@@ -1,1 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 3 — Measurement: Perimeter & Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-bg:#F0F7FF; --color-bg-deep:#E0EEFF; --color-surface:#FFFFFF;
+  --color-text:#0f172a; --color-text-secondary:#334155; --color-text-muted:#64748b;
+  --color-accent-1:#2563EB; --color-accent-2:#F97066; --color-accent-3:#D4A574;
+  --color-glass-bg:rgba(255,255,255,0.85); --color-glass-border:rgba(0,0,0,0.07);
+  --color-vignette:rgba(0,0,0,0.04);
+  --font-display:'Fredoka',sans-serif; --font-body:'Nunito',sans-serif;
+}
+</style>
+<style>
+:root{--color-bg:#F0F7FF;--color-text:#0f172a;--glow-color-rgb:37,99,235;}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--color-bg);margin:0;}
+body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;height:100vh;width:100vw;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.95);transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(0.8rem,2vw,2rem);}
+.nav-controls{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);padding:7px 18px;border-radius:40px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 4px 16px rgba(37,99,235,0.1);}
+.nav-btn{width:34px;height:34px;border:none;background:rgba(37,99,235,0.1);color:#2563EB;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:rgba(37,99,235,0.2);}
+.slide-nav-dropdown select{background:white;border:1.5px solid rgba(37,99,235,0.22);border-radius:8px;padding:4px 10px;font-size:0.78rem;font-family:'Fredoka',sans-serif;font-weight:500;color:#1e3a8a;cursor:pointer;outline:none;max-width:230px;box-shadow:0 1px 4px rgba(37,99,235,0.08);}
+.slide-counter{font-size:0.72rem;color:#64748b;min-width:38px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(14px);}
+@keyframes float-slow{0%{transform:translate(0,0) scale(1);}25%{transform:translate(35px,-25px) scale(1.07);}50%{transform:translate(-25px,25px) scale(0.95);}75%{transform:translate(25px,12px) scale(1.04);}100%{transform:translate(0,0) scale(1);}}
+@keyframes float-drift{0%{transform:translate(0,0);}33%{transform:translate(-35px,-35px) scale(1.09);}66%{transform:translate(28px,18px) scale(0.92);}100%{transform:translate(0,0);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-11px);}}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-4px);}75%{transform:translateX(4px);}}
+.gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.blob{position:absolute;border-radius:50%;filter:blur(65px);animation:float-slow 12s ease-in-out infinite;}
+.blob:nth-child(2){animation:float-drift 16s ease-in-out infinite;}
+.blob:nth-child(3){animation:float-slow 20s ease-in-out infinite reverse;}
+.slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,var(--color-vignette) 100%);}
+.slide-section{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 50%,#2563EB 100%);}
+.slide-section .content{color:white;}
+.slide-problem{background:#FFF7F6;}
+.slide-problem h2{color:#C2410C;}
+.prob-badge{display:inline-block;background:linear-gradient(135deg,#F97066,#FB923C);color:white;font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:20px;margin-bottom:0.4rem;}
+.lvl-badge{display:inline-block;font-size:0.64rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.lvl1{background:#dcfce7;color:#16a34a;}
+.lvl2{background:#fef9c3;color:#ca8a04;}
+.lvl3{background:#fee2e2;color:#dc2626;}
+.fill-input{border:2px solid rgba(37,99,235,0.28);border-radius:7px;padding:4px 9px;font-size:0.9rem;font-family:'Nunito',sans-serif;font-weight:600;color:#1e3a8a;background:rgba(255,255,255,0.97);outline:none;min-width:65px;max-width:145px;transition:border-color 0.2s,box-shadow 0.2s;display:inline-block;vertical-align:middle;}
+.fill-input:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,0.14);}
+.fill-input.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;box-shadow:0 0 0 3px rgba(22,163,74,0.13);}
+.fill-input.incorrect{border-color:#dc2626;background:#fef2f2;color:#b91c1c;animation:shake 0.28s ease;}
+.fill-input.revealed{border-color:#7c3aed;background:#f5f3ff;color:#5b21b6;}
+.check-btn{display:inline-flex;align-items:center;background:linear-gradient(135deg,#2563EB,#3b82f6);color:white;border:none;border-radius:6px;padding:4px 11px;font-size:0.73rem;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;transition:opacity 0.2s,transform 0.1s;margin-right:4px;}
+.check-btn:hover{opacity:0.88;transform:translateY(-1px);}
+.reveal-btn{background:linear-gradient(135deg,#7c3aed,#a855f7);}
+.answer-feedback{font-size:0.72rem;font-weight:700;margin-top:0.2rem;min-height:0.85rem;}
+.answer-feedback.correct{color:#16a34a;}
+.answer-feedback.incorrect{color:#dc2626;}
+.answer-feedback.revealed{color:#7c3aed;}
+.score-bar{display:inline-flex;align-items:center;gap:8px;background:white;border:1.5px solid rgba(37,99,235,0.12);border-radius:8px;padding:0.3rem 0.8rem;margin-bottom:0.4rem;}
+.score-display{font-size:0.75rem;font-weight:700;color:#2563EB;}
+.mc-opt{display:block;width:100%;text-align:left;background:white;border:2px solid rgba(37,99,235,0.18);border-radius:7px;padding:5px 11px;font-size:0.86rem;font-weight:500;color:#1e293b;font-family:'Nunito',sans-serif;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.12s;margin-bottom:0.28rem;}
+.mc-opt:hover{border-color:#2563EB;background:rgba(37,99,235,0.04);transform:translateX(2px);}
+.mc-opt.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;pointer-events:none;}
+.mc-opt.incorrect{border-color:#dc2626;background:#fef2f2;color:#b91c1c;pointer-events:none;}
+.mc-opt.disabled{opacity:0.48;pointer-events:none;}
+.card{background:white;border-radius:11px;padding:0.75rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.step-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:linear-gradient(135deg,#2563EB,#3b82f6);color:white;border-radius:50%;font-size:0.72rem;font-weight:800;flex-shrink:0;}
+.formula-box{background:linear-gradient(135deg,rgba(37,99,235,0.07),rgba(37,99,235,0.03));border:2px solid rgba(37,99,235,0.18);border-radius:10px;padding:0.5rem 1rem;font-size:1rem;font-weight:800;color:#1e3a8a;font-family:'Fredoka',sans-serif;letter-spacing:0.02em;}
+.shape-svg{filter:drop-shadow(0 2px 6px rgba(37,99,235,0.12));}
+.trap-card{border-left:4px solid #ef4444;background:white;border-radius:0 9px 9px 0;padding:0.6rem 0.9rem;box-shadow:0 2px 7px rgba(239,68,68,0.08);}
+.hint-bubble{background:rgba(249,112,102,0.08);border:1.5px dashed rgba(249,112,102,0.4);border-radius:9px;padding:0.4rem 0.7rem;font-size:0.78rem;color:#C2410C;font-weight:600;margin-top:0.3rem;}
+.socratic-q{background:rgba(37,99,235,0.06);border-left:3px solid #2563EB;border-radius:0 8px 8px 0;padding:0.5rem 0.8rem;font-size:0.82rem;font-style:italic;color:#1d4ed8;font-weight:600;margin-top:0.3rem;}
+</style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
 
+<!-- SLIDE 1: TITLE -->
+<div class="slide slide-section active" data-slide="1">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:420px;height:420px;top:-100px;right:-80px;background:#60A5FA;opacity:0.18;"></div>
+    <div class="blob" style="width:280px;height:280px;bottom:-60px;left:-40px;background:#93C5FD;opacity:0.13;"></div>
+    <div class="blob" style="width:180px;height:180px;top:35%;left:10%;background:#F97066;opacity:0.10;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:76px;margin-bottom:0.5rem;animation:float 3s ease-in-out infinite;" class="reveal">📐</div>
+    <div class="reveal" style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">Week 3 · June 2, 2026</div>
+    <h1 class="reveal" style="font-size:clamp(2rem,5vw,3.8rem);font-weight:900;color:white;margin-bottom:0.3rem;font-family:'Fredoka',sans-serif;">Measurement: Perimeter &amp; Area</h1>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.78);font-weight:500;margin-bottom:1rem;">Rectangles · Triangles · Parallelograms · Trapezoids · Composite Figures</p>
+    <div class="reveal" style="display:inline-flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+      <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:0.78rem;font-weight:700;color:white;">🕐 60 min</span>
+      <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:0.78rem;font-weight:700;color:white;">📊 Levels 1–3</span>
+      <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:0.78rem;font-weight:700;color:white;">🧠 Socratic Method</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: AGENDA -->
+<div class="slide" data-slide="2">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-50px;right:-40px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:180px;height:180px;bottom:-30px;left:-20px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.2rem;">📋 Session Roadmap</div>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,2rem);font-weight:800;color:#0f172a;margin-bottom:0.6rem;font-family:'Fredoka',sans-serif;">Today's 60-Minute Game Plan</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);display:flex;gap:0.6rem;align-items:flex-start;">
+        <div class="step-badge">1</div>
+        <div><div style="font-weight:800;font-size:0.85rem;">Perimeter of Polygons</div><div style="font-size:0.75rem;color:#475569;">Add all sides — every time · 10 min</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.18);display:flex;gap:0.6rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#F97066,#FB923C);">2</div>
+        <div><div style="font-weight:800;font-size:0.85rem;">Area: Rectangles &amp; Triangles</div><div style="font-size:0.75rem;color:#475569;">Formula lab · 10 min</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(212,165,116,0.25);display:flex;gap:0.6rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#D4A574,#F97316);">3</div>
+        <div><div style="font-weight:800;font-size:0.85rem;">Parallelograms &amp; Trapezoids</div><div style="font-size:0.75rem;color:#475569;">The slant trap · 8 min</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.2);display:flex;gap:0.6rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">4</div>
+        <div><div style="font-weight:800;font-size:0.85rem;">Composite Figures</div><div style="font-size:0.75rem;color:#475569;">Break it down · 12 min</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.18);display:flex;gap:0.6rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#16a34a,#22c55e);">5</div>
+        <div><div style="font-weight:800;font-size:0.85rem;">Leveled Practice Problems</div><div style="font-size:0.75rem;color:#475569;">Julius solo tries · 15 min</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(14,165,233,0.18);display:flex;gap:0.6rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8);">6</div>
+        <div><div style="font-weight:800;font-size:0.85rem;">ELA: Signal Words Block</div><div style="font-size:0.75rem;color:#475569;">First / However / As a result · 13 min</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: PERIMETER SECTION -->
+<div class="slide slide-section" data-slide="3">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:350px;height:350px;top:-80px;right:-60px;background:#60A5FA;opacity:0.15;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-30px;background:#93C5FD;opacity:0.10;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:64px;margin-bottom:0.4rem;animation:float 3s ease-in-out infinite;" class="reveal">🏃</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:white;margin-bottom:0.3rem;font-family:'Fredoka',sans-serif;">Part 1 — Perimeter</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.8);">The fence around the yard. The track around the field. Just <strong>add every side</strong>.</p>
+  </div>
+</div>
+
+<!-- SLIDE 4: PERIMETER CONCEPT -->
+<div class="slide" data-slide="4">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-50px;right:-40px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-25px;left:-20px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.2rem;">📐 Perimeter</div>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;font-family:'Fredoka',sans-serif;">The "Walk Around" Rule</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;align-items:start;" class="reveal">
+      <div style="display:flex;flex-direction:column;gap:0.45rem;">
+        <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+          <div style="font-weight:800;font-size:0.85rem;color:#1e3a8a;">🔑 The Golden Rule</div>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Perimeter = <strong>sum of ALL sides</strong>. No formula to memorize — just add every edge you can see.</div>
+        </div>
+        <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+          <div style="font-weight:800;font-size:0.85rem;color:#1e3a8a;">📦 Rectangle Shortcut</div>
+          <div class="formula-box" style="margin-top:0.3rem;font-size:0.95rem;">P = 2(l + w)</div>
+          <div style="font-size:0.75rem;color:#64748b;margin-top:0.2rem;">Two lengths + two widths. Or just add all 4 sides — same result.</div>
+        </div>
+        <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+          <div style="font-weight:800;font-size:0.85rem;color:#1e3a8a;">🔺 Other Polygons</div>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Add every labeled side. Missing a side? Opposite sides equal in a rectangle — use that!</div>
+        </div>
+        <div class="socratic-q">💬 If a square has perimeter 28 cm, what is one side? How do you know?</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;align-items:center;">
+        <svg width="200" height="130" viewBox="0 0 200 130" class="shape-svg">
+          <rect x="20" y="20" width="160" height="90" rx="4" fill="rgba(37,99,235,0.08)" stroke="#2563EB" stroke-width="2.5"/>
+          <text x="100" y="13" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#2563EB">8 cm</text>
+          <text x="100" y="125" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#2563EB">8 cm</text>
+          <text x="8" y="68" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#F97066">5 cm</text>
+          <text x="192" y="68" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#F97066">5 cm</text>
+          <text x="100" y="72" text-anchor="middle" font-family="Fredoka,sans-serif" font-weight="700" font-size="14" fill="#334155">P = 8+5+8+5 = 26</text>
+        </svg>
+        <svg width="145" height="120" viewBox="0 0 145 120" class="shape-svg">
+          <polygon points="72,10 132,52 112,112 32,112 12,52" fill="rgba(249,112,102,0.08)" stroke="#F97066" stroke-width="2.5"/>
+          <text x="72" y="8" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="11" fill="#C2410C">7</text>
+          <text x="130" y="56" text-anchor="start" font-family="Nunito" font-weight="700" font-size="11" fill="#C2410C">9</text>
+          <text x="90" y="118" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="11" fill="#C2410C">11</text>
+          <text x="44" y="118" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="11" fill="#C2410C">11</text>
+          <text x="4" y="56" text-anchor="start" font-family="Nunito" font-weight="700" font-size="11" fill="#C2410C">9</text>
+          <text x="72" y="68" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="12" fill="#334155">P = 7+9+11+11+9 = 47</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: PERIMETER PROBLEMS -->
+<div class="slide slide-problem" data-slide="5">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-40px;right:-30px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge">Practice — Perimeter</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:800;margin-bottom:0.3rem;">Find the Perimeter</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 3 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 1 <span class="lvl-badge lvl1">Level 1</span></div>
+        <svg width="130" height="80" viewBox="0 0 130 80" style="margin:0.3rem 0;" class="shape-svg">
+          <rect x="10" y="10" width="110" height="60" rx="3" fill="rgba(37,99,235,0.06)" stroke="#2563EB" stroke-width="2"/>
+          <text x="65" y="8" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="11" fill="#2563EB">12 ft</text>
+          <text x="3" y="43" font-family="Nunito" font-weight="800" font-size="11" fill="#F97066">7 ft</text>
+          <text x="65" y="78" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="11" fill="#2563EB">12 ft</text>
+          <text x="120" y="43" font-family="Nunito" font-weight="800" font-size="11" fill="#F97066">7 ft</text>
+        </svg>
+        <div style="font-size:0.8rem;font-weight:600;">P = <input class="fill-input" data-answer="38" style="width:55px;" placeholder="?"> ft</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 P = 2(12+7)</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(212,165,116,0.25);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 2 <span class="lvl-badge lvl2">Level 2</span></div>
+        <svg width="130" height="85" viewBox="0 0 130 85" style="margin:0.3rem 0;" class="shape-svg">
+          <polygon points="65,8 125,72 5,72" fill="rgba(249,112,102,0.07)" stroke="#F97066" stroke-width="2"/>
+          <text x="100" y="48" font-family="Nunito" font-weight="800" font-size="10" fill="#C2410C">13 m</text>
+          <text x="12" y="48" font-family="Nunito" font-weight="800" font-size="10" fill="#C2410C">13 m</text>
+          <text x="65" y="82" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="10" fill="#2563EB">10 m</text>
+        </svg>
+        <div style="font-size:0.79rem;color:#334155;margin-bottom:0.2rem;">Isosceles △: two sides = 13 m, base = 10 m</div>
+        <div style="font-size:0.8rem;font-weight:600;">P = <input class="fill-input" data-answer="36" style="width:55px;" placeholder="?"> m</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="socratic-q">💬 How many sides does a triangle have? What does isosceles tell you?</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 3 <span class="lvl-badge lvl3">Level 3</span></div>
+        <div style="font-size:0.79rem;color:#334155;margin:0.3rem 0;">A pentagon has sides: 6, 11, 11, ?, 28 in. Total perimeter = 63 in. Find the missing side.</div>
+        <div style="font-size:0.8rem;font-weight:600;">Missing = <input class="fill-input" data-answer="7" style="width:55px;" placeholder="?"> in</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 63 = 6+11+11+?+28. Solve for ?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: AREA SECTION -->
+<div class="slide slide-section" data-slide="6">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:380px;height:380px;top:-90px;right:-70px;background:#60A5FA;opacity:0.16;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#F97066;opacity:0.12;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:64px;margin-bottom:0.4rem;animation:float 3s ease-in-out infinite;" class="reveal">🟦</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:white;margin-bottom:0.3rem;font-family:'Fredoka',sans-serif;">Part 2 — Area: Rectangles &amp; Triangles</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.78);">How much <em>carpet</em> do you need? How much <em>paint</em>? That's area — the space <strong>inside</strong>.</p>
+  </div>
+</div>
+
+<!-- SLIDE 7: AREA CONCEPT -->
+<div class="slide" data-slide="7">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:260px;height:260px;top:-45px;right:-35px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-25px;left:-20px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.2rem;">🟦 Area</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.7rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;font-family:'Fredoka',sans-serif;">Rectangle = Rows of Tiles · Triangle = Half a Rectangle</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;align-items:start;" class="reveal">
+      <div style="display:flex;flex-direction:column;gap:0.45rem;">
+        <div class="card" style="border:1.5px solid rgba(37,99,235,0.15);">
+          <div style="font-weight:800;font-size:0.85rem;color:#1e3a8a;">📦 Rectangle</div>
+          <div class="formula-box" style="margin-top:0.3rem;">A = length × width</div>
+          <div style="font-size:0.77rem;color:#334155;margin-top:0.25rem;">Think: 4 rows × 6 tiles per row = 24 tiles. Units are always <strong>squared</strong> (cm², ft²).</div>
+        </div>
+        <div class="card" style="border:1.5px solid rgba(249,112,102,0.2);">
+          <div style="font-weight:800;font-size:0.85rem;color:#C2410C;">🔺 Triangle — The "Half" Trick</div>
+          <div class="formula-box" style="margin-top:0.3rem;border-color:rgba(249,112,102,0.3);">A = ½ × base × height</div>
+          <div style="font-size:0.77rem;color:#334155;margin-top:0.25rem;">Every triangle is exactly <strong>half</strong> of a rectangle with the same base &amp; height. Draw the rectangle to see it!</div>
+        </div>
+        <div class="socratic-q">💬 A triangle has base 10, height 6. Before calculating — is the area more or less than 30? Why?</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;align-items:center;justify-content:center;">
+        <svg width="175" height="100" viewBox="0 0 175 100" class="shape-svg">
+          <rect x="15" y="10" width="150" height="80" fill="rgba(37,99,235,0.04)" stroke="#2563EB" stroke-width="2" rx="2"/>
+          <line x1="15" y1="30" x2="165" y2="30" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="15" y1="50" x2="165" y2="50" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="15" y1="70" x2="165" y2="70" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="40" y1="10" x2="40" y2="90" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="65" y1="10" x2="65" y2="90" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="90" y1="10" x2="90" y2="90" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="115" y1="10" x2="115" y2="90" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="140" y1="10" x2="140" y2="90" stroke="#2563EB" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <text x="88" y="7" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="10" fill="#2563EB">6 units</text>
+          <text x="3" y="54" font-family="Nunito" font-weight="800" font-size="10" fill="#F97066">4</text>
+          <text x="88" y="54" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="12" fill="#1e3a8a">A = 24 units²</text>
+        </svg>
+        <svg width="175" height="100" viewBox="0 0 175 100" class="shape-svg">
+          <rect x="15" y="10" width="150" height="80" fill="rgba(249,112,102,0.06)" stroke="#F97066" stroke-width="1.5" stroke-dasharray="5,3" rx="2"/>
+          <polygon points="15,90 165,90 15,10" fill="rgba(249,112,102,0.15)" stroke="#F97066" stroke-width="2"/>
+          <line x1="15" y1="10" x2="15" y2="90" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,2"/>
+          <text x="6" y="54" font-family="Nunito" font-weight="800" font-size="10" fill="#16a34a">h</text>
+          <text x="88" y="99" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="10" fill="#F97066">base</text>
+          <text x="108" y="55" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="11" fill="#C2410C">½ of rectangle!</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: AREA PROBLEMS -->
+<div class="slide slide-problem" data-slide="8">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:240px;height:240px;top:-40px;right:-30px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge">Practice — Rectangle &amp; Triangle Area</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.55rem);font-weight:800;margin-bottom:0.3rem;">Find the Area</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 3 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 1 <span class="lvl-badge lvl1">Level 1</span></div>
+        <div style="font-size:0.8rem;color:#334155;margin:0.3rem 0;">A floor is 9 ft long and 5 ft wide. How many square feet of flooring?</div>
+        <div style="font-size:0.8rem;font-weight:600;">A = <input class="fill-input" data-answer="45" style="width:55px;" placeholder="?"> ft²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 A = l × w = 9 × 5</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.2);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 2 <span class="lvl-badge lvl2">Level 2</span></div>
+        <div style="font-size:0.8rem;color:#334155;margin:0.3rem 0;">A triangle: base = 8 cm, height = 11 cm. Find its area.</div>
+        <div style="font-size:0.8rem;font-weight:600;">A = <input class="fill-input" data-answer="44" style="width:55px;" placeholder="?"> cm²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="socratic-q">💬 Why do we multiply by ½?</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 3 <span class="lvl-badge lvl3">Level 3</span></div>
+        <div style="font-size:0.8rem;color:#334155;margin:0.3rem 0;">A rectangle has area 72 in². Its width is 8 in. What is the length?</div>
+        <div style="font-size:0.8rem;font-weight:600;">l = <input class="fill-input" data-answer="9" style="width:55px;" placeholder="?"> in</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 72 = l × 8 → divide both sides by 8</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: PARALLELOGRAM SECTION -->
+<div class="slide slide-section" data-slide="9">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:360px;height:360px;top:-80px;right:-60px;background:#60A5FA;opacity:0.16;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-30px;background:#D4A574;opacity:0.12;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:64px;margin-bottom:0.4rem;animation:float 3s ease-in-out infinite;" class="reveal">🔷</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,2.9rem);font-weight:900;color:white;margin-bottom:0.3rem;font-family:'Fredoka',sans-serif;">Part 3 — Parallelograms &amp; Trapezoids</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.78);">The slant is a trap — <strong>always use the height</strong>, not the slanted side.</p>
+  </div>
+</div>
+
+<!-- SLIDE 10: PARALLELOGRAM CONCEPT -->
+<div class="slide" data-slide="10">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:270px;height:270px;top:-50px;right:-40px;background:#D4A574;opacity:0.08;"></div>
+    <div class="blob" style="width:170px;height:170px;bottom:-25px;left:-20px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.2rem;">🔷 Parallelogram &amp; Trapezoid</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.7rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;font-family:'Fredoka',sans-serif;">Slide It Over — The Height Trick</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;align-items:start;" class="reveal">
+      <div style="display:flex;flex-direction:column;gap:0.45rem;">
+        <div class="card" style="border:1.5px solid rgba(212,165,116,0.3);">
+          <div style="font-weight:800;font-size:0.85rem;color:#92400e;">⬡ Parallelogram</div>
+          <div class="formula-box" style="margin-top:0.3rem;border-color:rgba(212,165,116,0.4);color:#92400e;">A = base × height</div>
+          <div style="font-size:0.77rem;color:#334155;margin-top:0.25rem;"><strong>Imagine sliding</strong> the slanted end straight down — you get a rectangle! Height = perpendicular drop, NOT the slant.</div>
+        </div>
+        <div class="card" style="border:1.5px solid rgba(124,58,237,0.2);">
+          <div style="font-weight:800;font-size:0.85rem;color:#6d28d9;">🔹 Trapezoid — Two Different Bases</div>
+          <div class="formula-box" style="margin-top:0.3rem;border-color:rgba(124,58,237,0.25);color:#6d28d9;">A = ½(b₁ + b₂) × h</div>
+          <div style="font-size:0.77rem;color:#334155;margin-top:0.25rem;">Average the two parallel sides, then multiply by the height. Step 1: add b₁+b₂. Step 2: ÷2. Step 3: ×h.</div>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.8rem;color:#dc2626;">⚠️ SHSAT Trap!</div>
+          <div style="font-size:0.76rem;color:#7f1d1d;margin-top:0.15rem;">Problems give you both slant side AND height. Always use the <strong>perpendicular height</strong>. The slant is bait!</div>
+        </div>
+        <div class="socratic-q">💬 Trapezoid with bases 4 and 10. What is the "average base"? Can you see why we average?</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.7rem;align-items:center;justify-content:center;">
+        <svg width="190" height="100" viewBox="0 0 190 100" class="shape-svg">
+          <polygon points="30,80 170,80 155,15 15,15" fill="rgba(212,165,116,0.12)" stroke="#D4A574" stroke-width="2.5"/>
+          <line x1="30" y1="15" x2="30" y2="80" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,2"/>
+          <text x="95" y="92" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="11" fill="#92400e">base</text>
+          <text x="21" y="52" font-family="Nunito" font-weight="800" font-size="11" fill="#16a34a">h ✓</text>
+          <text x="60" y="14" font-family="Nunito" font-weight="700" font-size="10" fill="#dc2626">slant ≠ h!</text>
+          <text x="95" y="55" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="12" fill="#92400e">A = b × h</text>
+        </svg>
+        <svg width="190" height="105" viewBox="0 0 190 105" class="shape-svg">
+          <polygon points="40,80 160,80 130,15 60,15" fill="rgba(124,58,237,0.08)" stroke="#7c3aed" stroke-width="2.5"/>
+          <line x1="95" y1="15" x2="95" y2="80" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,2"/>
+          <text x="95" y="11" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="11" fill="#7c3aed">b₁ (top)</text>
+          <text x="95" y="95" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="11" fill="#7c3aed">b₂ (bottom)</text>
+          <text x="104" y="52" font-family="Nunito" font-weight="800" font-size="11" fill="#16a34a">h</text>
+          <text x="95" y="58" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="11" fill="#6d28d9">A=½(b₁+b₂)×h</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: PARALLELOGRAM PROBLEMS -->
+<div class="slide slide-problem" data-slide="11">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:240px;height:240px;top:-40px;right:-30px;background:#D4A574;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge">Practice — Parallelogram &amp; Trapezoid</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.55rem);font-weight:800;margin-bottom:0.3rem;">Use the Right Formula</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 3 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(212,165,116,0.25);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 1 <span class="lvl-badge lvl1">Level 1</span></div>
+        <div style="font-size:0.8rem;color:#334155;margin:0.3rem 0;">A parallelogram: base = 10 m, perpendicular height = 6 m. Find the area.</div>
+        <div style="font-size:0.8rem;font-weight:600;">A = <input class="fill-input" data-answer="60" style="width:55px;" placeholder="?"> m²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 A = base × height</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.2);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 2 <span class="lvl-badge lvl2">Level 2</span></div>
+        <div style="font-size:0.8rem;color:#334155;margin:0.3rem 0;">Trapezoid: b₁ = 5 ft, b₂ = 9 ft, height = 4 ft. Find area.</div>
+        <div style="font-size:0.8rem;font-weight:600;">A = <input class="fill-input" data-answer="28" style="width:55px;" placeholder="?"> ft²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="socratic-q">💬 What is (5+9) ÷ 2 first?</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Problem 3 <span class="lvl-badge lvl3">Level 3</span></div>
+        <div style="font-size:0.8rem;color:#334155;margin:0.3rem 0;">Parallelogram: base = 12 cm, slant side = 9 cm, height = 7 cm. Area?</div>
+        <div style="font-size:0.8rem;font-weight:600;">A = <input class="fill-input" data-answer="84" style="width:55px;" placeholder="?"> cm²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="trap-card" style="margin-top:0.3rem;font-size:0.74rem;">⚠️ Do NOT use the slant side 9!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: COMPOSITE SECTION -->
+<div class="slide slide-section" data-slide="12">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:380px;height:380px;top:-90px;right:-70px;background:#60A5FA;opacity:0.16;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#a855f7;opacity:0.11;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:64px;margin-bottom:0.4rem;animation:float 3s ease-in-out infinite;" class="reveal">🧩</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:white;margin-bottom:0.3rem;font-family:'Fredoka',sans-serif;">Part 4 — Composite Figures</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.78);">Weird shapes = simple shapes in disguise. <strong>Break it. Solve it. Add it.</strong></p>
+  </div>
+</div>
+
+<!-- SLIDE 13: COMPOSITE CONCEPT -->
+<div class="slide" data-slide="13">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:270px;height:270px;top:-50px;right:-40px;background:#a855f7;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-25px;left:-20px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.2rem;">🧩 Composite Figures</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.7rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;font-family:'Fredoka',sans-serif;">The 3-Step Decompose Method</h2>
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:0.9rem;align-items:start;" class="reveal">
+      <div style="display:flex;flex-direction:column;gap:0.45rem;">
+        <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);display:flex;gap:0.6rem;align-items:flex-start;">
+          <div class="step-badge">1</div>
+          <div><div style="font-weight:800;font-size:0.85rem;">SPOT the simple shapes</div><div style="font-size:0.77rem;color:#475569;">Draw dashed lines to split into rectangles, triangles, etc. Name each piece out loud.</div></div>
+        </div>
+        <div class="card" style="border:1.5px solid rgba(249,112,102,0.18);display:flex;gap:0.6rem;align-items:flex-start;">
+          <div class="step-badge" style="background:linear-gradient(135deg,#F97066,#FB923C);">2</div>
+          <div><div style="font-weight:800;font-size:0.85rem;">FIND missing dimensions</div><div style="font-size:0.77rem;color:#475569;">Use the overall shape labels to figure out unlabeled sides before calculating.</div></div>
+        </div>
+        <div class="card" style="border:1.5px solid rgba(124,58,237,0.2);display:flex;gap:0.6rem;align-items:flex-start;">
+          <div class="step-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">3</div>
+          <div><div style="font-weight:800;font-size:0.85rem;">ADD (or SUBTRACT)</div><div style="font-size:0.77rem;color:#475569;">Adding pieces together? Add. Shape with a hole? Subtract the hole from the whole.</div></div>
+        </div>
+        <div class="socratic-q">💬 What is the difference between an L-shape (add) vs. a shape with a window cut out (subtract)?</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:center;justify-content:center;">
+        <svg width="175" height="145" viewBox="0 0 175 145" class="shape-svg">
+          <polygon points="10,10 100,10 100,65 175,65 175,140 10,140" fill="rgba(124,58,237,0.07)" stroke="#7c3aed" stroke-width="2.5"/>
+          <line x1="10" y1="65" x2="100" y2="65" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="55" y="6" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="10" fill="#7c3aed">90 u</text>
+          <text x="0" y="82" font-family="Nunito" font-weight="800" font-size="10" fill="#7c3aed">130</text>
+          <text x="48" y="42" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="11" fill="#6d28d9">Rect A</text>
+          <text x="125" y="105" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="11" fill="#6d28d9">Rect B</text>
+          <text x="90" y="130" font-family="Nunito" font-weight="700" font-size="9" fill="#7c3aed">Total = A + B</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: COMPOSITE PROBLEMS -->
+<div class="slide slide-problem" data-slide="14">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:240px;height:240px;top:-40px;right:-30px;background:#a855f7;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge">Practice — Composite Figures</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.55rem);font-weight:800;margin-bottom:0.3rem;">Break It Down</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 3 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">L-Shape <span class="lvl-badge lvl2">Level 2</span></div>
+        <svg width="130" height="90" viewBox="0 0 130 90" style="margin:0.3rem 0;" class="shape-svg">
+          <polygon points="5,5 75,5 75,45 130,45 130,88 5,88" fill="rgba(37,99,235,0.07)" stroke="#2563EB" stroke-width="2"/>
+          <line x1="5" y1="45" x2="75" y2="45" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="40" y="3" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="9" fill="#2563EB">7</text>
+          <text x="0" y="30" font-family="Nunito" font-weight="800" font-size="9" fill="#2563EB">4</text>
+          <text x="0" y="70" font-family="Nunito" font-weight="800" font-size="9" fill="#2563EB">6</text>
+          <text x="65" y="87" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="9" fill="#2563EB">13</text>
+        </svg>
+        <div style="font-size:0.76rem;color:#334155;margin-bottom:0.2rem;">Top rect: 7 wide × 4 tall. Bottom rect: 13 wide × 6 tall.</div>
+        <div style="font-size:0.8rem;font-weight:600;">Total A = <input class="fill-input" data-answer="106" style="width:55px;" placeholder="?"></div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 (7×4) + (13×6)</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.2);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Rect + △ <span class="lvl-badge lvl2">Level 2</span></div>
+        <svg width="130" height="95" viewBox="0 0 130 95" style="margin:0.3rem 0;" class="shape-svg">
+          <rect x="10" y="40" width="110" height="50" fill="rgba(249,112,102,0.07)" stroke="#F97066" stroke-width="2"/>
+          <polygon points="10,40 65,5 120,40" fill="rgba(249,112,102,0.14)" stroke="#F97066" stroke-width="2"/>
+          <line x1="65" y1="5" x2="65" y2="40" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="65" y="3" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9" fill="#16a34a">h=15</text>
+          <text x="65" y="70" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="9" fill="#F97066">base=10</text>
+          <text x="3" y="68" font-family="Nunito" font-weight="800" font-size="9" fill="#F97066">h=8</text>
+        </svg>
+        <div style="font-size:0.76rem;color:#334155;margin-bottom:0.2rem;">Rectangle: 10 × 8. Triangle on top: base 10, height 15.</div>
+        <div style="font-size:0.8rem;font-weight:600;">Total A = <input class="fill-input" data-answer="155" style="width:55px;" placeholder="?"></div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="socratic-q">💬 Name both shapes first.</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Subtract Hole <span class="lvl-badge lvl3">Level 3</span></div>
+        <svg width="130" height="95" viewBox="0 0 130 95" style="margin:0.3rem 0;" class="shape-svg">
+          <rect x="5" y="5" width="120" height="85" fill="rgba(124,58,237,0.07)" stroke="#7c3aed" stroke-width="2"/>
+          <rect x="40" y="28" width="50" height="40" fill="rgba(255,255,255,0.95)" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="65" y="3" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="9" fill="#7c3aed">12 ft</text>
+          <text x="0" y="52" font-family="Nunito" font-weight="800" font-size="9" fill="#7c3aed">8 ft</text>
+          <text x="65" y="51" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9" fill="#dc2626">hole: 5×4</text>
+        </svg>
+        <div style="font-size:0.76rem;color:#334155;margin-bottom:0.2rem;">Outer: 12 ft × 8 ft. Hole cut out: 5 ft × 4 ft.</div>
+        <div style="font-size:0.8rem;font-weight:600;">Area = <input class="fill-input" data-answer="76" style="width:55px;" placeholder="?"> ft²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 96 − 20 = ?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15: FORMULA REFERENCE -->
+<div class="slide" data-slide="15">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-55px;right:-45px;background:#2563EB;opacity:0.08;"></div>
+    <div class="blob" style="width:170px;height:170px;bottom:-30px;left:-25px;background:#F97066;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.2rem;">📋 Formula Sheet</div>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.55rem;font-family:'Fredoka',sans-serif;">SHSAT Cheat Card — Know These Cold</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;" class="reveal">
+      <div class="card" style="border-top:3px solid #2563EB;text-align:center;padding:0.6rem 0.7rem;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">📦</div>
+        <div style="font-weight:800;font-size:0.82rem;color:#1e3a8a;">Rectangle</div>
+        <div class="formula-box" style="margin:0.2rem 0;font-size:0.85rem;">A = l × w</div>
+        <div class="formula-box" style="font-size:0.85rem;">P = 2(l + w)</div>
+      </div>
+      <div class="card" style="border-top:3px solid #F97066;text-align:center;padding:0.6rem 0.7rem;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">🔺</div>
+        <div style="font-weight:800;font-size:0.82rem;color:#C2410C;">Triangle</div>
+        <div class="formula-box" style="margin:0.2rem 0;font-size:0.85rem;border-color:rgba(249,112,102,0.3);color:#C2410C;">A = ½bh</div>
+        <div style="font-size:0.73rem;color:#64748b;">P = s₁ + s₂ + s₃</div>
+      </div>
+      <div class="card" style="border-top:3px solid #D4A574;text-align:center;padding:0.6rem 0.7rem;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">⬡</div>
+        <div style="font-weight:800;font-size:0.82rem;color:#92400e;">Parallelogram</div>
+        <div class="formula-box" style="margin:0.2rem 0;font-size:0.85rem;border-color:rgba(212,165,116,0.4);color:#92400e;">A = b × h</div>
+        <div style="font-size:0.73rem;color:#64748b;">h = perp. height only!</div>
+      </div>
+      <div class="card" style="border-top:3px solid #7c3aed;text-align:center;padding:0.6rem 0.7rem;grid-column:1/2;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">🔹</div>
+        <div style="font-weight:800;font-size:0.82rem;color:#6d28d9;">Trapezoid</div>
+        <div class="formula-box" style="margin:0.2rem 0;font-size:0.85rem;border-color:rgba(124,58,237,0.25);color:#6d28d9;">A = ½(b₁+b₂)h</div>
+        <div style="font-size:0.73rem;color:#64748b;">Average the bases first</div>
+      </div>
+      <div class="card" style="border-top:3px solid #0ea5e9;text-align:center;padding:0.6rem 0.7rem;grid-column:2/4;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">🧩</div>
+        <div style="font-weight:800;font-size:0.82rem;color:#0369a1;">Composite Figures</div>
+        <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Spot → Label missing sides → Calculate each piece → Add or Subtract.</div>
+        <div class="trap-card" style="margin-top:0.3rem;font-size:0.74rem;">⚠️ Area = units² · Perimeter = units (no square!)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16: WORD PROBLEMS L1-L2 -->
+<div class="slide slide-problem" data-slide="16">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-35px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge">Word Problems</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:800;margin-bottom:0.4rem;">Real World. Real SHSAT.</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 2 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <div style="font-weight:800;font-size:0.84rem;color:#1e3a8a;">Problem A <span class="lvl-badge lvl1">Level 1</span></div>
+        <div style="font-size:0.82rem;color:#334155;margin:0.35rem 0;line-height:1.4;">Julius wants to fence his rectangular garden. It is <strong>14 feet long</strong> and <strong>9 feet wide</strong>. How many feet of fencing does he need?</div>
+        <div class="socratic-q">💬 Is fencing a perimeter or area problem? How do you know?</div>
+        <div style="font-size:0.8rem;font-weight:600;margin-top:0.4rem;">Fencing = <input class="fill-input" data-answer="46" style="width:55px;" placeholder="?"> ft</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.2);">
+        <div style="font-weight:800;font-size:0.84rem;color:#C2410C;">Problem B <span class="lvl-badge lvl2">Level 2</span></div>
+        <div style="font-size:0.82rem;color:#334155;margin:0.35rem 0;line-height:1.4;">A classroom floor is <strong>24 ft × 18 ft</strong>. Carpet tiles each cover <strong>4 ft²</strong>. How many tiles are needed?</div>
+        <div class="socratic-q">💬 Do you find perimeter or area first? Why?</div>
+        <div style="font-size:0.8rem;font-weight:600;margin-top:0.4rem;">Tiles = <input class="fill-input" data-answer="108" style="width:65px;" placeholder="?"></div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 Floor area ÷ tile size = # of tiles</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17: WORD PROBLEMS L3 -->
+<div class="slide slide-problem" data-slide="17">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-35px;background:#a855f7;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">Word Problems — SHSAT Challenge</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:800;margin-bottom:0.4rem;">Level 3 Word Problems</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 2 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <div style="font-weight:800;font-size:0.84rem;color:#991b1b;">Problem C <span class="lvl-badge lvl3">Level 3</span></div>
+        <div style="font-size:0.82rem;color:#334155;margin:0.35rem 0;line-height:1.4;">A wall is a rectangle (<strong>10 ft × 8 ft</strong>) with a triangular top (base <strong>10 ft</strong>, height <strong>5 ft</strong>). What is the total area to paint?</div>
+        <div class="socratic-q">💬 Name each shape. What formula does each one need?</div>
+        <div style="font-size:0.8rem;font-weight:600;margin-top:0.3rem;">Paint area = <input class="fill-input" data-answer="105" style="width:65px;" placeholder="?"> ft²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 (10×8) + ½(10×5)</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <div style="font-weight:800;font-size:0.84rem;color:#991b1b;">Problem D <span class="lvl-badge lvl3">Level 3</span></div>
+        <div style="font-size:0.82rem;color:#334155;margin:0.35rem 0;line-height:1.4;">A trapezoid park: bases <strong>30 m</strong> and <strong>50 m</strong>, height <strong>20 m</strong>. A rectangular fountain inside: <strong>6 m × 4 m</strong>. What is the grassy area?</div>
+        <div class="socratic-q">💬 Add or subtract the fountain? What is the "whole"?</div>
+        <div style="font-size:0.8rem;font-weight:600;margin-top:0.3rem;">Grass = <input class="fill-input" data-answer="776" style="width:65px;" placeholder="?"> m²</div>
+        <div style="display:flex;gap:4px;margin-top:0.3rem;flex-wrap:wrap;">
+          <button class="check-btn" onclick="checkInput(this.closest('.card').querySelector('.fill-input'))">Check</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.closest('.card').querySelector('.fill-input'))">Reveal</button>
+        </div>
+        <div class="answer-feedback"></div>
+        <div class="hint-bubble">💡 ½(30+50)×20 − 6×4</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 18: SHSAT TRAPS -->
+<div class="slide" data-slide="18">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:270px;height:270px;top:-50px;right:-40px;background:#ef4444;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-25px;left:-20px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#dc2626;margin-bottom:0.2rem;">⚠️ SHSAT Traps</div>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;font-family:'Fredoka',sans-serif;">The 5 Mistakes That Cost Points</h2>
+    <div style="display:flex;flex-direction:column;gap:0.42rem;" class="reveal">
+      <div class="trap-card"><strong>🪤 Trap 1:</strong> Using the slant side as height in a parallelogram or trapezoid. <em>Height must be perpendicular — straight up and down.</em></div>
+      <div class="trap-card"><strong>🪤 Trap 2:</strong> Forgetting to write units². Area is always in <strong>squared</strong> units. Perimeter is just units (feet, not feet²).</div>
+      <div class="trap-card"><strong>🪤 Trap 3:</strong> Adding all sides when you need the area. Remember: Perimeter = add sides. Area = formula.</div>
+      <div class="trap-card"><strong>🪤 Trap 4:</strong> For composite figures, not finding the missing dimension first. Label ALL sides before calculating anything.</div>
+      <div class="trap-card"><strong>🪤 Trap 5:</strong> Forgetting the ½ in the triangle formula. Every single time: A = <strong>½</strong> × base × height.</div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.45rem;">💬 Which trap do you think the SHSAT uses most often? Why?</div>
+  </div>
+</div>
+
+<!-- SLIDE 19: ELA SECTION -->
+<div class="slide slide-section" data-slide="19">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:380px;height:380px;top:-90px;right:-70px;background:#60A5FA;opacity:0.15;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#93C5FD;opacity:0.10;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:64px;margin-bottom:0.4rem;animation:float 3s ease-in-out infinite;" class="reveal">📖</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:white;margin-bottom:0.3rem;font-family:'Fredoka',sans-serif;">ELA Block — 13 min</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.78);">Organization &amp; Structure: Signal Words</p>
+    <p class="reveal" style="font-size:0.85rem;color:rgba(255,255,255,0.62);margin-top:0.3rem;"><em>First · However · As a result · In contrast · Therefore</em></p>
+  </div>
+</div>
+
+<!-- SLIDE 20: SIGNAL WORDS -->
+<div class="slide" data-slide="20">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:260px;height:260px;top:-45px;right:-35px;background:#0ea5e9;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-25px;left:-20px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#0369a1;margin-bottom:0.2rem;">📖 ELA · Signal Words</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.7rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;font-family:'Fredoka',sans-serif;">Signal Words Are the Author's Road Signs</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(14,165,233,0.18);">
+        <div style="font-weight:800;font-size:0.82rem;color:#0369a1;">➡️ Sequence / Order</div>
+        <div style="font-size:0.78rem;color:#334155;margin-top:0.2rem;font-style:italic;">First, Next, Then, Finally, Subsequently</div>
+        <div style="font-size:0.76rem;color:#64748b;margin-top:0.15rem;">Tells you the ORDER things happen.</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.2);">
+        <div style="font-weight:800;font-size:0.82rem;color:#C2410C;">⚡ Cause → Effect</div>
+        <div style="font-size:0.78rem;color:#334155;margin-top:0.2rem;font-style:italic;">Because, Therefore, As a result, Consequently, Thus</div>
+        <div style="font-size:0.76rem;color:#64748b;margin-top:0.15rem;">Reason → what happened because of it.</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.2);">
+        <div style="font-weight:800;font-size:0.82rem;color:#15803d;">↔️ Contrast</div>
+        <div style="font-size:0.78rem;color:#334155;margin-top:0.2rem;font-style:italic;">However, In contrast, On the other hand, But, Yet, Although</div>
+        <div style="font-size:0.76rem;color:#64748b;margin-top:0.15rem;">What comes AFTER flips direction.</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.2);">
+        <div style="font-weight:800;font-size:0.82rem;color:#6d28d9;">➕ Addition / Support</div>
+        <div style="font-size:0.78rem;color:#334155;margin-top:0.2rem;font-style:italic;">Furthermore, In addition, Also, Moreover, Additionally</div>
+        <div style="font-size:0.76rem;color:#64748b;margin-top:0.15rem;">More evidence or details piling on.</div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.4rem;">💬 "However" appears in paragraph 3. Before reading — do you predict the next idea AGREES or DISAGREES with paragraph 2?</div>
+  </div>
+</div>
+
+<!-- SLIDE 21: ELA PRACTICE -->
+<div class="slide slide-problem" data-slide="21">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:240px;height:240px;top:-40px;right:-30px;background:#0ea5e9;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="prob-badge" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8);">ELA · Signal Word Practice</div>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.55rem);font-weight:800;margin-bottom:0.35rem;">Identify the Structure</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 3 correct</span></div>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(14,165,233,0.2);">
+        <div style="font-size:0.82rem;color:#334155;font-style:italic;">"<em>First</em>, the caterpillar spins a cocoon. <em>Next</em>, it transforms for two weeks. <em>Finally</em>, a butterfly emerges."</div>
+        <div style="font-size:0.78rem;font-weight:600;margin-top:0.25rem;">Structure:
+          <div class="mc-group" style="display:grid;grid-template-columns:1fr 1fr;gap:0.25rem;margin-top:0.2rem;">
+            <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Sequence</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Cause/Effect</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Contrast</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">D) Description</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.2);">
+        <div style="font-size:0.82rem;color:#334155;font-style:italic;">"Cats are independent and prefer solitude. <em>However</em>, dogs crave companionship and thrive in packs."</div>
+        <div style="font-size:0.78rem;font-weight:600;margin-top:0.25rem;">The word "However" signals:
+          <div class="mc-group" style="display:grid;grid-template-columns:1fr 1fr;gap:0.25rem;margin-top:0.2rem;">
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) The ideas agree</button>
+            <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) The ideas contrast</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) A cause follows</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">D) A sequence begins</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.2);">
+        <div style="font-size:0.82rem;color:#334155;font-style:italic;">"Heavy rainfall flooded the streets. <em>As a result</em>, hundreds of residents were evacuated."</div>
+        <div style="font-size:0.78rem;font-weight:600;margin-top:0.25rem;">Structure:
+          <div class="mc-group" style="display:grid;grid-template-columns:1fr 1fr;gap:0.25rem;margin-top:0.2rem;">
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Sequence</button>
+            <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Cause/Effect</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Compare/Contrast</button>
+            <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">D) Problem/Solution</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 22: CLOSING -->
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 22 — ELA Reading Passage Intro
+════════════════════════════════════════════════════ -->
+<div class="slide slide-section" data-slide="22">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:380px;height:380px;top:-90px;right:-60px;background:#60A5FA;opacity:0.14;"></div>
+    <div class="blob" style="width:240px;height:240px;bottom:-60px;left:-40px;background:#F97066;opacity:0.11;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:64px;margin-bottom:0.5rem;animation:float 3s ease-in-out infinite;" class="reveal">📖</div>
+    <h2 class="reveal" style="font-size:clamp(1.9rem,4.2vw,3rem);font-weight:900;font-family:'Fredoka',sans-serif;color:white;margin-bottom:0.5rem;">ELA: Reading Passage</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.8);max-width:560px;margin:0 auto 0.8rem;">A nonfiction passage — read carefully, then answer 6 SHSAT-style questions on the next slides.</p>
+    <div class="reveal" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:0.6rem;">
+      <span style="background:rgba(96,165,250,0.2);border:1px solid rgba(96,165,250,0.4);border-radius:20px;padding:0.3rem 0.9rem;font-size:0.8rem;color:#93C5FD;">📌 Main Idea</span>
+      <span style="background:rgba(249,112,102,0.2);border:1px solid rgba(249,112,102,0.4);border-radius:20px;padding:0.3rem 0.9rem;font-size:0.8rem;color:#FCA5A5;">🔗 Structure</span>
+      <span style="background:rgba(212,165,116,0.2);border:1px solid rgba(212,165,116,0.4);border-radius:20px;padding:0.3rem 0.9rem;font-size:0.8rem;color:#FCD34D;">💡 Signal Words</span>
+      <span style="background:rgba(167,139,250,0.2);border:1px solid rgba(167,139,250,0.4);border-radius:20px;padding:0.3rem 0.9rem;font-size:0.8rem;color:#C4B5FD;">🔍 Inference</span>
+    </div>
+    <div class="reveal" style="font-size:0.82rem;color:rgba(255,255,255,0.55);">Strategy tip: Annotate as you read — underline signal words, circle the main idea sentence in each paragraph.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 23 — The Passage (two-column scrollable)
+════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="23" style="background:#F0F7FF;">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:320px;height:320px;top:-80px;right:-50px;background:#60A5FA;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#D4A574;opacity:0.07;"></div>
+  </div>
+  <div class="content" style="max-width:1060px;padding:clamp(1rem,3vw,2.5rem);">
+    <div class="reveal" style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;">
+      <span style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.3);border-radius:6px;padding:0.25rem 0.7rem;font-size:0.72rem;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.06em;">Nonfiction Passage</span>
+      <span style="font-size:0.72rem;color:#64748b;">~280 words · Read & Annotate</span>
+    </div>
+    <h3 class="reveal" style="font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:800;color:#0f172a;margin-bottom:0.9rem;font-family:'Fredoka',sans-serif;">The Hidden Geometry of City Parks</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+      <!-- LEFT COLUMN -->
+      <div class="reveal" style="font-size:0.82rem;line-height:1.72;color:#1e293b;">
+        <p style="margin:0 0 0.75rem;"><span style="background:rgba(220,38,38,0.12);border-radius:3px;padding:1px 3px;font-weight:700;color:#b91c1c;">[¶1]</span> When city planners design a public park, they rely on geometry in ways that most visitors never notice. Every lawn, fountain basin, and walking path is the result of careful calculations involving <strong>perimeter</strong> and <strong>area</strong>. Without these measurements, cities could not budget for fencing, paving, seeding, or landscaping.</p>
+        <p style="margin:0 0 0.75rem;"><span style="background:rgba(220,38,38,0.12);border-radius:3px;padding:1px 3px;font-weight:700;color:#b91c1c;">[¶2]</span> <em>First</em>, planners calculate the perimeter of the park's outer boundary to determine how much fencing or hedging is needed. A rectangular park that is 200 feet long and 80 feet wide, for example, requires 560 feet of fencing along its perimeter. <em>In addition</em>, interior paths that cut through the park must also be measured so contractors know how much pavement to order.</p>
+        <p style="margin:0;"><span style="background:rgba(220,38,38,0.12);border-radius:3px;padding:1px 3px;font-weight:700;color:#b91c1c;">[¶3]</span> <em>However</em>, perimeter alone does not capture the full picture. Area — the amount of flat space enclosed — determines how many bags of grass seed are needed, how much concrete fills a plaza, and whether a playground is large enough to serve a neighborhood safely. A park that looks wide from the street may actually have a smaller usable area than it appears, especially when fountains, benches, and planting beds reduce the open space.</p>
+      </div>
+      <!-- RIGHT COLUMN -->
+      <div class="reveal" style="font-size:0.82rem;line-height:1.72;color:#1e293b;">
+        <p style="margin:0 0 0.75rem;"><span style="background:rgba(220,38,38,0.12);border-radius:3px;padding:1px 3px;font-weight:700;color:#b91c1c;">[¶4]</span> Many parks include composite shapes — areas made by combining rectangles, triangles, and other figures. <em>As a result</em>, planners must break large spaces into smaller, simpler shapes, calculate each area individually, and then add the results together. A park with an L-shaped lawn, for instance, can be split into two rectangles whose areas are calculated separately and then summed.</p>
+        <p style="margin:0 0 0.75rem;"><span style="background:rgba(220,38,38,0.12);border-radius:3px;padding:1px 3px;font-weight:700;color:#b91c1c;">[¶5]</span> <em>In contrast</em> to large city parks, pocket parks — small green spaces tucked between buildings — present a different challenge. Because their boundaries are often irregular, planners must use the formula for trapezoids or even divide the space into triangles to obtain an accurate area measurement. A small error in these calculations can mean ordering far too much or too little material.</p>
+        <p style="margin:0;"><span style="background:rgba(220,38,38,0.12);border-radius:3px;padding:1px 3px;font-weight:700;color:#b91c1c;">[¶6]</span> Ultimately, the difference between a beautiful, functional park and a poorly planned one often comes down to the precision of the geometry used in its design. Planners who master perimeter and area are not just solving math problems — they are shaping the way communities live, play, and breathe.</p>
+      </div>
+    </div>
+    <!-- Signal word callout bar -->
+    <div class="reveal" style="margin-top:0.8rem;background:rgba(251,191,36,0.15);border:1px solid rgba(180,130,60,0.5);border-radius:8px;padding:0.45rem 0.9rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+      <span style="font-size:0.72rem;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.05em;">Signal Words Found →</span>
+      <span style="font-size:0.75rem;color:#334155;">First &nbsp;·&nbsp; In addition &nbsp;·&nbsp; However &nbsp;·&nbsp; As a result &nbsp;·&nbsp; In contrast &nbsp;·&nbsp; Ultimately</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 24 — 6 Comprehension Questions (interactive)
+════════════════════════════════════════════════════ -->
+<div class="slide slide-problem" data-slide="24">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-50px;background:#60A5FA;opacity:0.09;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-30px;background:#F97066;opacity:0.08;"></div>
+  </div>
+  <div class="content" style="max-width:1060px;padding:clamp(0.8rem,2.5vw,2rem);">
+    <!-- Header -->
+    <div class="reveal" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.65rem;flex-wrap:wrap;gap:0.4rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span style="font-size:1.3rem;">📝</span>
+        <h3 style="font-size:clamp(1rem,2.2vw,1.35rem);font-weight:800;color:white;font-family:'Fredoka',sans-serif;margin:0;">Passage Questions</h3>
+        <span style="background:rgba(96,165,250,0.2);border:1px solid rgba(96,165,250,0.4);border-radius:20px;padding:0.2rem 0.65rem;font-size:0.7rem;color:#93C5FD;font-weight:700;">6 Questions</span>
+      </div>
+      <div class="score-display" style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.25);border-radius:8px;padding:0.3rem 0.75rem;font-size:0.78rem;color:#1e40af;font-weight:700;">✅ <span class="score-correct">0</span> / 6 correct</div>
+    </div>
+
+    <!-- Questions grid: 2 columns × 3 rows -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;">
+
+      <!-- Q1 — Main Idea (Multiple Choice) -->
+      <div class="card reveal" style="background:rgba(255,255,255,0.93);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.65rem 0.8rem;">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#1d4ed8;margin-bottom:0.3rem;">Q1 · Main Idea</div>
+        <p style="font-size:0.78rem;color:#1e293b;margin:0 0 0.45rem;line-height:1.5;font-weight:500;">What is the <strong>main idea</strong> of this passage?</p>
+        <div style="display:flex;flex-direction:column;gap:0.3rem;" id="q1-opts">
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q1" value="A" style="margin-top:2px;accent-color:#60A5FA;"> <span><strong>(A)</strong> City parks are more expensive to build than most people realize.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q1" value="B" style="margin-top:2px;accent-color:#60A5FA;"> <span><strong>(B)</strong> Perimeter and area calculations are essential tools in the design of public parks.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q1" value="C" style="margin-top:2px;accent-color:#60A5FA;"> <span><strong>(C)</strong> Pocket parks are harder to design than large city parks.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q1" value="D" style="margin-top:2px;accent-color:#60A5FA;"> <span><strong>(D)</strong> Most park visitors do not understand geometry.</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.45rem;flex-wrap:wrap;">
+          <button onclick="checkMC('q1','B',this)" style="background:#2563EB;border:none;border-radius:6px;padding:0.28rem 0.65rem;color:white;font-size:0.72rem;cursor:pointer;font-weight:600;">Check ✓</button>
+          <button onclick="revealMC('q1','B','(B) Perimeter and area are the central tools discussed throughout every paragraph.',this)" style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;padding:0.28rem 0.65rem;color:#475569;font-size:0.72rem;cursor:pointer;">Reveal</button>
+        </div>
+        <div class="answer-feedback" style="font-size:0.72rem;margin-top:0.3rem;min-height:0.9rem;color:#1e293b;"></div>
+      </div>
+
+      <!-- Q2 — Structure (Multiple Choice) -->
+      <div class="card reveal" style="background:rgba(255,255,255,0.93);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.65rem 0.8rem;">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#b91c1c;margin-bottom:0.3rem;">Q2 · Text Structure</div>
+        <p style="font-size:0.78rem;color:#1e293b;margin:0 0 0.45rem;line-height:1.5;font-weight:500;">What is the <strong>organizational structure</strong> of this passage?</p>
+        <div style="display:flex;flex-direction:column;gap:0.3rem;" id="q2-opts">
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q2" value="A" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(A)</strong> Chronological order (events in time sequence)</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q2" value="B" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(B)</strong> Problem and solution</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q2" value="C" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(C)</strong> Compare and contrast combined with cause and effect</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q2" value="D" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(D)</strong> Definition followed by a single extended example</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.45rem;flex-wrap:wrap;">
+          <button onclick="checkMC('q2','C',this)" style="background:#2563EB;border:none;border-radius:6px;padding:0.28rem 0.65rem;color:white;font-size:0.72rem;cursor:pointer;font-weight:600;">Check ✓</button>
+          <button onclick="revealMC('q2','C','(C) ¶4 uses cause-effect ("As a result"); ¶5 uses contrast ("In contrast") comparing large vs. pocket parks.',this)" style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;padding:0.28rem 0.65rem;color:#475569;font-size:0.72rem;cursor:pointer;">Reveal</button>
+        </div>
+        <div class="answer-feedback" style="font-size:0.72rem;margin-top:0.3rem;min-height:0.9rem;color:#1e293b;"></div>
+      </div>
+
+      <!-- Q3 — Signal Word (Multiple Choice) -->
+      <div class="card reveal" style="background:rgba(255,255,255,0.93);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.65rem 0.8rem;">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#92400e;margin-bottom:0.3rem;">Q3 · Signal Words</div>
+        <p style="font-size:0.78rem;color:#1e293b;margin:0 0 0.45rem;line-height:1.5;font-weight:500;">In ¶3, the word <em>"However"</em> signals that the author is about to…</p>
+        <div style="display:flex;flex-direction:column;gap:0.3rem;" id="q3-opts">
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q3" value="A" style="margin-top:2px;accent-color:#D4A574;"> <span><strong>(A)</strong> give a second example of the same idea</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q3" value="B" style="margin-top:2px;accent-color:#D4A574;"> <span><strong>(B)</strong> introduce a contrasting or limiting idea</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q3" value="C" style="margin-top:2px;accent-color:#D4A574;"> <span><strong>(C)</strong> explain the cause of a problem</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q3" value="D" style="margin-top:2px;accent-color:#D4A574;"> <span><strong>(D)</strong> list steps in a process</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.45rem;flex-wrap:wrap;">
+          <button onclick="checkMC('q3','B',this)" style="background:#2563EB;border:none;border-radius:6px;padding:0.28rem 0.65rem;color:white;font-size:0.72rem;cursor:pointer;font-weight:600;">Check ✓</button>
+          <button onclick="revealMC('q3','B','(B) "However" is a contrast signal — ¶3 limits ¶2\'s point by saying perimeter alone is not enough.',this)" style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;padding:0.28rem 0.65rem;color:#475569;font-size:0.72rem;cursor:pointer;">Reveal</button>
+        </div>
+        <div class="answer-feedback" style="font-size:0.72rem;margin-top:0.3rem;min-height:0.9rem;color:#1e293b;"></div>
+      </div>
+
+      <!-- Q4 — Supporting Detail (Multiple Choice) -->
+      <div class="card reveal" style="background:rgba(255,255,255,0.93);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.65rem 0.8rem;">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#166534;margin-bottom:0.3rem;">Q4 · Supporting Detail</div>
+        <p style="font-size:0.78rem;color:#1e293b;margin:0 0 0.45rem;line-height:1.5;font-weight:500;">According to ¶2, why do planners calculate <strong>interior path</strong> measurements?</p>
+        <div style="display:flex;flex-direction:column;gap:0.3rem;" id="q4-opts">
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q4" value="A" style="margin-top:2px;accent-color:#86EFAC;"> <span><strong>(A)</strong> to determine whether the park is large enough for the neighborhood</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q4" value="B" style="margin-top:2px;accent-color:#86EFAC;"> <span><strong>(B)</strong> so contractors know how much pavement to order</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q4" value="C" style="margin-top:2px;accent-color:#86EFAC;"> <span><strong>(C)</strong> to split the park into composite shapes for easier calculation</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q4" value="D" style="margin-top:2px;accent-color:#86EFAC;"> <span><strong>(D)</strong> because pocket parks have irregular boundaries</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.45rem;flex-wrap:wrap;">
+          <button onclick="checkMC('q4','B',this)" style="background:#2563EB;border:none;border-radius:6px;padding:0.28rem 0.65rem;color:white;font-size:0.72rem;cursor:pointer;font-weight:600;">Check ✓</button>
+          <button onclick="revealMC('q4','B','(B) Directly stated in ¶2: "contractors know how much pavement to order."',this)" style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;padding:0.28rem 0.65rem;color:#475569;font-size:0.72rem;cursor:pointer;">Reveal</button>
+        </div>
+        <div class="answer-feedback" style="font-size:0.72rem;margin-top:0.3rem;min-height:0.9rem;color:#1e293b;"></div>
+      </div>
+
+      <!-- Q5 — Inference (Multiple Choice) -->
+      <div class="card reveal" style="background:rgba(255,255,255,0.93);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.65rem 0.8rem;">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#5b21b6;margin-bottom:0.3rem;">Q5 · Inference ⚠️</div>
+        <p style="font-size:0.78rem;color:#1e293b;margin:0 0 0.45rem;line-height:1.5;font-weight:500;">Based on ¶5, what can be <strong>inferred</strong> about why pocket parks use trapezoid or triangle formulas?</p>
+        <div style="display:flex;flex-direction:column;gap:0.3rem;" id="q5-opts">
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q5" value="A" style="margin-top:2px;accent-color:#C4B5FD;"> <span><strong>(A)</strong> Pocket parks are always shaped like trapezoids.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q5" value="B" style="margin-top:2px;accent-color:#C4B5FD;"> <span><strong>(B)</strong> Irregular shapes cannot be measured accurately with only a rectangle formula.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q5" value="C" style="margin-top:2px;accent-color:#C4B5FD;"> <span><strong>(C)</strong> Pocket parks have more visitors than large city parks.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q5" value="D" style="margin-top:2px;accent-color:#C4B5FD;"> <span><strong>(D)</strong> Triangle formulas are simpler than rectangle formulas.</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.45rem;flex-wrap:wrap;">
+          <button onclick="checkMC('q5','B',this)" style="background:#2563EB;border:none;border-radius:6px;padding:0.28rem 0.65rem;color:white;font-size:0.72rem;cursor:pointer;font-weight:600;">Check ✓</button>
+          <button onclick="revealMC('q5','B','(B) Infer: ¶5 says boundaries are "often irregular" — this implies the standard rectangle formula doesn\'t fit.',this)" style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;padding:0.28rem 0.65rem;color:#475569;font-size:0.72rem;cursor:pointer;">Reveal</button>
+        </div>
+        <div class="answer-feedback" style="font-size:0.72rem;margin-top:0.3rem;min-height:0.9rem;color:#1e293b;"></div>
+      </div>
+
+      <!-- Q6 — Author's Purpose (Multiple Choice) -->
+      <div class="card reveal" style="background:rgba(255,255,255,0.93);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.65rem 0.8rem;">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9f1239;margin-bottom:0.3rem;">Q6 · Author's Purpose</div>
+        <p style="font-size:0.78rem;color:#1e293b;margin:0 0 0.45rem;line-height:1.5;font-weight:500;">The <strong>primary purpose</strong> of ¶6 (the final paragraph) is to…</p>
+        <div style="display:flex;flex-direction:column;gap:0.3rem;" id="q6-opts">
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q6" value="A" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(A)</strong> introduce a new argument about urban planning</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q6" value="B" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(B)</strong> provide one more example of a composite-figure calculation</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q6" value="C" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(C)</strong> broaden the significance of geometry beyond calculations to its real-world impact</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:#334155;">
+            <input type="radio" name="q6" value="D" style="margin-top:2px;accent-color:#F97066;"> <span><strong>(D)</strong> contrast large parks with pocket parks one final time</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.45rem;flex-wrap:wrap;">
+          <button onclick="checkMC('q6','C',this)" style="background:#2563EB;border:none;border-radius:6px;padding:0.28rem 0.65rem;color:white;font-size:0.72rem;cursor:pointer;font-weight:600;">Check ✓</button>
+          <button onclick="revealMC('q6','C','(C) ¶6 zooms out — "shaping the way communities live" elevates geometry from calculation to community impact.',this)" style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;padding:0.28rem 0.65rem;color:#475569;font-size:0.72rem;cursor:pointer;">Reveal</button>
+        </div>
+        <div class="answer-feedback" style="font-size:0.72rem;margin-top:0.3rem;min-height:0.9rem;color:#1e293b;"></div>
+      </div>
+
+    </div><!-- end grid -->
+  </div>
+</div>
+
+<div class="slide slide-section" data-slide="25">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:400px;height:400px;top:-100px;right:-80px;background:#60A5FA;opacity:0.18;"></div>
+    <div class="blob" style="width:250px;height:250px;bottom:-60px;left:-40px;background:#F97066;opacity:0.13;"></div>
+    <div class="blob" style="width:180px;height:180px;top:40%;left:8%;background:#D4A574;opacity:0.10;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:70px;margin-bottom:0.5rem;animation:float 3s ease-in-out infinite;" class="reveal">🏆</div>
+    <h2 class="reveal" style="font-size:clamp(1.9rem,4.2vw,3.2rem);font-weight:900;color:white;margin-bottom:0.4rem;font-family:'Fredoka',sans-serif;">Week 3 Complete!</h2>
+    <p class="reveal" style="font-size:0.95rem;color:rgba(255,255,255,0.78);margin-bottom:0.8rem;">You can now find perimeter &amp; area of <strong>any shape on the SHSAT</strong>.</p>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;max-width:650px;margin:0 auto 0.7rem;">
+      <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem;border:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:1.5rem;">📐</div>
+        <div style="font-size:0.78rem;font-weight:700;color:white;">Perimeter</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);">Add every side</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem;border:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:1.5rem;">🟦</div>
+        <div style="font-size:0.78rem;font-weight:700;color:white;">Area Formulas</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);">5 shapes mastered</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem;border:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:1.5rem;">🧩</div>
+        <div style="font-size:0.78rem;font-weight:700;color:white;">Composites</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);">Break → Solve → Add</div>
+      </div>
+    </div>
+    <div class="reveal" style="font-size:0.82rem;color:rgba(255,255,255,0.65);">Next: Week 4 — Circles &amp; Surface Area (June 9) 🔵</div>
+  </div>
+</div>
+
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-nav-dropdown">
+    <select id="slideSelect" onchange="goToSlide(parseInt(this.value))">
+      <option value="" disabled>Jump to slide…</option>
+      <option value="1">1 · Title</option>
+      <option value="2">2 · Agenda</option>
+      <option value="3">3 · Perimeter Intro</option>
+      <option value="4">4 · Perimeter Concept</option>
+      <option value="5">5 · Perimeter Problems</option>
+      <option value="6">6 · Area Intro</option>
+      <option value="7">7 · Rect &amp; Triangle Area</option>
+      <option value="8">8 · Area Problems</option>
+      <option value="9">9 · Parallelogram Intro</option>
+      <option value="10">10 · Parallelogram Concept</option>
+      <option value="11">11 · Parallelogram Problems</option>
+      <option value="12">12 · Composite Intro</option>
+      <option value="13">13 · Composite Concept</option>
+      <option value="14">14 · Composite Problems</option>
+      <option value="15">15 · Formula Reference</option>
+      <option value="16">16 · Word Problems L1-L2</option>
+      <option value="17">17 · Word Problems L3</option>
+      <option value="18">18 · SHSAT Traps</option>
+      <option value="19">19 · ELA Intro</option>
+      <option value="20">20 · Signal Words</option>
+      <option value="21">21 · ELA Practice</option>
+      <option value="22">22 · ELA Passage Intro</option>
+      <option value="23">23 · Reading Passage</option>
+      <option value="24">24 · Passage Questions</option>
+      <option value="25">25 · Closing</option>
+    </select>
+  </div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 25</span>
+</div>
+
+<script>
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+function goToSlide(n){const prev=document.querySelector('.slide.active');const next=document.querySelector('.slide[data-slide="'+n+'"]');if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next);}current=n;updateNav();}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){const sel=document.getElementById('slideSelect');if(sel)sel.value=current;const c=document.getElementById('counter');if(c)c.textContent=current+' / '+total;}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}});
+let touchStartX=0;
+document.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',function(e){const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){slide.querySelectorAll('.reveal').forEach(function(el,i){el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(14px)';el.offsetHeight;const delay=i*0.07;el.style.transition='opacity 0.32s ease '+delay+'s, transform 0.32s ease '+delay+'s';el.style.opacity='1';el.style.transform='translateY(0)';});}
+function normalizeAns(s){return String(s).trim().toLowerCase().replace(/\s+/g,'');}
+function checkInput(el){if(!el||!el.dataset.answer)return;const correct=normalizeAns(el.dataset.answer);const val=normalizeAns(el.value);el.classList.remove('correct','incorrect','revealed');const fb=el.closest('.card')&&el.closest('.card').querySelector('.answer-feedback');if(val===correct){el.classList.add('correct');if(fb){fb.textContent='Correct!';fb.className='answer-feedback correct';}}else{el.classList.add('incorrect');if(fb){fb.textContent='Not quite — try again!';fb.className='answer-feedback incorrect';}}updateSlideScore(el.closest('.slide'));}
+function revealAnswer(el){if(!el)return;el.value=el.dataset.answer;el.classList.remove('correct','incorrect');el.classList.add('revealed');const fb=el.closest('.card')&&el.closest('.card').querySelector('.answer-feedback');if(fb){fb.textContent='Answer: '+el.dataset.answer;fb.className='answer-feedback revealed';}updateSlideScore(el.closest('.slide'));}
+function updateSlideScore(slide){if(!slide)return;const inputs=slide.querySelectorAll('.fill-input[data-answer]');const correct=slide.querySelectorAll('.fill-input.correct').length;const scoreEl=slide.querySelector('.score-display');if(scoreEl)scoreEl.textContent='✅ '+correct+' / '+inputs.length+' correct';}
+function selectMC(btn,isCorrect,allBtns){allBtns.forEach(function(b){b.classList.add('disabled');});btn.classList.remove('disabled');btn.classList.add(isCorrect?'correct':'incorrect');if(!isCorrect){allBtns.forEach(function(b){if(b.getAttribute('onclick')&&b.getAttribute('onclick').indexOf('true')>-1){b.classList.remove('disabled');b.classList.add('correct');}});}}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList.contains('fill-input')){e.preventDefault();checkInput(e.target);}});
+document.addEventListener('mousemove',function(e){const s=document.querySelector('.mouse-spotlight');if(s)s.style.background='radial-gradient(600px circle at '+e.clientX+'px '+e.clientY+'px, rgba(37,99,235,0.05), transparent 40%)';});
+window.initParticles=function(canvas,options){if(!canvas)return;const ctx=canvas.getContext('2d');canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;const interactive=options.interactive!==false;const count=options.count||(interactive?45:16);let mx=-1000,my=-1000;const particles=Array.from({length:count},function(){return{x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,size:Math.random()*2+0.6,alpha:Math.random()*0.28+0.08};});if(interactive){canvas.addEventListener('mousemove',function(e){const r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});canvas.addEventListener('mouseleave',function(){mx=-1000;my=-1000;});}(function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(function(p){if(interactive){const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);if(dist<100){const force=(100-dist)/100*2;p.vx+=(dx/dist)*force*0.1;p.vy+=(dy/dist)*force*0.1;}}p.vx*=0.98;p.vy*=0.98;p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba(37,99,235,'+p.alpha+')';ctx.fill();});requestAnimationFrame(animate);})();};
+document.querySelectorAll('.particle-canvas').forEach(function(c){window.initParticles(c,{interactive:true,count:45});});
+document.querySelectorAll('.particle-canvas-ambient').forEach(function(c){window.initParticles(c,{interactive:false,count:16});});
+
+function checkMC(qid, correct, btn) {
+  var radios = document.querySelectorAll('input[name="' + qid + '"]');
+  var selected = null;
+  radios.forEach(function(r) { if (r.checked) selected = r.value; });
+  var fb = btn.closest('.card').querySelector('.answer-feedback');
+  if (!selected) { if(fb) { fb.textContent = 'Please select an answer first.'; fb.className='answer-feedback incorrect'; } return; }
+  if (selected === correct) {
+    if(fb) { fb.textContent = '✅ Correct!'; fb.className='answer-feedback correct'; }
+    radios.forEach(function(r) { r.disabled = true; });
+    updateMCScore(btn.closest('.slide'));
+  } else {
+    if(fb) { fb.textContent = '❌ Not quite — try again!'; fb.className='answer-feedback incorrect'; }
+  }
+}
+function revealMC(qid, correct, explanation, btn) {
+  var radios = document.querySelectorAll('input[name="' + qid + '"]');
+  radios.forEach(function(r) {
+    r.disabled = true;
+    if (r.value === correct) r.checked = true;
+    var lbl = r.closest('label');
+    if (lbl) lbl.style.color = r.value === correct ? '#86efac' : 'rgba(255,255,255,0.45)';
+  });
+  var fb = btn.closest('.card').querySelector('.answer-feedback');
+  if(fb) { fb.textContent = explanation; fb.className='answer-feedback revealed'; }
+  updateMCScore(btn.closest('.slide'));
+}
+function updateMCScore(slide) {
+  if(!slide) return;
+  var total = slide.querySelectorAll('[id$="-opts"]').length;
+  var correct = 0;
+  slide.querySelectorAll('.answer-feedback.correct').forEach(function(){ correct++; });
+  var scoreEl = slide.querySelector('.score-correct');
+  if(scoreEl) scoreEl.textContent = correct;
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+</script>
+</body>
+</html>

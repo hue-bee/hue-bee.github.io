@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 Homework — Perimeter & Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Fredoka', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Print ────────────────────────────────────── */
+
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+  }
+  @media print {
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ──────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ───────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+  .name-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-width: 100px;
+    height: 1rem;
+  }
+
+  /* ── Section Header ───────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue); border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;     border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;     border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ────────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ───────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .lvl-1 { background: #dcfce7; color: #15803d; }
+  .lvl-2 { background: #fef9c3; color: #92400e; }
+  .lvl-3 { background: #fee2e2; color: #b91c1c; }
+
+  /* ── Problem card ─────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: var(--blue); }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-box {
+    min-height: 52px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    margin-top: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  /* ── SVG diagrams ─────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ──────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ──────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(239,68,68,0.12);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #b91c1c;
+    font-size: 0.74rem;
+  }
+  .sw { background: #fef9c3; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #92400e; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+  }
+  .mc-opt .bubble {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+  }
+
+  /* ── Error log ────────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill {
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: 1.5px solid;
+  }
+  .pill-cg  { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce  { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru  { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+  }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line .rl {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    height: 1rem;
+  }
+
+  /* ── Score banner ─────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val  { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl  { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula quick ref strip ─────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ─────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin-bottom:1rem;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+<script>
+function clearAll(){
+  if(!confirm("Clear all answers?")) return;
+  document.querySelectorAll("input[type=text],input[type=number],textarea").forEach(el=>el.value="");
+  document.querySelectorAll("input[type=radio]").forEach(el=>el.checked=false);
+  document.querySelectorAll("[contenteditable]").forEach(el=>el.textContent=" ");
+}
+</script>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>📐 Week 2 Homework</h1>
+      <div class="subtitle">Measurement: Perimeter &amp; Area &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder="Julius"></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+      
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="13" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 13</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="6" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 6</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="19" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 19</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MATH SECTION ── -->
+  <div class="section-hd">
+    <span class="icon">🔢</span>
+    <h2>Part A — Perimeter &amp; Area Problems</h2>
+    <span class="badge badge-blue">10 Problems · ~20 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Circle your final answer. Use the formula strip below if needed.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">Rect: A = l × w</span>
+    <span class="fml">Tri: A = ½bh</span>
+    <span class="fml">Para: A = bh</span>
+    <span class="fml">Trap: A = ½(b₁+b₂)h</span>
+    <span class="fml">P = sum of all sides</span>
+  </div>
+
+  <!-- PROBLEMS 1–4 (2-col grid) -->
+  <div class="prob-grid">
+
+    <!-- P1 -->
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">Level 1</span></div>
+      <p class="prob-q">A rectangular playground is <strong>18 ft</strong> long and <strong>12 ft</strong> wide. What is its <strong>perimeter</strong>?</p>
+      <div class="fig">
+        <svg width="130" height="70" viewBox="0 0 130 70">
+          <rect x="8" y="8" width="114" height="54" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+          <text x="65" y="5" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="10" fill="#1e3a8a">18 ft</text>
+          <text x="127" y="38" text-anchor="start" font-family="Nunito" font-weight="700" font-size="10" fill="#1e3a8a">12 ft</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:52px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Show your work here…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> ft</div>
+    </div>
+
+    <!-- P2 -->
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">Level 1</span></div>
+      <p class="prob-q">Find the <strong>area</strong> of a triangle with base <strong>14 cm</strong> and height <strong>9 cm</strong>.</p>
+      <div class="fig">
+        <svg width="130" height="72" viewBox="0 0 130 72">
+          <polygon points="10,65 120,65 65,10" fill="#FFF1F0" stroke="#F97066" stroke-width="2"/>
+          <line x1="65" y1="10" x2="65" y2="65" stroke="#F97066" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="65" y="76" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="10" fill="#c2410c">b = 14 cm</text>
+          <text x="74" y="44" text-anchor="start" font-family="Nunito" font-weight="700" font-size="10" fill="#c2410c">h = 9</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:52px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Show your work here…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> cm²</div>
+    </div>
+
+    <!-- P3 -->
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-1">Level 1</span></div>
+      <p class="prob-q">A parallelogram has a base of <strong>11 m</strong> and a height of <strong>7 m</strong>. What is its <strong>area</strong>?<br><em style="font-size:0.75rem;color:var(--muted);">⚠️ The slant side ≠ the height!</em></p>
+      <div class="fig">
+        <svg width="130" height="65" viewBox="0 0 130 65">
+          <polygon points="18,58 112,58 112,8 18,8" transform="skewX(-12)" fill="#EDE9FE" stroke="#7c3aed" stroke-width="2"/>
+          <line x1="90" y1="8" x2="90" y2="58" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="55" y="62" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="10" fill="#5b21b6">b = 11 m</text>
+          <text x="96" y="38" text-anchor="start" font-family="Nunito" font-weight="700" font-size="10" fill="#5b21b6">h=7</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:52px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Show your work here…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> m²</div>
+    </div>
+
+    <!-- P4 -->
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">A trapezoid has parallel bases of <strong>8 in</strong> and <strong>14 in</strong>, and a height of <strong>6 in</strong>. Find its <strong>area</strong>.</p>
+      <div class="fig">
+        <svg width="130" height="68" viewBox="0 0 130 68">
+          <polygon points="20,58 110,58 98,10 32,10" fill="#FDF3E7" stroke="#D4A574" stroke-width="2"/>
+          <line x1="65" y1="10" x2="65" y2="58" stroke="#D4A574" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="65" y="7" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9.5" fill="#92400e">b₁ = 8 in</text>
+          <text x="65" y="66" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9.5" fill="#92400e">b₂ = 14 in</text>
+          <text x="71" y="37" font-family="Nunito" font-weight="700" font-size="9" fill="#92400e">h=6</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:52px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Show your work here…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> in²</div>
+    </div>
+
+    <!-- P5 -->
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">Find the <strong>perimeter</strong> of the polygon below. All measurements are in cm.</p>
+      <div class="fig">
+        <svg width="140" height="80" viewBox="0 0 140 80">
+          <polygon points="20,70 120,70 120,30 80,30 80,10 20,10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+          <!-- labels -->
+          <text x="70" y="78" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">100</text>
+          <text x="125" y="52" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">40</text>
+          <text x="103" y="27" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">40</text>
+          <text x="81" y="21" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">60</text>
+          <text x="4" y="40" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">60</text>
+          <text x="26" y="7" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">60</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:52px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Show your work here…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> cm</div>
+    </div>
+
+    <!-- P6 -->
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">A right triangle has legs of <strong>5 ft</strong> and <strong>12 ft</strong>. (a) Find its <strong>area</strong>. (b) Find its <strong>perimeter</strong>. <em style="font-size:0.75rem;color:var(--muted);">(Hint: use the Pythagorean theorem for the hypotenuse.)</em></p>
+      <div class="fig">
+        <svg width="130" height="72" viewBox="0 0 130 72">
+          <polygon points="10,65 10,10 100,65" fill="#DCFCE7" stroke="#16a34a" stroke-width="2"/>
+          <rect x="10" y="55" width="10" height="10" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="4"  y="40" font-family="Nunito" font-weight="700" font-size="10" fill="#15803d">5 ft</text>
+          <text x="48" y="74" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="10" fill="#15803d">12 ft</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:65px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Show your work here…"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Area: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> ft²</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Perimeter: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> ft</div>
+      </div>
+    </div>
+
+  </div><!-- /prob-grid 1-6 -->
+
+  <!-- ── COMPOSITE FIGURES ── -->
+  <div class="section-hd" style="margin-top:1.3rem;">
+    <span class="icon">🧩</span>
+    <h2>Composite Figures — Break, Solve, Add</h2>
+    <span class="badge badge-coral">3 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Decompose each figure into simpler shapes. Label your pieces, find each area, then add them together.</p>
+
+  <div class="prob-grid">
+
+    <!-- P7 L-shape -->
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">Find the <strong>area</strong> of the L-shaped figure. All units are in meters.</p>
+      <div class="fig">
+        <svg width="140" height="90" viewBox="0 0 140 90">
+          <polygon points="10,80 10,10 50,10 50,40 110,40 110,80" fill="#FFF1F0" stroke="#F97066" stroke-width="2"/>
+          <!-- dashed cut line -->
+          <line x1="50" y1="40" x2="10" y2="40" stroke="#F97066" stroke-width="1.2" stroke-dasharray="4,3"/>
+          <!-- dims -->
+          <text x="28" y="7"  text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9" fill="#c2410c">4</text>
+          <text x="80" y="37" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9" fill="#c2410c">6</text>
+          <text x="5"  y="26" text-anchor="end"    font-family="Nunito" font-weight="700" font-size="9" fill="#c2410c">3</text>
+          <text x="5"  y="62" text-anchor="end"    font-family="Nunito" font-weight="700" font-size="9" fill="#c2410c">4</text>
+          <text x="60" y="88" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9" fill="#c2410c">10</text>
+          <text x="115" y="62" text-anchor="start" font-family="Nunito" font-weight="700" font-size="9" fill="#c2410c">4</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:60px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Piece 1: _____ Piece 2: _____"></textarea>
+      <div class="answer-box">Total Area: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> m²</div>
+    </div>
+
+    <!-- P8 rect minus square -->
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">A <strong>12 × 10 ft</strong> room has a square closet (<strong>4 × 4 ft</strong>) cut from one corner. Find the <strong>area of the remaining floor space</strong>.</p>
+      <div class="fig">
+        <svg width="140" height="85" viewBox="0 0 140 85">
+          <rect x="10" y="8" width="120" height="70" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+          <rect x="90" y="8" width="40" height="30" fill="white" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="70" y="5"  text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">12 ft</text>
+          <text x="135" y="46" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">10 ft</text>
+          <text x="112" y="27" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="8.5" fill="#F97066">4×4</text>
+          <text x="112" y="35" text-anchor="middle" font-family="Nunito" font-size="7.5" fill="#F97066">(closet)</text>
+        </svg>
+      </div>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:55px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Big rect – small sq = ?"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> ft²</div>
+    </div>
+
+    <!-- P9 rect + triangle -->
+    <div class="prob" style="grid-column:span 2;">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">Level 3</span></div>
+      <p class="prob-q">The figure below is a rectangle with a triangle attached to its right side. Find the <strong>total area</strong> of the combined figure. All units in cm.</p>
+      <div style="display:grid;grid-template-columns:180px 1fr;gap:0.8rem;align-items:start;">
+        <div class="fig" style="margin:0;">
+          <svg width="175" height="90" viewBox="0 0 175 90">
+            <rect x="10" y="15" width="100" height="60" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+            <polygon points="110,15 160,45 110,75" fill="#DCFCE7" stroke="#16a34a" stroke-width="2"/>
+            <!-- dims -->
+            <text x="60"  y="11"  text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">10 cm</text>
+            <text x="5"   y="47"  text-anchor="end"    font-family="Nunito" font-weight="700" font-size="9.5" fill="#1e3a8a">6 cm</text>
+            <text x="137" y="82"  text-anchor="middle" font-family="Nunito" font-weight="700" font-size="9.5" fill="#15803d">h=?</text>
+            <text x="165" y="47"  font-family="Nunito" font-weight="700" font-size="9"   fill="#15803d">b=6</text>
+            <!-- height hint label -->
+            <line x1="110" y1="45" x2="160" y2="45" stroke="#15803d" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="132" y="42" text-anchor="middle" font-family="Nunito" font-size="8" fill="#15803d">base 6</text>
+          </svg>
+        </div>
+        <div>
+          <p style="font-size:0.8rem;color:var(--slate);line-height:1.55;margin-bottom:0.4rem;">The triangle's base equals the rectangle's height (<strong>6 cm</strong>). The triangle's height (horizontal distance) is <strong>5 cm</strong>.</p>
+          <textarea class="work-box" style="width:100%;resize:vertical;min-height:55px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Rect area: _____ + Tri area: _____ ="></textarea>
+          <div class="answer-box" style="margin-top:0.4rem;">Total Area: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> cm²</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /composite grid -->
+
+</div><!-- /sheet 1 -->
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── WORD PROBLEMS ── -->
+  <div class="section-hd">
+    <span class="icon">💬</span>
+    <h2>Part B — Word Problems</h2>
+    <span class="badge badge-green">3 Problems · ~8 min</span>
+  </div>
+  <p class="instr">Read carefully. Underline the question. Identify whether it asks for perimeter or area before you solve.</p>
+
+  <div class="prob-grid">
+
+    <!-- W1 -->
+    <div class="prob">
+      <div class="prob-num">Word Problem 10 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">Julius wants to put a fence around his rectangular garden. The garden is <strong>9 yards long</strong> and <strong>6 yards wide</strong>. Fencing costs <strong>$4 per yard</strong>.<br>How much will the fence cost in total?</p>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:70px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Step 1 — Perimeter: _____ ydStep 2 — Cost: $_____"></textarea>
+      <div class="answer-box">Total Cost: $ <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"></div>
+    </div>
+
+    <!-- W2 -->
+    <div class="prob">
+      <div class="prob-num">Word Problem 11 <span class="lvl lvl-2">Level 2</span></div>
+      <p class="prob-q">A school wants to tile a hallway that is <strong>40 ft long</strong> and <strong>8 ft wide</strong>. Each tile covers <strong>2 ft²</strong> and costs <strong>$3 per tile</strong>.<br>How much will it cost to tile the hallway?</p>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:70px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="Area of hallway: _____ ft²Tiles needed: _____Total cost: $_____"></textarea>
+      <div class="answer-box">Total Cost: $ <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"></div>
+    </div>
+
+    <!-- W3 -->
+    <div class="prob" style="grid-column:span 2;">
+      <div class="prob-num">Word Problem 12 <span class="lvl lvl-3">Level 3</span></div>
+      <p class="prob-q">A city park is shaped like a trapezoid with parallel sides of <strong>120 m</strong> and <strong>80 m</strong> and a height of <strong>50 m</strong>. The park is surrounded by a jogging path along its perimeter — the two non-parallel sides are each <strong>55 m</strong> long. (a) Find the <strong>area</strong> of the park. (b) Find the <strong>total length</strong> of the jogging path around the park.</p>
+      <textarea class="work-box" style="width:100%;resize:vertical;min-height:65px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;" placeholder="(a) Area: ½ × (_____ + _____) × _____ = _____ m² &nbsp;&nbsp;&nbsp; (b) Perimeter: _____ + _____ + _____ + _____ = _____ m"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">(a) Area: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> m²</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">(b) Perimeter: <input type="text" class="answer-line" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--blue);background:transparent;outline:none;padding:1px 6px;min-width:60px;"> m</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── ELA SECTION ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Reading Passage</h2>
+    <span class="badge badge-purple">6 Questions · ~13 min</span>
+  </div>
+  <p class="instr">Read the passage once for understanding. Then annotate: circle signal words, underline the main idea of each paragraph. Answer all 6 questions.</p>
+
+  <!-- PASSAGE -->
+  <div class="passage-box">
+    <div class="passage-title">The Grid That Grew: How Urban Planners Designed New York City's Streets</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> In 1811, a group of city commissioners published a plan that would shape New York City for centuries to come. <span class="sw">First and foremost</span>, they imposed a strict rectangular grid on the island of Manhattan — a network of evenly spaced avenues running north-south and streets running east-west. At the time, most cities had grown organically, with winding lanes that followed old farm paths or natural features. Manhattan's grid was a radical departure.</p>
+      <p><span class="para-lbl">[¶2]</span> The commissioners chose the grid for practical geometric reasons. A rectangle is the most efficient shape for dividing land: every block has a calculable area, every property line forms a right angle, and perimeter measurements are straightforward. <span class="sw">As a result</span>, developers could quickly determine how much frontage a building lot had or how many square feet it contained — calculations that would have been far more complex on irregular lots.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">However</span>, the grid was not without its critics. Some argued that the perfectly rectangular blocks left no room for diagonal routes, making it inefficient to travel across the city at an angle. Others pointed out that the geometry ignored the natural landscape — rocky outcroppings, streams, and hills that would be costly to flatten. The grid, its critics said, valued mathematical order over practical terrain.</p>
+      <p><span class="para-lbl">[¶4]</span> The commissioners responded by making adjustments. <span class="sw">For example</span>, they preserved Broadway, an ancient Lenape trail that cuts diagonally across the grid, creating famous triangular intersections such as Times Square and Flatiron Square. These triangular spaces — technically composite figures formed where two street systems collide — became some of the city's most iconic gathering places.</p>
+      <p><span class="para-lbl">[¶5]</span> <span class="sw">In contrast</span> to Manhattan's rigid grid, neighborhoods like Greenwich Village and the Financial District developed before 1811 and kept their irregular, winding streets. Today, navigating these older neighborhoods feels entirely different from walking a numbered grid — the irregular block shapes make it much harder to estimate distances or areas at a glance.</p>
+      <p><span class="para-lbl">[¶6]</span> The 1811 Commissioners' Plan remains a vivid reminder that geometry is never purely abstract. The choice between a rectangle and an irregular polygon, between a grid and an organic street network, shapes how millions of people move through space every single day. Every block in Manhattan is, at its core, a geometry problem that a city decided to solve once — and live with forever.</p>
+    </div>
+  </div>
+
+  <!-- QUESTIONS 2-col grid -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+
+    <!-- Q1 -->
+    <div class="mc-q">
+      <p class="mc-q-text"><span class="qnum">Q1.</span> What is the <strong>main idea</strong> of the passage?</p>
+      <div class="mc-opts" style="grid-template-columns:1fr;">
+        <div class="mc-opt"><input type="radio" name="q1" value="A" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(A) New York City's street grid was designed in 1811 and has never changed.</span></div>
+        <div class="mc-opt"><input type="radio" name="q1" value="B" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(B) The rectangular grid imposed on Manhattan reflects how geometric thinking shapes real urban life.</span></div>
+        <div class="mc-opt"><input type="radio" name="q1" value="C" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(C) Broadway is the only diagonal street in New York City because of an old Native American trail.</span></div>
+        <div class="mc-opt"><input type="radio" name="q1" value="D" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(D) Rectangles are always better than irregular shapes for city planning.</span></div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="mc-q">
+      <p class="mc-q-text"><span class="qnum">Q2.</span> What is the <strong>organizational structure</strong> of the passage as a whole?</p>
+      <div class="mc-opts" style="grid-template-columns:1fr;">
+        <div class="mc-opt"><input type="radio" name="q2" value="A" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(A) Chronological order with a compare/contrast thread woven throughout</span></div>
+        <div class="mc-opt"><input type="radio" name="q2" value="B" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(B) Strict problem-and-solution structure</span></div>
+        <div class="mc-opt"><input type="radio" name="q2" value="C" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(C) Definition of a concept followed by a single extended example</span></div>
+        <div class="mc-opt"><input type="radio" name="q2" value="D" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(D) Cause-and-effect only</span></div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="mc-q">
+      <p class="mc-q-text"><span class="qnum">Q3.</span> In ¶2, the signal phrase <em>"As a result"</em> introduces…</p>
+      <div class="mc-opts" style="grid-template-columns:1fr;">
+        <div class="mc-opt"><input type="radio" name="q3" value="A" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(A) a contrast to the idea in ¶1</span></div>
+        <div class="mc-opt"><input type="radio" name="q3" value="B" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(B) an effect that follows from the rectangle's geometric properties</span></div>
+        <div class="mc-opt"><input type="radio" name="q3" value="C" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(C) a new definition of area</span></div>
+        <div class="mc-opt"><input type="radio" name="q3" value="D" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(D) an example of an irregular lot</span></div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="mc-q">
+      <p class="mc-q-text"><span class="qnum">Q4.</span> According to ¶3, what was one <strong>criticism</strong> of the grid plan?</p>
+      <div class="mc-opts" style="grid-template-columns:1fr;">
+        <div class="mc-opt"><input type="radio" name="q4" value="A" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(A) It made all blocks the same area, which was unfair to smaller property owners.</span></div>
+        <div class="mc-opt"><input type="radio" name="q4" value="B" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(B) It preserved too many diagonal streets, creating complex intersections.</span></div>
+        <div class="mc-opt"><input type="radio" name="q4" value="C" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(C) It left no room for diagonal routes, making cross-city travel inefficient.</span></div>
+        <div class="mc-opt"><input type="radio" name="q4" value="D" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(D) It was copied from Paris and did not fit the American landscape.</span></div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="mc-q">
+      <p class="mc-q-text"><span class="qnum">Q5.</span> What can be <strong>inferred</strong> from ¶5 about why older neighborhoods feel different to navigate?</p>
+      <div class="mc-opts" style="grid-template-columns:1fr;">
+        <div class="mc-opt"><input type="radio" name="q5" value="A" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(A) Older neighborhoods have fewer shops and landmarks to use as reference points.</span></div>
+        <div class="mc-opt"><input type="radio" name="q5" value="B" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(B) Irregular block shapes make it harder to use geometric reasoning to judge distances.</span></div>
+        <div class="mc-opt"><input type="radio" name="q5" value="C" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(C) Older streets are narrower than the grid streets, slowing foot traffic.</span></div>
+        <div class="mc-opt"><input type="radio" name="q5" value="D" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(D) Greenwich Village has more tourist attractions that create congestion.</span></div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="mc-q">
+      <p class="mc-q-text"><span class="qnum">Q6.</span> The primary purpose of the <strong>final paragraph (¶6)</strong> is to…</p>
+      <div class="mc-opts" style="grid-template-columns:1fr;">
+        <div class="mc-opt"><input type="radio" name="q6" value="A" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(A) introduce a new argument about why the grid should be replaced</span></div>
+        <div class="mc-opt"><input type="radio" name="q6" value="B" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(B) summarize the historical timeline of the 1811 plan</span></div>
+        <div class="mc-opt"><input type="radio" name="q6" value="C" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(C) broaden the significance of the grid by connecting geometry to lived human experience</span></div>
+        <div class="mc-opt"><input type="radio" name="q6" value="D" style="margin-top:2px;min-width:14px;accent-color:var(--blue);cursor:pointer;"><span>(D) contrast Manhattan with other cities that chose different grid systems</span></div>
+      </div>
+    </div>
+
+  </div><!-- /questions grid -->
+
+  <hr class="divider">
+
+  <!-- ── ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Problem</th>
+          <th>What I Did Wrong</th>
+          <th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td><td contenteditable="true" style="outline:none;min-width:40px;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── REFLECTION ── -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.8rem;color:var(--ink);background:transparent;outline:none;padding:1px 6px;min-width:80px;"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.8rem;color:var(--ink);background:transparent;outline:none;padding:1px 6px;min-width:80px;"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">For ELA, the signal word I find hardest to identify is <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.8rem;color:var(--ink);background:transparent;outline:none;padding:1px 6px;min-width:80px;"></div>
+      <div class="reflect-line">One thing I want to ask Julius's tutor about in session: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.8rem;color:var(--ink);background:transparent;outline:none;padding:1px 6px;min-width:80px;"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 2 · SHSAT Prep (Julius) &nbsp;·&nbsp; 📐 Perimeter &amp; Area &nbsp;|&nbsp; 📖 ELA: Structure &amp; Signal Words
+  </div>
+
+</div><!-- /sheet 2 -->
+
+</body>
+</html>
