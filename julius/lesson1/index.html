@@ -1,1 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 2 — Measurement: Units & Conversions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-bg:#F0F7FF; --color-bg-deep:#E0EEFF; --color-surface:#FFFFFF;
+  --color-text:#0f172a; --color-text-secondary:#334155; --color-text-muted:#64748b;
+  --color-accent-1:#2563EB; --color-accent-2:#F97066; --color-accent-3:#D4A574;
+  --color-glass-bg:rgba(255,255,255,0.85); --color-glass-border:rgba(0,0,0,0.07);
+  --color-vignette:rgba(0,0,0,0.04);
+  --font-display:'Fredoka',sans-serif; --font-body:'Nunito',sans-serif;
+}
+</style>
+<style>
+:root{--color-bg:#F0F7FF;--color-text:#0f172a;--glow-color-rgb:37,99,235;}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--color-bg);margin:0;}
+body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;height:100vh;width:100vw;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.95);transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,2.5vw,2.5rem);}
+.nav-controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);padding:7px 18px;border-radius:40px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 4px 16px rgba(37,99,235,0.1);}
+.nav-btn{width:34px;height:34px;border:none;background:rgba(37,99,235,0.1);color:#2563EB;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:rgba(37,99,235,0.2);}
+.slide-nav-dropdown select{background:white;border:1.5px solid rgba(37,99,235,0.22);border-radius:8px;padding:4px 10px;font-size:0.78rem;font-family:'Fredoka',sans-serif;font-weight:500;color:#1e3a8a;cursor:pointer;outline:none;max-width:220px;box-shadow:0 1px 4px rgba(37,99,235,0.08);transition:border-color 0.2s;}
+.slide-nav-dropdown select:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,0.12);}
+.slide-counter{font-size:0.72rem;color:#64748b;min-width:38px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(14px);}
 
+@keyframes float-slow{0%{transform:translate(0,0) scale(1);}25%{transform:translate(35px,-25px) scale(1.07);}50%{transform:translate(-25px,25px) scale(0.95);}75%{transform:translate(25px,12px) scale(1.04);}100%{transform:translate(0,0) scale(1);}}
+@keyframes float-drift{0%{transform:translate(0,0);}33%{transform:translate(-35px,-35px) scale(1.09);}66%{transform:translate(28px,18px) scale(0.92);}100%{transform:translate(0,0);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-11px);}}
+.gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.blob{position:absolute;border-radius:50%;filter:blur(65px);animation:float-slow 12s ease-in-out infinite;}
+.blob:nth-child(2){animation:float-drift 16s ease-in-out infinite;}
+.blob:nth-child(3){animation:float-slow 20s ease-in-out infinite reverse;}
+.slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,var(--color-vignette) 100%);}
+
+/* PROBLEM SLIDES */
+.slide-problem{background:#FFF7F6;}
+.slide-problem h2{color:#C2410C;}
+.prob-badge{display:inline-block;background:linear-gradient(135deg,#F97066,#FB923C);color:white;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:20px;margin-bottom:0.5rem;}
+/* SECTION */
+.slide-section{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 50%,#2563EB 100%);}
+.slide-section .content{color:white;}
+
+/* ── FILLABLE INPUTS ── */
+.fill-input{border:2px solid rgba(37,99,235,0.28);border-radius:7px;padding:4px 9px;font-size:0.9rem;font-family:'Nunito',sans-serif;font-weight:600;color:#1e3a8a;background:rgba(255,255,255,0.97);outline:none;min-width:65px;max-width:145px;transition:border-color 0.2s,box-shadow 0.2s;display:inline-block;vertical-align:middle;}
+.fill-input:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,0.14);}
+.fill-input.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;box-shadow:0 0 0 3px rgba(22,163,74,0.13);}
+.fill-input.incorrect{border-color:#dc2626;background:#fef2f2;color:#b91c1c;animation:shake 0.28s ease;}
+.fill-input.revealed{border-color:#7c3aed;background:#f5f3ff;color:#5b21b6;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-4px);}75%{transform:translateX(4px);}}
+.check-btn{display:inline-flex;align-items:center;background:linear-gradient(135deg,#2563EB,#3b82f6);color:white;border:none;border-radius:6px;padding:4px 11px;font-size:0.73rem;font-weight:700;font-family:'Fredoka',sans-serif;letter-spacing:0.01em;cursor:pointer;transition:opacity 0.2s,transform 0.1s;margin-right:4px;}
+.check-btn:hover{opacity:0.88;transform:translateY(-1px);}
+.reveal-btn{background:linear-gradient(135deg,#7c3aed,#a855f7);}
+.answer-feedback{font-size:0.72rem;font-weight:700;margin-top:0.25rem;min-height:0.9rem;}
+.answer-feedback.correct{color:#16a34a;}
+.answer-feedback.incorrect{color:#dc2626;}
+.answer-feedback.revealed{color:#7c3aed;}
+.score-bar{display:inline-flex;align-items:center;gap:8px;background:white;border:1.5px solid rgba(37,99,235,0.12);border-radius:8px;padding:0.3rem 0.8rem;margin-bottom:0.5rem;}
+.score-display{font-size:0.75rem;font-weight:700;color:#2563EB;}
+.mc-opt{display:block;width:100%;text-align:left;background:white;border:2px solid rgba(37,99,235,0.18);border-radius:7px;padding:5px 11px;font-size:0.86rem;font-weight:500;color:#1e293b;font-family:'Nunito',sans-serif;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.12s;margin-bottom:0.28rem;}
+.mc-opt:hover{border-color:#2563EB;background:rgba(37,99,235,0.04);transform:translateX(2px);}
+.mc-opt.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;pointer-events:none;}
+.mc-opt.incorrect{border-color:#dc2626;background:#fef2f2;color:#b91c1c;pointer-events:none;}
+.mc-opt.disabled{opacity:0.48;pointer-events:none;}
+
+/* misc */
+.card{background:white;border-radius:11px;padding:0.8rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.step-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:linear-gradient(135deg,#2563EB,#3b82f6);color:white;border-radius:50%;font-size:0.72rem;font-weight:800;flex-shrink:0;}
+.trap-card{border-left:4px solid #ef4444;background:white;border-radius:0 9px 9px 0;padding:0.65rem 0.9rem;box-shadow:0 2px 7px rgba(239,68,68,0.08);}
+.unit-badge{display:inline-block;background:rgba(37,99,235,0.09);border:1.5px solid rgba(37,99,235,0.2);color:#1d4ed8;border-radius:7px;padding:1px 7px;font-size:0.78rem;font-weight:700;font-family:'Nunito',monospace;}
+</style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<!-- ═══ SLIDE 1: TITLE ═══ -->
+<div class="slide slide-section active" data-slide="1">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:350px;height:350px;top:-80px;right:-60px;background:#60A5FA;opacity:0.15;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#93C5FD;opacity:0.12;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:70px;margin-bottom:0.7rem;animation:float 3s ease-in-out infinite;" class="reveal">🌉</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:white;margin-bottom:0.4rem;">The Bridge Method</h2>
+    <p class="reveal" style="font-size:1rem;color:rgba(255,255,255,0.8);font-weight:500;">3 steps · works for every conversion on the SHSAT</p>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 8: BRIDGE METHOD (content) ═══ -->
+<div class="slide" data-slide="2">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:260px;height:260px;top:-50px;right:-30px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:170px;height:170px;bottom:-25px;left:-15px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">🌉 The Bridge Method</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.7rem;">3 Steps — Every Time</h2>
+    <div style="display:flex;flex-direction:column;gap:0.55rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge">1</div>
+        <div><div style="font-weight:800;font-size:0.88rem;color:#0f172a;">WRITE the conversion fact</div><div style="font-size:0.8rem;color:#475569;">e.g. 1 foot = 12 inches</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#F97066,#FB923C);">2</div>
+        <div><div style="font-weight:800;font-size:0.88rem;color:#0f172a;">DECIDE: multiply or divide?</div><div style="font-size:0.8rem;color:#475569;">Smaller unit? → multiply. Bigger unit? → divide.</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#16a34a,#22c55e);">3</div>
+        <div><div style="font-weight:800;font-size:0.88rem;color:#0f172a;">SANITY CHECK the label</div><div style="font-size:0.8rem;color:#475569;">Fewer big units, more small units — does your answer make sense?</div></div>
+      </div>
+    </div>
+    <div class="reveal" style="background:rgba(37,99,235,0.05);border-radius:8px;padding:0.55rem 0.9rem;margin-top:0.6rem;font-size:0.83rem;color:#334155;">
+      <strong>Worked example:</strong> 36 inches → feet. Step 1: 1 ft = 12 in. Step 2: going UP → divide. Step 3: 36 ÷ 12 = <strong>3 feet</strong> ✓ (fewer feet than inches ✓)
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 9: PROBLEM — Bridge Method ═══ -->
+<div class="slide slide-problem" data-slide="3">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ You Try · 3 min · Bridge Method</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Build Your Own Bridge</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 5 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#F97066;margin-bottom:0.3rem;">Problem A — 5 yards → inches</p>
+        <p style="font-size:0.78rem;color:#64748b;margin-bottom:0.4rem;">Hint: yd → ft → in (2 bridges)</p>
+        <div style="font-size:0.84rem;color:#334155;line-height:2.1;">
+          Step 1: 5 × 3 = <input class="fill-input" type="text" placeholder="? ft" data-answer="15" data-explanation="5×3=15 ft" style="width:58px;min-width:58px;"> ft<br>
+          Step 2: <input class="fill-input" type="text" placeholder="? ft" data-answer="15" style="width:50px;min-width:50px;"> × 12 = <input class="fill-input" type="text" placeholder="? in" data-answer="180" data-explanation="15×12=180 in" style="width:62px;min-width:62px;"> in
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.3rem;">Problem B — 72 inches → feet</p>
+        <p style="font-size:0.78rem;color:#64748b;margin-bottom:0.4rem;">Going UP — so divide!</p>
+        <div style="font-size:0.84rem;color:#334155;margin-bottom:0.45rem;">
+          72 ÷ 12 = <input class="fill-input" type="text" placeholder="? ft" data-answer="6" data-explanation="72÷12=6 ft" style="width:58px;min-width:58px;"> feet
+        </div>
+        <div class="mc-group">
+          <p style="font-size:0.75rem;color:#475569;margin-bottom:0.25rem;">💬 Why divide when going to a bigger unit?</p>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Bigger units always need division</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) You get fewer big units — the number shrinks</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) It depends on which family</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+    <button class="check-btn reveal" style="margin-top:0.4rem;" onclick="checkSlide(3)">Check All ↵</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 10: UP/DOWN LADDER (content) ═══ -->
+<div class="slide" data-slide="4">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#D4A574;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">📐 Content · The Ladder Rule</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">Going Up vs. Going Down</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;" class="reveal">
+      <div class="card" style="border:2px solid rgba(37,99,235,0.2);text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.3rem;">⬇️</div>
+        <div style="font-weight:800;font-size:0.95rem;color:#2563EB;margin-bottom:0.3rem;">Going DOWN the ladder</div>
+        <div style="font-size:0.82rem;color:#475569;margin-bottom:0.4rem;">big unit → small unit<br>e.g. feet → inches</div>
+        <div style="font-size:1.1rem;font-weight:800;color:#0f172a;">✖️ MULTIPLY</div>
+        <div style="font-size:0.75rem;color:#64748b;margin-top:0.2rem;">More small pieces needed</div>
+      </div>
+      <div class="card" style="border:2px solid rgba(249,112,102,0.25);text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.3rem;">⬆️</div>
+        <div style="font-weight:800;font-size:0.95rem;color:#F97066;margin-bottom:0.3rem;">Going UP the ladder</div>
+        <div style="font-size:0.82rem;color:#475569;margin-bottom:0.4rem;">small unit → big unit<br>e.g. inches → feet</div>
+        <div style="font-size:1.1rem;font-weight:800;color:#0f172a;">➗ DIVIDE</div>
+        <div style="font-size:0.75rem;color:#64748b;margin-top:0.2rem;">Fewer big containers needed</div>
+      </div>
+    </div>
+    <div class="reveal" style="background:rgba(37,99,235,0.05);border-radius:8px;padding:0.5rem 0.9rem;margin-top:0.6rem;font-size:0.82rem;color:#334155;">
+      💬 <strong>Socratic question:</strong> If I go from yards to inches, how many bridges do I need? What are the steps?
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 11: PROBLEM — Up or Down ═══ -->
+<div class="slide slide-problem" data-slide="5">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Up or Down? · 2 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Multiply or Divide?</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 2 correct</span></div>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#F97066;margin-bottom:0.25rem;">Problem 1</p>
+        <div style="font-size:0.86rem;color:#334155;">Convert <strong>4 feet</strong> to inches: <input class="fill-input" type="text" placeholder="? in" data-answer="48" data-explanation="4×12=48 in" style="width:72px;min-width:72px;"> inches</div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.25rem;">Problem 2</p>
+        <div style="font-size:0.86rem;color:#334155;">Convert <strong>24 feet</strong> to yards: <input class="fill-input" type="text" placeholder="? yd" data-answer="8" data-explanation="24÷3=8 yd" style="width:72px;min-width:72px;"> yards</div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Problem 3 ⭐ Think First</p>
+        <div class="mc-group">
+          <p style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">Going from <strong>feet → inches</strong> — multiply or divide?</p>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Multiply — smaller unit, need more of them</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Divide — going down the ladder</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Depends on the number</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+    <button class="check-btn reveal" style="margin-top:0.4rem;" onclick="checkSlide(5)">Check Inputs ↵</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 12: MULTI-STEP (content) ═══ -->
+<div class="slide" data-slide="6">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#7c3aed;opacity:0.05;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">🔗 Content · Multi-Step Conversions</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">Chaining Two Bridges</h2>
+    <div class="reveal" style="background:rgba(37,99,235,0.05);border-radius:10px;padding:0.7rem 1rem;margin-bottom:0.6rem;font-size:0.84rem;color:#334155;">
+      💬 What if there's no direct conversion fact? You chain bridges:<br>
+      <strong>yards → feet → inches</strong> &nbsp;(2 bridges, both going down → multiply twice)
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <div style="font-weight:700;font-size:0.85rem;color:#0f172a;margin-bottom:0.3rem;">Example: 4 yards → inches</div>
+        <div style="font-size:0.82rem;color:#334155;">Step 1: 4 yd × 3 = <strong>12 ft</strong> &nbsp;→&nbsp; Step 2: 12 ft × 12 = <strong>144 in</strong></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.12);">
+        <div style="font-weight:700;font-size:0.85rem;color:#0f172a;margin-bottom:0.3rem;">Example: 2 hours → seconds</div>
+        <div style="font-size:0.82rem;color:#334155;">Step 1: 2 hr × 60 = <strong>120 min</strong> &nbsp;→&nbsp; Step 2: 120 × 60 = <strong>7,200 sec</strong></div>
+      </div>
+    </div>
+    <div class="reveal" style="background:rgba(249,112,102,0.06);border:1.5px solid rgba(249,112,102,0.15);border-radius:9px;padding:0.5rem 0.9rem;margin-top:0.5rem;font-size:0.8rem;color:#334155;">
+      💬 <strong>Socratic question:</strong> If I needed to go from <em>miles → inches</em>, how many bridges would I need? List the steps.
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 13: PROBLEM — Multi-Step ═══ -->
+<div class="slide slide-problem" data-slide="7">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#7c3aed;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Multi-Step · 4 min · SHSAT Style</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Two-Bridge Problems</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 6 correct</span></div>
+    <div style="display:flex;flex-direction:column;gap:0.55rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#F97066;margin-bottom:0.25rem;">A — 2 yards → inches</p>
+        <div style="font-size:0.84rem;color:#334155;display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+          2 yd × 3 = <input class="fill-input" type="text" placeholder="? ft" data-answer="6" data-explanation="6 ft" style="width:52px;min-width:52px;"> ft &nbsp;→&nbsp;
+          <input class="fill-input" type="text" placeholder="? ft" data-answer="6" style="width:47px;min-width:47px;"> × 12 = <input class="fill-input" type="text" placeholder="? in" data-answer="72" data-explanation="72 in" style="width:58px;min-width:58px;"> in
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.25rem;">B — 3 hours → seconds</p>
+        <div style="font-size:0.84rem;color:#334155;display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+          3 hr × 60 = <input class="fill-input" type="text" placeholder="? min" data-answer="180" data-explanation="180 min" style="width:62px;min-width:62px;"> min &nbsp;→&nbsp;
+          <input class="fill-input" type="text" placeholder="? min" data-answer="180" style="width:55px;min-width:55px;"> × 60 = <input class="fill-input" type="text" placeholder="? sec" data-answer="10800" data-explanation="10,800 sec" style="width:72px;min-width:72px;"> sec
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.15);">
+        <p style="font-size:0.65rem;font-weight:800;text-transform:uppercase;color:#7c3aed;margin-bottom:0.25rem;">⚡ SHSAT Bonus — 2 miles → feet</p>
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+          <input class="fill-input" type="text" placeholder="? feet" data-answer="10560" data-explanation="2×5280=10,560 ft" style="min-width:100px;width:100px;" autocomplete="off">
+          <button class="check-btn" onclick="checkInput(this.previousElementSibling)">Check ↵</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.previousElementSibling.previousElementSibling)">Show</button>
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+    </div>
+    <button class="check-btn reveal" style="margin-top:0.4rem;" onclick="checkSlide(7)">Check All ↵</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 14: TIME FAMILY (content) ═══ -->
+<div class="slide" data-slide="8">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">⏰ Content · Time Family</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">Clocks &amp; Calendars</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#2563EB;margin-bottom:0.4rem;">Time Ladder</div>
+        <div style="font-size:0.82rem;color:#334155;line-height:2;">
+          <span class="unit-badge">60 sec</span> = 1 min<br>
+          <span class="unit-badge">60 min</span> = 1 hr<br>
+          <span class="unit-badge">24 hr</span> = 1 day<br>
+          <span class="unit-badge">7 days</span> = 1 wk
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#F97066;margin-bottom:0.4rem;">Common SHSAT Traps</div>
+        <div style="display:flex;flex-direction:column;gap:0.35rem;">
+          <div class="trap-card"><span style="font-size:0.78rem;font-weight:700;color:#dc2626;">🪤</span> <span style="font-size:0.78rem;color:#334155;">230 min ≠ 2.3 hours</span></div>
+          <div class="trap-card"><span style="font-size:0.78rem;font-weight:700;color:#dc2626;">🪤</span> <span style="font-size:0.78rem;color:#334155;">1.5 hours = 90 min, NOT 150 min</span></div>
+          <div class="trap-card"><span style="font-size:0.78rem;font-weight:700;color:#dc2626;">🪤</span> <span style="font-size:0.78rem;color:#334155;">Always convert to same unit before comparing</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:0.55rem;font-size:0.82rem;color:#334155;background:rgba(37,99,235,0.05);border-radius:8px;padding:0.5rem 0.9rem;">
+      💬 <strong>Socratic question:</strong> Is 230 minutes more or less than 4 hours? What's the fastest way to check?
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 15: PROBLEM — Time Drill ═══ -->
+<div class="slide slide-problem" data-slide="9">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Time Drill · 3 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Clock Conversions</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 3 correct</span></div>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#F97066;margin-bottom:0.22rem;">Problem 1</p>
+        <div style="font-size:0.85rem;color:#334155;">How many seconds in <strong>4 minutes</strong>? <input class="fill-input" type="text" placeholder="? sec" data-answer="240" data-explanation="4×60=240 sec" style="width:70px;min-width:70px;"> seconds</div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.22rem;">Problem 2</p>
+        <div style="font-size:0.85rem;color:#334155;">Convert <strong>150 minutes</strong>:
+          <input class="fill-input" type="text" placeholder="? hr" data-answer="2" data-explanation="150÷60=2 hr" style="width:50px;min-width:50px;"> hr
+          <input class="fill-input" type="text" placeholder="? min" data-answer="30" data-explanation="150-120=30 min" style="width:55px;min-width:55px;"> min
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#15803d;margin-bottom:0.22rem;">Problem 3 ⭐ — 230 min vs 4 hours</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) More — 230 is a big number</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Less — 4 hrs = 240 min, so 230 &lt; 240 ✓</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Equal — close enough</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+    <button class="check-btn reveal" style="margin-top:0.4rem;" onclick="checkSlide(9)">Check Inputs ↵</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 16: WEIGHT FAMILY (content) ═══ -->
+<div class="slide" data-slide="10">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#b45309;opacity:0.06;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#b45309;margin-bottom:0.3rem;">⚖️ Content · Weight Family</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">Ounces, Pounds &amp; Tons</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(180,83,9,0.15);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#b45309;margin-bottom:0.4rem;">Weight Ladder</div>
+        <div style="font-size:0.85rem;color:#334155;line-height:2;">
+          <span class="unit-badge">16 oz</span> = 1 lb<br>
+          <span class="unit-badge">2,000 lb</span> = 1 ton
+        </div>
+        <div style="font-size:0.78rem;color:#64748b;margin-top:0.4rem;">🧠 Memory trick: <em>"Sixteen ounces makes a pound — sweet sixteen!"</em></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#F97066;margin-bottom:0.4rem;">SHSAT Weight Traps</div>
+        <div style="display:flex;flex-direction:column;gap:0.35rem;">
+          <div class="trap-card"><span style="font-size:0.78rem;color:#334155;">🪤 Comparing lbs &amp; oz: convert to same unit first</span></div>
+          <div class="trap-card"><span style="font-size:0.78rem;color:#334155;">🪤 "3 lbs 4 oz" = 3×16+4 = 52 oz total</span></div>
+          <div class="trap-card"><span style="font-size:0.78rem;color:#334155;">🪤 Don't confuse oz (weight) with fl oz (liquid)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:0.55rem;font-size:0.82rem;color:#334155;background:rgba(180,83,9,0.04);border:1.5px solid rgba(180,83,9,0.12);border-radius:8px;padding:0.5rem 0.9rem;">
+      💬 <strong>Socratic question:</strong> Maria has 3 lbs. Her friend has 52 oz. Who has more? How do you compare them?
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 17: PROBLEM — Weight ═══ -->
+<div class="slide slide-problem" data-slide="11">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#b45309;opacity:0.05;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Weight Problems · 3 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Lifting &amp; Weighing</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 1 correct</span></div>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(180,83,9,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#b45309;margin-bottom:0.3rem;">Problem 1</p>
+        <p style="font-size:0.85rem;color:#334155;margin-bottom:0.35rem;font-weight:600;">A bag weighs <strong>5 lbs 8 oz</strong>. How many ounces total?</p>
+        <p style="font-size:0.76rem;color:#64748b;margin-bottom:0.4rem;font-style:italic;">Hint: 5 lbs = ? oz, then add 8</p>
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+          <input class="fill-input" type="text" placeholder="? oz" data-answer="88" data-explanation="5×16=80, 80+8=88 oz" style="min-width:80px;width:80px;" autocomplete="off">
+          <button class="check-btn" onclick="checkInput(this.previousElementSibling)">Check ↵</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.previousElementSibling.previousElementSibling)">Show</button>
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.3rem;">Problem 2 ⭐ — Who has more?</p>
+        <p style="font-size:0.85rem;color:#334155;margin-bottom:0.3rem;font-weight:600;">Maria: <strong>3 pounds</strong> &nbsp;|&nbsp; Friend: <strong>52 ounces</strong>. Who has more?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Maria — 3 &gt; 52 obviously</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Friend — 52 oz &gt; 48 oz (3 lbs = 48 oz)</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Equal</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 18: METRIC (content) ═══ -->
+<div class="slide" data-slide="12">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#15803d;opacity:0.06;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#15803d;margin-bottom:0.3rem;">🌍 Content · Metric System</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">Always Powers of 10</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.15);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.4rem;">Prefix Chart</div>
+        <div style="font-size:0.8rem;color:#334155;line-height:1.85;">
+          <strong>kilo-</strong> = × 1,000 &nbsp;→&nbsp; 1 km = 1,000 m<br>
+          <strong>centi-</strong> = ÷ 100 &nbsp;→&nbsp; 1 m = 100 cm<br>
+          <strong>milli-</strong> = ÷ 1,000 &nbsp;→&nbsp; 1 m = 1,000 mm
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.12);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.4rem;">All 4 Metric Families</div>
+        <div style="font-size:0.8rem;color:#334155;line-height:1.85;">
+          <strong>Length:</strong> km → m → cm → mm<br>
+          <strong>Mass:</strong> kg → g → mg<br>
+          <strong>Volume:</strong> L → mL<br>
+          <strong>Rule:</strong> × 10/100/1000 going down, ÷ going up
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:0.55rem;font-size:0.82rem;color:#334155;background:rgba(21,128,61,0.04);border:1.5px solid rgba(21,128,61,0.12);border-radius:8px;padding:0.5rem 0.9rem;">
+      💬 <strong>Socratic question:</strong> 1.2 km = ? cm. How many bridges do you need? (km → m → cm)
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 19: PROBLEM — Metric Drill ═══ -->
+<div class="slide slide-problem" data-slide="13">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#15803d;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Metric Drill · 3 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Powers of 10</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 6 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.55rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.15);">
+        <p style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Q1</p>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">3 km = ? meters</div>
+        <input class="fill-input" type="text" placeholder="? m" data-answer="3000" data-explanation="3×1000=3,000 m" style="width:75px;min-width:75px;" autocomplete="off">
+        <div class="answer-feedback" style="font-size:0.7rem;"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.15);">
+        <p style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Q2</p>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">500 cm = ? meters</div>
+        <input class="fill-input" type="text" placeholder="? m" data-answer="5" data-explanation="500÷100=5 m" style="width:75px;min-width:75px;" autocomplete="off">
+        <div class="answer-feedback" style="font-size:0.7rem;"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.15);">
+        <p style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Q3</p>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">2,500 g = ? kg</div>
+        <input class="fill-input" type="text" placeholder="? kg" data-answer="2.5" data-alts="2.50" data-explanation="2500÷1000=2.5 kg" style="width:75px;min-width:75px;" autocomplete="off">
+        <div class="answer-feedback" style="font-size:0.7rem;"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.15);">
+        <p style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Q4</p>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">4 L = ? mL</div>
+        <input class="fill-input" type="text" placeholder="? mL" data-answer="4000" data-explanation="4×1000=4,000 mL" style="width:75px;min-width:75px;" autocomplete="off">
+        <div class="answer-feedback" style="font-size:0.7rem;"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(21,128,61,0.15);">
+        <p style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Q5</p>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">75 mm = ? cm</div>
+        <input class="fill-input" type="text" placeholder="? cm" data-answer="7.5" data-alts="7.50" data-explanation="75÷10=7.5 cm" style="width:75px;min-width:75px;" autocomplete="off">
+        <div class="answer-feedback" style="font-size:0.7rem;"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.15);">
+        <p style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#7c3aed;margin-bottom:0.25rem;">Q6 ⭐</p>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.3rem;">1.2 km = ? cm</div>
+        <input class="fill-input" type="text" placeholder="? cm" data-answer="120000" data-explanation="1.2×1000=1200 m, ×100=120,000 cm" style="width:85px;min-width:85px;" autocomplete="off">
+        <div class="answer-feedback" style="font-size:0.7rem;"></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:7px;margin-top:0.5rem;" class="reveal">
+      <button class="check-btn" onclick="checkSlide(13)">Check All ↵</button>
+      <button class="check-btn reveal-btn" onclick="revealSlide(13)">Show All</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 20: TRAPS (content) ═══ -->
+<div class="slide" data-slide="14">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#dc2626;opacity:0.06;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#dc2626;margin-bottom:0.3rem;">⚠️ Content · SHSAT Traps</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">The 4 Biggest Mistakes</h2>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;" class="reveal">
+      <div class="trap-card"><strong style="color:#dc2626;">🪤 Trap 1 — Flipped fraction:</strong> <span style="font-size:0.83rem;">Writing 1 ft / 12 in when you need 12 in / 1 ft</span></div>
+      <div class="trap-card"><strong style="color:#dc2626;">🪤 Trap 2 — Wrong operation:</strong> <span style="font-size:0.83rem;">Dividing when you should multiply (going DOWN means ×)</span></div>
+      <div class="trap-card"><strong style="color:#dc2626;">🪤 Trap 3 — Decimal time:</strong> <span style="font-size:0.83rem;">230 min ≠ 2.3 hours. 230 ÷ 60 = 3 hr 50 min, not 3.8 hrs</span></div>
+      <div class="trap-card"><strong style="color:#dc2626;">🪤 Trap 4 — Missing label:</strong> <span style="font-size:0.83rem;">Getting the right number but the wrong unit — always write the unit!</span></div>
+    </div>
+    <div class="reveal" style="margin-top:0.55rem;font-size:0.82rem;color:#334155;background:rgba(220,38,38,0.04);border:1.5px solid rgba(220,38,38,0.12);border-radius:8px;padding:0.5rem 0.9rem;">
+      💬 <strong>Socratic question:</strong> A student says "3 feet = 36 yards." Which trap did they fall into?
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 21: PROBLEM — Trap Hunt ═══ -->
+<div class="slide slide-problem" data-slide="15">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#dc2626;opacity:0.07;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal" style="background:linear-gradient(135deg,#dc2626,#ef4444);">🪤 Trap Hunt · 3 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;color:#b91c1c;margin-bottom:0.5rem;">Spot the Mistake!</h2>
+    <div style="display:flex;flex-direction:column;gap:0.55rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <p style="font-size:0.75rem;font-weight:700;color:#dc2626;margin-bottom:0.3rem;">🪤 "3 feet = 36 yards" — What's wrong?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Multiplied instead of dividing (should be 1 yd)</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Used the wrong factor (should use 12 not 3)</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Nothing is wrong</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <p style="font-size:0.75rem;font-weight:700;color:#dc2626;margin-bottom:0.3rem;">🪤 "230 min = 3 hr 50 min" — Correct or wrong?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Correct ✓ — 3×60=180, 230−180=50</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Wrong — should be 2 hr 30 min</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Wrong — 230÷60=3.8 hours</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <p style="font-size:0.75rem;font-weight:700;color:#dc2626;margin-bottom:0.3rem;">🪤 "48 oz ÷ 16 = 768 lbs" — What's wrong?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Wrong conversion factor</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Multiplied instead of dividing (48÷16=3 lbs)</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Should divide by 12, not 16</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 22: TIMED DRILL (10 problems) ═══ -->
+<div class="slide" data-slide="16">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-55px;right:-35px;background:#7c3aed;opacity:0.07;"></div>
+    <div class="blob" style="width:170px;height:170px;bottom:-25px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#7C3AED;margin-bottom:0.3rem;">⏱ Timed Drill · 10 Problems · 5 min</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.5rem;">Solo Round — No Hints!</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 10 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.48rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">1. 60 in = <input class="fill-input" type="text" placeholder="? ft" data-answer="5" data-explanation="60÷12=5" style="width:58px;min-width:58px;"> ft</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">2. 2 mi = <input class="fill-input" type="text" placeholder="? ft" data-answer="10560" data-explanation="2×5280" style="width:75px;min-width:75px;"> ft</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">3. 3 hr = <input class="fill-input" type="text" placeholder="? min" data-answer="180" data-explanation="3×60" style="width:65px;min-width:65px;"> min</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">4. 48 oz = <input class="fill-input" type="text" placeholder="? lb" data-answer="3" data-explanation="48÷16" style="width:58px;min-width:58px;"> lb</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">5. 4,000 m = <input class="fill-input" type="text" placeholder="? km" data-answer="4" data-explanation="4000÷1000" style="width:58px;min-width:58px;"> km</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">6. 2 yd = <input class="fill-input" type="text" placeholder="? in" data-answer="72" data-explanation="2×3×12" style="width:58px;min-width:58px;"> in</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">7. 120 min = <input class="fill-input" type="text" placeholder="? hr" data-answer="2" data-explanation="120÷60" style="width:58px;min-width:58px;"> hr</div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.1);font-size:0.82rem;color:#334155;">8. 2.5 kg = <input class="fill-input" type="text" placeholder="? g" data-answer="2500" data-explanation="2.5×1000" style="width:68px;min-width:68px;"> g</div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.15);font-size:0.82rem;color:#334155;">9. ⭐ 3.5 hr = <input class="fill-input" type="text" placeholder="? min" data-answer="210" data-explanation="3.5×60" style="width:65px;min-width:65px;"> min</div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.15);font-size:0.82rem;color:#334155;">10. ⭐ 1 ton = <input class="fill-input" type="text" placeholder="? oz" data-answer="32000" data-explanation="2000×16" style="width:75px;min-width:75px;"> oz</div>
+    </div>
+    <div style="display:flex;gap:7px;margin-top:0.5rem;" class="reveal">
+      <button class="check-btn" onclick="checkSlide(16)">Check All ↵</button>
+      <button class="check-btn reveal-btn" onclick="revealSlide(16)">Show All</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 23: ANSWER KEY ═══ -->
+<div class="slide slide-problem" data-slide="17">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#7c3aed;opacity:0.08;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">📝 Answer Key + Error Log</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;color:#5b21b6;margin-bottom:0.65rem;">Drill Answers</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.35rem;">✅ Answers 1–5</div>
+        <div style="font-size:0.8rem;color:#334155;line-height:1.9;">
+          1. 60 in = <strong>5 ft</strong> (÷12)<br>
+          2. 2 mi = <strong>10,560 ft</strong> (×5280)<br>
+          3. 3 hr = <strong>180 min</strong> (×60)<br>
+          4. 48 oz = <strong>3 lb</strong> (÷16)<br>
+          5. 4,000 m = <strong>4 km</strong> (÷1000)
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#15803d;margin-bottom:0.35rem;">✅ Answers 6–10</div>
+        <div style="font-size:0.8rem;color:#334155;line-height:1.9;">
+          6. 2 yd = <strong>72 in</strong> (×3×12)<br>
+          7. 120 min = <strong>2 hr</strong> (÷60)<br>
+          8. 2.5 kg = <strong>2,500 g</strong> (×1000)<br>
+          9. ⭐ 3.5 hr = <strong>210 min</strong> (×60)<br>
+          10. ⭐ 1 ton = <strong>32,000 oz</strong> (×2000×16)
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:0.55rem;background:white;border:1.5px solid rgba(124,58,237,0.15);border-radius:9px;padding:0.55rem 0.9rem;">
+      <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;color:#7c3aed;margin-bottom:0.35rem;">Error Log</div>
+      <div style="display:flex;gap:1rem;font-size:0.78rem;color:#334155;flex-wrap:wrap;">
+        <span>🔴 Content Gap — reteach the fact</span>
+        <span>🟡 Careless — correct method, arithmetic slip</span>
+        <span>🟢 Got it!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 24: WORD PROBLEM STRATEGY (content) ═══ -->
+<div class="slide" data-slide="18">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#F97066;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">📝 Content · Word Problems</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">4-Step Read</h2>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge">1</div>
+        <div><div style="font-weight:800;font-size:0.86rem;">CIRCLE the units given</div><div style="font-size:0.78rem;color:#475569;">Underline what unit they want as the answer</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#F97066,#FB923C);">2</div>
+        <div><div style="font-weight:800;font-size:0.86rem;">BOX all numbers</div><div style="font-size:0.78rem;color:#475569;">Don't get distracted by irrelevant info</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#16a34a,#22c55e);">3</div>
+        <div><div style="font-weight:800;font-size:0.86rem;">BRIDGE from given → wanted</div><div style="font-size:0.78rem;color:#475569;">Write the conversion fact, then × or ÷</div></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(212,165,116,0.2);display:flex;gap:0.7rem;align-items:flex-start;">
+        <div class="step-badge" style="background:linear-gradient(135deg,#D4A574,#F97066);">4</div>
+        <div><div style="font-weight:800;font-size:0.86rem;">SANITY CHECK the label</div><div style="font-size:0.78rem;color:#475569;">Does the unit match what the question asked for?</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 25: PROBLEM — Word Problems ═══ -->
+<div class="slide slide-problem" data-slide="19">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Word Problem Practice · 4 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;margin-bottom:0.5rem;">Apply the 4-Step Read</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 2 correct</span></div>
+    <div style="display:flex;flex-direction:column;gap:0.65rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#F97066;margin-bottom:0.3rem;">Problem A</p>
+        <p style="font-size:0.85rem;color:#334155;margin-bottom:0.35rem;font-weight:600;">A swimming pool is 25 yards long. Maya swims 8 laps. How many feet does she swim total?</p>
+        <p style="font-size:0.76rem;color:#64748b;margin-bottom:0.4rem;font-style:italic;">Step 1: 25 yd × 8 = ? yd &nbsp;→&nbsp; Step 2: ? yd × 3 = ? ft</p>
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+          <input class="fill-input" type="text" placeholder="? feet" data-answer="600" data-explanation="25×8=200 yd, 200×3=600 ft" style="min-width:90px;width:90px;" autocomplete="off">
+          <button class="check-btn" onclick="checkInput(this.previousElementSibling)">Check ↵</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.previousElementSibling.previousElementSibling)">Show</button>
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.3rem;">Problem B — 2 Conversions</p>
+        <p style="font-size:0.85rem;color:#334155;margin-bottom:0.35rem;font-weight:600;">A train trip takes 2 hours 45 minutes. How many seconds is that total?</p>
+        <p style="font-size:0.76rem;color:#64748b;margin-bottom:0.4rem;font-style:italic;">Convert everything to minutes first, then to seconds.</p>
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+          <input class="fill-input" type="text" placeholder="? seconds" data-answer="9900" data-explanation="2hr45min=165 min, 165×60=9,900 sec" style="min-width:100px;width:100px;" autocomplete="off">
+          <button class="check-btn" onclick="checkInput(this.previousElementSibling)">Check ↵</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.previousElementSibling.previousElementSibling)">Show</button>
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 26: ELA SECTION BREAK ═══ -->
+<div class="slide slide-section" data-slide="20">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:320px;height:320px;top:-70px;right:-50px;background:#60A5FA;opacity:0.15;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-45px;left:-25px;background:#93C5FD;opacity:0.12;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:65px;margin-bottom:0.7rem;animation:float 3s ease-in-out infinite;" class="reveal">📖</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:white;margin-bottom:0.4rem;">ELA Block</h2>
+    <p class="reveal" style="font-size:0.95rem;color:rgba(255,255,255,0.8);font-weight:500;">Text Structures · 10 min</p>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 27: TEXT STRUCTURES (content) ═══ -->
+<div class="slide" data-slide="21">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:160px;height:160px;bottom:-22px;left:-12px;background:#D4A574;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">📖 Content · Text Structures</p>
+    <h2 class="reveal" style="font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;color:#0f172a;margin-bottom:0.65rem;">5 Structures — Signal Words</h2>
+    <div style="display:flex;flex-direction:column;gap:0.42rem;" class="reveal">
+      <div class="card" style="border-left:4px solid #2563EB;border-radius:0 9px 9px 0;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-weight:700;font-size:0.84rem;color:#0f172a;">1. Description</div><div style="font-size:0.76rem;color:#64748b;">Explains characteristics of a topic</div></div>
+        <div style="font-size:0.74rem;color:#2563EB;font-weight:600;text-align:right;">for example, such as,<br>in addition, characteristics</div>
+      </div>
+      <div class="card" style="border-left:4px solid #F97066;border-radius:0 9px 9px 0;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-weight:700;font-size:0.84rem;color:#0f172a;">2. Sequence</div><div style="font-size:0.76rem;color:#64748b;">Events in order / steps</div></div>
+        <div style="font-size:0.74rem;color:#F97066;font-weight:600;text-align:right;">first, next, then,<br>finally, before, after</div>
+      </div>
+      <div class="card" style="border-left:4px solid #15803d;border-radius:0 9px 9px 0;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-weight:700;font-size:0.84rem;color:#0f172a;">3. Compare/Contrast</div><div style="font-size:0.76rem;color:#64748b;">Similarities and differences</div></div>
+        <div style="font-size:0.74rem;color:#15803d;font-weight:600;text-align:right;">however, similarly,<br>on the other hand, unlike</div>
+      </div>
+      <div class="card" style="border-left:4px solid #dc2626;border-radius:0 9px 9px 0;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-weight:700;font-size:0.84rem;color:#0f172a;">4. Cause &amp; Effect</div><div style="font-size:0.76rem;color:#64748b;">Why something happened</div></div>
+        <div style="font-size:0.74rem;color:#dc2626;font-weight:600;text-align:right;">because, as a result,<br>therefore, consequently</div>
+      </div>
+      <div class="card" style="border-left:4px solid #7c3aed;border-radius:0 9px 9px 0;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-weight:700;font-size:0.84rem;color:#0f172a;">5. Problem/Solution</div><div style="font-size:0.76rem;color:#64748b;">A problem and how it's solved</div></div>
+        <div style="font-size:0.74rem;color:#7c3aed;font-weight:600;text-align:right;">the problem is, one solution,<br>this led to, resolved by</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ NEW: READING PASSAGE ═══ -->
+<div class="slide" data-slide="22">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-55px;right:-35px;background:#2563EB;opacity:0.07;"></div>
+    <div class="blob" style="width:170px;height:170px;bottom:-25px;left:-15px;background:#D4A574;opacity:0.05;"></div>
+  </div>
+  <div class="content">
+    <p class="reveal" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#2563EB;margin-bottom:0.3rem;">📖 Reading Passage · 4 min · Annotate as you read</p>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.55rem);font-weight:800;color:#0f172a;margin-bottom:0.55rem;">The New York City Water System</h2>
+    <div class="reveal" style="background:#f8faff;border:1.5px solid rgba(37,99,235,0.13);border-radius:11px;padding:0.8rem 1rem;font-size:0.84rem;color:#1e293b;line-height:1.82;font-family:'Nunito',sans-serif;">
+      <p style="margin:0 0 0.55rem 0;"><strong>Paragraph 1.</strong> New York City's water supply is one of the largest unfiltered surface water systems in the world. Every day, more than <strong>1 billion gallons</strong> travel from upstate reservoirs through tunnels and pipes — some buried <strong>800 feet underground</strong> — before reaching city taps. The system spans <strong>19 reservoirs</strong> across a 2,000-square-mile watershed.</p>
+      <p style="margin:0 0 0.55rem 0;"><strong>Paragraph 2.</strong> For decades, however, the aging tunnels posed a serious problem. City Tunnel No. 1, built in <strong>1917</strong>, had never been shut down for inspection. Engineers feared that closing it — even briefly — could cut off water to millions of people. The infrastructure was quietly failing, and a major repair was long overdue.</p>
+      <p style="margin:0 0 0.55rem 0;"><strong>Paragraph 3.</strong> <em>As a result</em>, the city launched one of the most ambitious infrastructure projects in American history: <strong>City Water Tunnel No. 3</strong>. Construction began in <strong>1970</strong> and took over <strong>40 years</strong> to complete. The new tunnel stretches <strong>60 miles</strong> and runs as deep as <strong>800 feet</strong> below street level, allowing engineers to finally inspect — and repair — the older tunnels without cutting off the city's water.</p>
+      <p style="margin:0;"><strong>Paragraph 4.</strong> Today, the water flows reliably to over <strong>8 million New Yorkers</strong>. The completion of Tunnel No. 3 didn't just solve the immediate crisis — it secured the city's water supply for the next <strong>100 years</strong>.</p>
+    </div>
+    <div class="reveal" style="margin-top:0.5rem;background:rgba(37,99,235,0.05);border-radius:8px;padding:0.45rem 0.85rem;font-size:0.76rem;color:#334155;">
+      💬 <strong>Annotation task:</strong> Circle any signal words. Put a ✦ next to the problem. Put a → next to the solution. What structure do you predict?
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NEW: PASSAGE QUESTIONS ═══ -->
+<div class="slide slide-problem" data-slide="23">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#2563EB;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ Passage Questions · 5 min · NYC Water System</span>
+    <h2 class="reveal" style="font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:800;color:#C2410C;margin-bottom:0.45rem;">Read Closely, Answer Precisely</h2>
+    <div class="score-bar reveal"><span style="font-size:0.72rem;color:#64748b;font-weight:600;">Score:</span><span class="score-display">✅ 0 / 5 correct</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;" class="reveal">
+
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#2563EB;margin-bottom:0.25rem;">Q1 — Text Structure</p>
+        <p style="font-size:0.78rem;color:#334155;margin-bottom:0.28rem;">What is the <em>primary</em> organizational structure of this passage?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Sequence — events in order</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Compare/Contrast — two tunnel systems</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Problem/Solution — aging tunnels, Tunnel No. 3</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">D) Description — facts about water</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#dc2626;margin-bottom:0.25rem;">Q2 — Signal Word</p>
+        <p style="font-size:0.78rem;color:#334155;margin-bottom:0.28rem;">Which signal phrase in Paragraph 3 tells you the structure?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) "For decades"</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) "As a result"</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) "Today"</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#15803d;margin-bottom:0.25rem;">Q3 — Supporting Detail</p>
+        <p style="font-size:0.78rem;color:#334155;margin-bottom:0.28rem;">How many gallons does NYC use per day?</p>
+        <div style="display:flex;align-items:center;gap:7px;">
+          <input class="fill-input" type="text" placeholder="? billion" data-answer="1" data-alts="1 billion|one billion|one" data-explanation="Paragraph 1: more than 1 billion gallons" style="width:100px;" autocomplete="off">
+          <button class="check-btn" onclick="checkInput(this.previousElementSibling)">Check ↵</button>
+          <button class="check-btn reveal-btn" onclick="revealAnswer(this.previousElementSibling.previousElementSibling)">Show</button>
+        </div>
+        <div class="answer-feedback"></div>
+      </div>
+
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.15);">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#7c3aed;margin-bottom:0.25rem;">Q4 — Inference</p>
+        <p style="font-size:0.78rem;color:#334155;margin-bottom:0.28rem;">Why did engineers <em>not</em> shut down Tunnel No. 1 for decades?</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) It was working perfectly</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Closing it would cut off water to millions</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) There was no replacement tunnel yet</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);grid-column:span 2;">
+        <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#F97066;margin-bottom:0.25rem;">Q5 — Main Purpose ⭐ SHSAT-style</p>
+        <p style="font-size:0.78rem;color:#334155;margin-bottom:0.28rem;">What is the <em>main purpose</em> of this passage?</p>
+        <div class="mc-group" style="display:grid;grid-template-columns:1fr 1fr;gap:0.3rem;">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) To describe how water is filtered</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) To explain a problem and its long-term solution</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) To compare NYC water to other cities</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">D) To sequence the history of NYC</button>
+          <div class="answer-feedback" style="grid-column:span 2;"></div>
+        </div>
+      </div>
+
+    </div>
+    <button class="check-btn reveal" style="margin-top:0.4rem;" onclick="checkSlide(23)">Check Inputs ↵</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 28: PROBLEM — ELA Practice ═══ -->
+<div class="slide slide-problem" data-slide="24">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:250px;height:250px;top:-45px;right:-25px;background:#F97066;opacity:0.09;"></div>
+    <div class="blob" style="width:165px;height:165px;bottom:-22px;left:-15px;background:#7c3aed;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <span class="prob-badge reveal">✏️ ELA Practice · 3 min</span>
+    <h2 class="reveal" style="font-size:clamp(1.2rem,2.6vw,1.8rem);font-weight:800;color:#C2410C;margin-bottom:0.5rem;">Identify the Structure</h2>
+    <div style="display:flex;flex-direction:column;gap:0.55rem;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);">
+        <p style="font-size:0.75rem;font-weight:700;color:#2563EB;margin-bottom:0.25rem;">Passage A</p>
+        <p style="font-size:0.8rem;color:#334155;font-style:italic;margin-bottom:0.3rem;">"<em>First</em>, the caterpillar builds a cocoon. <em>Next</em>, it transforms for two weeks. <em>Finally</em>, a butterfly emerges."</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Cause &amp; Effect</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Sequence</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Compare/Contrast</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(220,38,38,0.12);">
+        <p style="font-size:0.75rem;font-weight:700;color:#dc2626;margin-bottom:0.25rem;">Passage B</p>
+        <p style="font-size:0.8rem;color:#334155;font-style:italic;margin-bottom:0.3rem;">"Cities face serious flooding <em>because</em> of heavy rainfall. <em>As a result</em>, many residents were evacuated."</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Description</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Problem/Solution</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Cause &amp; Effect</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(124,58,237,0.12);">
+        <p style="font-size:0.75rem;font-weight:700;color:#7c3aed;margin-bottom:0.25rem;">Passage C</p>
+        <p style="font-size:0.8rem;color:#334155;font-style:italic;margin-bottom:0.3rem;">"<em>Unlike</em> cats, dogs are pack animals. Dogs seek companionship; cats are more independent. <em>However</em>, both make great pets."</p>
+        <div class="mc-group">
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">A) Sequence</button>
+          <button class="mc-opt" onclick="selectMC(this,true,this.closest('.mc-group').querySelectorAll('.mc-opt'))">B) Compare/Contrast</button>
+          <button class="mc-opt" onclick="selectMC(this,false,this.closest('.mc-group').querySelectorAll('.mc-opt'))">C) Description</button>
+          <div class="answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 30: CLOSING ═══ -->
+<div class="slide" data-slide="25">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:450px;height:450px;top:-100px;right:-80px;background:#2563EB;opacity:0.09;"></div>
+    <div class="blob" style="width:300px;height:300px;bottom:-65px;left:-45px;background:#F97066;opacity:0.08;"></div>
+    <div class="blob" style="width:180px;height:180px;top:35%;left:8%;background:#D4A574;opacity:0.07;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div style="font-size:75px;margin-bottom:0.8rem;animation:float 3s ease-in-out infinite;" class="reveal">🎯</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;background:linear-gradient(135deg,#2563EB,#F97066);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;">Great Work Today, Julius!</h2>
+    <p class="reveal" style="font-size:0.92rem;color:#334155;font-weight:600;margin-bottom:0.6rem;">You can now convert any unit on the SHSAT — in 3 steps.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.55rem;text-align:left;max-width:700px;margin:0 auto;" class="reveal">
+      <div class="card" style="border:1.5px solid rgba(37,99,235,0.12);text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">🌉</div>
+        <div style="font-size:0.78rem;font-weight:700;color:#2563EB;">Bridge Method</div>
+        <div style="font-size:0.72rem;color:#64748b;">Write → Decide → Check</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(249,112,102,0.15);text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">⬇️⬆️</div>
+        <div style="font-size:0.78rem;font-weight:700;color:#F97066;">Ladder Rule</div>
+        <div style="font-size:0.72rem;color:#64748b;">Down × | Up ÷</div>
+      </div>
+      <div class="card" style="border:1.5px solid rgba(22,163,74,0.15);text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.2rem;">🪤</div>
+        <div style="font-size:0.78rem;font-weight:700;color:#15803d;">Trap Shield</div>
+        <div style="font-size:0.72rem;color:#64748b;">Label every answer!</div>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:0.82rem;color:#64748b;margin-top:0.6rem;">Next session: Week 3 — Ratios, Rates &amp; Proportions</p>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-nav-dropdown">
+    <select id="slideSelect" onchange="goToSlide(parseInt(this.value))" title="Jump to slide">
+          <option value="" disabled>Jump to slide…</option>
+          <option value="7">7. ✏️ Two-Bridge Problems</option>
+          <option value="8">8. ⏰ Clocks & Calendars</option>
+          <option value="9">9. ✏️ Clock Conversions</option>
+          <option value="10">10. ⚖️ Ounces, Pounds & Tons</option>
+          <option value="11">11. ✏️ Lifting & Weighing</option>
+          <option value="12">12. 🌍 Always Powers of 10</option>
+          <option value="13">13. ✏️ Powers of 10</option>
+          <option value="14">14. ⚠️ The 4 Biggest Mistakes</option>
+          <option value="15">15. ✏️ Spot the Mistake!</option>
+          <option value="16">16. ⏱️ Solo Round — No Hints!</option>
+          <option value="17">17. 📝 Drill Answers</option>
+          <option value="18">18. 📖 4-Step Read</option>
+          <option value="19">19. ✏️ Apply the 4-Step Read</option>
+          <option value="20">20. 📚 ELA Block</option>
+          <option value="21">21. 5 Structures — Signal Words</option>
+          <option value="22">22. NYC Water System Passage</option>
+          <option value="23">23. ✏️ Passage Questions</option>
+          <option value="24">24. ✏️ Identify the Structure</option>
+          <option value="25">25. 🎯 Great Work Today!</option>
+    </select>
+  </div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 25</span>
+</div>
+
+<script>
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+// dotsContainer removed — using dropdown nav
+const counter=document.getElementById('counter');
+// Dropdown nav — no dots needed
+function goToSlide(n){const prev=document.querySelector('.slide.active');const next=document.querySelector('.slide[data-slide="'+n+'"]');if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next);}current=n;updateNav();}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){
+  counter.textContent=current+' / '+total;
+  const sel=document.getElementById('slideSelect');
+  if(sel){
+    if(current>=7){sel.value=current;}
+    else{sel.value='';}
+  }
+}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}});
+let tX=0;document.addEventListener('touchstart',e=>{tX=e.touches[0].clientX;});document.addEventListener('touchend',e=>{const d=tX-e.changedTouches[0].clientX;if(Math.abs(d)>50)changeSlide(d>0?1:-1);});
+function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(14px)';el.offsetHeight;const delay=i*0.07;el.style.transition='opacity 0.32s ease '+delay+'s, transform 0.32s ease '+delay+'s';el.style.opacity='1';el.style.transform='translateY(0)';});}
+
+/* ── FILLABLE ANSWER SYSTEM ── */
+function normalizeAns(s){
+  s=String(s).toLowerCase().trim();
+  s=s.replace(/\s*(feet|foot|ft|inches|inch|in|yards|yard|yd|miles|mile|mi|pounds|pound|lbs|lb|ounces|ounce|oz|tons|ton|minutes|minute|min|hours|hour|hr|seconds|second|sec|km|kg|mg|ml|cm|mm|meters|meter|liters|liter)\.?$/i,'').trim();
+  var n=parseFloat(s);return !isNaN(n)?String(n):s;
+}
+function checkInput(el){
+  var val=el.value;if(!val.trim())return;
+  var norm=normalizeAns(val),normC=normalizeAns(el.dataset.answer);
+  var ok=(norm===normC);
+  if(!ok){var nv=parseFloat(norm),nc=parseFloat(normC);if(!isNaN(nv)&&!isNaN(nc))ok=Math.abs(nv-nc)<0.01;}
+  var alts=(el.dataset.alts||'').split('|').map(a=>normalizeAns(a)).filter(a=>a);
+  if(!ok&&alts.length)ok=alts.includes(norm);
+  var fb=el.parentElement?el.parentElement.querySelector('.answer-feedback'):null;
+  el.classList.remove('correct','incorrect','revealed');
+  if(fb)fb.className='answer-feedback';
+  if(ok){el.classList.add('correct');if(fb){fb.classList.add('correct');fb.textContent='✓ '+(el.dataset.explanation||'Correct!');}}
+  else{el.classList.add('incorrect');if(fb){fb.classList.add('incorrect');fb.textContent='✗ Try again — use the bridge!';}}
+  updateSlideScore(el.closest('.slide'));
+}
+function revealAnswer(el){
+  el.value=el.dataset.answer;el.classList.remove('correct','incorrect');el.classList.add('revealed');
+  var fb=el.parentElement?el.parentElement.querySelector('.answer-feedback'):null;
+  if(fb){fb.className='answer-feedback revealed';fb.textContent='👁 '+el.dataset.answer+(el.dataset.explanation?' — '+el.dataset.explanation:'');}
+  updateSlideScore(el.closest('.slide'));
+}
+function updateSlideScore(slide){
+  if(!slide)return;
+  var inputs=slide.querySelectorAll('.fill-input[data-answer]');
+  var correct=slide.querySelectorAll('.fill-input.correct').length;
+  var scoreEl=slide.querySelector('.score-display');
+  if(scoreEl)scoreEl.textContent='✅ '+correct+' / '+inputs.length+' correct';
+}
+function selectMC(btn,isCorrect,allBtns){
+  allBtns.forEach(b=>{b.classList.remove('correct','incorrect');b.classList.add('disabled');});
+  btn.classList.remove('disabled');btn.classList.add(isCorrect?'correct':'incorrect');
+  var fb=btn.closest('.mc-group')?btn.closest('.mc-group').querySelector('.answer-feedback'):null;
+  if(fb){fb.className='answer-feedback '+(isCorrect?'correct':'incorrect');fb.textContent=isCorrect?'✓ Correct!':'✗ Not quite — think it through!';}
+}
+function checkSlide(n){document.querySelectorAll('[data-slide="'+n+'"] .fill-input').forEach(el=>checkInput(el));}
+function revealSlide(n){document.querySelectorAll('[data-slide="'+n+'"] .fill-input').forEach(el=>revealAnswer(el));}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList.contains('fill-input')){e.preventDefault();e.stopPropagation();checkInput(e.target);}});
+
+/* Mouse spotlight */
+document.addEventListener('mousemove',function(e){const s=document.querySelector('.mouse-spotlight');if(s)s.style.background='radial-gradient(600px circle at '+e.clientX+'px '+e.clientY+'px, rgba(37,99,235,0.05), transparent 40%)';});
+
+/* Particles */
+window.initParticles=function(canvas,options){if(!canvas)return;const ctx=canvas.getContext('2d');canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;const count=options.count||18;const particles=Array.from({length:count},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,size:Math.random()*2+0.6,alpha:Math.random()*0.3+0.08}));(function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba(37,99,235,'+p.alpha+')';ctx.fill();});requestAnimationFrame(animate);})();};
+document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{count:45}));
+document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{count:16}));
+
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+</script>
+</body>
+</html>
