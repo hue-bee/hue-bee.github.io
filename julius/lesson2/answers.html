@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 Answer Sheet — Perimeter & Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#2563EB; --blue-lt:#EFF6FF; --blue-md:#BFDBFE;
+    --coral:#F97066; --coral-lt:#FFF1F0;
+    --sand:#D4A574; --sand-lt:#FDF3E7;
+    --green:#16a34a; --green-lt:#DCFCE7;
+    --purple:#7c3aed; --purple-lt:#EDE9FE;
+    --ink:#0f172a; --slate:#334155; --muted:#64748b;
+    --border:#CBD5E1; --bg:#F8FAFF; --white:#FFFFFF;
+    --ff-head:'Fredoka',sans-serif; --ff-body:'Nunito',sans-serif;
+  }
+  html { background:#e2e8f0; }
+  body { font-family:var(--ff-body); color:var(--ink); background:var(--bg); max-width:860px; margin:0 auto; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @media print {
+    html { background:white; }
+    body { max-width:100%; }
+    .no-print { display:none !important; }
+    .sheet { box-shadow:none !important; margin:0 !important; border-radius:0 !important; padding:1.2cm 1.5cm !important; }
+    .page-break { page-break-before:always; }
+  }
+  .sheet { background:var(--white); margin:2rem auto; padding:2.2rem 2.4rem; box-shadow:0 4px 24px rgba(37,99,235,0.10); border-radius:16px; }
+
+  /* Header */
+  .hw-header { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:1rem; border-bottom:3px solid var(--coral); margin-bottom:1.4rem; gap:1rem; flex-wrap:wrap; }
+  .hw-header h1 { font-family:var(--ff-head); font-size:1.75rem; font-weight:700; color:var(--coral); line-height:1.1; }
+  .hw-header .subtitle { font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:0.2rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .confidential { background:var(--coral-lt); border:2px solid var(--coral); border-radius:8px; padding:0.35rem 1rem; font-family:var(--ff-head); font-size:0.85rem; font-weight:700; color:#c2410c; letter-spacing:0.05em; text-transform:uppercase; }
+
+  /* Section header */
+  .section-hd { display:flex; align-items:center; gap:0.55rem; margin:1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size:1.25rem; }
+  .section-hd h2 { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; color:var(--ink); }
+  .badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:2px 9px; border-radius:20px; margin-left:auto; }
+  .badge-blue   { background:var(--blue-lt);   color:var(--blue);   border:1px solid var(--blue-md); }
+  .badge-coral  { background:var(--coral-lt);  color:#c2410c;       border:1px solid #fca5a5; }
+  .badge-green  { background:var(--green-lt);  color:var(--green);  border:1px solid #86efac; }
+  .badge-purple { background:var(--purple-lt); color:var(--purple); border:1px solid #c4b5fd; }
+
+  /* Answer table */
+  .ans-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom:0.5rem; }
+  .ans-table thead tr { background:linear-gradient(135deg,var(--blue),#1d4ed8); color:white; }
+  .ans-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .ans-table thead th:first-child { border-radius:8px 0 0 0; }
+  .ans-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .ans-table tbody tr:nth-child(even) { background:var(--blue-lt); }
+  .ans-table tbody tr:nth-child(odd)  { background:white; }
+  .ans-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .ans-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--blue); width:8%; text-align:center; font-size:0.9rem; }
+  .ans-table tbody td.answer { font-family:var(--ff-head); font-weight:700; color:var(--green); font-size:0.92rem; }
+  .ans-table tbody td.work { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .ans-table tbody tr:last-child td { border-bottom:none; }
+
+  /* MC answer table */
+  .mc-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  .mc-table thead tr { background:linear-gradient(135deg,var(--purple),#5b21b6); color:white; }
+  .mc-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .mc-table thead th:first-child { border-radius:8px 0 0 0; }
+  .mc-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .mc-table tbody tr:nth-child(even) { background:var(--purple-lt); }
+  .mc-table tbody tr:nth-child(odd)  { background:white; }
+  .mc-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .mc-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--purple); width:6%; text-align:center; font-size:0.9rem; }
+  .mc-table tbody td.answer { font-family:var(--ff-head); font-weight:800; color:var(--green); font-size:1rem; }
+  .mc-table tbody td.explain { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .mc-table tbody tr:last-child td { border-bottom:none; }
+
+  /* Lvl pill */
+  .lvl { display:inline-block; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:1px 8px; border-radius:20px; vertical-align:middle; margin-left:0.3rem; }
+  .lvl-1 { background:#dcfce7; color:#15803d; }
+  .lvl-2 { background:#fef9c3; color:#92400e; }
+  .lvl-3 { background:#fee2e2; color:#b91c1c; }
+
+  hr.divider { border:none; border-top:2px dashed var(--border); margin:1.4rem 0; }
+
+  .print-btn { display:block; width:fit-content; margin:0 auto 1rem; background:var(--coral); color:white; font-family:var(--ff-head); font-size:1rem; font-weight:600; padding:0.55rem 1.6rem; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 10px rgba(249,112,102,0.3); transition:background 0.2s; }
+  .print-btn:hover { background:#e05a50; }
+
+  .note-box { background:var(--sand-lt); border:1.5px solid var(--sand); border-radius:10px; padding:0.7rem 1rem; margin-bottom:1.2rem; font-size:0.8rem; color:#78350f; font-weight:600; line-height:1.6; }
+  .note-box strong { color:#92400e; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div>
+      <h1>✅ Week 2 Answer Sheet</h1>
+      <div class="subtitle">Measurement: Perimeter &amp; Area · SHSAT Prep</div>
+    </div>
+    <div class="confidential">🔒 Tutor Copy</div>
+  </div>
+
+  <div class="note-box">
+    <strong>Tutor Note:</strong> Share only after Julius has submitted his homework. Answers marked with ⚠️ are common error spots — check his work method, not just the final number. For Level 3 problems, partial credit if the setup is correct.
+  </div>
+
+  <!-- PART A: MATH -->
+  <div class="section-hd">
+    <span class="icon">🔢</span>
+    <h2>Part A — Perimeter &amp; Area (Problems 1–9)</h2>
+    <span class="badge badge-blue">10 pts</span>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr><th>#</th><th>Problem</th><th>Answer</th><th>Key Work / Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Perimeter of 18×12 ft rectangle <span class="lvl lvl-1">L1</span></td>
+        <td class="answer">60 ft</td>
+        <td class="work">P = 2(18 + 12) = 2(30) = 60 ft</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Area of triangle, b=14 cm, h=9 cm <span class="lvl lvl-1">L1</span></td>
+        <td class="answer">63 cm²</td>
+        <td class="work">A = ½ × 14 × 9 = ½ × 126 = 63 cm² &nbsp;⚠️ Watch: forgetting the ½</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Area of parallelogram, b=11 m, h=7 m <span class="lvl lvl-1">L1</span></td>
+        <td class="answer">77 m²</td>
+        <td class="work">A = bh = 11 × 7 = 77 m² &nbsp;⚠️ Watch: using slant side instead of height</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Area of trapezoid, b₁=8 in, b₂=14 in, h=6 in <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">66 in²</td>
+        <td class="work">A = ½(8 + 14) × 6 = ½ × 22 × 6 = ½ × 132 = 66 in²</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Perimeter of 6-sided polygon (sides: 100, 40, 40, 60, 60, 60 cm) <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">360 cm</td>
+        <td class="work">P = 100 + 40 + 40 + 60 + 60 + 60 = 360 cm &nbsp;⚠️ Watch: missing a side</td>
+      </tr>
+      <tr>
+        <td>6a</td>
+        <td>Area of right triangle, legs 5 ft &amp; 12 ft <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">30 ft²</td>
+        <td class="work">A = ½ × 5 × 12 = 30 ft² (legs ARE the base and height)</td>
+      </tr>
+      <tr>
+        <td>6b</td>
+        <td>Perimeter of same right triangle <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">30 ft</td>
+        <td class="work">Hypotenuse: √(5²+12²) = √(25+144) = √169 = 13 ft &nbsp;→ P = 5+12+13 = 30 ft</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Area of L-shape (4×3 top + 10×4 bottom) <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">52 m²</td>
+        <td class="work">Piece 1 (top rect): 4×3 = 12 m² &nbsp;|&nbsp; Piece 2 (bottom rect): 10×4 = 40 m² &nbsp;→ Total = 52 m²</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>12×10 room minus 4×4 closet <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">104 ft²</td>
+        <td class="work">Big rect: 12×10 = 120 ft² &nbsp;− &nbsp;Closet: 4×4 = 16 ft² &nbsp;= 104 ft²</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Rectangle (10×6) + triangle (b=6, h=5) <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">75 cm²</td>
+        <td class="work">Rect: 10×6 = 60 cm² &nbsp;+ &nbsp;Tri: ½×6×5 = 15 cm² &nbsp;= 75 cm²</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- PART B: WORD PROBLEMS -->
+  <div class="section-hd">
+    <span class="icon">💬</span>
+    <h2>Part B — Word Problems (10–12)</h2>
+    <span class="badge badge-green">3 pts</span>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr><th>#</th><th>Problem</th><th>Answer</th><th>Key Work / Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>10</td>
+        <td>Fence around 9×6 yd garden @ $4/yd <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">$120</td>
+        <td class="work">P = 2(9+6) = 30 yd &nbsp;→ Cost = 30 × $4 = $120 &nbsp;⚠️ Watch: computing area instead of perimeter</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Tile 40×8 ft hallway; tiles = 2 ft² @ $3 each <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">$480</td>
+        <td class="work">Area = 40×8 = 320 ft² &nbsp;→ Tiles needed = 320÷2 = 160 &nbsp;→ Cost = 160×$3 = $480</td>
+      </tr>
+      <tr>
+        <td>12a</td>
+        <td>Area of trapezoid park (b₁=120, b₂=80, h=50 m) <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">5,000 m²</td>
+        <td class="work">A = ½(120+80)×50 = ½×200×50 = 5,000 m²</td>
+      </tr>
+      <tr>
+        <td>12b</td>
+        <td>Perimeter (jogging path) of same trapezoid <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">310 m</td>
+        <td class="work">P = 120 + 80 + 55 + 55 = 310 m</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- PART C: ELA -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: "The Grid That Grew" (Q1–Q6)</h2>
+    <span class="badge badge-purple">6 pts</span>
+  </div>
+
+  <table class="mc-table">
+    <thead>
+      <tr><th>Q#</th><th>Skill</th><th>Answer</th><th>Why This Answer / Tutor Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Q1</td>
+        <td>Main Idea</td>
+        <td class="answer">B</td>
+        <td class="explain">Every paragraph connects back to the rectangular grid and geometry — not just history. (A) is too narrow; (C) is a detail; (D) is an overgeneralization not supported by the text.</td>
+      </tr>
+      <tr>
+        <td>Q2</td>
+        <td>Text Structure</td>
+        <td class="answer">A</td>
+        <td class="explain">The passage moves chronologically (1811 plan → critics → adjustments → today) AND contrasts Manhattan grid vs. old neighborhoods. Both structures are present. ⚠️ Watch: (B) problem-solution is too simple — the passage never fully "solves" a problem.</td>
+      </tr>
+      <tr>
+        <td>Q3</td>
+        <td>Signal Words</td>
+        <td class="answer">B</td>
+        <td class="explain">"As a result" = cause-effect signal. ¶2 explains the geometric properties of a rectangle → the result is easy calculation. (A) is wrong — "As a result" never signals contrast.</td>
+      </tr>
+      <tr>
+        <td>Q4</td>
+        <td>Supporting Detail</td>
+        <td class="answer">C</td>
+        <td class="explain">Directly stated in ¶3: "left no room for diagonal routes, making it inefficient to travel across the city at an angle." (B) is the opposite of what the text says.</td>
+      </tr>
+      <tr>
+        <td>Q5</td>
+        <td>Inference</td>
+        <td class="answer">B</td>
+        <td class="explain">¶5 says irregular shapes make it "much harder to estimate distances or areas at a glance" — this implies people use geometric reasoning (grids = predictable math) to navigate. ⚠️ (A), (C), (D) are not supported by the text.</td>
+      </tr>
+      <tr>
+        <td>Q6</td>
+        <td>Author's Purpose</td>
+        <td class="answer">C</td>
+        <td class="explain">¶6 zooms out from the 1811 plan to say geometry shapes how "millions of people move through space every day" — it elevates the topic from history to lived human experience. (A), (B), (D) misread the paragraph's function.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- SCORING GUIDE -->
+  <div class="section-hd">
+    <span class="icon">📊</span>
+    <h2>Scoring Guide</h2>
+  </div>
+  <table class="ans-table">
+    <thead>
+      <tr><th>Section</th><th>Points</th><th>Score Benchmark</th><th>If Julius Scores Below…</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="text-align:left;font-weight:600;">Part A (Math)</td><td class="answer">/ 10</td><td class="work">8–10 = Strong &nbsp;|&nbsp; 6–7 = Review composites &nbsp;|&nbsp; &lt;6 = Re-teach formulas</td><td class="work">6 → revisit formula strip at session start</td></tr>
+      <tr><td style="text-align:left;font-weight:600;">Part B (Word)</td><td class="answer">/ 3</td><td class="work">3 = Strong &nbsp;|&nbsp; 2 = Check perimeter vs. area confusion &nbsp;|&nbsp; 1 = Re-teach word problem setup</td><td class="work">2 → use the 4-step scaffold in Week 18</td></tr>
+      <tr><td style="text-align:left;font-weight:600;">Part C (ELA)</td><td class="answer">/ 6</td><td class="work">5–6 = Strong &nbsp;|&nbsp; 3–4 = Review signal words &nbsp;|&nbsp; &lt;3 = Re-teach structure types</td><td class="work">3 → signal word drill at start of ELA block</td></tr>
+      <tr><td style="text-align:left;font-weight:600;color:var(--coral);">Total</td><td class="answer" style="color:var(--coral);">/ 19</td><td class="work">16–19 = Excellent &nbsp;|&nbsp; 12–15 = On track &nbsp;|&nbsp; &lt;12 = Needs re-teach before moving to Week 3</td><td class="work">&lt;12 → spend 10 extra min on error log review</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 2 · SHSAT Prep (Julius) · 📐 Perimeter &amp; Area &nbsp;|&nbsp; 📖 ELA: Structure &amp; Signal Words &nbsp;·&nbsp; 🔒 Tutor Copy — Do Not Distribute
+  </div>
+
+</div>
+</body>
+</html>
