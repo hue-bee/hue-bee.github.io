@@ -1,1 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 3 — Measurement: Circles & Surface Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-bg: #F0F7FF;
+  --color-bg-deep: #E0EEFF;
+  --color-surface: #FFFFFF;
+  --color-text: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+  --color-accent-1: #374151;
+  --color-accent-2: #4b5563;
+  --color-accent-3: #9ca3af;
+  --color-glass-bg: rgba(255,255,255,0.88);
+  --color-glass-border: rgba(0,0,0,0.07);
+  --color-vignette: rgba(0,0,0,0.04);
+  --font-display: 'Fredoka', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+</style>
+<style>
+:root{--color-bg:#F0F7FF;--color-text:#0f172a;--glow-color-rgb:37,99,235;}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--color-bg);margin:0;}
+body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;height:100vh;width:100vw;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.96);transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1080px;padding:clamp(1rem,3vw,3rem);}
+.nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);padding:8px 22px;border-radius:40px;border:1px solid rgba(0,0,0,0.09);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.nav-btn{width:36px;height:36px;border:none;background:rgba(0,0,0,0.05);color:#111827;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:rgba(37,99,235,0.18);}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.12);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:#374151;transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:#64748b;min-width:36px;text-align:center;font-weight:700;}
+.reveal{opacity:0;transform:translateY(16px);}
+@keyframes float-slow{0%{transform:translate(0,0) scale(1);}33%{transform:translate(40px,-35px) scale(1.1);}66%{transform:translate(-30px,30px) scale(0.92);}100%{transform:translate(0,0) scale(1);}}
+@keyframes float-drift{0%{transform:translate(0,0) scale(1) rotate(0deg);}33%{transform:translate(-40px,-45px) scale(1.12) rotate(2deg);}66%{transform:translate(35px,25px) scale(0.9) rotate(-2deg);}100%{transform:translate(0,0) scale(1) rotate(0deg);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);animation:float-slow 12s ease-in-out infinite;}
+.blob:nth-child(2){animation:float-drift 16s ease-in-out infinite;}
+.blob:nth-child(3){animation:float-slow 20s ease-in-out infinite reverse;}
+.slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,var(--color-vignette) 100%);}
 
+/* ── Component styles ── */
+.lvl-badge{display:inline-block;font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.lvl-1{background:#f0f0f0;color:#374151;}
+.lvl-2{background:#d9d9d9;color:#1f2937;}
+.lvl-3{background:#bdbdbd;color:#111827;}
+.lvl-4{background:#6b7280;color:#ffffff;}
+.socratic-q{background:rgba(0,0,0,0.04);border-left:3px solid #6b7280;border-radius:0 8px 8px 0;padding:0.45rem 0.75rem;font-size:0.82rem;font-style:italic;color:#374151;font-weight:600;}
+.trap-card{border-left:4px solid #4b5563;background:#f9fafb;border-radius:0 9px 9px 0;padding:0.55rem 0.85rem;box-shadow:0 2px 7px rgba(0,0,0,0.10);}
+.formula-box{background:linear-gradient(135deg,rgba(0,0,0,0.05),rgba(0,0,0,0.02));border:2px solid rgba(0,0,0,0.18);border-radius:10px;padding:0.45rem 0.9rem;font-size:1rem;font-weight:800;color:#111827;font-family:'Fredoka',sans-serif;letter-spacing:0.02em;}
+.section-badge{display:inline-block;background:linear-gradient(135deg,#374151,#1f2937);color:white;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;padding:3px 12px;border-radius:20px;margin-bottom:0.6rem;}
+.diagram-wrap{background:white;border:1.5px solid rgba(0,0,0,0.09);border-radius:14px;padding:0.6rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,0.07);}
+.diagram-wrap svg text{font-family:'Nunito',sans-serif;}
+.prob-card{background:white;border:1.5px solid rgba(0,0,0,0.09);border-radius:12px;padding:0.7rem 0.9rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.work-box{border:1.5px dashed rgba(0,0,0,0.25);border-radius:8px;padding:0;background:rgba(0,0,0,0.02);min-height:2.8rem;font-size:0.82rem;color:#374151;font-style:normal;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.5rem;border:none;background:transparent;resize:vertical;padding:0.5rem 0.75rem;font-size:0.82rem;color:#374151;font-family:'Nunito',sans-serif;line-height:1.5;outline:none;box-sizing:border-box;}
+.work-box textarea::placeholder{color:#9ca3af;font-style:italic;}
+.work-box textarea:focus{background:rgba(0,0,0,0.03);}
+
+/* MC answer options */
+.mc-options{display:flex;flex-direction:column;gap:0.25rem;margin-top:0.35rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.45rem;padding:0.3rem 0.5rem;border-radius:6px;border:1.5px solid rgba(0,0,0,0.10);background:#fafafa;cursor:pointer;font-size:0.78rem;color:#374151;transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#f0f0f0;border-color:rgba(0,0,0,0.20);}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:#e5e7eb;border-color:#374151;font-weight:700;}
+.mc-option .opt-letter{font-weight:800;min-width:1rem;color:#6b7280;}
+</style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 1 — TITLE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide active" data-slide="1">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:480px;height:480px;top:-120px;right:-100px;background:#374151;opacity:0.13;"></div>
+    <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#4b5563;opacity:0.09;"></div>
+    <div class="blob" style="width:220px;height:220px;top:38%;left:12%;background:#9ca3af;opacity:0.09;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content" style="text-align:center;">
+    <div style="font-size:4.5rem;animation:float 3s ease-in-out infinite;margin-bottom:0.4rem;" class="reveal">📐</div>
+    <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5.5vw,3.8rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.4rem;">Week 3 — Measurement</h1>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,3vw,2.2rem);font-weight:600;color:#374151;margin:0 0 0.5rem;">Circles &amp; Surface Area</h2>
+    <p class="reveal" style="font-size:0.95rem;color:#64748b;letter-spacing:0.12em;text-transform:uppercase;">SHSAT Math &amp; ELA · 60-Minute Session</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 2 — SESSION ROADMAP
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:340px;height:340px;top:-80px;right:-80px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:240px;height:240px;bottom:-60px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Today's Plan</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;margin:0 0 1rem;">60-Minute Session Roadmap</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;" class="reveal">
+      <div class="prob-card" style="border-left:4px solid #374151;">
+        <div style="font-size:1.5rem;margin-bottom:0.3rem;">⭕</div>
+        <div style="font-weight:800;font-size:0.95rem;color:#111827;">0–15 min · Circles</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:0.25rem;">Circumference, Area, formulas &amp; vocab. <em>Fence vs. Carpet</em> mental model.</div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #6b7280;">
+        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🍕</div>
+        <div style="font-weight:800;font-size:0.95rem;color:#374151;">15–28 min · Arc &amp; Sector</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:0.25rem;">Fraction-of-circle trick. Arc length &amp; sector area with angle.</div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #374151;">
+        <div style="font-size:1.5rem;margin-bottom:0.3rem;">📦</div>
+        <div style="font-weight:800;font-size:0.95rem;color:#1f2937;">28–43 min · Surface Area</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:0.25rem;">"Unfold the box" net strategy. SA = 2lw + 2lh + 2wh.</div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #4b5563;">
+        <div style="font-size:1.5rem;margin-bottom:0.3rem;">📖</div>
+        <div style="font-weight:800;font-size:0.95rem;color:#1f2937;">43–60 min · ELA Strategy</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:0.25rem;">"Zoom Out" — detail → proof → main idea. 3 MC practice questions.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 3 — CIRCLE ANATOMY (large proportional SVG)
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="3">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 1 · Circles</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Anatomy of a Circle</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <!-- Big, proportional SVG diagram -->
+      <div class="diagram-wrap reveal" style="min-height:220px;">
+        <svg viewBox="0 0 320 260" width="100%" height="220" role="img" aria-label="Circle anatomy diagram showing radius, diameter, circumference labels">
+          <!-- Circle fill -->
+          <circle cx="160" cy="130" r="95" fill="#f5f5f5" stroke="#374151" stroke-width="3"/>
+          <!-- Diameter line (full width) -->
+          <line x1="65" y1="130" x2="255" y2="130" stroke="#4b5563" stroke-width="2.5" stroke-dasharray="6 3"/>
+          <!-- Radius line (center to right edge) -->
+          <line x1="160" y1="130" x2="255" y2="130" stroke="#374151" stroke-width="3"/>
+          <!-- Center dot -->
+          <circle cx="160" cy="130" r="5" fill="#374151"/>
+          <!-- Circumference arrow arc label path -->
+          <path d="M 160,35 A 95,95 0 0,1 255,130" fill="none" stroke="#4b5563" stroke-width="3" stroke-dasharray="8 4"/>
+          <!-- Arrow tip for circumference arc -->
+          <polygon points="255,130 245,120 248,133" fill="#4b5563"/>
+
+          <!-- Labels — min 15px, positioned clear of strokes -->
+          <!-- Radius label -->
+          <text x="212" y="122" font-size="15" font-weight="700" fill="#374151" text-anchor="middle">radius (r)</text>
+          <!-- Diameter label -->
+          <text x="160" y="155" font-size="15" font-weight="700" fill="#4b5563" text-anchor="middle">diameter (d = 2r)</text>
+          <!-- Circumference label -->
+          <text x="240" y="60" font-size="14" font-weight="700" fill="#4b5563" text-anchor="start">circumference</text>
+          <text x="240" y="76" font-size="13" fill="#4b5563" text-anchor="start">(the boundary)</text>
+          <!-- Center label -->
+          <text x="150" y="120" font-size="13" fill="#374151" text-anchor="end">center</text>
+          <!-- Pi annotation -->
+          <text x="160" y="248" font-size="13" fill="#64748b" text-anchor="middle">π ≈ 3.14159…  (use π on SHSAT)</text>
+        </svg>
+      </div>
+      <!-- Key facts panel -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.6rem;">
+        <div class="socratic-q">If you know the radius, what's the quickest way to find the diameter?</div>
+        <div class="prob-card">
+          <div style="font-weight:800;font-size:0.88rem;color:#111827;margin-bottom:0.3rem;">Three things to memorize:</div>
+          <ul style="font-size:0.85rem;color:#334155;margin:0;padding-left:1.1rem;line-height:1.8;">
+            <li><strong>Radius (r)</strong> — center to edge</li>
+            <li><strong>Diameter (d)</strong> — edge to edge through center; <em>d = 2r</em></li>
+            <li><strong>Circumference (C)</strong> — the full boundary (like a fence)</li>
+          </ul>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ SHSAT Trap #1</div>
+          <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">Problems often give you <em>diameter</em> — but formulas need <em>radius</em>. Always halve first!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 4 — CIRCUMFERENCE & AREA FORMULAS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#9ca3af;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 1 · Circles</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Fence vs. Carpet — The Two Formulas</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <!-- Circumference card -->
+      <div class="prob-card reveal" style="border-left:4px solid #374151;">
+        <div style="font-size:1.6rem;margin-bottom:0.3rem;">🏃</div>
+        <div style="font-weight:800;font-size:0.92rem;color:#111827;margin-bottom:0.3rem;">Circumference = <em>the fence</em></div>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.5rem;">How far would you walk <strong>around</strong> the circle? Use when the problem mentions <em>distance around</em>, <em>perimeter</em>, or <em>wrapping</em>.</div>
+        <div class="formula-box" style="text-align:center;">C = 2πr &nbsp;=&nbsp; πd</div>
+        <div class="socratic-q" style="margin-top:0.5rem;">If r = 7, what is C? Leave in terms of π.</div>
+      </div>
+      <!-- Area card -->
+      <div class="prob-card reveal" style="border-left:4px solid #6b7280;">
+        <div style="font-size:1.6rem;margin-bottom:0.3rem;">🪣</div>
+        <div style="font-weight:800;font-size:0.92rem;color:#374151;margin-bottom:0.3rem;">Area = <em>the carpet</em></div>
+        <div style="font-size:0.82rem;color:#334155;margin-bottom:0.5rem;">How much <strong>inside</strong> the circle? Use when the problem mentions <em>covering</em>, <em>painting</em>, <em>filling</em>, or <em>space inside</em>.</div>
+        <div class="formula-box" style="text-align:center;border-color:rgba(124,58,237,0.3);color:#374151;">A = πr²</div>
+        <div class="socratic-q" style="margin-top:0.5rem;">If d = 10, what is A? (Careful — what's r first?)</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.75rem;">
+      <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ SHSAT Trap #2</div>
+      <div style="font-size:0.8rem;color:#374151;">In A = πr², the exponent only applies to r — <strong>not</strong> to π. π stays as π (or 3.14). Students who write (πr)² double-square π and get 2–4× too large.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 5 — CIRCLE PROBLEMS (Leveled, NO answers)
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 1 · Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Circle Problems — Three Levels</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+
+      <!-- L2 (was L1) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 1</span><span class="lvl-badge lvl-2">L2</span></div>
+        <!-- Diameter given — student must halve before applying C = 2πr -->
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 160" width="100%" height="130" aria-label="Circle with diameter 10 labeled">
+            <circle cx="80" cy="80" r="55" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <line x1="25" y1="80" x2="135" y2="80" stroke="#374151" stroke-width="2.5" stroke-dasharray="5 3"/>
+            <polygon points="25,80 36,74 36,86" fill="#374151"/>
+            <polygon points="135,80 124,74 124,86" fill="#374151"/>
+            <text x="80" y="68" font-size="15" font-weight="700" fill="#374151" text-anchor="middle">d = 10</text>
+            <text x="80" y="100" font-size="12" fill="#1f2937" text-anchor="middle">Find C →</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">The <strong>diameter</strong> of a circle is <strong>10 cm</strong>. Find the <strong>circumference</strong>. Leave in terms of π.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L3 (was L2) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 2</span><span class="lvl-badge lvl-3">L3</span></div>
+        <!-- Circumference given — student must work backwards to find area -->
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 160" width="100%" height="130" aria-label="Circle with circumference 12π labeled">
+            <circle cx="80" cy="80" r="55" fill="#f5f5f5" stroke="#4b5563" stroke-width="2.5"/>
+            <!-- dashed circumference highlight -->
+            <circle cx="80" cy="80" r="55" fill="none" stroke="#4b5563" stroke-width="3" stroke-dasharray="8 4"/>
+            <text x="80" y="74" font-size="13" font-weight="700" fill="#4b5563" text-anchor="middle">C = 12π</text>
+            <text x="80" y="92" font-size="12" fill="#1f2937" text-anchor="middle">Find area →</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A circle has <strong>circumference = 12π cm</strong>. First find the radius, then find the <strong>area</strong>. Leave in terms of π.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L4 (was L3) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 3</span><span class="lvl-badge lvl-4">L4</span></div>
+        <!-- Annulus: outer diameter given (not radius), inner radius given -->
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 160" width="100%" height="130" aria-label="Annulus: outer diameter 20, inner radius 6, shaded ring area">
+            <circle cx="80" cy="80" r="58" fill="#f0f0f0" stroke="#374151" stroke-width="2.5"/>
+            <circle cx="80" cy="80" r="35" fill="white" stroke="#374151" stroke-width="2"/>
+            <!-- outer DIAMETER line (full) -->
+            <line x1="22" y1="80" x2="138" y2="80" stroke="#374151" stroke-width="2" stroke-dasharray="5 3"/>
+            <polygon points="22,80 33,74 33,86" fill="#374151"/>
+            <polygon points="138,80 127,74 127,86" fill="#374151"/>
+            <!-- inner radius line -->
+            <line x1="80" y1="80" x2="80" y2="45" stroke="#4b5563" stroke-width="2"/>
+            <circle cx="80" cy="80" r="3.5" fill="#374151"/>
+            <text x="80" y="70" font-size="13" font-weight="700" fill="#374151" text-anchor="middle">D = 20</text>
+            <text x="70" y="54" font-size="13" font-weight="700" fill="#4b5563" text-anchor="end">r = 6</text>
+            <text x="80" y="112" font-size="12" fill="#6b7280" text-anchor="middle">shaded region</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Two circles share the same center. The outer circle has <strong>diameter D = 20</strong>; the inner circle has <strong>radius r = 6</strong>. Find the area of the <strong>shaded ring</strong>. Leave in terms of π.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 6 — SECTOR & ARC INTRO (pizza model)
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="6">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#4b5563;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <div class="section-badge reveal">Part 2 · Arc &amp; Sector</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.5rem;">The Pizza Slice Trick 🍕</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <!-- Large sector SVG -->
+      <div class="diagram-wrap reveal" style="min-height:230px;">
+        <svg viewBox="0 0 300 260" width="100%" height="230" aria-label="Circle sector showing central angle theta, radius r, arc length, and sector area labels">
+          <!-- full circle lightly -->
+          <circle cx="150" cy="140" r="100" fill="#f5f5f5" stroke="#c0c0c0" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <!-- sector fill -->
+          <path d="M 150,140 L 150,40 A 100,100 0 0,1 232,190 Z" fill="#ebebeb" stroke="#4b5563" stroke-width="2.5"/>
+          <!-- Arc highlight -->
+          <path d="M 150,40 A 100,100 0 0,1 232,190" fill="none" stroke="#374151" stroke-width="4"/>
+          <!-- Radius lines -->
+          <line x1="150" y1="140" x2="150" y2="40" stroke="#4b5563" stroke-width="2.5"/>
+          <line x1="150" y1="140" x2="232" y2="190" stroke="#4b5563" stroke-width="2.5"/>
+          <!-- Central angle arc indicator -->
+          <path d="M 150,100 A 40,40 0 0,1 183,163" fill="none" stroke="#374151" stroke-width="2"/>
+          <!-- center dot -->
+          <circle cx="150" cy="140" r="4.5" fill="#4b5563"/>
+          <!-- Labels -->
+          <text x="141" y="88" font-size="15" font-weight="700" fill="#4b5563" text-anchor="end">r</text>
+          <text x="202" y="178" font-size="15" font-weight="700" fill="#4b5563" text-anchor="start">r</text>
+          <text x="172" y="116" font-size="15" font-weight="800" fill="#374151" text-anchor="start">θ°</text>
+          <!-- Arc label -->
+          <text x="212" y="90" font-size="14" font-weight="700" fill="#374151" text-anchor="start">arc</text>
+          <text x="212" y="105" font-size="12" fill="#374151" text-anchor="start">length</text>
+          <line x1="207" y1="93" x2="192" y2="100" stroke="#374151" stroke-width="1.5"/>
+          <!-- Sector area label -->
+          <text x="155" y="145" font-size="13" fill="#374151" text-anchor="start">sector</text>
+          <text x="155" y="159" font-size="13" fill="#374151" text-anchor="start">area</text>
+          <!-- Fraction annotation -->
+          <text x="150" y="248" font-size="13" fill="#64748b" text-anchor="middle">Fraction of circle = θ / 360</text>
+        </svg>
+      </div>
+      <!-- Explanation -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">If a pizza has 8 equal slices and you take 1 slice — what fraction of the whole pizza do you have?</div>
+        <div class="prob-card" style="font-size:0.83rem;color:#334155;">
+          <strong>Key insight:</strong> A sector is just a <em>fraction</em> of the full circle.<br>
+          That fraction = <strong>θ ÷ 360</strong> (where θ is the central angle in degrees).
+        </div>
+        <div class="formula-box">Arc Length = (θ/360) × 2πr</div>
+        <div class="formula-box" style="border-color:rgba(124,58,237,0.3);color:#374151;">Sector Area = (θ/360) × πr²</div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ Trap: "Minor arc" vs. "Major arc"</div>
+          <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">If the angle given is &gt;180°, use that angle directly. The minor arc uses the smaller angle.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 7 — ARC & SECTOR PROBLEMS (Leveled, NO answers)
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="7">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#4b5563;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 2 · Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Arc &amp; Sector Problems — Three Levels</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+
+      <!-- L2 (was L1) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 4</span><span class="lvl-badge lvl-2">L2</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 160" width="100%" height="130" aria-label="Circle sector with central angle 90 degrees and diameter 12">
+            <circle cx="80" cy="80" r="60" fill="#f5f5f5" stroke="#c0c0c0" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <path d="M 80,80 L 80,20 A 60,60 0 0,1 140,80 Z" fill="#ebebeb" stroke="#4b5563" stroke-width="2.5"/>
+            <path d="M 80,20 A 60,60 0 0,1 140,80" fill="none" stroke="#374151" stroke-width="3"/>
+            <line x1="80" y1="80" x2="80" y2="20" stroke="#4b5563" stroke-width="2"/>
+            <line x1="80" y1="80" x2="140" y2="80" stroke="#4b5563" stroke-width="2"/>
+            <!-- diameter line across full circle for the 90° arm -->
+            <line x1="80" y1="20" x2="80" y2="140" stroke="#374151" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M 80,60 A 20,20 0 0,1 100,80" fill="none" stroke="#374151" stroke-width="1.8"/>
+            <circle cx="80" cy="80" r="3.5" fill="#4b5563"/>
+            <text x="56" y="46" font-size="13" font-weight="700" fill="#374151">d = 12</text>
+            <text x="88" y="66" font-size="13" font-weight="700" fill="#374151">90°</text>
+            <text x="80" y="152" font-size="11" fill="#4b5563" text-anchor="middle">Find sector area →</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A sector has a central angle of <strong>90°</strong> and <strong>diameter = 12</strong>. Find the <strong>sector area</strong>. Leave in terms of π.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L3 (was L2) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 5</span><span class="lvl-badge lvl-3">L3</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 160" width="100%" height="130" aria-label="Sector with arc length 6π and central angle 120 degrees — find radius">
+            <circle cx="80" cy="80" r="60" fill="#f5f5f5" stroke="#b0b0b0" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <path d="M 80,80 L 80,20 A 60,60 0 0,1 131.96,50 Z" fill="#eeeeee" stroke="#4b5563" stroke-width="2.5"/>
+            <path d="M 80,20 A 60,60 0 0,1 131.96,50" fill="none" stroke="#4b5563" stroke-width="3.5"/>
+            <line x1="80" y1="80" x2="80" y2="20" stroke="#4b5563" stroke-width="2"/>
+            <line x1="80" y1="80" x2="131.96" y2="50" stroke="#4b5563" stroke-width="2"/>
+            <path d="M 80,60 A 20,20 0 0,1 97.3,70" fill="none" stroke="#374151" stroke-width="1.8"/>
+            <circle cx="80" cy="80" r="3.5" fill="#4b5563"/>
+            <text x="58" y="46" font-size="13" font-weight="700" fill="#4b5563">r = ?</text>
+            <text x="88" y="62" font-size="13" font-weight="700" fill="#374151">120°</text>
+            <text x="115" y="28" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">arc = 6π</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A sector has a central angle of <strong>120°</strong> and arc length <strong>= 6π</strong>. First find the <strong>radius</strong>, then find the <strong>sector area</strong>. Leave in terms of π.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L4 (was L3) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 6</span><span class="lvl-badge lvl-4">L4</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 160" width="100%" height="130" aria-label="Circle with sector shaded — find central angle given arc length 5π and radius 10">
+            <circle cx="80" cy="80" r="62" fill="#f5f5f5" stroke="#374151" stroke-width="2"/>
+            <!-- unknown sector shaded -->
+            <path d="M 80,80 L 80,18 A 62,62 0 0,1 142,80 Z" fill="#e0e0e0" stroke="#374151" stroke-width="2"/>
+            <path d="M 80,18 A 62,62 0 0,1 142,80" fill="none" stroke="#374151" stroke-width="3.5"/>
+            <line x1="80" y1="80" x2="80" y2="18" stroke="#374151" stroke-width="2"/>
+            <line x1="80" y1="80" x2="142" y2="80" stroke="#374151" stroke-width="2"/>
+            <path d="M 80,60 A 20,20 0 0,1 100,80" fill="none" stroke="#374151" stroke-width="1.8"/>
+            <circle cx="80" cy="80" r="3.5" fill="#374151"/>
+            <text x="112" y="74" font-size="13" font-weight="700" fill="#374151" text-anchor="start">r=10</text>
+            <text x="88" y="66" font-size="13" font-weight="700" fill="#374151">θ = ?</text>
+            <text x="80" y="152" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">arc = 5π</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A circle has radius <strong>r = 10</strong>. A sector of this circle has an <strong>arc length = 5π</strong>. Find the <strong>central angle θ</strong> in degrees, then find the <strong>sector area</strong>. Leave area in terms of π.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 8 — SURFACE AREA: UNFOLD THE BOX
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="8">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <div class="section-badge reveal">Part 3 · Surface Area</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.5rem;">Unfold the Box 📦</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <!-- Net SVG — proportionally drawn -->
+      <div class="diagram-wrap reveal" style="min-height:230px;">
+        <svg viewBox="0 0 300 270" width="100%" height="230" aria-label="Rectangular prism net unfolded showing 6 faces with dimension labels l=5, w=3, h=4">
+          <!-- ── Net layout (cross shape): l=5 units, w=3 units, h=4 units ──
+               Scale: 1 unit = 28px
+               l=5 → 140px, w=3 → 84px, h=4 → 112px
+               Center column x=108..192 (w=84px)
+               Center row y=112..252 (h=140px — but we use l for vertical center) -->
+
+          <!-- Top face (w×l): x=108,y=4 → 84×112 -->
+          <rect x="108" y="4" width="84" height="112" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+          <text x="150" y="52" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">w = 3</text>
+          <text x="150" y="70" font-size="13" fill="#111827" text-anchor="middle">l = 5</text>
+          <text x="150" y="86" font-size="12" fill="#64748b" text-anchor="middle">top</text>
+
+          <!-- Front face (w×h): x=108,y=116 → 84×112 -->
+          <rect x="108" y="116" width="84" height="112" fill="#e8e8e8" stroke="#374151" stroke-width="2"/>
+          <text x="150" y="166" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">w = 3</text>
+          <text x="150" y="184" font-size="13" fill="#111827" text-anchor="middle">h = 4</text>
+          <text x="150" y="200" font-size="12" fill="#64748b" text-anchor="middle">front</text>
+
+          <!-- Bottom face (w×l): x=108,y=228 → 84×40 (partial — clipped to viewport) -->
+          <rect x="108" y="228" width="84" height="38" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+          <text x="150" y="252" font-size="12" fill="#111827" text-anchor="middle">bottom</text>
+
+          <!-- Left face (h×l): x=24,y=116 → 84×112 -->
+          <rect x="24" y="116" width="84" height="112" fill="#eeeeee" stroke="#4b5563" stroke-width="2"/>
+          <text x="66" y="166" font-size="14" font-weight="700" fill="#1f2937" text-anchor="middle">h = 4</text>
+          <text x="66" y="184" font-size="13" fill="#1f2937" text-anchor="middle">l = 5</text>
+          <text x="66" y="200" font-size="12" fill="#64748b" text-anchor="middle">left</text>
+
+          <!-- Right face (h×l): x=192,y=116 → 84×112 -->
+          <rect x="192" y="116" width="84" height="112" fill="#eeeeee" stroke="#4b5563" stroke-width="2"/>
+          <text x="234" y="166" font-size="14" font-weight="700" fill="#1f2937" text-anchor="middle">h = 4</text>
+          <text x="234" y="184" font-size="13" fill="#1f2937" text-anchor="middle">l = 5</text>
+          <text x="234" y="200" font-size="12" fill="#64748b" text-anchor="middle">right</text>
+
+          <!-- Dimension spine labels on edges -->
+          <!-- top face left edge w label -->
+          <text x="96" y="62" font-size="11" fill="#64748b" text-anchor="middle" transform="rotate(-90,96,62)">l=5</text>
+        </svg>
+      </div>
+      <!-- Explanation -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">If you cut open a cardboard box and flatten it, what shapes do you see?</div>
+        <div class="prob-card" style="font-size:0.83rem;color:#334155;">
+          A rectangular prism has <strong>6 faces</strong> — 3 pairs of identical rectangles.<br>
+          Surface area = add up all 6 faces.
+        </div>
+        <div class="formula-box">SA = 2lw + 2lh + 2wh</div>
+        <div class="prob-card" style="font-size:0.82rem;color:#334155;">
+          <strong>Memory trick:</strong> "2 of each pair" — length×width, length×height, width×height.
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ SA ≠ Volume!</div>
+          <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">Surface area is in <strong>square</strong> units (cm²). Volume is in <strong>cubic</strong> units (cm³). They are different formulas entirely.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 9 — SURFACE AREA PROBLEMS (Leveled, NO answers)
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="9">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 3 · Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Surface Area Problems — Three Levels</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+
+      <!-- L2 (was L1) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 7</span><span class="lvl-badge lvl-2">L2</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <!-- Cube: s=7 -->
+          <svg viewBox="0 0 160 140" width="100%" height="115" aria-label="Cube with all sides equal to 7">
+            <polygon points="40,14 120,14 120,94 40,94" fill="#eeeeee" stroke="#4b5563" stroke-width="1.5"/>
+            <polygon points="40,94 120,94 136,110 56,110" fill="#d9d9d9" stroke="#4b5563" stroke-width="1.5"/>
+            <polygon points="120,14 136,30 136,110 120,94" fill="#c0c0c0" stroke="#4b5563" stroke-width="1.5"/>
+            <polygon points="40,14 120,14 136,30 56,30" fill="#eeeeee" stroke="#4b5563" stroke-width="1.5"/>
+            <text x="80" y="57" font-size="15" font-weight="700" fill="#1f2937" text-anchor="middle">s = 7</text>
+            <text x="80" y="74" font-size="12" fill="#374151" text-anchor="middle">all sides equal</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A cube has side length <strong>s = 7 cm</strong>. Find its total <strong>surface area</strong>. <em>Hint: all 6 faces are identical squares.</em></div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L3 (was L2) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 8</span><span class="lvl-badge lvl-3">L3</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <!-- Open-top box: l=8, w=5, h=3 — missing top face -->
+          <svg viewBox="0 0 160 140" width="100%" height="115" aria-label="Open-top box: length 8, width 5, height 3, no top face">
+            <polygon points="30,18 110,18 110,54 30,54" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+            <polygon points="30,54 110,54 126,66 46,66" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+            <polygon points="110,18 126,30 126,66 110,54" fill="#d1d1d1" stroke="#374151" stroke-width="1.5"/>
+            <line x1="30" y1="18" x2="110" y2="18" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+            <line x1="110" y1="18" x2="126" y2="30" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+            <line x1="30" y1="18" x2="46" y2="30" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+            <line x1="46" y1="30" x2="126" y2="30" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+            <text x="70" y="40" font-size="13" font-weight="700" fill="#374151" text-anchor="middle">l = 8</text>
+            <text x="27" y="38" font-size="13" font-weight="700" fill="#374151" text-anchor="end">h = 3</text>
+            <text x="120" y="62" font-size="12" font-weight="700" fill="#374151" text-anchor="start">w=5</text>
+            <text x="78" y="118" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">— top is OPEN —</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">An open-top box has l = 8, w = 5, h = 3. Find the <strong>surface area</strong> of the material needed (no top face).</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L4 (was L3) -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 9</span><span class="lvl-badge lvl-4">L4</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <!-- Rectangular prism with a square hole punched through one face -->
+          <!-- Prism l=10, w=6, h=4. A 2×2 square hole goes through the top face -->
+          <svg viewBox="0 0 160 140" width="100%" height="115" aria-label="Rectangular prism with a 2x2 square hole cut through the top face">
+            <!-- back face -->
+            <polygon points="22,12 122,12 122,72 22,72" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+            <!-- bottom face -->
+            <polygon points="22,72 122,72 140,88 40,88" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+            <!-- right face -->
+            <polygon points="122,12 140,28 140,88 122,72" fill="#c8c8c8" stroke="#374151" stroke-width="1.5"/>
+            <!-- top face with square hole outline (dashed) -->
+            <polygon points="22,12 122,12 140,28 40,28" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+            <!-- hole on top face (2x2 square approx centered) -->
+            <rect x="68" y="14" width="16" height="10" fill="#fff" stroke="#374151" stroke-width="2" stroke-dasharray="4 2"/>
+            <!-- Labels -->
+            <text x="72" y="46" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle">l = 10</text>
+            <text x="20" y="44" font-size="12" font-weight="700" fill="#1f2937" text-anchor="end">h = 4</text>
+            <text x="134" y="78" font-size="11" font-weight="700" fill="#1f2937" text-anchor="start">w=6</text>
+            <text x="76" y="10" font-size="10" fill="#374151" text-anchor="middle">2×2 hole</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A solid rectangular prism has l = 10, w = 6, h = 4. A <strong>2 × 2 square hole</strong> is cut completely through the <strong>top and bottom faces</strong>. Find the total <strong>exposed surface area</strong> (include the 4 inner walls of the tunnel; exclude the hole openings on top and bottom).</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 10 — MIXED SHSAT CHALLENGE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="10">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Challenge Round</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,2rem);font-weight:700;margin:0 0 0.7rem;">Mixed SHSAT Problems</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+
+      <!-- Challenge A: L4 (was L3) — open-top aquarium + circular drain -->
+      <div class="prob-card reveal" style="border-left:4px solid #374151;">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Challenge A</span><span class="lvl-badge lvl-4">L4</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 180 140" width="100%" height="115" aria-label="Open-top aquarium l=12 w=8 h=6 with circular drain radius 1 in the bottom">
+            <polygon points="28,16 124,16 124,64 28,64" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+            <polygon points="28,64 124,64 148,84 52,84" fill="#e0e0e0" stroke="#374151" stroke-width="2"/>
+            <polygon points="124,16 148,36 148,84 124,64" fill="#c8c8c8" stroke="#374151" stroke-width="2"/>
+            <line x1="28" y1="16" x2="124" y2="16" stroke="#374151" stroke-width="2.5" stroke-dasharray="7 4"/>
+            <line x1="124" y1="16" x2="148" y2="36" stroke="#374151" stroke-width="2.5" stroke-dasharray="7 4"/>
+            <line x1="28" y1="16" x2="52" y2="36" stroke="#374151" stroke-width="2.5" stroke-dasharray="7 4"/>
+            <line x1="52" y1="36" x2="148" y2="36" stroke="#374151" stroke-width="2.5" stroke-dasharray="7 4"/>
+            <!-- circular drain in bottom face -->
+            <ellipse cx="88" cy="74" rx="7" ry="4" fill="white" stroke="#374151" stroke-width="2"/>
+            <text x="76" y="44" font-size="13" font-weight="700" fill="#1f2937" text-anchor="middle">l = 12</text>
+            <text x="24" y="43" font-size="13" font-weight="700" fill="#1f2937" text-anchor="end">h = 6</text>
+            <text x="140" y="74" font-size="12" font-weight="700" fill="#1f2937" text-anchor="start">w=8</text>
+            <text x="88" y="95" font-size="11" fill="#374151" font-weight="700" text-anchor="middle">drain r=1 (bottom)</text>
+            <text x="88" y="126" font-size="12" fill="#374151" font-weight="700" text-anchor="middle">open top</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">An open-top aquarium has l = <strong>12 in</strong>, w = <strong>8 in</strong>, h = <strong>6 in</strong>. A circular drain with <strong>radius 1 in</strong> is cut into the bottom. How many square inches of glass are needed? (Subtract the drain hole area from the bottom face.) Leave π in your answer.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">Which faces exist? What must you subtract from the bottom face?</div>
+        <div class="work-box" style="margin-top:0.45rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- Mixed P2 upgraded to L3: Two-part sprinkler + arc length -->
+      <div class="prob-card reveal" style="border-left:4px solid #374151;">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Challenge B</span><span class="lvl-badge lvl-3">L3</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <!-- Sector: 60 degrees, radius 12, now also asking for arc length perimeter -->
+          <svg viewBox="0 0 180 160" width="100%" height="130" aria-label="Sector with central angle 60 degrees and radius 12 — find both arc length and sector area">
+            <circle cx="90" cy="90" r="72" fill="#f5f5f5" stroke="#b0b0b0" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <path d="M 90,90 L 54,27 A 72,72 0 0,1 126,27 Z" fill="#e0e0e0" stroke="#374151" stroke-width="2.5"/>
+            <path d="M 54,27 A 72,72 0 0,1 126,27" fill="none" stroke="#374151" stroke-width="3.5"/>
+            <line x1="90" y1="90" x2="54" y2="27" stroke="#374151" stroke-width="2.5"/>
+            <line x1="90" y1="90" x2="126" y2="27" stroke="#374151" stroke-width="2.5"/>
+            <path d="M 90,62 A 28,28 0 0,1 114,76" fill="none" stroke="#374151" stroke-width="2"/>
+            <circle cx="90" cy="90" r="4" fill="#374151"/>
+            <text x="65" y="55" font-size="14" font-weight="700" fill="#374151" text-anchor="end">r = 12</text>
+            <text x="96" y="70" font-size="14" font-weight="700" fill="#374151">60°</text>
+            <text x="90" y="14" font-size="12" fill="#374151" font-weight="700" text-anchor="middle">arc + perimeter?</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A circular garden (r = <strong>12 ft</strong>) has a sprinkler covering a <strong>60° sector</strong>. <strong>(a)</strong> Find the arc length of the watered boundary. <strong>(b)</strong> A fence is built around the entire sector (both straight edges + the arc). Find the <strong>total perimeter</strong> of the fenced region. Leave π in your answers.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">The perimeter of a sector has three parts — what are they?</div>
+        <div class="work-box" style="margin-top:0.45rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 11 — FORMULA CHEAT CARD
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="11">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Reference</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Formula Cheat Card</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;" class="reveal">
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">⭕</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.3rem;">Circumference</div>
+        <div class="formula-box" style="font-size:0.88rem;padding:0.3rem 0.5rem;">C = 2πr</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">"fence around"</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #4b5563;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">🪣</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#374151;margin-bottom:0.3rem;">Circle Area</div>
+        <div class="formula-box" style="font-size:0.88rem;padding:0.3rem 0.5rem;border-color:rgba(124,58,237,0.3);color:#374151;">A = πr²</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">"carpet inside"</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #6b7280;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">🍕</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#374151;margin-bottom:0.3rem;">Arc / Sector</div>
+        <div class="formula-box" style="font-size:0.75rem;padding:0.3rem 0.4rem;border-color:rgba(194,65,12,0.3);color:#374151;">× (θ/360)</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">fraction of circle</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">📦</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#1f2937;margin-bottom:0.3rem;">Surface Area</div>
+        <div class="formula-box" style="font-size:0.75rem;padding:0.3rem 0.4rem;border-color:rgba(8,145,178,0.3);color:#1f2937;">2lw+2lh+2wh</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">6 faces, 3 pairs</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-top:0.65rem;" class="reveal">
+      <div class="trap-card">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ d vs r Trap</div>
+        <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">If given diameter, <strong>halve it</strong> before plugging into any formula.</div>
+      </div>
+      <div class="trap-card">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ Open-Top / Open-Bottom</div>
+        <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">Count the actual faces present. Aquarium = no top = subtract 1 lw face.</div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.6rem;">Can you cover this card and recite all 4 formulas from memory? Try it with a partner!</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 12 — ELA: ZOOM OUT STRATEGY
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="12">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#4b5563;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · ELA</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.5rem;">The "Zoom Out" Strategy 🔭</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <!-- Visual chain diagram -->
+      <div class="diagram-wrap reveal" style="min-height:200px;">
+        <svg viewBox="0 0 280 210" width="100%" height="200" aria-label="Three-step zoom out diagram: Detail supports Proof, Proof supports Main Idea">
+          <!-- Step 1: Detail box -->
+          <rect x="10" y="14" width="260" height="46" rx="10" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+          <text x="140" y="34" font-size="14" font-weight="800" fill="#111827" text-anchor="middle">STEP 1: Spot the Detail</text>
+          <text x="140" y="51" font-size="12" fill="#334155" text-anchor="middle">A specific fact, date, statistic, or quote</text>
+
+          <!-- Arrow down -->
+          <line x1="140" y1="60" x2="140" y2="84" stroke="#64748b" stroke-width="2"/>
+          <polygon points="140,88 134,78 146,78" fill="#64748b"/>
+          <text x="160" y="76" font-size="11" fill="#4b5563" font-weight="700">Ask: what does this PROVE?</text>
+
+          <!-- Step 2: Proof box -->
+          <rect x="10" y="90" width="260" height="46" rx="10" fill="#f0f0f0" stroke="#4b5563" stroke-width="2"/>
+          <text x="140" y="110" font-size="14" font-weight="800" fill="#1f2937" text-anchor="middle">STEP 2: Name What It Proves</text>
+          <text x="140" y="127" font-size="12" fill="#334155" text-anchor="middle">The point the detail is evidence for</text>
+
+          <!-- Arrow down -->
+          <line x1="140" y1="136" x2="140" y2="160" stroke="#64748b" stroke-width="2"/>
+          <polygon points="140,164 134,154 146,154" fill="#64748b"/>
+          <text x="160" y="152" font-size="11" fill="#4b5563" font-weight="700">Ask: what's the BIG IDEA?</text>
+
+          <!-- Step 3: Main Idea box -->
+          <rect x="10" y="166" width="260" height="40" rx="10" fill="#ebebeb" stroke="#4b5563" stroke-width="2"/>
+          <text x="140" y="183" font-size="14" font-weight="800" fill="#374151" text-anchor="middle">STEP 3: State the Main Idea</text>
+          <text x="140" y="199" font-size="12" fill="#334155" text-anchor="middle">The author's overall purpose / argument</text>
+        </svg>
+      </div>
+      <!-- Worked example -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">You see this detail: "The Brooklyn Bridge used 14,680 miles of steel wire." What could the author be trying to PROVE?</div>
+        <div class="prob-card" style="font-size:0.82rem;color:#334155;border-left:3px solid #6b7280;">
+          <div style="font-weight:800;color:#374151;margin-bottom:0.2rem;">Worked Example:</div>
+          <div>Detail: "Students scoring in top geometry quartile earn 23% more."</div>
+          <div style="margin-top:0.2rem;color:#4b5563;font-weight:700;">→ Proves: geometry education has real-world economic value.</div>
+          <div style="margin-top:0.2rem;color:#4b5563;font-weight:700;">→ Main Idea: Early math instruction is a long-term investment in students' futures.</div>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ "Too Narrow" Trap</div>
+          <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">Main idea choices that simply restate one detail are wrong. The correct answer must cover <em>the whole passage</em>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 13 — ELA PASSAGE + 3 QUESTIONS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="13">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#4b5563;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:700;margin:0 0 0.6rem;">Passage + Socratic Questions</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+      <!-- Passage -->
+      <div class="prob-card reveal" style="border-left:4px solid #4b5563;">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;margin-bottom:0.35rem;">Read This Passage:</div>
+        <div style="font-size:0.8rem;color:#334155;line-height:1.65;">
+          <p style="margin:0 0 0.4rem;">[¶1] For decades, educators debated whether geometry could be taught meaningfully to young students. The conventional view held that abstract spatial thinking was too sophisticated for children under twelve. Then, in 2009, a landmark study overturned that assumption. Researchers found that children who learn geometry early score <strong>23% higher</strong> on spatial reasoning tests in high school — and that the advantage compounds over time, showing up in college-level STEM enrollment as well.</p>
+          <p style="margin:0 0 0.4rem;">[¶2] Yet access is far from equal. Students in low-income schools receive <strong>40% fewer hours</strong> of math instruction per year — not due to curriculum design, but chronic understaffing and budget cuts that force teachers to compress or skip geometry units entirely. A 2022 survey found that fewer than half of Title I middle schools offered any dedicated geometry lessons before eighth grade. Experts warn that this instructional gap is widening, not narrowing.</p>
+          <p style="margin:0 0 0.4rem;">[¶3] History reminds us that math is never purely theoretical. When John Roebling designed the Brooklyn Bridge in the 1870s, his team relied on precise geometric calculations to place <strong>14,680 miles of steel wire</strong> under the exact tension the design required. A single miscalculation could have been catastrophic. Every formula those engineers used is the same geometry taught — or in too many classrooms, not taught — today.</p>
+          <p style="margin:0;">[¶4] The stakes, then, are not abstract. When a student misses early geometry instruction, she loses more than a unit on circles and angles. She loses the foundation that connects classroom math to bridges, satellites, medical imaging, and the physical world she will one day help build.</p>
+        </div>
+      </div>
+      <!-- Questions -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.6rem;">
+        <div class="prob-card" style="border-left:3px solid #374151;">
+          <span style="font-weight:800;font-size:0.82rem;">Q1</span><span class="lvl-badge lvl-2">L2</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">The author's primary purpose in writing this passage is to:<br>
+            <div class="mc-options" data-q="1">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1" value="A"><span class="opt-letter">A</span><span>entertain readers with interesting facts about bridges.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1" value="B"><span class="opt-letter">B</span><span>argue that unequal access to math education has serious long-term consequences.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1" value="C"><span class="opt-letter">C</span><span>describe the history of geometry as a school subject.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1" value="D"><span class="opt-letter">D</span><span>explain how spatial reasoning tests are scored.</span></label>
+</div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #4b5563;">
+          <span style="font-weight:800;font-size:0.82rem;">Q2</span><span class="lvl-badge lvl-3">L3</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">The author's tone toward students in low-income schools can best be described as:<br>
+            <div class="mc-options" data-q="2">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2" value="A"><span class="opt-letter">A</span><span>indifferent — the author presents facts without taking a side.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2" value="B"><span class="opt-letter">B</span><span>sympathetic — the author implies those students are being unfairly disadvantaged.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2" value="C"><span class="opt-letter">C</span><span>critical — the author blames students for poor math scores.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2" value="D"><span class="opt-letter">D</span><span>humorous — the author uses irony to downplay the problem.</span></label>
+</div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #4b5563;">
+          <span style="font-weight:800;font-size:0.82rem;">Q3</span><span class="lvl-badge lvl-4">L4</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">A student claims: <em>"The author uses the Brooklyn Bridge example to show that math is difficult."</em> Is this claim supported, partially supported, or contradicted by the passage? Explain using evidence from <strong>at least two paragraphs</strong>.<br>
+            <div class="mc-options" data-q="3">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3" value="A"><span class="opt-letter">A</span><span>Supported — the bridge proves math is hard.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3" value="B"><span class="opt-letter">B</span><span>Partially supported — the bridge is mentioned but its difficulty is not discussed.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3" value="C"><span class="opt-letter">C</span><span>Contradicted — the bridge shows math is practical and accessible, not difficult.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3" value="D"><span class="opt-letter">D</span><span>Irrelevant — the bridge example is decorative and supports no argument.</span></label>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 14 — ELA DISCUSSION + STRATEGY REVIEW
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="14">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#4b5563;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Discussion</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Discuss &amp; Debrief the Questions</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">For Q1: The passage now has four paragraphs. Which answer choice must cover <em>all four</em> — not just the opening paragraph?</div>
+        <div class="socratic-q">For Q2: The word "tone" asks about the author's attitude, not just the facts. Look at word choices like "widening, not narrowing" — do those words sound neutral or concerned?</div>
+        <div class="socratic-q">For Q3 (L4): The student's claim says the bridge "proves math is difficult." Does ¶3 say it is difficult, or does it say something else? Use ¶4 as a second piece of evidence.</div>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="prob-card" style="border-left:4px solid #4b5563;">
+          <div style="font-weight:800;font-size:0.85rem;color:#1f2937;margin-bottom:0.3rem;">🎯 The 3-Question Mental Checklist</div>
+          <ol style="font-size:0.82rem;color:#334155;padding-left:1.1rem;margin:0;line-height:1.8;">
+            <li>Does this answer cover the <strong>whole</strong> passage, or just one part?</li>
+            <li>Is this answer stated or <strong>implied</strong>? (implied = valid!)</li>
+            <li>Is there a word that makes this answer <strong>too extreme</strong>? (always, never, only)</li>
+          </ol>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ Extreme Language Trap</div>
+          <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">SHSAT wrong answers often use "always," "never," "only," "all," or "none." These overstatements are almost always wrong — even if the rest of the sentence sounds correct.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 15 — SECOND ELA PASSAGE + QUESTIONS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="15">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#4b5563;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#4b5563);">Part 4 · Passage 2</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:700;margin:0 0 0.6rem;">Architecture &amp; Circles Passage</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+      <div class="prob-card reveal" style="border-left:4px solid #6b7280;">
+        <div style="font-weight:800;font-size:0.82rem;color:#374151;margin-bottom:0.35rem;">Read This Passage:</div>
+        <div style="font-size:0.8rem;color:#334155;line-height:1.65;">
+          <p style="margin:0 0 0.4rem;">[¶1] When Roman engineers completed the Pantheon around 125 CE, they embedded a mathematical perfection that would not be surpassed for over a thousand years. The building's interior height equals its diameter exactly — both measuring <strong>142 feet</strong> — creating a sphere of empty space that could theoretically contain a perfect globe. A circular opening at the very top, called the <em>oculus</em>, is the structure's only source of natural light. Rather than weaken the dome, the oculus actually distributes stress more evenly across the concrete shell — a geometric insight that modern engineers still study.</p>
+          <p style="margin:0 0 0.4rem;">[¶2] Centuries later, architect Frank Lloyd Wright applied similar thinking when he designed the Guggenheim Museum in New York. Its circular plaza measures <strong>76 feet in diameter</strong>, and Wright insisted the shape was not merely aesthetic. He argued that the circle was "the most human of shapes" because it eliminates corners, forcing everyone inside to face one another rather than turn away. Modern behavioral research supports his intuition: office teams working in circular conference rooms produce <strong>18% more collaborative decisions</strong> than those in rectangular rooms, according to a 2018 study from Columbia University.</p>
+          <p style="margin:0 0 0.4rem;">[¶3] The circle's influence does not stop at famous buildings. Satellite dishes are parabolic circles because the shape focuses incoming signals to a single point. Stadium running tracks are ovals — elongated circles — engineered so that every runner travels the same total distance regardless of lane. Water pipes are circular in cross-section because, for a given perimeter, a circle encloses more area than any other shape, maximizing flow while minimizing material.</p>
+          <p style="margin:0;">[¶4] What the Pantheon, the Guggenheim, and a household drainpipe share is this: their designers did not choose the circle for decoration. They chose it because the mathematics of circles — the relationship between radius, circumference, and area — makes the circle the most efficient, the most stable, and, perhaps, the most human shape in the built world.</p>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.6rem;">
+        <div class="prob-card" style="border-left:3px solid #374151;">
+          <span style="font-weight:800;font-size:0.82rem;">Q4</span><span class="lvl-badge lvl-2">L2</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Frank Lloyd Wright's claim that the circle is "the most human of shapes" is best supported by which piece of evidence in the passage?<br>
+            <div class="mc-options" data-q="4">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="A"><span class="opt-letter">A</span><span>The Pantheon's interior height equals its diameter.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="B"><span class="opt-letter">B</span><span>The Guggenheim's plaza is 76 feet in diameter.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="C"><span class="opt-letter">C</span><span>Circular rooms produce 18% more collaborative decisions.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="D"><span class="opt-letter">D</span><span>Satellite dishes and stadium tracks are circular.</span></label>
+</div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #4b5563;">
+          <span style="font-weight:800;font-size:0.82rem;">Q5</span><span class="lvl-badge lvl-3">L3</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Which statement best describes how the author develops the central claim across all three paragraphs?<br>
+            <div class="mc-options" data-q="5">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="A"><span class="opt-letter">A</span><span>The author moves from ancient history to modern psychology to everyday objects, showing circles matter in every era and context.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="B"><span class="opt-letter">B</span><span>The author focuses only on famous buildings to prove circles are aesthetically superior.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="C"><span class="opt-letter">C</span><span>The author argues that circles are superior to all other shapes in architecture.</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="D"><span class="opt-letter">D</span><span>The author lists examples of circles without connecting them to any larger argument.</span></label>
+</div>
+          </div>
+        </div>
+        <div class="socratic-q" style="margin-top:0.2rem;">What word in option D makes it an overstatement? Could this ever be used as the main idea?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 16 — WEEKLY SUMMARY / EXIT TICKET
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="16">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.09;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-50px;background:#4b5563;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Week 3 Wrap-Up</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Exit Ticket — 3 Things to Know Cold</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;" class="reveal">
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;padding:0.85rem;">
+        <div style="font-size:2rem;margin-bottom:0.3rem;">⭕</div>
+        <div style="font-weight:800;font-size:0.88rem;color:#111827;">Circles</div>
+        <div style="font-size:0.8rem;color:#334155;margin-top:0.3rem;line-height:1.6;">C = 2πr · A = πr²<br>Always use r, not d<br>r = d ÷ 2</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #6b7280;text-align:center;padding:0.85rem;">
+        <div style="font-size:2rem;margin-bottom:0.3rem;">🍕</div>
+        <div style="font-weight:800;font-size:0.88rem;color:#374151;">Arc &amp; Sector</div>
+        <div style="font-size:0.8rem;color:#334155;margin-top:0.3rem;line-height:1.6;">Multiply by θ/360<br>Arc = fraction × 2πr<br>Sector = fraction × πr²</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;padding:0.85rem;">
+        <div style="font-size:2rem;margin-bottom:0.3rem;">📦</div>
+        <div style="font-weight:800;font-size:0.88rem;color:#1f2937;">Surface Area</div>
+        <div style="font-size:0.8rem;color:#334155;margin-top:0.3rem;line-height:1.6;">SA = 2lw + 2lh + 2wh<br>Count actual faces<br>Open top → subtract lw</div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.75rem;">Before you leave: can you give one real-world example where you'd use each formula? (Think: track, pizza, gift box…)</div>
+    <div class="prob-card reveal" style="margin-top:0.55rem;border-left:4px solid #4b5563;font-size:0.82rem;color:#334155;">
+      <strong>ELA Takeaway:</strong> When you see a detail on the SHSAT, always ask "What does this <em>prove</em>?" before choosing your main idea. Zoom detail → proof → big idea every time.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 17 — CLOSING
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="17">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:480px;height:480px;top:-120px;right:-100px;background:#374151;opacity:0.14;"></div>
+    <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#4b5563;opacity:0.10;"></div>
+    <div class="blob" style="width:220px;height:220px;top:38%;left:12%;background:#4b5563;opacity:0.09;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content" style="text-align:center;">
+    <div style="font-size:4rem;animation:float 3s ease-in-out infinite;margin-bottom:0.5rem;" class="reveal">🎯</div>
+    <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.4rem;">Great work today!</h1>
+    <p class="reveal" style="font-size:1rem;color:#334155;margin:0 0 0.35rem;">You can now solve every circle and surface area problem on the SHSAT.</p>
+    <p class="reveal" style="font-size:0.9rem;color:#64748b;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 0.7rem;">Next Week: Week 5 — Ratios, Rates &amp; Proportions</p>
+    <div class="reveal" style="display:inline-flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:#f0f0f0;color:#111827;border-radius:20px;padding:6px 18px;font-weight:700;font-size:0.85rem;">C = 2πr ✓</span>
+      <span style="background:#ebebeb;color:#374151;border-radius:20px;padding:6px 18px;font-weight:700;font-size:0.85rem;">A = πr² ✓</span>
+      <span style="background:#eeeeee;color:#374151;border-radius:20px;padding:6px 18px;font-weight:700;font-size:0.85rem;">θ/360 ✓</span>
+      <span style="background:#f0f0f0;color:#1f2937;border-radius:20px;padding:6px 18px;font-weight:700;font-size:0.85rem;">SA = 2lw+2lh+2wh ✓</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- NAVIGATION -->
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 17</span>
+</div>
+
+<script>
+let current = 1;
+const total = document.querySelectorAll('.slide').length;
+const dotsContainer = document.getElementById('dots');
+const counter = document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+
+/* Mouse spotlight */
+document.addEventListener('mousemove',e=>{
+  const s=document.querySelector('.mouse-spotlight');
+  if(s)s.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px,rgba(37,99,235,0.06),transparent 40%)`;
+});
+
+/* Particle canvas */
+window.initParticles=function(canvas,opts){
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const interactive=opts.interactive!==false;
+  const count=opts.count||(interactive?45:16);
+  let mx=-1000,my=-1000;
+  const particles=Array.from({length:count},()=>({
+    x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+    vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+    size:Math.random()*2+0.7,alpha:Math.random()*0.3+0.08
+  }));
+  if(interactive){canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});canvas.addEventListener('mouseleave',()=>{mx=-1000;my=-1000;});}
+  (function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      if(interactive){const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){const f=(120-dist)/120*2;p.vx+=(dx/dist)*f*0.1;p.vy+=(dy/dist)*f*0.1;}}
+      p.vx*=0.98;p.vy*=0.98;p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+      if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=`rgba(37,99,235,${p.alpha})`;ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{interactive:true,count:45}));
+document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{interactive:false,count:16}));
+
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+</script>
+
+<script>
+function selectMC(label) {
+  const group = label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l => l.classList.remove('selected'));
+  label.classList.add('selected');
+  label.querySelector('input[type=radio]').checked = true;
+}
+
+// Auto-resize textareas
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.work-box textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>

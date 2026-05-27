@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 Homework — Circles &amp; Surface Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Fredoka', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>⭕ Week 3 Homework</h1>
+      <div class="subtitle">Measurement: Circles &amp; Surface Area &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PART A: CIRCLES ── -->
+  <div class="section-hd">
+    <span class="icon">⭕</span>
+    <h2>Part A — Circles: Circumference &amp; Area</h2>
+    <span class="badge badge-blue">6 Problems · ~18 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Leave answers in terms of π unless told otherwise. Circle your final answer.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">C = 2πr = πd</span>
+    <span class="fml">A = πr²</span>
+    <span class="fml">r = d ÷ 2</span>
+    <span class="fml">Arc = (θ/360) × 2πr</span>
+    <span class="fml">Sector A = (θ/360) × πr²</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <!-- P1: L2 — circumference, given r -->
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A circular fountain has a radius of <strong>7 m</strong>. Find its <strong>circumference</strong>. Leave in terms of π.</p>
+      <div class="fig">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="48" fill="#f5f5f5" stroke="#374151" stroke-width="2"/>
+          <line x1="60" y1="60" x2="108" y2="60" stroke="#374151" stroke-width="2"/>
+          <circle cx="60" cy="60" r="3.5" fill="#374151"/>
+          <polygon points="108,60 97,54 97,66" fill="#374151"/>
+          <text x="84" y="54" font-family="Nunito" font-weight="700" font-size="12" fill="#374151" text-anchor="middle">r = 7</text>
+          <text x="60" y="115" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">Find C →</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="C = 2πr = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> m</div>
+    </div>
+
+    <!-- P2: L2 — area, given diameter -->
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A circular rug has a <strong>diameter of 18 ft</strong>. Find its <strong>area</strong>. Leave in terms of π.</p>
+      <div class="fig">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="48" fill="#eeeeee" stroke="#4b5563" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="12" y1="60" x2="108" y2="60" stroke="#4b5563" stroke-width="2" stroke-dasharray="5 3"/>
+          <polygon points="12,60 23,54 23,66" fill="#4b5563"/>
+          <polygon points="108,60 97,54 97,66" fill="#4b5563"/>
+          <text x="60" y="52" font-family="Nunito" font-weight="700" font-size="12" fill="#374151" text-anchor="middle">d = 18 ft</text>
+          <text x="60" y="115" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">Find A → (halve d first!)</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="r = d ÷ 2 = …   A = πr² = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> ft²</div>
+    </div>
+
+    <!-- P3: L3 — work backwards from C to find area -->
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A circle has a <strong>circumference of 20π cm</strong>. First find the radius, then find the <strong>area</strong>. Leave in terms of π.</p>
+      <div class="fig">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="48" fill="#f5f5f5" stroke="#4b5563" stroke-width="2.5"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="#374151" stroke-width="3" stroke-dasharray="8 4"/>
+          <text x="60" y="56" font-family="Nunito" font-weight="700" font-size="11" fill="#374151" text-anchor="middle">C = 20π cm</text>
+          <text x="60" y="72" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">r = ? → A = ?</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1 — find r: C = 2πr → r = …&#10;Step 2 — find A: A = πr² = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> cm²</div>
+    </div>
+
+    <!-- P4: L3 — annulus (outer diameter given, inner radius given) -->
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Two circles share the same center. The outer circle has <strong>diameter D = 16 cm</strong>; the inner circle has <strong>radius r = 3 cm</strong>. Find the area of the <strong>shaded ring</strong>. Leave in terms of π.</p>
+      <div class="fig">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="#e0e0e0" stroke="#374151" stroke-width="2"/>
+          <circle cx="60" cy="60" r="25" fill="white" stroke="#374151" stroke-width="1.5"/>
+          <!-- outer diameter line -->
+          <line x1="8" y1="60" x2="112" y2="60" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="8,60 19,54 19,66" fill="#4b5563"/>
+          <polygon points="112,60 101,54 101,66" fill="#4b5563"/>
+          <!-- inner radius line -->
+          <line x1="60" y1="60" x2="60" y2="35" stroke="#6b7280" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="3" fill="#374151"/>
+          <text x="60" y="52" font-family="Nunito" font-weight="700" font-size="10" fill="#374151" text-anchor="middle">D = 16</text>
+          <text x="68" y="46" font-family="Nunito" font-weight="700" font-size="10" fill="#6b7280">r = 3</text>
+          <text x="60" y="115" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">shaded region</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Outer R = D ÷ 2 = …&#10;Shaded A = π·R² − π·r² = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> cm²</div>
+    </div>
+
+    <!-- P5: L2 — sector area, angle and radius given -->
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A sprinkler covers a <strong>90° sector</strong> of a circular lawn with <strong>radius 10 ft</strong>. Find the <strong>sector area</strong> watered. Leave in terms of π.</p>
+      <div class="fig">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="#f5f5f5" stroke="#bdbdbd" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <path d="M 60,60 L 60,8 A 52,52 0 0,1 112,60 Z" fill="#d9d9d9" stroke="#374151" stroke-width="2"/>
+          <path d="M 60,8 A 52,52 0 0,1 112,60" fill="none" stroke="#374151" stroke-width="3"/>
+          <line x1="60" y1="60" x2="60" y2="8" stroke="#4b5563" stroke-width="2"/>
+          <line x1="60" y1="60" x2="112" y2="60" stroke="#4b5563" stroke-width="2"/>
+          <path d="M 60,40 A 20,20 0 0,1 80,60" fill="none" stroke="#374151" stroke-width="1.8"/>
+          <circle cx="60" cy="60" r="3.5" fill="#374151"/>
+          <text x="40" y="30" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">r = 10</text>
+          <text x="68" y="50" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">90°</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="Sector A = (θ/360) × πr² = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> ft²</div>
+    </div>
+
+    <!-- P6: L3 — find arc length and sector perimeter -->
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A sector has a central angle of <strong>120°</strong> and radius <strong>r = 9 cm</strong>. <strong>(a)</strong> Find the arc length. <strong>(b)</strong> Find the total perimeter of the sector (arc + 2 radii). Leave in terms of π.</p>
+      <div class="fig">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="#f5f5f5" stroke="#bdbdbd" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <!-- 120° sector: from top (90°) sweeping to 210° in standard = top-left wedge -->
+          <path d="M 60,60 L 60,8 A 52,52 0 0,1 105,86 Z" fill="#e0e0e0" stroke="#374151" stroke-width="2"/>
+          <path d="M 60,8 A 52,52 0 0,1 105,86" fill="none" stroke="#374151" stroke-width="3.5"/>
+          <line x1="60" y1="60" x2="60" y2="8" stroke="#4b5563" stroke-width="2"/>
+          <line x1="60" y1="60" x2="105" y2="86" stroke="#4b5563" stroke-width="2"/>
+          <path d="M 60,42 A 18,18 0 0,1 75.6,51" fill="none" stroke="#374151" stroke-width="1.8"/>
+          <circle cx="60" cy="60" r="3.5" fill="#374151"/>
+          <text x="36" y="30" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">r = 9</text>
+          <text x="68" y="44" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">120°</text>
+          <text x="60" y="115" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">arc + 2 sides = perimeter</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:72px;" placeholder="(a) Arc = (120/360) × 2πr = …&#10;(b) Perimeter = arc + r + r = …"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">(a) Arc: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> cm</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">(b) Perimeter: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> cm</div>
+      </div>
+    </div>
+
+  </div><!-- /prob-grid circles -->
+
+</div><!-- /sheet 1 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART B: SURFACE AREA ── -->
+  <div class="section-hd">
+    <span class="icon">📦</span>
+    <h2>Part B — Surface Area</h2>
+    <span class="badge badge-sand">4 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Show ALL work. Draw or label faces if it helps. SA = 2lw + 2lh + 2wh for a full box. Adjust for open tops.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">SA (full box) = 2lw + 2lh + 2wh</span>
+    <span class="fml">SA (cube) = 6s²</span>
+    <span class="fml">Open top: subtract one lw face</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <!-- P7: L2 — cube SA -->
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A cube-shaped gift box has a side length of <strong>s = 8 in</strong>. Find its total <strong>surface area</strong>.</p>
+      <div class="fig">
+        <svg width="130" height="110" viewBox="0 0 130 110">
+          <polygon points="30,14 110,14 110,88 30,88" fill="#eeeeee" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="30,88 110,88 126,104 46,104" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="110,14 126,30 126,104 110,88" fill="#bdbdbd" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="30,14 110,14 126,30 46,30" fill="#eeeeee" stroke="#374151" stroke-width="1.5"/>
+          <text x="70" y="55" font-family="Nunito" font-weight="700" font-size="14" fill="#374151" text-anchor="middle">s = 8 in</text>
+          <text x="70" y="72" font-family="Nunito" font-size="11" fill="#6b7280" text-anchor="middle">all sides equal</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="SA = 6s² = 6 × 8² = …"></textarea>
+      <div class="answer-box">SA = <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> in²</div>
+    </div>
+
+    <!-- P8: L2 — rectangular prism SA -->
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Find the <strong>surface area</strong> of a rectangular prism with <strong>l = 6, w = 4, h = 5</strong> (all in cm).</p>
+      <div class="fig">
+        <svg width="130" height="110" viewBox="0 0 130 110">
+          <polygon points="22,12 106,12 106,78 22,78" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="22,78 106,78 122,94 38,94" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="106,12 122,28 122,94 106,78" fill="#bdbdbd" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="22,12 106,12 122,28 38,28" fill="#eeeeee" stroke="#374151" stroke-width="1.5"/>
+          <text x="64" y="48" font-family="Nunito" font-weight="700" font-size="12" fill="#374151" text-anchor="middle">l = 6</text>
+          <text x="20" y="47" font-family="Nunito" font-weight="700" font-size="12" fill="#374151" text-anchor="end">h = 5</text>
+          <text x="118" y="86" font-family="Nunito" font-weight="700" font-size="11" fill="#374151" text-anchor="start">w=4</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="SA = 2lw + 2lh + 2wh = …"></textarea>
+      <div class="answer-box">SA = <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> cm²</div>
+    </div>
+
+    <!-- P9: L3 — open-top box SA -->
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">An open-top storage bin has <strong>l = 10 in, w = 6 in, h = 4 in</strong>. How many square inches of material are needed to build it (no top face)?</p>
+      <div class="fig">
+        <svg width="140" height="110" viewBox="0 0 140 110">
+          <polygon points="22,22 106,22 106,74 22,74" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="22,74 106,74 122,88 38,88" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="106,22 122,36 122,88 106,74" fill="#bdbdbd" stroke="#374151" stroke-width="1.5"/>
+          <!-- open top dashed -->
+          <line x1="22" y1="22" x2="106" y2="22" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+          <line x1="106" y1="22" x2="122" y2="36" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+          <line x1="22" y1="22" x2="38" y2="36" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+          <line x1="38" y1="36" x2="122" y2="36" stroke="#374151" stroke-width="2" stroke-dasharray="6 3"/>
+          <text x="64" y="52" font-family="Nunito" font-weight="700" font-size="12" fill="#374151" text-anchor="middle">l = 10</text>
+          <text x="20" y="50" font-family="Nunito" font-weight="700" font-size="12" fill="#374151" text-anchor="end">h = 4</text>
+          <text x="120" y="82" font-family="Nunito" font-weight="700" font-size="10" fill="#374151" text-anchor="start">w=6</text>
+          <text x="70" y="104" font-family="Nunito" font-weight="700" font-size="10" fill="#6b7280" text-anchor="middle">— top is OPEN —</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Faces: bottom + 2 long sides + 2 short sides&#10;= lw + 2lh + 2wh = …"></textarea>
+      <div class="answer-box">SA = <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> in²</div>
+    </div>
+
+    <!-- P10: L4 — word problem: painting a room -->
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A room is <strong>14 ft long, 10 ft wide, and 8 ft tall</strong>. You will paint the <strong>4 walls and the ceiling only</strong> (not the floor). Each can of paint covers <strong>50 ft²</strong>. How many cans do you need?</p>
+      <div class="fig">
+        <svg width="150" height="110" viewBox="0 0 150 110">
+          <!-- room box — open floor (bottom dashed) -->
+          <polygon points="18,16 118,16 118,82 18,82" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="118,16 136,30 136,96 118,82" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <!-- ceiling highlighted -->
+          <polygon points="18,16 118,16 136,30 36,30" fill="#bdbdbd" stroke="#374151" stroke-width="2"/>
+          <!-- floor dashed (not painted) -->
+          <line x1="18" y1="82" x2="118" y2="82" stroke="#374151" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <line x1="118" y1="82" x2="136" y2="96" stroke="#374151" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <line x1="18" y1="82" x2="36" y2="96" stroke="#374151" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <line x1="36" y1="96" x2="136" y2="96" stroke="#374151" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="68" y="52" font-family="Nunito" font-weight="700" font-size="11" fill="#374151" text-anchor="middle">l = 14</text>
+          <text x="16" y="50" font-family="Nunito" font-weight="700" font-size="11" fill="#374151" text-anchor="end">h = 8</text>
+          <text x="132" y="90" font-family="Nunito" font-weight="700" font-size="10" fill="#374151" text-anchor="start">w=10</text>
+          <text x="77" y="22" font-family="Nunito" font-weight="700" font-size="9" fill="#374151" text-anchor="middle">ceiling ✓</text>
+          <text x="78" y="105" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">floor — not painted</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Ceiling: l × w = …&#10;4 Walls: 2lh + 2wh = …&#10;Total area: … ÷ 50 = … cans (round up!)"></textarea>
+      <div class="answer-box">Cans needed: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> cans</div>
+    </div>
+
+  </div><!-- /prob-grid surface area -->
+
+  <hr class="divider">
+
+  <!-- ── PART B CONTINUED: Word Problems ── -->
+  <div class="section-hd">
+    <span class="icon">💬</span>
+    <h2>Part B Continued — Word Problems</h2>
+    <span class="badge badge-green">2 Problems · ~8 min</span>
+  </div>
+  <p class="instr">Read carefully. Underline the question. Identify what formula you need before you solve.</p>
+
+  <div class="prob-grid">
+
+    <!-- W1: L3 — circular track -->
+    <div class="prob">
+      <div class="prob-num">Word Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A circular jogging track has a <strong>diameter of 400 m</strong>. A runner completes <strong>3 full laps</strong>. How far does the runner travel in total? Leave in terms of π, then also give a decimal approximation (use π ≈ 3.14).</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Step 1 — one lap (circumference): C = πd = …&#10;Step 2 — 3 laps: 3 × C = …&#10;Decimal: …"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Exact: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> m</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">≈ <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> m</div>
+      </div>
+    </div>
+
+    <!-- W2: L4 — aquarium glass -->
+    <div class="prob">
+      <div class="prob-num">Word Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">An open-top fish tank has <strong>l = 24 in, w = 12 in, h = 16 in</strong>. A circular drain with <strong>radius 1.5 in</strong> is cut into the bottom. How many square inches of glass are needed? Leave π in your answer.</p>
+      <textarea class="work-area" style="min-height:80px;" placeholder="Open-top SA (no lid): lw + 2lh + 2wh = …&#10;Drain hole: π × r² = …&#10;Glass needed: SA − drain = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> in²</div>
+    </div>
+
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — ELA + ERROR LOG
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART C: ELA ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Author's Purpose &amp; Tone</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read the passage once for understanding. Annotate: circle signal words, underline the main idea of each paragraph. Answer all 6 questions.</p>
+
+  <!-- Passage -->
+  <div class="passage-box">
+    <div class="passage-title">The Hidden Circle: How Geometry Shapes the Way We Build</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> In 1851, an English physician named John Snow mapped the locations of cholera deaths in London on a simple grid. He noticed that the deaths clustered around a single water pump on Broad Street — a circular pattern radiating outward from one point. Snow's insight saved hundreds of lives. What few people realize is that his entire method of reasoning depended on geometry: the circle, the radius, and the concept of distance from a center point.</p>
+      <p><span class="para-lbl">[¶2]</span> The circle is perhaps the most consequential shape in the history of human design. Its defining property — that every point on its edge is exactly the same distance from the center — makes it uniquely suited to problems that involve <span class="sw">spreading outward</span>, <span class="sw">rotating</span>, or <span class="sw">containing pressure evenly</span>. Water pipes are circular because a circle maximizes the volume of water carried for a given perimeter of pipe material. Wheels are circular because no other shape rolls without bouncing. Ball bearings, clock gears, radar dishes, and drill bits are all circles in disguise.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">However</span>, the circle is not always the obvious choice. Rooms in houses are almost never circular because rectangular walls are far easier to build and furnish. Storage boxes are rectangular because they stack efficiently. <span class="sw">In contrast</span> to a circle — which wastes corner space — a rectangle fills a grid perfectly. Engineers and architects, <span class="sw">as a result</span>, must decide for each application whether a circle's mathematical advantages outweigh its practical difficulties.</p>
+      <p><span class="para-lbl">[¶4]</span> When the choice <em>is</em> made in favor of the circle, the results can be extraordinary. The Roman Colosseum, the London Eye, the Large Hadron Collider, and the retina of the human eye are all, at their core, circles. Each was chosen for its geometry: equal load distribution, smooth rotation, or the ability to focus waves to a single point. The circle, in these cases, was not decorative. It was the only shape that would work.</p>
+      <p><span class="para-lbl">[¶5]</span> Understanding circles is not merely academic. Every student who learns to calculate circumference and area is learning to think the way Snow thought — to reason from a center point outward, to estimate distances and coverage, and to see the invisible geometry that organizes the physical world. A city block, a satellite orbit, a blood cell: all are circles waiting to be measured.</p>
+    </div>
+  </div>
+
+  <!-- Questions 1–6 -->
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> What is the <strong>author's primary purpose</strong> in writing this passage? <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) To entertain readers with stories about famous buildings</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) To argue that the circle is the most important shape in science and design</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) To explain how John Snow invented modern medicine</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) To compare the circle to the rectangle in architecture</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> The author opens with John Snow's cholera map primarily to: <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) Show that geometry has real-world, life-saving applications</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) Prove that doctors are better at geometry than engineers</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) Entertain readers with an interesting historical fact</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) Argue that maps are more useful than formulas</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶2, the signal phrase <em>"makes it uniquely suited to"</em> signals a relationship of: <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Cause and effect</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Contrast</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Sequence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Definition</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> The author's tone toward students who study geometry (¶5) is best described as: <span class="lvl lvl-3" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#bdbdbd;color:#111827;">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) Dismissive — the author implies geometry is only for experts</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) Encouraging — the author connects student learning to real-world thinking</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) Neutral — the author presents facts without any judgment</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) Critical — the author suggests schools do not teach geometry properly</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which statement best describes how the author organizes the passage across all five paragraphs? <span class="lvl lvl-3" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#bdbdbd;color:#111827;">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) Chronological order — events are listed from earliest to most recent</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) Hook → property → contrast → examples → student relevance</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) Problem → cause → effect → solution → conclusion</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) Comparison of circle vs. rectangle throughout each paragraph</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> A student claims: <em>"The author uses the Colosseum and the Large Hadron Collider to show that circles are decorative."</em> Is this claim supported, partially supported, or contradicted by ¶4? <span class="lvl lvl-4" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#6b7280;color:#ffffff;">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) Supported — ¶4 says the circle was chosen because it looks impressive</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) Partially supported — ¶4 mentions aesthetics alongside function</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Contradicted — ¶4 explicitly states "it was not decorative" and cites functional reasons</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) Irrelevant — ¶4 does not mention the Colosseum or Hadron Collider</span></label>
+    </div>
+  </div>
+
+
+  <hr class="divider">
+
+  <!-- ── PART C2: ELA PASSAGE 2 ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C2 — ELA: Inference &amp; Evidence</h2>
+    <span class="badge badge-blue">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read the passage once for understanding. Annotate: circle signal words, underline the main idea of each paragraph. Answer all 6 questions.</p>
+
+  <!-- Passage 2 -->
+  <div class="passage-box">
+    <div class="passage-title">Circles in Nature: Why the Universe Prefers Curves</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> Ask a child to draw the sun, and she will almost certainly draw a circle. Ask her to draw a raindrop, a coin, or a pupil, and the answer will be the same. The circle is not just a human invention — it is nature's default shape. Wherever forces act equally in all directions from a central point, a circle appears. This is not coincidence. It is physics.</p>
+      <p><span class="para-lbl">[¶2]</span> The most striking example is the soap bubble. When soapy water traps a pocket of air, the film pulls inward from every direction with equal tension. <span class="sw">As a result</span>, the bubble assumes the shape that encloses the most volume for the least surface area. Mathematicians call this the <em>isoperimetric property</em>: among all closed curves of equal perimeter, the circle encloses the greatest area. Nature, it turns out, is an excellent mathematician.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">However</span>, not all circles in nature are perfect. The orbits of planets, once thought to be perfect circles by ancient astronomers, are actually <em>ellipses</em> — slightly flattened circles. When Johannes Kepler discovered this in 1609, it was considered a demotion for geometry: the universe, it seemed, was not as tidy as Plato had hoped. <span class="sw">In contrast</span> to the disappointment of some scholars, Kepler himself was thrilled. The ellipse, after all, is still a close cousin of the circle, and its mathematical properties are just as elegant.</p>
+      <p><span class="para-lbl">[¶4]</span> The circle's dominance in nature extends to the microscopic world. Red blood cells are shaped like biconcave discs — essentially flattened circles — because this shape maximizes the surface area available for absorbing oxygen relative to the cell's volume. Tree rings form concentric circles because the tree grows outward from its center at roughly the same rate in all directions each year. Even the iris of a human eye is a circle, precisely because the pupil must be able to expand and contract symmetrically to control the amount of light entering at any angle.</p>
+      <p><span class="para-lbl">[¶5]</span> What all these examples share is a single underlying principle: the circle is the shape of <em>equilibrium</em>. Whenever competing forces balance out perfectly, a circle is what remains. Students who learn to calculate the area and circumference of a circle are not just memorizing formulas. They are learning to read the language that nature uses when it is in perfect balance — a language written not in words, but in curves.</p>
+    </div>
+  </div>
+
+  <!-- Questions 7–12 -->
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> What is the <strong>central claim</strong> of this passage? <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>A) Circles are the most common shape in the man-made world</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>B) The circle appears throughout nature because it represents the shape of perfect equilibrium</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>C) Ancient astronomers were wrong about planetary orbits being circles</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>D) Soap bubbles are the best example of geometry in everyday life</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> In ¶2, the phrase <span class="sw">"As a result"</span> signals that what follows is: <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>A) A contrast to what was just said</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>B) A definition of a new term</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>C) A consequence or effect of the previous sentence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>D) A sequence step in a process</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> According to ¶3, why was Kepler <em>thrilled</em> by the discovery that orbits are ellipses rather than circles? <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>A) He believed ellipses were more beautiful than circles</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>B) The ellipse is closely related to the circle and has equally elegant math</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>C) He wanted to prove ancient astronomers wrong</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>D) Ellipses are easier to calculate than circles</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q10.</span> The author's tone toward students in ¶5 can best be described as: <span class="lvl lvl-3" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#bdbdbd;color:#111827;">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>A) Condescending — the author implies students only memorize without understanding</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>B) Inspiring — the author elevates the act of learning formulas to something meaningful</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>C) Neutral — the author simply describes what students do in math class</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>D) Critical — the author argues that current math education misses the point</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q11.</span> Which piece of evidence from the passage <strong>best supports</strong> the claim that the circle is "nature's default shape"? <span class="lvl lvl-3" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#bdbdbd;color:#111827;">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>A) Children instinctively draw the sun and raindrops as circles (¶1)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>B) Planetary orbits are ellipses, not perfect circles (¶3)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>C) Soap bubbles, tree rings, blood cells, and irises all form circles due to equal forces (¶2, ¶4)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>D) Mathematicians have named the circle's area property "isoperimetric" (¶2)</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q12.</span> A student claims: <em>"The author uses Kepler's discovery to show that geometry cannot perfectly describe the natural world."</em> Using evidence from <strong>¶3 and ¶5</strong>, is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#6b7280;color:#ffffff;">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>A) Supported — ¶3 says orbits are ellipses, proving geometry fails to match nature exactly</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>B) Partially supported — ¶3 shows an imperfection, but ¶5 argues geometry still captures nature's equilibrium principle</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>C) Contradicted — both paragraphs insist geometry describes nature perfectly</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>D) Irrelevant — neither paragraph discusses geometry's limitations</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART D: ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── REFLECTION ── -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The circle formula I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 3 · SHSAT Prep &nbsp;·&nbsp; ⭕ Circles &amp; Surface Area &nbsp;|&nbsp; 📖 ELA: Author's Purpose &amp; Tone
+  </div>
+
+</div><!-- /sheet 3 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
