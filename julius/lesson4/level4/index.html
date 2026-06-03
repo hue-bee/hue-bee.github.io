@@ -1,1 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="slides-format" content="viewport">
+    <title>L4 Math Mastery — SHSAT Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg: #F0F7FF;
+            --color-bg-deep: #E0EEFF;
+            --color-surface: #FFFFFF;
+            --color-text: #0f172a;
+            --color-text-secondary: #334155;
+            --color-text-muted: #64748b;
+            --color-accent-1: #2563EB;
+            --color-accent-2: #F97066;
+            --color-accent-3: #D4A574;
+            --color-glass-bg: rgba(255,255,255,0.88);
+            --color-glass-border: rgba(0,0,0,0.07);
+            --color-vignette: rgba(0,0,0,0.04);
+            --font-display: 'Fredoka', sans-serif;
+            --font-body: 'Nunito', sans-serif;
+        }
+    </style>
+    <style>
+        :root { --color-bg: #F0F7FF; --color-text: #0f172a; --glow-color-rgb: 37,99,235; }
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { background: var(--color-bg); margin: 0; }
+        body { font-family: 'Nunito', sans-serif; color: var(--color-text); overflow: hidden; height: 100vh; width: 100vw; }
+        .deck { width: 100vw; height: 100vh; position: relative; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(0.96); transition: opacity 0.6s ease, transform 0.6s ease; pointer-events: none; overflow: hidden; }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: all; }
+        .slide > .content { position: relative; z-index: 2; width: 100%; max-width: 1080px; padding: clamp(1rem, 3vw, 3rem); }
+        .slide::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, var(--color-vignette) 100%); }
+        .nav-controls { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; z-index: 100; background: rgba(255,255,255,0.88); backdrop-filter: blur(12px); padding: 8px 22px; border-radius: 40px; border: 1px solid rgba(0,0,0,0.09); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .nav-btn { width: 36px; height: 36px; border: none; background: rgba(0,0,0,0.05); color: #111827; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .nav-btn:hover { background: rgba(37,99,235,0.18); }
+        .slide-dots { display: flex; gap: 7px; }
+        .slide-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.12); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+        .slide-dots .dot.active { background: #374151; transform: scale(1.35); }
+        .slide-counter { font-size: 0.75rem; color: #64748b; min-width: 36px; text-align: center; font-weight: 700; }
+        .reveal { opacity: 0; transform: translateY(16px); }
 
+        /* Gradient mesh */
+        @keyframes float-slow { 0%{transform:translate(0,0)scale(1)} 33%{transform:translate(40px,-35px)scale(1.1)} 66%{transform:translate(-30px,30px)scale(0.92)} 100%{transform:translate(0,0)scale(1)} }
+        @keyframes float-drift { 0%{transform:translate(0,0)scale(1)rotate(0deg)} 33%{transform:translate(-40px,-45px)scale(1.12)rotate(2deg)} 66%{transform:translate(35px,25px)scale(0.9)rotate(-2deg)} 100%{transform:translate(0,0)scale(1)rotate(0deg)} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+        .gradient-mesh { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(70px); animation: float-slow 12s ease-in-out infinite; }
+        .blob:nth-child(2) { animation: float-drift 16s ease-in-out infinite; }
+        .blob:nth-child(3) { animation: float-slow 20s ease-in-out infinite reverse; }
+
+        /* Level pills */
+        .lvl-badge { display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 9px; border-radius: 20px; margin-left: 6px; vertical-align: middle; }
+        .lvl-4 { background: #6b7280; color: #ffffff; }
+        .lvl-3 { background: #bdbdbd; color: #111827; }
+        .lvl-2 { background: #d9d9d9; color: #1f2937; }
+
+        /* Section badge */
+        .section-badge { display: inline-block; background: linear-gradient(135deg, #374151, #1f2937); color: white; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 3px 12px; border-radius: 20px; margin-bottom: 0.6rem; }
+
+        /* Cards */
+        .prob-card { background: white; border: 1.5px solid rgba(0,0,0,0.09); border-radius: 12px; padding: 0.7rem 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+        .prob-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,0.10); }
+
+        /* Formula box */
+        .formula-box { background: linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02)); border: 2px solid rgba(0,0,0,0.18); border-radius: 10px; padding: 0.45rem 0.9rem; font-size: 1rem; font-weight: 800; color: #111827; font-family: 'Fredoka', sans-serif; letter-spacing: 0.02em; }
+
+        /* Trap card */
+        .trap-card { border-left: 4px solid #4b5563; background: #f9fafb; border-radius: 0 9px 9px 0; padding: 0.55rem 0.85rem; box-shadow: 0 2px 7px rgba(0,0,0,0.10); }
+
+        /* Guided Q */
+        .guided-q { background: rgba(0,0,0,0.04); border-left: 3px solid #6b7280; border-radius: 0 8px 8px 0; padding: 0.45rem 0.75rem; font-size: 0.82rem; font-style: italic; color: #374151; font-weight: 600; }
+
+        /* Diagram wrap */
+        .diagram-wrap { background: white; border: 1.5px solid rgba(0,0,0,0.09); border-radius: 14px; padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+        .diagram-wrap svg text { font-family: 'Nunito', sans-serif; }
+
+        /* Step pill */
+        .step-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: #EFF6FF; color: #2563EB; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 10px; border-radius: 20px; border: 1px solid #BFDBFE; }
+
+        /* Work box */
+        .work-box { border: 1.5px dashed rgba(0,0,0,0.25); border-radius: 8px; background: rgba(0,0,0,0.02); padding: 0.4rem 0.6rem; min-height: 2.6rem; font-size: 0.8rem; color: #374151; }
+
+        /* Hero emoji */
+        .emoji-hero { font-size: 7rem; line-height: 1; animation: float 3s ease-in-out infinite; }
+
+        /* MC option */
+        .mc-opt { display: flex; align-items: flex-start; gap: 0.45rem; padding: 0.3rem 0.5rem; border-radius: 6px; border: 1.5px solid rgba(0,0,0,0.10); background: #fafafa; cursor: pointer; font-size: 0.79rem; color: #374151; transition: background 0.15s, border-color 0.15s; }
+        .mc-opt:hover { background: #f0f0f0; border-color: rgba(0,0,0,0.20); }
+        .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+        .mc-opt input[type=radio] { display: none; }
+        .bubble { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid #CBD5E1; border-radius: 50%; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+        .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+    </style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 1 — TITLE
+══════════════════════════════════════════════ -->
+<div class="slide active" data-slide="1">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:480px;height:480px;top:-120px;right:-100px;background:#2563EB;opacity:0.11;"></div>
+        <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#F97066;opacity:0.09;"></div>
+        <div class="blob" style="width:220px;height:220px;top:38%;left:12%;background:#D4A574;opacity:0.09;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div class="emoji-hero reveal">🏗️</div>
+        <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2.2rem,5.5vw,4rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0.3rem 0 0.4rem;">L4 Math Mastery</h1>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.8vw,2rem);font-weight:600;color:#374151;margin:0 0 0.5rem;">Surface Area Word Problems</h2>
+        <p class="reveal" style="font-size:0.92rem;color:#64748b;letter-spacing:0.12em;text-transform:uppercase;">SHSAT Prep · Week 3 · Level <span class="lvl-badge lvl-4">L4</span></p>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 2 — WHAT MAKES IT L4?
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-80px;right:-80px;background:#2563EB;opacity:0.08;"></div>
+        <div class="blob" style="width:240px;height:240px;bottom:-60px;left:-40px;background:#F97066;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">What is L4?</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;margin:0 0 1rem;">Why Are These Problems Harder?</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+            <div class="prob-card reveal" style="border-left:4px solid #d9d9d9;">
+                <div style="font-size:1.4rem;margin-bottom:0.3rem;">🟢</div>
+                <div style="font-weight:800;font-size:0.9rem;color:#374151;margin-bottom:0.3rem;">L2 Problems</div>
+                <div style="font-size:0.82rem;color:#334155;line-height:1.6;">One formula, one step. Plug in the numbers and go. The question tells you exactly what to find.</div>
+            </div>
+            <div class="prob-card reveal" style="border-left:4px solid #6b7280;">
+                <div style="font-size:1.4rem;margin-bottom:0.3rem;">🔴</div>
+                <div style="font-weight:800;font-size:0.9rem;color:#374151;margin-bottom:0.3rem;">L4 Problems</div>
+                <div style="font-size:0.82rem;color:#334155;line-height:1.6;"><strong>Multiple steps + a twist.</strong> You must decide which faces to count, what to add or subtract, and sometimes round up.</div>
+            </div>
+        </div>
+        <div class="prob-card reveal" style="border-left:4px solid #2563EB;margin-top:0.85rem;">
+            <div style="font-weight:800;font-size:0.88rem;color:#1f2937;margin-bottom:0.3rem;">🧠 The L4 Pattern — Every Time</div>
+            <ol style="font-size:0.82rem;color:#334155;padding-left:1.1rem;margin:0;line-height:1.9;">
+                <li><strong>Identify</strong> which surfaces actually exist (open tops? missing floors? holes?)</li>
+                <li><strong>Calculate</strong> each face's area using the right formula</li>
+                <li><strong>Add or subtract</strong> depending on what the problem asks</li>
+                <li><strong>Answer the real question</strong> (cans needed? inches of glass?)</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 3 — TODAY'S TWO L4 PROBLEMS
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="3">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#F97066;opacity:0.07;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content">
+        <div class="section-badge reveal">Today's Mission</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;margin:0 0 0.9rem;">Two Real L4 Problems from Your Homework</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+            <div class="prob-card reveal" style="border-top:3px solid #374151;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">🎨</div>
+                <div style="font-weight:800;font-size:0.92rem;color:#111827;margin-bottom:0.25rem;">Problem 10 <span class="lvl-badge lvl-4">L4</span></div>
+                <div style="font-size:0.82rem;color:#334155;line-height:1.6;">Paint a room's 4 walls + ceiling. Figure out how many cans of paint you need — with real-world rounding.</div>
+                <div class="guided-q" style="margin-top:0.5rem;">What happens if you need 7.2 cans — do you buy 7 or 8?</div>
+            </div>
+            <div class="prob-card reveal" style="border-top:3px solid #6b7280;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">🐟</div>
+                <div style="font-weight:800;font-size:0.92rem;color:#374151;margin-bottom:0.25rem;">Problem 12 <span class="lvl-badge lvl-4">L4</span></div>
+                <div style="font-size:0.82rem;color:#334155;line-height:1.6;">Build a fish tank — open top, plus a circular drain cut into the bottom. Glass = SA minus the hole.</div>
+                <div class="guided-q" style="margin-top:0.5rem;">Which faces does glass cover? Which do you subtract?</div>
+            </div>
+        </div>
+        <div class="trap-card reveal" style="margin-top:0.85rem;">
+            <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">🎯 The SHSAT Secret</div>
+            <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">L4 problems don't use harder math — they use <em>more steps</em> and add one sneaky twist. Master the steps and the twist becomes obvious.</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 4 — SA FORMULA REVIEW
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#2563EB;opacity:0.08;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#D4A574;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Toolkit</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Everything You Need — One Page</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:0.65rem;">
+                <div class="prob-card reveal" style="border-left:4px solid #374151;">
+                    <div style="font-weight:800;font-size:0.88rem;color:#111827;margin-bottom:0.35rem;">📦 Box Formula (Full)</div>
+                    <div class="formula-box" style="text-align:center;margin-bottom:0.4rem;">SA = 2lw + 2lh + 2wh</div>
+                    <div style="font-size:0.78rem;color:#334155;">Think of 3 pairs of matching faces: Top/bottom (lw), Front/back (lh), Left/right (wh).</div>
+                </div>
+                <div class="prob-card reveal" style="border-left:4px solid #6b7280;">
+                    <div style="font-weight:800;font-size:0.88rem;color:#374151;margin-bottom:0.35rem;">🔵 Circle Formulas</div>
+                    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.35rem;">
+                        <div class="formula-box" style="font-size:0.85rem;padding:0.3rem 0.7rem;">A = πr²</div>
+                        <div class="formula-box" style="font-size:0.85rem;padding:0.3rem 0.7rem;">r = d ÷ 2</div>
+                    </div>
+                    <div style="font-size:0.78rem;color:#334155;">You need this when a circular hole is cut into a face.</div>
+                </div>
+            </div>
+            <div class="diagram-wrap reveal" style="min-height:220px;">
+                <!-- Box net SVG -->
+                <svg viewBox="0 0 280 240" width="100%" height="220" aria-label="Unfolded box net showing 6 faces">
+                    <!-- Top face -->
+                    <rect x="90" y="4" width="80" height="70" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+                    <text x="130" y="36" font-size="11" font-weight="700" fill="#111827" text-anchor="middle">w</text>
+                    <text x="130" y="52" font-size="10" fill="#64748b" text-anchor="middle">top</text>
+                    <!-- Front face -->
+                    <rect x="90" y="74" width="80" height="90" fill="#e0e0e0" stroke="#374151" stroke-width="2"/>
+                    <text x="130" y="116" font-size="11" font-weight="700" fill="#111827" text-anchor="middle">w</text>
+                    <text x="130" y="132" font-size="10" fill="#64748b" text-anchor="middle">front</text>
+                    <!-- Bottom face -->
+                    <rect x="90" y="164" width="80" height="70" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+                    <text x="130" y="202" font-size="10" fill="#64748b" text-anchor="middle">bottom</text>
+                    <!-- Left face -->
+                    <rect x="10" y="74" width="80" height="90" fill="#eeeeee" stroke="#4b5563" stroke-width="2"/>
+                    <text x="50" y="116" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">h</text>
+                    <text x="50" y="132" font-size="10" fill="#64748b" text-anchor="middle">left</text>
+                    <!-- Right face -->
+                    <rect x="170" y="74" width="80" height="90" fill="#eeeeee" stroke="#4b5563" stroke-width="2"/>
+                    <text x="210" y="116" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">h</text>
+                    <text x="210" y="132" font-size="10" fill="#64748b" text-anchor="middle">right</text>
+                    <!-- Labels -->
+                    <text x="140" y="228" font-size="12" font-weight="800" fill="#374151" text-anchor="middle">Unfold = 6 faces • SA = add them all!</text>
+                </svg>
+            </div>
+        </div>
+        <div class="trap-card reveal" style="margin-top:0.7rem;">
+            <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚡ Open Top / Open Bottom Rule</div>
+            <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">No lid = subtract one <strong>lw</strong> face. No floor = subtract another. Count what's actually there.</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 5 — PROBLEM 10 SETUP
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#2563EB;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Problem 10 · L4</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">🎨 Painting a Room — Read It Like a Detective</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:0.65rem;">
+                <div class="prob-card reveal" style="border-left:4px solid #374151;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">The Problem</div>
+                    <div style="font-size:0.83rem;color:#334155;line-height:1.6;">A room is <strong>14 ft long, 10 ft wide, 8 ft tall</strong>. Paint the <strong>4 walls and the ceiling only</strong> — not the floor. Each can covers <strong>50 ft²</strong>. How many cans?</div>
+                </div>
+                <div class="prob-card reveal" style="border-left:4px solid #F97066;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.4rem;">🕵️ What Faces Exist?</div>
+                    <div style="font-size:0.82rem;color:#334155;line-height:1.8;">
+                        ✅ Ceiling (lw = 14 × 10)<br>
+                        ✅ Wall 1 &amp; Wall 2 (lh = 14 × 8) × 2<br>
+                        ✅ Wall 3 &amp; Wall 4 (wh = 10 × 8) × 2<br>
+                        ❌ Floor — skip it!
+                    </div>
+                </div>
+                <div class="guided-q reveal">Before you calculate: how many faces will you add up? What formula do you start with?</div>
+            </div>
+            <div class="diagram-wrap reveal" style="min-height:210px;">
+                <!-- Room with ceiling highlighted, floor dashed -->
+                <svg viewBox="0 0 220 190" width="100%" height="200" aria-label="Room diagram showing painted faces">
+                    <!-- Back wall -->
+                    <polygon points="22,16 152,16 152,100 22,100" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Right wall -->
+                    <polygon points="152,16 178,36 178,120 152,100" fill="#d0d0d0" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Ceiling HIGHLIGHTED -->
+                    <polygon points="22,16 152,16 178,36 48,36" fill="#d4d4d4" stroke="#374151" stroke-width="2.5"/>
+                    <!-- Left wall label -->
+                    <polygon points="22,16 48,36 48,120 22,100" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Floor dashed = NOT painted -->
+                    <line x1="22" y1="100" x2="152" y2="100" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <line x1="152" y1="100" x2="178" y2="120" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <line x1="22" y1="100" x2="48" y2="120" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <line x1="48" y1="120" x2="178" y2="120" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <!-- Labels -->
+                    <text x="87" y="62" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle">l = 14</text>
+                    <text x="20" y="60" font-size="11" font-weight="700" fill="#1f2937" text-anchor="end">h = 8</text>
+                    <text x="166" y="115" font-size="11" font-weight="700" fill="#1f2937" text-anchor="start">w=10</text>
+                    <text x="100" y="26" font-size="10" font-weight="700" fill="#374151" text-anchor="middle">CEILING ✓</text>
+                    <text x="100" y="140" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">floor — NOT painted</text>
+                    <!-- Paint can icon hint -->
+                    <text x="185" y="55" font-size="22">🎨</text>
+                    <text x="185" y="80" font-size="9" fill="#64748b">50 ft²</text>
+                    <text x="185" y="93" font-size="9" fill="#64748b">per can</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 6 — PROBLEM 10 SOLVE
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="6">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#2563EB;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#D4A574;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Problem 10 · Step-by-Step</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">🎨 Solving the Room — Four Clean Steps</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 1 · Ceiling</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">Ceiling = l × w<br><strong>14 × 10 = 140 ft²</strong></div>
+                </div>
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 2 · Long Walls</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">2 long walls = 2 × l × h<br><strong>2 × 14 × 8 = 224 ft²</strong></div>
+                </div>
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 3 · Short Walls</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">2 short walls = 2 × w × h<br><strong>2 × 10 × 8 = 160 ft²</strong></div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 4 · Total Area</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">Total = 140 + 224 + 160<br><strong>= 524 ft²</strong></div>
+                </div>
+                <div class="prob-card reveal" style="border-left:4px solid #F97066;">
+                    <div style="font-weight:800;font-size:0.88rem;color:#111827;margin-bottom:0.3rem;">⚡ The L4 Twist — Round UP!</div>
+                    <div style="font-size:0.83rem;color:#334155;line-height:1.6;">Cans = 524 ÷ 50 = <strong>10.48</strong><br><br>You can't buy 0.48 of a can. Round <em>up</em> to <strong>11 cans</strong>.<br><br><span style="color:#F97066;font-weight:700;">Always round UP for "how many cans/rolls/tiles" — you can't have partial supplies.</span></div>
+                </div>
+                <div class="trap-card reveal">
+                    <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">🪤 Common Trap</div>
+                    <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">Students use SA = 2lw + 2lh + 2wh and include the floor. Read the problem: <em>4 walls + ceiling only.</em></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 7 — PROBLEM 12 SETUP
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="7">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#F97066;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Problem 12 · L4</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">🐟 The Fish Tank — Two Twists in One</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:0.65rem;">
+                <div class="prob-card reveal" style="border-left:4px solid #374151;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">The Problem</div>
+                    <div style="font-size:0.83rem;color:#334155;line-height:1.6;">Open-top tank: <strong>l = 24 in, w = 12 in, h = 16 in</strong>. A circular drain with <strong>radius 1.5 in</strong> is cut into the bottom. How many square inches of <strong>glass</strong> are needed?</div>
+                </div>
+                <div class="prob-card reveal" style="border-left:4px solid #F97066;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.4rem;">🕵️ What Exists? What's Missing?</div>
+                    <div style="font-size:0.82rem;color:#334155;line-height:1.8;">
+                        ❌ No lid (open top) — skip lw on top<br>
+                        ✅ Bottom face (lw) — but has a hole!<br>
+                        ✅ 2 long sides (lh) × 2<br>
+                        ✅ 2 short sides (wh) × 2<br>
+                        ➖ Circular drain cut out of bottom
+                    </div>
+                </div>
+                <div class="guided-q reveal">If you cut a hole in a piece of glass, how do you find the remaining glass area?</div>
+            </div>
+            <div class="diagram-wrap reveal" style="min-height:210px;">
+                <!-- Fish tank SVG, open top, drain in bottom -->
+                <svg viewBox="0 0 220 200" width="100%" height="200" aria-label="Open-top fish tank with circular drain">
+                    <!-- Back face -->
+                    <polygon points="24,18 144,18 144,92 24,92" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Right face -->
+                    <polygon points="144,18 168,36 168,110 144,92" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Left face -->
+                    <polygon points="24,18 48,36 48,110 24,92" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Bottom face -->
+                    <polygon points="24,92 144,92 168,110 48,110" fill="#d4d4d4" stroke="#374151" stroke-width="2"/>
+                    <!-- Open top — dashed -->
+                    <line x1="24" y1="18" x2="144" y2="18" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <line x1="144" y1="18" x2="168" y2="36" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <line x1="24" y1="18" x2="48" y2="36" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <line x1="48" y1="36" x2="168" y2="36" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <!-- Drain circle on bottom face -->
+                    <ellipse cx="96" cy="101" rx="10" ry="6" fill="white" stroke="#4b5563" stroke-width="2.5"/>
+                    <!-- Labels -->
+                    <text x="84" y="58" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">l = 24</text>
+                    <text x="22" y="57" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h=16</text>
+                    <text x="158" y="107" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w=12</text>
+                    <text x="84" y="8" font-size="9" font-weight="700" fill="#64748b" text-anchor="middle">open top ✗</text>
+                    <text x="96" y="126" font-size="9" font-weight="700" fill="#4b5563" text-anchor="middle">drain r=1.5</text>
+                    <!-- Arrow to drain -->
+                    <line x1="96" y1="122" x2="96" y2="110" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <text x="185" y="65" font-size="22">🐟</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 8 — PROBLEM 12 SOLVE
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="8">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#2563EB;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Problem 12 · Step-by-Step</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">🐟 Solving the Tank — Subtract the Hole</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 1 · Bottom Face</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">Bottom = l × w<br><strong>24 × 12 = 288 in²</strong></div>
+                </div>
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 2 · Long Sides</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">2 long sides = 2 × l × h<br><strong>2 × 24 × 16 = 768 in²</strong></div>
+                </div>
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 3 · Short Sides</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">2 short sides = 2 × w × h<br><strong>2 × 12 × 16 = 384 in²</strong></div>
+                </div>
+                <div class="prob-card reveal">
+                    <div class="step-pill">Step 4 · Open-Top SA</div>
+                    <div style="font-size:0.83rem;color:#334155;margin-top:0.35rem;line-height:1.6;">288 + 768 + 384 = <strong>1,440 in²</strong></div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div class="prob-card reveal" style="border-left:4px solid #F97066;">
+                    <div style="font-weight:800;font-size:0.88rem;color:#111827;margin-bottom:0.3rem;">⚡ The L4 Twist — Subtract the Circle!</div>
+                    <div style="font-size:0.83rem;color:#334155;line-height:1.6;">Drain area = πr² = π(1.5)² = <strong>2.25π in²</strong><br><br>Glass needed = 1440 − 2.25π in²</div>
+                    <div class="formula-box" style="text-align:center;margin-top:0.5rem;font-size:0.9rem;">Glass = 1440 − 2.25π in²</div>
+                </div>
+                <div class="prob-card reveal" style="border-left:4px solid #374151;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">🧠 Why Subtract?</div>
+                    <div style="font-size:0.82rem;color:#334155;line-height:1.6;">The circular hole is empty — no glass fills it. So we take the full bottom area and remove the circle. <strong>Glass = solid area only.</strong></div>
+                </div>
+                <div class="trap-card reveal">
+                    <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">🪤 Common Trap</div>
+                    <div style="font-size:0.8rem;color:#374151;margin-top:0.2rem;">Forgetting to subtract the drain. Also: the problem says radius = 1.5, not diameter. Don't halve it again!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 9 — THE BIG PATTERN
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="9">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#2563EB;opacity:0.07;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content">
+        <div class="section-badge reveal">The Pattern</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Every L4 Surface Area Problem — Same 4 Moves</h2>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;margin-bottom:0.8rem;">
+            <div class="prob-card reveal" style="border-top:3px solid #374151;text-align:center;padding:0.85rem 0.6rem;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">🗺️</div>
+                <div style="font-weight:800;font-size:0.8rem;color:#111827;margin-bottom:0.2rem;">1. MAP the faces</div>
+                <div style="font-size:0.75rem;color:#334155;line-height:1.5;">List every face that exists. Check for open tops, open bottoms, and special constraints.</div>
+            </div>
+            <div class="prob-card reveal" style="border-top:3px solid #6b7280;text-align:center;padding:0.85rem 0.6rem;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">🧮</div>
+                <div style="font-weight:800;font-size:0.8rem;color:#374151;margin-bottom:0.2rem;">2. CALCULATE each</div>
+                <div style="font-size:0.75rem;color:#334155;line-height:1.5;">Use the right formula for each face. Rectangles: l×w. Circles: πr².</div>
+            </div>
+            <div class="prob-card reveal" style="border-top:3px solid #374151;text-align:center;padding:0.85rem 0.6rem;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">➕➖</div>
+                <div style="font-weight:800;font-size:0.8rem;color:#111827;margin-bottom:0.2rem;">3. ADD or SUBTRACT</div>
+                <div style="font-size:0.75rem;color:#334155;line-height:1.5;">Add all present faces. Subtract holes, drains, or excluded faces.</div>
+            </div>
+            <div class="prob-card reveal" style="border-top:3px solid #F97066;text-align:center;padding:0.85rem 0.6rem;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">🎯</div>
+                <div style="font-weight:800;font-size:0.8rem;color:#c2410c;margin-bottom:0.2rem;">4. ANSWER the question</div>
+                <div style="font-size:0.75rem;color:#334155;line-height:1.5;">Cans? Round UP. Exact glass? Leave in π. Read what they actually asked.</div>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+            <div class="trap-card reveal">
+                <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">Problem 10 Pattern</div>
+                <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">Map (4 walls + ceiling) → Calculate each → Add → Divide by 50 → <strong>Round UP</strong></div>
+            </div>
+            <div class="trap-card reveal">
+                <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">Problem 12 Pattern</div>
+                <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">Map (no top) → Calculate all sides → Add → <strong>Subtract π(1.5)²</strong> for drain → Answer in π</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 10 — PRACTICE PROBLEM A (similar to P10)
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="10">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#2563EB;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Your Turn · Practice A</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">🪣 Wallpaper Problem — Same Type as Problem 10</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:0.65rem;">
+                <div class="prob-card reveal" style="border-left:4px solid #6b7280;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">The Problem <span class="lvl-badge lvl-4">L4</span></div>
+                    <div style="font-size:0.83rem;color:#334155;line-height:1.6;">A hallway is <strong>20 ft long, 6 ft wide, and 9 ft tall</strong>. You will wallpaper the <strong>4 walls only</strong> — not the floor or ceiling. Each roll covers <strong>45 ft²</strong>. How many rolls do you need?</div>
+                </div>
+                <div class="guided-q reveal">What's different here compared to Problem 10? (Hint: think about which faces you're covering this time.)</div>
+                <div class="prob-card reveal" style="border-left:4px solid #2563EB;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">Work it out:</div>
+                    <div class="work-box" style="min-height:70px;padding:0;overflow:hidden;"><textarea style="width:100%;min-height:inherit;border:none;background:transparent;resize:vertical;padding:0.4rem 0.6rem;font-size:0.8rem;color:#374151;font-family:'Nunito',sans-serif;line-height:1.5;outline:none;box-sizing:border-box;" placeholder="2 long walls + 2 short walls → total ÷ 45 → round up" spellcheck="false"></textarea></div>
+                </div>
+            </div>
+            <div class="diagram-wrap reveal" style="min-height:200px;">
+                <!-- Hallway diagram -->
+                <svg viewBox="0 0 220 190" width="100%" height="200" aria-label="Hallway diagram showing 4 walls to wallpaper">
+                    <!-- Back wall -->
+                    <polygon points="24,18 144,18 144,100 24,100" fill="#efefef" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Right wall -->
+                    <polygon points="144,18 172,36 172,118 144,100" fill="#ebebeb" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Left wall -->
+                    <polygon points="24,18 52,36 52,118 24,100" fill="#ebebeb" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Ceiling — dashed, NOT wallpapered -->
+                    <polygon points="24,18 144,18 172,36 52,36" fill="#f0f0f0" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <!-- Floor — dashed, NOT wallpapered -->
+                    <line x1="24" y1="100" x2="144" y2="100" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <line x1="144" y1="100" x2="172" y2="118" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <line x1="24" y1="100" x2="52" y2="118" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <line x1="52" y1="118" x2="172" y2="118" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <!-- Labels -->
+                    <text x="84" y="62" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">l = 20</text>
+                    <text x="22" y="61" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h=9</text>
+                    <text x="162" y="115" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w=6</text>
+                    <text x="98" y="27" font-size="9" font-weight="700" fill="#64748b" text-anchor="middle">ceiling ✗</text>
+                    <text x="98" y="132" font-size="9" font-weight="700" fill="#64748b" text-anchor="middle">floor ✗</text>
+                    <text x="185" y="60" font-size="22">🪣</text>
+                    <text x="185" y="85" font-size="9" fill="#64748b">45 ft²</text>
+                    <text x="185" y="98" font-size="9" fill="#64748b">per roll</text>
+                </svg>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 11 — PRACTICE PROBLEM B (similar to P12)
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="11">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#F97066;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <div class="section-badge reveal">Your Turn · Practice B</div>
+        <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">🛁 Sandbox with Drain — Same Type as Problem 12</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:0.65rem;">
+                <div class="prob-card reveal" style="border-left:4px solid #6b7280;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">The Problem <span class="lvl-badge lvl-4">L4</span></div>
+                    <div style="font-size:0.83rem;color:#334155;line-height:1.6;">An open-top sandbox has <strong>l = 18 in, w = 10 in, h = 6 in</strong>. A circular drain with <strong>radius 2 in</strong> is cut into the bottom. How many square inches of wood are needed to build it? Leave π in your answer.</div>
+                </div>
+                <div class="guided-q reveal">How is this the same as the fish tank? How is it different? What will you subtract?</div>
+                <div class="prob-card reveal" style="border-left:4px solid #2563EB;">
+                    <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">Work it out:</div>
+                    <div class="work-box" style="min-height:70px;padding:0;overflow:hidden;"><textarea style="width:100%;min-height:inherit;border:none;background:transparent;resize:vertical;padding:0.4rem 0.6rem;font-size:0.8rem;color:#374151;font-family:'Nunito',sans-serif;line-height:1.5;outline:none;box-sizing:border-box;" placeholder="Bottom + 2 long sides + 2 short sides → subtract πr²" spellcheck="false"></textarea></div>
+                </div>
+            </div>
+            <div class="diagram-wrap reveal" style="min-height:200px;">
+                <!-- Sandbox diagram -->
+                <svg viewBox="0 0 220 200" width="100%" height="200" aria-label="Open-top sandbox with circular drain in bottom">
+                    <!-- Back face -->
+                    <polygon points="24,22 134,22 134,88 24,88" fill="#ebebeb" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Right face -->
+                    <polygon points="134,22 158,40 158,106 134,88" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Left face -->
+                    <polygon points="24,22 48,40 48,106 24,88" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+                    <!-- Bottom face -->
+                    <polygon points="24,88 134,88 158,106 48,106" fill="#d4d4d4" stroke="#374151" stroke-width="2"/>
+                    <!-- Open top dashed -->
+                    <line x1="24" y1="22" x2="134" y2="22" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <line x1="134" y1="22" x2="158" y2="40" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <line x1="24" y1="22" x2="48" y2="40" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <line x1="48" y1="40" x2="158" y2="40" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+                    <!-- Drain circle on bottom face -->
+                    <ellipse cx="91" cy="97" rx="11" ry="7" fill="white" stroke="#4b5563" stroke-width="2.5"/>
+                    <!-- Labels -->
+                    <text x="79" y="58" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">l = 18</text>
+                    <text x="22" y="57" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h=6</text>
+                    <text x="151" y="103" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w=10</text>
+                    <text x="79" y="12" font-size="9" font-weight="700" fill="#64748b" text-anchor="middle">open top ✗</text>
+                    <text x="91" y="122" font-size="9" font-weight="700" fill="#4b5563" text-anchor="middle">r = 2 in</text>
+
+                </svg>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 12 — CHEAT CARD + CLOSING
+══════════════════════════════════════════════ -->
+<div class="slide" data-slide="12">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:480px;height:480px;top:-120px;right:-100px;background:#374151;opacity:0.13;"></div>
+        <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#2563EB;opacity:0.09;"></div>
+        <div class="blob" style="width:220px;height:220px;top:38%;left:12%;background:#F97066;opacity:0.09;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content" style="text-align:center;">
+        <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.5rem;">L4 Cheat Card — Know These Cold</h1>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;margin:0.8rem 0 0.85rem;" class="reveal">
+            <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+                <div style="font-size:1.4rem;margin-bottom:0.2rem;">📦</div>
+                <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.2rem;">Full Box SA</div>
+                <div class="formula-box" style="font-size:0.78rem;padding:0.25rem 0.4rem;">2lw+2lh+2wh</div>
+            </div>
+            <div class="prob-card" style="border-top:3px solid #6b7280;text-align:center;">
+                <div style="font-size:1.4rem;margin-bottom:0.2rem;">📭</div>
+                <div style="font-weight:800;font-size:0.78rem;color:#374151;margin-bottom:0.2rem;">Open Top</div>
+                <div class="formula-box" style="font-size:0.78rem;padding:0.25rem 0.4rem;border-color:rgba(0,0,0,0.18);">Subtract lw</div>
+            </div>
+            <div class="prob-card" style="border-top:3px solid #F97066;text-align:center;">
+                <div style="font-size:1.4rem;margin-bottom:0.2rem;">🔵</div>
+                <div style="font-weight:800;font-size:0.78rem;color:#c2410c;margin-bottom:0.2rem;">Circle Hole</div>
+                <div class="formula-box" style="font-size:0.78rem;padding:0.25rem 0.4rem;border-color:rgba(249,112,102,0.3);color:#374151;">Subtract πr²</div>
+            </div>
+            <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+                <div style="font-size:1.4rem;margin-bottom:0.2rem;">🪣</div>
+                <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.2rem;">Cans/Rolls</div>
+                <div class="formula-box" style="font-size:0.78rem;padding:0.25rem 0.4rem;">÷ coverage → ↑</div>
+            </div>
+        </div>
+        <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.85rem;">
+
+
+        </div>
+        <p class="reveal" style="font-size:0.88rem;color:#334155;margin:0 0 0.3rem;">You now own every L4 surface area trick the SHSAT can throw at you. 🚀</p>
+        <p class="reveal" style="font-size:0.82rem;color:#64748b;letter-spacing:0.1em;text-transform:uppercase;">SHSAT Prep · Week 3 · Next: Ratios &amp; Rates →</p>
+    </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- NAVIGATION -->
+<div class="nav-controls">
+    <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <div class="slide-dots" id="dots"></div>
+    <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+    <span class="slide-counter" id="counter">1 / 12</span>
+</div>
+
+<script>
+    let current = 1;
+    const total = document.querySelectorAll('.slide').length;
+    const dotsContainer = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    for (let i = 1; i <= total; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 1 ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    }
+    function goToSlide(n) {
+        const prev = document.querySelector('.slide.active');
+        const next = document.querySelector(`.slide[data-slide="${n}"]`);
+        if (prev) prev.classList.remove('active');
+        if (next) { next.classList.add('active'); animateSlide(next); }
+        current = n; updateNav();
+    }
+    function changeSlide(dir) { let n = current + dir; if (n < 1) n = total; if (n > total) n = 1; goToSlide(n); }
+    function updateNav() { document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current)); counter.textContent = current + ' / ' + total; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); } });
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); });
+
+    function animateSlide(slide) {
+        slide.querySelectorAll('.reveal').forEach((el, i) => {
+            el.style.transition = 'none';
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            el.offsetHeight;
+            const delay = i * 0.07;
+            el.style.transition = `opacity 0.32s ease ${delay}s, transform 0.32s ease ${delay}s`;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        const s = document.querySelector('.mouse-spotlight');
+        if (s) s.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(37,99,235,0.06), transparent 40%)`;
+    });
+
+    window.initParticles = function(canvas, opts) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+        const interactive = opts.interactive !== false;
+        const count = opts.count || (interactive ? 45 : 16);
+        let mx = -1000, my = -1000;
+        const particles = Array.from({length: count}, () => ({
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * 2 + 0.7, alpha: Math.random() * 0.3 + 0.08
+        }));
+        if (interactive) {
+            canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+            canvas.addEventListener('mouseleave', () => { mx = -1000; my = -1000; });
+        }
+        (function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                if (interactive) { const dx = p.x-mx, dy = p.y-my, dist = Math.sqrt(dx*dx+dy*dy); if (dist < 120) { const f = (120-dist)/120*2; p.vx += (dx/dist)*f*0.1; p.vy += (dy/dist)*f*0.1; } }
+                p.vx *= 0.98; p.vy *= 0.98; p.x += p.vx; p.y += p.vy;
+                if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(37,99,235,${p.alpha})`; ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        })();
+    };
+    document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, {interactive: true, count: 45}));
+    document.querySelectorAll('.particle-canvas-ambient').forEach(c => window.initParticles(c, {interactive: false, count: 16}));
+
+    try { animateSlide(document.querySelector('.slide.active')); } catch(e) {}
+</script>
+</body>
+</html>
