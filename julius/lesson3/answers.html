@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 Answer Sheet — Circles &amp; Surface Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#2563EB; --blue-lt:#EFF6FF; --blue-md:#BFDBFE;
+    --coral:#F97066; --coral-lt:#FFF1F0;
+    --sand:#D4A574; --sand-lt:#FDF3E7;
+    --green:#16a34a; --green-lt:#DCFCE7;
+    --purple:#7c3aed; --purple-lt:#EDE9FE;
+    --ink:#0f172a; --slate:#334155; --muted:#64748b;
+    --border:#CBD5E1; --bg:#F8FAFF; --white:#FFFFFF;
+    --ff-head:'Fredoka',sans-serif; --ff-body:'Nunito',sans-serif;
+  }
+  html { background:#e2e8f0; }
+  body { font-family:var(--ff-body); color:var(--ink); background:var(--bg); max-width:860px; margin:0 auto; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @media print {
+    html { background:white; }
+    body { max-width:100%; }
+    .no-print { display:none !important; }
+    .sheet { box-shadow:none !important; margin:0 !important; border-radius:0 !important; padding:1.2cm 1.5cm !important; }
+    .page-break { page-break-before:always; }
+  }
+  .sheet { background:var(--white); margin:2rem auto; padding:2.2rem 2.4rem; box-shadow:0 4px 24px rgba(37,99,235,0.10); border-radius:16px; }
+
+  /* Header */
+  .hw-header { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:1rem; border-bottom:3px solid var(--coral); margin-bottom:1.4rem; gap:1rem; flex-wrap:wrap; }
+  .hw-header h1 { font-family:var(--ff-head); font-size:1.75rem; font-weight:700; color:var(--coral); line-height:1.1; }
+  .hw-header .subtitle { font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:0.2rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .confidential { background:var(--coral-lt); border:2px solid var(--coral); border-radius:8px; padding:0.35rem 1rem; font-family:var(--ff-head); font-size:0.85rem; font-weight:700; color:#c2410c; letter-spacing:0.05em; text-transform:uppercase; }
+
+  /* Section header */
+  .section-hd { display:flex; align-items:center; gap:0.55rem; margin:1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size:1.25rem; }
+  .section-hd h2 { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; color:var(--ink); }
+  .badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:2px 9px; border-radius:20px; margin-left:auto; }
+  .badge-blue   { background:var(--blue-lt);   color:var(--blue);   border:1px solid var(--blue-md); }
+  .badge-coral  { background:var(--coral-lt);  color:#c2410c;       border:1px solid #fca5a5; }
+  .badge-green  { background:var(--green-lt);  color:var(--green);  border:1px solid #86efac; }
+  .badge-purple { background:var(--purple-lt); color:var(--purple); border:1px solid #c4b5fd; }
+  .badge-sand   { background:var(--sand-lt);   color:#92400e;       border:1px solid #fcd34d; }
+
+  /* Answer table */
+  .ans-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom:0.5rem; }
+  .ans-table thead tr { background:linear-gradient(135deg,var(--blue),#1d4ed8); color:white; }
+  .ans-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .ans-table thead th:first-child { border-radius:8px 0 0 0; }
+  .ans-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .ans-table tbody tr:nth-child(even) { background:var(--blue-lt); }
+  .ans-table tbody tr:nth-child(odd)  { background:white; }
+  .ans-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .ans-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--blue); width:6%; text-align:center; font-size:0.9rem; }
+  .ans-table tbody td.answer { font-family:var(--ff-head); font-weight:700; color:var(--green); font-size:0.92rem; white-space:nowrap; }
+  .ans-table tbody td.work { font-size:0.78rem; color:var(--muted); line-height:1.6; }
+  .ans-table tbody tr:last-child td { border-bottom:none; }
+
+  /* MC answer table */
+  .mc-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  .mc-table thead tr { background:linear-gradient(135deg,var(--purple),#5b21b6); color:white; }
+  .mc-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .mc-table thead th:first-child { border-radius:8px 0 0 0; }
+  .mc-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .mc-table tbody tr:nth-child(even) { background:var(--purple-lt); }
+  .mc-table tbody tr:nth-child(odd)  { background:white; }
+  .mc-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .mc-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--purple); width:6%; text-align:center; font-size:0.9rem; }
+  .mc-table tbody td.answer { font-family:var(--ff-head); font-weight:800; color:var(--green); font-size:1rem; }
+  .mc-table tbody td.skill { font-size:0.78rem; color:var(--blue); font-weight:700; }
+  .mc-table tbody td.explain { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .mc-table tbody tr:last-child td { border-bottom:none; }
+
+  /* Level pill */
+  .lvl { display:inline-block; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:1px 8px; border-radius:20px; vertical-align:middle; margin-left:0.3rem; }
+  .lvl-2 { background:#fef9c3; color:#92400e; }
+  .lvl-3 { background:#fee2e2; color:#b91c1c; }
+  .lvl-4 { background:#ede9fe; color:#5b21b6; }
+
+  hr.divider { border:none; border-top:2px dashed var(--border); margin:1.4rem 0; }
+
+  .print-btn { display:block; width:fit-content; margin:0 auto 1rem; background:var(--coral); color:white; font-family:var(--ff-head); font-size:1rem; font-weight:600; padding:0.55rem 1.6rem; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 10px rgba(249,112,102,0.3); transition:background 0.2s; }
+  .print-btn:hover { background:#e05a50; }
+
+  .note-box { background:var(--sand-lt); border:1.5px solid var(--sand); border-radius:10px; padding:0.7rem 1rem; margin-bottom:1.2rem; font-size:0.8rem; color:#78350f; font-weight:600; line-height:1.6; }
+  .note-box strong { color:#92400e; }
+
+  /* Score guide table */
+  .score-table { width:100%; border-collapse:collapse; font-size:0.82rem; margin-top:0.5rem; }
+  .score-table thead tr { background:linear-gradient(135deg,var(--coral),#e05a50); color:white; }
+  .score-table thead th { padding:0.45rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.78rem; text-align:left; }
+  .score-table thead th:first-child { border-radius:8px 0 0 0; }
+  .score-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .score-table tbody tr:nth-child(even) { background:var(--coral-lt); }
+  .score-table tbody tr:nth-child(odd)  { background:white; }
+  .score-table tbody td { padding:0.4rem 0.8rem; border-bottom:1px solid #fca5a5; color:var(--slate); font-weight:500; vertical-align:top; font-size:0.78rem; }
+  .score-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:#c2410c; width:18%; }
+  .score-table tbody tr:last-child td { border-bottom:none; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div>
+      <h1>✅ Week 3 Answer Sheet</h1>
+      <div class="subtitle">Measurement: Circles &amp; Surface Area · SHSAT Prep</div>
+    </div>
+    <div class="confidential">🔒 Tutor Copy</div>
+  </div>
+
+  <div class="note-box">
+    <strong>Tutor Note:</strong> Share only after the student has submitted their homework. Answers marked with ⚠️ are common error spots — check the work method, not just the final number. For L3/L4 problems, award partial credit if the setup and formula are correct. All circle answers should be left in terms of π unless the problem specifies otherwise.
+  </div>
+
+  <!-- PART A: CIRCLES -->
+  <div class="section-hd">
+    <span class="icon">⭕</span>
+    <h2>Part A — Circles: Circumference &amp; Area (Problems 1–6)</h2>
+    <span class="badge badge-blue">6 pts</span>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr><th>#</th><th>Problem</th><th>Answer</th><th>Key Work / Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Circumference, r = 7 m <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">14π m</td>
+        <td class="work">C = 2πr = 2 × π × 7 = 14π m</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Area, diameter = 18 ft <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">81π ft²</td>
+        <td class="work">r = 18 ÷ 2 = 9 ft &nbsp;→ A = πr² = π × 9² = 81π ft² &nbsp;⚠️ Watch: using d instead of r in the formula</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>C = 20π → find area <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">100π cm²</td>
+        <td class="work">Step 1: C = 2πr → 20π = 2πr → r = 10 cm &nbsp;| &nbsp;Step 2: A = π × 10² = 100π cm² &nbsp;⚠️ Watch: squaring before finding r</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Annulus: outer D=16, inner r=3 <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">55π cm²</td>
+        <td class="work">Outer R = 16 ÷ 2 = 8 cm &nbsp;→ Shaded A = π(8²) − π(3²) = 64π − 9π = 55π cm² &nbsp;⚠️ Watch: forgetting to halve D for the outer radius</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Sector area: 90°, r = 10 ft <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">25π ft²</td>
+        <td class="work">A = (90/360) × π × 10² = ¼ × 100π = 25π ft²</td>
+      </tr>
+      <tr>
+        <td>6a</td>
+        <td>Arc length: 120°, r = 9 cm <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">6π cm</td>
+        <td class="work">Arc = (120/360) × 2π × 9 = ⅓ × 18π = 6π cm</td>
+      </tr>
+      <tr>
+        <td>6b</td>
+        <td>Sector perimeter: arc + 2 radii <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">(6π + 18) cm</td>
+        <td class="work">Perimeter = arc + r + r = 6π + 9 + 9 = (6π + 18) cm &nbsp;⚠️ Watch: forgetting to add the two straight sides</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- PART B: SURFACE AREA -->
+  <div class="section-hd">
+    <span class="icon">📦</span>
+    <h2>Part B — Surface Area (Problems 7–12)</h2>
+    <span class="badge badge-sand">6 pts</span>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr><th>#</th><th>Problem</th><th>Answer</th><th>Key Work / Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>7</td>
+        <td>SA of cube, s = 8 in <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">384 in²</td>
+        <td class="work">SA = 6s² = 6 × 8² = 6 × 64 = 384 in²</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>SA of prism: l=6, w=4, h=5 cm <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">148 cm²</td>
+        <td class="work">SA = 2lw + 2lh + 2wh = 2(6×4) + 2(6×5) + 2(4×5) = 48 + 60 + 40 = 148 cm²</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Open-top box: l=10, w=6, h=4 in <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">188 in²</td>
+        <td class="work">Bottom: 10×6=60 &nbsp;| &nbsp;2 long sides: 2×(10×4)=80 &nbsp;| &nbsp;2 short sides: 2×(6×4)=48 &nbsp;→ Total = 60+80+48 = 188 in² &nbsp;⚠️ Watch: including the missing top face</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Painting room: l=14, w=10, h=8; 4 walls + ceiling, 50 ft²/can <span class="lvl lvl-4">L4</span></td>
+        <td class="answer">8 cans</td>
+        <td class="work">Ceiling: 14×10 = 140 ft² &nbsp;| &nbsp;4 walls: 2(14×8)+2(10×8) = 224+160 = 384 ft² &nbsp;→ Total = 524 ft² &nbsp;→ 524 ÷ 50 = 10.48 → round UP → 11 cans &nbsp;⚠️ Always round UP for paint cans</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Circular track d=400 m, 3 laps <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">1200π m ≈ 3,768 m</td>
+        <td class="work">1 lap = C = πd = 400π m &nbsp;→ 3 laps = 3 × 400π = 1200π m &nbsp;≈ 1200 × 3.14 = 3,768 m</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Open-top aquarium: l=24, w=12, h=16; drain r=1.5 in <span class="lvl lvl-4">L4</span></td>
+        <td class="answer">(1200 − 2.25π) in²</td>
+        <td class="work">Open-top SA: 24×12 + 2(24×16) + 2(12×16) = 288 + 768 + 384 = 1440 in² &nbsp;| &nbsp;Drain: π(1.5²) = 2.25π in² &nbsp;→ Glass = (1440 − 2.25π) in² &nbsp;⚠️ Watch: using full SA instead of open-top</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div><!-- /sheet 1 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — ELA ANSWERS
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- PART C1: ELA PASSAGE 1 -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA Passage 1: Author's Purpose &amp; Tone (Q1–Q6)</h2>
+    <span class="badge badge-purple">6 pts</span>
+  </div>
+  <p style="font-size:0.78rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem;">Passage: <em>"The Hidden Circle: How Geometry Shapes the Way We Build"</em></p>
+
+  <table class="mc-table">
+    <thead>
+      <tr><th>Q#</th><th>Skill</th><th>Answer</th><th>Why This Answer / Tutor Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Q1</td>
+        <td class="skill">Author's Purpose</td>
+        <td class="answer">B</td>
+        <td class="explain">The passage consistently argues the circle is chosen for functional reasons across architecture, biology, and design — this is a persuasive/explanatory purpose. (A) is too narrow; (C) misreads the Snow example; (D) is only one paragraph.</td>
+      </tr>
+      <tr>
+        <td>Q2</td>
+        <td class="skill">Hook / Purpose of Example</td>
+        <td class="answer">A</td>
+        <td class="explain">Snow's cholera map is a real-world, life-saving application of circle geometry (radius, distance from center). The author uses it to hook the reader by proving geometry isn't just academic. ⚠️ Watch: (C) confuses entertainment with purpose.</td>
+      </tr>
+      <tr>
+        <td>Q3</td>
+        <td class="skill">Signal Words</td>
+        <td class="answer">A</td>
+        <td class="explain">"Makes it uniquely suited to" means the property described (equal distances from center) causes the circle to work well for those tasks — classic cause-effect. (B) contrast would require a word like "however"; (C) sequence needs "first/then".</td>
+      </tr>
+      <tr>
+        <td>Q4</td>
+        <td class="skill">Author's Tone</td>
+        <td class="answer">B</td>
+        <td class="explain">¶5 says students learning formulas are "learning to read the language that nature uses when it is in perfect balance" — this is clearly inspiring/encouraging, elevating routine learning to something meaningful. (A), (C), (D) all contradict the warmth of this framing.</td>
+      </tr>
+      <tr>
+        <td>Q5</td>
+        <td class="skill">Text Structure</td>
+        <td class="answer">B</td>
+        <td class="explain">¶1 = hook (Snow), ¶2 = circle's defining property, ¶3 = contrast (when circles are NOT used), ¶4 = examples where circles are the only choice, ¶5 = student relevance. This matches "hook → property → contrast → examples → relevance." (A) chronological only partially fits.</td>
+      </tr>
+      <tr>
+        <td>Q6</td>
+        <td class="skill">Evidence Evaluation</td>
+        <td class="answer">C</td>
+        <td class="explain">¶4 explicitly states: "The circle, in these cases, was not decorative. It was the only shape that would work." This directly contradicts the student's claim. (B) is wrong because ¶4 makes no mention of aesthetics at all. ⚠️ This is a classic SHSAT trap — always re-read the paragraph before choosing.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- PART C2: ELA PASSAGE 2 -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C2 — ELA Passage 2: Inference &amp; Evidence (Q7–Q12)</h2>
+    <span class="badge badge-purple">6 pts</span>
+  </div>
+  <p style="font-size:0.78rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem;">Passage: <em>"Circles in Nature: Why the Universe Prefers Curves"</em></p>
+
+  <table class="mc-table">
+    <thead>
+      <tr><th>Q#</th><th>Skill</th><th>Answer</th><th>Why This Answer / Tutor Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Q7</td>
+        <td class="skill">Central Claim</td>
+        <td class="answer">B</td>
+        <td class="explain">¶5 directly states the central claim: "the circle is the shape of equilibrium" and it appears throughout nature whenever forces balance perfectly. (A) is about man-made shapes — the passage is about nature. (C) and (D) are supporting details, not the main claim.</td>
+      </tr>
+      <tr>
+        <td>Q8</td>
+        <td class="skill">Signal Words</td>
+        <td class="answer">C</td>
+        <td class="explain">"As a result" is a cause-effect signal. The previous sentence describes equal tension pulling inward → As a result, the bubble takes the shape that minimizes surface area. (A) contrast = "however/but"; (B) definition = "which means"; (D) sequence = "then/next".</td>
+      </tr>
+      <tr>
+        <td>Q9</td>
+        <td class="skill">Factual Inference (¶3)</td>
+        <td class="answer">B</td>
+        <td class="explain">¶3 directly states Kepler was thrilled because "the ellipse is still a close cousin of the circle, and its mathematical properties are just as elegant." (A) and (C) are not stated in the text. (D) is the opposite of the passage's suggestion — ellipses are more complex, not simpler.</td>
+      </tr>
+      <tr>
+        <td>Q10</td>
+        <td class="skill">Author's Tone</td>
+        <td class="answer">B</td>
+        <td class="explain">¶5 frames formula-learning as "learning to read the language that nature uses when it is in perfect balance" — inspiring and elevating. (A) is wrong: the author says students are NOT just memorizing. (C) and (D) contradict the warm, motivational register of the paragraph.</td>
+      </tr>
+      <tr>
+        <td>Q11</td>
+        <td class="skill">Best Evidence</td>
+        <td class="answer">C</td>
+        <td class="explain">The strongest evidence for "nature's default shape" comes from multiple concrete natural examples (soap bubbles, blood cells, tree rings, iris) all caused by equal forces — this directly supports the claim with physical evidence from the natural world. (A) is about children's drawings (human behavior, not nature). (B) actually introduces an exception (ellipses). (D) is naming a mathematical property, not proving the claim.</td>
+      </tr>
+      <tr>
+        <td>Q12</td>
+        <td class="skill">Multi-Paragraph Evidence Eval.</td>
+        <td class="answer">B</td>
+        <td class="explain">¶3 does show an imperfection (orbits are ellipses, not perfect circles) — so the student's claim is partially supported. However, ¶5 argues that geometry still captures nature's equilibrium principle perfectly, which contradicts the claim's full scope. (A) overstates; (C) ignores ¶3's concession about ellipses; (D) is factually wrong — both paragraphs are highly relevant. ⚠️ This is the highest-difficulty question — reward students who cite both paragraphs.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- SCORE GUIDE -->
+  <div class="section-hd">
+    <span class="icon">📊</span>
+    <h2>Score Guide &amp; Tutor Action Plan</h2>
+    <span class="badge badge-coral">Session Prep</span>
+  </div>
+
+  <table class="score-table">
+    <thead>
+      <tr><th>Section</th><th>Points</th><th>Score Benchmark</th><th>If Student Scores Below…</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Part A (Circles)</td>
+        <td>/ 6</td>
+        <td>5–6 = Strong &nbsp;|&nbsp; 3–4 = Review formula setup &nbsp;|&nbsp; &lt;3 = Re-teach C and A from scratch</td>
+        <td>3 → start session with formula drill: C vs. A, r vs. d</td>
+      </tr>
+      <tr>
+        <td>Part B (SA)</td>
+        <td>/ 6</td>
+        <td>5–6 = Strong &nbsp;|&nbsp; 3–4 = Check face-counting method &nbsp;|&nbsp; &lt;3 = Re-teach net diagram approach</td>
+        <td>3 → draw the net together in session before re-solving</td>
+      </tr>
+      <tr>
+        <td>Part C1 (ELA 1)</td>
+        <td>/ 6</td>
+        <td>5–6 = Strong &nbsp;|&nbsp; 3–4 = Review signal words &amp; author's purpose &nbsp;|&nbsp; &lt;3 = Re-teach passage annotation</td>
+        <td>3 → signal word matching drill at start of ELA block</td>
+      </tr>
+      <tr>
+        <td>Part C2 (ELA 2)</td>
+        <td>/ 6</td>
+        <td>5–6 = Strong &nbsp;|&nbsp; 3–4 = Review evidence-based inference &nbsp;|&nbsp; &lt;3 = Re-teach claim vs. evidence distinction</td>
+        <td>3 → practice identifying "what the text says" vs. "what student assumes"</td>
+      </tr>
+      <tr>
+        <td><strong>Total</strong></td>
+        <td><strong>/ 24</strong></td>
+        <td>20–24 = Excellent &nbsp;|&nbsp; 15–19 = On track &nbsp;|&nbsp; &lt;15 = Needs re-teach before Week 4</td>
+        <td>&lt;15 → spend 10 extra min reviewing error log before new content</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 3 · SHSAT Prep &nbsp;·&nbsp; ⭕ Circles &amp; Surface Area &nbsp;|&nbsp; 📖 ELA: Author's Purpose &amp; Inference &nbsp;·&nbsp; 🔒 Tutor Copy
+  </div>
+
+</div><!-- /sheet 2 -->
+
+</body>
+</html>
