@@ -1,1 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Homework · L4 Surface Area Word Problems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #2563EB; --blue-lt: #EFF6FF; --blue-md: #BFDBFE;
+  --coral: #F97066; --coral-lt: #FFF1F0;
+  --sand: #D4A574; --sand-lt: #FDF3E7;
+  --green: #16a34a; --green-lt: #DCFCE7;
+  --purple: #7c3aed; --purple-lt: #EDE9FE;
+  --ink: #0f172a; --slate: #334155; --muted: #64748b;
+  --border: #CBD5E1; --bg: #F8FAFF; --white: #FFFFFF;
+  --ff-head: Fredoka, sans-serif; --ff-body: Nunito, sans-serif;
+}
+html { background: #e2e8f0; }
+body { font-family: var(--ff-body); color: var(--ink); background: var(--bg); max-width: 860px; margin: 0 auto; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
+@media print {
+  input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+  textarea { resize: none !important; }
+  html { background: white; }
+  body { max-width: 100%; padding: 0; }
+  .no-print { display: none !important; }
+  .page-break { page-break-before: always; }
+  .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+}
+
+.sheet { background: var(--white); margin: 2rem auto; padding: 2.2rem 2.4rem; box-shadow: 0 4px 24px rgba(37,99,235,0.10); border-radius: 16px; }
+
+/* Header */
+.hw-header { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 1rem; border-bottom: 3px solid var(--blue); margin-bottom: 1.4rem; gap: 1rem; flex-wrap: wrap; }
+.hw-header-left h1 { font-family: var(--ff-head); font-size: 1.75rem; font-weight: 700; color: var(--blue); line-height: 1.1; }
+.hw-header-left .subtitle { font-size: 0.85rem; color: var(--muted); font-weight: 600; margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+.hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+.hw-meta-row .label { background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px; font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; min-width: 65px; text-align: center; }
+
+/* Score banner */
+.score-banner { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem; }
+.score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+.score-banner .sub { font-size: 0.78rem; opacity: 0.85; }
+.score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+.score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+.score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Section header */
+.section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+.section-hd .icon { font-size: 1.25rem; }
+.section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+.section-hd .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 9px; border-radius: 20px; margin-left: auto; }
+.badge-blue { background: var(--blue-lt); color: var(--blue); border: 1px solid var(--blue-md); }
+.badge-sand { background: var(--sand-lt); color: #92400e; border: 1px solid #fcd34d; }
+
+/* Instruction strip */
+.instr { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem; padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; }
+
+/* Level pills */
+.lvl { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
+.lvl-4 { background: #6b7280; color: #ffffff; }
+
+/* Formula strip */
+.formula-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md); border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center; }
+.formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+.fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+
+/* Problem cards */
+.prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.prob-grid.single { grid-template-columns: 1fr; }
+.prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+.prob.acc1 { border-left: 4px solid #374151; }
+.prob.acc2 { border-left: 4px solid #4b5563; }
+.prob.acc3 { border-left: 4px solid #6b7280; }
+.prob.acc4 { border-left: 4px solid #F97066; }
+.prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+.prob-q strong { color: #374151; }
+.work-area { width: 100%; resize: vertical; min-height: 80px; border: 1.5px dashed var(--border); border-radius: 6px; background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink); box-sizing: border-box; outline: none; margin-top: 0.4rem; }
+.work-area::placeholder { color: var(--muted); font-style: italic; }
+.answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+.answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.2rem; }
+
+/* SVG diagrams */
+.fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+.fig svg { overflow: visible; }
+.fig svg text { font-family: Nunito, sans-serif; paint-order: stroke fill; stroke: white; stroke-width: 3px; stroke-linejoin: round; }
+
+/* Divider */
+hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+
+/* Error log */
+.error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+.error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+.error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+.error-table th:first-child { border-radius: 6px 0 0 0; }
+.error-table th:last-child { border-radius: 0 6px 0 0; }
+.error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+.error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+.error-table tr:last-child td { border-bottom: none; }
+.error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+.pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+.pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+.pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+.pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+/* Reflection */
+.reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+.reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+.reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+.reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+.reflect-line input[type=text] { flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
+
+/* Print button */
+.print-btn { display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white; font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s; }
+.print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0">🖨 Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b">Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>Week 4 Homework</h1>
+      <div class="subtitle">Surface Area Word Problems &nbsp;·&nbsp; SHSAT Prep &nbsp;·&nbsp; <span class="lvl lvl-4">L4</span></div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Session</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px" placeholder="Week 4 · L4 SA"></div>
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="5" style="width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none" placeholder=""></div>
+        <div class="sc-lbl">/ 5 Problems</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">L4 Pattern</span>
+    <span class="fml">① MAP faces</span>
+    <span class="fml">② CALCULATE each</span>
+    <span class="fml">③ ADD or SUBTRACT</span>
+    <span class="fml">④ ANSWER the question — round UP for cans/rolls</span>
+  </div>
+  <div class="formula-strip" style="margin-top:-0.4rem">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">SA full box = 2lw + 2lh + 2wh</span>
+    <span class="fml">Open top → subtract one lw</span>
+    <span class="fml">Circle hole → subtract πr²</span>
+    <span class="fml">r = d ÷ 2</span>
+  </div>
+
+  <!-- ── P1 L4 Paint a gym (walls + ceiling) ── -->
+  <div class="section-hd">
+    <span class="icon">🎨</span>
+    <h2>Problem 1 <span class="lvl lvl-4">L4</span></h2>
+    <span class="badge badge-sand">Walls + Ceiling · Round UP</span>
+  </div>
+  <p class="instr">Identify which faces to include. Calculate each face separately. Divide total area by coverage and round UP.</p>
+
+  <div class="prob acc1" style="margin-bottom:0.9rem">
+    <p class="prob-q">A gym is <strong>30 ft long, 20 ft wide, and 12 ft tall</strong>. You will paint the <strong>4 walls and the ceiling only</strong> — not the floor. Each can of paint covers <strong>75 ft²</strong>. How many cans do you need?</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-top:0.5rem">
+      <div class="fig" style="margin:0">
+        <svg width="185" height="155" viewBox="0 0 185 155">
+          <polygon points="18,18 138,18 138,98 18,98" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="138,18 160,34 160,114 138,98" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="18,18 138,18 160,34 38,34" fill="#bdbdbd" stroke="#374151" stroke-width="2.5"/>
+          <polygon points="18,18 38,34 38,114 18,98" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+          <line x1="18" y1="98" x2="138" y2="98" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="138" y1="98" x2="160" y2="114" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="18" y1="98" x2="38" y2="114" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="38" y1="114" x2="160" y2="114" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="78" y="64" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle">l = 30</text>
+          <text x="12" y="62" font-size="11" font-weight="700" fill="#1f2937" text-anchor="end">h = 12</text>
+          <text x="164" y="112" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w = 20</text>
+          <text x="88" y="28" font-size="9" font-weight="700" fill="#374151" text-anchor="middle">CEILING ✓</text>
+          <text x="88" y="140" font-size="9" font-weight="700" fill="#6b7280" text-anchor="middle">floor — NOT painted</text>
+          <text x="172" y="55" font-size="20">🪣</text>
+          <text x="172" y="72" font-size="8" fill="#6b7280" text-anchor="middle">75 ft²</text>
+          <text x="172" y="82" font-size="8" fill="#6b7280" text-anchor="middle">per can</text>
+        </svg>
+      </div>
+      <div>
+        <textarea class="work-area" style="min-height:110px"></textarea>
+        <div class="answer-box" style="margin-top:0.5rem">Cans needed: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px"> cans</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── P2 L4 Open-top fish tank with drain ── -->
+  <div class="section-hd">
+    <span class="icon">🐟</span>
+    <h2>Problem 2 <span class="lvl lvl-4">L4</span></h2>
+    <span class="badge badge-blue">Open Top · Subtract Circle</span>
+  </div>
+  <p class="instr">No lid — skip the top face. A circular hole is cut into the bottom — subtract that area from the bottom face.</p>
+
+  <div class="prob acc2" style="margin-bottom:0.9rem">
+    <p class="prob-q">An open-top fish tank has <strong>l = 24 in, w = 12 in, h = 16 in</strong>. A circular drain with <strong>radius 1.5 in</strong> is cut into the bottom. How many square inches of <strong>glass</strong> are needed? Leave π in your answer.</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-top:0.5rem">
+      <div class="fig" style="margin:0">
+        <svg width="175" height="165" viewBox="0 0 175 165">
+          <polygon points="20,22 130,22 130,92 20,92" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="130,22 154,40 154,110 130,92" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="20,22 44,40 44,110 20,92" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="20,92 130,92 154,110 44,110" fill="#d4d4d4" stroke="#374151" stroke-width="2"/>
+          <line x1="20" y1="22" x2="130" y2="22" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="130" y1="22" x2="154" y2="40" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="20" y1="22" x2="44" y2="40" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="44" y1="40" x2="154" y2="40" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <ellipse cx="87" cy="101" rx="12" ry="7" fill="white" stroke="#4b5563" stroke-width="2.5"/>
+          <text x="75" y="60" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle">l = 24</text>
+          <text x="14" y="60" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h = 16</text>
+          <text x="158" y="108" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w = 12</text>
+          <text x="75" y="13" font-size="9" font-weight="700" fill="#6b7280" text-anchor="middle">open top ↑</text>
+          <text x="87" y="128" font-size="9" font-weight="700" fill="#4b5563" text-anchor="middle">r = 1.5 in</text>
+          <line x1="87" y1="124" x2="87" y2="110" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <defs><marker id="arr2" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><polygon points="0,0 5,2.5 0,5" fill="#4b5563"/></marker></defs>
+          <text x="87" y="148" font-size="9" fill="#6b7280" text-anchor="middle">subtract drain!</text>
+        </svg>
+      </div>
+      <div>
+        <textarea class="work-area" style="min-height:120px"></textarea>
+        <div class="answer-box" style="margin-top:0.5rem">Glass needed: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px"> in²</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <div style="font-family:var(--ff-head);font-size:1rem;font-weight:700;color:var(--blue);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px dashed var(--border)">
+    Week 4 · L4 Surface Area — continued
+  </div>
+
+  <!-- Formula reminder -->
+  <div class="formula-strip" style="margin-bottom:1.2rem">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">4 walls only = 2lh + 2wh</span>
+    <span class="fml">Open top = SA full box − lw</span>
+    <span class="fml">Hole = subtract πr²</span>
+    <span class="fml">Cans/rolls → always round UP</span>
+  </div>
+
+  <!-- ── P3 L4 Wallpaper a bedroom ── -->
+  <div class="section-hd">
+    <span class="icon">🖼</span>
+    <h2>Problem 3 <span class="lvl lvl-4">L4</span></h2>
+    <span class="badge badge-sand">4 Walls Only · Round UP</span>
+  </div>
+  <p class="instr">Walls only — no floor, no ceiling. Divide total wall area by roll coverage. Fractional rolls still need a full roll!</p>
+
+  <div class="prob acc3" style="margin-bottom:0.9rem">
+    <p class="prob-q">A bedroom is <strong>15 ft long, 12 ft wide, and 9 ft tall</strong>. You will wallpaper the <strong>4 walls only</strong> — not the floor or ceiling. Each roll covers <strong>40 ft²</strong>. How many rolls do you need?</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-top:0.5rem">
+      <div class="fig" style="margin:0">
+        <svg width="185" height="150" viewBox="0 0 185 150">
+          <polygon points="18,18 118,18 118,90 18,90" fill="#efefef" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="118,18 142,36 142,108 118,90" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="18,18 42,36 42,108 18,90" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="18,18 118,18 142,36 42,36" fill="#f5f5f5" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="18" y1="90" x2="118" y2="90" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="118" y1="90" x2="142" y2="108" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="18" y1="90" x2="42" y2="108" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="42" y1="108" x2="142" y2="108" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="68" y="58" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">l = 15</text>
+          <text x="14" y="57" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h = 9</text>
+          <text x="146" y="104" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w = 12</text>
+          <text x="80" y="28" font-size="9" font-weight="700" fill="#6b7280" text-anchor="middle">ceiling</text>
+          <text x="80" y="125" font-size="9" font-weight="700" fill="#6b7280" text-anchor="middle">floor</text>
+          <text x="160" y="52" font-size="20">🗞</text>
+          <text x="163" y="69" font-size="8" fill="#6b7280" text-anchor="middle">40 ft²</text>
+          <text x="163" y="79" font-size="8" fill="#6b7280" text-anchor="middle">per roll</text>
+        </svg>
+      </div>
+      <div>
+        <textarea class="work-area" style="min-height:100px"></textarea>
+        <div class="answer-box" style="margin-top:0.5rem">Rolls needed: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px"> rolls</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── P4 L4 Open-top sandbox with drain ── -->
+  <div class="section-hd">
+    <span class="icon">🏖</span>
+    <h2>Problem 4 <span class="lvl lvl-4">L4</span></h2>
+    <span class="badge badge-blue">Open Top · Subtract Circle</span>
+  </div>
+  <p class="instr">Same pattern as Problem 2 — no lid, circular hole in the bottom. Watch the difference: this time you're given the diameter, not the radius.</p>
+
+  <div class="prob acc4" style="margin-bottom:0.9rem">
+    <p class="prob-q">An open-top sandbox has <strong>l = 18 in, w = 10 in, h = 6 in</strong>. A circular drainage hole with <strong>diameter 4 in</strong> is cut into the bottom. How many square inches of wood are needed? Leave π in your answer.</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-top:0.5rem">
+      <div class="fig" style="margin:0">
+        <svg width="170" height="160" viewBox="0 0 170 160">
+          <polygon points="20,24 128,24 128,90 20,90" fill="#ebebeb" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="128,24 152,42 152,108 128,90" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="20,24 44,42 44,108 20,90" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="20,90 128,90 152,108 44,108" fill="#d4d4d4" stroke="#374151" stroke-width="2"/>
+          <line x1="20" y1="24" x2="128" y2="24" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="128" y1="24" x2="152" y2="42" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="20" y1="24" x2="44" y2="42" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="44" y1="42" x2="152" y2="42" stroke="#374151" stroke-width="2" stroke-dasharray="6,3"/>
+          <ellipse cx="86" cy="99" rx="12" ry="7" fill="white" stroke="#4b5563" stroke-width="2.5"/>
+          <!-- diameter line across drain -->
+          <line x1="74" y1="99" x2="98" y2="99" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="3,2"/>
+          <text x="75" y="60" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">l = 18</text>
+          <text x="14" y="60" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h = 6</text>
+          <text x="156" y="106" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w = 10</text>
+          <text x="75" y="14" font-size="9" font-weight="700" fill="#6b7280" text-anchor="middle">open top ↑</text>
+          <text x="86" y="90" font-size="9" font-weight="700" fill="#4b5563" text-anchor="middle">d = 4</text>
+          <text x="86" y="128" font-size="9" fill="#6b7280" text-anchor="middle">find r first!</text>
+        </svg>
+      </div>
+      <div>
+        <textarea class="work-area" style="min-height:120px"></textarea>
+        <div class="answer-box" style="margin-top:0.5rem">Wood needed: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px"> in²</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── P5 L4 Multi-twist: open top + missing wall + two cans needed ── -->
+  <div class="section-hd">
+    <span class="icon">🧩</span>
+    <h2>Problem 5 <span class="lvl lvl-4">L4</span></h2>
+    <span class="badge badge-sand">Multi-Twist · Read Carefully</span>
+  </div>
+  <p class="instr">This problem has TWO twists. Map all the faces that exist first — then calculate. Read the question at the end carefully before answering.</p>
+
+  <div class="prob acc1">
+    <p class="prob-q">A storage shed is <strong>20 ft long, 10 ft wide, and 10 ft tall</strong>. The shed has <strong>no floor</strong> (it sits on concrete) and <strong>one wall is left open</strong> as an entrance (one of the 20 ft × 10 ft walls). You will paint all remaining surfaces. Each can covers <strong>60 ft²</strong>. How many cans do you need?</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;margin-top:0.5rem">
+      <div class="fig" style="margin:0">
+        <svg width="200" height="175" viewBox="0 0 200 175">
+          <!-- back wall -->
+          <polygon points="18,18 138,18 138,98 18,98" fill="#f0f0f0" stroke="#374151" stroke-width="1.5"/>
+          <!-- right wall (short) -->
+          <polygon points="138,18 162,36 162,114 138,98" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <!-- ceiling -->
+          <polygon points="18,18 138,18 162,36 38,36" fill="#bdbdbd" stroke="#374151" stroke-width="2"/>
+          <!-- left wall (short) -->
+          <polygon points="18,18 38,36 38,114 18,98" fill="#e8e8e8" stroke="#374151" stroke-width="1.5"/>
+          <!-- front wall OPEN — dashed outline only -->
+          <line x1="18" y1="98" x2="138" y2="98" stroke="#F97066" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="138" y1="98" x2="162" y2="114" stroke="#F97066" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="18" y1="98" x2="38" y2="114" stroke="#F97066" stroke-width="2" stroke-dasharray="6,3"/>
+          <line x1="38" y1="114" x2="162" y2="114" stroke="#F97066" stroke-width="2" stroke-dasharray="6,3"/>
+          <!-- floor dashed not painted -->
+          <line x1="18" y1="98" x2="138" y2="98" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="78" y="62" font-size="11" font-weight="700" fill="#1f2937" text-anchor="middle">l = 20</text>
+          <text x="12" y="62" font-size="10" font-weight="700" fill="#1f2937" text-anchor="end">h = 10</text>
+          <text x="166" y="112" font-size="10" font-weight="700" fill="#1f2937" text-anchor="start">w = 10</text>
+          <text x="88" y="28" font-size="9" font-weight="700" fill="#374151" text-anchor="middle">ceiling ✓</text>
+          <text x="88" y="160" font-size="9" font-weight="700" fill="#F97066" text-anchor="middle">front wall OPEN ✗</text>
+          <text x="88" y="148" font-size="8" fill="#6b7280" text-anchor="middle">floor also OPEN ✗</text>
+          <text x="180" y="55" font-size="18">🪣</text>
+          <text x="183" y="70" font-size="8" fill="#6b7280" text-anchor="middle">60 ft²</text>
+        </svg>
+      </div>
+      <div>
+        <textarea class="work-area" style="min-height:140px"></textarea>
+        <div class="answer-box" style="margin-top:0.5rem">Cans needed: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px"> cans</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sheet 2 -->
+
+
+<!-- PAGE 3 — ERROR LOG + REFLECTION -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">🔍</span>
+    <h2>Error Log</h2>
+    <span class="badge badge-sand">Required — Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be specific about what step tripped you up.</p>
+
+  <div class="error-log">
+    <h3>My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem">Label each error →</span>
+      <span class="pill pill-cg">Content Gap — didn't know how</span>
+      <span class="pill pill-ce">Careless — knew it but slipped up</span>
+      <span class="pill pill-ru">Rushing — didn't read carefully</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem">
+      <thead><tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%">Error Type</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-height:1.5rem;min-width:60px"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td><td contenteditable="true" style="outline:none;min-height:1.5rem"> </td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✏️ Weekly Reflection</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest mistake this week was <input type="text" placeholder=""></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="Content Gap / Careless / Rushing"></div>
+      <div class="reflect-line">The L4 step I need to practice most is <input type="text" placeholder="e.g. mapping faces, subtracting the hole, rounding UP"></div>
+      <div class="reflect-line">One thing I want to ask in session: <input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600">
+    Week 4 · SHSAT Prep &nbsp;·&nbsp; L4 Surface Area Word Problems
+  </div>
+
+</div><!-- /sheet 3 -->
+
+<script>
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text], input[type=number], textarea').forEach(el => el.value = '');
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; });
+  });
+});
+</script>
+</body>
+</html>
