@@ -72,12 +72,16 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
 .work-box textarea:focus{background:rgba(0,0,0,0.03);}
 
 /* MC answer options */
-.mc-options{display:flex;flex-direction:column;gap:0.25rem;margin-top:0.35rem;}
-.mc-option{display:flex;align-items:flex-start;gap:0.45rem;padding:0.3rem 0.5rem;border-radius:6px;border:1.5px solid rgba(0,0,0,0.10);background:#fafafa;cursor:pointer;font-size:0.78rem;color:#374151;transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-options{display:flex;flex-direction:column;gap:0.18rem;margin-top:0.3rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.45rem;padding:0.22rem 0.5rem;border-radius:6px;border:1.5px solid rgba(0,0,0,0.10);background:#fafafa;cursor:pointer;font-size:0.74rem;line-height:1.35;color:#374151;transition:background 0.15s,border-color 0.15s;user-select:none;}
 .mc-option:hover{background:#f0f0f0;border-color:rgba(0,0,0,0.20);}
 .mc-option input[type=radio]{display:none;}
 .mc-option.selected{background:#e5e7eb;border-color:#374151;font-weight:700;}
 .mc-option .opt-letter{font-weight:800;min-width:1rem;color:#6b7280;}
+
+/* ── Compact fit for the dense poem slide ── */
+.slide[data-slide="15"] .mc-option{font-size:0.72rem;padding:0.18rem 0.5rem;}
+.slide[data-slide="15"] .prob-card{padding:0.55rem 0.8rem;}
 
 /* ── SVG label legibility ── */
 .diagram-wrap svg text {
@@ -170,7 +174,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
         <svg viewBox="0 0 320 275" width="100%" height="235" role="img" aria-label="Four angle diagrams: acute less than 90, right equals 90, obtuse between 90 and 180, straight equals 180">
           <!-- ACUTE (top-left) -->
           <line x1="20" y1="120" x2="80" y2="120" stroke="#374151" stroke-width="2.5"/>
-          <line x1="20" y1="120" x2="55" y2="75" stroke="#374151" stroke-width="2.5"/>
+          <line x1="20" y1="120" x2="75" y2="74" stroke="#374151" stroke-width="2.5"/>
           <text x="54" y="96" font-size="13" font-weight="700" fill="#374151">40°</text>
           <text x="50" y="140" font-size="13" font-weight="800" fill="#111827" text-anchor="middle">ACUTE</text>
           <text x="50" y="154" font-size="11" fill="#64748b" text-anchor="middle">&lt; 90°</text>
@@ -183,9 +187,9 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
           <text x="205" y="154" font-size="11" fill="#64748b" text-anchor="middle">= 90° exactly</text>
 
           <!-- OBTUSE (bottom-left) -->
-          <line x1="20" y1="220" x2="100" y2="220" stroke="#374151" stroke-width="2.5"/>
-          <line x1="20" y1="220" x2="70" y2="185" stroke="#374151" stroke-width="2.5"/>
-          <text x="55" y="204" font-size="13" font-weight="700" fill="#374151">120°</text>
+          <line x1="45" y1="220" x2="125" y2="220" stroke="#374151" stroke-width="2.5"/>
+          <line x1="45" y1="220" x2="13" y2="164" stroke="#374151" stroke-width="2.5"/>
+          <text x="58" y="200" font-size="13" font-weight="700" fill="#374151">120°</text>
           <text x="60" y="245" font-size="13" font-weight="800" fill="#111827" text-anchor="middle">OBTUSE</text>
           <text x="60" y="258" font-size="11" fill="#64748b" text-anchor="middle">90° – 180°</text>
 
@@ -301,13 +305,13 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
           <circle cx="150" cy="130" r="5" fill="#1f2937"/>
           <!-- Arcs for each angle -->
           <!-- Angle a (top) -->
-          <text x="163" y="102" font-size="15" font-weight="800" fill="#374151">a</text>
+          <text x="150" y="100" font-size="15" font-weight="800" fill="#374151" text-anchor="middle">a</text>
           <!-- Angle c (bottom) — vertical to a -->
-          <text x="124" y="165" font-size="15" font-weight="800" fill="#374151">c</text>
+          <text x="150" y="175" font-size="15" font-weight="800" fill="#374151" text-anchor="middle">c</text>
           <!-- Angle b (right) -->
-          <text x="173" y="112" font-size="15" font-weight="800" fill="#4b5563">b</text>
+          <text x="205" y="136" font-size="15" font-weight="800" fill="#4b5563" text-anchor="middle">b</text>
           <!-- Angle d (left) — vertical to b -->
-          <text x="115" y="154" font-size="15" font-weight="800" fill="#4b5563">d</text>
+          <text x="95" y="136" font-size="15" font-weight="800" fill="#4b5563" text-anchor="middle">d</text>
           <!-- Labels -->
           <text x="150" y="20" font-size="14" font-weight="700" fill="#374151" text-anchor="middle">Vertical angles: a = c, b = d</text>
           <text x="150" y="250" font-size="13" fill="#64748b" text-anchor="middle">Adjacent: a + b = 180° (straight line)</text>
@@ -370,8 +374,8 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
             <line x1="15" y1="30" x2="145" y2="110" stroke="#374151" stroke-width="2.5"/>
             <line x1="145" y1="30" x2="15" y2="110" stroke="#4b5563" stroke-width="2.5"/>
             <circle cx="80" cy="70" r="4" fill="#1f2937"/>
-            <text x="92" y="48" font-size="11" font-weight="700" fill="#374151">(3x+10)°</text>
-            <text x="6" y="96" font-size="11" font-weight="700" fill="#4b5563">(2x+40)°</text>
+            <text x="80" y="48" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">(3x+10)°</text>
+            <text x="80" y="104" font-size="11" font-weight="700" fill="#4b5563" text-anchor="middle">(2x+40)°</text>
             <text x="80" y="130" font-size="11" fill="#64748b" text-anchor="middle">Find x, then each angle</text>
           </svg>
         </div>
@@ -383,19 +387,18 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
       <div class="prob-card reveal">
         <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 3</span><span class="lvl-badge lvl-4">L4</span></div>
         <div class="diagram-wrap" style="margin-bottom:0.5rem;">
-          <svg viewBox="0 0 160 130" width="100%" height="115" aria-label="Three angles on a straight line: x, 2x, and 3x plus 12">
-            <line x1="10" y1="90" x2="150" y2="90" stroke="#374151" stroke-width="2.5"/>
-            <line x1="55" y1="90" x2="45" y2="30" stroke="#4b5563" stroke-width="2"/>
-            <line x1="95" y1="90" x2="120" y2="25" stroke="#374151" stroke-width="2"/>
-            <circle cx="55" cy="90" r="3" fill="#374151"/>
-            <circle cx="95" cy="90" r="3" fill="#374151"/>
-            <text x="32" y="70" font-size="11" font-weight="700" fill="#374151">x°</text>
-            <text x="68" y="72" font-size="11" font-weight="700" fill="#4b5563">2x°</text>
-            <text x="100" y="54" font-size="11" font-weight="700" fill="#374151">(3x+12)°</text>
-            <text x="80" y="118" font-size="11" fill="#64748b" text-anchor="middle">Three angles on a straight line</text>
+          <svg viewBox="0 0 160 130" width="100%" height="115" aria-label="Two rays from one point on a straight line forming three angles: x, 2x, and 3x plus 12">
+            <line x1="10" y1="95" x2="150" y2="95" stroke="#374151" stroke-width="2.5"/>
+            <line x1="80" y1="95" x2="27" y2="67" stroke="#4b5563" stroke-width="2"/>
+            <line x1="80" y1="95" x2="74" y2="35" stroke="#374151" stroke-width="2"/>
+            <circle cx="80" cy="95" r="3.5" fill="#374151"/>
+            <text x="38" y="88" font-size="11" font-weight="700" fill="#374151">x°</text>
+            <text x="54" y="62" font-size="11" font-weight="700" fill="#4b5563">2x°</text>
+            <text x="96" y="62" font-size="11" font-weight="700" fill="#374151">(3x+12)°</text>
+            <text x="80" y="118" font-size="11" fill="#64748b" text-anchor="middle">Two rays from one point on a line</text>
           </svg>
         </div>
-        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Three rays meet at points on a straight line forming angles <strong>x°</strong>, <strong>2x°</strong>, and <strong>(3x + 12)°</strong>. All three angles lie on the same side. Find x and then find the largest angle.</div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Two rays extend from the same point on a straight line, forming angles <strong>x°</strong>, <strong>2x°</strong>, and <strong>(3x + 12)°</strong> on one side of the line. Find x and then find the largest angle.</div>
         <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
       </div>
     </div>
@@ -433,7 +436,6 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
           <!-- The three angles "unfolded" -->
           <text x="124" y="40" font-size="12" fill="#4b5563">b</text>
           <text x="174" y="40" font-size="12" fill="#374151">c</text>
-          <text x="148" y="10" font-size="12" fill="#374151">a</text>
           <text x="150" y="250" font-size="13" fill="#64748b" text-anchor="middle">Tear the corners → they always lie flat: a + b + c = 180°</text>
         </svg>
       </div>
@@ -538,7 +540,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
           <svg viewBox="0 0 160 150" width="100%" height="125" aria-label="Triangle with interior angles 4x and 2x plus 10, and exterior angle 4x plus 50">
             <polygon points="70,20 15,125 130,125" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
             <line x1="130" y1="125" x2="155" y2="125" stroke="#374151" stroke-width="2.5"/>
-            <text x="128" y="112" font-size="10" font-weight="700" fill="#4b5563">(4x+50)°</text>
+            <text x="158" y="104" font-size="10" font-weight="700" fill="#4b5563" text-anchor="end">(4x+50)°</text>
             <text x="42" y="118" font-size="11" font-weight="700" fill="#4b5563">4x°</text>
             <text x="80" y="42" font-size="10" font-weight="700" fill="#374151">(2x+10)°</text>
             <text x="80" y="146" font-size="11" fill="#64748b" text-anchor="middle">Use exterior angle theorem</text>
@@ -552,23 +554,21 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
       <div class="prob-card reveal">
         <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 6</span><span class="lvl-badge lvl-4">L4</span></div>
         <div class="diagram-wrap" style="margin-bottom:0.5rem;">
-          <svg viewBox="0 0 160 150" width="100%" height="125" aria-label="Two triangles sharing a side: top triangle has angles 50 and 70 degrees, bottom triangle shares vertical angle and has angle x">
-            <!-- Upper triangle -->
-            <polygon points="80,10 20,80 140,80" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
-            <!-- Lower triangle -->
-            <polygon points="80,80 30,145 130,145" fill="#e8e8e8" stroke="#4b5563" stroke-width="2" stroke-dasharray="5 3"/>
-            <!-- Shared vertex dot -->
-            <circle cx="80" cy="80" r="4" fill="#1f2937"/>
-            <!-- Vertical angle marks -->
-            <text x="96" y="50" font-size="11" font-weight="700" fill="#374151">∠top</text>
-            <text x="48" y="106" font-size="11" font-weight="700" fill="#4b5563">vert.</text>
-            <text x="40" y="74" font-size="11" font-weight="700" fill="#374151">50°</text>
-            <text x="120" y="74" font-size="11" font-weight="700" fill="#374151">70°</text>
-            <text x="80" y="138" font-size="11" font-weight="700" fill="#4b5563" text-anchor="middle">x°</text>
-            <text x="80" y="155" font-size="10" fill="#64748b" text-anchor="middle">x in bottom triangle?</text>
+          <svg viewBox="0 0 160 170" width="100%" height="125" aria-label="Hourglass figure: two triangles whose slanted sides are straight lines crossing at one point; the top triangle has angles 50 and 70 degrees, the bottom triangle has two equal base angles labeled x">
+            <!-- Upper triangle (apex down) -->
+            <polygon points="30,15 130,15 80,81" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+            <!-- Lower triangle (apex up) — sides collinear with upper sides -->
+            <polygon points="80,81 30,147 130,147" fill="#e8e8e8" stroke="#4b5563" stroke-width="2"/>
+            <!-- Crossing point -->
+            <circle cx="80" cy="81" r="3.5" fill="#1f2937"/>
+            <text x="46" y="30" font-size="11" font-weight="700" fill="#374151">50°</text>
+            <text x="98" y="30" font-size="11" font-weight="700" fill="#374151">70°</text>
+            <text x="40" y="138" font-size="11" font-weight="700" fill="#4b5563">x°</text>
+            <text x="104" y="138" font-size="11" font-weight="700" fill="#4b5563">x°</text>
+            <text x="80" y="163" font-size="10" fill="#64748b" text-anchor="middle">Slanted sides are straight lines — find x</text>
           </svg>
         </div>
-        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Two triangles share a vertex. The top triangle has angles <strong>50°</strong>, <strong>70°</strong>, and an unknown top angle. The vertical angle at the shared vertex equals the top triangle's apex angle. If the bottom triangle has two equal base angles of <strong>x°</strong>, find x.</div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Two triangles form an hourglass — their slanted sides are straight lines crossing at one point. The top triangle has angles <strong>50°</strong> and <strong>70°</strong>. The bottom triangle has two equal base angles of <strong>x°</strong>. Find x. <em>(Hint: vertical angles!)</em></div>
         <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
       </div>
     </div>
@@ -592,19 +592,19 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
       <div class="prob-card reveal" style="border-left:4px solid #374151;">
         <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Challenge A</span><span class="lvl-badge lvl-4">L4</span></div>
         <div class="diagram-wrap" style="margin-bottom:0.5rem;">
-          <svg viewBox="0 0 180 150" width="100%" height="125" aria-label="Three lines meeting at one point forming angles: one labeled 5x minus 10, adjacent angle 2x plus 5, and a third angle">
+          <svg viewBox="0 0 180 150" width="100%" height="125" aria-label="Two rays from one point on a straight line forming three angles: 4x minus 10, an unknown middle angle, and 2x plus 10">
             <line x1="10" y1="100" x2="170" y2="100" stroke="#374151" stroke-width="2.5"/>
-            <line x1="90" y1="100" x2="50" y2="20" stroke="#4b5563" stroke-width="2.5"/>
-            <line x1="90" y1="100" x2="148" y2="18" stroke="#374151" stroke-width="2.5"/>
+            <line x1="90" y1="100" x2="49" y2="43" stroke="#4b5563" stroke-width="2.5"/>
+            <line x1="90" y1="100" x2="142" y2="53" stroke="#374151" stroke-width="2.5"/>
             <circle cx="90" cy="100" r="3.5" fill="#1f2937"/>
-            <!-- Angle arcs -->
-            <text x="50" y="89" font-size="10" font-weight="700" fill="#4b5563">(5x−10)°</text>
-            <text x="114" y="89" font-size="10" font-weight="700" fill="#374151">(2x+5)°</text>
-            <text x="93" y="63" font-size="11" font-weight="700" fill="#374151">?</text>
-            <text x="90" y="138" font-size="10" fill="#64748b" text-anchor="middle">Three rays from one point on a line</text>
+            <!-- Angle labels -->
+            <text x="55" y="86" font-size="10" font-weight="700" fill="#4b5563" text-anchor="middle">(4x−10)°</text>
+            <text x="128" y="88" font-size="10" font-weight="700" fill="#374151" text-anchor="middle">(2x+10)°</text>
+            <text x="94" y="62" font-size="11" font-weight="700" fill="#374151">?</text>
+            <text x="90" y="138" font-size="10" fill="#64748b" text-anchor="middle">Two rays from one point on a line</text>
           </svg>
         </div>
-        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Three rays extend from a point on a straight line, dividing the space above the line into three angles: <strong>(5x − 10)°</strong>, <strong>?</strong>, and <strong>(2x + 5)°</strong>. The three angles above the line sum to 180°. The unknown middle angle equals twice the smallest angle. Find x and all three angles.</div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Two rays extend from a point on a straight line, dividing the space above the line into three angles: <strong>(4x − 10)°</strong>, <strong>?</strong>, and <strong>(2x + 10)°</strong>. The three angles sum to 180°, and the middle angle is twice the rightmost angle. Find x and all three angles.</div>
         <div class="socratic-q" style="margin-top:0.4rem;">How many unknowns do you have? What relationships can you write as equations?</div>
         <div class="work-box" style="margin-top:0.45rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
       </div>
@@ -622,7 +622,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
             <!-- Angles -->
             <text x="48" y="119" font-size="13" font-weight="700" fill="#4b5563">75°</text>
             <text x="117" y="119" font-size="13" font-weight="700" fill="#374151">35°</text>
-            <text x="87" y="23" font-size="13" font-weight="700" fill="#374151">x°</text>
+            <text x="82" y="54" font-size="13" font-weight="700" fill="#374151">x°</text>
             <text x="90" y="148" font-size="11" fill="#64748b" text-anchor="middle">Find x using only triangle rule</text>
           </svg>
         </div>
@@ -667,7 +667,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
       <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
         <div style="font-size:1.4rem;margin-bottom:0.25rem;">🔺</div>
         <div style="font-weight:800;font-size:0.78rem;color:#1f2937;margin-bottom:0.3rem;">Triangle Sum</div>
-        <div class="formula-box" style="font-size:0.75rem;padding:0.3rem 0.4rem;border-color:rgba(8,145,178,0.3);color:#1f2937;">a + b + c = 180°</div>
+        <div class="formula-box" style="font-size:0.75rem;padding:0.3rem 0.4rem;border-color:rgba(55,65,81,0.35);color:#1f2937;">a + b + c = 180°</div>
         <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">always, every triangle</div>
       </div>
     </div>
@@ -756,7 +756,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
       <!-- Poem -->
       <div class="prob-card reveal" style="border-left:4px solid #4b5563;">
         <div style="font-weight:800;font-size:0.82rem;color:#1f2937;margin-bottom:0.4rem;">Read This Poem:</div>
-        <div style="font-size:0.82rem;color:#334155;line-height:1.9;font-style:italic;">
+        <div style="font-size:0.8rem;color:#334155;line-height:1.62;font-style:italic;">
           <p style="margin:0 0 0.5rem;">My grandfather measured everything in angles —<br>
           the lean of a fence post, the pitch of a roof,<br>
           the exact degree at which a hawk rode the wind.<br>
@@ -774,7 +774,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
         </div>
       </div>
       <!-- Questions -->
-      <div class="reveal" style="display:flex;flex-direction:column;gap:0.6rem;">
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.45rem;">
         <div class="prob-card" style="border-left:3px solid #374151;">
           <span style="font-weight:800;font-size:0.82rem;">Q1</span><span class="lvl-badge lvl-2">L2</span>
           <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Who is the speaker of this poem?
@@ -850,7 +850,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     SLIDE 15 — POEM 3: "FIELD NOTES, LATE OCTOBER"
+     SLIDE 15 — POEM 2: "FIELD NOTES, LATE OCTOBER"
      ═══════════════════════════════════════════════════ -->
 <div class="slide" data-slide="15">
   <div class="gradient-mesh">
@@ -858,13 +858,13 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
     <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
   </div>
   <div class="content">
-    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Poetry Practice 3</div>
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Poetry Practice 2</div>
     <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:700;margin:0 0 0.6rem;">Poem: "Field Notes, Late October"</h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
       <!-- Poem -->
       <div class="prob-card reveal" style="border-left:4px solid #4b5563;">
         <div style="font-weight:800;font-size:0.82rem;color:#1f2937;margin-bottom:0.4rem;">Read This Poem:</div>
-        <div style="font-size:0.82rem;color:#334155;line-height:1.9;font-style:italic;">
+        <div style="font-size:0.8rem;color:#334155;line-height:1.62;font-style:italic;">
           <p style="margin:0 0 0.5rem;">The geese crossed at forty-five degrees<br>
           above the river, precise as theorems,<br>
           their bodies solving for the wind<br>
@@ -884,37 +884,37 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
         </div>
       </div>
       <!-- Questions -->
-      <div class="reveal" style="display:flex;flex-direction:column;gap:0.6rem;">
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.45rem;">
         <div class="prob-card" style="border-left:3px solid #374151;">
-          <span style="font-weight:800;font-size:0.82rem;">Q7</span><span class="lvl-badge lvl-2">L2</span>
+          <span style="font-weight:800;font-size:0.82rem;">Q4</span><span class="lvl-badge lvl-2">L2</span>
           <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">Who is the speaker of this poem?
-            <div class="mc-options" data-q="7">
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7" value="A"><span class="opt-letter">A</span><span>A migrating goose observing the landscape below</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7" value="B"><span class="opt-letter">B</span><span>A longtime math teacher watching geese fly and reflecting on teaching</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7" value="C"><span class="opt-letter">C</span><span>A student who finally understood why angles add to 180°</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7" value="D"><span class="opt-letter">D</span><span>A scientist studying the flight patterns of geese</span></label>
+            <div class="mc-options" data-q="4">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="A"><span class="opt-letter">A</span><span>A migrating goose observing the landscape below</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="B"><span class="opt-letter">B</span><span>A longtime math teacher watching geese fly and reflecting on teaching</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="C"><span class="opt-letter">C</span><span>A student who finally understood why angles add to 180°</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4" value="D"><span class="opt-letter">D</span><span>A scientist studying the flight patterns of geese</span></label>
 </div>
           </div>
         </div>
         <div class="prob-card" style="border-left:3px solid #4b5563;">
-          <span style="font-weight:800;font-size:0.82rem;">Q8</span><span class="lvl-badge lvl-3">L3</span>
+          <span style="font-weight:800;font-size:0.82rem;">Q5</span><span class="lvl-badge lvl-3">L3</span>
           <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">"They lean into the angle that saves them / and call it instinct instead of math." This suggests:
-            <div class="mc-options" data-q="8">
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8" value="A"><span class="opt-letter">B</span><span>Geese are smarter than humans because they don't need to study</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8" value="B"><span class="opt-letter">B</span><span>The same mathematical principles that govern geometry also govern nature — whether or not we name them</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8" value="C"><span class="opt-letter">C</span><span>Instinct is a better guide than mathematics in dangerous situations</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8" value="D"><span class="opt-letter">D</span><span>Geese travel at exactly 45 degrees because of a law of physics</span></label>
+            <div class="mc-options" data-q="5">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="A"><span class="opt-letter">A</span><span>Geese are smarter than humans because they don't need to study</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="B"><span class="opt-letter">B</span><span>The same mathematical principles that govern geometry also govern nature — whether or not we name them</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="C"><span class="opt-letter">C</span><span>Instinct is a better guide than mathematics in dangerous situations</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5" value="D"><span class="opt-letter">D</span><span>Geese travel at exactly 45 degrees because of a law of physics</span></label>
 </div>
           </div>
         </div>
         <div class="prob-card" style="border-left:3px solid #4b5563;">
-          <span style="font-weight:800;font-size:0.82rem;">Q9</span><span class="lvl-badge lvl-4">L4</span>
+          <span style="font-weight:800;font-size:0.82rem;">Q6</span><span class="lvl-badge lvl-4">L4</span>
           <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">"Understanding and knowing are two different migrations." The word "migrations" here is best interpreted as:
-            <div class="mc-options" data-q="9">
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9" value="A"><span class="opt-letter">A</span><span>Two separate flight paths that geese take in autumn and spring</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9" value="B"><span class="opt-letter">B</span><span>Two separate journeys of the mind — memorizing a fact versus truly grasping its meaning — each requiring its own long effort</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9" value="C"><span class="opt-letter">C</span><span>Two types of students: those who understand quickly and those who must travel far to learn</span></label>
-<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9" value="D"><span class="opt-letter">D</span><span>The speaker's two moves between different teaching positions over thirty years</span></label>
+            <div class="mc-options" data-q="6">
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q6" value="A"><span class="opt-letter">A</span><span>Two separate flight paths that geese take in autumn and spring</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q6" value="B"><span class="opt-letter">B</span><span>Two separate journeys of the mind — memorizing a fact versus truly grasping its meaning — each requiring its own long effort</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q6" value="C"><span class="opt-letter">C</span><span>Two types of students: those who understand quickly and those who must travel far to learn</span></label>
+<label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q6" value="D"><span class="opt-letter">D</span><span>The speaker's two moves between different teaching positions over thirty years</span></label>
 </div>
           </div>
         </div>
@@ -924,7 +924,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     SLIDE 16 — POEM 3 DEBRIEF + ALL-POEM COMPARISON
+     SLIDE 16 — POEM 2 DEBRIEF + POEM COMPARISON
      ═══════════════════════════════════════════════════ -->
 <div class="slide" data-slide="16">
   <div class="gradient-mesh">
@@ -932,20 +932,19 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
     <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
   </div>
   <div class="content">
-    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Debrief 3</div>
-    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:700;margin:0 0 0.6rem;">Debrief &amp; All-Poem Comparison</h2>
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Debrief</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:700;margin:0 0 0.6rem;">Debrief &amp; Poem Comparison</h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
       <div class="reveal" style="display:flex;flex-direction:column;gap:0.5rem;">
-        <div class="socratic-q">For Q8: The geese don't study math, yet they "solve for the wind." What is the poet saying about the relationship between nature and mathematical truth?</div>
-        <div class="socratic-q">For Q9: Why does the poet use the word "migrations" — a word about movement and distance — to describe understanding vs. knowing? What does the journey metaphor add?</div>
-        <div class="socratic-q">All three poems involve someone who once didn't see something and later did. How does the tone of this teacher differ from the surveyor's grandchild and the lighthouse keeper?</div>
+        <div class="socratic-q">For Q5: The geese don't study math, yet they "solve for the wind." What is the poet saying about the relationship between nature and mathematical truth?</div>
+        <div class="socratic-q">For Q6: Why does the poet use the word "migrations" — a word about movement and distance — to describe understanding vs. knowing? What does the journey metaphor add?</div>
+        <div class="socratic-q">Both poems involve someone who once didn't see something and later did. How does the tone of this teacher differ from the surveyor's grandchild?</div>
       </div>
       <div class="reveal" style="display:flex;flex-direction:column;gap:0.5rem;">
         <div class="prob-card" style="border-left:4px solid #4b5563;">
-          <div style="font-weight:800;font-size:0.83rem;color:#1f2937;margin-bottom:0.35rem;">🎯 Three-Poem Tone Comparison</div>
+          <div style="font-weight:800;font-size:0.83rem;color:#1f2937;margin-bottom:0.35rem;">🎯 Two-Poem Tone Comparison</div>
           <div style="font-size:0.79rem;color:#334155;line-height:1.85;">
             <strong>"The Surveyor's Lines"</strong> — nostalgic, <em>warm acceptance</em> (came to see what grandfather saw)<br>
-            <strong>"The Lighthouse Keeper"</strong> — elegiac, <em>quiet grief</em> (replaced; still comes back)<br>
             <strong>"Field Notes, Late October"</strong> — reflective, <em>humble wonder</em> (thirty years teaching; still learning)
           </div>
         </div>
@@ -954,7 +953,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
           <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">When a poem ends by contrasting two seemingly similar things — like "understanding and knowing" — the contrast IS the main idea. The whole poem builds toward it. Look for it.</div>
         </div>
         <div class="prob-card" style="font-size:0.79rem;color:#334155;border-left:3px solid #6b7280;">
-          <strong>Geometry connection:</strong> All three poems weave math into their imagery — angles, lenses, triangles. On the SHSAT, connecting imagery to theme earns the hardest points.
+          <strong>Geometry connection:</strong> Both poems weave math into their imagery — angles, theorems, triangles. On the SHSAT, connecting imagery to theme earns the hardest points.
         </div>
       </div>
     </div>
@@ -962,7 +961,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     SLIDE 15 — EXIT TICKET / WEEK WRAP-UP
+     SLIDE 17 — EXIT TICKET / WEEK WRAP-UP
      ═══════════════════════════════════════════════════ -->
 <div class="slide" data-slide="17">
   <div class="gradient-mesh">
@@ -1002,7 +1001,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     SLIDE 16 — CLOSING
+     SLIDE 18 — CLOSING
      ═══════════════════════════════════════════════════ -->
 <div class="slide" data-slide="18">
   <div class="gradient-mesh">
@@ -1015,7 +1014,7 @@ body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;hei
     <div style="font-size:4rem;animation:float 3s ease-in-out infinite;margin-bottom:0.5rem;" class="reveal">🎯</div>
     <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.4rem;">Angles mastered. Triangles tamed.</h1>
     <p class="reveal" style="font-size:1rem;color:#334155;margin:0 0 0.35rem;">You now own every angle and triangle rule tested on the SHSAT.</p>
-    <p class="reveal" style="font-size:0.9rem;color:#64748b;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 0.7rem;">Next Week: Week 6 — Triangles &amp; Quadrilaterals (Part 2)</p>
+    <p class="reveal" style="font-size:0.9rem;color:#64748b;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 0.7rem;">Next Week: Week 5 — Triangles &amp; Quadrilaterals (Part 2)</p>
     <div class="reveal" style="display:inline-flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;">
       <span style="background:#f0f0f0;color:#111827;border-radius:20px;padding:6px 16px;font-weight:700;font-size:0.83rem;">Comp. = 90° ✓</span>
       <span style="background:#ebebeb;color:#374151;border-radius:20px;padding:6px 16px;font-weight:700;font-size:0.83rem;">Supp. = 180° ✓</span>
@@ -1120,5 +1119,333 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 });
 </script>
-</body>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
 </html>
