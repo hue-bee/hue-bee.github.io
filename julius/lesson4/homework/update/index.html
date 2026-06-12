@@ -450,37 +450,35 @@
     <!-- P10b -->
     <div class="prob" style="border-left:3px solid #6b7280;">
       <div class="prob-num">Problem 10b <span class="lvl lvl-4">L4</span></div>
-      <p class="prob-q">In triangle PQR, side QR is extended to point S forming exterior angle <strong>∠PRS = (7x − 1)°</strong>. The two non-adjacent interior angles are <strong>∠P = (3x + 11)°</strong> and <strong>∠Q = (2x + 8)°</strong>. Find x, all three interior angles, and verify using the triangle angle sum.</p>
+      <p class="prob-q">Two triangles share a vertex (hourglass shape). The top triangle has angles <strong>44°</strong> and <strong>72°</strong> at its base corners. The bottom triangle is <strong>isosceles</strong> with two equal base angles of <strong>y°</strong>. Find y.</p>
       <div class="fig">
-        <svg viewBox="0 0 240 175" width="100%" height="162">
-          <!-- Triangle PQR: P at top, Q at bottom-left, R at bottom-right -->
-          <polygon points="110,22 25,148 175,148" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
-          <!-- Extended line R → S -->
-          <line x1="175" y1="148" x2="225" y2="148" stroke="#374151" stroke-width="2.5"/>
-          <!-- Arrowhead at S -->
-          <polygon points="225,148 212,142 212,154" fill="#374151"/>
-          <!-- Vertex labels -->
-          <text x="107" y="17" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">P</text>
-          <text x="12" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">Q</text>
-          <text x="179" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#374151">R</text>
-          <text x="228" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#374151">S</text>
-          <!-- Interior angle labels -->
-          <text x="96" y="40" font-family="Nunito" font-weight="700" font-size="10" fill="#374151" text-anchor="middle">(3x+11)°</text>
-          <text x="44" y="138" font-family="Nunito" font-weight="700" font-size="10" fill="#4b5563">(2x+8)°</text>
-          <!-- Exterior angle arc and label -->
-          <path d="M 175,148 A 30,30 0 0,0 199,125" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <text x="200" y="124" font-family="Nunito" font-weight="700" font-size="10" fill="#6b7280">(7x−1)°</text>
-          <!-- Interior angle at R (unlabeled, to be found) -->
-          <text x="148" y="138" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">∠R = ?</text>
-          <text x="120" y="168" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Ext. angle theorem + triangle sum</text>
+        <svg viewBox="0 0 220 205" width="100%" height="190">
+          <!-- Top triangle pointing DOWN (base at top, apex at shared vertex) -->
+          <polygon points="35,20 185,20 110,100" fill="#f0f0f0" stroke="#374151" stroke-width="2.5"/>
+          <!-- Bottom triangle pointing UP (apex at shared vertex, base at bottom) -->
+          <polygon points="110,100 50,188 170,188" fill="#e8e8e8" stroke="#4b5563" stroke-width="2.5"/>
+          <!-- Shared vertex dot -->
+          <circle cx="110" cy="100" r="4" fill="#1f2937"/>
+          <!-- Top triangle angle labels -->
+          <text x="42" y="36" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">44°</text>
+          <text x="158" y="36" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">72°</text>
+          <!-- Shared vertex label -->
+          <text x="116" y="96" font-family="Nunito" font-weight="700" font-size="9" fill="#6b7280">vert</text>
+          <!-- Bottom triangle base angle labels -->
+          <text x="38" y="180" font-family="Nunito" font-weight="700" font-size="12" fill="#4b5563">y°</text>
+          <text x="158" y="180" font-family="Nunito" font-weight="700" font-size="12" fill="#4b5563">y°</text>
+          <!-- Tick marks on equal sides of bottom triangle (isosceles) -->
+          <line x1="75" y1="149" x2="85" y2="139" stroke="#4b5563" stroke-width="2"/>
+          <line x1="135" y1="139" x2="145" y2="149" stroke="#4b5563" stroke-width="2"/>
+          <!-- Equal angle arcs at base of bottom triangle -->
+          <path d="M 66,182 A 18,18 0 0,1 78,170" fill="none" stroke="#4b5563" stroke-width="1.5"/>
+          <path d="M 142,170 A 18,18 0 0,1 154,182" fill="none" stroke="#4b5563" stroke-width="1.5"/>
+          <text x="110" y="202" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Vertical angles + triangle sum</text>
         </svg>
       </div>
-      <textarea class="work-area" style="min-height:96px;"></textarea>
+      <textarea class="work-area" style="min-height:80px;"></textarea>
       <div class="answer-box">
-        x: <input type="text" class="answer-input">
-        &nbsp; ∠P: <input type="text" class="answer-input"> °
-        &nbsp; ∠Q: <input type="text" class="answer-input"> °
-        &nbsp; ∠R: <input type="text" class="answer-input"> °
+        y: <input type="text" class="answer-input"> °
       </div>
     </div>
 
