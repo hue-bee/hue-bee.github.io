@@ -1,1 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Homework — Angles &amp; Triangles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#2563EB; --blue-lt:#EFF6FF; --blue-md:#BFDBFE;
+    --coral:#F97066; --coral-lt:#FFF1F0;
+    --sand:#D4A574; --sand-lt:#FDF3E7;
+    --green:#16a34a; --green-lt:#DCFCE7;
+    --purple:#7c3aed; --purple-lt:#EDE9FE;
+    --ink:#0f172a; --slate:#334155; --muted:#64748b;
+    --border:#CBD5E1; --bg:#F8FAFF; --white:#FFFFFF;
+    --lesson-dark:#374151; --lesson-mid:#4b5563; --lesson-light:#6b7280; --lesson-pale:#9ca3af; --lesson-bg:#F0F7FF;
+    --ff-head:'Fredoka',sans-serif; --ff-body:'Nunito',sans-serif;
+  }
+  html { background:#e2e8f0; }
+  body { font-family:var(--ff-body); color:var(--ink); background:var(--bg); max-width:860px; margin:0 auto; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @media print {
+    input, textarea { border-color:#cbd5e1 !important; background:white !important; }
+    input[type="radio"] { accent-color:#000 !important; }
+    textarea { resize:none !important; }
+    html { background:white; }
+    body { max-width:100%; padding:0; }
+    .no-print { display:none !important; }
+    .page-break { page-break-before:always; }
+    .sheet { box-shadow:none !important; margin:0 !important; border-radius:0 !important; padding:1.2cm 1.5cm !important; }
+  }
+  .sheet { background:var(--white); margin:2rem auto; padding:2.2rem 2.4rem; box-shadow:0 4px 24px rgba(37,99,235,0.10); border-radius:16px; }
+  .hw-header { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:1rem; border-bottom:3px solid var(--blue); margin-bottom:1.4rem; gap:1rem; flex-wrap:wrap; }
+  .hw-header-left h1 { font-family:var(--ff-head); font-size:1.75rem; font-weight:700; color:var(--blue); line-height:1.1; }
+  .hw-header-left .subtitle { font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:0.2rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .hw-meta { display:flex; flex-direction:column; gap:0.35rem; min-width:220px; }
+  .hw-meta-row { display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:var(--slate); font-weight:600; }
+  .hw-meta-row .label { background:var(--blue-lt); color:var(--blue); border-radius:4px; padding:1px 7px; font-size:0.73rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; min-width:65px; text-align:center; }
+  .score-banner { display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg,var(--blue),#1d4ed8); color:white; border-radius:10px; padding:0.7rem 1.2rem; margin-bottom:1.4rem; flex-wrap:wrap; gap:0.5rem; }
+  .score-banner .title { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; }
+  .score-banner .sub { font-size:0.78rem; opacity:0.85; }
+  .score-cells { display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .score-cell { background:rgba(255,255,255,0.15); border-radius:8px; padding:0.3rem 0.75rem; text-align:center; min-width:80px; }
+  .score-cell .sc-val { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; }
+  .score-cell .sc-lbl { font-size:0.65rem; opacity:0.8; text-transform:uppercase; letter-spacing:0.04em; }
+  .section-hd { display:flex; align-items:center; gap:0.55rem; margin:1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size:1.25rem; }
+  .section-hd h2 { font-family:var(--ff-head); font-size:1.15rem; font-weight:700; color:var(--ink); }
+  .section-hd .badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:2px 9px; border-radius:20px; margin-left:auto; }
+  .badge-blue   { background:var(--blue-lt); color:var(--blue); border:1px solid var(--blue-md); }
+  .badge-coral  { background:var(--coral-lt); color:#c2410c; border:1px solid #fca5a5; }
+  .badge-green  { background:var(--green-lt); color:var(--green); border:1px solid #86efac; }
+  .badge-purple { background:var(--purple-lt); color:var(--purple); border:1px solid #c4b5fd; }
+  .instr { font-size:0.8rem; color:var(--muted); font-style:italic; margin-bottom:0.9rem; padding:0.35rem 0.75rem; background:var(--blue-lt); border-left:3px solid var(--blue); border-radius:0 6px 6px 0; }
+  .lvl { display:inline-block; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:1px 8px; border-radius:20px; vertical-align:middle; margin-left:0.3rem; }
+  .lvl-2 { background:#d9d9d9; color:#1f2937; }
+  .lvl-3 { background:#bdbdbd; color:#111827; }
+  .lvl-4 { background:#6b7280; color:#ffffff; }
+  .formula-strip { display:flex; gap:0.5rem; flex-wrap:wrap; background:var(--blue-lt); border:1.5px solid var(--blue-md); border-radius:10px; padding:0.6rem 0.9rem; margin-bottom:0.9rem; align-items:center; }
+  .formula-strip .fs-label { font-size:0.72rem; font-weight:800; color:var(--blue); text-transform:uppercase; letter-spacing:0.05em; margin-right:0.3rem; }
+  .fml { background:white; border:1.5px solid var(--blue-md); border-radius:7px; padding:0.2rem 0.6rem; font-size:0.78rem; font-weight:700; color:#1e3a8a; font-family:var(--ff-head); }
+  .prob-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.9rem; }
+  .prob-grid.single { grid-template-columns:1fr; }
+  .prob-grid.three { grid-template-columns:1fr 1fr 1fr; }
+  @media (max-width:620px) { .prob-grid, .prob-grid.three { grid-template-columns:1fr; } }
+  .prob { background:var(--bg); border:1.5px solid var(--border); border-radius:10px; padding:0.75rem 0.9rem; position:relative; }
+  .prob-num { font-family:var(--ff-head); font-size:0.72rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.3rem; }
+  .prob-q { font-size:0.84rem; color:var(--ink); font-weight:600; line-height:1.55; margin-bottom:0.5rem; }
+  .prob-q strong { color:#374151; }
+  .fig { display:flex; justify-content:center; margin:0.35rem 0 0.45rem; background:white; border:1.5px solid rgba(0,0,0,0.09); border-radius:10px; padding:0.5rem; }
+  .fig svg { overflow:visible; }
+  .work-area { width:100%; resize:vertical; min-height:56px; border:1.5px dashed var(--border); border-radius:6px; background:white; padding:0.35rem 0.55rem; font-family:var(--ff-body); font-size:0.78rem; color:var(--ink); box-sizing:border-box; outline:none; margin-top:0.4rem; }
+  .work-area::placeholder { color:var(--muted); font-style:italic; }
+  .answer-box { margin-top:0.5rem; display:flex; align-items:center; gap:0.4rem; font-size:0.8rem; font-weight:700; color:var(--slate); flex-wrap:wrap; }
+  .answer-input { border:none; border-bottom:1.5px solid var(--border); flex:1; min-width:60px; font-family:var(--ff-body); font-size:0.82rem; font-weight:700; color:var(--ink); background:transparent; outline:none; padding:1px 6px; }
+  .classify-row { font-size:0.82rem; color:#334155; margin-top:0.35rem; display:flex; flex-wrap:wrap; gap:0.4rem 0.8rem; align-items:center; }
+  .classify-row input[type="text"] { border:none; border-bottom:1.5px solid var(--border); width:90px; font-family:var(--ff-body); font-size:0.8rem; outline:none; background:transparent; padding:1px 4px; }
+  .trap-card { border-left:4px solid #4b5563; background:#f9fafb; border-radius:0 9px 9px 0; padding:0.55rem 0.85rem; margin-top:0.75rem; font-size:0.8rem; color:#374151; }
+  .trap-card strong { color:#1f2937; font-size:0.82rem; }
+  .passage-box { background:var(--bg); border:1.5px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin-bottom:1rem; }
+  .passage-title { font-family:var(--ff-head); font-size:1rem; font-weight:700; color:var(--ink); margin-bottom:0.6rem; }
+  .passage-poem { font-size:0.85rem; line-height:1.85; color:var(--slate); font-style:italic; }
+  .passage-poem p { margin-bottom:0.6rem; }
+  .mc-q { margin-bottom:1rem; padding:0.7rem 0.85rem; background:var(--bg); border:1.5px solid var(--border); border-radius:10px; }
+  .mc-q-text { font-size:0.83rem; font-weight:700; color:var(--ink); margin-bottom:0.5rem; line-height:1.5; }
+  .mc-q-text .qnum { font-family:var(--ff-head); color:var(--blue); margin-right:0.3rem; }
+  .mc-opts { display:grid; grid-template-columns:1fr 1fr; gap:0.25rem 1rem; }
+  @media (max-width:500px) { .mc-opts { grid-template-columns:1fr; } }
+  .mc-opt { font-size:0.79rem; color:var(--slate); display:flex; align-items:flex-start; gap:0.3rem; line-height:1.45; cursor:pointer; padding:0.2rem 0.4rem; border-radius:5px; border:1.5px solid transparent; transition:background 0.15s; }
+  .mc-opt:hover { background:#f0f0f0; }
+  .mc-opt input[type=radio] { display:none; }
+  .mc-opt.selected { background:#e5e7eb; border-color:#374151; font-weight:700; }
+  .mc-opt .bubble { width:14px; height:14px; min-width:14px; border:1.5px solid var(--border); border-radius:50%; margin-top:1px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:800; }
+  .mc-opt.selected .bubble { background:#374151; border-color:#374151; color:white; }
+  .error-log { border:2px solid var(--coral); border-radius:10px; padding:0.9rem 1.1rem; background:var(--coral-lt); margin-top:0.5rem; }
+  .error-log h3 { font-family:var(--ff-head); font-size:1rem; font-weight:700; color:#c2410c; margin-bottom:0.55rem; }
+  .error-table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+  .error-table th { background:var(--coral); color:white; font-family:var(--ff-head); font-weight:600; padding:0.35rem 0.6rem; text-align:left; font-size:0.75rem; }
+  .error-table th:first-child { border-radius:6px 0 0 0; }
+  .error-table th:last-child  { border-radius:0 6px 0 0; }
+  .error-table td { padding:0.45rem 0.6rem; border-bottom:1px solid #fca5a5; color:var(--slate); background:white; font-weight:500; vertical-align:middle; }
+  .error-table td:first-child { font-weight:700; color:var(--ink); width:5%; text-align:center; }
+  .error-table tr:last-child td { border-bottom:none; }
+  .error-table td input[type="text"] { width:100%; border:none; font-family:var(--ff-body); font-size:0.78rem; outline:none; background:transparent; padding:1px 4px; }
+  .error-type-pills { display:flex; gap:0.4rem; flex-wrap:wrap; font-size:0.73rem; margin-top:0.55rem; }
+  .pill { padding:2px 10px; border-radius:20px; font-weight:700; border:1.5px solid; }
+  .pill-cg { background:#fee2e2; color:#b91c1c; border-color:#fca5a5; }
+  .pill-ce { background:#fef9c3; color:#92400e; border-color:#fde68a; }
+  .pill-ru { background:var(--purple-lt); color:var(--purple); border-color:#c4b5fd; }
+  .reflect-box { background:var(--green-lt); border:1.5px solid #86efac; border-radius:10px; padding:0.8rem 1rem; margin-top:1rem; }
+  .reflect-box h3 { font-family:var(--ff-head); font-size:0.9rem; font-weight:700; color:var(--green); margin-bottom:0.45rem; }
+  .reflect-lines { display:flex; flex-direction:column; gap:0.6rem; margin-top:0.3rem; }
+  .reflect-line { display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--slate); font-weight:600; }
+  .reflect-line input[type="text"] { flex:1; border:none; border-bottom:1.5px solid var(--border); font-family:var(--ff-body); font-size:0.8rem; color:var(--ink); background:transparent; outline:none; padding:1px 6px; }
+  .hint { font-size:0.75rem; color:var(--muted); font-style:italic; margin-top:0.3rem; padding:0.25rem 0.55rem; background:rgba(100,116,139,0.07); border-left:2px solid var(--lesson-pale); border-radius:0 4px 4px 0; }
+  hr.divider { border:none; border-top:2px dashed var(--border); margin:1.6rem 0; }
+  .print-btn { display:block; width:fit-content; margin:0 auto 1rem; background:var(--blue); color:white; font-family:var(--ff-head); font-size:1rem; font-weight:600; padding:0.55rem 1.6rem; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 10px rgba(37,99,235,0.3); transition:background 0.2s; }
+  .print-btn:hover { background:#1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>📐 Week 4 Homework</h1>
+      <div class="subtitle">Geometry: Angles &amp; Triangles &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;"></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;"></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="10" style="width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;"> / 10</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="6" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;"> / 6</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="16" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;"> / 16</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="section-hd">
+    <span class="icon">📐</span>
+    <h2>Part A — Angle Classification &amp; Pairs</h2>
+    <span class="badge badge-blue">4 Problems · 12 min</span>
+  </div>
+  <p class="instr">Name the rule first. Write the equation. Solve. Show ALL work in the box. Circle your final answer.</p>
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">Complementary: A + B = 90°</span>
+    <span class="fml">Supplementary: A + B = 180°</span>
+    <span class="fml">C before S → 90 before 180</span>
+  </div>
+
+  <div class="prob-grid">
+    <!-- P1 -->
+    <div class="prob" style="border-left:3px solid #374151;">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Classify each angle below as <strong>acute</strong>, <strong>right</strong>, <strong>obtuse</strong>, or <strong>straight</strong>. Write your answer on the line next to each angle.</p>
+      <div class="fig">
+        <svg viewBox="0 0 280 140" width="100%" height="130">
+          <line x1="20" y1="110" x2="80" y2="110" stroke="#374151" stroke-width="2"/>
+          <line x1="20" y1="110" x2="50" y2="55" stroke="#374151" stroke-width="2"/>
+          <circle cx="20" cy="110" r="3" fill="#374151"/>
+          <text x="36" y="98" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">40°</text>
+          <text x="50" y="128" font-family="Nunito" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">A</text>
+          <line x1="110" y1="110" x2="170" y2="110" stroke="#374151" stroke-width="2"/>
+          <line x1="110" y1="110" x2="110" y2="50" stroke="#374151" stroke-width="2"/>
+          <rect x="110" y="96" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <circle cx="110" cy="110" r="3" fill="#374151"/>
+          <text x="140" y="128" font-family="Nunito" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">B</text>
+          <line x1="200" y1="110" x2="260" y2="110" stroke="#374151" stroke-width="2"/>
+          <line x1="200" y1="110" x2="173" y2="55" stroke="#4b5563" stroke-width="2"/>
+          <circle cx="200" cy="110" r="3" fill="#374151"/>
+          <text x="197" y="91" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">130°</text>
+          <text x="230" y="128" font-family="Nunito" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">C</text>
+        </svg>
+      </div>
+      <div class="classify-row">
+        A (40°): <input type="text">
+        B (90°): <input type="text">
+        C (130°): <input type="text">
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="prob" style="border-left:3px solid #374151;">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Two angles are <strong>complementary</strong>. One angle measures <strong>37°</strong>. Find the other angle.</p>
+      <div class="fig">
+        <svg viewBox="0 0 160 130" width="100%" height="118">
+          <line x1="20" y1="110" x2="140" y2="110" stroke="#374151" stroke-width="2"/>
+          <line x1="20" y1="110" x2="20" y2="25" stroke="#374151" stroke-width="2"/>
+          <line x1="20" y1="110" x2="90" y2="35" stroke="#4b5563" stroke-width="2.5"/>
+          <rect x="20" y="96" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <circle cx="20" cy="110" r="3" fill="#374151"/>
+          <text x="38" y="92" font-family="Nunito" font-weight="700" font-size="12" fill="#4b5563">37°</text>
+          <text x="45" y="98" font-family="Nunito" font-weight="700" font-size="13" fill="#374151">?</text>
+          <text x="80" y="125" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Find the missing angle</text>
+        </svg>
+      </div>
+      <textarea class="work-area"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"> °</div>
+    </div>
+
+    <!-- P3 -->
+    <div class="prob" style="border-left:3px solid #4b5563;">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Two angles are <strong>supplementary</strong>. One angle is <strong>three times</strong> the other. Find both angles.</p>
+      <div class="fig">
+        <svg viewBox="0 0 170 110" width="100%" height="100">
+          <line x1="10" y1="80" x2="160" y2="80" stroke="#374151" stroke-width="2.5"/>
+          <line x1="85" y1="80" x2="60" y2="20" stroke="#4b5563" stroke-width="2.5"/>
+          <circle cx="85" cy="80" r="3.5" fill="#374151"/>
+          <text x="54" y="66" font-family="Nunito" font-weight="700" font-size="12" fill="#4b5563">3x°</text>
+          <text x="100" y="66" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">x°</text>
+          <text x="85" y="100" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Straight line = 180°</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;"></textarea>
+      <div class="answer-box">
+        Smaller: <input type="text" class="answer-input"> °
+        &nbsp;&nbsp; Larger: <input type="text" class="answer-input"> °
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="prob" style="border-left:3px solid #4b5563;">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Angle A and Angle B are <strong>complementary</strong>. Angle B and Angle C are <strong>supplementary</strong>. If <strong>∠A = 28°</strong>, find ∠B and ∠C.</p>
+      <div class="fig">
+        <svg viewBox="0 0 220 120" width="100%" height="110">
+          <line x1="15" y1="95" x2="85" y2="95" stroke="#374151" stroke-width="2"/>
+          <line x1="15" y1="95" x2="15" y2="30" stroke="#374151" stroke-width="2"/>
+          <line x1="15" y1="95" x2="75" y2="40" stroke="#4b5563" stroke-width="2"/>
+          <rect x="15" y="81" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <text x="32" y="75" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">28°</text>
+          <text x="18" y="57" font-family="Nunito" font-weight="700" font-size="11" fill="#4b5563">B</text>
+          <text x="50" y="108" font-family="Nunito" font-size="9" fill="#9ca3af" text-anchor="middle">A+B = 90°</text>
+          <line x1="115" y1="95" x2="215" y2="95" stroke="#374151" stroke-width="2.5"/>
+          <line x1="165" y1="95" x2="145" y2="35" stroke="#4b5563" stroke-width="2"/>
+          <circle cx="165" cy="95" r="3" fill="#374151"/>
+          <text x="143" y="78" font-family="Nunito" font-weight="700" font-size="11" fill="#4b5563">B</text>
+          <text x="180" y="78" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">C</text>
+          <text x="165" y="108" font-family="Nunito" font-size="9" fill="#9ca3af" text-anchor="middle">B+C = 180°</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;"></textarea>
+      <div class="answer-box">
+        ∠B: <input type="text" class="answer-input"> °
+        &nbsp;&nbsp; ∠C: <input type="text" class="answer-input"> °
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B -->
+  <div class="section-hd">
+    <span class="icon">✂️</span>
+    <h2>Part B — Vertical Angles &amp; Lines</h2>
+    <span class="badge badge-blue">3 Problems · 10 min</span>
+  </div>
+  <p class="instr">Name the rule (vertical = equal; adjacent on a line = 180°). Write the equation first, then solve.</p>
+  <div class="formula-strip">
+    <span class="fs-label">Rules</span>
+    <span class="fml">Vertical angles: a = c (across the X)</span>
+    <span class="fml">Adjacent on a line: a + b = 180°</span>
+    <span class="fml">All angles in X sum = 360°</span>
+  </div>
+
+  <div class="prob-grid three">
+    <!-- P5 -->
+    <div class="prob" style="border-left:3px solid #374151;">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Two lines intersect. One angle is <strong>65°</strong>. Find all four angles at the intersection.</p>
+      <div class="fig">
+        <svg viewBox="0 0 160 150" width="100%" height="138">
+          <line x1="15" y1="30" x2="145" y2="120" stroke="#374151" stroke-width="2.5"/>
+          <line x1="145" y1="30" x2="15" y2="120" stroke="#4b5563" stroke-width="2.5"/>
+          <circle cx="80" cy="75" r="4" fill="#1f2937"/>
+          <text x="88" y="62" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">65°</text>
+          <text x="72" y="118" font-family="Nunito" font-weight="700" font-size="13" fill="#4b5563">a</text>
+          <text x="125" y="100" font-family="Nunito" font-weight="700" font-size="13" fill="#4b5563">b</text>
+          <text x="24" y="100" font-family="Nunito" font-weight="700" font-size="13" fill="#374151">c</text>
+          <text x="80" y="138" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Find a, b, c</text>
+        </svg>
+      </div>
+      <textarea class="work-area"></textarea>
+      <div class="answer-box">
+        a: <input type="text" class="answer-input"> °
+        b: <input type="text" class="answer-input"> °
+        c: <input type="text" class="answer-input"> °
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="prob" style="border-left:3px solid #4b5563;">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Two lines intersect. Vertical angles are labeled <strong>(4x + 8)°</strong> and <strong>(6x − 12)°</strong>. Find x and the measure of each angle.</p>
+      <div class="fig">
+        <svg viewBox="0 0 170 150" width="100%" height="138">
+          <line x1="15" y1="35" x2="155" y2="115" stroke="#374151" stroke-width="2.5"/>
+          <line x1="155" y1="35" x2="15" y2="115" stroke="#4b5563" stroke-width="2.5"/>
+          <circle cx="85" cy="75" r="4" fill="#1f2937"/>
+          <text x="90" y="60" font-family="Nunito" font-weight="700" font-size="10" fill="#374151">(4x+8)°</text>
+          <text x="16" y="100" font-family="Nunito" font-weight="700" font-size="10" fill="#4b5563">(6x−12)°</text>
+          <text x="85" y="140" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Vertical angles = equal</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;"></textarea>
+      <div class="answer-box">
+        x: <input type="text" class="answer-input">
+        &nbsp;&nbsp; Each angle: <input type="text" class="answer-input"> °
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="prob" style="border-left:3px solid #6b7280;">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Three angles lie above a straight line: <strong>x°</strong>, <strong>2x°</strong>, and <strong>(3x + 12)°</strong>. Find x and identify the largest angle.</p>
+      <div class="fig">
+        <svg viewBox="0 0 170 135" width="100%" height="125">
+          <line x1="10" y1="100" x2="160" y2="100" stroke="#374151" stroke-width="2.5"/>
+          <line x1="85" y1="100" x2="52" y2="30" stroke="#4b5563" stroke-width="2"/>
+          <line x1="85" y1="100" x2="128" y2="28" stroke="#374151" stroke-width="2"/>
+          <circle cx="85" cy="100" r="3" fill="#374151"/>
+          <text x="22" y="88" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">x°</text>
+          <text x="72" y="72" font-family="Nunito" font-weight="700" font-size="11" fill="#4b5563">2x°</text>
+          <text x="106" y="80" font-family="Nunito" font-weight="700" font-size="10" fill="#374151">(3x+12)°</text>
+          <text x="85" y="120" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Three angles on a straight line</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;"></textarea>
+      <div class="answer-box">
+        x: <input type="text" class="answer-input">
+        &nbsp;&nbsp; Largest angle: <input type="text" class="answer-input"> °
+      </div>
+    </div>
+  </div>
+</div><!-- end page 1 -->
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+  <!-- PART C -->
+  <div class="section-hd">
+    <span class="icon">🔺</span>
+    <h2>Part C — Triangle Angle Sum</h2>
+    <span class="badge badge-blue">3 Problems · 10 min</span>
+  </div>
+  <p class="instr">Every triangle sums to 180°. Name the rule, write the equation, solve. Show all work.</p>
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">∠A + ∠B + ∠C = 180°</span>
+    <span class="fml">Exterior angle = sum of 2 remote interior angles</span>
+    <span class="fml">ext = a + b  (NOT a + b + c)</span>
+  </div>
+
+  <div class="prob-grid">
+    <!-- P8 -->
+    <div class="prob" style="border-left:3px solid #374151;">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A triangle has angles of <strong>62°</strong> and <strong>85°</strong>. Find the third angle.</p>
+      <div class="fig">
+        <svg viewBox="0 0 200 170" width="100%" height="155">
+          <polygon points="100,18 22,148 178,148" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <text x="100" y="13" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">A</text>
+          <text x="8" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">B</text>
+          <text x="183" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#374151">C</text>
+          <text x="108" y="36" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">x°</text>
+          <text x="32" y="138" font-family="Nunito" font-weight="700" font-size="12" fill="#4b5563">62°</text>
+          <text x="146" y="138" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">85°</text>
+          <text x="100" y="163" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Find angle A (x)</text>
+        </svg>
+      </div>
+      <textarea class="work-area"></textarea>
+      <div class="answer-box">Third angle: <input type="text" class="answer-input"> °</div>
+    </div>
+
+    <!-- P9 -->
+    <div class="prob" style="border-left:3px solid #4b5563;">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">In a triangle, two interior angles are <strong>48°</strong> and <strong>67°</strong>. A side is extended to create an exterior angle. Find the exterior angle.</p>
+      <div class="fig">
+        <svg viewBox="0 0 220 170" width="100%" height="155">
+          <polygon points="50,20 22,148 168,148" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <line x1="168" y1="148" x2="210" y2="148" stroke="#374151" stroke-width="2.5"/>
+          <polygon points="210,148 196,142 196,154" fill="#374151"/>
+          <text x="54" y="38" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">c</text>
+          <text x="28" y="138" font-family="Nunito" font-weight="700" font-size="12" fill="#4b5563">48°</text>
+          <text x="132" y="138" font-family="Nunito" font-weight="700" font-size="12" fill="#374151">67°</text>
+          <path d="M 168,148 A 25,25 0 0,0 188,126" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="190" y="132" font-family="Nunito" font-weight="700" font-size="11" fill="#6b7280">ext</text>
+          <text x="110" y="163" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Exterior angle shortcut</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;"></textarea>
+      <div class="answer-box">Exterior angle: <input type="text" class="answer-input"> °</div>
+    </div>
+
+    <!-- P10 -->
+    <div class="prob" style="border-left:3px solid #6b7280;">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">The exterior angle of a triangle is <strong>(7x − 3)°</strong>. The two non-adjacent interior angles are <strong>(3x + 9)°</strong> and <strong>(2x + 6)°</strong>. Find x and all three labeled angles.</p>
+      <div class="fig">
+        <svg viewBox="0 0 230 175" width="100%" height="160">
+          <polygon points="55,22 20,150 175,150" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <line x1="175" y1="150" x2="220" y2="150" stroke="#374151" stroke-width="2.5"/>
+          <polygon points="220,150 207,144 207,156" fill="#374151"/>
+          <text x="59" y="38" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">c</text>
+          <text x="24" y="140" font-family="Nunito" font-weight="700" font-size="10" fill="#4b5563">(3x+9)°</text>
+          <text x="132" y="140" font-family="Nunito" font-weight="700" font-size="10" fill="#374151">(2x+6)°</text>
+          <path d="M 175,150 A 28,28 0 0,0 198,130" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="198" y="127" font-family="Nunito" font-weight="700" font-size="10" fill="#6b7280">(7x−3)°</text>
+          <text x="110" y="165" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Use exterior angle theorem</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:80px;"></textarea>
+      <div class="answer-box">
+        x: <input type="text" class="answer-input">
+        &nbsp; ext: <input type="text" class="answer-input"> °
+        &nbsp; interior pair: <input type="text" class="answer-input"> °, <input type="text" class="answer-input"> °
+      </div>
+    </div>
+
+    <!-- P10b -->
+    <div class="prob" style="border-left:3px solid #6b7280;">
+      <div class="prob-num">Problem 10b <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">In triangle PQR, side QR is extended to point S forming exterior angle <strong>∠PRS = (7x − 1)°</strong>. The two non-adjacent interior angles are <strong>∠P = (3x + 11)°</strong> and <strong>∠Q = (2x + 8)°</strong>. Find x, all three interior angles, and verify using the triangle angle sum.</p>
+      <div class="fig">
+        <svg viewBox="0 0 240 175" width="100%" height="162">
+          <!-- Triangle PQR: P at top, Q at bottom-left, R at bottom-right -->
+          <polygon points="110,22 25,148 175,148" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <!-- Extended line R → S -->
+          <line x1="175" y1="148" x2="225" y2="148" stroke="#374151" stroke-width="2.5"/>
+          <!-- Arrowhead at S -->
+          <polygon points="225,148 212,142 212,154" fill="#374151"/>
+          <!-- Vertex labels -->
+          <text x="107" y="17" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">P</text>
+          <text x="12" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">Q</text>
+          <text x="179" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#374151">R</text>
+          <text x="228" y="152" font-family="Nunito" font-weight="800" font-size="13" fill="#374151">S</text>
+          <!-- Interior angle labels -->
+          <text x="96" y="40" font-family="Nunito" font-weight="700" font-size="10" fill="#374151" text-anchor="middle">(3x+11)°</text>
+          <text x="44" y="138" font-family="Nunito" font-weight="700" font-size="10" fill="#4b5563">(2x+8)°</text>
+          <!-- Exterior angle arc and label -->
+          <path d="M 175,148 A 30,30 0 0,0 199,125" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="200" y="124" font-family="Nunito" font-weight="700" font-size="10" fill="#6b7280">(7x−1)°</text>
+          <!-- Interior angle at R (unlabeled, to be found) -->
+          <text x="148" y="138" font-family="Nunito" font-weight="700" font-size="11" fill="#374151">∠R = ?</text>
+          <text x="120" y="168" font-family="Nunito" font-weight="600" font-size="10" fill="#64748b" text-anchor="middle">Ext. angle theorem + triangle sum</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:96px;"></textarea>
+      <div class="answer-box">
+        x: <input type="text" class="answer-input">
+        &nbsp; ∠P: <input type="text" class="answer-input"> °
+        &nbsp; ∠Q: <input type="text" class="answer-input"> °
+        &nbsp; ∠R: <input type="text" class="answer-input"> °
+      </div>
+    </div>
+
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART D -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part D — ELA: Poetry — Speaker, Tone &amp; Evidence</h2>
+    <span class="badge badge-purple">6 Questions · 18 min</span>
+  </div>
+  <p class="instr">Read the poem twice. Apply the three-step checklist: (1) Who is the speaker? (2) What is the tone? (3) Which lines prove it? Then answer Q1–Q6.</p>
+
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;">
+    <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.75rem;font-weight:700;color:#374151;"><span style="color:#6b7280;margin-right:0.3rem;">①</span> Speaker — who? past or present?</div>
+    <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.75rem;font-weight:700;color:#374151;"><span style="color:#6b7280;margin-right:0.3rem;">②</span> Tone — precise adjective</div>
+    <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.75rem;font-weight:700;color:#374151;"><span style="color:#6b7280;margin-right:0.3rem;">③</span> Evidence — quote 2 lines</div>
+    <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.75rem;font-weight:700;color:#374151;"><span style="color:#6b7280;margin-right:0.3rem;">⚠️</span> Watch for contrast: past vs. present</div>
+  </div>
+
+  <div class="passage-box">
+    <div class="passage-title">📜 "The Surveyor's Lines"</div>
+    <div class="passage-poem">
+      <p>My grandfather measured everything in angles —<br>
+      the lean of a fence post, the pitch of a roof,<br>
+      the exact degree at which a hawk rode the wind.<br>
+      He said the world was made of triangles.</p>
+      <p>I was twelve and thought him foolish,<br>
+      until I stood where he once stood,<br>
+      a transit scope pressed to my eye,<br>
+      and the whole hillside unfolded in degrees.</p>
+      <p>Now I carry his brass instrument<br>
+      and read each morning's shadows like he did —<br>
+      every angle a kind of grammar<br>
+      only the patient learn to speak.</p>
+      <p>The world, I know now, is still made of triangles.<br>
+      I just took longer than he did to see them.</p>
+    </div>
+    <div style="margin-top:0.7rem;font-size:0.75rem;color:var(--muted);">🖊️ Annotate as you read: circle unfamiliar words, underline lines that feel emotionally charged, mark tense shifts (past → present).</div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> Who is most likely the speaker of this poem? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq1"><span class="bubble"></span><span>A) A professional surveyor describing their daily work</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq1"><span class="bubble"></span><span>B) A grandchild who grew to value the grandfather's worldview</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq1"><span class="bubble"></span><span>C) A twelve-year-old child who currently dislikes geometry</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq1"><span class="bubble"></span><span>D) The grandfather reflecting on lessons he taught</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> Which two words best describe the tone of the poem? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq2"><span class="bubble"></span><span>A) Bitter and regretful</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq2"><span class="bubble"></span><span>B) Nostalgic and reverent</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq2"><span class="bubble"></span><span>C) Triumphant and proud</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq2"><span class="bubble"></span><span>D) Confused and uncertain</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> "Every angle a kind of grammar / only the patient learn to speak" most likely means: <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq3"><span class="bubble"></span><span>A) Grammar and geometry are both school subjects requiring memorization</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq3"><span class="bubble"></span><span>B) Understanding the geometry of the world is a deep form of literacy, acquired through time and patience</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq3"><span class="bubble"></span><span>C) The grandfather was a grammar teacher who also knew geometry</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq3"><span class="bubble"></span><span>D) Patience is more important than ability in school</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> The line "I was twelve and thought him foolish" primarily serves to: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq4"><span class="bubble"></span><span>A) Show the speaker's permanent dislike of geometry</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq4"><span class="bubble"></span><span>B) Establish a contrast that makes the speaker's later appreciation more meaningful</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq4"><span class="bubble"></span><span>C) Criticize the grandfather for being too strict</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq4"><span class="bubble"></span><span>D) Explain why the speaker became a professional surveyor</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which line most directly proves the speaker is an adult reflecting on the past — not a child in the present moment? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq5"><span class="bubble"></span><span>A) "He said the world was made of triangles."</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq5"><span class="bubble"></span><span>B) "I was twelve and thought him foolish" (past tense — the speaker is no longer twelve)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq5"><span class="bubble"></span><span>C) "the exact degree at which a hawk rode the wind"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="pq5"><span class="bubble"></span><span>D) "every angle a kind of grammar"</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> <strong>Short Response (2–3 sentences):</strong> The speaker says "I just took longer than he did to see them." Is this self-criticism or something else? Use evidence from the poem to support your answer. <span class="lvl lvl-4">L4</span></div>
+    <textarea class="work-area" style="min-height:80px;"></textarea>
+  </div>
+</div><!-- end page 2 -->
+
+<!-- PAGE 3 -->
+<div class="sheet page-break">
+  <div class="section-hd">
+    <span class="icon">🔍</span>
+    <h2>Error Log &amp; Self-Correction</h2>
+    <span class="badge badge-coral">Complete after checking answers</span>
+  </div>
+
+  <div class="error-log">
+    <h3>📋 Where Did I Lose Points?</h3>
+    <p style="font-size:0.78rem;color:#92400e;margin-bottom:0.65rem;">For every problem you got wrong, fill in a row. Be honest — this is how we fix it in session!</p>
+    <table class="error-table">
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:20%">Problem</th>
+          <th style="width:40%">What I Did Wrong</th>
+          <th style="width:35%">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>2</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>3</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>4</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>5</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills" style="margin-top:0.7rem;">
+      <span style="font-size:0.72rem;font-weight:700;color:#92400e;margin-right:0.2rem;">Error types:</span>
+      <span class="pill pill-cg">Careless (CG)</span>
+      <span class="pill pill-ce">Concept Error (CE)</span>
+      <span class="pill pill-ru">Wrong Rule (WR)</span>
+      <span class="pill" style="background:#f0f0f0;color:#374151;border-color:#d1d5db;">Misread (MR)</span>
+      <span class="pill" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;">Algebra Slip (AS)</span>
+    </div>
+  </div>
+
+  <div class="trap-card" style="margin-top:1rem;">
+    <strong>⚠️ Top 3 Traps from This Week's Lesson</strong><br>
+    <div style="margin-top:0.35rem;font-size:0.79rem;line-height:1.7;">
+      <b>1. Complementary vs. Supplementary:</b> C before S in the alphabet → 90° before 180°. If you mixed them up, mark <em>CE</em>.<br>
+      <b>2. Adjacent ≠ Vertical:</b> Adjacent angles are supplementary (add to 180°). Vertical angles are equal. Confusing them? Mark <em>WR</em>.<br>
+      <b>3. Exterior angle theorem:</b> ext = sum of 2 <em>remote</em> (non-touching) interior angles — NOT all three. Mark <em>CE</em> if you included the adjacent angle.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="reflect-box">
+    <h3>💭 Reflection — Complete Before Your Next Session</h3>
+    <div class="reflect-lines">
+      <div class="reflect-line">The concept I understood most clearly this week was <input type="text"></div>
+      <div class="reflect-line">The concept I am still unsure about is <input type="text"></div>
+      <div class="reflect-line">One SHSAT trap I now know to watch for is <input type="text"></div>
+      <div class="reflect-line">In the poem, the line that stood out most to me was <input type="text"></div>
+    </div>
+  </div>
+</div><!-- end page 3 -->
+
+<script>
+  function selMC(el) {
+    const name = el.querySelector('input[type=radio]').name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+      r.closest('.mc-opt').classList.remove('selected');
+      r.closest('.mc-opt').querySelector('.bubble').textContent = '';
+    });
+    el.classList.add('selected');
+    el.querySelector('.bubble').textContent = '✓';
+  }
+  function clearAll() {
+    document.querySelectorAll('textarea, input[type=text], input[type=number]').forEach(el => el.value = '');
+    document.querySelectorAll('.mc-opt.selected').forEach(el => {
+      el.classList.remove('selected');
+      el.querySelector('.bubble').textContent = '';
+    });
+  }
+</script>
+</body>
+</html>
