@@ -65,10 +65,36 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 .section-divider{border:none;border-top:1.5px solid rgba(0,0,0,.08);margin:2rem 0}
 .q-label{font-weight:800;font-size:.82rem;color:#374151;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
 .diagram-wrap{background:#fff;border:1.5px solid rgba(0,0,0,.09);border-radius:12px;padding:.6rem;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:.6rem}
+
+/* ── Toolbar buttons ── */
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:0 0 1.6rem;flex-wrap:wrap}
+.btn-print{font-family:var(--fdisplay);font-size:1rem;font-weight:600;padding:.55rem 1.6rem;border:none;border-radius:30px;cursor:pointer;transition:background .2s;box-shadow:0 3px 10px rgba(37,99,235,.28)}
+.btn-print.primary{background:#2563EB;color:#fff}
+.btn-print.primary:hover{background:#1d4ed8}
+.btn-print.secondary{background:#64748b;color:#fff}
+.btn-print.secondary:hover{background:#475569}
+
+/* ── Print styles ── */
+@media print{
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+  body{background:#fff;padding:0}
+  .toolbar{display:none!important}
+  .page{max-width:100%}
+  .prob-card,.error-log-section{box-shadow:none!important;break-inside:avoid}
+  .work-box textarea{resize:none!important}
+  input,textarea{border-color:#cbd5e1!important;background:#fff!important}
+}
 </style>
 </head>
 <body>
 <div class="page">
+
+<!-- ── Toolbar ── -->
+<div class="toolbar">
+  <button class="btn-print primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  <button class="btn-print secondary" onclick="clearAll()">🗑️ Clear All</button>
+</div>
 
 <div class="hw-header">
   <div class="week-badge">Week 4 Practice</div>
@@ -213,9 +239,25 @@ td:first-child{font-weight:700;width:32px;text-align:center}
     <textarea placeholder="Write your plan here&hellip;" spellcheck="false"></textarea></p>
   </div>
 </div>
-</div>
+
+</div><!-- /.page -->
+
 <script>
-function selectMC(label){const opts=label.closest(".mc-options");if(opts)opts.querySelectorAll(".mc-option").forEach(o=>o.classList.remove("selected"));label.classList.add("selected")}
+function selectMC(label) {
+  const opts = label.closest(".mc-options");
+  if (opts) opts.querySelectorAll(".mc-option").forEach(o => o.classList.remove("selected"));
+  label.classList.add("selected");
+}
+
+function clearAll() {
+  if (!confirm("Clear all answers? This cannot be undone.")) return;
+  document.querySelectorAll("textarea, input[type='text'], input[type='number']")
+    .forEach(el => el.value = "");
+  document.querySelectorAll("input[type='radio']")
+    .forEach(el => el.checked = false);
+  document.querySelectorAll(".mc-option.selected")
+    .forEach(el => el.classList.remove("selected"));
+}
 </script>
 </body>
 </html>
