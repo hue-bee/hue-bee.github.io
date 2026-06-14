@@ -10,7 +10,7 @@
 <style>
 :root{--bg:#F0F7FF;--surface:#FFFFFF;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#2563EB;--fdisplay:'Fredoka',sans-serif;--fbody:'Nunito',sans-serif}
 *,*::before,*::after{box-sizing:border-box}
-body{font-family:var(--fbody);background:var(--bg);color:var(--text);margin:0;padding:2rem 1rem 4rem;min-height:100vh}
+body{font-family:var(--fbody);background:var(--bg);color:var(--text);margin:0;padding:2rem 1rem 4rem;min-height:100vh;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .page{max-width:860px;margin:0 auto}
 .hw-header{text-align:center;margin-bottom:2.5rem;padding:1.8rem 2rem 1.4rem;background:var(--surface);border-radius:18px;border:1.5px solid rgba(37,99,235,.12);box-shadow:0 4px 18px rgba(37,99,235,.07)}
 .week-badge{display:inline-block;background:linear-gradient(135deg,#1e3a8a,#2563EB);color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:3px 14px;border-radius:20px;margin-bottom:.65rem}
@@ -64,52 +64,47 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 .section-divider{border:none;border-top:1.5px solid rgba(0,0,0,.08);margin:2rem 0}
 .q-label{font-weight:800;font-size:.82rem;color:#374151;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
 
-  /* ── Print / Save as PDF ─────────────────────── */
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
-
+  /* ── Print styles ─────────────────────────────── */
   @media print {
     input, textarea { border-color: #cbd5e1 !important; background: white !important; }
-    input[type="radio"] { accent-color: #000 !important; }
     textarea { resize: none !important; }
     html { background: white; }
-    body { max-width: 100%; padding: 0; }
+    body { max-width: 100%; padding: 0.5cm 1cm 1cm; }
     .no-print { display: none !important; }
+    .page { max-width: 100%; }
+    .hw-header { box-shadow: none !important; }
+    .prob-card { box-shadow: none !important; break-inside: avoid; }
   }
+  @page { margin: 1.5cm; }
 
-  /* ── Action Buttons ──────────────────────────── */
-  .no-print {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-    margin: 1rem 0 0.5rem;
-    flex-wrap: wrap;
-  }
+  /* ── Action buttons ───────────────────────────── */
   .action-btn {
-    display: inline-block;
-    background: #1e3a8a;
-    color: white;
-    font-family: var(--fdisplay, var(--ff-head, sans-serif));
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0.5rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--fbody);
+    font-size: .88rem;
+    font-weight: 700;
+    padding: .5rem 1.4rem;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(37,99,235,0.25);
-    transition: background 0.2s;
+    box-shadow: 0 3px 10px rgba(37,99,235,.28);
+    transition: background .18s, transform .1s;
   }
-  .action-btn:hover { background: #1d4ed8; }
-  .action-btn.clear { background: #64748b; }
-  .action-btn.clear:hover { background: #475569; }
+  .action-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+  .action-btn.clear-btn { background: #64748b; box-shadow: 0 3px 10px rgba(100,116,139,.25); }
+  .action-btn.clear-btn:hover { background: #475569; }
 </style>
 </head>
 <body>
-<div class="no-print">
-  <button class="action-btn" onclick="window.print()">&#128438; Print / Save as PDF</button>
-  <button class="action-btn clear" onclick="clearAll()">&#128465; Clear All</button>
-</div>
 <div class="page">
+<div class="no-print" style="display:flex;gap:.75rem;justify-content:center;margin:0 0 1.5rem;flex-wrap:wrap;">
+  <button class="action-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  <button class="action-btn clear-btn" onclick="clearAll()">🗑️ Clear All</button>
+</div>
 
 <div class="hw-header">
   <div class="week-badge">Week 1 Practice</div>
@@ -233,21 +228,14 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 </div>
 <script>
 function selectMC(label){const opts=label.closest('.mc-options');if(opts)opts.querySelectorAll('.mc-option').forEach(o=>o.classList.remove('selected'));label.classList.add('selected')}
-
-function clearAll() {
-  if (!confirm('Clear all answers?')) return;
-  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
-  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
-  document.querySelectorAll('.mc-option').forEach(o => o.classList.remove('selected'));
+function clearAll(){
+  if(!confirm('Clear all answers? This cannot be undone.'))return;
+  document.querySelectorAll('textarea').forEach(el=>{el.value='';el.style.height='';});
+  document.querySelectorAll('input[type="text"],input[type="number"]').forEach(el=>el.value='');
+  document.querySelectorAll('input[type="radio"]').forEach(el=>el.checked=false);
+  document.querySelectorAll('.mc-option').forEach(o=>o.classList.remove('selected'));
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent=' ');
 }
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('textarea').forEach(ta => {
-    ta.addEventListener('input', () => {
-      ta.style.height = 'auto';
-      ta.style.height = ta.scrollHeight + 'px';
-    });
-  });
-});
 </script>
 </body>
 </html>
