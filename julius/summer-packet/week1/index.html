@@ -63,9 +63,52 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 .reflection-box textarea{width:100%;min-height:52px;border:1.5px dashed rgba(0,0,0,.2);border-radius:8px;background:rgba(0,0,0,.01);padding:.45rem .7rem;font-size:.82rem;font-family:var(--fbody);color:#374151;line-height:1.5;outline:none;resize:vertical;box-sizing:border-box}
 .section-divider{border:none;border-top:1.5px solid rgba(0,0,0,.08);margin:2rem 0}
 .q-label{font-weight:800;font-size:.82rem;color:#374151;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
+
+  /* ── Print / Save as PDF ─────────────────────── */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+  }
+
+  /* ── Action Buttons ──────────────────────────── */
+  .no-print {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+  }
+  .action-btn {
+    display: inline-block;
+    background: #1e3a8a;
+    color: white;
+    font-family: var(--fdisplay, var(--ff-head, sans-serif));
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.25);
+    transition: background 0.2s;
+  }
+  .action-btn:hover { background: #1d4ed8; }
+  .action-btn.clear { background: #64748b; }
+  .action-btn.clear:hover { background: #475569; }
 </style>
 </head>
 <body>
+<div class="no-print">
+  <button class="action-btn" onclick="window.print()">&#128438; Print / Save as PDF</button>
+  <button class="action-btn clear" onclick="clearAll()">&#128465; Clear All</button>
+</div>
 <div class="page">
 
 <div class="hw-header">
@@ -190,6 +233,21 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 </div>
 <script>
 function selectMC(label){const opts=label.closest('.mc-options');if(opts)opts.querySelectorAll('.mc-option').forEach(o=>o.classList.remove('selected'));label.classList.add('selected')}
+
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-option').forEach(o => o.classList.remove('selected'));
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
 </script>
 </body>
 </html>
