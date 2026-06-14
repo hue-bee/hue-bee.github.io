@@ -65,10 +65,44 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 .section-divider{border:none;border-top:1.5px solid rgba(0,0,0,.08);margin:2rem 0}
 .q-label{font-weight:800;font-size:.82rem;color:#374151;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
 .diagram-wrap{background:#fff;border:1.5px solid rgba(0,0,0,.09);border-radius:12px;padding:.6rem;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:.6rem}
+
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html, body { background: white !important; }
+    .no-print { display: none !important; }
+  }
+
+  /* ── Print / Clear buttons ───────────────────── */
+  .print-btn {
+    display: inline-block;
+    background: #374151;
+    color: white;
+    font-family: var(--fdisplay);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1f2937; }
+  .print-btn.clear { background: #64748b; }
+  .print-btn.clear:hover { background: #475569; }
 </style>
 </head>
 <body>
 <div class="page">
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:0 0 1rem;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()">&#x1F5A8;&#xFE0F; Print / Save as PDF</button>
+  <button class="print-btn clear" onclick="clearAll()">&#x1F5D1;&#xFE0F; Clear All</button>
+</div>
+
 
 <div class="hw-header">
   <div class="week-badge">Mixed Review Practice</div>
@@ -191,6 +225,18 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 </div>
 <script>
 function selectMC(label){const opts=label.closest(".mc-options");if(opts)opts.querySelectorAll(".mc-option").forEach(o=>o.classList.remove("selected"));label.classList.add("selected")}
+function clearAll(){
+  if(!confirm('Clear all answers?'))return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el=>el.value='');
+  document.querySelectorAll('input[type=radio]').forEach(el=>el.checked=false);
+  document.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent='\u00a0');
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('textarea').forEach(ta=>{
+    ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});
+  });
+});
 </script>
 </body>
 </html>
