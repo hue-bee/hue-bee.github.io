@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice 1 — Week 2: Units &amp; Conversions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0F7FF;--surface:#FFFFFF;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#2563EB;--fdisplay:'Fredoka',sans-serif;--fbody:'Nunito',sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{font-family:var(--fbody);background:var(--bg);color:var(--text);margin:0;padding:2rem 1rem 4rem;min-height:100vh}
+.page{max-width:860px;margin:0 auto}
+.hw-header{text-align:center;margin-bottom:2.5rem;padding:1.8rem 2rem 1.4rem;background:var(--surface);border-radius:18px;border:1.5px solid rgba(37,99,235,.12);box-shadow:0 4px 18px rgba(37,99,235,.07)}
+.week-badge{display:inline-block;background:linear-gradient(135deg,#1e3a8a,#2563EB);color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:3px 14px;border-radius:20px;margin-bottom:.65rem}
+.hw-header h1{font-family:var(--fdisplay);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 .3rem}
+.hw-header .subtitle{font-size:.88rem;color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.meta-row{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+.meta-item{font-size:.82rem;color:var(--text2);font-weight:600}
+.meta-item span{display:inline-block;border-bottom:1.5px solid #cbd5e1;min-width:80px;margin-left:6px}
+.section-header{display:flex;align-items:center;gap:.75rem;margin:2.2rem 0 1rem}
+.section-badge{display:inline-block;background:linear-gradient(135deg,#374151,#1f2937);color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:3px 12px;border-radius:20px}
+.section-header h2{font-family:var(--fdisplay);font-size:1.35rem;font-weight:700;color:#111827;margin:0}
+.instr{background:rgba(37,99,235,.05);border:1.5px solid rgba(37,99,235,.15);border-radius:10px;padding:.65rem 1rem;font-size:.83rem;color:var(--text2);margin-bottom:1.2rem;font-weight:600}
+.prob-card{background:var(--surface);border:1.5px solid rgba(0,0,0,.09);border-radius:14px;padding:1rem 1.1rem .9rem;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:1.1rem}
+.prob-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem}
+.prob-num{font-weight:800;font-size:.9rem;color:#111827}
+.lvl-badge{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:2px 9px;border-radius:20px}
+.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:#fff}
+.prob-text{font-size:.9rem;color:var(--text2);line-height:1.65;margin-bottom:.6rem}
+.prob-text strong{color:#111827}
+.formula-hint{background:linear-gradient(135deg,rgba(0,0,0,.04),rgba(0,0,0,.01));border:1.5px solid rgba(0,0,0,.14);border-radius:8px;padding:.3rem .8rem;font-size:.82rem;font-weight:700;color:#111827;font-family:var(--fdisplay);display:inline-block;margin-bottom:.55rem}
+.work-box{border:1.5px dashed rgba(0,0,0,.22);border-radius:8px;background:rgba(0,0,0,.015);min-height:80px;margin-top:.5rem}
+.work-box textarea{width:100%;min-height:80px;border:none;background:transparent;resize:vertical;padding:.55rem .8rem;font-size:.83rem;color:#374151;font-family:var(--fbody);line-height:1.55;outline:none;box-sizing:border-box}
+.work-box textarea::placeholder{color:#9ca3af;font-style:italic}
+.work-box-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;padding:.35rem .8rem 0;display:block}
+.answer-line{display:flex;align-items:center;gap:.5rem;margin-top:.45rem;font-size:.83rem;font-weight:700;color:#374151;flex-wrap:wrap}
+.ans-blank{border-bottom:2px solid #374151;min-width:120px;height:1.3rem;display:inline-block}
+.trap-card{border-left:4px solid #ef4444;background:#fff7f6;border-radius:0 9px 9px 0;padding:.5rem .85rem;font-size:.79rem;color:#374151;margin-top:.5rem}
+.trap-card strong{color:#b91c1c}
+.passage-box{background:#f8faff;border:1.5px solid rgba(37,99,235,.14);border-radius:12px;padding:1rem 1.2rem;font-size:.87rem;color:#1e293b;line-height:1.82;margin-bottom:1.1rem}
+.passage-box p{margin:0 0 .55rem}
+.passage-box p:last-child{margin-bottom:0}
+.passage-instr{background:rgba(37,99,235,.06);border-radius:8px;padding:.5rem .85rem;font-size:.8rem;color:#334155;font-weight:600;margin-bottom:.85rem}
+.mc-options{display:flex;flex-direction:column;gap:.3rem;margin-top:.4rem}
+.mc-option{display:flex;align-items:flex-start;gap:.45rem;padding:.3rem .55rem;border-radius:7px;border:1.5px solid rgba(0,0,0,.1);background:#fafafa;cursor:pointer;font-size:.79rem;color:#374151;transition:background .15s,border-color .15s;user-select:none}
+.mc-option:hover{background:#f0f0f0;border-color:rgba(0,0,0,.18)}
+.mc-option input[type="radio"]{display:none}
+.mc-option.selected{background:#e5e7eb;border-color:#374151;font-weight:700}
+.opt-letter{font-weight:800;min-width:1rem;color:#6b7280}
+.short-ans{border:1.5px solid rgba(0,0,0,.18);border-radius:8px;background:#fff;min-height:60px;margin-top:.4rem;padding:.45rem .7rem;font-size:.82rem;color:#374151;font-family:var(--fbody);line-height:1.5;width:100%;resize:vertical;outline:none;box-sizing:border-box}
+.short-ans::placeholder{color:#9ca3af;font-style:italic}
+.error-log-section{margin-top:2.5rem;background:var(--surface);border-radius:14px;border:1.5px solid rgba(0,0,0,.09);padding:1.2rem 1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.error-log-section h3{font-family:var(--fdisplay);font-size:1.1rem;font-weight:700;color:#111827;margin:0 0 .5rem}
+.error-log-section>p{font-size:.82rem;color:#475569;margin:0 0 .85rem}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{background:#f1f5f9;color:#374151;font-weight:700;text-align:left;padding:.5rem .65rem;border-bottom:2px solid #e2e8f0}
+td{padding:.5rem .65rem;border-bottom:1px solid #f1f5f9;color:#334155;vertical-align:top}
+td:first-child{font-weight:700;width:32px;text-align:center}
+.reflection-box{margin-top:1.1rem}
+.reflection-box p{font-size:.83rem;color:#334155;font-weight:600;margin-bottom:.3rem}
+.reflection-box textarea{width:100%;min-height:52px;border:1.5px dashed rgba(0,0,0,.2);border-radius:8px;background:rgba(0,0,0,.01);padding:.45rem .7rem;font-size:.82rem;font-family:var(--fbody);color:#374151;line-height:1.5;outline:none;resize:vertical;box-sizing:border-box}
+.section-divider{border:none;border-top:1.5px solid rgba(0,0,0,.08);margin:2rem 0}
+.q-label{font-weight:800;font-size:.82rem;color:#374151;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
+</style>
+</head>
+<body>
+<div class="page">
 
+<div class="hw-header">
+  <div class="week-badge">Week 1 Practice</div>
+  <h1>Units &amp; Conversions</h1>
+  <div class="subtitle">SHSAT Math &amp; ELA Practice</div>
+  <div class="meta-row">
+    <div class="meta-item">Name <span></span></div>
+    <div class="meta-item">Date <span></span></div>
+    <div class="meta-item">Score <span></span></div>
+  </div>
+</div>
+
+<div class="section-header">
+  <div class="section-badge">Math</div>
+  <h2>Unit Conversion Problems</h2>
+</div>
+<div class="instr">Use the Bridge Method: &#9312; Write the conversion fact &#9313; Decide multiply or divide &#9314; Sanity-check the label. Show ALL work. Circle your final answer.</div>
+
+<div class="prob-card">
+  <div class="prob-header"><span class="prob-num">Problem 1</span><span class="lvl-badge lvl-2">L2</span></div>
+  <div class="prob-text">A swimming pool is <strong>27 feet</strong> long. Convert this length to <strong>yards</strong>.</div>
+  <div class="formula-hint">1 yard = 3 feet &mdash; Going UP &rarr; divide</div>
+  <span class="work-box-label">Work</span>
+  <div class="work-box"><textarea placeholder="Step 1: 1 yd = 3 ft  |  Step 2: going UP (ft &rarr; yd) so divide  |  27 &div; 3 = ?" spellcheck="false"></textarea></div>
+  <div class="answer-line">Answer: <span class="ans-blank"></span> yards</div>
+</div>
+
+<div class="prob-card" style="border-left:4px solid #6b7280">
+  <div class="prob-header"><span class="prob-num">Problem 2</span><span class="lvl-badge lvl-4">L4</span></div>
+  <div class="prob-text">A relay race is <strong>2.5 miles</strong> long. There are <strong>4 runners</strong> per team, each running an equal segment. How many <strong>feet</strong> does each runner cover?</div>
+  <div class="formula-hint">1 mile = 5,280 feet &mdash; then divide by 4</div>
+  <div class="trap-card"><strong>SHSAT Trap:</strong> Don&#39;t forget the final division by 4. The question asks per runner, not total distance!</div>
+  <span class="work-box-label">Work</span>
+  <div class="work-box"><textarea placeholder="Step 1: 2.5 &times; 5,280 = total feet  |  Step 2: total &div; 4 = each runner&#39;s feet" spellcheck="false" style="min-height:96px"></textarea></div>
+  <div class="answer-line">Each runner covers: <span class="ans-blank"></span> feet</div>
+</div>
+
+<hr class="section-divider">
+
+<div class="section-header">
+  <div class="section-badge" style="background:linear-gradient(135deg,#4b5563,#374151)">ELA</div>
+  <h2>Reading &mdash; Text Structure</h2>
+</div>
+<div class="passage-instr">&#128214; Read the passage <strong>once</strong> for understanding. Annotate: <strong>circle signal words</strong>, <strong>underline the main idea</strong> of each paragraph. Answer all 5 questions.</div>
+
+<div class="passage-box">
+  <p><strong>[&para;1]</strong> Every year, engineers who design city water systems face the same invisible problem: how to move millions of gallons of water from reservoirs to kitchens, hospitals, and fire hydrants &mdash; quietly, reliably, and without anyone noticing. The solution is a hierarchy of pipes. The largest mains carry water in units of hundreds of thousands of gallons. As a result, smaller branches split off and carry that flow into neighborhoods. Finally, the smallest lines deliver exact quantities to each building &mdash; often measured in fractions of a gallon per second.</p>
+  <p><strong>[&para;2]</strong> The challenge is not just distance, but unit translation. A pressure reading might be given in pounds per square inch; a pipe&#39;s diameter in millimeters; a daily usage figure in millions of gallons. Engineers must therefore convert constantly &mdash; between imperial and metric, between rates and totals, between small-scale measurements and city-wide flows. A single conversion error, in contrast to a simple calculation error, can cause a pipeline to overpressure and burst.</p>
+  <p><strong>[&para;3]</strong> This is precisely why engineers use what they call dimensional analysis &mdash; a method of chaining conversion factors together so that units cancel out cleanly. The process is always the same: write the given measurement, multiply by a conversion fraction, and check that the unwanted units cancel. However careful the calculation, the final sanity check &mdash; does this answer make sense? &mdash; is never skipped.</p>
+  <p><strong>[&para;4]</strong> The same logic applies to everyday problems. A swimmer asking how many laps equal a mile, a baker converting a recipe from cups to milliliters, a driver calculating fuel cost per kilometer &mdash; all are performing dimensional analysis. The bridge between a measurement you have and a measurement you need is always a conversion fact. The only question is whether to multiply or divide.</p>
+</div>
+
+<div class="prob-card">
+  <div class="q-label">Q1 <span class="lvl-badge lvl-2">L2</span></div>
+  <div class="prob-text">What is the <em>primary</em> organizational structure of this passage?</div>
+  <div class="mc-options">
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1"><span class="opt-letter">A</span><span>Sequence &mdash; steps of a water treatment process in order</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1"><span class="opt-letter">B</span><span>Compare/Contrast &mdash; imperial vs. metric measurement systems</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1"><span class="opt-letter">C</span><span>Problem/Solution &mdash; conversion errors cause failures; dimensional analysis is the fix</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1"><span class="opt-letter">D</span><span>Description &mdash; facts about how city water systems work</span></label>
+  </div>
+</div>
+
+<div class="prob-card">
+  <div class="q-label">Q2 <span class="lvl-badge lvl-2">L2</span></div>
+  <div class="prob-text">According to Paragraph 1, what role do the <em>smallest</em> pipe lines play?</div>
+  <div class="mc-options">
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2"><span class="opt-letter">A</span><span>They carry hundreds of thousands of gallons from reservoirs</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2"><span class="opt-letter">B</span><span>They split the flow into neighborhoods</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2"><span class="opt-letter">C</span><span>They deliver exact quantities to each individual building</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2"><span class="opt-letter">D</span><span>They measure pressure in pounds per square inch</span></label>
+  </div>
+</div>
+
+<div class="prob-card">
+  <div class="q-label">Q3 <span class="lvl-badge lvl-3">L3</span></div>
+  <div class="prob-text">In Paragraph 2, the phrase "in contrast to a simple calculation error" signals that:</div>
+  <div class="mc-options">
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3"><span class="opt-letter">A</span><span>Calculation errors are more dangerous than conversion errors</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3"><span class="opt-letter">B</span><span>A conversion error has a worse consequence &mdash; bursting pipes &mdash; than a regular math slip</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3"><span class="opt-letter">C</span><span>Engineers rarely make calculation errors</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q3"><span class="opt-letter">D</span><span>Metric units are less accurate than imperial units</span></label>
+  </div>
+</div>
+
+<div class="prob-card">
+  <div class="q-label">Q4 <span class="lvl-badge lvl-3">L3</span></div>
+  <div class="prob-text">Which signal word in Paragraph 3 most clearly indicates a <em>contrast</em>?</div>
+  <div class="mc-options">
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4"><span class="opt-letter">A</span><span>"precisely why"</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4"><span class="opt-letter">B</span><span>"The process is always the same"</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4"><span class="opt-letter">C</span><span>"However careful"</span></label>
+    <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4"><span class="opt-letter">D</span><span>"chaining conversion factors"</span></label>
+  </div>
+</div>
+
+<div class="prob-card">
+  <div class="q-label">Q5 <span class="lvl-badge lvl-4">L4</span></div>
+  <div class="prob-text">In Paragraph 4, the author compares a swimmer, a baker, and a driver to engineers doing dimensional analysis. What <em>central idea</em> does this comparison support? Cite <strong>one specific phrase</strong> from the passage in your answer.</div>
+  <textarea class="short-ans" placeholder="Name the central idea + quote one exact phrase. Example: The author argues that... as shown by the phrase &#39;...&#39;" spellcheck="false"></textarea>
+</div>
+
+<div class="error-log-section">
+  <h3>&#128269; Error Log</h3>
+  <p>For every problem you got wrong, fill in a row. Be honest &mdash; this helps us target the right fixes in session!</p>
+  <table>
+    <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th>Error Type</th></tr>
+    <tr><td>1</td><td></td><td></td><td></td></tr>
+    <tr><td>2</td><td></td><td></td><td></td></tr>
+    <tr><td>3</td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="reflection-box">
+    <p>After reviewing your errors, complete these sentences:</p>
+    <p style="margin-top:.6rem">The conversion rule I need to review most is:<br>
+    <textarea placeholder="e.g. going UP the ladder means&hellip;" spellcheck="false"></textarea></p>
+    <p style="margin-top:.5rem">One thing I will do differently next time is:<br>
+    <textarea placeholder="Write your plan here&hellip;" spellcheck="false"></textarea></p>
+  </div>
+</div>
+
+</div>
+<script>
+function selectMC(label){const opts=label.closest('.mc-options');if(opts)opts.querySelectorAll('.mc-option').forEach(o=>o.classList.remove('selected'));label.classList.add('selected')}
+</script>
+</body>
+</html>
