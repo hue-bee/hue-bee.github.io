@@ -62,10 +62,46 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 .reflection-box textarea{width:100%;min-height:52px;border:1.5px dashed rgba(0,0,0,.2);border-radius:8px;background:rgba(0,0,0,.01);padding:.45rem .7rem;font-size:.82rem;font-family:var(--fbody);color:#374151;line-height:1.5;outline:none;resize:vertical;box-sizing:border-box}
 .section-divider{border:none;border-top:1.5px solid rgba(0,0,0,.08);margin:2rem 0}
 .q-label{font-weight:800;font-size:.82rem;color:#374151;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
+
+/* ── Print / PDF ─────────────────────────────── */
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .5rem 1.4rem;
+  border: none;
+  border-radius: 30px;
+  font-family: var(--fbody);
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,.15);
+  transition: opacity .18s, transform .12s;
+}
+.toolbar-btn:hover { opacity: .88; transform: translateY(-1px); }
+.toolbar-btn:active { transform: translateY(0); }
+.btn-print { background: linear-gradient(135deg,#1d4ed8,#2563eb); color: #fff; }
+.btn-clear { background: linear-gradient(135deg,#4b5563,#374151); color: #fff; }
+.action-toolbar { display: flex; gap: .75rem; justify-content: center; margin: 1.2rem 0 .6rem; flex-wrap: wrap; }
+@media print {
+  .action-toolbar { display: none !important; }
+  body { background: #fff; padding: .5rem; }
+  .page { max-width: 100%; }
+  textarea { border-color: #cbd5e1 !important; background: white !important; resize: none !important; }
+  .short-ans { border-color: #cbd5e1 !important; background: white !important; resize: none !important; }
+  .prob-card { box-shadow: none !important; border: 1px solid #cbd5e1 !important; }
+  .hw-header { box-shadow: none !important; }
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
 </style>
 </head>
 <body>
 <div class="page">
+<div class="action-toolbar">
+  <button class="toolbar-btn btn-print" onclick="window.print()">&#128424; Print / Save as PDF</button>
+  <button class="toolbar-btn btn-clear" onclick="clearAll()">&#128465; Clear All</button>
+</div>
 
 <div class="hw-header">
   <div class="week-badge">Week 2 Practice</div>
@@ -189,7 +225,27 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 
 </div>
 <script>
-function selectMC(label){const opts=label.closest(".mc-options");if(opts)opts.querySelectorAll(".mc-option").forEach(o=>o.classList.remove("selected"));label.classList.add("selected")}
+function selectMC(label){
+  const opts=label.closest(".mc-options");
+  if(opts) opts.querySelectorAll(".mc-option").forEach(o=>o.classList.remove("selected"));
+  label.classList.add("selected");
+}
+function clearAll(){
+  if(!confirm('Clear all answers? This cannot be undone.')) return;
+  document.querySelectorAll('textarea').forEach(el => { el.value = ''; el.style.height = 'auto'; });
+  document.querySelectorAll('.short-ans').forEach(el => el.value = '');
+  document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-option').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = ' ');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea, .short-ans').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
 </script>
 </body>
 </html>
