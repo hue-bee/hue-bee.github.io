@@ -77,6 +77,7 @@ td:first-child{font-weight:700;width:32px;text-align:center}
     .no-print { display: none !important; }
     .page-break { page-break-before: always; }
     .page { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+    .annotation-toolbar { display: none !important; }
   }
 
   /* ── Print button ────────────────────────────── */
@@ -97,6 +98,102 @@ td:first-child{font-weight:700;width:32px;text-align:center}
   .print-btn:hover { background: #1f2937; }
   .print-btn.clear-btn { background: #64748b; }
   .print-btn.clear-btn:hover { background: #475569; }
+
+  /* ── Annotation System ───────────────────────── */
+  .annotation-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.96);
+    border: 1.5px solid rgba(0,0,0,0.10);
+    border-radius: 12px;
+    padding: 5px 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+  }
+  .annot-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 9px;
+    border-radius: 7px;
+    border: 1.5px solid rgba(0,0,0,0.10);
+    background: #f8f8f8;
+    color: #374151;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    font-family: 'Nunito', sans-serif;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+  .annot-btn.active { background: #374151; color: white; border-color: #374151; }
+  .annot-btn.active:hover { background: #1f2937; }
+  .annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+  .annot-color-row { display: flex; align-items: center; gap: 4px; }
+  .annot-color-swatch {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+    cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+  }
+  .annot-color-swatch:hover { transform: scale(1.18); }
+  .annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+  .annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+  .annotatable-poem { position: relative; cursor: text; user-select: text; }
+  .poem-highlight { border-radius: 3px; padding: 0 1px; }
+  .poem-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+  .poem-strikethrough { text-decoration: line-through; }
+  .poem-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+  .poem-note {
+    display: inline-block;
+    width: 14px; height: 14px;
+    background: #374151; color: white;
+    border-radius: 50%;
+    font-size: 0.6rem; font-weight: 800;
+    text-align: center; line-height: 14px;
+    cursor: pointer;
+    position: relative;
+    vertical-align: super;
+    margin-left: 2px;
+    font-style: normal;
+  }
+  .poem-note .note-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    font-size: 0.72rem;
+    padding: 5px 9px;
+    border-radius: 8px;
+    z-index: 200;
+    pointer-events: none;
+    width: max-content;
+    max-width: 200px;
+    white-space: normal;
+  }
+  .poem-note:hover .note-tooltip { display: block; }
+  .clear-annotations-btn {
+    margin-left: auto;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: #fee2e2;
+    border: 1.5px solid #fca5a5;
+    color: #b91c1c;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: background 0.15s;
+  }
+  .clear-annotations-btn:hover { background: #fecaca; }
 </style>
 </head>
 <body>
@@ -127,32 +224,29 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 <div class="prob-card">
   <div class="prob-header"><span class="prob-num">Problem 1</span><span class="lvl-badge lvl-2">L2</span></div>
   <div class="prob-text">Two lines intersect forming four angles. One angle measures <strong>52&deg;</strong>. Find the measures of <strong>all four angles</strong>. Label each and state which rule you used.</div>
-  <div class="formula-hint">Vertical angles are equal &nbsp;|&nbsp; Adjacent angles on a line sum to 180&deg;</div>
-  <div class="diagram-wrap">
-    <svg viewBox="0 0 200 160" width="200" height="160">
-      <line x1="20" y1="30" x2="180" y2="130" stroke="#374151" stroke-width="2.5"/>
-      <line x1="180" y1="30" x2="20" y2="130" stroke="#4b5563" stroke-width="2.5"/>
-      <circle cx="100" cy="80" r="4" fill="#1f2937"/>
-      <text x="100" y="55" font-size="13" font-weight="800" fill="#374151" text-anchor="middle" font-family="Nunito,sans-serif">52&deg;</text>
-      <text x="130" y="82" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle" font-family="Nunito,sans-serif">b</text>
-      <text x="100" y="112" font-size="13" font-weight="800" fill="#374151" text-anchor="middle" font-family="Nunito,sans-serif">c</text>
-      <text x="66" y="82" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle" font-family="Nunito,sans-serif">d</text>
-      <text x="100" y="152" font-size="10" fill="#64748b" text-anchor="middle" font-family="Nunito,sans-serif">Find b, c, and d</text>
-    </svg>
-  </div>
+  <div class="formula-hint">Vertical angles = equal &nbsp;|&nbsp; Supplementary angles = 180&deg;</div>
   <span class="work-box-label">Work</span>
-  <div class="work-box"><textarea placeholder="c = 52&deg; (vertical angles are equal)  |  b = 180 &minus; 52 = ? (supplementary)  |  d = b (vertical)" spellcheck="false"></textarea></div>
-  <div class="answer-line">b = <span class="ans-blank" style="min-width:60px"></span> &emsp; c = <span class="ans-blank" style="min-width:60px"></span> &emsp; d = <span class="ans-blank" style="min-width:60px"></span></div>
+  <div class="work-box"><textarea placeholder="Vertical angle = 52°  |  Supplementary = 180 − 52 = ?  |  Label all 4" spellcheck="false"></textarea></div>
+  <div class="answer-line">Angles: <span class="ans-blank"></span>, <span class="ans-blank"></span>, <span class="ans-blank"></span>, <span class="ans-blank"></span></div>
 </div>
 
-<div class="prob-card" style="border-left:4px solid #6b7280">
-  <div class="prob-header"><span class="prob-num">Problem 2</span><span class="lvl-badge lvl-4">L4</span></div>
+<div class="prob-card">
+  <div class="prob-header"><span class="prob-num">Problem 2</span><span class="lvl-badge lvl-2">L2</span></div>
+  <div class="prob-text">Two angles are <strong>complementary</strong>. One angle is <strong>3x + 4</strong> and the other is <strong>2x &minus; 9</strong>. Find x and each angle.</div>
+  <div class="formula-hint">Complementary = 90&deg;</div>
+  <span class="work-box-label">Work</span>
+  <div class="work-box"><textarea placeholder="(3x+4)+(2x−9)=90 → 5x−5=90 → x=?" spellcheck="false"></textarea></div>
+  <div class="answer-line">x = <span class="ans-blank" style="min-width:50px"></span> &emsp; Angles: <span class="ans-blank"></span> and <span class="ans-blank"></span></div>
+</div>
+
+<div class="prob-card">
+  <div class="prob-header"><span class="prob-num">Problem 3</span><span class="lvl-badge lvl-3">L3</span></div>
   <div class="prob-text">In triangle ABC, the interior angles are <strong>(3x + 5)&deg;</strong>, <strong>(2x &minus; 10)&deg;</strong>, and <strong>(x + 15)&deg;</strong>.<br>
   <strong>(a)</strong> Find x. &emsp; <strong>(b)</strong> Find each angle. &emsp; <strong>(c)</strong> An exterior angle is drawn at vertex C by extending side BC. Find the exterior angle measure.</div>
   <div class="formula-hint">A + B + C = 180&deg; &nbsp;|&nbsp; Exterior angle = sum of two remote interior angles</div>
   <div class="trap-card"><strong>SHSAT Trap:</strong> Don&rsquo;t report x as your answer. You MUST substitute back to find the actual angle degrees. Very common error!</div>
   <span class="work-box-label">Work</span>
-  <div class="work-box"><textarea placeholder="(a) (3x+5)+(2x&minus;10)+(x+15)=180 &rarr; 6x+10=180 &rarr; x=?  |  (b) sub in each  |  (c) ext = angle A + angle B" spellcheck="false" style="min-height:110px"></textarea></div>
+  <div class="work-box"><textarea placeholder="(a) (3x+5)+(2x−10)+(x+15)=180 → 6x+10=180 → x=?  |  (b) sub in each  |  (c) ext = angle A + angle B" spellcheck="false" style="min-height:110px"></textarea></div>
   <div class="answer-line">x = <span class="ans-blank" style="min-width:50px"></span> &emsp; Angles: <span class="ans-blank"></span>, <span class="ans-blank"></span>, <span class="ans-blank"></span> &emsp; Exterior: <span class="ans-blank" style="min-width:60px"></span></div>
 </div>
 
@@ -164,23 +258,45 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 </div>
 <div class="passage-instr">&#128214; Read the poem carefully. Identify the <strong>speaker</strong>, name the <strong>tone</strong> precisely, and <strong>quote evidence</strong> from the text. Answer all 5 questions.</div>
 
-<div class="poem-box">
-  <p style="font-style:normal;font-weight:700;font-size:.82rem;margin-bottom:.65rem;color:#374151">Read This Poem</p>
-  <p>My father drew straight lines for a living &mdash;<br>
-  property edges, fence rows, the angle<br>
-  at which a wall must lean to hold its ground.<br>
-  I thought it was the dullest work on earth.</p>
-  <p>He told me once that every angle has a name:<br>
-  acute for sharp things, obtuse for the wide,<br>
-  supplementary when two halves make a flat line,<br>
-  complementary when two pieces fill a corner.</p>
-  <p>I laughed. He kept his ruler straight and said<br>
-  nothing more than: <em>everything leans at some angle &mdash;<br>
-  the trick is knowing which rule it follows.</em></p>
-  <p>Now I teach my own students about lines.<br>
-  I write the same four families on the board<br>
-  and I hear, beneath my chalk, my father&rsquo;s voice,<br>
-  patient as a plumb line, waiting to be right.</p>
+<!-- Annotation Toolbar + Annotatable Poem -->
+<div class="poem-box" style="padding:0;overflow:hidden;">
+  <div style="padding:0.75rem 1.2rem 0.6rem;">
+    <p style="font-style:normal;font-weight:700;font-size:.82rem;margin:0 0 .5rem;color:#374151">Read This Poem</p>
+    <div class="annotation-toolbar" id="toolbar-poem">
+      <span class="annot-label">Tool:</span>
+      <button class="annot-btn active" data-tool="highlight" onclick="setTool('poem','highlight',this)">🖊 Highlight</button>
+      <button class="annot-btn" data-tool="underline" onclick="setTool('poem','underline',this)">U&#x332; Underline</button>
+      <button class="annot-btn" data-tool="outline" onclick="setTool('poem','outline',this)">&#9634; Outline</button>
+      <button class="annot-btn" data-tool="note" onclick="setTool('poem','note',this)">&#128204; Note</button>
+      <div class="annot-sep"></div>
+      <span class="annot-label">Color:</span>
+      <div class="annot-color-row" id="colors-poem">
+        <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setColor('poem','#fef08a',this)" title="Yellow"></div>
+        <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setColor('poem','#86efac',this)" title="Green"></div>
+        <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setColor('poem','#93c5fd',this)" title="Blue"></div>
+        <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setColor('poem','#fca5a5',this)" title="Pink"></div>
+        <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setColor('poem','#c4b5fd',this)" title="Purple"></div>
+      </div>
+      <button class="clear-annotations-btn" onclick="clearAnnotations('poem')">&#10005; Clear</button>
+    </div>
+    <div class="annotatable-poem" id="poem-poem" style="font-size:.88rem;color:#1e293b;line-height:1.85;font-style:italic;">
+      <p style="margin:0 0 .7rem">My father drew straight lines for a living &mdash;<br>
+      property edges, fence rows, the angle<br>
+      at which a wall must lean to hold its ground.<br>
+      I thought it was the dullest work on earth.</p>
+      <p style="margin:0 0 .7rem">He told me once that every angle has a name:<br>
+      acute for sharp things, obtuse for the wide,<br>
+      supplementary when two halves make a flat line,<br>
+      complementary when two pieces fill a corner.</p>
+      <p style="margin:0 0 .7rem">I laughed. He kept his ruler straight and said<br>
+      nothing more than: <em>everything leans at some angle &mdash;<br>
+      the trick is knowing which rule it follows.</em></p>
+      <p style="margin:0">Now I teach my own students about lines.<br>
+      I write the same four families on the board<br>
+      and I hear, beneath my chalk, my father&rsquo;s voice,<br>
+      patient as a plumb line, waiting to be right.</p>
+    </div>
+  </div>
 </div>
 
 <div class="prob-card">
@@ -251,18 +367,195 @@ td:first-child{font-weight:700;width:32px;text-align:center}
   </div>
 </div>
 </div>
+
 <script>
+/* ── MC Selection ── */
 function selectMC(label){const opts=label.closest(".mc-options");if(opts)opts.querySelectorAll(".mc-option").forEach(o=>o.classList.remove("selected"));label.classList.add("selected")}
+
+/* ── Clear All ── */
 function clearAll(){
   if(!confirm('Clear all answers?')) return;
   document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el=>el.value='');
   document.querySelectorAll('input[type=radio]').forEach(el=>el.checked=false);
   document.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
   document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent='\u00a0');
+  clearAnnotations('poem');
 }
+
+/* ── Auto-resize textareas ── */
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('textarea').forEach(ta=>{
     ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});
+  });
+});
+
+/* ── Annotation System ── */
+const annotState = {
+  'poem': { tool: 'highlight', color: '#fef08a', noteCount: 0 }
+};
+
+function setTool(slideId, tool, btn) {
+  annotState[slideId].tool = tool;
+  const toolbar = document.getElementById('toolbar-' + slideId);
+  toolbar.querySelectorAll('.annot-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setColor(slideId, color, swatch) {
+  annotState[slideId].color = color;
+  const colorRow = document.getElementById('colors-' + slideId);
+  colorRow.querySelectorAll('.annot-color-swatch').forEach(s => s.classList.remove('active'));
+  swatch.classList.add('active');
+}
+
+function clearAnnotations(slideId) {
+  const poem = document.getElementById('poem-' + slideId);
+  if (!poem) return;
+  poem.querySelectorAll('.note-input-wrapper').forEach(el => el.remove());
+  poem.querySelectorAll('.poem-note').forEach(el => el.remove());
+  poem.querySelectorAll('.poem-highlight, .poem-underline, .poem-outline').forEach(el => {
+    const parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  annotState[slideId].noteCount = 0;
+}
+
+function applyAnnotation(slideId, range) {
+  const state = annotState[slideId];
+  if (!range || range.collapsed) return;
+  const tool = state.tool;
+  const color = state.color;
+
+  if (tool === 'note') {
+    let pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'poem-highlight poem-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'poem-highlight poem-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    const inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note…';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:120px;color:#374151;background:transparent;font-family:inherit;';
+    const confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '✓';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '✕';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      const noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        const p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      state.noteCount++;
+      const noteNum = state.noteCount;
+      pendingSpan.className = 'poem-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      const noteEl = document.createElement('span');
+      noteEl.className = 'poem-note';
+      noteEl.textContent = noteNum;
+      const tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = '📝 ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', () => {
+      inputWrapper.remove();
+      const p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    const span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'poem-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'poem-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'poem-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      const span = document.createElement('span');
+      if (tool === 'highlight') {
+        span.className = 'poem-highlight';
+        span.style.backgroundColor = color;
+        span.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span.className = 'poem-underline';
+        span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span.className = 'poem-outline';
+        span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+['poem'].forEach(slideId => {
+  const poem = document.getElementById('poem-' + slideId);
+  if (!poem) return;
+  poem.addEventListener('mouseup', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!poem.contains(range.commonAncestorContainer)) return;
+    applyAnnotation(slideId, range);
+  });
+  poem.addEventListener('touchend', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!poem.contains(range.commonAncestorContainer)) return;
+    setTimeout(() => applyAnnotation(slideId, range), 100);
   });
 });
 </script>
