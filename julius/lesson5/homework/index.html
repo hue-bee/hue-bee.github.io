@@ -1,1 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 Homework — Triangles &amp; Quadrilaterals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    /* Header / chrome palette — kept from homework.html */
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Fredoka', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header (chrome — kept blue from homework.html) ── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header (chrome) ─────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip (chrome — blue) ───────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill (GRAYSCALE — matches lesson deck) ── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card (GRAYSCALE problems/diagrams) ── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  /* Socratic hint — grayscale, matching lesson problem cards */
+  .hint {
+    font-size: 0.76rem;
+    font-style: italic;
+    color: #4b5563;
+    background: #f0f0f0;
+    border-left: 3px solid #9ca3af;
+    border-radius: 0 6px 6px 0;
+    padding: 0.3rem 0.6rem;
+    margin: 0.4rem 0;
+  }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .ans-input {
+    flex:1; border:none; border-bottom:1.5px solid var(--border);
+    font-family:var(--ff-body); font-size:0.82rem; font-weight:700;
+    color:var(--ink); background:transparent; outline:none; padding:1px 6px;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams (GRAYSCALE — matches lesson) ── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Poem box (GRAYSCALE — matches lesson) ────── */
+  .poem-box {
+    background: #f5f5f5;
+    border: 1.5px solid var(--border);
+    border-left: 4px solid #4b5563;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.9rem;
+  }
+  .poem-title {
+    font-family: var(--ff-head);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+  .poem-text {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: #334155;
+    font-style: italic;
+  }
+  .poem-text p { margin-bottom: 0.55rem; }
+  .poem-text p:last-child { margin-bottom: 0; }
+
+  /* ── MC question (GRAYSCALE problems) ────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: #374151;
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+
+  /* ── Error log (chrome — coral) ──────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box (chrome — green) ─────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner (chrome — blue gradient) ───── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .sc-input {
+    width:2.4rem; background:transparent; border:none;
+    border-bottom:2px solid rgba(255,255,255,0.6); color:white;
+    font-family:var(--ff-head); font-size:1.1rem; font-weight:700;
+    text-align:center; outline:none;
+  }
+
+  /* ── Formula strip (chrome — blue) ───────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Device key (GRAYSCALE — matches lesson) ──── */
+  .device-key {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+  }
+  .device {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-left: 3px solid #6b7280;
+    border-radius: 8px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.78rem;
+    color: #334155;
+    line-height: 1.5;
+  }
+  .device strong { color: #374151; }
+
+  /* ── Meta name input ─────────────────────────── */
+  .name-input {
+    flex:1; border:none; border-bottom:1.5px solid var(--border);
+    font-family:var(--ff-body); font-size:0.82rem; color:var(--ink);
+    background:transparent; outline:none; padding:1px 4px;
+  }
+
+  /* ── Print button (chrome — blue) ────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1 — TRIANGLES
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>🔺 Week 5 Homework</h1>
+      <div class="subtitle">Geometry: Triangles &amp; Quadrilaterals (Part 2) &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" class="name-input" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" class="name-input" placeholder=""></div>
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="10" class="sc-input" placeholder="__"> / 10</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="6" class="sc-input" style="width:2rem;" placeholder="__"> / 6</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="16" class="sc-input" placeholder="__"> / 16</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PART A: TRIANGLES ── -->
+  <div class="section-hd">
+    <span class="icon">🔺</span>
+    <h2>Part A — Triangles &amp; the Pythagorean Theorem</h2>
+    <span class="badge badge-blue">5 Problems · ~16 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Mark equal sides with tick marks and right angles with a square. Circle your final answer.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">Angles of △ = 180°</span>
+    <span class="fml">Equilateral: 3 × 60°</span>
+    <span class="fml">Isosceles: apex + 2x = 180°</span>
+    <span class="fml">a² + b² = c²</span>
+    <span class="fml">Triples: 3-4-5 · 5-12-13</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <!-- P1: L2 — equilateral / triangle angle sum -->
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A triangle has two angles measuring <strong>55°</strong> and <strong>65°</strong>. Find the <strong>third angle</strong>, and state what type of triangle it is (equilateral, isosceles, or scalene).</p>
+      <div class="fig">
+        <svg width="150" height="115" viewBox="0 0 160 120">
+          <polygon points="80,14 18,108 142,108" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <text x="80" y="40" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">?°</text>
+          <text x="26" y="104" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">55°</text>
+          <text x="120" y="104" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">65°</text>
+          <text x="80" y="118" font-family="Nunito" font-weight="600" font-size="11" fill="#6b7280" text-anchor="middle">Find the top angle</text>
+        </svg>
+      </div>
+      <div class="hint">All three angles of any triangle add to what total?</div>
+      <textarea class="work-area" placeholder="3rd angle = 180 − 55 − 65 = …   Type: …"></textarea>
+      <div class="answer-box">3rd angle: <input type="text" class="ans-input"> °</div>
+    </div>
+
+    <!-- P2: L2 — isosceles, find base angles -->
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">An isosceles triangle has an <strong>apex angle of 36°</strong>. Find the measure of <strong>each base angle x</strong>.</p>
+      <div class="fig">
+        <svg width="150" height="115" viewBox="0 0 160 120">
+          <polygon points="80,14 18,108 142,108" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <line x1="47" y1="58" x2="55" y2="63" stroke="#4b5563" stroke-width="2"/>
+          <line x1="105" y1="58" x2="113" y2="63" stroke="#4b5563" stroke-width="2"/>
+          <text x="80" y="40" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">36°</text>
+          <text x="22" y="104" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">x°</text>
+          <text x="124" y="104" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563">x°</text>
+          <text x="80" y="118" font-family="Nunito" font-weight="600" font-size="11" fill="#6b7280" text-anchor="middle">Find x (tick = equal legs)</text>
+        </svg>
+      </div>
+      <div class="hint">Equal legs sit across from equal angles. Set up apex + 2x = 180°.</div>
+      <textarea class="work-area" placeholder="36 + 2x = 180 → 2x = …  → x = …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"> °</div>
+    </div>
+
+    <!-- P3: L3 — Pythagorean, find hypotenuse (magic triple) -->
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A right triangle has legs of <strong>9</strong> and <strong>12</strong>. Find the length of the <strong>hypotenuse c</strong>.</p>
+      <div class="fig">
+        <svg width="150" height="115" viewBox="0 0 160 120">
+          <polygon points="20,105 20,20 130,105" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <rect x="20" y="93" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+          <text x="12" y="65" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">9</text>
+          <text x="75" y="118" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563" text-anchor="middle">12</text>
+          <text x="92" y="57" font-family="Nunito" font-weight="800" font-size="13" fill="#1f2937" text-anchor="middle" transform="rotate(42,92,57)">c = ?</text>
+        </svg>
+      </div>
+      <div class="hint">9-12-? is a multiple of which magic triple you memorized?</div>
+      <textarea class="work-area" placeholder="a² + b² = c² → 9² + 12² = c² → c = …"></textarea>
+      <div class="answer-box">c = <input type="text" class="ans-input"></div>
+    </div>
+
+    <!-- P4: L3 — Pythagorean, find missing leg given hypotenuse -->
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A right triangle has a <strong>hypotenuse of 13</strong> and one <strong>leg of 5</strong>. Find the <strong>missing leg b</strong>.</p>
+      <div class="fig">
+        <svg width="150" height="118" viewBox="0 0 160 125">
+          <polygon points="20,108 20,18 135,108" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <rect x="20" y="96" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+          <text x="12" y="65" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">5</text>
+          <text x="78" y="122" font-family="Nunito" font-weight="800" font-size="13" fill="#4b5563" text-anchor="middle">b = ?</text>
+          <text x="95" y="55" font-family="Nunito" font-weight="800" font-size="13" fill="#1f2937" text-anchor="middle" transform="rotate(37,95,55)">13</text>
+        </svg>
+      </div>
+      <div class="hint">The hypotenuse goes on the RIGHT of a² + b² = c². Solve for the leg.</div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="5² + b² = 13² → b² = 169 − 25 → b = …"></textarea>
+      <div class="answer-box">b = <input type="text" class="ans-input"></div>
+    </div>
+
+  </div><!-- /prob-grid -->
+
+  <!-- P5: L4 — isosceles right triangle (single, full width) -->
+  <div class="prob-grid single" style="margin-top:0.9rem;">
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">An <strong>isosceles right triangle</strong> has two equal legs of length <strong>6</strong>. <strong>(a)</strong> Find the exact length of the hypotenuse (leave it in simplest radical form, e.g. 6√2). <strong>(b)</strong> What are the measures of the two non-right angles?</p>
+      <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
+        <div class="fig" style="margin:0;">
+          <svg width="180" height="120" viewBox="0 0 200 130">
+            <polygon points="100,15 20,115 180,115" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <rect x="94" y="103" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+            <line x1="55" y1="64" x2="63" y2="69" stroke="#4b5563" stroke-width="2.2"/>
+            <line x1="137" y1="64" x2="145" y2="69" stroke="#4b5563" stroke-width="2.2"/>
+            <text x="46" y="70" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">6</text>
+            <text x="156" y="70" font-family="Nunito" font-weight="800" font-size="13" fill="#374151" text-anchor="middle">6</text>
+            <text x="100" y="130" font-family="Nunito" font-weight="800" font-size="12" fill="#4b5563" text-anchor="middle">c = ?</text>
+          </svg>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div class="hint" style="margin-top:0;">Both legs equal AND a right angle — combine the Pythagorean theorem with the isosceles fact.</div>
+          <textarea class="work-area" style="min-height:64px;" placeholder="(a) 6² + 6² = c² → c² = 72 → c = …&#10;(b) Right angle = 90°, remaining 90° splits evenly → …"></textarea>
+        </div>
+      </div>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(a) Hypotenuse: <input type="text" class="ans-input"></div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(b) Each base angle: <input type="text" class="ans-input"> °</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — QUADRILATERALS + CHALLENGE
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART B: QUADRILATERALS ── -->
+  <div class="section-hd">
+    <span class="icon">▭</span>
+    <h2>Part B — Quadrilaterals: Angles &amp; Properties</h2>
+    <span class="badge badge-sand">3 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Show ALL work. The four angles of any quadrilateral sum to 360°. Watch the difference between opposite and adjacent angles.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">∠A+∠B+∠C+∠D = 360°</span>
+    <span class="fml">Parallelogram: opposite = equal</span>
+    <span class="fml">Adjacent = supplementary (180°)</span>
+    <span class="fml">Rhombus: 4 equal sides, ⊥ diagonals</span>
+  </div>
+
+  <div class="prob-grid triple">
+
+    <!-- P6: L2 — parallelogram opposite angle -->
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-2">L2</span></div>
+      <div class="fig">
+        <svg width="100%" height="88" viewBox="0 0 160 100">
+          <polygon points="35,18 130,18 125,82 40,82" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <text x="42" y="36" font-family="Nunito" font-size="13" font-weight="800" fill="#374151">108°</text>
+          <text x="105" y="78" font-family="Nunito" font-size="13" font-weight="800" fill="#4b5563">x°</text>
+          <text x="80" y="96" font-family="Nunito" font-size="11" fill="#64748b" text-anchor="middle">Find x</text>
+        </svg>
+      </div>
+      <p class="prob-q">A parallelogram has one angle of <strong>108°</strong>. Find angle x, the angle <strong>across from</strong> it.</p>
+      <div class="hint">What's true about opposite angles in a parallelogram?</div>
+      <textarea class="work-area" placeholder="Opposite angles are equal → x = …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"> °</div>
+    </div>
+
+    <!-- P7: L3 — parallelogram adjacent algebra -->
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-3">L3</span></div>
+      <div class="fig">
+        <svg width="100%" height="88" viewBox="0 0 160 100">
+          <polygon points="30,16 132,16 130,84 28,84" fill="#f5f5f5" stroke="#4b5563" stroke-width="2.5"/>
+          <text x="33" y="38" font-family="Nunito" font-size="11" font-weight="800" fill="#374151">(3x+5)°</text>
+          <text x="98" y="38" font-family="Nunito" font-size="11" font-weight="800" fill="#4b5563">(x+15)°</text>
+          <text x="80" y="96" font-family="Nunito" font-size="11" fill="#64748b" text-anchor="middle">Find x, then all 4 angles</text>
+        </svg>
+      </div>
+      <p class="prob-q">A parallelogram has <strong>adjacent</strong> angles <strong>(3x + 5)°</strong> and <strong>(x + 15)°</strong>. Find x and all four angles.</p>
+      <div class="hint">Adjacent (consecutive) angles in a parallelogram add to what?</div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="(3x+5) + (x+15) = 180 → x = …&#10;Angles: … , … , … , …"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">x = <input type="text" class="ans-input"></div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">Angles: <input type="text" class="ans-input"></div>
+      </div>
+    </div>
+
+    <!-- P8: L4 — rhombus opposite angles algebra -->
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-4">L4</span></div>
+      <div class="fig">
+        <svg width="100%" height="100" viewBox="0 0 160 115">
+          <polygon points="80,12 148,56 80,100 12,56" fill="#f5f5f5" stroke="#6b7280" stroke-width="2.5"/>
+          <line x1="110" y1="28" x2="116" y2="33" stroke="#6b7280" stroke-width="2"/>
+          <line x1="117" y1="76" x2="111" y2="81" stroke="#6b7280" stroke-width="2"/>
+          <line x1="50" y1="28" x2="44" y2="33" stroke="#6b7280" stroke-width="2"/>
+          <line x1="43" y1="76" x2="49" y2="81" stroke="#6b7280" stroke-width="2"/>
+          <text x="80" y="32" font-family="Nunito" font-size="10" font-weight="800" fill="#374151" text-anchor="middle">(5x−10)°</text>
+          <text x="80" y="90" font-family="Nunito" font-size="10" font-weight="800" fill="#4b5563" text-anchor="middle">(2x+44)°</text>
+          <text x="80" y="112" font-family="Nunito" font-size="11" fill="#64748b" text-anchor="middle">Rhombus: find x, then each angle</text>
+        </svg>
+      </div>
+      <p class="prob-q">A rhombus has <strong>opposite</strong> angles <strong>(5x − 10)°</strong> and <strong>(2x + 44)°</strong>. Find x and all four angles. Check: do they sum to 360°?</p>
+      <div class="hint">A rhombus is a parallelogram — so opposite angles are equal.</div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="5x−10 = 2x+44 → x = …&#10;Each angle = … , the other pair = … (sum = 360?)"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">x = <input type="text" class="ans-input"></div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">Angles: <input type="text" class="ans-input"></div>
+      </div>
+    </div>
+
+  </div><!-- /prob-grid quad -->
+
+  <hr class="divider">
+
+  <!-- ── PART C: MIXED CHALLENGE ── -->
+  <div class="section-hd">
+    <span class="icon">⚡</span>
+    <h2>Part C — Mixed SHSAT Challenge</h2>
+    <span class="badge badge-green">2 Problems · ~10 min</span>
+  </div>
+  <p class="instr">These combine two ideas at once. Identify each shape's properties first, then choose your formula.</p>
+
+  <div class="prob-grid">
+
+    <!-- C-A: L4 — rectangle diagonal angles -->
+    <div class="prob">
+      <div class="prob-num">Challenge A <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Rectangle ABCD has diagonal <strong>AC</strong> drawn. Angle <strong>DAC = 32°</strong>. Find angle <strong>ACD</strong>.</p>
+      <div class="fig">
+        <svg width="100%" height="108" viewBox="0 0 200 120">
+          <rect x="15" y="15" width="170" height="90" fill="#f5f5f5" stroke="#4b5563" stroke-width="2.5"/>
+          <rect x="15" y="15" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <rect x="175" y="15" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <rect x="15" y="95" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <rect x="175" y="95" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+          <line x1="15" y1="15" x2="185" y2="105" stroke="#374151" stroke-width="2" stroke-dasharray="5 3"/>
+          <text x="6" y="13" font-family="Nunito" font-size="11" font-weight="800" fill="#374151">A</text>
+          <text x="188" y="13" font-family="Nunito" font-size="11" font-weight="800" fill="#374151">B</text>
+          <text x="188" y="114" font-family="Nunito" font-size="11" font-weight="800" fill="#4b5563">C</text>
+          <text x="6" y="114" font-family="Nunito" font-size="11" font-weight="800" fill="#4b5563">D</text>
+          <text x="32" y="38" font-family="Nunito" font-size="11" font-weight="800" fill="#374151">32°</text>
+          <text x="150" y="96" font-family="Nunito" font-size="11" font-weight="800" fill="#4b5563">?</text>
+        </svg>
+      </div>
+      <div class="hint">Triangle ACD sits inside the rectangle. What is angle ADC? Then use 180°.</div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="∠ADC = 90° (rectangle corner)&#10;∠ACD = 180 − 90 − 32 = …"></textarea>
+      <div class="answer-box">∠ACD = <input type="text" class="ans-input"> °</div>
+    </div>
+
+    <!-- C-B: L4 — equilateral perimeter / ladder word problem -->
+    <div class="prob">
+      <div class="prob-num">Challenge B <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A <strong>15 ft ladder</strong> leans against a wall. Its base is <strong>9 ft</strong> from the wall. <strong>(a)</strong> How high up the wall does it reach? <strong>(b)</strong> Which magic triple did this use?</p>
+      <div class="fig">
+        <svg width="100%" height="108" viewBox="0 0 180 120">
+          <line x1="30" y1="15" x2="30" y2="105" stroke="#374151" stroke-width="3"/>
+          <line x1="30" y1="105" x2="160" y2="105" stroke="#374151" stroke-width="3"/>
+          <line x1="30" y1="25" x2="150" y2="105" stroke="#4b5563" stroke-width="2.5"/>
+          <rect x="30" y="93" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+          <text x="22" y="62" font-family="Nunito" font-size="12" font-weight="800" fill="#374151" text-anchor="end">h = ?</text>
+          <text x="90" y="118" font-family="Nunito" font-size="12" font-weight="800" fill="#4b5563" text-anchor="middle">9 ft</text>
+          <text x="100" y="55" font-family="Nunito" font-size="12" font-weight="800" fill="#1f2937" text-anchor="middle" transform="rotate(33,100,55)">15 ft</text>
+        </svg>
+      </div>
+      <div class="hint">The ladder is the hypotenuse (across from the 90° corner). The wall and ground are the legs.</div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="(a) h² + 9² = 15² → h² = 225 − 81 → h = …&#10;(b) Triple: 9–12–15 = 3 × (…)"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(a) Height: <input type="text" class="ans-input"> ft</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(b) Triple: <input type="text" class="ans-input"></div>
+      </div>
+    </div>
+
+  </div><!-- /prob-grid challenge -->
+
+</div><!-- /sheet 2 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — ELA + ERROR LOG
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART D: ELA ── -->
+  <div class="section-hd">
+    <span class="icon">🎭</span>
+    <h2>Part D — ELA: Figurative Language in Poetry</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read each poem twice. Annotate: circle any simile/metaphor/personification, underline vivid imagery. Use the 3-step protocol: Name it → What's compared → Effect.</p>
+
+  <!-- Device key (grayscale, matching lesson) -->
+  <div class="device-key">
+    <div class="device"><strong>Simile:</strong> comparison using <em>like</em> or <em>as</em></div>
+    <div class="device"><strong>Metaphor:</strong> direct comparison, no <em>like/as</em></div>
+    <div class="device"><strong>Personification:</strong> human traits given to non-human things</div>
+    <div class="device"><strong>Imagery:</strong> language that triggers the senses</div>
+  </div>
+
+  <!-- Poem 1 -->
+  <div class="poem-box">
+    <div class="poem-title">Poem 1 — "The Surveyor's Daughter"</div>
+    <div class="poem-text">
+      <p>My mother read the land like a sentence,<br>
+      each hill a clause, each fence line a comma<br>
+      pausing the eye before the long horizon —<br>
+      she measured the world and found it honest.</p>
+      <p>A right angle, she told me, never lies.<br>
+      It is the one promise the ground keeps:<br>
+      that up and across will always meet<br>
+      at a corner you can trust your weight to.</p>
+      <p>I have made a life of crooked rooms,<br>
+      of walls that lean like tired arguments.<br>
+      But when I square a doorway true at last,<br>
+      I hear her voice come level through the wood.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> "My mother read the land like a sentence" is an example of which device? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) Metaphor — the land is directly called a sentence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) Simile — reading land is compared to reading a sentence using "like"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) Personification — the land is given the ability to speak</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) Imagery — it describes the smell of the soil</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> "A right angle… never lies" is best identified as: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) Simile — the angle is compared to an honest person using "as"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) Imagery — it appeals to the sense of touch</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) Personification — the angle is given the human trait of honesty</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) Metaphor — the angle is renamed a promise</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In the last stanza, what does the contrast between "crooked rooms" and squaring "a doorway true" most likely suggest? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) The speaker is a professional carpenter by trade</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Bringing order to a messy life reconnects the speaker to the mother's wisdom</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) The speaker dislikes geometry and avoids it</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Right angles are impossible to build in real houses</span></label>
+    </div>
+  </div>
+
+  <!-- Poem 2 -->
+  <div class="poem-box" style="border-left-color:#374151;">
+    <div class="poem-title">Poem 2 — "Parallelogram"</div>
+    <div class="poem-text">
+      <p>We were never a rectangle, you and I —<br>
+      no easy corners, no four matching angles.<br>
+      We leaned. We tilted toward each other's weight<br>
+      the way two opposite sides agree to stay parallel<br>
+      no matter how far the road slants underneath them.</p>
+      <p>People wanted us square. They wanted proof.<br>
+      But a parallelogram keeps its own quiet law:<br>
+      what is opposite is equal; what is adjacent<br>
+      gives a little, sums to one straight line of peace.</p>
+      <p>So let them measure us and shake their heads.<br>
+      Our diagonals still cross. They always have.<br>
+      That crossing is the only center we have needed.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> "two opposite sides agree to stay parallel" is an example of: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) Personification — the sides are given the human ability to "agree"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) Simile — the sides are compared to a couple using "like"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) Imagery — it describes the color of the road</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) Metaphor — the sides are renamed a promise</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> The poet borrows the rule "what is opposite is equal; what is adjacent gives a little" from which shape's properties? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) A right triangle's leg-and-hypotenuse rule</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) A parallelogram — opposite angles equal, adjacent angles supplementary</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) An equilateral triangle — all parts identical</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) A circle — every radius equal</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> Both poems use geometry to talk about human life. Write 2–3 sentences explaining what is <strong>similar</strong> about what both speakers are really saying. Name one figurative device from each poem and quote the exact phrase. <span class="lvl lvl-4">L4</span></div>
+    <textarea class="work-area" style="min-height:90px;" placeholder="Both speakers use ___ to show that ___.&#10;Poem 1 device + quote: …&#10;Poem 2 device + quote: …"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART E: ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part E — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── REFLECTION ── -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The triangle or quadrilateral rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 5 · SHSAT Prep &nbsp;·&nbsp; 🔺 Triangles &amp; Quadrilaterals &nbsp;|&nbsp; 🎭 ELA: Figurative Language
+  </div>
+
+</div><!-- /sheet 3 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
