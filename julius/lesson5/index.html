@@ -1,1 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 5 — Geometry: Triangles & Quadrilaterals (Part 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-bg: #F0F7FF;
+  --color-bg-deep: #E0EEFF;
+  --color-surface: #FFFFFF;
+  --color-text: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+  --color-accent-1: #374151;
+  --color-accent-2: #4b5563;
+  --color-accent-3: #9ca3af;
+  --color-glass-bg: rgba(255,255,255,0.88);
+  --color-glass-border: rgba(0,0,0,0.07);
+  --color-vignette: rgba(0,0,0,0.04);
+  --font-display: 'Fredoka', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+</style>
+<style>
+:root{--color-bg:#F0F7FF;--color-text:#0f172a;--glow-color-rgb:37,99,235;}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--color-bg);margin:0;}
+body{font-family:'Nunito',sans-serif;color:var(--color-text);overflow:hidden;height:100vh;width:100vw;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.96);transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1080px;padding:clamp(1rem,3vw,3rem);}
+.nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);padding:8px 22px;border-radius:40px;border:1px solid rgba(0,0,0,0.09);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.nav-btn{width:36px;height:36px;border:none;background:rgba(0,0,0,0.05);color:#111827;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:rgba(37,99,235,0.18);}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.12);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:#374151;transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:#64748b;min-width:36px;text-align:center;font-weight:700;}
+.reveal{opacity:0;transform:translateY(16px);}
+@keyframes float-slow{0%{transform:translate(0,0) scale(1);}33%{transform:translate(40px,-35px) scale(1.1);}66%{transform:translate(-30px,30px) scale(0.92);}100%{transform:translate(0,0) scale(1);}}
+@keyframes float-drift{0%{transform:translate(0,0) scale(1) rotate(0deg);}33%{transform:translate(-40px,-45px) scale(1.12) rotate(2deg);}66%{transform:translate(35px,25px) scale(0.9) rotate(-2deg);}100%{transform:translate(0,0) scale(1) rotate(0deg);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);animation:float-slow 12s ease-in-out infinite;}
+.blob:nth-child(2){animation:float-drift 16s ease-in-out infinite;}
+.blob:nth-child(3){animation:float-slow 20s ease-in-out infinite reverse;}
+.slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,var(--color-vignette) 100%);}
 
+/* ── Component styles ── */
+.lvl-badge{display:inline-block;font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.lvl-1{background:#f0f0f0;color:#374151;}
+.lvl-2{background:#d9d9d9;color:#1f2937;}
+.lvl-3{background:#bdbdbd;color:#111827;}
+.lvl-4{background:#6b7280;color:#ffffff;}
+.socratic-q{background:rgba(0,0,0,0.04);border-left:3px solid #6b7280;border-radius:0 8px 8px 0;padding:0.45rem 0.75rem;font-size:0.82rem;font-style:italic;color:#374151;font-weight:600;}
+.trap-card{border-left:4px solid #4b5563;background:#f9fafb;border-radius:0 9px 9px 0;padding:0.55rem 0.85rem;box-shadow:0 2px 7px rgba(0,0,0,0.10);}
+.formula-box{background:linear-gradient(135deg,rgba(0,0,0,0.05),rgba(0,0,0,0.02));border:2px solid rgba(0,0,0,0.18);border-radius:10px;padding:0.45rem 0.9rem;font-size:1rem;font-weight:800;color:#111827;font-family:'Fredoka',sans-serif;letter-spacing:0.02em;}
+.section-badge{display:inline-block;background:linear-gradient(135deg,#374151,#1f2937);color:white;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;padding:3px 12px;border-radius:20px;margin-bottom:0.6rem;}
+.diagram-wrap{background:white;border:1.5px solid rgba(0,0,0,0.09);border-radius:14px;padding:0.6rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,0.07);}
+.diagram-wrap svg text{font-family:'Nunito',sans-serif;}
+.prob-card{background:white;border:1.5px solid rgba(0,0,0,0.09);border-radius:12px;padding:0.7rem 0.9rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.work-box{border:1.5px dashed rgba(0,0,0,0.25);border-radius:8px;padding:0;background:rgba(0,0,0,0.02);min-height:2.8rem;font-size:0.82rem;color:#374151;font-style:normal;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.5rem;border:none;background:transparent;resize:vertical;padding:0.5rem 0.75rem;font-size:0.82rem;color:#374151;font-family:'Nunito',sans-serif;line-height:1.5;outline:none;box-sizing:border-box;}
+.work-box textarea::placeholder{color:#9ca3af;font-style:italic;}
+.work-box textarea:focus{background:rgba(0,0,0,0.03);}
+.mc-options{display:flex;flex-direction:column;gap:0.18rem;margin-top:0.3rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.45rem;padding:0.22rem 0.5rem;border-radius:6px;border:1.5px solid rgba(0,0,0,0.10);background:#fafafa;cursor:pointer;font-size:0.74rem;line-height:1.35;color:#374151;transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#f0f0f0;border-color:rgba(0,0,0,0.20);}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:#e5e7eb;border-color:#374151;font-weight:700;}
+.mc-option .opt-letter{font-weight:800;min-width:1rem;color:#6b7280;}
+.diagram-wrap svg text{paint-order:stroke fill;stroke:white;stroke-width:4px;stroke-linejoin:round;font-family:'Nunito',sans-serif;}
+
+/* ── Annotation Toolbar (Slides 13 & 15) ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-poem { position: relative; cursor: text; user-select: text; }
+.poem-highlight { border-radius: 3px; padding: 0 1px; }
+.poem-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.poem-strikethrough { text-decoration: line-through; }
+.poem-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.poem-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.poem-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 200px;
+  white-space: normal;
+}
+.poem-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 1 — TITLE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide active" data-slide="1">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:480px;height:480px;top:-120px;right:-100px;background:#374151;opacity:0.13;"></div>
+    <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#4b5563;opacity:0.09;"></div>
+    <div class="blob" style="width:220px;height:220px;top:38%;left:12%;background:#9ca3af;opacity:0.09;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content" style="text-align:center;">
+    <div style="font-size:4.5rem;animation:float 3s ease-in-out infinite;margin-bottom:0.4rem;" class="reveal">📐</div>
+    <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5.5vw,3.8rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.4rem;">Week 5 — Geometry</h1>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,3vw,2.2rem);font-weight:600;color:#374151;margin:0 0 0.5rem;">Triangles &amp; Quadrilaterals (Part 2)</h2>
+    <p class="reveal" style="font-size:0.95rem;color:#64748b;letter-spacing:0.12em;text-transform:uppercase;">SHSAT Math · 60-Minute Session · June 17, 2026</p>
+    <div class="reveal" style="display:inline-flex;gap:0.75rem;margin-top:0.8rem;flex-wrap:wrap;justify-content:center;">
+      <span style="background:#f0f0f0;color:#374151;border-radius:20px;padding:5px 14px;font-size:0.8rem;font-weight:700;">Triangle Types</span>
+      <span style="background:#e8e8e8;color:#374151;border-radius:20px;padding:5px 14px;font-size:0.8rem;font-weight:700;">Pythagorean Theorem</span>
+      <span style="background:#f0f0f0;color:#374151;border-radius:20px;padding:5px 14px;font-size:0.8rem;font-weight:700;">Isosceles &amp; Equilateral</span>
+      <span style="background:#e8e8e8;color:#374151;border-radius:20px;padding:5px 14px;font-size:0.8rem;font-weight:700;">Parallelogram · Rectangle · Rhombus</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 2 — SESSION ROADMAP
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:340px;height:340px;top:-80px;right:-80px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:240px;height:240px;bottom:-60px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Today's Plan</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;margin:0 0 1rem;">60-Minute Session Roadmap</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;" class="reveal">
+      <div class="prob-card" style="border-left:4px solid #374151;">
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.35rem;">⏱ 0–5 min · Warm-Up</div>
+        <div style="font-size:0.82rem;color:#334155;">Error log check-in: Julius shares one mistake from Week 4 homework and explains <em>why</em> it happened.</div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #4b5563;">
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.35rem;">⏱ 5–10 min · HW Review</div>
+        <div style="font-size:0.82rem;color:#334155;">Tutor targets 1–2 angle misconceptions from Week 4 homework — we attack the <em>why</em>, not just the wrong answer.</div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #374151;">
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.35rem;">⏱ 10–45 min · Math Block</div>
+        <div style="font-size:0.82rem;color:#334155;">
+          <strong>Part 1:</strong> Triangle types (equilateral, isosceles, right) + key properties<br>
+          <strong>Part 2:</strong> Pythagorean theorem — the "ladder on a wall" secret<br>
+          <strong>Part 3:</strong> Quadrilaterals — parallelogram, rectangle, rhombus<br>
+          <strong>Part 4:</strong> Practice problems, 3 levels
+        </div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #4b5563;">
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.35rem;">⏱ 45–58 min · ELA Block</div>
+        <div style="font-size:0.82rem;color:#334155;">
+          Figurative language in poetry: simile, metaphor, personification, imagery.<br>
+          <strong>Model:</strong> find device → what it compares → effect on meaning
+        </div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.75rem;">Before we start: what's the one thing from Week 4 you feel most confident about? And what feels shakiest?</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 3 — TRIANGLE TYPES: THE THREE FAMILIES
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="3">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#9ca3af;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 1 · Triangle Types</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">The Three Triangle Families 🔺</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;" class="reveal">
+      <!-- Equilateral -->
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;min-height:110px;">
+          <svg viewBox="0 0 160 130" width="100%" height="110" aria-label="Equilateral triangle with all sides and angles equal">
+            <polygon points="80,15 10,120 150,120" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <!-- double tick marks on all 3 sides -->
+            <line x1="43" y1="65" x2="50" y2="70" stroke="#374151" stroke-width="2.2"/>
+            <line x1="47" y1="61" x2="54" y2="66" stroke="#374151" stroke-width="2.2"/>
+            <line x1="106" y1="65" x2="113" y2="70" stroke="#374151" stroke-width="2.2"/>
+            <line x1="110" y1="61" x2="117" y2="66" stroke="#374151" stroke-width="2.2"/>
+            <line x1="75" y1="119" x2="85" y2="119" stroke="#374151" stroke-width="2.2"/>
+            <line x1="75" y1="123" x2="85" y2="123" stroke="#374151" stroke-width="2.2"/>
+            <!-- angle labels inside corners -->
+            <text x="80" y="48" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">60°</text>
+            <text x="24" y="116" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">60°</text>
+            <text x="136" y="116" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">60°</text>
+          </svg>
+        </div>
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">Equilateral</div>
+        <div style="font-size:0.78rem;color:#334155;line-height:1.5;">All 3 sides equal<br>All 3 angles = <strong>60°</strong><br>"Equal everything"</div>
+        <div class="formula-box" style="font-size:0.78rem;margin-top:0.4rem;padding:0.3rem 0.6rem;">3 × 60° = 180° ✓</div>
+      </div>
+      <!-- Isosceles -->
+      <div class="prob-card" style="border-top:3px solid #4b5563;text-align:center;">
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;min-height:110px;">
+          <svg viewBox="0 0 160 130" width="100%" height="110" aria-label="Isosceles triangle with two equal sides and two equal base angles labeled x">
+            <polygon points="80,12 20,120 140,120" fill="#f0f0f0" stroke="#4b5563" stroke-width="2.5"/>
+            <!-- single tick marks on 2 equal sides -->
+            <line x1="46" y1="63" x2="54" y2="68" stroke="#4b5563" stroke-width="2.5"/>
+            <line x1="106" y1="63" x2="114" y2="68" stroke="#4b5563" stroke-width="2.5"/>
+            <text x="80" y="34" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">apex</text>
+            <text x="26" y="113" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle">x°</text>
+            <text x="134" y="113" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle">x°</text>
+            <text x="80" y="128" font-size="11" fill="#64748b" text-anchor="middle">base angles equal</text>
+          </svg>
+        </div>
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">Isosceles</div>
+        <div style="font-size:0.78rem;color:#334155;line-height:1.5;"><strong>2 equal sides → 2 equal angles</strong><br>The base angles are always equal<br>"Iso = same legs"</div>
+        <div class="formula-box" style="font-size:0.78rem;margin-top:0.4rem;padding:0.3rem 0.6rem;">apex + 2x = 180°</div>
+      </div>
+      <!-- Right -->
+      <div class="prob-card" style="border-top:3px solid #6b7280;text-align:center;">
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;min-height:110px;">
+          <svg viewBox="0 0 160 130" width="100%" height="110" aria-label="Right triangle with the 90 degree square marker at bottom left corner, hypotenuse labeled">
+            <polygon points="20,110 20,20 140,110" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <!-- right angle marker -->
+            <rect x="20" y="98" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+            <text x="90" y="62" font-size="11" font-weight="700" fill="#4b5563" text-anchor="middle" transform="rotate(37,90,62)">hypotenuse</text>
+            <text x="9" y="70" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">leg</text>
+            <text x="80" y="122" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">leg</text>
+            <text x="36" y="94" font-size="13" font-weight="800" fill="#374151">90°</text>
+          </svg>
+        </div>
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.3rem;">Right Triangle</div>
+        <div style="font-size:0.78rem;color:#334155;line-height:1.5;">One angle = <strong>90°</strong><br>Other two angles sum to <strong>90°</strong><br>The long side = hypotenuse</div>
+        <div class="formula-box" style="font-size:0.78rem;margin-top:0.4rem;padding:0.3rem 0.6rem;">90 + a + b = 180°</div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.7rem;">If an isosceles triangle has an apex angle of 40°, what are its base angles? Don't calculate yet — what <em>relationship</em> do you already know that makes this solvable?</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 4 — ISOSCELES DEEP DIVE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#4b5563;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 1 · Isosceles Deep Dive</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.55rem;">The Mirror Triangle — Isosceles Logic ⚖️</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <div class="diagram-wrap reveal" style="min-height:240px;">
+        <svg viewBox="0 0 280 250" width="100%" height="235" aria-label="Isosceles triangle showing the line of symmetry down the middle, two equal legs, and the two equal base angles labeled x">
+          <!-- Triangle -->
+          <polygon points="140,18 30,218 250,218" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <!-- Line of symmetry -->
+          <line x1="140" y1="18" x2="140" y2="218" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text x="148" y="130" font-size="11" fill="#9ca3af" font-weight="700">symmetry</text>
+          <!-- Equal leg tick marks -->
+          <line x1="82" y1="114" x2="90" y2="120" stroke="#4b5563" stroke-width="2.5"/>
+          <line x1="190" y1="114" x2="198" y2="120" stroke="#4b5563" stroke-width="2.5"/>
+          <!-- Apex angle -->
+          <text x="140" y="45" font-size="14" font-weight="800" fill="#374151" text-anchor="middle">apex (a)</text>
+          <!-- Base angles -->
+          <text x="46" y="212" font-size="14" font-weight="800" fill="#4b5563">x°</text>
+          <text x="220" y="212" font-size="14" font-weight="800" fill="#4b5563">x°</text>
+          <!-- "equal legs" label -->
+          <text x="56" y="155" font-size="11" fill="#4b5563" font-weight="700" transform="rotate(-52,56,155)">equal leg</text>
+          <text x="200" y="155" font-size="11" fill="#4b5563" font-weight="700" transform="rotate(52,200,155)">equal leg</text>
+          <!-- Formula under -->
+          <text x="140" y="240" font-size="13" fill="#64748b" text-anchor="middle">a + x + x = 180° → a + 2x = 180°</text>
+        </svg>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">Here's the cheat: equal sides are always <em>opposite</em> equal angles. So if you know two sides are equal, what do you immediately know about two of the angles?</div>
+        <div class="prob-card" style="font-size:0.83rem;color:#334155;">
+          <strong>The Golden Isosceles Move:</strong><br>
+          1. Spot the two equal sides (tick marks)<br>
+          2. The angles <em>across from</em> those equal sides are equal<br>
+          3. Set up: apex + 2x = 180° → solve for x
+        </div>
+        <div class="prob-card" style="border-left:3px solid #6b7280;font-size:0.82rem;color:#334155;">
+          <strong>Worked Example:</strong><br>
+          An isosceles triangle has a base angle of 65°. Find the apex.<br>
+          <span style="color:#4b5563;font-weight:700;">→ apex + 65 + 65 = 180 → apex = 50°</span>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ SHSAT Trap: "Equal sides" vs. "Equal angles"</div>
+          <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">Equal sides are across from equal angles — not adjacent to them. Don't confuse the sides with the angles they face.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 5 — PYTHAGOREAN THEOREM
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:320px;height:320px;top:-70px;right:-70px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-40px;background:#4b5563;opacity:0.07;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <div class="section-badge reveal">Part 2 · Pythagorean Theorem</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.5rem;">a² + b² = c² — The Ladder Secret 🪜</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <div class="diagram-wrap reveal" style="min-height:240px;">
+        <svg viewBox="0 0 280 255" width="100%" height="240" aria-label="Right triangle with squares on each side illustrating the Pythagorean theorem: the two smaller squares equal the large square">
+          <!-- Main right triangle -->
+          <polygon points="60,200 60,60 220,200" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <!-- Right angle box -->
+          <rect x="60" y="188" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+          <!-- Square on side a (vertical leg, left side) -->
+          <rect x="20" y="60" width="40" height="140" fill="rgba(55,65,81,0.10)" stroke="#374151" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <text x="40" y="132" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">a²</text>
+          <!-- Square on side b (horizontal leg, bottom) -->
+          <rect x="60" y="200" width="160" height="40" fill="rgba(75,85,99,0.09)" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <text x="140" y="225" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle">b²</text>
+          <!-- Hypotenuse label -->
+          <text x="152" y="118" font-size="12" font-weight="800" fill="#1f2937" text-anchor="middle" transform="rotate(38,152,118)">c (hyp.)</text>
+          <!-- Leg labels -->
+          <text x="46" y="130" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">a</text>
+          <text x="140" y="192" font-size="12" font-weight="700" fill="#4b5563" text-anchor="middle">b</text>
+          <!-- Formula bottom -->
+          <text x="140" y="252" font-size="13" fill="#64748b" text-anchor="middle">a² + b² = c² (the hypotenuse)</text>
+        </svg>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">Imagine a ladder leaning against a wall. The ladder is 13 ft long, the base is 5 ft from the wall. Before you calculate: which measurement is the hypotenuse — and why?</div>
+        <div class="prob-card" style="font-size:0.83rem;color:#334155;">
+          <strong>The Rule:</strong> In <em>every</em> right triangle, the square of the longest side (hypotenuse) equals the sum of the squares of the two legs.<br><br>
+          <strong>c is always across from the 90° angle.</strong>
+        </div>
+        <div class="formula-box" style="text-align:center;">a² + b² = c²</div>
+        <div class="prob-card" style="border-left:3px solid #6b7280;font-size:0.82rem;color:#334155;">
+          <strong>The Magic Triples (memorize these!):</strong><br>
+          <span style="font-weight:700;color:#374151;">3–4–5 → 9 + 16 = 25 ✓</span><br>
+          <span style="font-weight:700;color:#4b5563;">5–12–13 → 25 + 144 = 169 ✓</span><br>
+          <span style="font-weight:700;color:#6b7280;">8–15–17 · 7–24–25</span><br>
+          <em style="font-size:0.78rem;">Any multiple works: 6–8–10, 10–24–26…</em>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ c² is always the LARGEST square</div>
+          <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">If a question gives you the hypotenuse, it goes on the RIGHT side of the equation: leg² + leg² = hyp²</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 6 — TRIANGLE PRACTICE: THREE LEVELS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="6">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 1–2 · Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Triangle Problems — Three Levels</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+
+      <!-- L2: Isosceles — find base angles -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 1</span><span class="lvl-badge lvl-2">L2</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 120" width="100%" height="105" aria-label="Isosceles triangle with apex angle labeled 44 degrees, asking for x the base angles">
+            <polygon points="80,14 18,108 142,108" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <line x1="47" y1="58" x2="55" y2="63" stroke="#4b5563" stroke-width="2"/>
+            <line x1="105" y1="58" x2="113" y2="63" stroke="#4b5563" stroke-width="2"/>
+            <text x="80" y="40" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">44°</text>
+            <text x="22" y="106" font-size="13" font-weight="800" fill="#4b5563">x°</text>
+            <text x="122" y="106" font-size="13" font-weight="800" fill="#4b5563">x°</text>
+            <text x="80" y="118" font-size="11" fill="#64748b" text-anchor="middle">Find x</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">An isosceles triangle has an apex angle of <strong>44°</strong>. Find each base angle x.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">What do you know about the two legs? What does that tell you about the base angles?</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L3: Right triangle — find missing leg using Pythagorean theorem -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 2</span><span class="lvl-badge lvl-3">L3</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 120" width="100%" height="105" aria-label="Right triangle with legs 5 and 12, find the hypotenuse c">
+            <polygon points="20,105 20,20 130,105" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <rect x="20" y="93" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+            <text x="12" y="65" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">5</text>
+            <text x="75" y="118" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle">12</text>
+            <text x="92" y="57" font-size="13" font-weight="800" fill="#1f2937" text-anchor="middle" transform="rotate(42,92,57)">c = ?</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A right triangle has legs of <strong>5</strong> and <strong>12</strong>. Find the hypotenuse c.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">Does 5–12–? remind you of a magic triple you just learned?</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L4: Pythagorean theorem — find missing leg given hypotenuse -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 3</span><span class="lvl-badge lvl-4">L4</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 125" width="100%" height="110" aria-label="Right triangle with hypotenuse 17 and one leg 8, find the missing leg">
+            <polygon points="20,108 20,18 135,108" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <rect x="20" y="96" width="12" height="12" fill="none" stroke="#374151" stroke-width="2"/>
+            <text x="12" y="65" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">8</text>
+            <text x="78" y="122" font-size="13" font-weight="800" fill="#4b5563" text-anchor="middle">b = ?</text>
+            <text x="95" y="55" font-size="13" font-weight="800" fill="#1f2937" text-anchor="middle" transform="rotate(37,95,55)">17</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A right triangle has a hypotenuse of <strong>17</strong> and one leg of <strong>8</strong>. Find the missing leg b.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">The hypotenuse goes on which side of a² + b² = c²? Set it up first, then solve.</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 7 — QUADRILATERALS: THE BIG THREE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="7">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:320px;height:320px;top:-70px;right:-70px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:210px;height:210px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <div class="section-badge reveal">Part 3 · Quadrilaterals</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.6rem;">The Big Three Quadrilaterals ▭</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;" class="reveal">
+      <!-- Parallelogram -->
+      <div class="prob-card" style="border-top:3px solid #374151;">
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;min-height:100px;">
+          <svg viewBox="0 0 160 110" width="100%" height="95" aria-label="Parallelogram with opposite sides parallel and equal, and opposite angles equal">
+            <polygon points="35,20 145,20 125,90 15,90" fill="#f0f0f0" stroke="#374151" stroke-width="2.5"/>
+            <!-- Single tick marks on both pairs of parallel sides -->
+            <line x1="75" y1="16" x2="90" y2="16" stroke="#374151" stroke-width="2"/>
+            <line x1="61" y1="87" x2="76" y2="87" stroke="#374151" stroke-width="2"/>
+            <line x1="22" y1="53" x2="27" y2="60" stroke="#4b5563" stroke-width="2"/>
+            <line x1="132" y1="47" x2="137" y2="54" stroke="#4b5563" stroke-width="2"/>
+            <text x="80" y="62" font-size="11" fill="#64748b" text-anchor="middle">opp sides ∥ &amp; =</text>
+          </svg>
+        </div>
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.4rem;">Parallelogram</div>
+        <div style="font-size:0.78rem;color:#334155;line-height:1.6;">
+          • Opposite sides <strong>parallel &amp; equal</strong><br>
+          • Opposite angles <strong>equal</strong><br>
+          • Consecutive angles <strong>supplementary</strong> (sum = 180°)<br>
+          • Diagonals <strong>bisect</strong> each other
+        </div>
+        <div class="formula-box" style="font-size:0.75rem;margin-top:0.4rem;padding:0.3rem 0.5rem;">∠A + ∠B = 180°</div>
+      </div>
+      <!-- Rectangle -->
+      <div class="prob-card" style="border-top:3px solid #4b5563;">
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;min-height:100px;">
+          <svg viewBox="0 0 160 110" width="100%" height="95" aria-label="Rectangle with all right angles marked and equal diagonals">
+            <rect x="20" y="20" width="120" height="70" fill="#f5f5f5" stroke="#4b5563" stroke-width="2.5"/>
+            <!-- Right angle markers -->
+            <rect x="20" y="20" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <rect x="130" y="20" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <rect x="20" y="80" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <rect x="130" y="80" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <!-- Diagonals -->
+            <line x1="20" y1="20" x2="140" y2="90" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <line x1="140" y1="20" x2="20" y2="90" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <text x="80" y="60" font-size="11" fill="#64748b" text-anchor="middle">diagonals equal</text>
+          </svg>
+        </div>
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.4rem;">Rectangle</div>
+        <div style="font-size:0.78rem;color:#334155;line-height:1.6;">
+          • ALL angles = <strong>90°</strong><br>
+          • Opposite sides <strong>equal &amp; parallel</strong><br>
+          • Diagonals <strong>equal in length</strong><br>
+          • A parallelogram with right angles
+        </div>
+        <div class="formula-box" style="font-size:0.75rem;margin-top:0.4rem;padding:0.3rem 0.5rem;">4 × 90° = 360°</div>
+      </div>
+      <!-- Rhombus -->
+      <div class="prob-card" style="border-top:3px solid #6b7280;">
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;min-height:100px;">
+          <svg viewBox="0 0 160 110" width="100%" height="95" aria-label="Rhombus with all four sides equal, tick marks on all sides, and diagonals bisecting at right angles">
+            <polygon points="80,14 145,55 80,96 15,55" fill="#f0f0f0" stroke="#6b7280" stroke-width="2.5"/>
+            <!-- Tick marks on all 4 sides -->
+            <line x1="110" y1="32" x2="116" y2="37" stroke="#6b7280" stroke-width="2"/>
+            <line x1="117" y1="72" x2="111" y2="77" stroke="#6b7280" stroke-width="2"/>
+            <line x1="50" y1="32" x2="44" y2="37" stroke="#6b7280" stroke-width="2"/>
+            <line x1="43" y1="72" x2="49" y2="77" stroke="#6b7280" stroke-width="2"/>
+            <!-- Perpendicular diagonals -->
+            <line x1="15" y1="55" x2="145" y2="55" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <line x1="80" y1="14" x2="80" y2="96" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <rect x="76" y="51" width="8" height="8" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <text x="80" y="70" font-size="10" fill="#64748b" text-anchor="middle">⊥ diagonals</text>
+          </svg>
+        </div>
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.4rem;">Rhombus</div>
+        <div style="font-size:0.78rem;color:#334155;line-height:1.6;">
+          • All 4 sides <strong>equal</strong><br>
+          • Opposite angles <strong>equal</strong><br>
+          • Diagonals bisect at <strong>90° (perpendicular)</strong><br>
+          • A parallelogram with equal sides
+        </div>
+        <div class="formula-box" style="font-size:0.75rem;margin-top:0.4rem;padding:0.3rem 0.5rem;">diag₁ ⊥ diag₂</div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.6rem;">Is every rectangle a parallelogram? Is every parallelogram a rectangle? Think carefully — what's the key difference between them?</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 8 — QUADRILATERAL FAMILY TREE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="8">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content" style="padding:clamp(0.4rem,1.2vw,1rem);">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#374151,#1f2937);">Part 3 · Family Tree</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.1rem,2.3vw,1.5rem);font-weight:700;margin:0 0 0.4rem;">The Quadrilateral Family Tree 🌳</h2>
+
+    <div class="reveal" style="display:grid;grid-template-columns:1fr 300px;gap:0.8rem;align-items:start;width:100%;">
+
+      <!-- LEFT: Tree SVG -->
+      <svg viewBox="0 0 580 460" width="100%" style="display:block;overflow:visible;" aria-label="Quadrilateral family tree with actual shape drawings">
+        <defs>
+          <marker id="arrowT" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="#9ca3af"/>
+          </marker>
+          <marker id="arrowD" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="#6b7280"/>
+          </marker>
+        </defs>
+
+        <!-- ── CONNECTOR LINES ── -->
+        <!-- Root → Parallelogram -->
+        <line x1="290" y1="90" x2="100" y2="148" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#arrowT)"/>
+        <!-- Root → Trapezoid -->
+        <line x1="290" y1="90" x2="290" y2="148" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#arrowT)"/>
+        <!-- Root → Kite -->
+        <line x1="290" y1="90" x2="480" y2="148" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#arrowT)"/>
+        <!-- Parallelogram → Rhombus -->
+        <line x1="72" y1="262" x2="52" y2="308" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#arrowT)"/>
+        <!-- Parallelogram → Rectangle -->
+        <line x1="128" y1="262" x2="164" y2="308" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#arrowT)"/>
+        <!-- Rhombus → Square (dashed) -->
+        <line x1="52" y1="418" x2="196" y2="438" stroke="#6b7280" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#arrowD)"/>
+        <!-- Rectangle → Square (dashed) -->
+        <line x1="196" y1="418" x2="218" y2="438" stroke="#6b7280" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#arrowD)"/>
+
+        <!-- ════ TIER 1: QUADRILATERAL ════ -->
+        <rect x="160" y="8" width="260" height="82" rx="12" fill="#1f2937"/>
+        <text x="290" y="24" font-size="13" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Quadrilateral</text>
+        <!-- Generic irregular 4-sided polygon -->
+        <polygon points="185,68 192,32 370,36 355,72" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.65)" stroke-width="2" stroke-linejoin="round"/>
+        <text x="290" y="84" font-size="8.5" fill="#9ca3af" text-anchor="middle" font-family="Nunito,sans-serif">any 4 sides · 4 angles · sum = 360°</text>
+
+        <!-- ════ TIER 2: PARALLELOGRAM (cx=100) ════ -->
+        <rect x="10" y="148" width="180" height="114" rx="10" fill="#374151"/>
+        <text x="100" y="162" font-size="11" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Parallelogram</text>
+        <!-- Parallelogram shape: slanted left -->
+        <polygon points="28,236 52,178 172,178 148,236" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.80)" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Double tick on top and bottom (parallel) -->
+        <line x1="104" y1="178" x2="104" y2="185" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="110" y1="178" x2="110" y2="185" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="80" y1="236" x2="80" y2="229" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="86" y1="236" x2="86" y2="229" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <!-- Single tick on left and right sides -->
+        <line x1="38" y1="207" x2="44" y2="210" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="154" y1="207" x2="160" y2="210" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <text x="100" y="252" font-size="8" fill="#d1d5db" text-anchor="middle" font-family="Nunito,sans-serif">opp. sides ∥ &amp; = · opp. ∠s =</text>
+        <text x="100" y="262" font-size="8" fill="#d1d5db" text-anchor="middle" font-family="Nunito,sans-serif">diagonals bisect each other</text>
+
+        <!-- ════ TIER 2: TRAPEZOID (cx=290) ════ -->
+        <rect x="210" y="148" width="160" height="114" rx="10" fill="#4b5563"/>
+        <text x="290" y="162" font-size="11" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Trapezoid</text>
+        <!-- Trapezoid: short top, wide bottom -->
+        <polygon points="246,236 230,178 350,178 354,236" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.80)" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Single parallel arrows on top and bottom -->
+        <line x1="283" y1="173" x2="291" y2="173" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="283" y1="241" x2="291" y2="241" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <text x="290" y="252" font-size="8" fill="#d1d5db" text-anchor="middle" font-family="Nunito,sans-serif">exactly 1 pair of ∥ sides</text>
+        <text x="290" y="262" font-size="8" fill="#d1d5db" text-anchor="middle" font-family="Nunito,sans-serif">non-parallel sides = legs</text>
+
+        <!-- ════ TIER 2: KITE (cx=480) ════ -->
+        <rect x="400" y="148" width="160" height="114" rx="10" fill="#4b5563"/>
+        <text x="480" y="162" font-size="11" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Kite</text>
+        <!-- Kite shape: asymmetric diamond (tall top, short bottom) -->
+        <polygon points="480,180 524,218 480,240 436,218" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.80)" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Single ticks on top-two sides (equal), double on bottom-two (equal) -->
+        <line x1="454" y1="199" x2="458" y2="204" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="503" y1="199" x2="507" y2="194" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="454" y1="229" x2="449" y2="233" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="451" y1="225" x2="446" y2="229" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="506" y1="229" x2="511" y2="233" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <line x1="509" y1="225" x2="514" y2="229" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+        <text x="480" y="252" font-size="8" fill="#d1d5db" text-anchor="middle" font-family="Nunito,sans-serif">2 pairs of consecutive = sides</text>
+        <text x="480" y="262" font-size="8" fill="#d1d5db" text-anchor="middle" font-family="Nunito,sans-serif">1 pair of equal opposite angles</text>
+
+        <!-- ════ TIER 3: RHOMBUS (cx=52) ════ -->
+        <rect x="8" y="308" width="132" height="110" rx="10" fill="#6b7280"/>
+        <text x="74" y="322" font-size="11" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Rhombus</text>
+        <!-- Rhombus: diamond (equal sides, wider than tall) -->
+        <polygon points="74,334 108,363 74,392 40,363" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Equal tick on all 4 sides (single tick) -->
+        <line x1="56" y1="348" x2="61" y2="352" stroke="rgba(255,255,255,0.8)" stroke-width="1.8"/>
+        <line x1="87" y1="348" x2="92" y2="344" stroke="rgba(255,255,255,0.8)" stroke-width="1.8"/>
+        <line x1="56" y1="377" x2="51" y2="381" stroke="rgba(255,255,255,0.8)" stroke-width="1.8"/>
+        <line x1="91" y1="377" x2="96" y2="381" stroke="rgba(255,255,255,0.8)" stroke-width="1.8"/>
+        <!-- Diagonal intersection dot -->
+        <circle cx="74" cy="363" r="3" fill="rgba(255,255,255,0.5)"/>
+        <text x="74" y="404" font-size="7.5" fill="#e5e7eb" text-anchor="middle" font-family="Nunito,sans-serif">all 4 sides = · diags ⊥</text>
+        <text x="74" y="414" font-size="7.5" fill="#e5e7eb" text-anchor="middle" font-family="Nunito,sans-serif">opp. angles equal</text>
+
+        <!-- ════ TIER 3: RECTANGLE (cx=196) ════ -->
+        <rect x="142" y="308" width="132" height="110" rx="10" fill="#6b7280"/>
+        <text x="208" y="322" font-size="11" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Rectangle</text>
+        <!-- Rectangle: wider than tall -->
+        <rect x="158" y="334" width="100" height="58" rx="1" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.85)" stroke-width="2"/>
+        <!-- Right angle marks all 4 corners (small L shapes) -->
+        <polyline points="158,344 168,344 168,334" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <polyline points="248,344 238,344 238,334" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <polyline points="158,382 168,382 168,392" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <polyline points="248,382 238,382 238,392" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <text x="208" y="404" font-size="7.5" fill="#e5e7eb" text-anchor="middle" font-family="Nunito,sans-serif">all 90° · opp. sides =</text>
+        <text x="208" y="414" font-size="7.5" fill="#e5e7eb" text-anchor="middle" font-family="Nunito,sans-serif">diagonals equal length</text>
+
+        <!-- ════ TIER 4: SQUARE (cx=222, y=438) ════ -->
+        <rect x="158" y="438" width="128" height="118" rx="10" fill="#111827" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="222" y="453" font-size="11" font-weight="800" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Square ⭐</text>
+        <!-- Perfect square, centered -->
+        <rect x="180" y="462" width="84" height="84" rx="1" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.85)" stroke-width="2"/>
+        <!-- Right angle marks all 4 corners -->
+        <polyline points="180,472 190,472 190,462" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <polyline points="254,472 244,472 244,462" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <polyline points="180,536 190,536 190,546" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <polyline points="254,536 244,536 244,546" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <!-- Equal tick marks on all 4 sides (double tick = most special) -->
+        <line x1="218" y1="462" x2="218" y2="468" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="224" y1="462" x2="224" y2="468" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="218" y1="546" x2="218" y2="540" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="224" y1="546" x2="224" y2="540" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="180" y1="500" x2="186" y2="500" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="180" y1="506" x2="186" y2="506" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="264" y1="500" x2="258" y2="500" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <line x1="264" y1="506" x2="258" y2="506" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/>
+        <text x="222" y="554" font-size="7.5" fill="#9ca3af" text-anchor="middle" font-family="Nunito,sans-serif">all = sides · all 90° · most special!</text>
+      </svg>
+
+      <!-- RIGHT: Key facts panel -->
+      <div style="display:flex;flex-direction:column;gap:0.5rem;padding-top:0.2rem;">
+        <div class="prob-card" style="border-left:4px solid #1f2937;padding:0.6rem 0.75rem;">
+          <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.25rem;">🔑 Golden Rule</div>
+          <div style="font-size:0.72rem;color:#334155;line-height:1.55;">
+            Every <strong>square</strong> is a rectangle <em>and</em> a rhombus.<br>
+            Every <strong>rectangle</strong> is a parallelogram.<br>
+            But NOT every ∥gram is a rectangle!
+          </div>
+          <div style="font-size:0.68rem;color:#6b7280;margin-top:0.25rem;">↓ Arrow = "is a special type of"<br>╌ ╌ Dashed = inherits from both parents</div>
+        </div>
+        <div class="prob-card" style="border-left:4px solid #374151;padding:0.6rem 0.75rem;">
+          <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.2rem;">📐 Shape Markers</div>
+          <div style="font-size:0.71rem;color:#334155;line-height:1.6;">
+            <span style="font-weight:700;">| tick</span> = that side's length is equal to another side with same ticks<br>
+            <span style="font-weight:700;">┐ corner box</span> = 90° right angle<br>
+            <span style="font-weight:700;">↔ arrow</span> = those two sides are parallel
+          </div>
+        </div>
+        <div class="socratic-q" style="font-size:0.72rem;">
+          Can a square be a kite? (Hint: does it have 2 pairs of consecutive equal sides?)
+        </div>
+        <div class="trap-card" style="font-size:0.71rem;">
+          <div style="font-weight:800;font-size:0.73rem;color:#1f2937;">⚠️ SHSAT Trap</div>
+          <div style="color:#374151;margin-top:0.15rem;">A rhombus is NOT necessarily a rectangle — its angles don't have to be 90°. Only the square is both.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 8 — QUADRILATERAL ANGLE PROPERTIES
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="9">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 3 · Quadrilateral Angles</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.5rem;">Quadrilaterals Always Sum to 360° 🔲</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <div class="diagram-wrap reveal" style="min-height:240px;">
+        <svg viewBox="0 0 280 250" width="100%" height="235" aria-label="Parallelogram with angles labeled A, B, C, D showing that A equals C, B equals D, and A plus B equals 180">
+          <polygon points="60,50 220,50 260,200 20,200" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+          <!-- Diagonal tear-apart: two triangles = 2×180 = 360 -->
+          <line x1="60" y1="50" x2="260" y2="200" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6 3"/>
+          <text x="80" y="68" font-size="13" font-weight="800" fill="#374151">A</text>
+          <text x="208" y="68" font-size="13" font-weight="800" fill="#374151">B</text>
+          <text x="240" y="198" font-size="13" font-weight="800" fill="#4b5563">C</text>
+          <text x="18" y="198" font-size="13" font-weight="800" fill="#4b5563">D</text>
+          <text x="140" y="130" font-size="12" fill="#9ca3af" text-anchor="middle">diagonal splits into</text>
+          <text x="140" y="145" font-size="12" fill="#9ca3af" text-anchor="middle">2 triangles = 2×180°</text>
+          <text x="140" y="230" font-size="13" fill="#64748b" text-anchor="middle">A + B + C + D = 360°</text>
+          <!-- For parallelogram: opp angles equal -->
+          <text x="76" y="94" font-size="11" fill="#374151" font-weight="700">A = C</text>
+          <text x="192" y="100" font-size="11" fill="#4b5563" font-weight="700">B = D</text>
+          <text x="140" y="168" font-size="11" fill="#374151" font-weight="700" text-anchor="middle">A + B = 180° (co-interior)</text>
+        </svg>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">Any quadrilateral can be cut into 2 triangles with a diagonal. How many degrees are in 2 triangles? What does that tell you about all 4 angles of any quadrilateral?</div>
+        <div class="prob-card" style="font-size:0.83rem;color:#334155;">
+          <strong>The Master Rule:</strong> Any quadrilateral's 4 angles always sum to <strong>360°</strong> — just like a full rotation.
+        </div>
+        <div class="formula-box" style="text-align:center;">∠A + ∠B + ∠C + ∠D = 360°</div>
+        <div class="prob-card" style="border-left:3px solid #6b7280;font-size:0.82rem;color:#334155;">
+          <strong>For a parallelogram specifically:</strong><br>
+          • ∠A = ∠C (opposite angles equal)<br>
+          • ∠A + ∠B = 180° (co-interior = supplementary)<br><br>
+          <strong>Worked Example:</strong> A parallelogram has one angle of 70°. Find all four angles.<br>
+          <span style="color:#4b5563;font-weight:700;">→ 70°, 110°, 70°, 110° (opposite pair each)</span>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ 360° not 180° — quadrilaterals are NOT triangles!</div>
+          <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">A very common SHSAT error: students set up the angles of a quadrilateral = 180°. The correct sum is always 360°.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 9 — QUADRILATERAL PROBLEMS: THREE LEVELS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="10">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Part 3 · Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Quadrilateral Problems — Three Levels</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+
+      <!-- L2: Parallelogram — find one angle given the opposite -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 4</span><span class="lvl-badge lvl-2">L2</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 100" width="100%" height="88" aria-label="Parallelogram with one angle labeled 115 degrees, asking for the angle x across from it">
+            <polygon points="35,18 130,18 125,82 40,82" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <text x="42" y="36" font-size="13" font-weight="800" fill="#374151">115°</text>
+            <text x="105" y="78" font-size="13" font-weight="800" fill="#4b5563">x°</text>
+            <text x="80" y="96" font-size="11" fill="#64748b" text-anchor="middle">Find x</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A parallelogram has one angle of <strong>115°</strong>. Find angle x, which is across from the 115° angle.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">In a parallelogram, what's the relationship between opposite angles?</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L3: Parallelogram with algebra — co-interior angles -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 5</span><span class="lvl-badge lvl-3">L3</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 100" width="100%" height="88" aria-label="Parallelogram with adjacent angles labeled 4x plus 10 degrees and 2x plus 20 degrees">
+            <polygon points="30,16 132,16 130,84 28,84" fill="#f0f0f0" stroke="#4b5563" stroke-width="2.5"/>
+            <text x="34" y="38" font-size="11" font-weight="800" fill="#374151">(4x+10)°</text>
+            <text x="100" y="38" font-size="11" font-weight="800" fill="#4b5563">(2x+20)°</text>
+            <text x="80" y="96" font-size="11" fill="#64748b" text-anchor="middle">Find x, then all 4 angles</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A parallelogram has adjacent angles <strong>(4x + 10)°</strong> and <strong>(2x + 20)°</strong>. Find x and all four angles.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">Adjacent angles in a parallelogram are co-interior. What do co-interior angles always add up to?</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- L4: Rhombus with diagonal — find angle using perpendicular diagonals -->
+      <div class="prob-card reveal">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Problem 6</span><span class="lvl-badge lvl-4">L4</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 160 115" width="100%" height="100" aria-label="Rhombus with one interior angle labeled 3x minus 6 degrees and the opposite angle labeled x plus 30 degrees">
+            <polygon points="80,12 148,56 80,100 12,56" fill="#f0f0f0" stroke="#6b7280" stroke-width="2.5"/>
+            <text x="80" y="30" font-size="10" font-weight="800" fill="#374151" text-anchor="middle">(3x−6)°</text>
+            <text x="80" y="90" font-size="10" font-weight="800" fill="#4b5563" text-anchor="middle">(x+30)°</text>
+            <text x="80" y="112" font-size="11" fill="#64748b" text-anchor="middle">Rhombus: find x, then each angle</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">A rhombus has opposite angles <strong>(3x − 6)°</strong> and <strong>(x + 30)°</strong>. Find x, then find all four angles. Check: do they sum to 360°?</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">A rhombus is a type of parallelogram. So what do you know about its opposite angles?</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 10 — MIXED SHSAT CHALLENGE
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="11">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:290px;height:290px;top:-60px;right:-60px;background:#374151;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Challenge Round</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,2rem);font-weight:700;margin:0 0 0.7rem;">Mixed SHSAT Challenge Problems</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+
+      <!-- Challenge A: L4 — isosceles + Pythagorean combined -->
+      <div class="prob-card reveal" style="border-left:4px solid #374151;">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Challenge A</span><span class="lvl-badge lvl-4">L4</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 200 140" width="100%" height="120" aria-label="Isosceles right triangle with right angle at top, two equal legs of 6, find the hypotenuse">
+            <polygon points="100,15 20,115 180,115" fill="#f5f5f5" stroke="#374151" stroke-width="2.5"/>
+            <!-- Right angle marker at apex (100,15) -->
+            <polyline points="93.75,22.81 100,30.62 106.25,22.81" fill="none" stroke="#374151" stroke-width="1.8"/>
+            <!-- Tick marks on left leg -->
+            <line x1="55.2" y1="62.2" x2="64.8" y2="67.8" stroke="#374151" stroke-width="2.2"/>
+            <line x1="52.2" y1="66.6" x2="61.8" y2="72.2" stroke="#374151" stroke-width="2.2"/>
+            <!-- Tick marks on right leg -->
+            <line x1="135.2" y1="67.8" x2="144.8" y2="62.2" stroke="#374151" stroke-width="2.2"/>
+            <line x1="138.2" y1="72.2" x2="147.8" y2="66.6" stroke="#374151" stroke-width="2.2"/>
+            <!-- Labels on legs -->
+            <text x="44" y="72" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">6</text>
+            <text x="158" y="72" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">6</text>
+            <!-- Hypotenuse label -->
+            <text x="100" y="132" font-size="12" font-weight="800" fill="#4b5563" text-anchor="middle">c = ?</text>
+            <!-- Vertex labels -->
+            <text x="100" y="11" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">A</text>
+            <text x="11" y="118" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">B</text>
+            <text x="191" y="118" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">C</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">An isosceles right triangle has two equal legs of length <strong>6</strong>. Find the exact length of the hypotenuse.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">Both legs are equal AND there's a right angle. Which two formulas can you use here?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+
+      <!-- Challenge B: L3 — parallelogram with a triangle cut inside -->
+      <div class="prob-card reveal" style="border-left:4px solid #4b5563;">
+        <div style="margin-bottom:0.4rem;"><span style="font-weight:800;font-size:0.88rem;">Challenge B</span><span class="lvl-badge lvl-3">L3</span></div>
+        <div class="diagram-wrap" style="margin-bottom:0.5rem;">
+          <svg viewBox="0 0 200 120" width="100%" height="108" aria-label="Rectangle ABCD with diagonal from A to C. Angle DAC is labeled 35 degrees. Find angle ACD.">
+            <rect x="15" y="15" width="170" height="90" fill="#f5f5f5" stroke="#4b5563" stroke-width="2.5"/>
+            <!-- Right angle markers -->
+            <rect x="15" y="15" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <rect x="175" y="15" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5" transform="translate(0,0)"/>
+            <rect x="15" y="95" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <rect x="175" y="95" width="10" height="10" fill="none" stroke="#374151" stroke-width="1.5"/>
+            <!-- Diagonal AC -->
+            <line x1="15" y1="15" x2="185" y2="105" stroke="#374151" stroke-width="2" stroke-dasharray="5 3"/>
+            <!-- Labels -->
+            <text x="8" y="13" font-size="11" font-weight="800" fill="#374151">A</text>
+            <text x="184" y="13" font-size="11" font-weight="800" fill="#374151">B</text>
+            <text x="184" y="110" font-size="11" font-weight="800" fill="#4b5563">C</text>
+            <text x="8" y="110" font-size="11" font-weight="800" fill="#4b5563">D</text>
+            <text x="32" y="38" font-size="11" font-weight="800" fill="#374151">35°</text>
+            <text x="152" y="96" font-size="11" font-weight="800" fill="#4b5563">?</text>
+          </svg>
+        </div>
+        <div style="font-size:0.83rem;color:#334155;line-height:1.5;">Rectangle ABCD has diagonal AC drawn. Angle DAC = <strong>35°</strong>. Find angle ACD.</div>
+        <div class="socratic-q" style="margin-top:0.4rem;">Triangle ACD is inside a rectangle. What do you know about angle ADC? Then use 180° to find what's left.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 11 — FORMULA CHEAT CARD
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="12">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#4b5563;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Reference</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.7rem;">Triangles &amp; Quadrilaterals Cheat Card</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;" class="reveal">
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">🔺</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.3rem;">Equilateral</div>
+        <div class="formula-box" style="font-size:0.82rem;padding:0.3rem 0.5rem;">3 × 60°</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">all equal, all 60</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #4b5563;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">⚖️</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.3rem;">Isosceles</div>
+        <div class="formula-box" style="font-size:0.82rem;padding:0.3rem 0.5rem;">apex + 2x = 180°</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">equal sides → equal base angles</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #6b7280;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">📐</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.3rem;">Pythagorean</div>
+        <div class="formula-box" style="font-size:0.82rem;padding:0.3rem 0.5rem;">a² + b² = c²</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">right triangles only; c = hyp</div>
+      </div>
+      <div class="prob-card" style="border-top:3px solid #374151;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:0.25rem;">▱</div>
+        <div style="font-weight:800;font-size:0.78rem;color:#111827;margin-bottom:0.3rem;">Quadrilateral</div>
+        <div class="formula-box" style="font-size:0.76rem;padding:0.3rem 0.4rem;">A+B+C+D = 360°</div>
+        <div style="font-size:0.72rem;color:#64748b;margin-top:0.3rem;">all 4-sided shapes</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-top:0.65rem;" class="reveal">
+      <div class="trap-card">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ Hypotenuse is ALWAYS across from 90°</div>
+        <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">c² is the largest term. If you're given c, it goes on the right of the equals sign: a² + b² = c².</div>
+      </div>
+      <div class="trap-card">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚡ Pythagorean Triples — instant recognition</div>
+        <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">3–4–5 and 5–12–13 appear most often on the SHSAT. Any multiple works: 6–8–10 is just 2 × (3–4–5).</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-top:0.5rem;" class="reveal">
+      <div class="trap-card">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ Parallelogram adjacent angles sum to 180°</div>
+        <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">Opposite = equal. Adjacent = supplementary. Don't mix these up — they're the two key parallelogram angle facts.</div>
+      </div>
+      <div class="trap-card">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">🔑 Rhombus: diagonals bisect at 90°</div>
+        <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">This creates 4 right triangles inside the rhombus — a Pythagorean theorem setup waiting to happen on the SHSAT.</div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.6rem;">Cover this card. In 30 seconds, can you say all four formulas out loud with their nicknames?</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 12 — ELA: FIGURATIVE LANGUAGE INTRO
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="13">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#4b5563;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · ELA — Poetry</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.5rem;">Figurative Language — The Four Devices 🎭</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;">
+      <!-- The 3-step model diagram -->
+      <div class="diagram-wrap reveal" style="min-height:220px;">
+        <svg viewBox="0 0 280 220" width="100%" height="210" aria-label="Three-step model for analyzing figurative language: find device, explain comparison, explain effect">
+          <rect x="10" y="10" width="260" height="44" rx="10" fill="#f0f0f0" stroke="#374151" stroke-width="2"/>
+          <text x="140" y="29" font-size="13" font-weight="800" fill="#111827" text-anchor="middle">STEP 1: Name the Device</text>
+          <text x="140" y="46" font-size="11" fill="#334155" text-anchor="middle">Simile? Metaphor? Personification? Imagery?</text>
+          <line x1="140" y1="54" x2="140" y2="76" stroke="#64748b" stroke-width="2"/>
+          <polygon points="140,80 134,70 146,70" fill="#64748b"/>
+          <rect x="10" y="82" width="260" height="44" rx="10" fill="#f0f0f0" stroke="#4b5563" stroke-width="2"/>
+          <text x="140" y="101" font-size="13" font-weight="800" fill="#1f2937" text-anchor="middle">STEP 2: What Does It Compare?</text>
+          <text x="140" y="118" font-size="11" fill="#334155" text-anchor="middle">X is being compared to Y — say what both are.</text>
+          <line x1="140" y1="126" x2="140" y2="148" stroke="#64748b" stroke-width="2"/>
+          <polygon points="140,152 134,142 146,142" fill="#64748b"/>
+          <rect x="10" y="154" width="260" height="44" rx="10" fill="#ebebeb" stroke="#6b7280" stroke-width="2"/>
+          <text x="140" y="173" font-size="13" font-weight="800" fill="#374151" text-anchor="middle">STEP 3: Effect on Meaning / Tone</text>
+          <text x="140" y="190" font-size="11" fill="#334155" text-anchor="middle">How does this device change how you feel?</text>
+          <text x="140" y="210" font-size="11" fill="#9ca3af" text-anchor="middle">→ This creates a feeling of ___</text>
+        </svg>
+      </div>
+      <!-- Device definitions -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.45rem;">
+        <div class="socratic-q">Before I define anything: if I say "Julius's focus is a laser beam," am I saying he literally has a laser? What am I actually saying — and why is that more powerful than "he is focused"?</div>
+        <div class="prob-card" style="font-size:0.79rem;color:#334155;border-left:3px solid #374151;">
+          <strong>Simile:</strong> comparison using <em>like</em> or <em>as</em><br>
+          <em>"The angle opened like a door."</em>
+        </div>
+        <div class="prob-card" style="font-size:0.79rem;color:#334155;border-left:3px solid #4b5563;">
+          <strong>Metaphor:</strong> direct comparison, no <em>like/as</em><br>
+          <em>"Every angle is a grammar only the patient speak."</em>
+        </div>
+        <div class="prob-card" style="font-size:0.79rem;color:#334155;border-left:3px solid #6b7280;">
+          <strong>Personification:</strong> giving human traits to non-human things<br>
+          <em>"The triangle refused to yield its secret."</em>
+        </div>
+        <div class="prob-card" style="font-size:0.79rem;color:#334155;border-left:3px solid #9ca3af;">
+          <strong>Imagery:</strong> language that triggers the senses (sight, sound, touch, taste, smell)<br>
+          <em>"The brass instrument cold against my eye."</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 13 — POEM: "FIELD ANGLES" + 3 QUESTIONS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="14">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#4b5563;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Poetry Practice</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:700;margin:0 0 0.6rem;">Poem: "What the Rhombus Knows"</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:start;">
+      <!-- Poem with Annotation Tools -->
+      <div class="prob-card reveal" style="border-left:4px solid #4b5563;">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;margin-bottom:0.4rem;">Read This Poem:</div>
+        <div class="annotation-toolbar" id="toolbar-13">
+          <span class="annot-label">Tool:</span>
+          <button class="annot-btn active" data-tool="highlight" onclick="setTool('13','highlight',this)">🖊 Highlight</button>
+          <button class="annot-btn" data-tool="underline" onclick="setTool('13','underline',this)">U&#x332; Underline</button>
+          <button class="annot-btn" data-tool="outline" onclick="setTool('13','outline',this)">&#9634; Outline</button>
+          <button class="annot-btn" data-tool="note" onclick="setTool('13','note',this)">&#128204; Note</button>
+          <div class="annot-sep"></div>
+          <span class="annot-label">Color:</span>
+          <div class="annot-color-row" id="colors-13">
+            <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setColor('13','#fef08a',this)" title="Yellow"></div>
+            <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setColor('13','#86efac',this)" title="Green"></div>
+            <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setColor('13','#93c5fd',this)" title="Blue"></div>
+            <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setColor('13','#fca5a5',this)" title="Pink"></div>
+            <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setColor('13','#c4b5fd',this)" title="Purple"></div>
+          </div>
+          <button class="clear-annotations-btn" onclick="clearAnnotations('13')">&#10005; Clear</button>
+        </div>
+        <div class="annotatable-poem" id="poem-13" style="font-size:0.8rem;color:#334155;line-height:1.65;font-style:italic;">
+          <p style="margin:0 0 0.5rem;">My father built fences the way theorems work —<br>
+          each post leaning into the weight of the next,<br>
+          nothing vertical, nothing accidental,<br>
+          every angle chosen like a quiet argument.</p>
+          <p style="margin:0 0 0.5rem;">He said: a square gives in too easily.<br>
+          It stands rigid, proud, forgets that wind<br>
+          is a proof that nothing stays perpendicular<br>
+          forever.</p>
+          <p style="margin:0 0 0.5rem;">A rhombus, though — a rhombus leans.<br>
+          It knows the world is all pressure and yield,<br>
+          that the diagonals of any life<br>
+          cross somewhere in the middle.</p>
+          <p style="margin:0;">I am learning to lean like that.<br>
+          To hold my shape without holding my breath.</p>
+        </div>
+      </div>
+      <!-- Questions -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.45rem;">
+        <div class="prob-card" style="border-left:3px solid #374151;">
+          <span style="font-weight:800;font-size:0.82rem;">Q1</span><span class="lvl-badge lvl-2">L2</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">In stanza 2, "the wind / is a proof that nothing stays perpendicular forever" is an example of which device?
+            <div class="mc-options" data-q="1">
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1p" value="A"><span class="opt-letter">A</span><span>Simile — it compares wind to a proof using <em>like</em></span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1p" value="B"><span class="opt-letter">B</span><span>Metaphor — wind is directly called a proof</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1p" value="C"><span class="opt-letter">C</span><span>Personification — the wind is given a human ability to prove things</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q1p" value="D"><span class="opt-letter">D</span><span>Imagery — it describes the sound of wind against a fence</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #4b5563;">
+          <span style="font-weight:800;font-size:0.82rem;">Q2</span><span class="lvl-badge lvl-3">L3</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">What does "the diagonals of any life / cross somewhere in the middle" most likely mean?
+            <div class="mc-options" data-q="2">
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2p" value="A"><span class="opt-letter">A</span><span>Life is perfectly symmetrical, like a rhombus</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2p" value="B"><span class="opt-letter">B</span><span>Every person's opposing forces eventually meet and intersect</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2p" value="C"><span class="opt-letter">C</span><span>Rhombus diagonals always bisect each other at 90°</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q2p" value="D"><span class="opt-letter">D</span><span>The speaker is confused about the definition of a diagonal</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #6b7280;">
+          <span style="font-weight:800;font-size:0.82rem;">Q3</span><span class="lvl-badge lvl-4">L4</span>
+          <div style="font-size:0.8rem;color:#334155;margin-top:0.2rem;">The speaker contrasts a square and a rhombus. What does this contrast suggest about the speaker's view of rigidity vs. flexibility?</div>
+          <div class="work-box" style="margin-top:0.3rem;"><textarea placeholder="Cite 2 specific lines from the poem in your answer…" spellcheck="false"></textarea></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 14 — ELA DEBRIEF + FIGURATIVE LANGUAGE DEBRIEF
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="15">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#4b5563;opacity:0.08;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#374151;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Discussion</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Discuss &amp; Debrief the Poem 💬</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="prob-card" style="border-left:4px solid #374151;">
+          <div style="font-weight:800;font-size:0.84rem;color:#111827;margin-bottom:0.3rem;">Q1 Answer: B — Metaphor</div>
+          <div style="font-size:0.8rem;color:#334155;">Wind is directly called a "proof" — no <em>like</em> or <em>as</em> → it's a metaphor. Note: wind isn't given human traits (not personification), and there's no sensory detail list (not imagery).</div>
+        </div>
+        <div class="prob-card" style="border-left:4px solid #4b5563;">
+          <div style="font-weight:800;font-size:0.84rem;color:#111827;margin-bottom:0.3rem;">Q2 Answer: B — Forces that meet</div>
+          <div style="font-size:0.8rem;color:#334155;">The poet uses the geometric fact that rhombus diagonals bisect as a metaphor: our life's opposing tensions ("diagonals") inevitably cross. Answer C is literal — it describes the math, not the meaning.</div>
+        </div>
+        <div class="prob-card" style="border-left:4px solid #6b7280;">
+          <div style="font-weight:800;font-size:0.84rem;color:#111827;margin-bottom:0.3rem;">Q3 Model Answer (L4)</div>
+          <div style="font-size:0.79rem;color:#334155;line-height:1.55;">The speaker uses the square to represent rigid thinking: "A square gives in too easily" suggests that inflexibility actually makes one <em>weaker</em>, not stronger. The rhombus, by contrast, represents adaptive strength: "A rhombus leans" — leaning without losing shape. The speaker values resilience over rigidity.</div>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="socratic-q">Did you notice the poem never uses the word "flexibility" or "resilience"? How does using geometry instead make the ideas feel different?</div>
+        <div class="prob-card" style="font-size:0.82rem;color:#334155;">
+          <div style="font-weight:800;color:#374151;margin-bottom:0.35rem;">📋 Figurative Language Answer Protocol:</div>
+          <div style="font-size:0.79rem;line-height:1.6;">
+            1. <strong>Name</strong> the device (simile, metaphor, etc.)<br>
+            2. <strong>Quote</strong> the exact phrase from the poem<br>
+            3. <strong>Explain</strong> what two things are being compared<br>
+            4. <strong>State the effect:</strong> "This creates a feeling of ___"
+          </div>
+        </div>
+        <div class="trap-card">
+          <div style="font-weight:800;font-size:0.82rem;color:#1f2937;">⚠️ Simile vs. Metaphor — the <em>like/as</em> test</div>
+          <div style="font-size:0.79rem;color:#374151;margin-top:0.2rem;">If you see <em>like</em> or <em>as</em> making the comparison → simile. If the two things are just fused together without those words → metaphor. This is the #1 SHSAT figurative language test.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 15 — POEM 2: "THEOREM" + 3 MORE QUESTIONS
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="16">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:280px;height:280px;top:-60px;right:-60px;background:#374151;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-40px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Second Poem</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:700;margin:0 0 0.5rem;">Poem: "The Geese Again"</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;align-items:start;">
+      <div class="prob-card reveal" style="border-left:4px solid #374151;">
+        <div style="font-weight:800;font-size:0.82rem;color:#1f2937;margin-bottom:0.35rem;">Read This Poem:</div>
+        <div class="annotation-toolbar" id="toolbar-15">
+          <span class="annot-label">Tool:</span>
+          <button class="annot-btn active" data-tool="highlight" onclick="setTool('15','highlight',this)">🖊 Highlight</button>
+          <button class="annot-btn" data-tool="underline" onclick="setTool('15','underline',this)">U&#x332; Underline</button>
+          <button class="annot-btn" data-tool="outline" onclick="setTool('15','outline',this)">&#9634; Outline</button>
+          <button class="annot-btn" data-tool="note" onclick="setTool('15','note',this)">&#128204; Note</button>
+          <div class="annot-sep"></div>
+          <span class="annot-label">Color:</span>
+          <div class="annot-color-row" id="colors-15">
+            <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setColor('15','#fef08a',this)" title="Yellow"></div>
+            <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setColor('15','#86efac',this)" title="Green"></div>
+            <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setColor('15','#93c5fd',this)" title="Blue"></div>
+            <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setColor('15','#fca5a5',this)" title="Pink"></div>
+            <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setColor('15','#c4b5fd',this)" title="Purple"></div>
+          </div>
+          <button class="clear-annotations-btn" onclick="clearAnnotations('15')">&#10005; Clear</button>
+        </div>
+        <div class="annotatable-poem" id="poem-15" style="font-size:0.79rem;color:#334155;line-height:1.62;font-style:italic;">
+          <p style="margin:0 0 0.45rem;">The geese crossed at forty-five degrees<br>
+          above the river, precise as theorems,<br>
+          their bodies solving for the wind<br>
+          in a language older than any proof.</p>
+          <p style="margin:0 0 0.45rem;">My student asked me once<br>
+          why angles have to add to what they add to.<br>
+          I said: because the universe insists.<br>
+          She wrote it down like it meant something.</p>
+          <p style="margin:0 0 0.45rem;">Maybe it did. The geese don't ask<br>
+          why the updraft bends at just that pitch —<br>
+          they lean into the angle that saves them<br>
+          and call it instinct instead of math.</p>
+          <p style="margin:0;">I've been teaching thirty years.<br>
+          Every October the geese remind me<br>
+          that understanding and knowing<br>
+          are two different migrations.</p>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.4rem;">
+        <div class="prob-card" style="border-left:3px solid #374151;">
+          <span style="font-weight:800;font-size:0.82rem;">Q4</span><span class="lvl-badge lvl-2">L2</span>
+          <div style="font-size:0.78rem;color:#334155;margin-top:0.2rem;">"Their bodies solving for the wind" is an example of:
+            <div class="mc-options">
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4p"><span class="opt-letter">A</span><span>Imagery — it makes you picture the geese's bodies in detail</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4p"><span class="opt-letter">B</span><span>Simile — geese are compared to math students using <em>like</em></span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4p"><span class="opt-letter">C</span><span>Personification — geese are given the human mathematical act of "solving"</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q4p"><span class="opt-letter">D</span><span>Metaphor — wind is directly compared to an equation</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #4b5563;">
+          <span style="font-weight:800;font-size:0.82rem;">Q5</span><span class="lvl-badge lvl-3">L3</span>
+          <div style="font-size:0.78rem;color:#334155;margin-top:0.2rem;">What does the final stanza suggest is the difference between "understanding" and "knowing"?
+            <div class="mc-options">
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5p"><span class="opt-letter">A</span><span>Understanding is for teachers; knowing is for students</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5p"><span class="opt-letter">B</span><span>Knowing is instinctive and lived; understanding requires conscious thought</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5p"><span class="opt-letter">C</span><span>The speaker thinks understanding is more important than knowing</span></label>
+              <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q5p"><span class="opt-letter">D</span><span>The geese understand math better than humans do</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="prob-card" style="border-left:3px solid #6b7280;">
+          <span style="font-weight:800;font-size:0.82rem;">Q6</span><span class="lvl-badge lvl-4">L4</span>
+          <div style="font-size:0.78rem;color:#334155;margin-top:0.15rem;">How does the poet use the simile "precise as theorems" to develop the poem's theme? What two things are being compared, and what does the comparison suggest about the nature of math?</div>
+          <div class="work-box" style="margin-top:0.25rem;"><textarea placeholder="Name the device → what's compared → effect on theme…" spellcheck="false" style="min-height:3rem;"></textarea></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 16 — POEM 2 DEBRIEF + COMPARISON
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="17">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.07;"></div>
+    <div class="blob" style="width:200px;height:200px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.06;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal" style="background:linear-gradient(135deg,#4b5563,#374151);">Part 4 · Poem Comparison</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;margin:0 0 0.7rem;">Poem 2 Debrief &amp; Compare Both Speakers 🔍</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.5rem;">
+        <div class="prob-card" style="border-left:4px solid #374151;">
+          <div style="font-weight:800;font-size:0.84rem;color:#111827;margin-bottom:0.3rem;">Q4 Answer: C — Personification</div>
+          <div style="font-size:0.79rem;color:#334155;">"Solving" is a human mathematical act given to geese. They are given the trait of doing math — that's personification, not imagery or simile.</div>
+        </div>
+        <div class="prob-card" style="border-left:4px solid #4b5563;">
+          <div style="font-weight:800;font-size:0.84rem;color:#111827;margin-bottom:0.3rem;">Q5 Answer: B — Lived vs. Conscious</div>
+          <div style="font-size:0.79rem;color:#334155;">The geese "know" instinctively — they don't ask why. The student has to "understand" consciously. The poem suggests knowing is deeper and more embodied than verbal understanding.</div>
+        </div>
+        <div class="prob-card" style="border-left:4px solid #6b7280;">
+          <div style="font-weight:800;font-size:0.84rem;color:#111827;margin-bottom:0.3rem;">Q6 Model Answer (L4)</div>
+          <div style="font-size:0.78rem;color:#334155;line-height:1.55;">The simile compares the geese's flight to theorems (X = geese's precision; Y = mathematical theorems). This suggests that math is not invented but discovered — it exists in nature, as precise and inevitable as the geese's migration path. The comparison elevates geometry to something ancient and universal.</div>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0.5rem;">
+        <div class="socratic-q">Poem 1 speaker uses a rhombus to talk about personal resilience. Poem 2 speaker uses geese flying at 45° to talk about teaching. What is <em>similar</em> about what both speakers are really saying?</div>
+        <div class="prob-card" style="font-size:0.82rem;color:#334155;">
+          <strong>The Connecting Thread:</strong> Both poems use geometry/math as a lens for understanding human experience. Both speakers are people who have learned something about life <em>through</em> the process of learning math.
+        </div>
+        <div class="prob-card" style="font-size:0.82rem;color:#334155;border-left:3px solid #374151;">
+          <div style="font-weight:800;color:#374151;margin-bottom:0.25rem;">SHSAT Comparison Question Format:</div>
+          <div style="font-size:0.79rem;line-height:1.55;">"Both speakers…" questions expect you to find a theme that exists in BOTH poems. Don't describe each separately — find the overlap. Usually: the theme, the tone, or the speaker's purpose.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 17 — EXIT TICKET / WEEK WRAP-UP
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="18">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:300px;height:300px;top:-70px;right:-60px;background:#374151;opacity:0.09;"></div>
+    <div class="blob" style="width:210px;height:210px;bottom:-50px;left:-30px;background:#4b5563;opacity:0.07;"></div>
+  </div>
+  <div class="content">
+    <div class="section-badge reveal">Exit Ticket</div>
+    <h2 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin:0 0 0.8rem;">Before You Leave — Say It Out Loud 🎤</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;" class="reveal">
+      <div class="prob-card" style="border-left:4px solid #374151;">
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.5rem;">⚡ 60-Second Speed Round</div>
+        <div style="display:flex;flex-direction:column;gap:0.35rem;font-size:0.82rem;color:#334155;">
+          <div>1. What are the three triangle families?</div>
+          <div>2. In an isosceles triangle, which angles are equal?</div>
+          <div>3. In a² + b² = c², what is c?</div>
+          <div>4. A parallelogram's adjacent angles sum to…?</div>
+          <div>5. What makes a rhombus different from a rectangle?</div>
+          <div>6. All quadrilateral angles sum to…?</div>
+        </div>
+      </div>
+      <div class="prob-card" style="border-left:4px solid #4b5563;">
+        <div style="font-weight:800;font-size:0.85rem;color:#111827;margin-bottom:0.5rem;">🎭 ELA Quick Check</div>
+        <div style="display:flex;flex-direction:column;gap:0.35rem;font-size:0.82rem;color:#334155;">
+          <div>1. What's the difference between a simile and metaphor?</div>
+          <div>2. Name one figurative device from today's poems.</div>
+          <div>3. Complete the 3-step protocol: Name it → ??? → ???</div>
+        </div>
+        <div style="margin-top:0.7rem;font-weight:800;font-size:0.85rem;color:#111827;">🧠 Week 5 Reflection:</div>
+        <div style="font-size:0.82rem;color:#334155;margin-top:0.3rem;">In one sentence: what's the most useful thing you learned today and why will it help you on the SHSAT?</div>
+        <div class="work-box" style="margin-top:0.4rem;"><textarea placeholder="Write your reflection here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="socratic-q reveal" style="margin-top:0.7rem;">If you had to pick ONE thing from today's session to explain to a friend who missed class, what would it be — and how would you explain it without using any math symbols?</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 18 — CLOSING
+     ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="19">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:480px;height:480px;top:-120px;right:-100px;background:#374151;opacity:0.14;"></div>
+    <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#4b5563;opacity:0.10;"></div>
+    <div class="blob" style="width:220px;height:220px;top:42%;left:10%;background:#9ca3af;opacity:0.09;"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content" style="text-align:center;">
+    <div style="font-size:4rem;animation:float 3s ease-in-out infinite;margin-bottom:0.5rem;" class="reveal">🏆</div>
+    <h1 class="reveal" style="font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;background:linear-gradient(135deg,#111827,#374151,#4b5563);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.4rem;">You now own every triangle<br>and quadrilateral rule tested on the SHSAT.</h1>
+    <p class="reveal" style="font-size:1rem;color:#374151;font-weight:600;margin:0.6rem 0 1rem;">Equilateral · Isosceles · Right · Pythagorean · Parallelogram · Rectangle · Rhombus</p>
+    <div class="reveal" style="background:rgba(255,255,255,0.75);border-radius:14px;padding:0.9rem 1.5rem;display:inline-block;border:1.5px solid rgba(0,0,0,0.09);box-shadow:0 2px 10px rgba(0,0,0,0.07);">
+      <div style="font-weight:800;font-size:0.88rem;color:#111827;margin-bottom:0.35rem;">📅 Next Week: Week 6 — Geometry: Circles, Volume &amp; 3D Figures</div>
+      
+    </div>
+    <div class="reveal" style="margin-top:0.9rem;">
+      <div style="font-style:italic;font-size:0.88rem;color:#64748b;max-width:560px;margin:0 auto;line-height:1.6;">"The geese don't ask why the updraft bends at just that pitch — they lean into the angle that saves them."<br><span style="font-style:normal;font-weight:700;color:#374151;font-size:0.8rem;">— from "The Geese Again"</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- NAVIGATION -->
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 19</span>
+</div>
+
+<script>
+let current=1;
+const total=document.querySelectorAll('[data-slide]').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){const prev=document.querySelector('.slide.active');const next=document.querySelector(`.slide[data-slide="${n}"]`);if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next);}current=n;updateNav();}
+function changeSlide(dir){let next=current+dir;if(next<1)next=total;if(next>total)next=1;goToSlide(next);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>{d.classList.toggle('active',i+1===current);});counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}});
+let touchStartX=0;
+document.addEventListener('touchstart',(e)=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',(e)=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.08;
+    el.style.transition=`opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0px)';
+  });
+  animateSlideEffects(slide);
+}
+
+function animateSlideEffects(slide){
+  slide.querySelectorAll('[data-count]:not(.counted)').forEach(el=>{
+    el.classList.add('counted');
+    const target=parseInt(el.dataset.count);
+    const suffix=el.dataset.suffix||'',prefix=el.dataset.prefix||'';
+    let cur=0;const step=target/40;
+    const timer=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(timer);}el.textContent=prefix+Math.round(cur).toLocaleString()+suffix;},30);
+  });
+}
+
+function selectMC(label){
+  const options=label.closest('.mc-options');
+  if(options)options.querySelectorAll('.mc-option').forEach(o=>o.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+document.addEventListener('mousemove',(e)=>{
+  const spotlight=document.querySelector('.mouse-spotlight');
+  if(spotlight){const rgb='37,99,235';spotlight.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(${rgb}, 0.05), transparent 40%)`;}
+});
+
+window.initParticles=function(canvas,options){
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const interactive=options.interactive!==false;
+  const count=options.count||(interactive?55:18);
+  let mx=-1000,my=-1000;
+  const r=37,g=99,b=235;
+  const particles=Array.from({length:count},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,size:Math.random()*2+0.8,alpha:Math.random()*0.25+0.08}));
+  if(interactive){canvas.addEventListener('mousemove',(e)=>{const rect=canvas.getBoundingClientRect();mx=e.clientX-rect.left;my=e.clientY-rect.top;});canvas.addEventListener('mouseleave',()=>{mx=-1000;my=-1000;});}
+  (function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{if(interactive){const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){const force=(120-dist)/120*2;p.vx+=(dx/dist)*force*0.1;p.vy+=(dy/dist)*force*0.1;}}p.vx*=0.98;p.vy*=0.98;p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${p.alpha})`;ctx.fill();});requestAnimationFrame(animate);})();
+};
+document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{interactive:true,count:55}));
+document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{interactive:false,count:18}));
+
+
+/* ── Annotation System ── */
+const annotState = {
+  '13': { tool: 'highlight', color: '#fef08a', noteCount: 0 },
+  '15': { tool: 'highlight', color: '#fef08a', noteCount: 0 }
+};
+
+function setTool(slideId, tool, btn) {
+  annotState[slideId].tool = tool;
+  const toolbar = document.getElementById('toolbar-' + slideId);
+  toolbar.querySelectorAll('.annot-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setColor(slideId, color, swatch) {
+  annotState[slideId].color = color;
+  const colorRow = document.getElementById('colors-' + slideId);
+  colorRow.querySelectorAll('.annot-color-swatch').forEach(s => s.classList.remove('active'));
+  swatch.classList.add('active');
+}
+
+function clearAnnotations(slideId) {
+  const poem = document.getElementById('poem-' + slideId);
+  if (!poem) return;
+  poem.querySelectorAll('.note-input-wrapper').forEach(el => el.remove());
+  poem.querySelectorAll('.poem-note').forEach(el => el.remove());
+  poem.querySelectorAll('.poem-highlight, .poem-underline, .poem-outline').forEach(el => {
+    const parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  annotState[slideId].noteCount = 0;
+}
+
+function applyAnnotation(slideId, range) {
+  const state = annotState[slideId];
+  if (!range || range.collapsed) return;
+  const tool = state.tool;
+  const color = state.color;
+
+  if (tool === 'note') {
+    let pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'poem-highlight poem-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'poem-highlight poem-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    const inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note…';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:120px;color:#374151;background:transparent;font-family:inherit;';
+    const confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '✓';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '✕';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      const noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        const p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      state.noteCount++;
+      const noteNum = state.noteCount;
+      pendingSpan.className = 'poem-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      const noteEl = document.createElement('span');
+      noteEl.className = 'poem-note';
+      noteEl.textContent = noteNum;
+      const tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = '📝 ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', () => {
+      inputWrapper.remove();
+      const p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    const span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'poem-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'poem-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'poem-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      const span = document.createElement('span');
+      if (tool === 'highlight') {
+        span.className = 'poem-highlight';
+        span.style.backgroundColor = color;
+        span.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span.className = 'poem-underline';
+        span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span.className = 'poem-outline';
+        span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+['13', '15'].forEach(slideId => {
+  const poem = document.getElementById('poem-' + slideId);
+  if (!poem) return;
+  poem.addEventListener('mouseup', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!poem.contains(range.commonAncestorContainer)) return;
+    applyAnnotation(slideId, range);
+  });
+  poem.addEventListener('touchend', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!poem.contains(range.commonAncestorContainer)) return;
+    setTimeout(() => applyAnnotation(slideId, range), 100);
+  });
+});
+
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){console.warn('Init anim:',e);}
+</script>
+</body>
+</html>
