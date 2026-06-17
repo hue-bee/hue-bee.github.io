@@ -97,6 +97,102 @@ td:first-child{font-weight:700;width:32px;text-align:center}
   .action-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
   .action-btn.clear-btn { background: #64748b; box-shadow: 0 3px 10px rgba(100,116,139,.25); }
   .action-btn.clear-btn:hover { background: #475569; }
+
+  /* ── Annotation Toolbar ── */
+  .annotation-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.97);
+    border: 1.5px solid rgba(37,99,235,0.15);
+    border-radius: 12px;
+    padding: 5px 8px;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+  }
+  .annot-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 9px;
+    border-radius: 7px;
+    border: 1.5px solid rgba(0,0,0,0.10);
+    background: #f8f8f8;
+    color: #374151;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: 'Nunito', sans-serif;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+  .annot-btn.active { background: #2563EB; color: white; border-color: #2563EB; }
+  .annot-btn.active:hover { background: #1d4ed8; }
+  .annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+  .annot-color-row { display: flex; align-items: center; gap: 4px; }
+  .annot-color-swatch {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+    cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+  }
+  .annot-color-swatch:hover { transform: scale(1.18); }
+  .annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+  .annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+  .annotatable-passage { position: relative; cursor: text; user-select: text; }
+  .passage-highlight { border-radius: 3px; padding: 0 1px; }
+  .passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+  .passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+  .passage-note {
+    display: inline-block;
+    width: 14px; height: 14px;
+    background: #2563EB; color: white;
+    border-radius: 50%;
+    font-size: 0.6rem; font-weight: 800;
+    text-align: center; line-height: 14px;
+    cursor: pointer;
+    position: relative;
+    vertical-align: super;
+    margin-left: 2px;
+    font-style: normal;
+  }
+  .passage-note .note-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    font-size: 0.72rem;
+    padding: 5px 9px;
+    border-radius: 8px;
+    z-index: 200;
+    pointer-events: none;
+    width: max-content;
+    max-width: 200px;
+    white-space: normal;
+  }
+  .passage-note:hover .note-tooltip { display: block; }
+  .clear-annotations-btn {
+    margin-left: auto;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: #fee2e2;
+    border: 1.5px solid #fca5a5;
+    color: #b91c1c;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: background 0.15s;
+  }
+  .clear-annotations-btn:hover { background: #fecaca; }
+
 </style>
 </head>
 <body>
@@ -121,7 +217,9 @@ td:first-child{font-weight:700;width:32px;text-align:center}
   <div class="section-badge">Math</div>
   <h2>Unit Conversion Problems</h2>
 </div>
-<div class="instr">Use the Bridge Method: &#9312; Write the conversion fact &#9313; Decide multiply or divide &#9314; Sanity-check the label. Show ALL work. Circle your final answer.</div>
+<div class="instr">Use the Bridge Method: &#9312; Write the conversion fact &#9313; Decide multiply or divide &#9314; Sanity-check the label. Show ALL work. Circle your final answer.
+  </div>
+</div>
 
 <div class="prob-card">
   <div class="prob-header"><span class="prob-num">Problem 1</span><span class="lvl-badge lvl-2">L2</span></div>
@@ -150,11 +248,30 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 </div>
 <div class="passage-instr">&#128214; Read the passage <strong>once</strong> for understanding. Annotate: <strong>circle signal words</strong>, <strong>underline the main idea</strong> of each paragraph. Answer all 5 questions.</div>
 
+<div class="annotation-toolbar" id="passage-toolbar">
+  <span class="annot-label">Tool:</span>
+  <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">🖊 Highlight</button>
+  <button class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+  <button class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+  <button class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color:</span>
+  <div class="annot-color-row" id="passage-colors">
+    <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+    <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+    <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+    <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+    <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+  </div>
+  <button class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+</div>
 <div class="passage-box">
+  <div class="annotatable-passage" id="annotatable-passage">
   <p><strong>[&para;1]</strong> Every year, engineers who design city water systems face the same invisible problem: how to move millions of gallons of water from reservoirs to kitchens, hospitals, and fire hydrants &mdash; quietly, reliably, and without anyone noticing. The solution is a hierarchy of pipes. The largest mains carry water in units of hundreds of thousands of gallons. As a result, smaller branches split off and carry that flow into neighborhoods. Finally, the smallest lines deliver exact quantities to each building &mdash; often measured in fractions of a gallon per second.</p>
   <p><strong>[&para;2]</strong> The challenge is not just distance, but unit translation. A pressure reading might be given in pounds per square inch; a pipe&#39;s diameter in millimeters; a daily usage figure in millions of gallons. Engineers must therefore convert constantly &mdash; between imperial and metric, between rates and totals, between small-scale measurements and city-wide flows. A single conversion error, in contrast to a simple calculation error, can cause a pipeline to overpressure and burst.</p>
   <p><strong>[&para;3]</strong> This is precisely why engineers use what they call dimensional analysis &mdash; a method of chaining conversion factors together so that units cancel out cleanly. The process is always the same: write the given measurement, multiply by a conversion fraction, and check that the unwanted units cancel. However careful the calculation, the final sanity check &mdash; does this answer make sense? &mdash; is never skipped.</p>
   <p><strong>[&para;4]</strong> The same logic applies to everyday problems. A swimmer asking how many laps equal a mile, a baker converting a recipe from cups to milliliters, a driver calculating fuel cost per kilometer &mdash; all are performing dimensional analysis. The bridge between a measurement you have and a measurement you need is always a conversion fact. The only question is whether to multiply or divide.</p>
+  </div>
 </div>
 
 <div class="prob-card">
@@ -237,5 +354,173 @@ function clearAll(){
   document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent=' ');
 }
 </script>
+
+<script>
+/* ── Passage Annotation System ── */
+const passageState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageState.tool = tool;
+  document.getElementById('passage-toolbar').querySelectorAll('.annot-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageState.color = color;
+  document.getElementById('passage-colors').querySelectorAll('.annot-color-swatch').forEach(s => s.classList.remove('active'));
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  const passage = document.getElementById('annotatable-passage');
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(el => el.remove());
+  passage.querySelectorAll('.passage-note').forEach(el => el.remove());
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(el => {
+    const parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  if (!range || range.collapsed) return;
+  const tool = passageState.tool;
+  const color = passageState.color;
+
+  if (tool === 'note') {
+    let pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    const inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note…';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:120px;color:#374151;background:transparent;font-family:inherit;';
+    const confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '✓';
+    confirmBtn.style.cssText = 'border:none;background:#2563EB;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '✕';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      const noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        const p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageState.noteCount++;
+      const noteNum = passageState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      const noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      const tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = '📝 ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', () => {
+      inputWrapper.remove();
+      const p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    const span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      const span = document.createElement('span');
+      if (tool === 'highlight') {
+        span.className = 'passage-highlight';
+        span.style.backgroundColor = color;
+        span.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span.className = 'passage-underline';
+        span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span.className = 'passage-outline';
+        span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+(function() {
+  const passage = document.getElementById('annotatable-passage');
+  if (!passage) return;
+  passage.addEventListener('mouseup', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range);
+  });
+  passage.addEventListener('touchend', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    setTimeout(() => applyPassageAnnotation(range), 100);
+  });
+})();
+</script>
+
 </body>
 </html>
