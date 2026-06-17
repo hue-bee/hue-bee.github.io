@@ -39,7 +39,7 @@ body{font-family:var(--fbody);background:var(--bg);color:var(--text);margin:0;pa
 .ans-blank{border-bottom:2px solid #374151;min-width:120px;height:1.3rem;display:inline-block}
 .trap-card{border-left:4px solid #4b5563;background:#f9fafb;border-radius:0 9px 9px 0;padding:.5rem .85rem;font-size:.79rem;color:#374151;margin-top:.5rem}
 .trap-card strong{color:#1f2937}
-.passage-box{background:#f8faff;border:1.5px solid rgba(37,99,235,.14);border-radius:12px;padding:1rem 1.2rem;font-size:.87rem;color:#1e293b;line-height:1.82;margin-bottom:1.1rem}
+.passage-box{background:#f8faff;border:1.5px solid rgba(37,99,235,.14);border-radius:12px;padding:1rem 1.2rem;font-size:.87rem;color:#1e293b;line-height:1.82;margin-bottom:1.1rem;user-select:text;cursor:text}
 .passage-box p{margin:0 0 .55rem}.passage-box p:last-child{margin-bottom:0}
 .passage-instr{background:rgba(37,99,235,.06);border-radius:8px;padding:.5rem .85rem;font-size:.8rem;color:#334155;font-weight:600;margin-bottom:.85rem}
 .mc-options{display:flex;flex-direction:column;gap:.3rem;margin-top:.4rem}
@@ -85,6 +85,7 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 .action-toolbar { display: flex; gap: .75rem; justify-content: center; margin: 1.2rem 0 .6rem; flex-wrap: wrap; }
 @media print {
   .action-toolbar { display: none !important; }
+  .annotation-toolbar { display: none !important; }
   body { background: #fff; padding: .5rem; }
   .page { max-width: 100%; }
   textarea { border-color: #cbd5e1 !important; background: white !important; resize: none !important; }
@@ -94,6 +95,113 @@ td:first-child{font-weight:700;width:32px;text-align:center}
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
+
+/* ── Annotation Toolbar ─────────────────────────────── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.97);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: var(--fbody);
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 3px; flex-shrink:0; }
+.annot-color-row { display: flex; align-items: center; gap: 5px; }
+.annot-color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.12s;
+  flex-shrink: 0;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; white-space:nowrap; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--fbody);
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+/* ── Annotation span styles ─────────────────────────────── */
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-strikethrough { text-decoration: line-through; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background: #374151;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 15px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.passage-note:hover .note-tooltip { display: block; }
 </style>
 </head>
 <body>
@@ -146,9 +254,29 @@ td:first-child{font-weight:700;width:32px;text-align:center}
   <div class="section-badge" style="background:linear-gradient(135deg,#4b5563,#374151)">ELA</div>
   <h2>Reading &mdash; Informational Passage</h2>
 </div>
-<div class="passage-instr">&#128214; Read the passage <strong>once</strong> for understanding. Annotate: <strong>circle signal words</strong>, <strong>underline the main idea</strong> of each paragraph. Answer all 5 questions.</div>
+<div class="passage-instr">&#128214; Read the passage. Use the annotation tools below to <strong>highlight</strong>, <strong>underline</strong>, or <strong>outline</strong> key ideas, signal words, and evidence. Add notes by selecting text and clicking &#128204; Note. Answer all 5 questions.</div>
 
-<div class="passage-box">
+<!-- Annotation Toolbar -->
+<div class="annotation-toolbar" id="passage-toolbar">
+  <span class="annot-label">Tool</span>
+  <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#9733; Highlight</button>
+  <button class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">&#818; Underline</button>
+  <button class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+  <button class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color</span>
+  <div class="annot-color-row" id="passage-colors">
+    <div class="annot-color-swatch active" style="background:#fef08a" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+    <div class="annot-color-swatch" style="background:#86efac" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+    <div class="annot-color-swatch" style="background:#93c5fd" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+    <div class="annot-color-swatch" style="background:#fca5a5" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+    <div class="annot-color-swatch" style="background:#c4b5fd" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+    <div class="annot-color-swatch" style="background:#fdba74" data-color="#fdba74" onclick="setPassageColor('#fdba74',this)" title="Orange"></div>
+  </div>
+  <button class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+</div>
+
+<div class="passage-box" id="annotatable-passage">
   <p><strong>[&para;1]</strong> The circle is, without question, the most mathematically efficient shape in engineering. Its single defining property &mdash; that every point on its boundary lies exactly the same distance from the center &mdash; makes it uniquely suited to problems of pressure, rotation, and coverage. A water pipe is circular, not square, because a circular cross-section carries the maximum volume of fluid for the minimum amount of pipe material. A gear is circular because only a circle can transmit rotational force smoothly and without skipping.</p>
   <p><strong>[&para;2]</strong> However, the circle is not always practical. A circular room wastes corner space; a circular box cannot be stacked efficiently. As a result, engineers and architects must constantly choose between the mathematical ideal and the physical reality. A bridge cable is circular in cross-section, but the roadway it supports is rectangular. A satellite dish is a circle, but the building it sits on is a box. Each shape is chosen for a specific reason.</p>
   <p><strong>[&para;3]</strong> The most dramatic examples of the circle&rsquo;s power appear at extremes of scale. The Large Hadron Collider &mdash; the world&rsquo;s largest particle accelerator &mdash; is a circle 27 kilometers in circumference, because only a circular path allows particles to be accelerated repeatedly without losing them. At the other extreme, the lens of the human eye is a circle because the pupil must expand and contract symmetrically. The circle works because of its symmetry: every radius is the same length, and that equality distributes force, pressure, and light perfectly.</p>
@@ -224,20 +352,27 @@ td:first-child{font-weight:700;width:32px;text-align:center}
 </div>
 
 </div>
+
 <script>
+/* ── MC selection ─────────────────────────────── */
 function selectMC(label){
   const opts=label.closest(".mc-options");
   if(opts) opts.querySelectorAll(".mc-option").forEach(o=>o.classList.remove("selected"));
   label.classList.add("selected");
 }
+
+/* ── Clear All ─────────────────────────────── */
 function clearAll(){
-  if(!confirm('Clear all answers? This cannot be undone.')) return;
+  if(!confirm('Clear all answers AND annotations? This cannot be undone.')) return;
   document.querySelectorAll('textarea').forEach(el => { el.value = ''; el.style.height = 'auto'; });
   document.querySelectorAll('.short-ans').forEach(el => el.value = '');
   document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
   document.querySelectorAll('.mc-option').forEach(el => el.classList.remove('selected'));
-  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = ' ');
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = ' ');
+  clearPassageAnnotations();
 }
+
+/* ── Auto-resize textareas ─────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('textarea, .short-ans').forEach(ta => {
     ta.addEventListener('input', () => {
@@ -246,6 +381,190 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+/* ══════════════════════════════════════════════
+   ANNOTATION SYSTEM
+══════════════════════════════════════════════ */
+const passageAnnotState = {
+  tool: 'highlight',
+  color: '#fef08a',
+  noteCount: 0
+};
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.querySelectorAll('#passage-toolbar .annot-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.querySelectorAll('#passage-colors .annot-color-swatch').forEach(s => s.classList.remove('active'));
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  const passage = document.getElementById('annotatable-passage');
+  if (!passage) return;
+  // Remove all note superscripts
+  passage.querySelectorAll('.passage-note').forEach(el => el.remove());
+  // Remove note input wrappers if any open
+  passage.querySelectorAll('.note-input-wrapper').forEach(el => el.remove());
+  // Unwrap all annotation spans
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline, .passage-strikethrough').forEach(el => {
+    const parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  if (!range || range.collapsed) return;
+  const tool = passageAnnotState.tool;
+  const color = passageAnnotState.color;
+
+  if (tool === 'note') {
+    // Wrap selection in a pending highlight for note
+    let pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    // Build inline input
+    const inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal';
+
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note…';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit';
+
+    const confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '✓';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:20px;height:20px;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '✕';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:20px;height:20px;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0';
+
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      const noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        const p = pendingSpan.parentNode;
+        while (pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      const noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+
+      const noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      const tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', () => {
+      inputWrapper.remove();
+      const p = pendingSpan.parentNode;
+      while (pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') cancelBtn.click();
+    });
+    return;
+  }
+
+  // highlight / underline / outline
+  let span;
+  try {
+    span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = (color === '#fef08a') ? '#374151' : color;
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = (color === '#fef08a') ? '#374151' : color;
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      span = document.createElement('span');
+      if (tool === 'highlight') {
+        span.className = 'passage-highlight';
+        span.style.backgroundColor = color;
+        span.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span.className = 'passage-underline';
+        span.style.textDecorationColor = (color === '#fef08a') ? '#374151' : color;
+      } else if (tool === 'outline') {
+        span.className = 'passage-outline';
+        span.style.outlineColor = (color === '#fef08a') ? '#374151' : color;
+      }
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
+    } catch(e2) { /* selection spans multiple block elements — skip */ }
+  }
+  window.getSelection().removeAllRanges();
+}
+
+/* Bind mouseup and touchend to the passage */
+const passage = document.getElementById('annotatable-passage');
+if (passage) {
+  passage.addEventListener('mouseup', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range);
+  });
+
+  passage.addEventListener('touchend', function() {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    setTimeout(() => applyPassageAnnotation(range), 120);
+  });
+}
 </script>
 </body>
 </html>
