@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 Homework Answer Sheet — Problem 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#2563EB; --blue-lt:#EFF6FF; --blue-md:#BFDBFE;
+    --coral:#F97066; --coral-lt:#FFF1F0;
+    --sand:#D4A574; --sand-lt:#FDF3E7;
+    --green:#16a34a; --green-lt:#DCFCE7;
+    --purple:#7c3aed; --purple-lt:#EDE9FE;
+    --ink:#0f172a; --slate:#334155; --muted:#64748b;
+    --border:#CBD5E1; --bg:#F8FAFF; --white:#FFFFFF;
+    --ff-head:'Fredoka',sans-serif; --ff-body:'Nunito',sans-serif;
+  }
+  html { background:#e2e8f0; }
+  body { font-family:var(--ff-body); color:var(--ink); background:var(--bg); max-width:860px; margin:0 auto; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @media print {
+    html { background:white; }
+    body { max-width:100%; }
+    .no-print { display:none !important; }
+    .sheet { box-shadow:none !important; margin:0 !important; border-radius:0 !important; padding:1.2cm 1.5cm !important; }
+  }
+  .sheet { background:var(--white); margin:2rem auto; padding:2.2rem 2.4rem; box-shadow:0 4px 24px rgba(37,99,235,0.10); border-radius:16px; }
 
+  .hw-header { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:1rem; border-bottom:3px solid var(--coral); margin-bottom:1.4rem; gap:1rem; flex-wrap:wrap; }
+  .hw-header h1 { font-family:var(--ff-head); font-size:1.75rem; font-weight:700; color:var(--coral); line-height:1.1; }
+  .hw-header .subtitle { font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:0.2rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .confidential { background:var(--coral-lt); border:2px solid var(--coral); border-radius:8px; padding:0.35rem 1rem; font-family:var(--ff-head); font-size:0.85rem; font-weight:700; color:#c2410c; letter-spacing:0.05em; text-transform:uppercase; }
+
+  .section-hd { display:flex; align-items:center; gap:0.55rem; margin:1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size:1.25rem; }
+  .section-hd h2 { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; color:var(--ink); }
+  .badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:2px 9px; border-radius:20px; margin-left:auto; }
+  .badge-blue   { background:var(--blue-lt);   color:var(--blue);   border:1px solid var(--blue-md); }
+
+  .ans-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom:0.5rem; }
+  .ans-table thead tr { background:linear-gradient(135deg,var(--blue),#1d4ed8); color:white; }
+  .ans-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .ans-table thead th:first-child { border-radius:8px 0 0 0; }
+  .ans-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .ans-table tbody tr:nth-child(even) { background:var(--blue-lt); }
+  .ans-table tbody tr:nth-child(odd)  { background:white; }
+  .ans-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .ans-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--blue); width:8%; text-align:center; font-size:0.9rem; }
+  .ans-table tbody td.answer { font-family:var(--ff-head); font-weight:700; color:var(--green); font-size:0.92rem; }
+  .ans-table tbody td.work { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .ans-table tbody tr:last-child td { border-bottom:none; }
+
+  .lvl { display:inline-block; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:1px 8px; border-radius:20px; vertical-align:middle; margin-left:0.3rem; }
+  .lvl-4 { background:#ede9fe; color:#5b21b6; }
+
+  .note-box { background:var(--sand-lt); border:1.5px solid var(--sand); border-radius:10px; padding:0.7rem 1rem; margin-bottom:1.2rem; font-size:0.8rem; color:#78350f; font-weight:600; line-height:1.6; }
+  .note-box strong { color:#92400e; }
+
+  .footer-strip { background:var(--blue-lt); border-top:2px solid var(--blue-md); border-radius:0 0 12px 12px; padding:0.5rem 1.2rem; font-size:0.72rem; color:var(--muted); font-weight:600; margin-top:1.2rem; text-align:center; letter-spacing:0.02em; }
+
+  .print-btn { display:block; width:fit-content; margin:0 auto 1rem; background:var(--coral); color:white; font-family:var(--ff-head); font-size:1rem; font-weight:600; padding:0.55rem 1.6rem; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 10px rgba(249,112,102,0.3); transition:background 0.2s; }
+  .print-btn:hover { background:#e05a50; }
+
+  hr.divider { border:none; border-top:2px dashed var(--border); margin:1.4rem 0; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<div class="sheet">
+
+  <div class="hw-header">
+    <div>
+      <h1>✅ Week 5 Homework Answer Sheet</h1>
+      <div class="subtitle">Geometry: Triangles &amp; Quadrilaterals · Problem 5</div>
+    </div>
+    <div class="confidential">🔒 Tutor Copy</div>
+  </div>
+
+  <div class="note-box">
+    <strong>Tutor Note:</strong> This isosceles right triangle problem (45°-45°-90°) tests the special right triangle relationship. Award partial credit if the student correctly applies the Pythagorean theorem but simplifies the radical incorrectly, or if part (a) is correct but part (b) is left blank.
+  </div>
+
+  <div class="section-hd">
+    <span class="icon">📐</span>
+    <h2>Special Right Triangles</h2>
+    <span class="badge badge-blue">1 pt</span>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr><th>#</th><th>Problem</th><th>Answer</th><th>Key Work / Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>P5</td>
+        <td>Isosceles right triangle with two equal legs of length 6. (a) Find exact hypotenuse. (b) Find the two non-right angle measures. <span class="lvl lvl-4">L4</span></td>
+        <td class="answer">(a) c = 6√2&nbsp;&nbsp;|&nbsp;&nbsp;(b) 45° and 45°</td>
+        <td class="work">
+          <strong>(a)</strong> Rule: Pythagorean theorem, a² + b² = c², with both legs = 6<br>
+          6² + 6² = c² → 36 + 36 = c² → c² = 72 → c = √72 = √(36·2) = <strong>6√2</strong><br>
+          Check: 6√2 ≈ 8.49, which is longer than either leg (6) but shorter than 6+6=12 ✓<br><br>
+          <strong>(b)</strong> Rule: In any right triangle, the two non-right angles sum to 90°. Since the triangle is isosceles (two equal legs), the two base angles opposite those equal legs must also be equal.<br>
+          Let each base angle = x → x + x = 90° → 2x = 90° → x = <strong>45°</strong><br>
+          Both non-right angles = 45° and 45° (this is the classic 45°-45°-90° triangle)<br>
+          ⚠️ Trap (a): forgetting to simplify √72 down to 6√2, or leaving the answer as a decimal instead of exact radical form<br>
+          ⚠️ Trap (b): assuming the angles are 30°-60° (that's a different special triangle) instead of recognizing that equal legs → equal base angles → 45°-45°
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <div class="footer-strip">
+    Week 5 Homework · Triangles &amp; Quadrilaterals · Problem 5 Answer Key — For Tutor/Teacher Use Only
+  </div>
+
+</div>
+
+</body>
+</html>
