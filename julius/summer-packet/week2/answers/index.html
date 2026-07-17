@@ -1,1 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Answer Sheet — Circles &amp; Surface Area</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#2563EB; --blue-lt:#EFF6FF; --blue-md:#BFDBFE;
+    --coral:#F97066; --coral-lt:#FFF1F0;
+    --sand:#D4A574; --sand-lt:#FDF3E7;
+    --green:#16a34a; --green-lt:#DCFCE7;
+    --purple:#7c3aed; --purple-lt:#EDE9FE;
+    --ink:#0f172a; --slate:#334155; --muted:#64748b;
+    --border:#CBD5E1; --bg:#F8FAFF; --white:#FFFFFF;
+    --ff-head:'Fredoka',sans-serif; --ff-body:'Nunito',sans-serif;
+  }
+  html { background:#e2e8f0; }
+  body { font-family:var(--ff-body); color:var(--ink); background:var(--bg); max-width:860px; margin:0 auto; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @media print {
+    html { background:white; }
+    body { max-width:100%; }
+    .no-print { display:none !important; }
+    .sheet { box-shadow:none !important; margin:0 !important; border-radius:0 !important; padding:1.2cm 1.5cm !important; }
+    .page-break { page-break-before:always; }
+  }
+  .sheet { background:var(--white); margin:2rem auto; padding:2.2rem 2.4rem; box-shadow:0 4px 24px rgba(37,99,235,0.10); border-radius:16px; }
 
+  .hw-header { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:1rem; border-bottom:3px solid var(--coral); margin-bottom:1.4rem; gap:1rem; flex-wrap:wrap; }
+  .hw-header h1 { font-family:var(--ff-head); font-size:1.75rem; font-weight:700; color:var(--coral); line-height:1.1; }
+  .hw-header .subtitle { font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:0.2rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .confidential { background:var(--coral-lt); border:2px solid var(--coral); border-radius:8px; padding:0.35rem 1rem; font-family:var(--ff-head); font-size:0.85rem; font-weight:700; color:#c2410c; letter-spacing:0.05em; text-transform:uppercase; }
+
+  .section-hd { display:flex; align-items:center; gap:0.55rem; margin:1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size:1.25rem; }
+  .section-hd h2 { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; color:var(--ink); }
+  .badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:2px 9px; border-radius:20px; margin-left:auto; }
+  .badge-blue   { background:var(--blue-lt);   color:var(--blue);   border:1px solid var(--blue-md); }
+  .badge-purple { background:var(--purple-lt); color:var(--purple); border:1px solid #c4b5fd; }
+
+  .ans-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom:0.5rem; }
+  .ans-table thead tr { background:linear-gradient(135deg,var(--blue),#1d4ed8); color:white; }
+  .ans-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .ans-table thead th:first-child { border-radius:8px 0 0 0; }
+  .ans-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .ans-table tbody tr:nth-child(even) { background:var(--blue-lt); }
+  .ans-table tbody tr:nth-child(odd)  { background:white; }
+  .ans-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .ans-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--blue); width:8%; text-align:center; font-size:0.9rem; }
+  .ans-table tbody td.answer { font-family:var(--ff-head); font-weight:700; color:var(--green); font-size:0.92rem; }
+  .ans-table tbody td.work { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .ans-table tbody tr:last-child td { border-bottom:none; }
+
+  .mc-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  .mc-table thead tr { background:linear-gradient(135deg,var(--purple),#5b21b6); color:white; }
+  .mc-table thead th { padding:0.5rem 0.8rem; font-family:var(--ff-head); font-weight:600; font-size:0.8rem; text-align:left; }
+  .mc-table thead th:first-child { border-radius:8px 0 0 0; }
+  .mc-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .mc-table tbody tr:nth-child(even) { background:var(--purple-lt); }
+  .mc-table tbody tr:nth-child(odd)  { background:white; }
+  .mc-table tbody td { padding:0.45rem 0.8rem; border-bottom:1px solid var(--border); color:var(--slate); font-weight:500; vertical-align:top; }
+  .mc-table tbody td:first-child { font-family:var(--ff-head); font-weight:700; color:var(--purple); width:6%; text-align:center; font-size:0.9rem; }
+  .mc-table tbody td.answer { font-family:var(--ff-head); font-weight:800; color:var(--green); font-size:1rem; }
+  .mc-table tbody td.explain { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .mc-table tbody tr:last-child td { border-bottom:none; }
+
+  .lvl { display:inline-block; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:1px 8px; border-radius:20px; vertical-align:middle; margin-left:0.3rem; }
+  .lvl-2 { background:#fef9c3; color:#92400e; }
+  .lvl-3 { background:#fee2e2; color:#b91c1c; }
+  .lvl-4 { background:#ede9fe; color:#5b21b6; }
+
+  hr.divider { border:none; border-top:2px dashed var(--border); margin:1.4rem 0; }
+  .print-btn { display:block; width:fit-content; margin:0 auto 1rem; background:var(--coral); color:white; font-family:var(--ff-head); font-size:1rem; font-weight:600; padding:0.55rem 1.6rem; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 10px rgba(249,112,102,0.3); transition:background 0.2s; }
+  .print-btn:hover { background:#e05a50; }
+
+  .note-box { background:var(--sand-lt); border:1.5px solid var(--sand); border-radius:10px; padding:0.7rem 1rem; margin-bottom:1.2rem; font-size:0.8rem; color:#78350f; font-weight:600; line-height:1.6; }
+  .note-box strong { color:#92400e; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<div class="sheet">
+
+  <div class="hw-header">
+    <div>
+      <h1>✅ Answer Sheet — Week 2 Practice</h1>
+      <div class="subtitle">Circles &amp; Surface Area · SHSAT Math &amp; ELA Practice</div>
+    </div>
+    <div class="confidential">🔒 Tutor Copy</div>
+  </div>
+
+  <div class="note-box">
+    <strong>Tutor Note:</strong> Leave answers in terms of π unless a decimal is requested. For Problem 2, the most common miss is forgetting that "open-top" means no top face — students who add the hole area instead of subtracting it should be redirected to the trap card. For the ELA passage, focus the debrief on paragraph-purpose questions (Q3, Q4), which are the highest-difficulty items.
+  </div>
+
+  <div class="section-hd">
+    <span class="icon">⭕</span>
+    <h2>Circles &amp; Surface Area Problems</h2>
+    <span class="badge badge-blue">2 pts</span>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr><th>#</th><th>Problem</th><th>Answer</th><th>Key Work / Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Sector with central angle 60° and radius r = 12 cm. (a) Find arc length. (b) Find sector area, in terms of π. <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">(a) 4π cm ≈ 12.57 cm&nbsp;&nbsp;|&nbsp;&nbsp;(b) 24π cm² ≈ 75.40 cm²</td>
+        <td class="work">
+          Rule: Arc length = (θ/360) × 2πr &nbsp;|&nbsp; Sector Area = (θ/360) × πr²<br>
+          <strong>(a)</strong> Arc = (60/360) × 2π(12) = (1/6) × 24π = <strong>4π cm</strong> ≈ 12.57 cm<br>
+          <strong>(b)</strong> Area = (60/360) × π(12)² = (1/6) × 144π = <strong>24π cm²</strong> ≈ 75.40 cm²<br>
+          ⚠️ Trap: forgetting to reduce 60/360 to 1/6 before multiplying, or squaring the radius incorrectly in part (b)
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Open-top planter box: l = 18 in, w = 9 in, h = 12 in. A circular drainage hole with radius 2 in is cut into the bottom. How much wood is needed? Leave π in your answer. <span class="lvl lvl-4">L4</span></td>
+        <td class="answer">810 − 4π in² ≈ 797.43 in²</td>
+        <td class="work">
+          Rule: Open-top surface area = lw + 2lh + 2wh (no top face) — then subtract the circular hole cut from the bottom<br>
+          Bottom: 18 × 9 = 162 in²<br>
+          2 long sides: 2 × 18 × 12 = 432 in²<br>
+          2 short sides: 2 × 9 × 12 = 216 in²<br>
+          Total surface: 162 + 432 + 216 = <strong>810 in²</strong><br>
+          Hole area: π(2)² = 4π in² ≈ 12.57 in²<br>
+          Wood needed: 810 − 4π ≈ <strong>797.43 in²</strong><br>
+          ⚠️ SHSAT Trap: "open-top" means NO top face — students who include a top face (adding another 162 in²) get 972 − 4π, which is incorrect. Also watch for students who <em>add</em> the hole area instead of subtracting it.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>ELA — Reading: Informational Passage</h2>
+    <span class="badge badge-purple">5 pts</span>
+  </div>
+
+  <table class="mc-table">
+    <thead>
+      <tr><th>Q#</th><th>Skill</th><th>Answer</th><th>Why This Answer / Tutor Explanation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Q1</td>
+        <td>Supporting Detail <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">B</td>
+        <td class="explain">
+          ¶1 states directly that "a circular cross-section carries the maximum volume of fluid for the minimum amount of pipe material." (A), (C), and (D) are not supported anywhere in the text.
+        </td>
+      </tr>
+      <tr>
+        <td>Q2</td>
+        <td>Signal Words <span class="lvl lvl-2">L2</span></td>
+        <td class="answer">B</td>
+        <td class="explain">
+          "However" always signals a contrast or limitation to the idea just presented — here, it pivots from praising the circle's efficiency (¶1) to noting its practical drawbacks (¶2). (A) is the opposite of what "however" signals. (C) and (D) misidentify the signal word's function.<br>
+          ⚠️ Trap: students who choose (A) because ¶2 still discusses circles positively later — but the word itself introduces the contrast, not a supporting example.
+        </td>
+      </tr>
+      <tr>
+        <td>Q3</td>
+        <td>Author's Purpose / Contrast <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">B</td>
+        <td class="explain">
+          The Large Hadron Collider (27 km) and the human eye's pupil (millimeters) sit at opposite ends of the size spectrum, both relying on circular symmetry. The contrast demonstrates that the circle's usefulness is scale-independent. (A) and (D) invent a ranking not stated in the text. (C) man-made vs. natural is a surface-level observation, not the point of the comparison.
+        </td>
+      </tr>
+      <tr>
+        <td>Q4</td>
+        <td>Main Idea <span class="lvl lvl-3">L3</span></td>
+        <td class="answer">C</td>
+        <td class="explain">
+          ¶4's central claim is that learning circle formulas teaches "a mode of reasoning — from center to edge, from a single measurement to a prediction about the whole boundary" — a way of thinking used across many professions. (A) is too narrow (test-focused, not the paragraph's point). (B) and (D) are supporting details, not the main idea.<br>
+          ⚠️ Trap: (A) is tempting because the paragraph mentions formulas, but the paragraph explicitly says students are "not merely memorizing formulas."
+        </td>
+      </tr>
+      <tr>
+        <td>Q5</td>
+        <td>Analysis / Extended Response <span class="lvl lvl-4">L4</span></td>
+        <td class="answer">Open response — model answer below</td>
+        <td class="explain">
+          Model answer: "A circular gear transmits force more reliably than a square one because every point on its edge is the same distance from the center, so it rotates with constant, even contact. As the passage states, 'every radius is the same length, and that equality distributes force, pressure, and light perfectly.' A square gear's corners would create uneven distances from the center, causing the force to be applied inconsistently and the gear to skip or jam."<br>
+          Award credit for any response that (1) connects equal radius length to smooth, even force transmission, and (2) quotes the "every radius is the same length" phrase (or equivalent) from ¶3.<br>
+          ⚠️ Trap: students who only restate that "circles are smoother" without explaining <em>why</em> (equal radius → equal distance → consistent force) should be redirected to the symmetry language in ¶3.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <div style="margin-top:1.2rem; text-align:center; font-size:0.72rem; color:var(--muted); font-weight:600;">
+    Week 2 Practice · Circles &amp; Surface Area &nbsp;&nbsp;•&nbsp;&nbsp; ELA Informational Passage &nbsp;&nbsp;•&nbsp;&nbsp; Tutor Copy — Do Not Distribute
+  </div>
+
+</div>
+
+</body>
+</html>
