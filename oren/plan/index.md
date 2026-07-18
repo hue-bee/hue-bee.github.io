@@ -58,7 +58,7 @@ Each 60-minute session follows a consistent rhythm so it becomes automatic:
 - **10 min** — Warm-up review of last week's error log
 - **35 min** — Math core
 - **12 min** — ELA target
-- **3 min** — Assign homework (~30–40 mixed problems plus one timed drill)
+- **3 min** — Assign homework
 
 A recurring **error log** is the engine of the plan. Every missed question is categorized by topic each week, and the warm-up revisits it, so progress is measured against Oren's own data.
 
