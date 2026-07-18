@@ -6,8 +6,6 @@
 **Math Raw Score:** 32 / 57 (56.1% correct)
 **Plan Prepared:** July 18, 2026
 
----
-
 ## 1. Diagnostic Summary
 
 Oren's mock results show that his Math errors are heavily clustered in a small number of
@@ -31,8 +29,6 @@ per hour than reviewing topics he already handles adequately.
 | Probability | 66.7% | Strength (maintain) |
 | Word Problems | 75% | Strength (maintain) |
 
----
-
 ## 2. Guiding Principle for the 4-Session Plan
 
 With only four one-hour sessions currently available, the plan follows a triage approach. It does
@@ -51,8 +47,6 @@ Each topic was selected using three filters:
 
 Oren's existing strengths — Word Problems (75%) and Probability (67%) — are deliberately left out,
 since spending scarce hours there would yield little return.
-
----
 
 ## 3. The Four Sessions
 
@@ -95,8 +89,6 @@ are quick and review is essential to lock in Sessions 1-3.
   tables and computing mean/median/mode/range (fixes Q75).
 - Last 25 minutes: a mixed cumulative quiz drawing from all four sessions to prevent forgetting.
 
----
-
 ## 4. What the 4-Session Plan Deliberately Excludes
 
 Four hours cannot responsibly cover everything, so the following were consciously deferred:
@@ -114,8 +106,6 @@ Concentrating four hours on the four lowest-scoring, highest-frequency topics ta
 12-15 questions Oren is currently missing across Measurements, Geometry, Percents, Factors, and
 Data. Recovering even half of those would add meaningful raw points to his 222 Math scaled score
 and represents the most efficient use of a limited engagement.
-
----
 
 ## 5. Long-Term Math Plan (Beyond the First Four Sessions)
 
@@ -152,9 +142,7 @@ Shifts from content gaps to test-taking performance under real conditions.
   sessions.
 - **Periodic remock:** take a fresh full-length mock every 4-6 sessions to measure real progress
   against the ~496-518 cutoff range for target schools.
-
----
-
+  
 ## 6. Target Score Context
 
 | School | Approx. Cutoff |
