@@ -6,6 +6,6 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **1** | [The Bridge Method](https://hue-bee.github.io/julius/lesson1) | [1 Homework](https://hue-bee.github.io/oren/1/homework) ||
-| **2** | [Geometry](https://hue-bee.github.io/oren/2) | [2 Homework](https://hue-bee.github.io/oren/2/homework) ||
+| **1** | [The Bridge Method](https://hue-bee.github.io/julius/lesson1) | - ||
+| **2** | [Measurements: Perimeter and Area](https://hue-bee.github.io/julius/lesson2) | [2 Homework](https://hue-bee.github.io/julius/lesson2/homework.html) ||
 | **3** | [Percents](https://hue-bee.github.io/oren/3) | [3 Homework](https://hue-bee.github.io/oren/3/homework) ||
