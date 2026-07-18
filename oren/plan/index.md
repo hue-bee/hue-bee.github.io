@@ -1,6 +1,6 @@
-# SHSAT Math Study Plan — Oren Fishman
+# SHSAT Math Study Plan — Oren
 
-**Student:** Oren Fishman, Grade 7, New Voices Middle School
+**Student:** Oren, Grade 7
 **Baseline Mock:** SHSAT DOE Form B 2019 (taken June 19, 2026)
 **Total Score:** 454 (ELA 232 / Math 222)
 **Math Raw Score:** 32 / 57 (56.1% correct)
