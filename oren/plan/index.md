@@ -1,7 +1,7 @@
-# SHSAT Study Plan — Oren Fishman
+# SHSAT Study Plan — Oren 
 
-**Student:** Oren Fishman (rising 8th grader, New Voices Middle School)
-**Plan duration:** July 24 – October 30, 2026
+**Student:** Oren (rising 8th grader)
+**Plan duration:** July 24 – October 16, 2026
 **Format:** One 60-minute session per week (14 weeks)
 **Prepared as:** Sequenced, diagnostic-driven SHSAT tutoring plan
 
@@ -83,12 +83,11 @@ A recurring **error log** is the engine of the plan. Every missed question is ca
 - **Week 9 (Sep 18):** Math — Geometry II (circles, volume, coordinate geometry). ELA — Reading: Main Idea method.
 - **Week 10 (Sep 25):** Math — Algebra (linear equations, inequalities, expressions) plus the plug-in/back-solve strategy as a test-taking tool. ELA — Analyzing organization/structure.
 
-### Phase 4 — Reading, Mixed Review & Test Simulation (Weeks 11–14, Oct 2 – Oct 30)
+### Phase 4 — Reading, Mixed Review & Test Simulation (Weeks 11–14, Oct 2 – Oct 16)
 
 - **Week 11 (Oct 2):** ELA — Reading comprehension deep-dive (passage mapping, Main Idea and structure questions, pacing across passage types, with focus on Fiction). Math — Spiral review of percents/geometry misses.
 - **Week 12 (Oct 9):** Full timed math section under real conditions; review every miss into the error log.
 - **Week 13 (Oct 16):** Full timed ELA section; drill Revising/Editing to lock in grammar gains and review reading errors.
-- **Week 14 (Oct 23–30):** Full mixed mock under test-day conditions, followed by final error-log review and a personalized "last two weeks" cheat sheet of top recurring mistakes.
 
 ## 6. What Mastery Looks Like in Math (the Weakest Area)
 
