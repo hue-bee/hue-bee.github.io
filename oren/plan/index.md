@@ -57,37 +57,17 @@ rhythm: teach -> model -> practice -> check.
 Scheduled first because Oren answered zero measurement questions correctly, making this a
 foundational gap rather than review. Left untreated, it will keep costing guaranteed points.
 
-- Teach unit-conversion chains (length, area, volume, mass, time) using the "cancel the units" method.
-- Emphasize the linear vs. square vs. cubic unit trap (the error behind Q78, Q96, Q99, Q101).
-- Practice: 8-10 conversion problems, followed by a 3-problem timed check.
-
 ### Session 2 — Geometry (18% -> biggest raw-point pool)
 Scheduled second because it is both very weak and one of the most frequent Math topics, giving it
 the largest single block of recoverable points.
-
-- Memorize core formulas cold: area/perimeter of rectangles and triangles, circle
-  circumference/area, and volume of rectangular solids (the SHSAT provides no formula sheet).
-- Fix the likely radius/diameter confusion behind the Q74 "100pi" error, plus angle rules
-  (Q64, Q100).
-- Practice: mixed area/volume/angle set, then a timed check.
 
 ### Session 3 — Percents (29% -> high-frequency, fully procedural)
 Scheduled third because percents are high-frequency, entirely rule-based, and ideal for
 single-hour mastery.
 
-- Drill the three canonical operations: percent of a number, percent increase/decrease, and
-  finding the whole from a part.
-- Work multi-step problems (successive discount, markup + tax) — the type behind misses on
-  Q85, Q90, Q95.
-- Practice, then a timed check.
-
 ### Session 4 — Factors/Multiples + Data/Statistics + Cumulative Review
 The final hour is a combined high-value cleanup and retention session, since both remaining topics
 are quick and review is essential to lock in Sessions 1-3.
-
-- First 25 minutes: GCF/LCM, prime factorization, divisibility rules (fixes Q87), plus reading
-  tables and computing mean/median/mode/range (fixes Q75).
-- Last 25 minutes: a mixed cumulative quiz drawing from all four sessions to prevent forgetting.
 
 ## 4. What the 4-Session Plan Deliberately Excludes
 
