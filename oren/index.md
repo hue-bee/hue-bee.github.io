@@ -1,7 +1,7 @@
 ### 🏖️ Oren - CAT SHSAT 
 
 ![Level](https://img.shields.io/badge/level-beginner%20to%20advanced-brightgreen)
-![Updated](https://img.shields.io/badge/updated-Summer%202026-lightyellow)
+![Updated](https://img.shields.io/badge/updated-2026-lightyellow)
 
 
 | Session | Lesson | Homework | Notes |
