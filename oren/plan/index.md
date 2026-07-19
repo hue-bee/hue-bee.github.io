@@ -64,13 +64,13 @@ A recurring **error log** is the engine of the plan. Every missed question is ca
 
 ## 5. The 14-Week Sequenced Plan (Jul 24 – Oct 30)
 
-### Phase 1 — Rebuild the Math Foundation (Weeks 1–4, Jul 24 – Aug 14)
+- **Phase 1** — Rebuild the Math Foundation (Weeks 1–4, Jul 24 – Aug 14)
 
-### Phase 2 — Percents & Highest-Value Math (Weeks 5–7, Aug 21 – Sep 4)
+- **Phase 2** — Percents & Highest-Value Math (Weeks 5–7, Aug 21 – Sep 4)
 
-### Phase 3 — Geometry & Algebra (Weeks 8–10, Sep 11 – Sep 25)
+- **Phase 3** — Geometry & Algebra (Weeks 8–10, Sep 11 – Sep 25)
 
-### Phase 4 — Reading, Mixed Review & Test Simulation (Weeks 11–14, Oct 2 – Oct 16)
+- **Phase 4** — Reading, Mixed Review & Test Simulation (Weeks 11–14, Oct 2 – Oct 16)
 
 ## 6. What Mastery Looks Like in Math (the Weakest Area)
 
