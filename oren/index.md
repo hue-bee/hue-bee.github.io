@@ -3,6 +3,7 @@
 ![Level](https://img.shields.io/badge/level-beginner%20to%20advanced-brightgreen)
 ![Updated](https://img.shields.io/badge/updated-2026-lightyellow)
 
+[Study Plan](https://hue-bee.github.io/oren/plan/)
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
