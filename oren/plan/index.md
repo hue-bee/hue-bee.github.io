@@ -1,6 +1,6 @@
-# SHSAT Study Plan — Oren 
-
 [Oren - CAT SHSAT](https://hue-bee.github.io/oren/)
+
+# SHSAT Study Plan — Oren 
 
 **Student:** Oren (rising 8th grader)
 **Plan duration:** July 24 – October 16, 2026
