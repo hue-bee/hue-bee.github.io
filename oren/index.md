@@ -5,6 +5,7 @@
 
 [Study Plan](https://hue-bee.github.io/oren/plan/)
 
+
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **00** | [Diagnostic Plan](https://hue-bee.github.io/oren/lesson/00/) | -- ||
