@@ -66,28 +66,11 @@ A recurring **error log** is the engine of the plan. Every missed question is ca
 
 ### Phase 1 — Rebuild the Math Foundation (Weeks 1–4, Jul 24 – Aug 14)
 
-- **Week 1 (Jul 24):** Math — Signed numbers & absolute value (adding/subtracting/multiplying negatives, absolute value on a number line). ELA — Pronoun clarity/agreement.
-- **Week 2 (Jul 31):** Math — Fractions & decimals (operations, converting, comparing, complex fractions). ELA — Modifiers (dangling/misplaced).
-- **Week 3 (Aug 7):** Math — Factors, multiples, exponents & radicals (GCF/LCM, prime factorization, exponent rules, square roots). ELA — Verb tense/mood/number.
-- **Week 4 (Aug 14):** Math — Scientific notation + exponent review, then a timed 15-min math checkpoint. ELA — Possessive nouns & determiners.
-
 ### Phase 2 — Percents & Highest-Value Math (Weeks 5–7, Aug 21 – Sep 4)
-
-- **Week 5 (Aug 21):** Math — Percents I (percent of a number, percent equations, translating word problems). ELA — Frequently confused words.
-- **Week 6 (Aug 28):** Math — Percents II (increase/decrease, discounts, tax/tip, successive change). ELA — Logical comparison.
-- **Week 7 (Sep 4):** Math — Ratios, proportions & unit rate (stabilizing a skill that slid from 83% to 50%). ELA — Subordination & coordination.
 
 ### Phase 3 — Geometry & Algebra (Weeks 8–10, Sep 11 – Sep 25)
 
-- **Week 8 (Sep 11):** Math — Geometry I (angles, triangles, perimeter/area). ELA — End-of-sentence punctuation.
-- **Week 9 (Sep 18):** Math — Geometry II (circles, volume, coordinate geometry). ELA — Reading: Main Idea method.
-- **Week 10 (Sep 25):** Math — Algebra (linear equations, inequalities, expressions) plus the plug-in/back-solve strategy as a test-taking tool. ELA — Analyzing organization/structure.
-
 ### Phase 4 — Reading, Mixed Review & Test Simulation (Weeks 11–14, Oct 2 – Oct 16)
-
-- **Week 11 (Oct 2):** ELA — Reading comprehension deep-dive (passage mapping, Main Idea and structure questions, pacing across passage types, with focus on Fiction). Math — Spiral review of percents/geometry misses.
-- **Week 12 (Oct 9):** Full timed math section under real conditions; review every miss into the error log.
-- **Week 13 (Oct 16):** Full timed ELA section; drill Revising/Editing to lock in grammar gains and review reading errors.
 
 ## 6. What Mastery Looks Like in Math (the Weakest Area)
 
