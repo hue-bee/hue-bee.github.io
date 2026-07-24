@@ -1,1 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Homework — Signed Numbers &amp; Absolute Value</title>
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Lexend', sans-serif;
+    --ff-body: 'Lexend', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .meta-input { flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px; }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0;
+  }
+  .lvl { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
+  .lvl-1 { background: #e5e7eb; color: #374151; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .prob-expr { font-family: var(--ff-head); font-weight: 600; font-size: 1.15rem; color: var(--ink); margin: 0.3rem 0 0.5rem; letter-spacing: 0.02em; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.2rem; }
+  .answer-input { flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px; }
+  .work-area {
+    width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px;
+    background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink);
+    box-sizing: border-box; outline: none; margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .passage-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; }
+  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); }
+  .passage-text p { margin-bottom: 0.65rem; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt {
+    font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem; line-height: 1.45;
+    cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 600; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 600; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; flex-wrap: wrap; }
+  .reflect-line input[type=text] { flex: 1; min-width: 120px; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
+  .score-banner { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem; }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 600; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 600; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .score-input { width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:600;text-align:center;outline:none; }
+  .formula-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md); border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center; }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .habit-strip { display:flex; gap:0.5rem; flex-wrap:wrap; background:var(--sand-lt); border:1.5px solid #fcd34d; border-radius:10px; padding:0.6rem 0.9rem; margin-bottom:0.9rem; align-items:center; }
+  .habit-strip .hs-label { font-size:0.72rem; font-weight:800; color:#92400e; text-transform:uppercase; letter-spacing:0.05em; margin-right:0.3rem; }
+  .hstep { background:white; border:1.5px solid #fcd34d; border-radius:7px; padding:0.2rem 0.6rem; font-size:0.75rem; font-weight:600; color:#92400e; }
+  .trap-note { border: 1.5px solid #fca5a5; background: var(--coral-lt); border-radius: 8px; padding: 0.5rem 0.75rem; font-size: 0.78rem; color: #9f1239; margin-top: 0.6rem; }
+  .trap-note strong { color: #c2410c; }
+  .print-btn {
+    display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white; font-family: var(--ff-head);
+    font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none; border-radius: 30px; cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>🧭 Week 1 Homework</h1>
+      <div class="subtitle">Signed Numbers &amp; Absolute Value &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" class="meta-input" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" class="meta-input" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="8" class="score-input" placeholder="__"> / 8</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="4" class="score-input" style="width:2rem;" placeholder="__"> / 4</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" class="score-input" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PART A: SHOW-YOUR-WORK HABIT ── -->
+  <div class="section-hd">
+    <span class="icon">✅</span>
+    <h2>Part A — The Show-Your-Work Habit</h2>
+    <span class="badge badge-sand">Apply Before Every Problem</span>
+  </div>
+  <p class="instr">Your score plateau comes from accuracy, not concepts. Use this three-step check on <em>every</em> problem below — no exceptions.</p>
+  <div class="habit-strip">
+    <span class="hs-label">The Routine</span>
+    <span class="hstep">1. Rewrite double signs</span>
+    <span class="hstep">2. Circle the final sign</span>
+    <span class="hstep">3. Plug the answer back in</span>
+  </div>
+
+  <!-- ── PART B: SIGNED NUMBERS PRACTICE ── -->
+  <div class="section-hd">
+    <span class="icon">➖➕</span>
+    <h2>Part B — Signed Numbers &amp; Absolute Value</h2>
+    <span class="badge badge-blue">8 Problems · ~20 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Before computing, decide whether your answer will be positive or negative — and why.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Key Rules</span>
+    <span class="fml">a − (−b) = a + b</span>
+    <span class="fml">same signs → add, keep sign</span>
+    <span class="fml">diff signs → subtract, keep bigger sign</span>
+    <span class="fml">odd # of negatives → negative</span>
+    <span class="fml">even # of negatives → positive</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Add the two signed numbers.</p>
+      <div class="prob-expr">−9 + (−6) = ?</div>
+      <textarea class="work-area" placeholder="Rewrite double signs → circle final sign → check…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Find the value using absolute value.</p>
+      <div class="prob-expr">|−12| − 5 = ?</div>
+      <textarea class="work-area" placeholder="Simplify the absolute value first…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Multiply the two negatives.</p>
+      <div class="prob-expr">−4 × (−7) = ?</div>
+      <textarea class="work-area" placeholder="How many negatives are you multiplying?"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Divide, then add.</p>
+      <div class="prob-expr">15 ÷ (−3) + (−2) = ?</div>
+      <textarea class="work-area" placeholder="Division follows the same sign rule as…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Rewrite the double sign before you do anything else.</p>
+      <div class="prob-expr">8 − (−5) − 12 = ?</div>
+      <textarea class="work-area" placeholder="8 − (−5) − 12  →  8 + ⬜ − 12"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Multiply three negatives together.</p>
+      <div class="prob-expr">−3 × (−2) × (−5) = ?</div>
+      <textarea class="work-area" placeholder="Odd or even number of negatives?"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify fully inside each absolute value bar before subtracting.</p>
+      <div class="prob-expr">|−6 + 2| − |4 − 9| = ?</div>
+      <textarea class="work-area" placeholder="|−6+2| = …    |4−9| = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+      <div class="trap-note"><strong>⚠️ SHSAT Trap:</strong> Absolute value bars are grouping symbols. Do not combine the two expressions before the bars are removed.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Follow order of operations, then rewrite the double sign.</p>
+      <div class="prob-expr">−8 − (−15) + (−6) × 2 = ?</div>
+      <textarea class="work-area" placeholder="Multiply first, then combine left to right…"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="answer-input"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART C: SHSAT WORD PROBLEM ── -->
+  <div class="section-hd">
+    <span class="icon">🌊</span>
+    <h2>Part C — Multi-Step, Test-Day Format</h2>
+    <span class="badge badge-purple">Level 4 · Word Problem</span>
+  </div>
+  <p class="instr">Translate the words into a signed expression <em>first</em> — decide what "rises" and "descends" do to elevation before touching any numbers.</p>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A submarine is at an elevation of <strong>−120 feet</strong>. It rises <strong>45 feet</strong>, then descends <strong>3 times</strong> that distance. What is its final elevation?</p>
+      <div class="mc-opts" style="margin-top:0.5rem;">
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9" value="A"><span class="bubble"></span><span>A. −75 feet</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9" value="B"><span class="bubble"></span><span>B. −195 feet</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9" value="C"><span class="bubble"></span><span>C. −210 feet</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9" value="D"><span class="bubble"></span><span>D. 165 feet</span></label>
+      </div>
+      <textarea class="work-area" style="min-height:64px;margin-top:0.6rem;" placeholder="Translate to numbers first, then compute…"></textarea>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART D: ELA PRONOUN CLARITY ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part D — ELA: Pronoun Clarity &amp; Agreement</h2>
+    <span class="badge badge-green">4 Questions</span>
+  </div>
+  <p class="instr">For each question, point to the exact word each pronoun replaces. If you can't point to exactly one word, the sentence has a problem.</p>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> Which is correct? "Neither of the coaches submitted ___ roster on time." <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e1" value="A"><span class="bubble"></span><span>A. their</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e1" value="B"><span class="bubble"></span><span>B. his</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e1" value="C"><span class="bubble"></span><span>C. they're</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e1" value="D"><span class="bubble"></span><span>D. our</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> Which sentence fixes the unclear pronoun reference? "Maria told her sister that she had won the scholarship." <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e2" value="A"><span class="bubble"></span><span>A. Maria told her sister that Maria had won the scholarship.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e2" value="B"><span class="bubble"></span><span>B. Maria's sister was told that she had won the scholarship.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e2" value="C"><span class="bubble"></span><span>C. Her sister, Maria told, had won the scholarship.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e2" value="D"><span class="bubble"></span><span>D. She had won the scholarship, Maria told her sister.</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> "Each of the students must bring ___ own permission slip." Which pronoun agrees correctly? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e3" value="A"><span class="bubble"></span><span>A. their</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e3" value="B"><span class="bubble"></span><span>B. his or her</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e3" value="C"><span class="bubble"></span><span>C. they</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e3" value="D"><span class="bubble"></span><span>D. our</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> "When Jenna met Amara, she gave her the report." Why is this sentence ambiguous, and how would you fix it? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e4" value="A"><span class="bubble"></span><span>A. "She" and "her" could both refer to either girl — replace one pronoun with a name.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e4" value="B"><span class="bubble"></span><span>B. The sentence is not ambiguous; no fix is needed.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e4" value="C"><span class="bubble"></span><span>C. "Met" is the wrong verb tense.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="e4" value="D"><span class="bubble"></span><span>D. The sentence needs a comma after "Jenna."</span></label>
+    </div>
+  </div>
+
+  <div class="trap-note" style="margin-top:0.4rem;">
+    <strong>🤔 One question that solves all four:</strong> Is the noun the pronoun refers to singular or plural in the SHSAT's eyes — and can you point to exactly one word it replaces?
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART E: ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part E — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── REFLECTION ── -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest sign error this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The step of the show-your-work routine I skip most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 1 · SHSAT Prep &nbsp;·&nbsp; 🧭 Signed Numbers &amp; Absolute Value &nbsp;|&nbsp; 📖 ELA: Pronoun Clarity
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
