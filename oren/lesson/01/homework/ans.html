@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Answer Key — Signed Numbers &amp; Absolute Value</title>
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Lexend', sans-serif;
+    --ff-body: 'Lexend', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .print-btn { background: var(--blue); color: white; border: none; padding: 0.55rem 1.1rem; border-radius: 8px; font-family: var(--ff-body); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--green);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--green);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--green-lt); color: var(--green); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--green-lt); border-left: 3px solid var(--green); border-radius: 0 6px 6px 0;
+  }
+  .lvl { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
+  .lvl-1 { background: #e5e7eb; color: #374151; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .prob-expr { font-family: var(--ff-head); font-weight: 600; font-size: 1.15rem; color: var(--ink); margin: 0.3rem 0 0.5rem; letter-spacing: 0.02em; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 800; color: var(--green); background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 6px; padding: 0.35rem 0.6rem; }
+  .work-steps {
+    width: 100%; border: 1.5px solid var(--blue-md); border-radius: 6px;
+    background: var(--blue-lt); padding: 0.5rem 0.65rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--slate);
+    box-sizing: border-box; margin-top: 0.4rem; line-height: 1.6;
+  }
+  .work-steps .step { display: block; }
+  .work-steps .step b { color: var(--ink); }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt { font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem; line-height: 1.45; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; }
+  .mc-opt .bubble { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .mc-opt.correct { background: var(--green-lt); border-color: var(--green); font-weight: 700; color: #166534; }
+  .mc-opt.correct .bubble { background: var(--green); border-color: var(--green); color: white; }
+  .mc-opt.correct .bubble::after { content: "✓"; }
+  .why-box { border: 1.5px solid #86efac; background: var(--green-lt); border-radius: 8px; padding: 0.6rem 0.8rem; margin-top: 0.5rem; font-size: 0.79rem; color: #14532d; line-height: 1.55; }
+  .why-box b { color: #166534; }
+  .trap-note { font-size: 0.75rem; color: #92400e; background: var(--sand-lt); border: 1px solid #fcd34d; border-radius: 6px; padding: 0.35rem 0.55rem; margin-top: 0.5rem; }
+  .error-guide { border: 2px solid var(--purple); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--purple-lt); margin-top: 0.5rem; }
+  .error-guide h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 600; color: var(--purple); margin-bottom: 0.55rem; }
+  .error-guide ul { padding-left: 1.1rem; font-size: 0.79rem; color: var(--slate); line-height: 1.6; }
+  .habit-strip { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; background: var(--sand-lt); border: 1.5px solid #fcd34d; border-radius: 8px; padding: 0.5rem 0.8rem; margin-bottom: 1rem; }
+  .hs-label { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: #92400e; text-transform: uppercase; letter-spacing: 0.05em; }
+  .hstep { font-size: 0.78rem; font-weight: 700; color: #78350f; background: white; border-radius: 20px; padding: 2px 10px; border: 1px solid #fcd34d; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>✅ Week 1 Answer Key</h1>
+      <div class="subtitle">Signed Numbers &amp; Absolute Value &nbsp;·&nbsp; SHSAT Prep · Tutor Copy</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Tutor</span><span>Hue</span></div>
+      <div class="hw-meta-row"><span class="label">Session</span><span>Week 1</span></div>
+    </div>
+  </div>
+
+  <div class="section-hd">
+    <span class="icon">✅</span>
+    <h2>Part A — The Show-Your-Work Habit</h2>
+    <span class="badge badge-sand">Grading Standard</span>
+  </div>
+  <p class="instr">Every solution below models the exact three-step habit students are asked to apply — use this key to check not just the final answer, but whether the student's process matches.</p>
+  <div class="habit-strip">
+    <span class="hs-label">The Routine</span>
+    <span class="hstep">1. Rewrite double signs</span>
+    <span class="hstep">2. Circle the final sign</span>
+    <span class="hstep">3. Plug the answer back in</span>
+  </div>
+
+  <div class="section-hd">
+    <span class="icon">➖➕</span>
+    <h2>Part B — Signed Numbers &amp; Absolute Value</h2>
+    <span class="badge badge-blue">Problems 1–8</span>
+  </div>
+  <p class="instr">Every solution below applies the same three-step check: rewrite double signs, decide the final sign before computing, and confirm by plugging the answer back in.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Add the two signed numbers.</p>
+      <div class="prob-expr">−9 + (−6) = ?</div>
+      <div class="work-steps">
+        <span class="step">Same signs (both negative) → <b>add</b> the values and <b>keep the negative sign</b>.</span>
+        <span class="step">9 + 6 = 15, so the result is −15.</span>
+      </div>
+      <div class="answer-box">Answer: −15</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Find the value using absolute value.</p>
+      <div class="prob-expr">|−12| − 5 = ?</div>
+      <div class="work-steps">
+        <span class="step">|−12| strips the sign → 12.</span>
+        <span class="step">12 − 5 = 7.</span>
+      </div>
+      <div class="answer-box">Answer: 7</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Multiply the two negatives.</p>
+      <div class="prob-expr">−4 × (−7) = ?</div>
+      <div class="work-steps">
+        <span class="step">Two negatives (even count) → the product is <b>positive</b>.</span>
+        <span class="step">4 × 7 = 28.</span>
+      </div>
+      <div class="answer-box">Answer: 28</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Divide, then add.</p>
+      <div class="prob-expr">15 ÷ (−3) + (−2) = ?</div>
+      <div class="work-steps">
+        <span class="step">Division follows the same sign rule as multiplication: positive ÷ negative → negative.</span>
+        <span class="step">15 ÷ (−3) = −5.</span>
+        <span class="step">−5 + (−2) = −7 (same signs → add, keep negative).</span>
+      </div>
+      <div class="answer-box">Answer: −7</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Rewrite the double sign before you do anything else.</p>
+      <div class="prob-expr">8 − (−5) − 12 = ?</div>
+      <div class="work-steps">
+        <span class="step">8 − (−5) − 12 → 8 + 5 − 12 (subtracting a negative = adding a positive).</span>
+        <span class="step">8 + 5 = 13, then 13 − 12 = 1.</span>
+      </div>
+      <div class="answer-box">Answer: 1</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Multiply three negatives together.</p>
+      <div class="prob-expr">−3 × (−2) × (−5) = ?</div>
+      <div class="work-steps">
+        <span class="step">Three negatives (odd count) → the product is <b>negative</b>, regardless of grouping order.</span>
+        <span class="step">3 × 2 × 5 = 30, so the result is −30.</span>
+      </div>
+      <div class="answer-box">Answer: −30</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify fully inside each absolute value bar before subtracting.</p>
+      <div class="prob-expr">|−6 + 2| − |4 − 9| = ?</div>
+      <div class="work-steps">
+        <span class="step">|−6 + 2| = |−4| = 4.</span>
+        <span class="step">|4 − 9| = |−5| = 5.</span>
+        <span class="step">4 − 5 = −1.</span>
+      </div>
+      <div class="answer-box">Answer: −1</div>
+      <div class="trap-note"><strong>⚠️ SHSAT Trap:</strong> Absolute value bars are grouping symbols — each bar must be fully simplified on its own before the outside subtraction happens. Combining the insides first (e.g., treating it like |(−6+2)−(4−9)|) gives a wrong answer.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Follow order of operations, then rewrite the double sign.</p>
+      <div class="prob-expr">−8 − (−15) + (−6) × 2 = ?</div>
+      <div class="work-steps">
+        <span class="step">Multiply first: (−6) × 2 = −12.</span>
+        <span class="step">−8 − (−15) + (−12) → −8 + 15 − 12 (rewrite the double sign).</span>
+        <span class="step">−8 + 15 = 7, then 7 − 12 = −5.</span>
+      </div>
+      <div class="answer-box">Answer: −5</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">🌊</span>
+    <h2>Part C — Multi-Step, Test-Day Format</h2>
+    <span class="badge badge-purple">Problem 9 · Level 4</span>
+  </div>
+  <p class="instr">Translate the words into a signed expression first, then compute — this is exactly how the answer choices are designed to catch translation errors.</p>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A submarine is at an elevation of <strong>−120 feet</strong>. It rises <strong>45 feet</strong>, then descends <strong>3 times</strong> that distance. What is its final elevation?</p>
+      <div class="mc-opts" style="margin-top:0.5rem;">
+        <label class="mc-opt"><span class="bubble"></span><span>A. −75 feet</span></label>
+        <label class="mc-opt"><span class="bubble"></span><span>B. −195 feet</span></label>
+        <label class="mc-opt correct"><span class="bubble"></span><span>C. −210 feet</span></label>
+        <label class="mc-opt"><span class="bubble"></span><span>D. 165 feet</span></label>
+      </div>
+      <div class="work-steps" style="margin-top:0.6rem;">
+        <span class="step">Start: −120 feet.</span>
+        <span class="step">"Rises 45 feet" → add 45: −120 + 45 = −75.</span>
+        <span class="step">"Descends 3 times that distance" → 3 × 45 = 135, and descending means subtract: −75 − 135 = −210.</span>
+      </div>
+      <div class="answer-box">Answer: C — −210 feet</div>
+      <div class="why-box">
+        <b>Why the traps are wrong:</b> Choice A (−75) stops after the rise and forgets the descent entirely. Choice B (−195) uses the wrong descent multiplier instead of 3 × 45 = 135. Choice D (165 feet) drops the sign convention for elevation and treats "descend" as addition instead of subtraction.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part D — ELA: Pronoun Clarity &amp; Agreement</h2>
+    <span class="badge badge-green">Questions 1–4</span>
+  </div>
+  <p class="instr">The fastest check: point to the exact word each pronoun replaces. If you can't point to exactly one word, the sentence has a problem.</p>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> Which is correct? "Neither of the coaches submitted ___ roster on time." <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><span class="bubble"></span><span>A. their</span></label>
+      <label class="mc-opt correct"><span class="bubble"></span><span>B. his</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>C. they're</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>D. our</span></label>
+    </div>
+    <div class="why-box"><b>Why B:</b> "Neither" is grammatically singular on the SHSAT, so its pronoun must also be singular. "His" (used generically here) matches "neither," while "their" incorrectly treats "neither" as plural, and "they're"/"our" don't fit the sentence's subject at all.</div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> Which sentence fixes the unclear pronoun reference? "Maria told her sister that she had won the scholarship." <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt correct"><span class="bubble"></span><span>A. Maria told her sister that Maria had won the scholarship.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>B. Maria's sister was told that she had won the scholarship.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>C. Her sister, Maria told, had won the scholarship.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>D. She had won the scholarship, Maria told her sister.</span></label>
+    </div>
+    <div class="why-box"><b>Why A:</b> The original sentence's "she" could point to either Maria or her sister. Choice A removes the ambiguity by naming "Maria" directly instead of using a pronoun. Choices B, C, and D keep an ambiguous "she" or reorder the sentence without ever clarifying who won.</div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> "Each of the students must bring ___ own permission slip." Which pronoun agrees correctly? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><span class="bubble"></span><span>A. their</span></label>
+      <label class="mc-opt correct"><span class="bubble"></span><span>B. his or her</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>C. they</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>D. our</span></label>
+    </div>
+    <div class="why-box"><b>Why B:</b> "Each" is singular on the SHSAT (just like "neither," "everyone," and "every"), so it needs a singular pronoun. "His or her" is the grammatically correct singular match; "their" and "they" incorrectly pluralize the subject, and "our" doesn't agree with "each" at all.</div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> "When Jenna met Amara, she gave her the report." Why is this sentence ambiguous, and how would you fix it? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt correct"><span class="bubble"></span><span>A. "She" and "her" could both refer to either girl — replace one pronoun with a name.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>B. The sentence is not ambiguous; no fix is needed.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>C. "Met" is the wrong verb tense.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>D. The sentence needs a comma after "Jenna."</span></label>
+    </div>
+    <div class="why-box"><b>Why A:</b> With two female names in the sentence, both "she" and "her" have two equally valid antecedents, so the reader can't tell who gave the report to whom. The fix is always the same on the SHSAT: swap one pronoun for the actual name (e.g., "When Jenna met Amara, Jenna gave her the report").</div>
+  </div>
+
+  <div class="trap-note" style="margin-top:0.4rem;">
+    <strong>🤔 Tutor shortcut for all four:</strong> Teach students to ask one question every time — "Is the noun singular or plural in the SHSAT's eyes, and can I point to exactly one word this pronoun replaces?" Q1 and Q3 test singular indefinite pronouns; Q2 and Q4 test ambiguous antecedents with two equally valid nouns.
+  </div>
+
+  <hr class="divider">
+
+  <div class="error-guide">
+    <h3>🎯 Tutor Notes — Common Error Patterns to Watch For</h3>
+    <ul>
+      <li><b>Concept gap:</b> Student doesn't know the sign rule (e.g., thinks two negatives multiplied stay negative) — reteach with the even/odd negatives rule.</li>
+      <li><b>Careless error:</b> Student knows the rule but drops a sign when rewriting double signs or forgets to multiply before adding (Order of Operations) — reinforce the "rewrite double sign first" habit.</li>
+      <li><b>Rushed/skipped step:</b> Student jumps straight to an answer on Problem 7 or 9 without simplifying each absolute value bar or translating the word problem into numbers first — slow down and require the work box to be filled in fully.</li>
+      <li><b>Singular/plural confusion (ELA):</b> Words like "neither," "each," and "everyone" are singular on the SHSAT even though they feel plural — this is the most common trap in Q1 and Q3-style questions.</li>
+      <li><b>Ambiguous antecedent (ELA):</b> When two nouns of the same gender/number appear before a pronoun, students often miss that the pronoun could logically point to either one — train students to "point to the word" as a fast self-check on Q2 and Q4-style questions.</li>
+    </ul>
+  </div>
+
+</div><!-- /sheet 2 -->
+
+</body>
+</html>
