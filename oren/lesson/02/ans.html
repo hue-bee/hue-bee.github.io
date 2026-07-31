@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oren — Week 2: Fractions & Decimals — Answer Key</title>
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Lexend', sans-serif;
+    --ff-body: 'Lexend', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .print-btn { background: var(--blue); color: white; border: none; padding: 0.55rem 1.1rem; border-radius: 8px; font-family: var(--ff-body); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--green);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--green);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--green-lt); color: var(--green); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--green-lt); border-left: 3px solid var(--green); border-radius: 0 6px 6px 0;
+  }
+  .lvl { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
+  .lvl-1 { background: #e5e7eb; color: #374151; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .prob-expr { font-family: var(--ff-head); font-weight: 600; font-size: 1.15rem; color: var(--ink); margin: 0.3rem 0 0.5rem; letter-spacing: 0.02em; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 800; color: var(--green); background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 6px; padding: 0.35rem 0.6rem; }
+  .work-steps {
+    width: 100%; border: 1.5px solid var(--blue-md); border-radius: 6px;
+    background: var(--blue-lt); padding: 0.5rem 0.65rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--slate);
+    box-sizing: border-box; margin-top: 0.4rem; line-height: 1.6;
+  }
+  .work-steps .step { display: block; }
+  .work-steps .step b { color: var(--ink); }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt { font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem; line-height: 1.45; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; }
+  .mc-opt .bubble { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .mc-opt.correct { background: var(--green-lt); border-color: var(--green); font-weight: 700; color: #166534; }
+  .mc-opt.correct .bubble { background: var(--green); border-color: var(--green); color: white; }
+  .mc-opt.correct .bubble::after { content: "✓"; }
+  .why-box { border: 1.5px solid #86efac; background: var(--green-lt); border-radius: 8px; padding: 0.6rem 0.8rem; margin-top: 0.5rem; font-size: 0.79rem; color: #14532d; line-height: 1.55; }
+  .why-box b { color: #166534; }
+  .trap-note { font-size: 0.75rem; color: #92400e; background: var(--sand-lt); border: 1px solid #fcd34d; border-radius: 6px; padding: 0.35rem 0.55rem; margin-top: 0.5rem; }
+  .error-guide { border: 2px solid var(--purple); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--purple-lt); margin-top: 0.5rem; }
+  .error-guide h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 600; color: var(--purple); margin-bottom: 0.55rem; }
+  .error-guide ul { padding-left: 1.1rem; font-size: 0.79rem; color: var(--slate); line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+<button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>Week 2 Answer Key</h1>
+      <div class="subtitle">Fractions, Decimals &amp; Modifiers &nbsp;&nbsp; SHSAT Prep Tutor Copy</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Tutor</span><span>Hue's SHSAT Coach</span></div>
+      <div class="hw-meta-row"><span class="label">Source</span><span>Oren — Week 2: Fractions &amp; Decimals</span></div>
+    </div>
+  </div>
+
+  <div class="section-hd"><span class="icon">🧠</span><h2>Part A · Math Core</h2><span class="badge badge-blue">Problems 1–7</span></div>
+  <p class="instr">Tutor habit for this set: translate before you calculate. For fractions, make the units match; for decimals, estimate first; for complex fractions, simplify each layer before you flip anything.</p>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Find <strong>2/3 + 3/4</strong>.</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> Different denominators mean the pieces are different sizes, so you must rename them before adding.</span>
+        <span class="step">Least common denominator of 3 and 4 is 12.</span>
+        <span class="step">2/3 = 8/12 and 3/4 = 9/12.</span>
+        <span class="step">8/12 + 9/12 = 17/12 = 1 5/12.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>1 5/12</strong></div>
+      <div class="trap-note"><strong>SHSAT Trap:</strong> Students often add across and write 5/7. That only works when denominators already match.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A recipe needs <strong>2 1/3</strong> cups of flour, but you are making <strong>3/4</strong> of the recipe. How much flour do you need?</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> “Of” means multiply. Convert the mixed number before multiplying, or the setup breaks.</span>
+        <span class="step">2 1/3 = 7/3.</span>
+        <span class="step">7/3 × 3/4 = 21/12.</span>
+        <span class="step">Simplify: 21/12 = 7/4 = 1 3/4 cups.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>1 3/4 cups</strong></div>
+      <div class="trap-note"><strong>SHSAT Trap:</strong> Do not multiply 2 by 3/4 and then tack on 1/3. Mixed numbers must become improper fractions first.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Find <strong>3.6 × 0.4</strong>.</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> Estimate before computing. Since 0.4 is less than 1, the answer must be smaller than 3.6.</span>
+        <span class="step">Ignore decimals first: 36 × 4 = 144.</span>
+        <span class="step">There are 2 total decimal places, so place the point two spots from the right.</span>
+        <span class="step">144 → 1.44.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>1.44</strong></div>
+      <div class="trap-note"><strong>Quick check:</strong> If you got 14.4, your decimal point drifted. The estimate catches that immediately.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A stack of <strong>12</strong> identical textbooks is <strong>28.8 cm</strong> tall. What is the thickness of one textbook?</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> Total ÷ number of books = one book. This is unit rate thinking.</span>
+        <span class="step">28.8 ÷ 12.</span>
+        <span class="step">12 goes into 28 two times (24), remainder 4.8.</span>
+        <span class="step">4.8 ÷ 12 = 0.4, so 2 + 0.4 = 2.4.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>2.4 cm</strong></div>
+      <div class="trap-note"><strong>SHSAT Trap:</strong> Some students divide 12 by 28.8, which reverses the unit rate and answers the wrong question.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Order from least to greatest: <strong>5/8, 0.6, 7/10, 0.58</strong>.</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> One common form settles every argument. Convert everything to decimals.</span>
+        <span class="step">5/8 = 0.625, 0.6 = 0.600, 7/10 = 0.700, and 0.58 stays 0.580.</span>
+        <span class="step">Compare place value digit by digit: 0.580 &lt; 0.600 &lt; 0.625 &lt; 0.700.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>0.58, 0.6, 5/8, 7/10</strong></div>
+      <div class="trap-note"><strong>SHSAT Trap:</strong> Eyeballing 5/8 as “5 is less than 7” misses the fact that the denominators change the size of each part.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify <strong>(3/4) ÷ (5/8)</strong>.</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> A fraction bar means division, so use keep-change-flip.</span>
+        <span class="step">3/4 ÷ 5/8 = 3/4 × 8/5.</span>
+        <span class="step">Multiply: 3×8 = 24 and 4×5 = 20.</span>
+        <span class="step">24/20 simplifies to 6/5 = 1 1/5.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>1 1/5</strong></div>
+      <div class="trap-note"><strong>Smart move:</strong> You could also cross-reduce first: 8 ÷ 4 = 2, so the multiplication becomes 3×2/5 = 6/5.</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Simplify <strong>(1 1/2) ÷ (1/4 + 2/3)</strong>. Combine the bottom before you flip anything.</p>
+      <div class="work-steps">
+        <span class="step"><b>Strategy:</b> This problem warns you about the trap directly: simplify the denominator first because it has more than one term.</span>
+        <span class="step">Convert the mixed number: 1 1/2 = 3/2.</span>
+        <span class="step">Add the denominator: 1/4 + 2/3 = 3/12 + 8/12 = 11/12.</span>
+        <span class="step">Now divide: 3/2 ÷ 11/12 = 3/2 × 12/11 = 36/22 = 18/11 = 1 7/11.</span>
+      </div>
+      <div class="answer-box">Answer: <strong>1 7/11</strong></div>
+      <div class="trap-note"><strong>SHSAT Trap:</strong> Flipping too early creates nonsense because you would be inverting only part of the denominator instead of the entire quantity 11/12.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet page-break">
+  <div class="section-hd"><span class="icon">✍️</span><h2>Part B · ELA Modifiers</h2><span class="badge badge-purple">Problems 8–9</span></div>
+  <p class="instr">Fastest modifier test: ask, “Who is doing the action in the opening phrase?” If the subject right after the comma cannot logically do that action, the sentence is dangling.</p>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> Which sentence fixes the dangling modifier? <em>Covered in frosting, Maria cut the cake.</em> <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><span class="bubble"></span><span>A. Maria cut the cake, which was covered in frosting.</span></label>
+      <label class="mc-opt correct"><span class="bubble"></span><span>B. Covered in frosting, the cake was cut by Maria.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>C. Maria, covered in frosting, cut the cake.</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>D. The cake, Maria cut it covered in frosting.</span></label>
+    </div>
+    <div class="why-box"><b>Why B:</b> The opening phrase <em>Covered in frosting</em> should describe <em>the cake</em>, not Maria. Choice B puts <em>the cake</em> immediately after the modifier, so the sentence becomes logical and grammatically clean.</div>
+    <div class="trap-note"><strong>Why not A?</strong> A is logical and natural in everyday writing, but it changes the structure instead of directly repairing the modifier pattern the exercise is targeting. B is the clean textbook fix because the modified noun appears right after the phrase.</div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> Identify the misplaced modifier: <em>She almost finished all of her homework before dinner.</em> <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt correct"><span class="bubble"></span><span>A. almost — it should modify all, not finished</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>B. before dinner — it is in the wrong tense</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>C. her homework — it is a pronoun error</span></label>
+      <label class="mc-opt"><span class="bubble"></span><span>D. There is no error in this sentence</span></label>
+    </div>
+    <div class="why-box"><b>Why A:</b> As written, <em>almost finished all of her homework</em> suggests she did not quite finish. If the intended meaning is that she finished nearly all of it, the modifier belongs next to <em>all</em>, as in <em>She finished almost all of her homework before dinner.</em></div>
+    <div class="trap-note"><strong>Test-day strategy:</strong> Read the sentence two ways. If moving one small word changes the meaning, you found the misplaced modifier.</div>
+  </div>
+
+  <div class="error-guide">
+    <h3>Tutor Notes · High-Value Habits</h3>
+    <ul>
+      <li><b>Fractions:</b> Rename before adding or subtracting, and simplify at the end—not halfway unless you are cross-reducing in multiplication or division.</li>
+      <li><b>Decimals:</b> Estimate first so the decimal point has to earn its spot.</li>
+      <li><b>Complex fractions:</b> If the top or bottom has more than one term, simplify that group completely before using keep-change-flip.</li>
+      <li><b>Modifiers:</b> After an opening phrase, the next noun must be the thing doing or receiving that action logically.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
