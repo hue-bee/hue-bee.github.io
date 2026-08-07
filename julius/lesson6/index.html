@@ -1,1 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 6: Circles, Volume &amp; 3D Figures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --z1:#262626; --z1-soft:rgba(38,38,38,0.10);
+  --z2:#4d4d4d; --z2-soft:rgba(77,77,77,0.10);
+  --z3:#6a6a6a; --z3-soft:rgba(106,106,106,0.12);
+  --z4:#858585; --z4-soft:rgba(133,133,133,0.12);
+  --z5:#5c5c5c; --z5-soft:rgba(92,92,92,0.10);
+  --ela:#3e3e3e; --ela-soft:rgba(62,62,62,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--z5);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--z5);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--z5);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow-y:auto;transform:translateX(320px);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;pointer-events:none;}
+.pip-panel.open{transform:translateX(0);opacity:1;pointer-events:all;}
+.pip-panel-inner{padding:0.9rem 1rem;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.pip-panel-title{font-weight:700;font-size:0.82rem;color:var(--ink);}
+.pip-close-btn{background:none;border:none;font-size:0.9rem;color:var(--ink-3);cursor:pointer;}
+.pip-mini-formula{font-size:0.78rem;font-weight:600;color:var(--ink-2);background:#EDF2F9;border-radius:8px;padding:0.4rem 0.6rem;margin-bottom:0.6rem;}
+.pip-mini-card{background:#FBFCFE;border:1px solid rgba(201,212,228,0.4);border-radius:10px;padding:0.5rem 0.65rem;margin-bottom:0.5rem;}
+.pip-mini-lvl{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:14px;}
+.pip-mini-title{font-weight:700;font-size:0.8rem;color:var(--ink);margin-top:0.3rem;}
+.pip-mini-body{font-size:0.76rem;color:var(--ink-2);line-height:1.5;margin-top:0.2rem;}
+.pip-mini-trap{background:#F0F0F0;border-radius:10px;padding:0.5rem 0.65rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.76rem;color:#3D3D3D;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--z1);"></span> Session 7 · Phase 1, Week 6
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.1rem,5.5vw,3.7rem);">Week 6 <br><span style="color:var(--z1);">Circles, Volume &amp; 3D Figures</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">Aug 7 &nbsp;·&nbsp; Math Core 0:10–0:45 &nbsp;·&nbsp; ELA 0:45–0:58</h2>
+    <p class="reveal" style="font-size:0.82rem;color:var(--ink-3);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem;">SHSAT Prep · Rebuild the Zero-Percent Topics</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--z1-soft);color:var(--z1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Circles Revisited</span>
+      <span style="background:var(--z2-soft);color:var(--z2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Rectangular Prisms</span>
+      <span style="background:var(--z3-soft);color:var(--z3);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Cylinders</span>
+      <span style="background:var(--z4-soft);color:var(--z4);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Cones &amp; Pyramids</span>
+      <span style="background:var(--z5-soft);color:var(--z5);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Composite Solids</span>
+      <span style="background:var(--ela-soft);color:var(--ela);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Poem Structure</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:00–0:10</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Warm-Up · Error Log</div>
+          <div class="tl-b">We revisit your triangle &amp; quadrilateral work from last week before touching anything new. <em>You scored 0% on volume in Diagnostic A — today we rebuild that from zero.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:10–0:18</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Circles Revisited — In 3D Context</div>
+          <div class="tl-b">You'll reconnect circumference and area to the circular base of a solid. <em>Every cylinder and cone starts with a circle you already know how to measure.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z2);">
+        <div class="tl-time">0:18–0:26</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Volume of Rectangular Prisms</div>
+          <div class="tl-b">The easiest 3D shape — and the one every other formula borrows from. <em>Volume is just "base area" stacked "height" times.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z3);">
+        <div class="tl-time">0:26–0:34</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Volume of Cylinders<span class="tag hot">High-Frequency</span></div>
+          <div class="tl-b">Same idea as a prism, but the base is a circle. <em>V = πr²h — a circle's area, stacked up.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z4);">
+        <div class="tl-time">0:34–0:42</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Cones &amp; Pyramids<span class="tag hot">Stretch Goal</span></div>
+          <div class="tl-b">Cones and pyramids are prisms/cylinders shrunk to a point. <em>Remember: always multiply by 1/3.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z5);">
+        <div class="tl-time">0:42–0:45</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Composite 3D Figures</div>
+          <div class="tl-b">Real SHSAT figures often glue two solids together. <em>Split it into shapes you already know, then add or subtract.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--ela);">
+        <div class="tl-time">0:45–0:58</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">ELA · Poem Structure</div>
+          <div class="tl-b">Stanzas, line breaks, repetition. <em>Structure isn't decoration — it's how a poem builds meaning.</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — WARM UP: ERROR LOG -->
+<div class="slide" data-slide="3" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Warm-Up · Quick Recall</div>
+    <h2 class="slide-title reveal">Before We Move On: <span class="tint">Prove It Stuck</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think first</div>
+        <div class="socratic-body">Last week you learned the Pythagorean theorem. If a right triangle has legs 6 and 8, what's the hypotenuse? Say the rule out loud before you calculate.</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this matters</div>
+        <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Volume problems often hide a right triangle or a circle inside a 3D shape. If your 2D geometry is shaky, the 3D formulas won't save you — we're stacking new skills on old ones today.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.9rem;">
+      <div class="trap-title">Your Habit Target</div>
+      <div class="trap-body">You scored 0% on both Circles and Volume in Diagnostic A. Today isn't about memorizing more formulas — it's about understanding what each formula is actually counting. Say each formula in words before you plug in numbers.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — CIRCLES REVISITED -->
+<div class="slide" data-slide="4" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Circles Revisited</div>
+    <h2 class="slide-title reveal">Every 3D Solid Starts With a <span class="tint">Flat Shape You Know</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">A cylinder is a stack of circles. If one circle has area πr², and you stack "h" copies of it, what would the total space inside be? Try to guess the formula before I show you.</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">Circle basics — the foundation for everything today</div>
+          <div class="math" style="font-size:1.15rem;">Circumference = 2πr &nbsp;&nbsp; Area = πr²</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="130" cy="95" r="60" fill="#f0f0f0" stroke="#262626" stroke-width="2.5"/>
+  <line x1="70" y1="95" x2="190" y2="95" stroke="#4a4a4a" stroke-width="2" stroke-dasharray="5,4"/>
+  <line x1="130" y1="95" x2="184" y2="95" stroke="#1f1f1f" stroke-width="2.5"/>
+  <circle cx="130" cy="95" r="3" fill="#1f1f1f"/>
+  <path d="M 130 35 A 60 60 0 0 1 184 95" fill="none" stroke="#6a6a6a" stroke-width="5"/>
+  <text x="148" y="70" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">r</text>
+  <text x="94" y="115" font-size="12" font-weight="600" fill="#4a4a4a" font-family="Nunito, sans-serif">diameter</text>
+  <text x="150" y="50" font-size="11" font-weight="700" fill="#6a6a6a" font-family="Nunito, sans-serif">circumference</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — RECTANGULAR PRISM CONCEPT -->
+<div class="slide" data-slide="5" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Rectangular Prisms</div>
+    <h2 class="slide-title reveal">Volume Is Just <span class="tint">"Base Area" Times "Height"</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Area of a rectangle is length × width — you already know this. Volume just adds one more dimension. What do you think happens if you multiply that flat area by how "tall" the box is?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div class="math">V = l × w × h</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="55,60 55,135 145,150 145,75" fill="#e5e5e5" stroke="#262626" stroke-width="2"/>
+  <polygon points="145,75 205,50 205,125 145,150" fill="#cfcfcf" stroke="#262626" stroke-width="2"/>
+  <polygon points="55,60 115,35 205,50 145,75" fill="#f0f0f0" stroke="#262626" stroke-width="2"/>
+  <text x="88" y="150" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">l</text>
+  <text x="180" y="95" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">w</text>
+  <text x="35" y="100" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">h</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — PRISM PRACTICE -->
+<div class="slide" data-slide="6" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice</div>
+    <h2 class="slide-title reveal">Rectangular Prisms — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A box measures <span class="math-inline">5 cm</span> by <span class="math-inline">4 cm</span> by <span class="math-inline">3 cm</span>. Find its volume. Ask yourself: which three numbers get multiplied?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A fish tank has volume <span class="math-inline">240 in³</span>. Its base is <span class="math-inline">8 in</span> by <span class="math-inline">6 in</span>. How tall is the tank? Work backward from the formula.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Mismatched Units</div>
+      <div class="trap-body">If one dimension is given in a different unit (say, feet instead of inches), convert everything to the same unit <em>before</em> you multiply — otherwise your answer will be off by a huge factor, not a small error.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — CYLINDER CONCEPT -->
+<div class="slide" data-slide="7" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Cylinders<span class="tag hot">High-Frequency</span></div>
+    <h2 class="slide-title reveal">Swap the Rectangle Base for a <span class="tint">Circle</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">A prism's volume is base area × height. A cylinder is really a "circular prism." What's the area of a circle again? Now substitute that in for the base.</div>
+        </div>
+        <div class="formula-box reveal">
+          <div class="math">V = πr²h</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="100" cy="40" rx="55" ry="18" fill="#e5e5e5" stroke="#262626" stroke-width="2.5"/>
+  <line x1="45" y1="40" x2="45" y2="140" stroke="#262626" stroke-width="2.5"/>
+  <line x1="155" y1="40" x2="155" y2="140" stroke="#262626" stroke-width="2.5"/>
+  <path d="M 45 140 A 55 18 0 0 0 155 140" fill="none" stroke="#262626" stroke-width="2.5"/>
+  <path d="M 45 140 A 55 18 0 0 1 155 140" fill="none" stroke="#262626" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="100" y1="40" x2="155" y2="40" stroke="#1f1f1f" stroke-width="2.5"/>
+  <text x="120" y="33" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">r</text>
+  <line x1="25" y1="40" x2="25" y2="140" stroke="#6a6a6a" stroke-width="2"/>
+  <text x="6" y="94" font-size="13" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">h</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — CYLINDER PRACTICE -->
+<div class="slide" data-slide="8" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Practice</div>
+    <h2 class="slide-title reveal">Cylinders — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A cylinder has radius <span class="math-inline">3 cm</span> and height <span class="math-inline">10 cm</span>. Find its volume in terms of π. What goes in for r, and what goes in for h?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A cylindrical water tank has <strong>diameter</strong> <span class="math-inline">14 ft</span> and height <span class="math-inline">20 ft</span>. Using π ≈ 22/7, find the volume. What's the trap hiding in "diameter"?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Diameter vs. Radius</div>
+      <div class="trap-body">The single most common cylinder error is plugging the <em>diameter</em> straight into r² instead of dividing by 2 first. Always circle the word "diameter" or "radius" the second you see it in a problem.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — CONES & PYRAMIDS CONCEPT -->
+<div class="slide" data-slide="9" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Cones &amp; Pyramids — Stretch Goal</div>
+    <h2 class="slide-title reveal">Shrink a Cylinder to a Point — <span class="tint">Multiply by 1/3</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">If you filled a cone with water and poured it into a cylinder with the same base and height, how many cone-fuls would fill the cylinder? (Hint: it's exactly 3.) What does that tell you about the cone's volume compared to the cylinder's?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">The rule</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">A cone or pyramid always holds exactly <strong>1/3</strong> the volume of the prism/cylinder that shares its base and height. Compute the "full" shape's volume, then multiply by 1/3.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="65" cy="35" rx="42" ry="14" fill="#e5e5e5" stroke="#262626" stroke-width="2"/>
+  <line x1="23" y1="35" x2="23" y2="135" stroke="#262626" stroke-width="2"/>
+  <line x1="107" y1="35" x2="107" y2="135" stroke="#262626" stroke-width="2"/>
+  <path d="M 23 135 A 42 14 0 0 0 107 135" fill="none" stroke="#262626" stroke-width="2"/>
+  <path d="M 23 135 A 42 14 0 0 1 107 135" fill="none" stroke="#262626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="35" y="158" font-size="11" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">V = &#960;r&#178;h</text>
+  <line x1="130" y1="85" x2="160" y2="85" stroke="#4a4a4a" stroke-width="2"/>
+  <polygon points="128,80 130,85 128,90" fill="#4a4a4a"/>
+  <text x="128" y="72" font-size="18" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">&#215;&#8531;</text>
+  <polygon points="205,135 165,135 185,35" fill="#cfcfcf" stroke="#262626" stroke-width="2"/>
+  <ellipse cx="185" cy="135" rx="20" ry="7" fill="none" stroke="#262626" stroke-width="2"/>
+  <line x1="185" y1="135" x2="185" y2="35" stroke="#262626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="158" y="158" font-size="11" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">V = &#8531;&#960;r&#178;h</text>
+</svg>
+      </div>
+    </div>
+    <div class="formula-box reveal" style="margin-top:0.8rem;">
+      <div class="math" style="font-size:1.15rem;">Cone: V = (1/3)πr²h &nbsp;&nbsp;|&nbsp;&nbsp; Pyramid: V = (1/3) × (base area) × h</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — CONE/PYRAMID PRACTICE -->
+<div class="slide" data-slide="10" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Practice</div>
+    <h2 class="slide-title reveal">Cones &amp; Pyramids — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A cone has radius <span class="math-inline">6 in</span> and height <span class="math-inline">9 in</span>. Find its volume in terms of π. Compute the cylinder volume first, then apply the rule.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A square pyramid has a base edge of <span class="math-inline">8 m</span> and height <span class="math-inline">12 m</span>. Find its volume. What shape is the base, and what's its area formula?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Forgetting the 1/3</div>
+      <div class="trap-body">Test-writers count on you forgetting the 1/3 factor entirely, or applying it twice by accident. Write "×1/3" as a separate step in your work — never fold it silently into your head math.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — COMPOSITE FIGURES CONCEPT -->
+<div class="slide" data-slide="11" style="--zc:var(--z5);--zs:var(--z5-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="5"></div>
+    <div class="kicker reveal">Zone 5 · Composite 3D Figures</div>
+    <h2 class="slide-title reveal">Split It Into Shapes You <span class="tint">Already Know</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Imagine an ice cream cone with a scoop on top — a cone plus a hemisphere. Would you add the two volumes together, or subtract one from the other? What if a cylindrical hole was drilled through a block instead?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">The rule</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;"><strong>Solids stacked/attached →</strong> add the volumes. <strong>Material removed (a hole, a notch) →</strong> subtract the volume. Always redraw the composite as two separate labeled shapes before computing anything.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="40,60 40,140 130,155 130,75" fill="#e5e5e5" stroke="#262626" stroke-width="2"/>
+  <polygon points="130,75 195,55 195,135 130,155" fill="#cfcfcf" stroke="#262626" stroke-width="2"/>
+  <polygon points="40,60 105,40 195,55 130,75" fill="#f0f0f0" stroke="#262626" stroke-width="2"/>
+  <ellipse cx="118" cy="97" rx="15" ry="6" fill="#ffffff" stroke="#1f1f1f" stroke-width="2"/>
+  <ellipse cx="118" cy="135" rx="15" ry="6" fill="none" stroke="#1f1f1f" stroke-width="2" stroke-dasharray="3,3"/>
+  <line x1="103" y1="97" x2="103" y2="135" stroke="#1f1f1f" stroke-width="1.5"/>
+  <line x1="133" y1="97" x2="133" y2="135" stroke="#1f1f1f" stroke-width="1.5"/>
+  <text x="18" y="172" font-size="11" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">block volume &#8722; cylinder volume</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — COMPOSITE PRACTICE -->
+<div class="slide" data-slide="12" style="--zc:var(--z5);--zs:var(--z5-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="5"></div>
+    <div class="kicker reveal">Zone 5 · Practice</div>
+    <h2 class="slide-title reveal">Composite Figures — <span class="tint">Easy to Hard</span></h2>
+    <div class="prob-card reveal">
+      <div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-4">Level 4</span></div>
+      <div style="font-size:0.98rem;color:var(--ink-2);line-height:1.55;">A solid is made of a rectangular block <span class="math-inline">10 × 6 × 4</span> (in inches) with a cylindrical hole of radius <span class="math-inline">2 in</span> drilled all the way through the height (4 in). Find the remaining volume. Set up both volumes separately before combining.</div>
+      <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+    </div>
+    <div class="mc-options reveal" style="margin-top:0.6rem;">
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">A</span> 240 − 16π in³</label>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">B</span> 240 − 4π in³</label>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">C</span> 240 + 16π in³</label>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">D</span> 16π in³</label>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Adding Instead of Subtracting</div>
+      <div class="trap-body">A drilled hole removes material — it should shrink your total, not grow it. If your composite-figure answer is bigger than the original block, re-check whether you should have subtracted.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — CHECK YOUR WORK -->
+<div class="slide" data-slide="13" style="--zc:#17233B;--zs:rgba(23,35,59,0.08);">
+  <div class="content">
+    <div class="kicker reveal">Zone 5 · Accuracy</div>
+    <h2 class="slide-title reveal">Three Ways to <span class="tint">Check a Volume Answer</span></h2>
+    <div class="formula-box reveal" style="margin-bottom:0.9rem;">
+      <span style="font-size:0.85rem;font-weight:600;color:var(--ink-2);">Worked example: cylinder, r = 3, h = 10 → V = π(3)²(10) = 90π</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-1">Before You Start</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Sanity-Check the Shape</div>
+        <div class="prose" style="font-size:0.85rem;">Does your final unit make sense? Volume should always come out in <span class="math-inline">units³</span> — if you get plain units or units², you skipped a dimension somewhere.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-2">After You Finish</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Estimate With π ≈ 3</div>
+        <div class="prose" style="font-size:0.85rem;">Swap π for 3 quickly: <span class="math-inline">90π ≈ 270</span>. If your calculator answer is wildly different from that estimate, you likely mis-squared the radius or forgot a factor.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-3">If Time Allows</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Redo the Formula From Scratch</div>
+        <div class="prose" style="font-size:0.85rem;">Rewrite the formula on a blank line and re-substitute your numbers without looking at your first attempt. Getting the same answer twice, independently, is strong proof it's correct.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Confusing Volume With Surface Area</div>
+      <div class="trap-body">Volume measures what's <em>inside</em> a solid (units³); surface area measures its <em>outer skin</em> (units²). Before you pick a formula, ask: "am I filling this shape or wrapping it?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — ELA: POEM STRUCTURE -->
+<div class="slide" data-slide="14" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Poem Structure</div>
+    <h2 class="slide-title reveal">Structure Isn't Decoration — <span class="tint">It Builds Meaning</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think about it</div>
+        <div class="socratic-body">If a poet suddenly shortens every line in the final stanza, what feeling might that create — rushing, calm, tension? Why might a poet repeat the same phrase three times across a poem?</div>
+      </div>
+      <div class="info-card reveal">
+        <div style="font-weight:600;font-size:0.92rem;color:var(--ink);margin-bottom:0.4rem;">What to look for</div>
+        <ul class="prose" style="margin:0;padding-left:1.1rem;line-height:1.85;font-size:0.87rem;">
+          <li><strong>Stanza breaks</strong> often mark a shift in topic, time, or feeling.</li>
+          <li><strong>Line length changes</strong> can speed up or slow down the poem's pace.</li>
+          <li><strong>Repetition</strong> emphasizes an idea or builds emotional intensity.</li>
+          <li>Always ask: "why did the poet make this structural choice <em>here</em>?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15 — ELA PRACTICE -->
+<div class="slide" data-slide="15" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Practice</div>
+    <h2 class="slide-title reveal">Spot the <span class="tint">Structural Choice</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">A poem repeats the line "the tide comes in" at the start of each stanza. What is the most likely effect of this repetition on the reader?</div>
+        <div class="mc-options" style="margin-top:0.45rem;">
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8"><span class="opt-letter">A</span> It confuses the reader about setting</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8"><span class="opt-letter">B</span> It creates a rhythmic, cyclical feeling tied to the ocean</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8"><span class="opt-letter">C</span> It signals the poem is a sonnet</label>
+        </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">In the final stanza, the poet switches from long, flowing lines to short, one-word lines. What effect does this shift most likely create?</div>
+        <div class="mc-options" style="margin-top:0.45rem;">
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9"><span class="opt-letter">A</span> A slower, more relaxed mood</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9"><span class="opt-letter">B</span> A sudden, urgent, or tense mood</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q9"><span class="opt-letter">C</span> No change in mood at all</label>
+        </div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Naming the Device Without Explaining Its Effect</div>
+      <div class="trap-body">Identifying "repetition" or "short lines" earns you nothing on its own. Every structure question is really asking: <em>what effect does this have on tone or meaning?</em> Always finish your answer with "...which makes the reader feel ___."</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16 — SESSION CLOSE -->
+<div class="slide" data-slide="16" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Log the Misses, <span class="tint">Lock in the Habit</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-top:0.8rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log Update</div>
+        <div class="tl-b">Every miss today gets categorized: wrong formula, diameter/radius mix-up, forgot the 1/3, or add/subtract mistake on composites.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Confidence Win</div>
+        <div class="tl-b">Volume was a 0% zone just one diagnostic ago. Any correctly set-up formula today — even with an arithmetic slip — is real progress.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Next Session</div>
+        <div class="tl-b">Week 8 (Jul 7): Phase I Review &amp; Mini-Assessment — a timed 15-problem test covering Weeks 2–7.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- PIP: Check Your Work floating panel (visible on every slide) -->
+<button class="pip-toggle-btn" id="pipToggleBtn" onclick="togglePip()" aria-label="Toggle Check Your Work picture-in-picture">
+  <span class="pip-dot"></span> Check Your Work
+</button>
+<div class="pip-panel" id="pipPanel">
+  <div class="pip-panel-inner">
+    <div class="pip-panel-header">
+      <span class="pip-panel-title">Check Your Work</span>
+      <button class="pip-close-btn" onclick="togglePip()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="pip-mini-formula">Worked example: cylinder r=3, h=10 → V = 90π</div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-1">Before You Start</span>
+      <div class="pip-mini-title">Sanity-Check the Shape</div>
+      <div class="pip-mini-body">Volume should always end in <span class="math-inline">units³</span>. If you get units or units², you skipped a dimension.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-2">After You Finish</span>
+      <div class="pip-mini-title">Estimate With π ≈ 3</div>
+      <div class="pip-mini-body"><span class="math-inline">90π ≈ 270</span>. If your answer is way off from that estimate, recheck your squaring or your factor of 1/3.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-3">If Time Allows</span>
+      <div class="pip-mini-title">Redo From Scratch</div>
+      <div class="pip-mini-body">Rewrite the formula on a blank line and resubstitute without peeking at your first attempt. Matching answers twice is strong proof.</div>
+    </div>
+    <div class="pip-mini-trap">
+      <div class="pip-mini-trap-title">Volume vs. Surface Area</div>
+      <div class="pip-mini-body">Volume = what's inside (units³). Surface area = the outer skin (units²). Ask: "am I filling this or wrapping it?"</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 16</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Circles',t:'0:10',c:'var(--z1)'},
+  {n:'Prisms',t:'0:18',c:'var(--z2)'},
+  {n:'Cylinders',t:'0:26',c:'var(--z3)'},
+  {n:'Cones/Pyramids',t:'0:34',c:'var(--z4)'},
+  {n:'Composite',t:'0:42',c:'var(--z5)'},
+  {n:'ELA',t:'0:45',c:'var(--ela)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  panel.classList.toggle('open');
+}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
