@@ -12,4 +12,4 @@
 | **4** | [Geometry: Angles and Triangles](https://hue-bee.github.io/julius/lesson4) | [4 Homework](https://hue-bee.github.io/julius/lesson4/homework) ||
 | **4** | [L4 Mastery: Surface Area Word Problems](https://hue-bee.github.io/julius/lesson4/level4) | [4 Homework](https://hue-bee.github.io/julius/lesson4/level4/homework) |L4|
 | **5** | [Word Problems & Mixed Review](https://hue-bee.github.io/julius/lesson5) | [5 Homework](https://hue-bee.github.io/julius/lesson5/homework) ||
-| **6** | [Circles, Volume & 3D Figures](https://hue-bee.github.io/julius/lesson6) | [5 Homework](https://hue-bee.github.io/julius/lesson6/homework) ||
+| **6** | [Circles, Volume & 3D Figures](https://hue-bee.github.io/julius/lesson6) | [6 Homework](https://hue-bee.github.io/julius/lesson6/homework) ||
