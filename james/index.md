@@ -6,4 +6,4 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **01** | [Measurements: Perimeter and Area](https://hue-bee.github.io/james/01) | [2 Homework](https://hue-bee.github.io/james/01/homework.html) ||
+| **01** | [Measurements: Perimeter and Area](https://hue-bee.github.io/james/01) | [1 Homework](https://hue-bee.github.io/james/01/homework.html) ||
