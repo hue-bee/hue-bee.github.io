@@ -1,1 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Homework — Percent Foundations &amp; Function of a Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+  .hw-meta-row input[type=text] {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);
+    font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);
+    background:transparent;outline:none;padding:1px 4px;
+  }
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .lvl-1 { background: #eef0f3; color: #374151; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-box input[type=text] {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);
+    font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);
+    background:transparent;outline:none;padding:1px 6px;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opts.single { grid-template-columns: 1fr; }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-val input {
+    width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);
+    color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;
+  }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+  .trap-note {
+    border: 1.5px solid #fcd34d;
+    background: var(--sand-lt);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+    color: #92400e;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .trap-note strong { font-family: var(--ff-head); font-weight: 700; }
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>％ Week 1 Homework</h1>
+      <div class="subtitle">Percent Foundations &amp; Function of a Detail &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="6" placeholder="__"> / 6</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="18" placeholder="__"> / 18</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A: REVERSE PERCENT -->
+  <div class="section-hd">
+    <span class="icon">🔁</span>
+    <h2>Part A — Reverse Percent</h2>
+    <span class="badge badge-blue">4 Problems · ~14 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Set up the equation new = old × (1 ± r) before solving. Circle your final answer.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">new = old × (1 ± r)</span>
+    <span class="fml">old = new ÷ (1 ± r)</span>
+    <span class="fml">increase → factor &gt; 1</span>
+    <span class="fml">decrease → factor &lt; 1</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">After a <strong>25% increase</strong>, a number becomes <strong>75</strong>. What was the original number?</p>
+      <div class="fig">
+        <svg width="150" height="70" viewBox="0 0 150 70">
+          <rect x="8" y="20" width="60" height="34" rx="6" fill="#eeeeee" stroke="#374151" stroke-width="1.5"/>
+          <text x="38" y="41" font-family="Nunito" font-weight="700" font-size="11" fill="#374151" text-anchor="middle">OLD = ?</text>
+          <line x1="70" y1="37" x2="98" y2="37" stroke="#374151" stroke-width="2"/>
+          <polygon points="96,32 104,37 96,42" fill="#374151"/>
+          <text x="84" y="27" font-family="Nunito" font-weight="700" font-size="9" fill="#374151" text-anchor="middle">×1.25</text>
+          <rect x="106" y="20" width="40" height="34" rx="6" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <text x="126" y="41" font-family="Nunito" font-weight="700" font-size="11" fill="#374151" text-anchor="middle">75</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="75 = old × 1.25 → old = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A jacket's price dropped <strong>18%</strong> to <strong>$41.00</strong>. What was the original price? Watch the sign on r.</p>
+      <textarea class="work-area" placeholder="41 = old × (1 − 0.18) → old = …"></textarea>
+      <div class="answer-box">Answer: $ <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Thursday's temperature was <strong>91°</strong>, which is <strong>4% higher</strong> than Wednesday's. What was Wednesday's temperature? Set up the equation first — do not skip it.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="91 = 1.04x → x = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> °</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A price of <strong>$77</strong> already includes a <strong>10% markup</strong> over wholesale cost. Find the wholesale cost, then find the price after a separate <strong>15% discount</strong> off that wholesale cost. Two reversals, one problem.</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Step 1 — wholesale: 77 = w × 1.10 → w = …&#10;Step 2 — discounted price: w × 0.85 = …"></textarea>
+      <div class="answer-box">Wholesale: $ <input type="text"> &nbsp;&nbsp; Discounted price: $ <input type="text"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: RIGHT MATH WRONG LINE -->
+  <div class="section-hd">
+    <span class="icon">🎯</span>
+    <h2>Part B — Value or Difference? (Right Math, Wrong Line)</h2>
+    <span class="badge badge-coral">Highest-Yield Trap</span>
+  </div>
+  <p class="instr">Before you circle an answer, finish this sentence out loud: "the question wants ___." Then check your last line matches.</p>
+
+  <div class="trap-note"><strong>Trap name — Right Math, Wrong Line:</strong> Solving the equation correctly is only half the job. Many wrong choices come from answering a different question than the one actually asked — a value instead of a difference, or vice versa.</div>
+
+  <div class="prob-grid" style="margin-top:0.9rem;">
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">A club had <strong>32 members</strong>. Membership grew <strong>25%</strong>. How many members does the club have now? First — value, or change?</p>
+      <textarea class="work-area" placeholder="32 × 1.25 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> members</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Monday's attendance was <strong>180 people</strong>. Tuesday's attendance was <strong>15% lower</strong>. How much <em>lower</em>, in people, was Tuesday than Monday — not what Tuesday's attendance was. Circle the target before answering.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Tuesday's attendance = 180 × 0.85 = …&#10;Difference = 180 − Tuesday's = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> people fewer</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <!-- PART C: COMPLEMENT PERCENT -->
+  <div class="section-hd">
+    <span class="icon">💯</span>
+    <h2>Part C — Complement Percent</h2>
+    <span class="badge badge-sand">4 Problems · ~13 min</span>
+  </div>
+  <p class="instr">Start every complement problem from 100%. Convert to a decimal first, then count zeroes into the denominator.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">complement = 100% − given %</span>
+    <span class="fml">0.3% = 0.003 = 3/1000</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q"><strong>72%</strong> of a class passed a quiz. What fraction did <strong>NOT</strong> pass? Start from 100% first.</p>
+      <textarea class="work-area" placeholder="100% − 72% = … → fraction = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q"><strong>99.6%</strong> of parts passed inspection. What fraction of parts did <strong>NOT</strong> pass? Watch for the traps 4/100 and 4/10 — both come from misplacing the decimal.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="100% − 99.6% = 0.4% = 0.004 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A number increased by <strong>12%</strong> is <strong>112</strong>. What was the original number?</p>
+      <textarea class="work-area" placeholder="112 = old × 1.12 → old = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q"><strong>99.8%</strong> of a batch of <strong>5,000 bulbs</strong> worked. How many bulbs did <strong>NOT</strong> work? Convert the complement to a fraction first, then multiply by 5,000 — don't skip the count step.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Complement = 100% − 99.8% = 0.2% = 0.002&#10;0.002 × 5000 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> bulbs</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART D: MIXED TIMED SET -->
+  <div class="section-hd">
+    <span class="icon">⏱️</span>
+    <h2>Part D — Mixed Timed Finish</h2>
+    <span class="badge badge-green">2 Problems · 75 Seconds Each</span>
+  </div>
+  <p class="instr">Two-minute cap applies. If you pass 75 seconds on a problem, flag it and move on — come back at the end.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-3">L3 · 75s</span></div>
+      <p class="prob-q">Saturday's sales were <strong>14% below</strong> Friday's, and Friday's were <strong>$300</strong>. How much <em>MORE</em> did Friday sell than Saturday, in dollars? Circle: value, or difference?</p>
+      <textarea class="work-area" style="min-height:56px;" placeholder="Saturday = 300 × 0.86 = …&#10;Difference = 300 − Saturday = …"></textarea>
+      <div class="answer-box">Answer: $ <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4 · 75s</span></div>
+      <p class="prob-q"><strong>99.9%</strong> of a shipment of <strong>6,000 units</strong> arrived undamaged. How many units arrived <strong>damaged</strong>?</p>
+      <textarea class="work-area" style="min-height:56px;" placeholder="Complement = 0.1% = 0.001&#10;0.001 × 6000 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> units</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PAGE 3 — ELA + ERROR LOG -->
+<div class="sheet page-break">
+
+  <!-- PART E: ELA -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part E — ELA: Function of a Detail</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Cover the answer choices with your hand before reading them. Say the sentence's JOB out loud in your own words — then reveal the choices and match.</p>
+
+  <div class="trap-note"><strong>Trap name — True But Useless:</strong> One answer choice will accurately restate the sentence's content. It will be completely true — and completely wrong, because the question asked what the sentence DOES, not what it SAYS.</div>
+
+  <div class="passage-box" style="margin-top:0.9rem;">
+    <div class="passage-title">Why the Grid Beat the Circle: The Story of the Manhattan Street Plan</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> In 1811, a small commission of surveyors sat down to decide the future shape of a growing American city. Rather than the winding, organic streets common to older European cities, they chose something radically plain: a grid of straight lines and right angles, stretching uniformly across the island. Critics at the time called it monotonous and unimaginative. They were, in a narrow sense, correct — and that was exactly the point.</p>
+      <p><span class="para-lbl">[¶2]</span> A grid's greatest strength is not beauty but predictability. Every block is roughly the same size, every address follows a logical numbering scheme, and a stranger can navigate the entire city with nothing more than two numbers. <span class="sw">As a result</span>, the grid transformed real estate into something that could be measured, bought, and sold like any other commodity — a rectangular lot has a knowable area, while an irregular medieval-style plot does not.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">However</span>, the grid was not without critics, then or now. Diagonal avenues were later carved through the original plan precisely because a pure grid forces every trip into a longer, angular path — walking from one corner to its diagonal opposite takes longer on a grid than it would along a straight line. <span class="sw">In contrast</span> to the efficiency gained in navigation, some efficiency was lost in travel distance.</p>
+      <p><span class="para-lbl">[¶4]</span> Despite these tradeoffs, the grid's dominance was sealed by a single unglamorous virtue: it made a chaotic, fast-growing city legible. Emergency services could find an address; new residents could orient themselves within minutes; developers could calculate a lot's worth without visiting it in person. The grid did not need to be loved. It needed to be understood at a glance, by everyone, immediately.</p>
+      <p><span class="para-lbl">[¶5]</span> Students who study geometry are, in a small way, retracing that same commission's reasoning: measuring space, comparing shapes, and asking which arrangement of lines and angles solves a real problem most efficiently. The grid was never meant to be admired. It was meant to work.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> The author includes the detail that "critics at the time called it monotonous and unimaginative" (¶1) primarily to: <span class="lvl lvl-1">L1</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) Prove that the surveyors made a mistake in 1811</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) Acknowledge a real objection before explaining why the choice was still made</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) Describe what European cities looked like in the 1800s</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) List the names of the original surveyors</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> What job does the sentence "a stranger can navigate the entire city with nothing more than two numbers" (¶2) perform? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) It gives a specific example that supports the claim about predictability</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) It contradicts the previous sentence about the grid's strength</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) It introduces a new, unrelated topic about tourism</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) It summarizes the entire passage's main idea</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶3, the phrase <span class="sw">"In contrast"</span> signals a relationship of: <span class="lvl lvl-1">L1</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Cause and effect</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Contrast between two tradeoffs</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Chronological sequence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Definition of a new term</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> What is the function of the detail about diagonal avenues being "later carved through the original plan" (¶3)? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) To show that the grid's designers regretted their original decision</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) To provide historical evidence of a real limitation of a pure grid system</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) To describe how New York City looks today from above</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) To argue that diagonal streets are more dangerous than straight ones</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> A student claims: <em>"The list of examples in ¶4 — emergency services, new residents, developers — simply repeats facts about the grid that the reader already knows."</em> Is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) Supported — the examples add no new information</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) Partially supported — some examples are new, others are repeated</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) Contradicted — the list's job is to illustrate "legible," a new claim not yet supported with specifics</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) Irrelevant — ¶4 does not mention emergency services</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> What job does the final sentence, "The grid was never meant to be admired. It was meant to work" (¶5), perform in the passage as a whole? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) It restates a fact about geometry class assignments</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) It provides a closing statement that reinforces the passage's central argument</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) It introduces a brand-new counterargument about beauty</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) It describes the physical appearance of Manhattan's streets</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART F: ERROR LOG -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part F — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong / Trap Name</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The percent skill I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 1 · SHSAT Prep &nbsp;·&nbsp; ％ Percent Foundations &amp; Reverse Percent &nbsp;|&nbsp; 📖 ELA: Function of a Detail
+  </div>
+
+</div>
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
