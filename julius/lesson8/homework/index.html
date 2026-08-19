@@ -1,1 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 Homework — Exponents, Radicals & Counting Principle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2563eb;--blue-lt:#eff6ff;--blue-md:#bfdbfe;--coral:#f97066;--coral-lt:#fff1f0;--sand:#d4a574;--sand-lt:#fdf3e7;--green:#16a34a;--green-lt:#dcfce7;--purple:#7c3aed;--purple-lt:#ede9fe;--ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#cbd5e1;--bg:#f8faff;--white:#fff;--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html{background:#e2e8f0}body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.tools{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.tool-btn{background:var(--blue);color:#fff;font-family:var(--ff-head);font-size:1rem;font-weight:600;padding:.55rem 1.6rem;border:0;border-radius:30px;cursor:pointer;box-shadow:0 3px 10px rgba(37,99,235,.3)}
+.tool-btn.secondary{background:#64748b}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.2rem;gap:1rem;flex-wrap:wrap}
+.hw-header h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:700;color:var(--blue);line-height:1.1}
+.subtitle{font-size:.82rem;color:var(--muted);font-weight:600;margin-top:.25rem;text-transform:uppercase;letter-spacing:.05em}
+.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:220px}
+.meta-row{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--slate)}
+.label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:2px 7px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}
+.meta-input,.answer-input,.reflect-line input{flex:1;border:0;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:.82rem;color:var(--ink);background:transparent;outline:0;padding:2px 5px}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border-radius:10px;padding:.7rem 1.1rem;margin-bottom:1.35rem;flex-wrap:wrap;gap:.5rem}
+.score-banner .title{font-family:var(--ff-head);font-size:1.05rem;font-weight:700}
+.score-banner .sub{font-size:.75rem;opacity:.86}
+.score-cells{display:flex;gap:.55rem}
+.score-cell{background:rgba(255,255,255,.16);border-radius:8px;padding:.3rem .7rem;text-align:center;min-width:82px}
+.score-input{width:2.5rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.65);color:#fff;font-family:var(--ff-head);font-size:1.05rem;font-weight:700;text-align:center;outline:0}
+.sc-lbl{font-size:.62rem;opacity:.85;text-transform:uppercase;letter-spacing:.04em}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.45rem 0 .7rem}
+.section-hd h2{font-family:var(--ff-head);font-size:1.13rem;font-weight:700;color:var(--ink)}
+.icon{font-size:1.2rem}
+.badge{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:20px;margin-left:auto}
+.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}
+.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}
+.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}
+.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}
+.badge-green{background:var(--green-lt);color:#166534;border:1px solid #86efac}
+.instr{font-size:.79rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;padding:.38rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}
+.habit-strip,.formula-strip{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;border-radius:10px;padding:.6rem .85rem;margin-bottom:.85rem}
+.habit-strip{background:var(--sand-lt);border:1.5px solid #fcd34d}
+.formula-strip{background:var(--blue-lt);border:1.5px solid var(--blue-md)}
+.strip-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-right:.2rem}
+.habit-strip .strip-label{color:#92400e}
+.formula-strip .strip-label{color:var(--blue)}
+.chip{background:#fff;border-radius:7px;padding:.22rem .55rem;font-size:.73rem;font-weight:650}
+.habit-strip .chip{border:1px solid #fcd34d;color:#92400e}
+.formula-strip .chip{border:1px solid var(--blue-md);color:#1e3a8a;font-family:var(--ff-head)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.75rem .85rem}
+.prob-num{font-family:var(--ff-head);font-size:.71rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem}
+.lvl{display:inline-block;font-family:var(--ff-body);font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:20px;margin-left:.3rem;vertical-align:middle}
+.l1{background:#e5e7eb;color:#374151}
+.l2{background:#dbeafe;color:#1d4ed8}
+.l3{background:#fef3c7;color:#92400e}
+.l4{background:#fae8ff;color:#86198f}
+.prob-q{font-size:.81rem;color:var(--ink);font-weight:600;line-height:1.5;margin-bottom:.35rem}
+.math{font-family:var(--ff-head);font-size:1.1rem;font-weight:600;letter-spacing:.02em;color:var(--ink);line-height:1.5}
+.work-area{width:100%;min-height:54px;resize:vertical;border:1.5px dashed var(--border);border-radius:6px;background:#fff;padding:.35rem .5rem;font-family:var(--ff-body);font-size:.76rem;color:var(--ink);outline:0;margin-top:.45rem}
+.work-area::placeholder{color:var(--muted);font-style:italic}
+.answer-box{display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;color:var(--slate);margin-top:.38rem}
+.trap-note{border:1.5px solid #fca5a5;background:var(--coral-lt);border-radius:8px;padding:.55rem .7rem;font-size:.76rem;color:#9f1239;margin-top:.65rem;line-height:1.5}
+.trap-note strong{color:#c2410c}
+.divider{border:0;border-top:2px dashed var(--border);margin:1.45rem 0}
+.word-prob,.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1rem}
+.word-prob p,.passage-box p{font-size:.82rem;font-weight:600;line-height:1.55}
+.passage-box p{font-weight:500}
+.mc-options{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .65rem;margin-top:.6rem}
+.mc-opt{display:flex;align-items:flex-start;gap:.3rem;font-size:.76rem;color:var(--slate);cursor:pointer;padding:.28rem .35rem;border-radius:5px;border:1.5px solid transparent;line-height:1.4}
+.mc-opt input{display:none}
+.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}
+.bubble{width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800}
+.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.85rem 1rem;background:var(--coral-lt);margin-top:.45rem}
+.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:.5rem}
+.error-types{font-size:.72rem;color:#92400e;font-weight:700;margin-bottom:.55rem}
+.error-table{width:100%;border-collapse:collapse;font-size:.75rem}
+.error-table th{background:var(--coral);color:#fff;font-family:var(--ff-head);font-weight:700;padding:.35rem .5rem;text-align:left}
+.error-table td{padding:.42rem .5rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:#fff}
+.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center}
+.error-table tr:last-child td{border-bottom:0}
+.reflection{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}
+.reflection h3{font-family:var(--ff-head);font-size:.92rem;font-weight:700;color:var(--green);margin-bottom:.4rem}
+.reflect-line{display:flex;align-items:center;gap:.4rem;font-size:.77rem;color:var(--slate);font-weight:600;margin-top:.55rem;flex-wrap:wrap}
+.footer{text-align:center;margin-top:1.1rem;color:var(--muted);font-size:.7rem;font-weight:600}
+@media(max-width:620px){.sheet{padding:1.25rem}.prob-grid,.mc-options{grid-template-columns:1fr}.hw-meta{width:100%}}
+@media print{html{background:#fff}body{max-width:100%;padding:0}.tools{display:none!important}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.2cm 1.45cm!important}.page-break{page-break-before:always}input,textarea{border-color:#cbd5e1!important;background:#fff!important}}
+</style>
+</head>
+<body>
+<div class="tools"><button class="tool-btn" onclick="window.print()">Print / Save as PDF</button><button class="tool-btn secondary" onclick="clearAll()">Clear All</button></div>
 
+<section class="sheet">
+<header class="hw-header"><div><h1>Week 8 Homework</h1><div class="subtitle">Exponents, Radicals & Counting Principle &nbsp;•&nbsp; SHSAT Prep</div></div><div class="hw-meta"><div class="meta-row"><span class="label">Name</span><input class="meta-input"></div><div class="meta-row"><span class="label">Date</span><input class="meta-input"></div></div></header>
+
+<div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Check your work, record your score, and bring this to tutoring.</div></div><div class="score-cells"><div class="score-cell"><input type="number" min="0" max="12" class="score-input" placeholder="12"><div class="sc-lbl">Math</div></div><div class="score-cell"><input type="number" min="0" max="4" class="score-input" placeholder="4"><div class="sc-lbl">ELA</div></div><div class="score-cell"><input type="number" min="0" max="100" class="score-input" placeholder="100"><div class="sc-lbl">Accuracy</div></div></div></div>
+
+<div class="section-hd"><span class="icon">✦</span><h2>Part A: The Accuracy Routine</h2><span class="badge badge-sand">Use on Every Problem</span></div>
+<p class="instr">The goal is not just the right answer. Show the decision that proves it: name the rule, apply it step by step, then check that the direction of your answer makes sense.</p>
+<div class="habit-strip"><span class="strip-label">The routine</span><span class="chip">1. Name the rule</span><span class="chip">2. Show every exponent/step</span><span class="chip">3. Check the direction</span></div>
+
+<div class="section-hd"><span class="icon">◆</span><h2>Part B: Exponent Rules</h2><span class="badge badge-blue">4 Problems</span></div>
+<p class="instr">The base stays the same. Multiplying same bases adds exponents; dividing subtracts; a power raised to a power multiplies.</p>
+<div class="formula-strip"><span class="strip-label">Remember</span><span class="chip">a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></span><span class="chip">a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m−n</sup></span><span class="chip">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 1 <span class="lvl l1">L1</span></div><p class="prob-q">Simplify.</p><div class="math">4<sup>3</sup> · 4<sup>5</sup></div><textarea class="work-area" placeholder="Same base — what happens to the exponents?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 2 <span class="lvl l2">L2</span></div><p class="prob-q">Simplify.</p><div class="math">6<sup>9</sup> ÷ 6<sup>4</sup></div><textarea class="work-area" placeholder="Subtract the exponents; do not divide the base."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 3 <span class="lvl l3">L3</span></div><p class="prob-q">Simplify.</p><div class="math">(3<sup>2</sup>)<sup>3</sup> · 3<sup>2</sup></div><textarea class="work-area" placeholder="Do the power-of-a-power step first."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 4 <span class="lvl l3">L3</span></div><p class="prob-q">Explain why 5<sup>2</sup> · 2<sup>3</sup> cannot be rewritten as 10<sup>5</sup>.</p><textarea class="work-area" placeholder="Use the phrase &quot;different bases&quot; in your explanation."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+</div>
+<div class="trap-note"><strong>SHSAT Trap — different bases:</strong> You may only combine exponents when the bases match exactly. Evaluate mismatched-base powers separately before multiplying.</div>
+
+<div class="divider"></div>
+
+<div class="section-hd"><span class="icon">⁰</span><h2>Part C: Negative & Zero Exponents</h2><span class="badge badge-blue">4 Problems</span></div>
+<p class="instr">A negative exponent means "flip it," not "make it negative." Any nonzero base to the zero power equals 1.</p>
+<div class="formula-strip"><span class="strip-label">Remember</span><span class="chip">a<sup>-n</sup> = 1/a<sup>n</sup></span><span class="chip">a<sup>0</sup> = 1 (a ≠ 0)</span><span class="chip">Flip, don't negate</span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 5 <span class="lvl l1">L1</span></div><p class="prob-q">Evaluate.</p><div class="math">3<sup>-2</sup></div><textarea class="work-area" placeholder="Flip the base into the denominator first."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 6 <span class="lvl l1">L1</span></div><p class="prob-q">Evaluate.</p><div class="math">7<sup>0</sup></div><textarea class="work-area" placeholder="What does the zero-exponent rule say, regardless of base?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 7 <span class="lvl l2">L2</span></div><p class="prob-q">Evaluate and write as a fraction.</p><div class="math">2<sup>-4</sup></div><textarea class="work-area" placeholder="A negative exponent should give a small positive fraction, not a negative number."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 8 <span class="lvl l3">L3</span></div><p class="prob-q">Simplify.</p><div class="math">5<sup>3</sup> ÷ 5<sup>-2</sup></div><textarea class="work-area" placeholder="Dividing by a negative exponent — does that add or subtract?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+</div>
+<div class="trap-note"><strong>SHSAT Trap — negative exponent ≠ negative number:</strong> A negative exponent on a positive base always produces a small positive fraction, never a negative value.</div>
+
+</section>
+
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon">√</span><h2>Part D: Square & Cube Roots</h2><span class="badge badge-purple">3 Problems</span></div>
+<p class="instr">Find the largest perfect-square (or perfect-cube) factor hiding under the radical, then simplify before combining any terms.</p>
+<div class="formula-strip"><span class="strip-label">Method</span><span class="chip">√98 = √(49 · 2)</span><span class="chip">√98 = 7√2</span><span class="chip">Combine only like radicals</span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 9 <span class="lvl l2">L2</span></div><p class="prob-q">Simplify completely.</p><div class="math">√45</div><textarea class="work-area" placeholder="Write 45 as a perfect square times a leftover factor."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 10 <span class="lvl l3">L3</span></div><p class="prob-q">Simplify completely.</p><div class="math">√12 + √27</div><textarea class="work-area" placeholder="Simplify each radical separately before combining."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 11 <span class="lvl l3">L3</span></div><p class="prob-q">What is the cube root of 216?</p><textarea class="work-area" placeholder="What number, cubed, equals 216?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+</div>
+<div class="trap-note"><strong>SHSAT Trap — unlike radicals:</strong> You cannot add √12 + √27 directly. Simplify each to the same leftover root first, then combine coefficients like like-terms.</div>
+
+<div class="divider"></div>
+
+<div class="section-hd"><span class="icon">✕</span><h2>Part E: Counting Principle</h2><span class="badge badge-purple">3 Problems</span></div>
+<p class="instr">Counting outcomes is multiplication in disguise. Multiply the number of choices at each independent step; only add when choices are "either/or" alternatives.</p>
+<div class="formula-strip"><span class="strip-label">Remember</span><span class="chip">Total = choice 1 × choice 2 × ...</span><span class="chip">"AND" → multiply</span><span class="chip">"OR" → add</span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 12 <span class="lvl l1">L1</span></div><p class="prob-q">A cafe offers 5 bagel choices and 4 spread choices. How many different bagel-and-spread combinations are possible?</p><textarea class="work-area" placeholder="What two numbers do you multiply?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 13 <span class="lvl l3">L3</span></div><p class="prob-q">A padlock code uses 3 digits from 0–9, and no digit may repeat. How many codes are possible?</p><textarea class="work-area" placeholder="Does every slot still have 10 choices, or does the count shrink?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 14 <span class="lvl l4">L4</span></div><p class="prob-q">A spinner has 4 equal sections and is spun 3 times, with each result recorded in order. How many possible sequences are there, and how would you write that total using an exponent?</p><textarea class="work-area" placeholder="Same choice repeated 3 times — what does that look like as a power?"></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+</div>
+<div class="trap-note"><strong>SHSAT Trap — add vs. multiply:</strong> Independent steps that happen together get multiplied. Only alternatives that replace each other (either/or) get added.</div>
+
+<div class="divider"></div>
+
+<div class="section-hd"><span class="icon">★</span><h2>Part F: Test-Day Challenge</h2><span class="badge badge-purple">Level 4</span></div>
+<p class="instr">Translate the situation into math before calculating. Circle the clue phrase that tells you which concept applies.</p>
+<div class="word-prob"><div class="prob-num">Problem 15 <span class="lvl l4">L4</span></div><p>A vending machine sells 6 snack choices and 5 drink choices. If a customer also chooses one of 2 payment methods, how many total snack-drink-payment combinations are possible?</p><div class="mc-options">
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q15"><span class="bubble"></span><span>A. 13</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q15"><span class="bubble"></span><span>B. 30</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q15"><span class="bubble"></span><span>C. 60</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q15"><span class="bubble"></span><span>D. 11</span></label>
+</div><textarea class="work-area" style="min-height:76px" placeholder="What clue tells you to multiply instead of add? List the three counts, then multiply all of them."></textarea></div>
+
+</section>
+
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon">📖</span><h2>Part G: ELA — Character, Motivation & Tone</h2><span class="badge badge-green">4 Problems</span></div>
+<p class="instr">Motivation is the "why" behind an action — find it in context, not in a dictionary definition. Tone comes from word choice, not from plot events.</p>
+<div class="habit-strip"><span class="strip-label">The routine</span><span class="chip">1. Underline what the character does</span><span class="chip">2. Ask what it reveals</span><span class="chip">3. Match the answer choice to the clue, not to a guess</span></div>
+
+<div class="passage-box"><p>Marcus arrived at the courts an hour before every practice, rebounding his own missed shots in silence long after his teammates had gone home. When his coach offered to end drills early one evening, Marcus asked to run the last set again.</p></div>
+
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 16 <span class="lvl l2">L2</span></div><p class="prob-q">What does Marcus's request to run the last set again most likely reveal about his motivation?</p><div class="mc-options">
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q16"><span class="bubble"></span><span>A. He dislikes his coach</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q16"><span class="bubble"></span><span>B. He is committed to improving himself</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q16"><span class="bubble"></span><span>C. He wants to impress his teammates</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q16"><span class="bubble"></span><span>D. The passage gives no clue about his feelings</span></label>
+</div><textarea class="work-area" placeholder="Underline the exact action that supports your choice."></textarea></div>
+
+<div class="prob"><div class="prob-num">Problem 17 <span class="lvl l3">L3</span></div><p class="prob-q">Which word best describes the tone of the passage's description of Marcus?</p><div class="mc-options">
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q17"><span class="bubble"></span><span>A. Mocking</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q17"><span class="bubble"></span><span>B. Admiring</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q17"><span class="bubble"></span><span>C. Indifferent</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q17"><span class="bubble"></span><span>D. Angry</span></label>
+</div><textarea class="work-area" placeholder="Which word choices in the passage point to this tone?"></textarea></div>
+
+<div class="prob"><div class="prob-num">Problem 18 <span class="lvl l3">L3</span></div><p class="prob-q">Which sentence best states a theme this passage could support beyond Marcus's own story?</p><div class="mc-options">
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>A. Basketball requires teamwork</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>B. Coaches should end practice early</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>C. Quiet, consistent effort often leads to growth</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>D. Practicing alone is lonely</span></label>
+</div><textarea class="work-area" placeholder="Ask: what lesson could apply to situations outside this one story?"></textarea></div>
+
+<div class="prob"><div class="prob-num">Problem 19 <span class="lvl l2">L2</span></div><p class="prob-q">In two sentences, explain how the detail "rebounding his own missed shots in silence" supports your answer to Problem 16.</p><textarea class="work-area" style="min-height:70px" placeholder="Name the detail, then state what it reveals about Marcus."></textarea></div>
+</div>
+<div class="trap-note"><strong>SHSAT Trap — confusing plot summary with theme:</strong> A theme is a general lesson, not a restatement of what happened. "He practiced a lot" is a plot summary, not a theme.</div>
+
+<div class="divider"></div>
+
+<div class="section-hd"><span class="icon">!</span><h2>Part H: Error Log</h2><span class="badge badge-coral">Required for Every Miss</span></div>
+<p class="instr">For every missed problem, identify the exact step that broke. Label it: content gap, careless error, or rushing.</p>
+<div class="error-log"><h3>My Errors This Week</h3><div class="error-types">Error labels: Content Gap = I did not know the method &nbsp;•&nbsp; Careless Error = I knew it but slipped &nbsp;•&nbsp; Rushing = I skipped a needed check</div>
+<table class="error-table"><thead><tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th>Label</th></tr></thead>
+<tbody>
+<tr><td></td><td><input class="answer-input"></td><td><input class="answer-input"></td><td><input class="answer-input"></td></tr>
+<tr><td></td><td><input class="answer-input"></td><td><input class="answer-input"></td><td><input class="answer-input"></td></tr>
+<tr><td></td><td><input class="answer-input"></td><td><input class="answer-input"></td><td><input class="answer-input"></td></tr>
+</tbody></table></div>
+
+<div class="reflection"><h3>Reflection</h3>
+<div class="reflect-line">The topic I felt most confident on this week was <input class="meta-input"></div>
+<div class="reflect-line">The topic I need to revisit before the next session is <input class="meta-input"></div>
+<div class="reflect-line">One question I want to ask my tutor is <input class="meta-input"></div>
+</div>
+
+<div class="footer">Bring this sheet to your next tutoring session • SHSAT Prep • Week 8</div>
+</section>
+
+<script>
+function selectMC(el){
+  const group = el.parentElement.querySelectorAll('.mc-opt');
+  group.forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+}
+function clearAll(){
+  document.querySelectorAll('input, textarea').forEach(el => {
+    if(el.type === 'radio'){ el.checked = false; } else { el.value = ''; }
+  });
+  document.querySelectorAll('.mc-opt.selected').forEach(el => el.classList.remove('selected'));
+}
+</script>
+</body>
+</html>
