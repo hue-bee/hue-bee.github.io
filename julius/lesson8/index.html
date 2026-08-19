@@ -1,1 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 8: Exponents, Radicals & Counting Principle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --z1:#262626; --z1-soft:rgba(38,38,38,0.10);
+  --z2:#4d4d4d; --z2-soft:rgba(77,77,77,0.10);
+  --z3:#6a6a6a; --z3-soft:rgba(106,106,106,0.12);
+  --z4:#858585; --z4-soft:rgba(133,133,133,0.12);
+  --z5:#5c5c5c; --z5-soft:rgba(92,92,92,0.10);
+  --ela:#3e3e3e; --ela-soft:rgba(62,62,62,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--z5);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--z5);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--z5);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow-y:auto;transform:translateX(320px);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;pointer-events:none;}
+.pip-panel.open{transform:translateX(0);opacity:1;pointer-events:all;}
+.pip-panel-inner{padding:0.9rem 1rem;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.pip-panel-title{font-weight:700;font-size:0.82rem;color:var(--ink);}
+.pip-close-btn{background:none;border:none;font-size:0.9rem;color:var(--ink-3);cursor:pointer;}
+.pip-mini-formula{font-size:0.78rem;font-weight:600;color:var(--ink-2);background:#EDF2F9;border-radius:8px;padding:0.4rem 0.6rem;margin-bottom:0.6rem;}
+.pip-mini-card{background:#FBFCFE;border:1px solid rgba(201,212,228,0.4);border-radius:10px;padding:0.5rem 0.65rem;margin-bottom:0.5rem;}
+.pip-mini-lvl{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:14px;}
+.pip-mini-title{font-weight:700;font-size:0.8rem;color:var(--ink);margin-top:0.3rem;}
+.pip-mini-body{font-size:0.76rem;color:var(--ink-2);line-height:1.5;margin-top:0.2rem;}
+.pip-mini-trap{background:#F0F0F0;border-radius:10px;padding:0.5rem 0.65rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.76rem;color:#3D3D3D;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--z1);"></span> Session 8 · Phase II, Week 8
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.1rem,5.5vw,3.7rem);">Week 8 <br><span style="color:var(--z1);">Exponents, Radicals &amp; Counting Principle</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">Aug 19 &nbsp;·&nbsp; Math Core 0:10–0:45 &nbsp;·&nbsp; ELA 0:45–0:58</h2>
+    <p class="reveal" style="font-size:0.82rem;color:var(--ink-3);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem;">SHSAT Prep · Rebuild the Zero-Percent Topics</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--z1-soft);color:var(--z1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Exponent Rules</span>
+      <span style="background:var(--z2-soft);color:var(--z2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Negative &amp; Zero Exponents</span>
+      <span style="background:var(--z3-soft);color:var(--z3);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Square &amp; Cube Roots</span>
+      <span style="background:var(--z4-soft);color:var(--z4);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Counting Principle</span>
+      <span style="background:var(--ela-soft);color:var(--ela);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">ELA · Fiction &amp; Character</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:00–0:10</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Warm-Up · Error Log</div>
+          <div class="tl-b">We revisit last week's absolute value/factor errors first. <em>Counting Principle scored 0% on Diagnostic A — today we rebuild it from the ground up.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:10–0:18</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Exponent Rules — Why They Work<span class="tag hot">High-Frequency</span></div>
+          <div class="tl-b">Product, quotient, and power rules aren't arbitrary — they fall out of counting repeated factors. <em>Expand it by hand once, then trust the shortcut.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z2);">
+        <div class="tl-time">0:18–0:26</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Negative &amp; Zero Exponents</div>
+          <div class="tl-b">A negative exponent means "flip it," not "make it negative." <em>Zero exponent always gives 1 — the pattern proves why.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z3);">
+        <div class="tl-time">0:26–0:34</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Square Roots &amp; Cube Roots</div>
+          <div class="tl-b">A radical is just asking "what number, multiplied by itself (or itself twice more), gives me this?" <em>Perfect squares and cubes are your mental toolkit.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z4);">
+        <div class="tl-time">0:34–0:42</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Counting Principle<span class="tag hot">0% Zone — Rebuild</span></div>
+          <div class="tl-b">Counting outcomes is just multiplication in disguise. <em>Multiply the number of choices at each independent step.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z5);">
+        <div class="tl-time">0:42–0:45</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Mixed Number Sense Check</div>
+          <div class="tl-b">SHSAT loves blending exponents with counting scenarios in one question. <em>Identify which skill is actually being tested before you compute.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--ela);">
+        <div class="tl-time">0:45–0:58</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">ELA · Fiction Passages</div>
+          <div class="tl-b">Character motivation, theme, and tone. <em>Annotate: what does the character DO, and what does that reveal?</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — WARM UP -->
+<div class="slide" data-slide="3" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Warm-Up · Quick Recall</div>
+    <h2 class="slide-title reveal">Before We Move On: <span class="tint">Prove It Stuck</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think first</div>
+        <div class="socratic-body">What does 2<sup>3</sup> actually mean — is it 2 × 3, or is it something else entirely? Write out the full expansion before you answer. What role does the exponent play versus the base?</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this matters</div>
+        <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Counting Principle earned 0% on your last diagnostic — but it's really just multiplication with a story attached. Exponents are also just multiplication, repeated. Today, two "impossible" topics turn out to be the same idea twice.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.9rem;">
+      <div class="trap-title">Your Habit Target</div>
+      <div class="trap-body">Today isn't about memorizing rules as magic tricks. It's about seeing <em>why</em> <span class="math-inline">a<sup>m</sup> &#215; a<sup>n</sup> = a<sup>m+n</sup></span> works, and *why* multiplying choices — not adding them — counts outcomes correctly. Say the reasoning out loud before you compute.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — EXPONENT RULES CONCEPT -->
+<div class="slide" data-slide="4" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Exponent Rules<span class="tag hot">High-Frequency</span></div>
+    <h2 class="slide-title reveal">Exponents Are Just <span class="tint">Counting Repeated Factors</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Write out <span class="math-inline">2<sup>3</sup> &#215; 2<sup>2</sup></span> as repeated multiplication of 2's. Count how many 2's you have in total. Now compare that total to <span class="math-inline">3 + 2</span>. Does that pattern always hold when you multiply same-base powers?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The three core rules — same base only</div>
+          <div class="math" style="font-size:1.1rem;">a<sup>m</sup> &#215; a<sup>n</sup> = a<sup>m+n</sup> &nbsp;&nbsp; a<sup>m</sup> &#247; a<sup>n</sup> = a<sup>m-n</sup> &nbsp;&nbsp; (a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="150" viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg">
+  <text x="20" y="35" font-size="14" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">2&#179; = 2&#215;2&#215;2</text>
+  <rect x="20" y="45" width="35" height="26" rx="5" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="1.6"/>
+  <text x="30" y="63" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2</text>
+  <rect x="60" y="45" width="35" height="26" rx="5" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="1.6"/>
+  <text x="70" y="63" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2</text>
+  <rect x="100" y="45" width="35" height="26" rx="5" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="1.6"/>
+  <text x="110" y="63" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2</text>
+  <text x="20" y="100" font-size="14" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">2&#178; = 2&#215;2</text>
+  <rect x="140" y="45" width="35" height="26" rx="5" fill="#FBEBCF" stroke="#B45309" stroke-width="1.6"/>
+  <text x="150" y="63" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">2</text>
+  <rect x="180" y="45" width="35" height="26" rx="5" fill="#FBEBCF" stroke="#B45309" stroke-width="1.6"/>
+  <text x="190" y="63" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">2</text>
+  <text x="20" y="130" font-size="14" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Total = 5 twos = 2&#8309;</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — EXPONENT RULES PRACTICE -->
+<div class="slide" data-slide="5" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Practice</div>
+    <h2 class="slide-title reveal">Exponent Rules — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Simplify <span class="math-inline">3<sup>2</sup> &#215; 3<sup>4</sup></span>. Are the bases the same? If so, what do you do to the exponents?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Simplify <span class="math-inline">5<sup>7</sup> &#247; 5<sup>3</sup></span>. Which exponent gets subtracted from which — does order matter here?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Simplify <span class="math-inline">(2<sup>3</sup>)<sup>4</sup></span>. Careful — this is a power raised to a power, not two powers multiplied. What rule applies?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Simplify <span class="math-inline">(2x<sup>3</sup>y<sup>2</sup>)<sup>2</sup> &#215; x</span>. What happens to the coefficient 2, and to each variable's exponent, when you square the whole group first?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Different Bases Can't Combine</div>
+      <div class="trap-body">You can only add or subtract exponents when the <em>bases match exactly</em>. <span class="math-inline">2<sup>3</sup> &#215; 3<sup>2</sup></span> stays as two separate powers — it does NOT become <span class="math-inline">6<sup>5</sup></span>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — NEGATIVE/ZERO EXPONENTS CONCEPT -->
+<div class="slide" data-slide="6" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Negative &amp; Zero Exponents</div>
+    <h2 class="slide-title reveal">A Negative Exponent Means <span class="tint">"Flip It," Not "Make It Negative"</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Look at this pattern: 2<sup>3</sup>=8, 2<sup>2</sup>=4, 2<sup>1</sup>=2, 2<sup>0</sup>=?, 2<sup>-1</sup>=?. Each step down, you divide by 2. Continue the pattern — what must 2<sup>0</sup> equal? What must 2<sup>-1</sup> equal as a fraction?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div class="math" style="font-size:1.05rem;">a<sup>0</sup> = 1 &nbsp;(a ≠ 0) &nbsp;&nbsp; a<sup>-n</sup> = 1/a<sup>n</sup></div>
+        </div>
+        <div class="info-card reveal" style="margin-top:0.7rem;">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Why this makes sense</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Dividing by the base each time you decrease the exponent by 1 is exactly the quotient rule in action: <span class="math-inline">2<sup>1</sup> ÷ 2<sup>1</sup> = 2<sup>0</sup> = 1</span>, and <span class="math-inline">2<sup>0</sup> ÷ 2<sup>1</sup> = 2<sup>-1</sup> = 1/2</span>.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="25" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2&#179; = 8</text>
+  <text x="10" y="55" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2&#178; = 4</text>
+  <text x="10" y="85" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2&#185; = 2</text>
+  <text x="10" y="115" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">2&#8304; = 1</text>
+  <text x="10" y="145" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">2&#8315;&#185; = 1/2</text>
+  <text x="10" y="175" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">2&#8315;&#178; = 1/4</text>
+  <path d="M110 20 L110 170" stroke="#767676" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="120" y="35" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">&#247;2 each step down</text>
+  <polygon points="105,40 115,40 110,50" fill="#4a4a4a"/>
+  <polygon points="105,70 115,70 110,80" fill="#4a4a4a"/>
+  <polygon points="105,100 115,100 110,110" fill="#4a4a4a"/>
+  <polygon points="105,130 115,130 110,140" fill="#4a4a4a"/>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — NEG/ZERO EXPONENT PRACTICE -->
+<div class="slide" data-slide="7" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice</div>
+    <h2 class="slide-title reveal">Negative &amp; Zero Exponents — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Evaluate <span class="math-inline">7<sup>0</sup></span>. What does the zero-exponent rule say, regardless of the base?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Evaluate <span class="math-inline">4<sup>-2</sup></span> as a fraction. Flip the base into the denominator first, then apply the positive exponent.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="mc-options reveal" style="margin-top:0.6rem;">
+      <div style="font-size:0.9rem;font-weight:700;color:var(--ink);margin-bottom:0.3rem;">7. Level 3: Simplify <span class="math-inline">3<sup>-1</sup> &#215; 3<sup>4</sup></span>. Which combined exponent, and then which value, results?</div>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">A</span> 3<sup>-4</sup> = 1/81</label>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">B</span> 3<sup>3</sup> = 27</label>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">C</span> 3<sup>5</sup> = 243</label>
+      <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q7"><span class="opt-letter">D</span> 3<sup>4</sup> = 81</label>
+    </div>
+    <div class="prob-card reveal" style="margin-top:0.7rem;">
+      <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4</span></div>
+      <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Simplify <span class="math-inline">(2<sup>-3</sup> &#215; 2<sup>5</sup>) ÷ 2<sup>-1</sup></span>. Combine the numerator's exponents first, then handle the division by a negative exponent — does dividing by a negative exponent add or subtract?</div>
+      <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Negative Exponent ≠ Negative Number</div>
+      <div class="trap-body">A negative exponent never makes the final value negative (as long as the base is positive). <span class="math-inline">2<sup>-3</sup></span> is a small positive fraction (1/8), not -8.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — RADICALS CONCEPT -->
+<div class="slide" data-slide="8" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Square &amp; Cube Roots</div>
+    <h2 class="slide-title reveal">A Radical Is <span class="tint">an Exponent Question in Reverse</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body"><span class="math-inline">&#8730;49</span> is asking: "what number, multiplied by itself, gives 49?" What number is that? Now <span class="math-inline">&#8731;27</span> asks the same question but with three copies multiplied together — what number works there?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Build your mental toolkit</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;"><strong>Perfect squares:</strong> 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144. <strong>Perfect cubes:</strong> 1, 8, 27, 64, 125. Memorizing these turns radical problems from "figure it out" into "recognize it instantly."</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="170" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg">
+  <rect x="30" y="20" width="120" height="120" fill="none" stroke="#1D4ED8" stroke-width="2.2"/>
+  <line x1="30" y1="60" x2="150" y2="60" stroke="#1D4ED8" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+  <line x1="30" y1="100" x2="150" y2="100" stroke="#1D4ED8" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+  <line x1="70" y1="20" x2="70" y2="140" stroke="#1D4ED8" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+  <line x1="110" y1="20" x2="110" y2="140" stroke="#1D4ED8" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+  <text x="70" y="16" font-size="12" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">side = 6</text>
+  <text x="4" y="85" font-size="12" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif" transform="rotate(-90 4,85)">side = 6</text>
+  <text x="60" y="160" font-size="13" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Area = 36 &#8594; &#8730;36 = 6</text>
+  <text x="180" y="90" font-size="12" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">&#8731;27 = 3</text>
+  <text x="170" y="110" font-size="11" fill="#6a6a6a" font-family="Nunito, sans-serif">(3&#215;3&#215;3=27)</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — RADICALS PRACTICE -->
+<div class="slide" data-slide="9" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Practice</div>
+    <h2 class="slide-title reveal">Square &amp; Cube Roots — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Evaluate <span class="math-inline">√81</span>. What number times itself lands exactly on 81?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Evaluate <span class="math-inline">∛125</span>. Which small number, cubed, equals 125?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Simplify <span class="math-inline">√72</span>. Find the largest perfect square factor of 72 first — what stays under the radical after you pull it out?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Evaluate <span class="math-inline">√50 + √18</span>. Simplify each radical to the same "leftover" root first — can you then combine them like like-terms?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: You Can't Add Unlike Radicals Directly</div>
+      <div class="trap-body"><span class="math-inline">&#8730;50 + &#8730;18</span> is NOT <span class="math-inline">&#8730;68</span>. You must simplify each radical first to see if they share the same leftover root — only then can you combine coefficients, just like adding like terms.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — COUNTING PRINCIPLE CONCEPT -->
+<div class="slide" data-slide="10" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Counting Principle — 0% Zone Rebuild</div>
+    <h2 class="slide-title reveal">Counting Outcomes Is <span class="tint">Multiplication in Disguise</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">You have 3 shirts and 2 pairs of pants. For each shirt, how many pants could you pair with it? Now list every outfit combination by hand — how many total outfits are there? Compare that count to 3 × 2.</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">The rule</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">If one event can happen in <em>m</em> ways and a second independent event can happen in <em>n</em> ways, then both events together can happen in <strong>m &#215; n</strong> ways. For three or more independent choices, multiply all the counts together.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="180" viewBox="0 0 270 180" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="20" font-size="12" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">Shirts</text>
+  <rect x="10" y="30" width="42" height="34" rx="6" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="1.6"/>
+  <rect x="60" y="30" width="42" height="34" rx="6" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="1.6"/>
+  <rect x="110" y="30" width="42" height="34" rx="6" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="1.6"/>
+  <text x="10" y="90" font-size="12" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">Pants</text>
+  <rect x="10" y="100" width="42" height="34" rx="6" fill="#FBEBCF" stroke="#B45309" stroke-width="1.6"/>
+  <rect x="60" y="100" width="42" height="34" rx="6" fill="#FBEBCF" stroke="#B45309" stroke-width="1.6"/>
+  <line x1="31" y1="64" x2="31" y2="100" stroke="#767676" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+  <line x1="81" y1="64" x2="81" y2="100" stroke="#767676" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+  <line x1="131" y1="64" x2="131" y2="100" stroke="#767676" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+  <text x="170" y="55" font-size="13" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">3 shirts</text>
+  <text x="170" y="115" font-size="13" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">&#215; 2 pants</text>
+  <text x="170" y="150" font-size="15" font-weight="800" fill="#15803D" font-family="Nunito, sans-serif">= 6 outfits</text>
+  <line x1="160" y1="128" x2="220" y2="128" stroke="#4a4a4a" stroke-width="1.2"/>
+</svg>
+      </div>
+    </div>
+    <div class="formula-box reveal" style="margin-top:0.8rem;">
+      <div class="math" style="font-size:1.1rem;">Total outcomes = (choices for step 1) &#215; (choices for step 2) &#215; ...</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — COUNTING PRINCIPLE PRACTICE -->
+<div class="slide" data-slide="11" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Practice</div>
+    <h2 class="slide-title reveal">Counting Principle — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A diner offers 4 sandwich choices and 3 drink choices. How many different sandwich-and-drink meals are possible? What two numbers do you multiply?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A license plate has 2 letters followed by 3 digits. If letters and digits can repeat, how many plates are possible? (26 letters, 10 digits.) How many "slots" are there total?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A 4-digit code uses digits 0–9, and no digit may repeat. How many codes are possible? Careful — does every slot still have 10 choices?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A pizza shop offers 5 toppings, and a customer picks exactly 2 different toppings (order doesn't matter, e.g., pepperoni+onion is the same as onion+pepperoni). Why doesn't the plain counting principle 5 &#215; 4 give the right final answer here — and what fix is needed?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: "No Repeats" Shrinks Later Choices</div>
+      <div class="trap-body">When an item can't be reused, the number of options for each later slot drops by one each time. Don't multiply the same number for every slot unless the problem explicitly allows repeats.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — MIXED NUMBER SENSE PRACTICE -->
+<div class="slide" data-slide="12" style="--zc:var(--z5);--zs:var(--z5-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="5"></div>
+    <div class="kicker reveal">Zone 5 · Mixed Practice</div>
+    <h2 class="slide-title reveal">Mixed Number Sense — <span class="tint">Spot the Skill</span></h2>
+    <div class="socratic reveal" style="margin-bottom:0.8rem;">
+      <div class="socratic-title">Think about it</div>
+      <div class="socratic-body">The SHSAT often blends exponents, radicals, and counting in one question. Before solving, ask: "is this about repeated multiplication of one number, or about multiplying independent choices together?"</div>
+    </div>
+    <div class="diagram-wrap reveal" style="margin-bottom:0.8rem;padding:0.6rem;">
+      <svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg">
+  <rect x="15" y="20" width="60" height="60" rx="10" fill="#DCEBFB" stroke="#1D4ED8" stroke-width="2"/>
+  <circle cx="45" cy="50" r="5" fill="#1D4ED8"/>
+  <text x="30" y="98" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Roll 1: 6</text>
+  <text x="90" y="55" font-size="20" font-weight="700" fill="#767676" font-family="Nunito, sans-serif">&#215;</text>
+  <rect x="120" y="20" width="60" height="60" rx="10" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/>
+  <circle cx="140" cy="35" r="5" fill="#B45309"/><circle cx="160" cy="35" r="5" fill="#B45309"/>
+  <circle cx="140" cy="65" r="5" fill="#B45309"/><circle cx="160" cy="65" r="5" fill="#B45309"/>
+  <text x="130" y="98" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Roll 2: 6</text>
+  <text x="195" y="55" font-size="20" font-weight="700" fill="#767676" font-family="Nunito, sans-serif">&#215;</text>
+  <rect x="225" y="20" width="60" height="60" rx="10" fill="#E2E2E2" stroke="#5c5c5c" stroke-width="2"/>
+  <circle cx="240" cy="35" r="5" fill="#5c5c5c"/><circle cx="270" cy="35" r="5" fill="#5c5c5c"/>
+  <circle cx="255" cy="50" r="5" fill="#5c5c5c"/>
+  <circle cx="240" cy="65" r="5" fill="#5c5c5c"/><circle cx="270" cy="65" r="5" fill="#5c5c5c"/>
+  <text x="230" y="98" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Roll 3: 6</text>
+  <text x="305" y="55" font-size="18" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">=</text>
+  <text x="330" y="45" font-size="18" font-weight="800" fill="#1f1f1f" font-family="Nunito, sans-serif">6&#215;6&#215;6</text>
+  <text x="330" y="70" font-size="16" font-weight="700" fill="#15803D" font-family="Nunito, sans-serif">= 6&#179; sequences</text>
+</svg>
+    </div>
+    <div class="prob-card reveal">
+      <div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-4">Level 4</span></div>
+      <div style="font-size:0.98rem;color:var(--ink-2);line-height:1.55;">A game uses a 6-sided die rolled 3 times, and each roll's result is recorded in order. If the number of possible sequences equals <span class="math-inline">6<sup>n</sup></span>, what is n, and what is the total number of sequences? Then: is <span class="math-inline">6<sup>3</sup></span> itself a perfect square, a perfect cube, both, or neither — and how do you know?</div>
+      <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Solving the Wrong Sub-Problem First</div>
+      <div class="trap-body">Multi-skill problems reward slowing down before writing anything. Circle the exact quantity the question asks for last — it's easy to solve for a middle step and stop there.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — CHECK YOUR WORK -->
+<div class="slide" data-slide="13" style="--zc:#17233B;--zs:rgba(23,35,59,0.08);">
+  <div class="content">
+    <div class="kicker reveal">Zone 5 · Accuracy</div>
+    <h2 class="slide-title reveal">Three Ways to <span class="tint">Check a Number Sense Answer</span></h2>
+    <div class="formula-box reveal" style="margin-bottom:0.9rem;">
+      <span style="font-size:0.85rem;font-weight:600;color:var(--ink-2);">Worked example: 4 sandwiches &#215; 3 drinks = 12 meals</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-1">Before You Start</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Sanity-Check Exponent Direction</div>
+        <div class="prose" style="font-size:0.85rem;">Ask: should this exponent make the number bigger (positive) or smaller (negative/fraction)? If your answer moves the wrong direction, recheck your rule.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-2">After You Finish</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">List a Few Outcomes By Hand</div>
+        <div class="prose" style="font-size:0.85rem;">For small counting problems, physically list 3–4 outcomes to confirm your multiplication logic matches reality before trusting a big number.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-3">If Time Allows</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Square Your Radical Answer</div>
+        <div class="prose" style="font-size:0.85rem;">For a simplified radical like <span class="math-inline">a&#8730;b</span>, square the whole expression and confirm it equals the original number under the root.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Confusing "Add the Choices" With "Multiply the Choices"</div>
+      <div class="trap-body">Add choices only when events are alternatives ("either/or," pick one path). Multiply choices when events happen in sequence ("this AND then that"). Before you answer, ask: "am I choosing one path, or building a combo of several steps?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — ELA: FICTION CONCEPT -->
+<div class="slide" data-slide="14" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Fiction Passages</div>
+    <h2 class="slide-title reveal">What a Character <span class="tint">Does Reveals Who They Are</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think about it</div>
+        <div class="socratic-body">If a character "slammed the door and refused to answer texts for a week," what does that action suggest about how they feel — even though no emotion word is used? What single detail is your strongest evidence?</div>
+      </div>
+      <div class="info-card reveal">
+        <div style="font-weight:600;font-size:0.92rem;color:var(--ink);margin-bottom:0.4rem;">The annotation approach</div>
+        <ul class="prose" style="margin:0;padding-left:1.1rem;line-height:1.85;font-size:0.87rem;">
+          <li>Underline what the character <strong>says</strong>, circle what they <strong>do</strong>.</li>
+          <li>Motivation = the "why" behind an action — find it in context, not just the dictionary definition of a word.</li>
+          <li>Theme is the takeaway that could apply beyond this one story — ask "what lesson does this character's arc teach?"</li>
+          <li>Tone is the author's attitude — look at word choice, not just plot events.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15 — ELA PRACTICE -->
+<div class="slide" data-slide="15" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Practice</div>
+    <h2 class="slide-title reveal">Motivation, Theme, or <span class="tint">Tone?</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">A character "practiced her speech in the mirror every night for a month before the competition." What does this reveal about her motivation?</div>
+        <div class="mc-options" style="margin-top:0.45rem;">
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q18"><span class="opt-letter">A</span> She doesn't care about winning</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q18"><span class="opt-letter">B</span> She is determined and takes the competition seriously</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q18"><span class="opt-letter">C</span> She has done this before and finds it easy</label>
+        </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">A story ends with a character who cheated finally confessing and losing his trophy, but feeling "lighter than he had in months." What theme does this ending suggest? Use one phrase as evidence.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Write: 'The text says ___, which suggests the theme is ___.'" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Confusing Plot Summary With Theme</div>
+      <div class="trap-body">"He lied, then he told the truth" is a plot summary, not a theme. A theme is the broader lesson — like "honesty brings relief, even when it costs something." Push one level deeper than what literally happened.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16 — ELA PRACTICE CONTINUED -->
+<div class="slide" data-slide="16" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Practice, Continued</div>
+    <h2 class="slide-title reveal">Two More <span class="tint">Fiction Checks</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">A passage says: "She laughed loudly at every joke, even the ones that weren't funny." What tone does this detail create around her character? Point to the exact phrase that supports your answer.</div>
+        <div class="mc-options" style="margin-top:0.45rem;">
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">A</span> She might be nervous or trying too hard to fit in</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">B</span> She is definitely the funniest person in the room</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">C</span> The passage gives no clue about her feelings</label>
+        </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">21</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">A boy "gave his last dollar to a stranger, then walked home hungry, smiling the whole way." Which is the stronger interpretation: he regrets the choice, or he values generosity over comfort? Defend your choice using the specific details given — not just a gut feeling.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Write: 'The text says ___, which means ___.'" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="win-card reveal" style="margin-top:0.8rem;">
+      <div class="win-title">Habit Check</div>
+      <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Before locking in a motivation, theme, or tone answer, ask: "could I point to the exact sentence that supports this?" If not, it's probably too big a leap — go back and find your evidence first.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17 — CLOSE -->
+<div class="slide" data-slide="17" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Log the Misses, <span class="tint">Lock in the Habit</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-top:0.8rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log Update</div>
+        <div class="tl-b">Every miss today gets categorized: mixed up an exponent rule, forgot to flip a negative exponent, missed a perfect square, or added choices instead of multiplying.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Confidence Win</div>
+        <div class="tl-b">Counting Principle was a 0% zone one diagnostic ago. Any correctly multiplied set of choices today — even with a small slip — is real progress.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Next Session</div>
+        <div class="tl-b">Week 11 (Jul 28): Multi-Step Equations &amp; Word Translations — turning sentences into algebra.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- PIP: Check Your Work floating panel (visible on every slide) -->
+<button class="pip-toggle-btn" id="pipToggleBtn" onclick="togglePip()" aria-label="Toggle Check Your Work picture-in-picture">
+  <span class="pip-dot"></span> Check Your Work
+</button>
+<div class="pip-panel" id="pipPanel">
+  <div class="pip-panel-inner">
+    <div class="pip-panel-header">
+      <span class="pip-panel-title">Check Your Work</span>
+      <button class="pip-close-btn" onclick="togglePip()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="pip-mini-formula">Worked example: 4 sandwiches &#215; 3 drinks = 12 meals</div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-1">Before You Start</span>
+      <div class="pip-mini-title">Sanity-Check Exponent Direction</div>
+      <div class="pip-mini-body">Should the exponent make the number bigger (positive) or smaller (negative/fraction)? If it moves the wrong direction, recheck the rule.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-2">After You Finish</span>
+      <div class="pip-mini-title">List a Few Outcomes By Hand</div>
+      <div class="pip-mini-body">For small counting problems, list 3–4 outcomes to confirm your multiplication logic matches reality.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-3">If Time Allows</span>
+      <div class="pip-mini-title">Square Your Radical Answer</div>
+      <div class="pip-mini-body">For a simplified radical <span class="math-inline">a&#8730;b</span>, square the expression and confirm it equals the original number under the root.</div>
+    </div>
+    <div class="pip-mini-trap">
+      <div class="pip-mini-trap-title">Add vs. Multiply Choices</div>
+      <div class="pip-mini-body">Add for "either/or" alternatives. Multiply for "this AND then that" sequences. Ask: "one path, or a combo of steps?"</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 17</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Exponent Rules',t:'0:10',c:'var(--z1)'},
+  {n:'Neg/Zero Exp',t:'0:18',c:'var(--z2)'},
+  {n:'Radicals',t:'0:26',c:'var(--z3)'},
+  {n:'Counting',t:'0:34',c:'var(--z4)'},
+  {n:'Mixed',t:'0:42',c:'var(--z5)'},
+  {n:'ELA',t:'0:45',c:'var(--ela)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  panel.classList.toggle('open');
+}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
