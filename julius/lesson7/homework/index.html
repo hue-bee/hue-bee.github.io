@@ -1,688 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 7 Homework — Absolute Value, Factors &amp; Multiples</title>
+<title>Week 7 Homework — Absolute Value, Factors & Multiples + Inference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --blue:   #2563EB;
-    --blue-lt:#EFF6FF;
-    --blue-md:#BFDBFE;
-    --coral:  #F97066;
-    --coral-lt:#FFF1F0;
-    --sand:   #D4A574;
-    --sand-lt:#FDF3E7;
-    --green:  #16a34a;
-    --green-lt:#DCFCE7;
-    --purple: #7c3aed;
-    --purple-lt:#EDE9FE;
-    --ink:    #0f172a;
-    --slate:  #334155;
-    --muted:  #64748b;
-    --border: #CBD5E1;
-    --bg:     #F8FAFF;
-    --white:  #FFFFFF;
-    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
-    --ff-body: 'Nunito', sans-serif;
-  }
-  html { background: #e2e8f0; }
-  body {
-    font-family: var(--ff-body);
-    color: var(--ink);
-    background: var(--bg);
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  @media print {
-    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
-    input[type="radio"] { accent-color: #000 !important; }
-    textarea { resize: none !important; }
-    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
-    html { background: white; }
-    body { max-width: 100%; padding: 0; }
-    .no-print { display: none !important; }
-    .page-break { page-break-before: always; }
-    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
-  }
-
-  .sheet {
-    background: var(--white);
-    margin: 2rem auto;
-    padding: 2.2rem 2.4rem;
-    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
-    border-radius: 16px;
-  }
-
-  .hw-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid var(--blue);
-    margin-bottom: 1.4rem;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .hw-header-left h1 {
-    font-family: var(--ff-head);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--blue);
-    line-height: 1.1;
-  }
-  .hw-header-left .subtitle {
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-weight: 600;
-    margin-top: 0.2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .hw-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    min-width: 220px;
-  }
-  .hw-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.82rem;
-    color: var(--slate);
-    font-weight: 600;
-  }
-  .hw-meta-row .label {
-    background: var(--blue-lt);
-    color: var(--blue);
-    border-radius: 4px;
-    padding: 1px 7px;
-    font-size: 0.73rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    min-width: 65px;
-    text-align: center;
-  }
-  .text-line {
-    flex:1; border:none; border-bottom:1.5px solid var(--border);
-    font-family: var(--ff-body); font-size:0.82rem; color: var(--ink);
-    background: transparent; outline: none; padding: 1px 4px;
-  }
-
-  .section-hd {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    margin: 1.5rem 0 0.8rem;
-  }
-  .section-hd .icon { font-size: 1.25rem; }
-  .section-hd h2 {
-    font-family: var(--ff-head);
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .section-hd .badge {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 9px;
-    border-radius: 20px;
-    margin-left: auto;
-  }
-  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
-  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
-  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
-  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
-  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
-
-  .instr {
-    font-size: 0.8rem;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 0.9rem;
-    padding: 0.35rem 0.75rem;
-    background: var(--blue-lt);
-    border-left: 3px solid var(--blue);
-    border-radius: 0 6px 6px 0;
-  }
-
-  .lvl {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 1px 8px;
-    border-radius: 20px;
-    vertical-align: middle;
-    margin-left: 0.3rem;
-  }
-  .lvl-1 { background: #e8edf5; color: #3d4c63; }
-  .lvl-2 { background: #d9d9d9; color: #1f2937; }
-  .lvl-3 { background: #bdbdbd; color: #111827; }
-  .lvl-4 { background: #6b7280; color: #ffffff; }
-
-  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-  .prob-grid.single { grid-template-columns: 1fr; }
-  .prob {
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 0.75rem 0.9rem;
-    position: relative;
-  }
-  .prob-num {
-    font-family: var(--ff-head);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.3rem;
-  }
-  .prob-q {
-    font-size: 0.84rem;
-    color: var(--ink);
-    font-weight: 600;
-    line-height: 1.55;
-    margin-bottom: 0.5rem;
-  }
-  .prob-q strong { color: #374151; }
-  .math-inline { font-family: var(--ff-head); font-weight: 700; }
-  .answer-box {
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--slate);
-  }
-  .work-area {
-    width: 100%;
-    resize: vertical;
-    min-height: 56px;
-    border: 1.5px dashed var(--border);
-    border-radius: 6px;
-    background: white;
-    padding: 0.35rem 0.55rem;
-    font-family: var(--ff-body);
-    font-size: 0.78rem;
-    color: var(--ink);
-    box-sizing: border-box;
-    outline: none;
-    margin-top: 0.4rem;
-  }
-  .work-area::placeholder { color: var(--muted); font-style: italic; }
-
-  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
-  .fig svg { overflow: visible; }
-
-  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
-
-  .passage-box {
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.2rem;
-    margin-bottom: 1rem;
-  }
-  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
-  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); column-count: 2; column-gap: 1.4rem; }
-  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
-  .para-lbl { background: rgba(100,116,139,0.15); border-radius: 3px; padding: 0 4px; font-weight: 800; color: #374151; font-size: 0.74rem; }
-  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
-
-  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
-  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
-  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
-  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
-  .mc-opts.single-col { grid-template-columns: 1fr; }
-  .mc-opt {
-    font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem;
-    line-height: 1.45; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px;
-    border: 1.5px solid transparent; transition: background 0.15s;
-  }
-  .mc-opt:hover { background: #f0f0f0; }
-  .mc-opt input[type=radio] { display: none; }
-  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
-  .mc-opt .bubble {
-    width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%;
-    margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800;
-  }
-  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
-
-  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
-  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
-  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
-  .error-table th {
-    background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600;
-    padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem;
-  }
-  .error-table th:first-child { border-radius: 6px 0 0 0; }
-  .error-table th:last-child  { border-radius: 0 6px 0 0; }
-  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
-  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
-  .error-table tr:last-child td { border-bottom: none; }
-  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
-  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
-  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
-  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
-  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
-
-  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
-  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
-  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
-  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
-  .reflect-line input[type=text] {
-    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
-    font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px;
-  }
-
-  .score-banner {
-    display: flex; align-items: center; justify-content: space-between;
-    background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px;
-    padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem;
-  }
-  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
-  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
-  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
-  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
-  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
-  .score-input { width: 2.4rem; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.6); color: white; font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; text-align: center; outline: none; }
-
-  .formula-strip {
-    display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md);
-    border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center;
-  }
-  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
-  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
-
-  .socratic-note {
-    border: 1.5px solid var(--purple-lt); background: var(--purple-lt); border-radius: 10px;
-    padding: 0.6rem 0.9rem; font-size: 0.8rem; color: #4c1d95; margin-bottom: 0.9rem; line-height: 1.5;
-  }
-  .socratic-note strong { color: var(--purple); }
-
-  .print-btn {
-    display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white;
-    font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none;
-    border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
-  }
-  .print-btn:hover { background: #1d4ed8; }
+:root{--blue:#2563eb;--blue-lt:#eff6ff;--blue-md:#bfdbfe;--coral:#f97066;--coral-lt:#fff1f0;--sand:#d4a574;--sand-lt:#fdf3e7;--green:#16a34a;--green-lt:#dcfce7;--purple:#7c3aed;--purple-lt:#ede9fe;--ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#cbd5e1;--bg:#f8faff;--white:#fff;--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html{background:#e2e8f0}body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.tools{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.tool-btn{background:var(--blue);color:#fff;font-family:var(--ff-head);font-size:1rem;font-weight:600;padding:.55rem 1.6rem;border:0;border-radius:30px;cursor:pointer;box-shadow:0 3px 10px rgba(37,99,235,.3)}
+.tool-btn.secondary{background:#64748b}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.2rem;gap:1rem;flex-wrap:wrap}
+.hw-header h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:600;color:var(--blue);line-height:1.1}
+.subtitle{font-size:.82rem;color:var(--muted);font-weight:600;margin-top:.25rem;text-transform:uppercase;letter-spacing:.05em}
+.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:220px}
+.meta-row{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--slate)}
+.label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:2px 7px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}
+.meta-input,.answer-input,.reflect-line input{flex:1;border:0;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:.82rem;color:var(--ink);background:transparent;outline:0;padding:2px 5px}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border-radius:10px;padding:.7rem 1.1rem;margin-bottom:1.35rem;flex-wrap:wrap;gap:.5rem}
+.score-banner .title{font-family:var(--ff-head);font-size:1.05rem;font-weight:600}
+.score-banner .sub{font-size:.75rem;opacity:.86}
+.score-cells{display:flex;gap:.55rem}
+.score-cell{background:rgba(255,255,255,.16);border-radius:8px;padding:.3rem .7rem;text-align:center;min-width:82px}
+.score-input{width:2.5rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.65);color:#fff;font-family:var(--ff-head);font-size:1.05rem;font-weight:600;text-align:center;outline:0}
+.sc-lbl{font-size:.62rem;opacity:.85;text-transform:uppercase;letter-spacing:.04em}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.45rem 0 .7rem}
+.section-hd h2{font-family:var(--ff-head);font-size:1.13rem;font-weight:600;color:var(--ink)}
+.icon{font-size:1.2rem}
+.badge{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:20px;margin-left:auto}
+.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}
+.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}
+.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}
+.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}
+.instr{font-size:.79rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;padding:.38rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}
+.habit-strip,.formula-strip{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;border-radius:10px;padding:.6rem .85rem;margin-bottom:.85rem}
+.habit-strip{background:var(--sand-lt);border:1.5px solid #fcd34d}
+.formula-strip{background:var(--blue-lt);border:1.5px solid var(--blue-md)}
+.strip-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-right:.2rem}
+.habit-strip .strip-label{color:#92400e}
+.formula-strip .strip-label{color:var(--blue)}
+.chip{background:#fff;border-radius:7px;padding:.22rem .55rem;font-size:.73rem;font-weight:650}
+.habit-strip .chip{border:1px solid #fcd34d;color:#92400e}
+.formula-strip .chip{border:1px solid var(--blue-md);color:#1e3a8a;font-family:var(--ff-head)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.75rem .85rem}
+.prob-num{font-family:var(--ff-head);font-size:.71rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem}
+.lvl{display:inline-block;font-family:var(--ff-body);font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:20px;margin-left:.3rem;vertical-align:middle}
+.l1{background:#e5e7eb;color:#374151}
+.l2{background:#dbeafe;color:#1d4ed8}
+.l3{background:#fef3c7;color:#92400e}
+.l4{background:#fae8ff;color:#86198f}
+.prob-q{font-size:.81rem;color:var(--ink);font-weight:600;line-height:1.5;margin-bottom:.35rem}
+.math{font-family:var(--ff-head);font-size:1.1rem;font-weight:600;letter-spacing:.02em;color:var(--ink);line-height:1.5}
+.work-area{width:100%;min-height:54px;resize:vertical;border:1.5px dashed var(--border);border-radius:6px;background:#fff;padding:.35rem .5rem;font-family:var(--ff-body);font-size:.76rem;color:var(--ink);outline:0;margin-top:.45rem}
+.work-area::placeholder{color:var(--muted);font-style:italic}
+.answer-box{display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;color:var(--slate);margin-top:.38rem}
+.trap-note{border:1.5px solid #fca5a5;background:var(--coral-lt);border-radius:8px;padding:.55rem .7rem;font-size:.76rem;color:#9f1239;margin-top:.65rem;line-height:1.5}
+.trap-note strong{color:#c2410c}
+.divider{border:0;border-top:2px dashed var(--border);margin:1.45rem 0}
+.word-prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1rem}
+.word-prob p{font-size:.82rem;font-weight:600;line-height:1.55}
+.mc-options{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .65rem;margin-top:.6rem}
+.mc-opt{display:flex;align-items:flex-start;gap:.3rem;font-size:.76rem;color:var(--slate);cursor:pointer;padding:.28rem .35rem;border-radius:5px;border:1.5px solid transparent;line-height:1.4}
+.mc-opt input{display:none}
+.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}
+.bubble{width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800}
+.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.85rem 1rem;background:var(--coral-lt);margin-top:.45rem}
+.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:600;color:#c2410c;margin-bottom:.5rem}
+.error-types{font-size:.72rem;color:#92400e;font-weight:700;margin-bottom:.55rem}
+.error-table{width:100%;border-collapse:collapse;font-size:.75rem}
+.error-table th{background:var(--coral);color:#fff;font-family:var(--ff-head);font-weight:600;padding:.35rem .5rem;text-align:left}
+.error-table td{padding:.42rem .5rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:#fff}
+.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center}
+.error-table tr:last-child td{border-bottom:0}
+.reflection{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}
+.reflection h3{font-family:var(--ff-head);font-size:.92rem;font-weight:600;color:var(--green);margin-bottom:.4rem}
+.reflect-line{display:flex;align-items:center;gap:.4rem;font-size:.77rem;color:var(--slate);font-weight:600;margin-top:.55rem;flex-wrap:wrap}
+.footer{text-align:center;margin-top:1.1rem;color:var(--muted);font-size:.7rem;font-weight:600}
+.passage-box{background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.85rem 1rem;margin-bottom:.85rem;font-size:.82rem;line-height:1.6;color:var(--slate)}
+.passage-box .pt{font-family:var(--ff-head);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#92400e;margin-bottom:.35rem}
+@media(max-width:620px){.sheet{padding:1.25rem}.prob-grid,.mc-options{grid-template-columns:1fr}.hw-meta{width:100%}}
+@media print{html{background:#fff}body{max-width:100%;padding:0}.tools{display:none!important}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.2cm 1.45cm!important}.page-break{page-break-before:always}input,textarea{border-color:#cbd5e1!important;background:#fff!important}}
 </style>
 </head>
 <body>
+<div class="tools"><button class="tool-btn" onclick="window.print()">Print / Save as PDF</button><button class="tool-btn secondary" onclick="clearAll()">Clear All</button></div>
+<section class="sheet">
+<header class="hw-header"><div><h1>Week 7 Homework</h1><div class="subtitle">Absolute Value, Factors & Multiples + Inference &nbsp;•&nbsp; SHSAT Prep</div></div><div class="hw-meta"><div class="meta-row"><span class="label">Name</span><input class="meta-input"></div><div class="meta-row"><span class="label">Date</span><input class="meta-input"></div></div></header>
+<div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Check your work, record your score, and bring this to tutoring.</div></div><div class="score-cells"><div class="score-cell"><input type="number" min="0" max="10" class="score-input" placeholder="10"><div class="sc-lbl">Math</div></div><div class="score-cell"><input type="number" min="0" max="10" class="score-input" placeholder="10"><div class="sc-lbl">ELA</div></div></div></div>
 
-<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
-  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
-  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+<div class="section-hd"><span class="icon">✦</span><h2>Part A: The Accuracy Routine</h2><span class="badge badge-sand">Use on Every Problem</span></div>
+<p class="instr">Your goal is not just the right answer. Show the decision that proves it: identify the concept, apply the rule, then check whether the result makes sense.</p>
+<div class="habit-strip"><span class="strip-label">The routine</span><span class="chip">1. Underline the clue</span><span class="chip">2. Write the rule or setup</span><span class="chip">3. Check your answer</span></div>
+
+<div class="section-hd"><span class="icon">|x|</span><h2>Part B: Absolute Value</h2><span class="badge badge-blue">4 Problems</span></div>
+<p class="instr">Absolute value measures distance from zero, so it is always zero or positive. An absolute value equation usually splits into two cases.</p>
+<div class="formula-strip"><span class="strip-label">Remember</span><span class="chip">|x| = distance from 0</span><span class="chip">|x| = a → x = a or x = −a</span><span class="chip">|x| can never equal a negative number</span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 1 <span class="lvl l1">L1</span></div><p class="prob-q">Evaluate.</p><div class="math">|−15| − |7|</div><textarea class="work-area" placeholder="Find each absolute value first, then subtract."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 2 <span class="lvl l2">L2</span></div><p class="prob-q">Solve for all values of x.</p><div class="math">|x − 4| = 9</div><textarea class="work-area" placeholder="Write both cases before solving."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 3 <span class="lvl l3">L3</span></div><p class="prob-q">Solve for all values of x.</p><div class="math">2|x + 3| − 5 = 11</div><textarea class="work-area" placeholder="Isolate the absolute value expression first."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 4 <span class="lvl l4">L4</span></div><p class="prob-q">How many solutions does |x + 6| = −2 have? Explain why.</p><textarea class="work-area" placeholder="Think about what absolute value can never equal."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
 </div>
+<div class="trap-note"><strong>SHSAT Trap — forgetting the negative case:</strong> |x − 4| = 9 has two solutions, not one. Solve x − 4 = 9 <em>and</em> x − 4 = −9.</div>
+<div class="divider"></div>
 
-<!-- ══════════════════════════════════════════════
-     PAGE 1 — ABSOLUTE VALUE
-══════════════════════════════════════════════ -->
-<div class="sheet">
+<div class="section-hd"><span class="icon">◆</span><h2>Part C: Factors & Prime Factorization</h2><span class="badge badge-blue">3 Problems</span></div>
+<p class="instr">Keep splitting until every factor is prime. Write repeated factors using exponents only after your tree is complete.</p>
+<div class="formula-strip"><span class="strip-label">Remember</span><span class="chip">Prime = exactly 2 factors</span><span class="chip">1 is not prime</span><span class="chip">Start with the smallest prime</span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 5 <span class="lvl l1">L1</span></div><p class="prob-q">Write the prime factorization of 120.</p><div class="math">120 =</div><textarea class="work-area" placeholder="Build a factor tree here."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 6 <span class="lvl l2">L2</span></div><p class="prob-q">Write the prime factorization of 196 in exponent form.</p><div class="math">196 =</div><textarea class="work-area" placeholder="Factor completely before using exponents."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 7 <span class="lvl l3">L3</span></div><p class="prob-q">What is the smallest number that has exactly four total factors and is divisible by 3?</p><textarea class="work-area" placeholder="Try p^3 form and p·q form, then compare."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+</div>
+<div class="divider"></div>
 
-  <div class="hw-header">
-    <div class="hw-header-left">
-      <h1>➕ Week 7 Homework</h1>
-      <div class="subtitle">Absolute Value, Factors &amp; Multiples &nbsp;·&nbsp; SHSAT Prep</div>
-    </div>
-    <div class="hw-meta">
-      <div class="hw-meta-row"><span class="label">Name</span><input type="text" class="text-line" placeholder=""></div>
-      <div class="hw-meta-row"><span class="label">Date</span><input type="text" class="text-line" placeholder=""></div>
-    </div>
-  </div>
+<div class="section-hd"><span class="icon">◈</span><h2>Part D: GCF & LCM</h2><span class="badge badge-purple">4 Problems</span></div>
+<p class="instr">First factor each number. For GCF, keep shared primes with the smaller exponent. For LCM, use every prime with the larger exponent.</p>
+<div class="formula-strip"><span class="strip-label">Quick check</span><span class="chip">GCF ≤ smaller number</span><span class="chip">LCM ≥ larger number</span><span class="chip">"Together again" → LCM</span></div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 8 <span class="lvl l1">L1</span></div><p class="prob-q">Find the GCF of 45 and 60.</p><textarea class="work-area" placeholder="Prime-factorize both numbers."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 9 <span class="lvl l2">L2</span></div><p class="prob-q">Find the LCM of 14 and 21.</p><textarea class="work-area" placeholder="Use the largest power of each prime."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 10 <span class="lvl l3">L3</span></div><p class="prob-q">What is the greatest number that divides evenly into both 90 and 135?</p><textarea class="work-area" placeholder="Underline the word that tells you GCF."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+<div class="prob"><div class="prob-num">Problem 11 <span class="lvl l4">L4</span></div><p class="prob-q">Two joggers start together on a track. One completes a lap every 8 minutes, the other every 10 minutes. After how many minutes will they cross the starting line together again?</p><textarea class="work-area" placeholder="Name the clue phrase, then find the LCM."></textarea><div class="answer-box">Answer <input class="answer-input"></div></div>
+</div>
+<div class="trap-note"><strong>SHSAT Trap — mixing up GCF and LCM:</strong> "Greatest that divides into" means GCF. "When will they happen together again" means LCM. Underline the clue before you solve.</div>
+</section>
 
-  <div class="score-banner">
-    <div>
-      <div class="title">Self-Score Before Session</div>
-      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
-    </div>
-    <div class="score-cells">
-      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="15" class="score-input" placeholder="__"> / 15</div><div class="sc-lbl">Math Problems</div></div>
-      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="4" class="score-input" style="width:2rem;" placeholder="__"> / 4</div><div class="sc-lbl">ELA Questions</div></div>
-      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="19" class="score-input" placeholder="__"> / 19</div><div class="sc-lbl">Total</div></div>
-    </div>
-  </div>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon">✎</span><h2>Part E: Stated Detail or Inference?</h2><span class="badge badge-coral">3 Problems</span></div>
+<p class="instr">A stated detail is written directly in the passage. An inference is a reasonable conclusion built from evidence the passage gives you, without saying it outright.</p>
+<div class="formula-strip"><span class="strip-label">Sentence stem</span><span class="chip">"The text says ___, which means ___."</span></div>
+<div class="passage-box"><div class="pt">Passage</div>Mara refilled her water bottle three times during the two-hour hike and stopped twice in the shade before the group reached the summit.</div>
+<div class="prob-grid">
+<div class="prob"><div class="prob-num">Problem 12 <span class="lvl l2">L2</span></div><p class="prob-q">Is the statement "Mara felt tired and overheated during the hike" a stated detail or an inference?</p>
+<div class="mc-options">
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>A. Stated detail — it is written directly</span></label>
+<label class="mc-opt" onclick="selectMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>B. Inference — it is a conclusion drawn from her actions</span></label>
+</div>
+<textarea class="work-area" placeholder="Which exact words support your choice?"></textarea></div>
+<div class="prob"><div class="prob-num">Problem 13 <span class="lvl l3">L3</span></div><p class="prob-q">What can you reasonably infer about the difficulty of the hike, and which exact phrase from the passage is your evidence?</p><textarea class="work-area" placeholder="Write: 'The text says ___, which means ___.'"></textarea></div>
+</div>
+<div class="divider"></div>
+<div class="passage-box"><div class="pt">Passage</div>The company rewrote its return policy for the third time this year and posted a notice apologizing to customers for "recent inconvenience."</div>
+<div class="word-prob"><div class="prob-num">Problem 14 <span class="lvl l4">L4</span></div><p>Which is the stronger inference about the company: it is responsive to customer feedback, or it has struggled to get its return policy right the first time? Defend your choice using specific details from the passage — not just a guess.</p>
+<textarea class="work-area" style="min-height:70px" placeholder="Name the detail(s) that support your choice, then explain your reasoning."></textarea></div>
+</section>
 
-  <!-- PART A: ABSOLUTE VALUE BASICS -->
-  <div class="section-hd">
-    <span class="icon">📏</span>
-    <h2>Part A — Absolute Value Basics</h2>
-    <span class="badge badge-blue">4 Problems · ~12 min</span>
-  </div>
-  <p class="instr">Remember: absolute value means distance from zero, so it is never negative. Show your steps in the work box.</p>
-
-  <div class="formula-strip">
-    <span class="fs-label">Formulas</span>
-    <span class="fml">|x| = x if x ≥ 0</span>
-    <span class="fml">|x| = -x if x &lt; 0</span>
-    <span class="fml">|x| ≥ 0 always</span>
-  </div>
-
-  <div class="prob-grid">
-    <div class="prob">
-      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
-      <p class="prob-q">Evaluate <span class="math-inline">|-9| + |4|</span>. Ask yourself: does the minus sign inside the bars survive?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">Answer: <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
-      <p class="prob-q">Evaluate <span class="math-inline">|3 - 8|</span>. Do the subtraction inside the bars first — does order matter here?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">Answer: <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
-      <p class="prob-q">Evaluate <span class="math-inline">-|-6|</span>. Careful — the negative sign is <strong>outside</strong> the bars. What does it do to your final answer?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">Answer: <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 4 <span class="lvl lvl-4">L4</span></div>
-      <p class="prob-q">If <span class="math-inline">|x - 4| = 9</span>, what are the two possible values of x? Think of it as two distances from 4, one in each direction.</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">x = <input type="text" class="text-line"></div>
-    </div>
-  </div>
-
-  <div class="socratic-note"><strong>SHSAT Trap:</strong> Always finish the arithmetic <em>inside</em> the bars before taking the absolute value. <span class="math-inline">|3 - 8|</span> is <span class="math-inline">|-5| = 5</span>, not <span class="math-inline">|3| - |8| = -5</span>.</div>
-
-  <hr class="divider">
-
-  <!-- PART B: ABS VALUE EQUATIONS/INEQUALITIES -->
-  <div class="section-hd">
-    <span class="icon">⚖️</span>
-    <h2>Part B — Absolute Value Equations &amp; Inequalities</h2>
-    <span class="badge badge-sand">3 Problems · ~12 min</span>
-  </div>
-  <p class="instr">Every |expression| = n equation hides two branches — write both before you finish.</p>
-
-  <div class="formula-strip">
-    <span class="fs-label">Formulas</span>
-    <span class="fml">|x| = n → x = n or x = -n</span>
-    <span class="fml">|x| &lt; n → -n &lt; x &lt; n</span>
-    <span class="fml">|x| &gt; n → x &lt; -n or x &gt; n</span>
-  </div>
-
-  <div class="prob-grid">
-    <div class="prob">
-      <div class="prob-num">Problem 5 <span class="lvl lvl-1">L1</span></div>
-      <p class="prob-q">Solve <span class="math-inline">|x| = 12</span>. How many solutions should you expect, and what are they?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">x = <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
-      <p class="prob-q">Solve <span class="math-inline">|2x + 1| = 7</span>. Set up your two branch equations before isolating x in either one.</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">x = <input type="text" class="text-line"></div>
-    </div>
-  </div>
-
-  <div class="mc-q">
-    <div class="mc-q-text"><span class="qnum">Problem 7.</span> Solve and graph <span class="math-inline">|x + 3| ≤ 4</span>. Which range describes all solutions? <span class="lvl lvl-4">L4</span></div>
-    <div class="mc-opts">
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>A) -7 ≤ x ≤ 1</span></label>
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>B) -1 ≤ x ≤ 7</span></label>
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>C) x ≤ -7 or x ≥ 1</span></label>
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>D) -4 ≤ x ≤ 4</span></label>
-    </div>
-  </div>
-
-  <div class="socratic-note"><strong>SHSAT Trap:</strong> The most common error is solving only the positive branch and stopping. Every |expression| = n equation has two branches unless n = 0.</div>
-
-</div><!-- /sheet 1 -->
-
-<!-- ══════════════════════════════════════════════
-     PAGE 2 — FACTORS, GCF/LCM, MIXED
-══════════════════════════════════════════════ -->
-<div class="sheet page-break">
-
-  <!-- PART C: FACTORS & PRIME FACTORIZATION -->
-  <div class="section-hd">
-    <span class="icon">🌳</span>
-    <h2>Part C — Factors &amp; Prime Factorization</h2>
-    <span class="badge badge-green">4 Problems · ~15 min</span>
-  </div>
-  <p class="instr">Every whole number greater than 1 has exactly one prime factorization. Find the factor tree first.</p>
-
-  <div class="formula-strip">
-    <span class="fs-label">Key Idea</span>
-    <span class="fml">Factor: divides evenly into a number</span>
-    <span class="fml">Prime factorization: product of only primes</span>
-    <span class="fml">Total factors of pˣqʸ = (x+1)(y+1)</span>
-  </div>
-
-  <div class="prob-grid">
-    <div class="prob">
-      <div class="prob-num">Problem 8 <span class="lvl lvl-1">L1</span></div>
-      <p class="prob-q">List all the factors of 24. How many are there? Pair them up from the outside in (1×24, 2×12…) so you don't miss any.</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">Factors: <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 9 <span class="lvl lvl-2">L2</span></div>
-      <p class="prob-q">Write the prime factorization of 90 using a factor tree. Which prime do you divide out first — does it matter which one you pick?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">90 = <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 10 <span class="lvl lvl-3">L3</span></div>
-      <p class="prob-q">Is 91 prime? Test it by dividing by small primes in order (2, 3, 5, 7…) — where can you stop checking?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">Answer: <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 11 <span class="lvl lvl-4">L4</span></div>
-      <p class="prob-q">If a number's prime factorization is <span class="math-inline">2³ × 5²</span>, how many total factors does it have? (Hint: add 1 to each exponent, then multiply.)</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">Total factors: <input type="text" class="text-line"></div>
-    </div>
-  </div>
-
-  <div class="socratic-note"><strong>SHSAT Trap:</strong> Every whole number has itself and 1 as factors — it's easy to forget these when listing factor pairs. Always start with 1 × n and work inward.</div>
-
-  <hr class="divider">
-
-  <!-- PART D: GCF & LCM -->
-  <div class="section-hd">
-    <span class="icon">🔗</span>
-    <h2>Part D — GCF &amp; LCM</h2>
-    <span class="badge badge-purple">3 Problems · ~12 min</span>
-  </div>
-  <p class="instr">GCF and LCM are two different questions asked about the same prime factorization — smallest shared pieces vs. largest combined pieces.</p>
-
-  <div class="formula-strip">
-    <span class="fs-label">Rule</span>
-    <span class="fml">GCF = lowest power of each shared prime</span>
-    <span class="fml">LCM = highest power of every prime present</span>
-    <span class="fml">GCF × LCM = product of the two numbers</span>
-  </div>
-
-  <div class="prob-grid">
-    <div class="prob">
-      <div class="prob-num">Problem 12 <span class="lvl lvl-1">L1</span></div>
-      <p class="prob-q">Find the GCF of 8 and 20. List factors of each first — which is the biggest one they share?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">GCF = <input type="text" class="text-line"></div>
-    </div>
-    <div class="prob">
-      <div class="prob-num">Problem 13 <span class="lvl lvl-2">L2</span></div>
-      <p class="prob-q">Find the LCM of 6 and 8 using prime factorization. What's the highest power of 2 you need? Of 3?</p>
-      <textarea class="work-area" placeholder="Work here…"></textarea>
-      <div class="answer-box">LCM = <input type="text" class="text-line"></div>
-    </div>
-  </div>
-
-  <div class="prob" style="margin-top:0.9rem;">
-    <div class="prob-num">Word Problem 14 <span class="lvl lvl-4">L4</span></div>
-    <p class="prob-q">Two buses leave the station at the same time. Bus A returns every <strong>12 minutes</strong>, Bus B returns every <strong>18 minutes</strong>. In how many minutes will they next leave together? Which tool — GCF or LCM — answers a "when do they line up again" question?</p>
-    <textarea class="work-area" style="min-height:64px;" placeholder="Work here…"></textarea>
-    <div class="answer-box">They leave together again in <input type="text" class="text-line"> minutes</div>
-  </div>
-
-  <div class="socratic-note"><strong>SHSAT Trap:</strong> "Cutting into equal pieces" or "grouping evenly" usually wants GCF. "Happening again at the same time" or "lining up" usually wants LCM. Ask which direction the problem is going.</div>
-
-  <hr class="divider">
-
-  <!-- PART E: MIXED NUMBER SENSE -->
-  <div class="section-hd">
-    <span class="icon">🧩</span>
-    <h2>Part E — Mixed Number Sense</h2>
-    <span class="badge badge-coral">1 Problem · ~8 min</span>
-  </div>
-  <p class="instr">The SHSAT often blends absolute value with factor/multiple ideas in one question. Read twice before you write anything.</p>
-
-  <div class="prob prob-grid single">
-    <div class="prob">
-      <div class="prob-num">Problem 15 <span class="lvl lvl-4">L4</span></div>
-      <p class="prob-q">Let n be the smallest positive integer such that <span class="math-inline">|n - 15|</span> is a multiple of both 4 and 6. What is n? Break this into two steps: what values make <span class="math-inline">|n - 15|</span> a common multiple, then check which n is smallest and positive.</p>
-      <textarea class="work-area" style="min-height:72px;" placeholder="Work here…"></textarea>
-      <div class="answer-box">n = <input type="text" class="text-line"></div>
-    </div>
-  </div>
-
-  <div class="socratic-note"><strong>SHSAT Trap:</strong> Multi-skill problems reward slowing down before writing anything. Circle the exact quantity the question asks for last — it's easy to solve for a middle step and stop there.</div>
-
-</div><!-- /sheet 2 -->
-
-<!-- ══════════════════════════════════════════════
-     PAGE 3 — ELA + ERROR LOG
-══════════════════════════════════════════════ -->
-<div class="sheet page-break">
-
-  <!-- PART F: ELA INFERENCE -->
-  <div class="section-hd">
-    <span class="icon">📖</span>
-    <h2>Part F — ELA: Stated Detail or Inference?</h2>
-    <span class="badge badge-blue">4 Questions · ~12 min</span>
-  </div>
-  <p class="instr">An inference needs one logical step beyond what's written. Use the frame: "The text says ___, which means ___."</p>
-
-  <div class="mc-q">
-    <div class="mc-q-text"><span class="qnum">Q16.</span> A passage states: "By 1920, the factory employed three times as many workers as it had in 1900." Is the statement "the factory grew" a stated detail or an inference? <span class="lvl lvl-2">L2</span></div>
-    <div class="mc-opts">
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q16"><span class="bubble"></span><span>A) Stated detail — it's written directly</span></label>
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q16"><span class="bubble"></span><span>B) Inference — "grew" is a conclusion drawn from the numbers</span></label>
-    </div>
-  </div>
-
-  <div class="mc-q">
-    <div class="mc-q-text"><span class="qnum">Q17.</span> A character "counted her coins twice before buying the bread." What can you reasonably infer about her financial situation, and what one phrase is your evidence? <span class="lvl lvl-3">L3</span></div>
-    <textarea class="work-area" placeholder="Write: 'The text says ___, which means ___.'"></textarea>
-  </div>
-
-  <div class="mc-q">
-    <div class="mc-q-text"><span class="qnum">Q18.</span> A passage says: "He wore his winter coat, even though it was only September." What can you infer about the weather or the character's habits? <span class="lvl lvl-1">L1</span></div>
-    <div class="mc-opts">
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>A) It's definitely snowing outside</span></label>
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>B) He may feel cold easily, or the weather turned unusually cool early</span></label>
-      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18"><span class="bubble"></span><span>C) The passage doesn't give enough to infer anything</span></label>
-    </div>
-  </div>
-
-  <div class="mc-q">
-    <div class="mc-q-text"><span class="qnum">Q19.</span> A scientist "double-checked her data three times and asked a colleague to review it before publishing." Which is the stronger inference: she is meticulous, or she is uncertain about her results? Defend your choice using the specific details given. <span class="lvl lvl-4">L4</span></div>
-    <textarea class="work-area" placeholder="Write: 'The text says ___, which means ___.'"></textarea>
-  </div>
-
-  <div class="socratic-note"><strong>SHSAT Trap:</strong> A correct inference is one small logical step from the text — not a wild guess. If an answer choice requires outside knowledge the passage never hints at, it's a trap.</div>
-
-  <hr class="divider">
-
-  <!-- PART G: ERROR LOG -->
-  <div class="section-hd">
-    <span class="icon">🔎</span>
-    <h2>Part G — Error Log</h2>
-    <span class="badge badge-coral">Required · Every Missed Problem</span>
-  </div>
-  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps target the right fixes in session!</p>
-
-  <div class="error-log">
-    <h3>📋 My Errors This Week</h3>
-    <div class="error-type-pills">
-      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
-      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
-      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
-      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
-    </div>
-    <table class="error-table" style="margin-top:0.7rem;">
-      <thead>
-        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
-        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
-        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
-        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
-        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="reflect-box">
-    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
-    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
-    <div class="reflect-lines">
-      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
-      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
-      <div class="reflect-line">The rule I need to review most is <input type="text" placeholder="…"></div>
-      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
-    </div>
-  </div>
-
-  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
-    Week 7 · SHSAT Prep &nbsp;·&nbsp; ➕ Absolute Value, Factors &amp; Multiples &nbsp;|&nbsp; 📖 ELA: Inference
-  </div>
-
-</div><!-- /sheet 3 -->
+<section class="sheet">
+<div class="section-hd"><span class="icon">!</span><h2>Part F: Error Log</h2><span class="badge badge-coral">Required for Every Miss</span></div>
+<p class="instr">For every missed problem, identify the exact step that broke. Label it: content gap, careless error, or rushing.</p>
+<div class="error-log"><h3>My Errors This Week</h3><div class="error-types">Error labels: Content Gap = I did not know the method &nbsp;•&nbsp; Careless Error = I knew it but slipped &nbsp;•&nbsp; Rushing = I skipped a needed check</div><table class="error-table"><thead><tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th>Error Type</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table></div>
+<div class="reflection"><h3>Weekly Reflection</h3><div class="reflect-line">The type of problem I need to slow down on is <input></div><div class="reflect-line">The check that will prevent my most common mistake is <input></div><div class="reflect-line">One question I will bring to tutoring is <input></div></div>
+<div class="footer">Week 7 SHSAT Prep &nbsp;•&nbsp; Absolute Value, Factors & Multiples + Inference &nbsp;•&nbsp; Show every step.</div>
+</section>
 
 <script>
-function selMC(label) {
-  const group = label.closest('.mc-opts');
-  group.querySelectorAll('.mc-opt').forEach(l => {
-    l.classList.remove('selected');
-    l.querySelector('.bubble').textContent = '';
-  });
-  label.classList.add('selected');
-  label.querySelector('.bubble').textContent = '✓';
-  label.querySelector('input[type=radio]').checked = true;
-}
-function clearAll() {
-  if (!confirm('Clear all answers?')) return;
-  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
-  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
-  document.querySelectorAll('.mc-opt').forEach(l => {
-    l.classList.remove('selected');
-    l.querySelector('.bubble').textContent = '';
-  });
-  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
-}
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('textarea').forEach(ta => {
-    ta.addEventListener('input', () => {
-      ta.style.height = 'auto';
-      ta.style.height = ta.scrollHeight + 'px';
-    });
-  });
-});
+function selectMC(label){const group=label.closest('.mc-options');group.querySelectorAll('.mc-opt').forEach(x=>{x.classList.remove('selected');x.querySelector('.bubble').textContent=''});label.classList.add('selected');label.querySelector('.bubble').textContent='✓';label.querySelector('input').checked=true}
+function clearAll(){if(!confirm('Clear all answers?'))return;document.querySelectorAll('input, textarea').forEach(x=>x.value='');document.querySelectorAll('input[type=radio]').forEach(x=>x.checked=false);document.querySelectorAll('.mc-opt').forEach(x=>{x.classList.remove('selected');x.querySelector('.bubble').textContent=''});document.querySelectorAll('[contenteditable=true]').forEach(x=>x.innerHTML='&nbsp;')}
+document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}));
 </script>
 </body>
 </html>
