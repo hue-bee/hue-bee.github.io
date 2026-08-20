@@ -1,1 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Homework — Repeated Growth &amp; Percent Vocabulary + ELA Purpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .annotation-toolbar { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+  .hw-meta-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.82rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 4px;
+  }
+
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .lvl-1 { background: #eef1f4; color: #374151; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .answer-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .score-input {
+    width: 2.4rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.6);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+  }
+
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+  /* ── Annotation Toolbar ── */
+  .annotation-toolbar {
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.96);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 5px 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+  }
+  .annot-btn {
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    padding: 4px 9px;
+    border-radius: 7px;
+    border: 1.5px solid var(--border);
+    background: #f8f8f8;
+    color: var(--slate);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    font-family: var(--ff-body);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+  .annot-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+  .annot-btn.active:hover { background: #1d4ed8; }
+  .annot-sep { width: 1px; height: 22px; background: var(--border); margin: 0 2px; }
+  .annot-color-row { display: flex; align-items: center; gap: 4px; }
+  .annot-color-swatch {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.12s, border-color 0.12s;
+  }
+  .annot-color-swatch:hover { transform: scale(1.18); }
+  .annot-color-swatch.active { border-color: var(--blue); transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px var(--blue); }
+  .annot-label {
+    font-size: 0.68rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .annotatable-passage { position: relative; cursor: text; user-select: text; }
+  .passage-highlight { border-radius: 3px; padding: 0 1px; }
+  .passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+  .passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+  .passage-note {
+    display: inline-block; width: 14px; height: 14px;
+    background: var(--blue); color: white; border-radius: 50%;
+    font-size: 0.6rem; font-weight: 800; text-align: center; line-height: 14px;
+    cursor: pointer; position: relative; vertical-align: super; margin-left: 2px;
+    font-style: normal;
+  }
+  .passage-note .note-tooltip {
+    display: none; position: absolute; bottom: 120%; left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937; color: white; font-size: 0.72rem;
+    padding: 5px 9px; border-radius: 8px; z-index: 200;
+    pointer-events: none; width: max-content; max-width: 220px; white-space: normal;
+  }
+  .passage-note:hover .note-tooltip { display: block; }
+  .clear-annotations-btn {
+    margin-left: auto;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--coral-lt);
+    border: 1.5px solid #fca5a5;
+    color: #b91c1c;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--ff-body);
+    transition: background 0.15s;
+  }
+  .clear-annotations-btn:hover { background: #fecaca; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>📈 Week 1 Homework</h1>
+      <div class="subtitle">Repeated Growth &amp; Percent Vocabulary &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" class="hw-meta-input" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" class="hw-meta-input" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" class="score-input" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" class="score-input" style="width:2rem;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" class="score-input" placeholder="__"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A: REPEATED GROWTH -->
+  <div class="section-hd">
+    <span class="icon">📈</span>
+    <h2>Part A — Repeated Growth (Compounding)</h2>
+    <span class="badge badge-blue">6 Problems · ~18 min</span>
+  </div>
+  <p class="instr">Show ALL work. Write the growth/decay multiplier FIRST, then apply it the correct number of times. Round money answers to the nearest cent.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">Growth: new = old &#215; (1 + r)^n</span>
+    <span class="fml">Decay: new = old &#215; (1 &#8722; r)^n</span>
+    <span class="fml">r = rate as a decimal</span>
+    <span class="fml">n = number of periods</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">A savings account starts at <strong>$300</strong> and grows <strong>5%</strong> each year for <strong>2 years</strong>. Find the balance after 2 years.</p>
+      <textarea class="work-area" placeholder="multiplier = 1.05 &#10;300 × 1.05² = …"></textarea>
+      <div class="answer-box">Balance = <input type="text" class="answer-input">$</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">A bacteria colony of <strong>500</strong> cells doubles every day. How many cells are there after <strong>3 days</strong>?</p>
+      <textarea class="work-area" placeholder="multiplier = 2 &#10;500 × 2³ = …"></textarea>
+      <div class="answer-box">Cells = <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A car valued at <strong>$24,000</strong> depreciates <strong>8%</strong> per year. Is the correct setup 24,000 &#215; 0.92&#178;, or 24,000 &#8722; 2(0.08 &#215; 24,000)? Explain, then find the value after 2 years.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Explain why:&#10;Then compute: 24000 × 0.92² = …"></textarea>
+      <div class="answer-box">Value = <input type="text" class="answer-input">$</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A town's population of <strong>4,000</strong> grows <strong>10%</strong> per year for <strong>3 years</strong>. What is the population after 3 years? Round to the nearest whole person.</p>
+      <textarea class="work-area" placeholder="4000 × 1.10³ = …"></textarea>
+      <div class="answer-box">Population = <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">An investment of <strong>$1,000</strong> grows <strong>20%</strong> in Year 1, then an additional <strong>10% of the NEW total</strong> in Year 2 (not the original $1,000). What is the value after Year 2?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Year 1: 1000 × 1.20 = …&#10;Year 2: (Year 1 result) × 1.10 = …"></textarea>
+      <div class="answer-box">Value = <input type="text" class="answer-input">$</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A membership of <strong>80 members</strong> grows <strong>25%</strong> in year 1, then <strong>drops 20%</strong> of the new total in year 2. Is the club bigger or smaller than 80 after 2 years — and by how much?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Year 1: 80 × 1.25 = …&#10;Year 2: (result) × 0.80 = …&#10;Compare to 80: …"></textarea>
+      <div class="answer-box">Final size = <input type="text" class="answer-input">members</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: PERCENT VOCABULARY -->
+  <div class="section-hd">
+    <span class="icon">🔤</span>
+    <h2>Part B — Percent Vocabulary: Value or Difference?</h2>
+    <span class="badge badge-sand">6 Problems · ~15 min</span>
+  </div>
+  <p class="instr">For each stem, DO NOT calculate yet. First decide: is the question asking for a single value, or a difference/gap between two values? Circle "Value" or "Difference," then solve.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Key Vocabulary</span>
+    <span class="fml">"increased FROM" &#8594; original value</span>
+    <span class="fml">"increased TO" &#8594; new value</span>
+    <span class="fml">"how much more/less" &#8594; difference</span>
+    <span class="fml">percentage point &#8800; percent</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">"Ticket prices increased FROM $40 to $52." What is the original price? <strong>Value</strong> or <strong>Difference</strong>?</p>
+      <textarea class="work-area" placeholder="Value / Difference — answer: …"></textarea>
+      <div class="answer-box">Answer = <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">"How much did the ticket price go up?" (same numbers as Problem 7: $40 to $52). <strong>Value</strong> or <strong>Difference</strong>?</p>
+      <textarea class="work-area" placeholder="Value / Difference — answer: …"></textarea>
+      <div class="answer-box">Answer = <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A store's discount rate rose from <strong>10% to 15%</strong>. Is that a "5 percent increase" or a "5 percentage point increase"? Explain the difference, then find the actual percent increase in the rate.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Percentage point difference: …&#10;Percent (relative) increase: (15-10)/10 = …"></textarea>
+      <div class="answer-box">Percent increase = <input type="text" class="answer-input">%</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">"Attendance dropped TO 180 people after being 240." What number does the question want if it asks "What is attendance NOW"? <strong>Value</strong> or <strong>Difference</strong>?</p>
+      <textarea class="work-area" placeholder="Value / Difference — answer: …"></textarea>
+      <div class="answer-box">Answer = <input type="text" class="answer-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A survey shows approval rose from <strong>35% to 42%</strong>. Find BOTH: (a) the percentage-point change, and (b) the percent (relative) change, rounded to the nearest whole percent.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="(a) 42 - 35 = …&#10;(b) (42-35)/35 = …"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(a) <input type="text" class="answer-input">points</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(b) <input type="text" class="answer-input">%</div>
+      </div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">"Revenue increased from $12,000 to $15,000. How much higher, as a percent of the ORIGINAL revenue, is the new revenue?" Identify the two numbers the question actually wants divided, then solve.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Difference: 15000 - 12000 = …&#10;Percent of original: …/12000 = …"></textarea>
+      <div class="answer-box">Answer = <input type="text" class="answer-input">%</div>
+    </div>
+
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- PAGE 2 — ELA -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Purpose, Tone &amp; Paragraph Job Notes</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read the passage once. As you read, write a 2–4 word "job note" for each paragraph in the margin (what job does it DO, not what it says). Then answer using your notes before rereading.</p>
+
+  <div class="annotation-toolbar" id="toolbar-passage1">
+    <span class="annot-label">Tool</span>
+    <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('passage1','highlight',this)">🖊️ Highlight</button>
+    <button class="annot-btn" data-tool="underline" onclick="setPassageTool('passage1','underline',this)">U̲ Underline</button>
+    <button class="annot-btn" data-tool="outline" onclick="setPassageTool('passage1','outline',this)">◯ Outline</button>
+    <button class="annot-btn" data-tool="note" onclick="setPassageTool('passage1','note',this)">📌 Note</button>
+    <div class="annot-sep"></div>
+    <span class="annot-label">Color</span>
+    <div class="annot-color-row" id="colors-passage1">
+      <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('passage1','#fef08a',this)" title="Yellow"></div>
+      <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('passage1','#86efac',this)" title="Green"></div>
+      <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('passage1','#93c5fd',this)" title="Blue"></div>
+      <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('passage1','#fca5a5',this)" title="Pink"></div>
+      <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('passage1','#c4b5fd',this)" title="Purple"></div>
+    </div>
+    <button class="clear-annotations-btn" onclick="clearPassageAnnotations('passage1')">🗑️ Clear</button>
+  </div>
+  <div class="passage-box">
+    <div class="passage-title">Why Your Brain Lies to You About Practice</div>
+    <div class="passage-text annotatable-passage" id="passage1">
+      <p><span class="para-lbl">[¶1]</span> Ask most students how they know they've studied well, and they'll say the material "felt easy" the second time through. This feeling, psychologists have discovered, is one of the most reliable ways a student's brain can fool them. Rereading a chapter, or watching a worked example a second time, creates a comfortable sense of fluency — but fluency with familiar material is not the same thing as being able to produce the answer from memory, unaided, later on.</p>
+      <p><span class="para-lbl">[¶2]</span> Researchers call this gap the "illusion of competence." <span class="sw">In a well-known study</span>, students who reread a passage four times rated their understanding far higher than students who read it once and then tried, unsuccessfully, to recall it from memory. <span class="sw">Yet</span> on a test given a week later, the group that struggled to recall the material — not the group that reread it — scored significantly higher. Struggling to retrieve information, it turns out, is what actually builds durable memory.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">This does not mean</span> that rereading is worthless. It has a place early in learning, when a student is encountering brand-new vocabulary or an unfamiliar formula for the first time. <span class="sw">However</span>, once a student can recognize the material, continuing to reread it produces diminishing returns — comfort without competence. The more useful next step is to close the book and try to reconstruct the idea from scratch.</p>
+      <p><span class="para-lbl">[¶4]</span> Retrieval practice — testing yourself instead of reviewing notes — feels harder in the moment, and that difficulty is exactly the point. <span class="sw">As a result</span>, students who quiz themselves report lower confidence immediately after studying than students who reread, even though the quizzers remember more a week later. Effective studying, in other words, often feels worse while it is happening and better only once it is tested.</p>
+      <p><span class="para-lbl">[¶5]</span> None of this is an argument against reviewing material at all — it is an argument about sequencing. Learn a concept once, attempt to retrieve it without help, check your accuracy, and only then reread the parts you missed. Students who adopt this cycle are not smarter than their classmates; they have simply stopped trusting a feeling that was never a reliable measure of learning in the first place.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> What is the <strong>author's primary purpose</strong> in writing this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) To tell the story of a famous memory study</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) To argue that rereading is a less reliable study method than retrieval practice</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) To criticize students for not studying hard enough</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) To explain how memory works at the biological level</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> The author's job note for ¶2 would most likely be: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) "introduces main character"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) "gives supporting evidence/study"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) "concludes with a warning"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) "defines an unrelated term"</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶3, the signal phrase <em>"This does not mean"</em> signals a relationship of: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Cause and effect</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Sequence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Qualification / limiting a claim</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Definition</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> The author's tone toward students who rely on rereading is best described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) Mocking — the author ridicules students who reread</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) Understanding but corrective — the author explains why the habit is misleading, not shameful</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) Neutral — the author presents facts with no judgment at all</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) Alarmed — the author warns of serious academic danger</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which best describes the passage's overall organization across all five paragraphs? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) Hook → evidence → limiting qualifier → deeper mechanism → practical takeaway</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) Chronological account of one student's semester</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) Problem → single cause → single solution, in that order only</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) A list of unrelated tips presented in no particular order</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> A student claims: <em>"The author uses ¶3 to argue that rereading should never be used."</em> Using evidence from ¶3, is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) Fully supported — ¶3 says rereading has no value</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) Contradicted — ¶3 says rereading is useful early in learning new material</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Partially supported — ¶3 only criticizes rereading on weekends</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) Cannot be determined from ¶3</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C2 — ELA: Inference &amp; Evidence</h2>
+    <span class="badge badge-blue">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Same process: write a job note per paragraph, then answer only from your notes. Reread a paragraph ONLY if your note is not specific enough to answer.</p>
+
+  <div class="annotation-toolbar" id="toolbar-passage2">
+    <span class="annot-label">Tool</span>
+    <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('passage2','highlight',this)">🖊️ Highlight</button>
+    <button class="annot-btn" data-tool="underline" onclick="setPassageTool('passage2','underline',this)">U̲ Underline</button>
+    <button class="annot-btn" data-tool="outline" onclick="setPassageTool('passage2','outline',this)">◯ Outline</button>
+    <button class="annot-btn" data-tool="note" onclick="setPassageTool('passage2','note',this)">📌 Note</button>
+    <div class="annot-sep"></div>
+    <span class="annot-label">Color</span>
+    <div class="annot-color-row" id="colors-passage2">
+      <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('passage2','#fef08a',this)" title="Yellow"></div>
+      <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('passage2','#86efac',this)" title="Green"></div>
+      <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('passage2','#93c5fd',this)" title="Blue"></div>
+      <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('passage2','#fca5a5',this)" title="Pink"></div>
+      <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('passage2','#c4b5fd',this)" title="Purple"></div>
+    </div>
+    <button class="clear-annotations-btn" onclick="clearPassageAnnotations('passage2')">🗑️ Clear</button>
+  </div>
+  <div class="passage-box">
+    <div class="passage-title">The Case of the Disappearing Bees</div>
+    <div class="passage-text annotatable-passage" id="passage2">
+      <p><span class="para-lbl">[¶1]</span> In the winter of 2006, beekeepers across the United States opened their hives to find something alarming: entire colonies had vanished, leaving behind only a queen, a few nurse bees, and untouched honey stores. Worker bees — the colony's foragers — were simply gone, with no dead bodies found nearby. Scientists eventually named the mystery Colony Collapse Disorder, but naming a problem is not the same as solving it.</p>
+      <p><span class="para-lbl">[¶2]</span> At first, researchers suspected a single cause: a parasite called the varroa mite, which feeds on bee blood and weakens colonies from within. <span class="sw">Indeed</span>, mite infestations were found in many, though not all, of the collapsed hives. <span class="sw">If</span> mites were the sole cause, however, hives with low mite counts should have remained healthy — and many of them did not.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">Subsequent research</span> pointed toward a combination of stressors rather than one single culprit. Certain pesticides, particularly a class called neonicotinoids, appeared to impair bees' navigation abilities, making it harder for foragers to find their way back to the hive. <span class="sw">Additionally</span>, the widespread practice of trucking hives across the country to pollinate different crops exposed bees to unfamiliar diseases and chronic stress.</p>
+      <p><span class="para-lbl">[¶4]</span> Habitat loss compounded these problems. As farmland replaced wildflower meadows, bees lost access to the varied diet needed to keep their immune systems strong. A bee weakened by poor nutrition, researchers found, was far more vulnerable to both mites and pesticide exposure — meaning that no single factor acted alone. <span class="sw">Rather</span>, the stressors interacted, each one making the others more dangerous.</p>
+      <p><span class="para-lbl">[¶5]</span> Today, most entomologists describe Colony Collapse Disorder not as one disease with one cure, but as a warning sign of an ecosystem under simultaneous pressure from multiple directions. The bees, in this sense, were not just dying — they were reporting on the health of an entire agricultural system, one hive at a time.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> What is the <strong>central claim</strong> of this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>A) Varroa mites are the sole cause of Colony Collapse Disorder</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>B) Colony Collapse Disorder results from multiple interacting stressors, not one single cause</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>C) Beekeepers should stop trucking hives across the country</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>D) Pesticides are harmless to bee navigation</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> In ¶2, the word <span class="sw">"however"</span> signals that what follows is: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>A) A definition of a new term</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>B) A complication that weakens the single-cause theory</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>C) A summary of the whole passage</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>D) A restatement of ¶1</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> According to ¶4, why did habitat loss make bees more vulnerable to other stressors? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>A) It directly killed worker bees on contact</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>B) It reduced dietary variety, weakening bees' immune systems</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>C) It increased the number of varroa mites in the environment</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>D) It caused hives to be trucked across state lines</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q10.</span> The author's tone in ¶5 toward the significance of Colony Collapse Disorder is best described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>A) Dismissive — the author treats the disorder as unimportant</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>B) Cautionary — the author frames the bees as a warning sign about a larger system</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>C) Celebratory — the author praises beekeepers for solving the mystery</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>D) Confused — the author admits no explanation currently exists</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q11.</span> Which piece of evidence <strong>best supports</strong> the claim that no single stressor alone caused Colony Collapse Disorder? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>A) Beekeepers found the mystery alarming in the winter of 2006 (¶1)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>B) Hives with low mite counts still collapsed, and weakened bees were more vulnerable to multiple stressors together (¶2, ¶4)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>C) The disorder was named Colony Collapse Disorder (¶1)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>D) Honey stores were left untouched in collapsed hives (¶1)</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q12.</span> A student claims: <em>"The author uses ¶3 and ¶4 to show that pesticides are the single most important cause of Colony Collapse Disorder."</em> Using evidence from ¶3–¶4, is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>A) Fully supported — pesticides are named as the only cause</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>B) Contradicted — ¶3–¶4 describe pesticides as one of several interacting stressors, not the single most important one</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>C) Partially supported — pesticides are mentioned only in ¶1</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>D) Cannot be determined from the passage</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The growth/decay rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 1 · SHSAT Prep &nbsp;·&nbsp; 📈 Repeated Growth &amp; Percent Vocabulary &nbsp;|&nbsp; 📖 ELA: Purpose &amp; Job Notes
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+  ['passage1','passage2'].forEach(id => { if (typeof clearPassageAnnotations === 'function') clearPassageAnnotations(id); });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+
+<script>
+/* ===== Passage Annotation System ===== */
+var passageAnnotState = {};
+function getPassageState(id) {
+  if (!passageAnnotState[id]) passageAnnotState[id] = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+  return passageAnnotState[id];
+}
+function setPassageTool(id, tool, btn) {
+  getPassageState(id).tool = tool;
+  document.getElementById('toolbar-' + id).querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+function setPassageColor(id, color, swatch) {
+  getPassageState(id).color = color;
+  document.getElementById('colors-' + id).querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+function clearPassageAnnotations(id) {
+  var passage = document.getElementById(id);
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el) {
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  getPassageState(id).noteCount = 0;
+}
+function applyPassageAnnotation(id, range) {
+  var state = getPassageState(id);
+  var tool = state.tool;
+  var color = state.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch (e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch (e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note…';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '✓';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '✕';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while (pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      state.noteCount++;
+      var noteNum = state.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while (pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') { span.className = 'passage-highlight'; span.style.backgroundColor = color; span.style.color = '#1f2937'; }
+    else if (tool === 'underline') { span.className = 'passage-underline'; span.style.textDecorationColor = (color === '#fef08a') ? '#374151' : color; }
+    else if (tool === 'outline') { span.className = 'passage-outline'; span.style.outlineColor = (color === '#fef08a') ? '#374151' : color; }
+    range.surroundContents(span);
+  } catch (e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') { span2.className = 'passage-highlight'; span2.style.backgroundColor = color; span2.style.color = '#1f2937'; }
+      else if (tool === 'underline') { span2.className = 'passage-underline'; span2.style.textDecorationColor = (color === '#fef08a') ? '#374151' : color; }
+      else if (tool === 'outline') { span2.className = 'passage-outline'; span2.style.outlineColor = (color === '#fef08a') ? '#374151' : color; }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch (e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+(function() {
+  ['passage1', 'passage2'].forEach(function(id) {
+    var passage = document.getElementById(id);
+    if (!passage) return;
+    passage.addEventListener('mouseup', function() {
+      var sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+      var range = sel.getRangeAt(0);
+      if (!passage.contains(range.commonAncestorContainer)) return;
+      applyPassageAnnotation(id, range);
+    });
+    passage.addEventListener('touchend', function() {
+      var sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+      var range = sel.getRangeAt(0);
+      if (!passage.contains(range.commonAncestorContainer)) return;
+      setTimeout(function() { applyPassageAnnotation(id, range); }, 100);
+    });
+  });
+})();
+</script>
+</body>
+</html>
