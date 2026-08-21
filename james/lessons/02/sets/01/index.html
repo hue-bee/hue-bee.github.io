@@ -40,13 +40,18 @@
     padding: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    overflow-x: hidden;
   }
+  @page { size: auto; margin: 12mm; }
   @media print {
     input, textarea { border-color: #cbd5e1 !important; background: white !important; }
     html { background: white; }
     body { max-width: 100%; padding: 0; }
     .no-print { display: none !important; }
-    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 0 !important; width: 100% !important; }
+    .prob-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .prob { page-break-inside: avoid; }
+    .reflect-box, .timer-banner, .section-hd { page-break-inside: avoid; }
   }
   .sheet {
     background: var(--white);
@@ -54,6 +59,9 @@
     padding: 2rem 2.2rem;
     box-shadow: 0 4px 24px rgba(37,99,235,0.10);
     border-radius: 16px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
   .hw-header {
     display: flex;
@@ -65,12 +73,14 @@
     gap: 1rem;
     flex-wrap: wrap;
   }
+  .hw-header-left { min-width: 0; flex: 1 1 220px; }
   .hw-header-left h1 {
     font-family: var(--ff-head);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--blue);
     line-height: 1.15;
+    overflow-wrap: break-word;
   }
   .hw-header-left .subtitle {
     font-size: 0.8rem;
@@ -79,16 +89,17 @@
     margin-top: 0.2rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    overflow-wrap: break-word;
   }
-  .hw-meta { display: flex; flex-direction: column; gap: 0.3rem; min-width: 190px; }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.3rem; min-width: 160px; flex: 0 1 220px; }
   .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--slate); font-weight: 600; }
   .hw-meta-row .label {
     background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
     font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-    min-width: 55px; text-align: center;
+    min-width: 55px; text-align: center; flex: none;
   }
   .hw-meta-row input {
-    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
+    flex: 1; min-width: 0; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
     font-size: 0.78rem; color: var(--ink); background: transparent; outline: none; padding: 1px 4px;
   }
   .timer-banner {
@@ -96,16 +107,16 @@
     background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white;
     border-radius: 10px; padding: 0.6rem 1.1rem; margin-bottom: 1.1rem; flex-wrap: wrap;
   }
-  .timer-banner .title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; }
-  .timer-banner .sub { font-size: 0.75rem; opacity: 0.88; }
-  .timer-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.7rem; text-align: center; min-width: 70px; }
+  .timer-banner .title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; overflow-wrap: break-word; }
+  .timer-banner .sub { font-size: 0.75rem; opacity: 0.88; overflow-wrap: break-word; }
+  .timer-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.7rem; text-align: center; min-width: 70px; flex: none; }
   .timer-cell .tv { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; }
   .timer-cell .tl { font-size: 0.62rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
-  .section-hd { display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0 0.6rem; }
-  .section-hd h2 { font-family: var(--ff-head); font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+  .section-hd { display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0 0.6rem; flex-wrap: wrap; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.05rem; font-weight: 700; color: var(--ink); overflow-wrap: break-word; }
   .section-hd .badge {
     font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto; white-space: nowrap;
   }
   .badge-blue { background: var(--blue-lt); color: var(--blue); border: 1px solid var(--blue-md); }
   .badge-coral { background: var(--coral-lt); color: #c2410c; border: 1px solid #fca5a5; }
@@ -113,21 +124,30 @@
   .instr {
     font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 0.8rem;
     padding: 0.32rem 0.7rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0;
+    overflow-wrap: break-word;
   }
   .lvl { display: inline-block; font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 7px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
   .lvl-2 { background: #d9d9d9; color: #1f2937; }
   .lvl-3 { background: #bdbdbd; color: #111827; }
   .lvl-4 { background: #6b7280; color: #ffffff; }
-  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  .prob-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.7rem;
+    width: 100%;
+  }
   .prob {
     background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.6rem 0.75rem; position: relative;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
   .prob-num { font-family: var(--ff-head); font-size: 0.68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
-  .prob-q { font-size: 0.82rem; color: var(--ink); font-weight: 600; line-height: 1.45; margin-bottom: 0.4rem; }
+  .prob-q { font-size: 0.82rem; color: var(--ink); font-weight: 600; line-height: 1.45; margin-bottom: 0.4rem; overflow-wrap: break-word; }
   .prob-q strong { color: #374151; }
   .answer-box { margin-top: 0.4rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 700; color: var(--slate); }
   .answer-box input[type=text] {
-    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
+    flex: 1; min-width: 0; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
     font-size: 0.8rem; font-weight: 700; color: var(--ink); background: transparent; outline: none;
     padding: 1px 4px; min-height: 1.2rem;
   }
@@ -141,15 +161,15 @@
   hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.2rem 0; }
   .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.7rem 0.9rem; margin-top: 0.9rem; }
   .reflect-box h3 { font-family: var(--ff-head); font-size: 0.85rem; font-weight: 700; color: var(--green); margin-bottom: 0.4rem; }
-  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--slate); font-weight: 600; margin-top: 0.4rem; }
-  .reflect-line input[type=text] { flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--slate); font-weight: 600; margin-top: 0.4rem; flex-wrap: wrap; }
+  .reflect-line input[type=text] { flex: 1; min-width: 120px; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
   .print-btn {
     display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white;
     font-family: var(--ff-head); font-size: 0.95rem; font-weight: 600; padding: 0.5rem 1.4rem; border: none;
     border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
   }
   .print-btn:hover { background: #1d4ed8; }
-  .footer-note { margin-top: 1rem; text-align: center; font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+  .footer-note { margin-top: 1rem; text-align: center; font-size: 0.7rem; color: var(--muted); font-weight: 600; overflow-wrap: break-word; }
 </style>
 </head>
 <body>
@@ -183,7 +203,7 @@
     <span class="badge badge-blue">8 Problems - ~3 min</span>
   </div>
   <p class="instr">No calculator. Write the percent directly - you should recognize these on sight by the end of the week.</p>
-  <div class="prob-grid" style="grid-template-columns:1fr 1fr 1fr 1fr ;">
+  <div class="prob-grid">
     <div class="prob">
       <div class="prob-num">1 </div>
       <p class="prob-q">1/2 = ___%</p>
@@ -232,7 +252,7 @@
     <span class="badge badge-blue">8 Problems - ~3 min</span>
   </div>
   <p class="instr">Simplify all the way. Same benchmark set, reversed direction.</p>
-  <div class="prob-grid" style="grid-template-columns:1fr 1fr 1fr 1fr ;">
+  <div class="prob-grid">
     <div class="prob">
       <div class="prob-num">1 </div>
       <p class="prob-q">50% = ___ (fraction)</p>
