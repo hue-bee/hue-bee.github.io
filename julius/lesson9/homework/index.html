@@ -1,1 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 Homework — Equations &amp; Revising/Editing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.2rem; }
+  .work-area {
+    width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px;
+    background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink);
+    box-sizing: border-box; outline: none; margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  .ans-input {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);
+    font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;
+  }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .passage-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); column-count: 2; column-gap: 1.4rem; }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt {
+    font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem;
+    line-height: 1.45; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%;
+    margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid #fca5a5; background: white; }
+  .error-table input { width: 100%; border: none; background: transparent; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink); outline: none; }
+  .reflect-box { border: 2px solid var(--green); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--green-lt); margin-top: 1.2rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem;
+    color: var(--ink); background: transparent; outline: none; padding: 1px 6px;
+  }
+  .score-banner {
+    display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md);
+    border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center;
+  }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .print-btn {
+    display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white; font-family: var(--ff-head);
+    font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none; border-radius: 30px; cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>✏️ Week 8 Homework</h1>
+      <div class="subtitle">Multi-Step Equations &amp; Word Translations &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" class="ans-input" style="border:none;border-bottom:1.5px solid var(--border);"></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" class="ans-input" style="border:none;border-bottom:1.5px solid var(--border);"></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="6" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 6</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="18" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 18</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A: MULTI-STEP EQUATIONS -->
+  <div class="section-hd">
+    <span class="icon">🧮</span>
+    <h2>Part A — Multi-Step Equations</h2>
+    <span class="badge badge-blue">4 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Undo addition/subtraction across the whole side before you touch multiplication/division. Circle your final answer.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">Undo +/− first, then ×/÷</span>
+    <span class="fml">Whatever you do to one side, do to the other</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve <strong>5x − 3 = 22</strong>. What is the last operation done to x, and what should you undo first?</p>
+      <textarea class="work-area" placeholder="Add 3 to both sides → …&#10;Divide by 5 → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve <strong>2x + 9 = −5</strong>. Watch your signs carefully when you subtract 9 from both sides.</p>
+      <textarea class="work-area" placeholder="Subtract 9 → …&#10;Divide by 2 → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve <strong>−4x + 7 = 3x − 14</strong>. Get all the x-terms on one side before you isolate x.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Move x-terms → …&#10;Move constants → …&#10;Divide → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve <strong>−3(x − 5) + 2 = 4x − 9</strong>. Which value of x makes this true?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Distribute first → …&#10;Combine like terms → …&#10;Isolate x → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: DISTRIBUTING & COMBINING LIKE TERMS -->
+  <div class="section-hd">
+    <span class="icon">🧹</span>
+    <h2>Part B — Distributing &amp; Combining Like Terms</h2>
+    <span class="badge badge-sand">3 Problems · ~10 min</span>
+  </div>
+  <p class="instr">Distribute to EVERY term inside the parentheses before combining like terms. Watch negative signs closely.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Formula</span>
+    <span class="fml">a(b + c) = ab + ac</span>
+    <span class="fml">Combine x-terms and constants separately</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Simplify <strong>3(x + 6) + 2x</strong> into one clean expression before doing anything else.</p>
+      <textarea class="work-area" placeholder="Distribute → …&#10;Combine like terms → …"></textarea>
+      <div class="answer-box">Simplified: <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve <strong>5(x − 3) = 3x + 7</strong>. Distribute on the left, then move the x-terms to one side.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Distribute → …&#10;Move x-terms → …&#10;Isolate x → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve <strong>−2(3x − 4) = 4(x + 1) − 2</strong>. What is x?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Distribute both sides → …&#10;Combine, move x-terms → …&#10;Isolate x → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <!-- PART C: WORD-TO-EQUATION TRANSLATION -->
+  <div class="section-hd">
+    <span class="icon">🔤</span>
+    <h2>Part C — Word-to-Equation Translation</h2>
+    <span class="badge badge-green">3 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Read each sentence piece by piece. Build the equation in the same order the words appear, then solve.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Dictionary</span>
+    <span class="fml">more than, increased by = +</span>
+    <span class="fml">less than, decreased by = −</span>
+    <span class="fml">twice, product = ×</span>
+    <span class="fml">is, was, equals = =</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">"5 more than three times a number is 26." Write and solve an equation for the number.</p>
+      <textarea class="work-area" placeholder="Let n = the number.&#10;Equation: …&#10;Solve: …"></textarea>
+      <div class="answer-box">n = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">"7 less than twice a number equals the number plus 9." Write and solve an equation for the number.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Let n = the number.&#10;Equation: …&#10;Solve: …"></textarea>
+      <div class="answer-box">n = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">"Twice the sum of a number and 4 is 6 less than four times the number." Which value of the number makes this true?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Let n = the number.&#10;Equation: …&#10;Solve: …"></textarea>
+      <div class="answer-box">n = <input type="text" class="ans-input"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART C CONTINUED: VARIABLES ON BOTH SIDES -->
+  <div class="section-hd">
+    <span class="icon">⚖️</span>
+    <h2>Part C Continued — Variables on Both Sides</h2>
+    <span class="badge badge-coral">2 Problems · ~8 min</span>
+  </div>
+  <p class="instr">Move the smaller x-coefficient to the other side first — it keeps your remaining x-term positive.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve <strong>7x − 4 = 4x + 11</strong>. Which x-term should you move first, and why?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Move smaller x-term → …&#10;Isolate x → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve <strong>3(x − 2) = 8x + 4</strong>. Distribute before you herd the x's to one side.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Distribute → …&#10;Move x-terms → …&#10;Isolate x → …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART D: ELA REVISING/EDITING -->
+  <div class="section-hd">
+    <span class="icon">📝</span>
+    <h2>Part D — ELA: Revising &amp; Editing</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read each sentence carefully. Look for redundancy, dangling modifiers, and unclear pronoun references before choosing an answer.</p>
+
+  <div class="passage-box">
+    <div class="passage-title">Revision Practice Set</div>
+    <div class="passage-text">
+      <p>Editors do not just shorten sentences — they make sure every word earns its place and every phrase points clearly back to the right subject. A sentence can be grammatically correct and still confuse a reader if a modifier is misplaced or if a pronoun could refer to more than one noun. The six questions below ask you to find the specific problem in each sentence, not just to guess which choice "sounds better."</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> "After finishing her homework early, the television was turned on." What is wrong with this sentence?</div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) Nothing — the sentence is correct as written</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) The opening phrase has no clear subject to attach to — the television didn't finish homework</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) It uses the wrong verb tense</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) It is missing a comma before "the"</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> "The reason the test was hard is due to the fact that it covered too much material." What kind of error is this?</div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) Redundancy — "the reason is due to the fact" repeats the same idea</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) Subject-verb disagreement</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) A dangling modifier</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) Incorrect punctuation</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> Which revision best fixes: "Maria told her sister that she had won the contest."</div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Maria told her sister that Maria had won the contest.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) No change — the sentence is already clear</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Maria's sister told her that she had won the contest.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) She told her that Maria won.</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> "Each and every student must return back their permission form by Friday." Identify the redundancy.</div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) "Each and every" and "return back" both repeat a single idea twice</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) "Permission form" is unnecessary</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) "By Friday" should be removed</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) There is no redundancy in this sentence</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> "Running quickly to catch the bus, my backpack fell off my shoulder." Choose the best revision.</div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) Running quickly to catch the bus, I felt my backpack fall off my shoulder.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) No change — the sentence is correct</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) My backpack, running quickly to catch the bus, fell off my shoulder.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) To catch the bus quickly running, my backpack fell.</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> A student says: <em>"'No Change' is always a safe choice if I'm not sure which answer is right."</em> Is this a good test-taking strategy?</div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) Yes — "No Change" is correct more often than any other option</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) No — you should still check the sentence for real errors before choosing it, since it is only correct when the sentence truly has no issue</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Yes — it saves time, and time is the only thing that matters</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) No — "No Change" should never be selected on the SHSAT</span></label>
+    </div>
+  </div>
+
+  <!-- ERROR LOG -->
+  <div class="error-log">
+    <h3>🩹 Error Log</h3>
+    <p style="font-size:0.78rem;color:#7c2d12;margin-bottom:0.6rem;">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+    <table class="error-table">
+      <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th>Error Type</th></tr>
+      <tr><td>1</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>2</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>3</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>4</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>5</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflect-box">
+    <h3>💭 Reflection</h3>
+    <p style="font-size:0.78rem;color:#166534;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The equation-solving step I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(o => o.classList.remove('selected'));
+  label.classList.add('selected');
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers, work, and selections?')) return;
+  document.querySelectorAll('input[type=text], input[type=number], textarea').forEach(el => el.value = '');
+  document.querySelectorAll('.mc-opt.selected').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+}
+</script>
+</body>
+</html>
