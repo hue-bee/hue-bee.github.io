@@ -15,3 +15,4 @@
 | **06** | [Circles, Volume & 3D Figures](https://hue-bee.github.io/julius/lesson6) | [6 Homework](https://hue-bee.github.io/julius/lesson6/homework) ||
 | **07** | [Absolute Value, Factors & Multiples](https://hue-bee.github.io/julius/lesson7) | [7 Homework](https://hue-bee.github.io/julius/lesson7/homework) ||
 | **08** | [Exponents, Radicals & Counting Principle](https://hue-bee.github.io/julius/lesson8) | [8 Homework](https://hue-bee.github.io/julius/lesson8/homework) ||
+| **09** | [Multi-Step Equations & Word Translations](https://hue-bee.github.io/julius/lesson9) | [9 Homework](https://hue-bee.github.io/julius/lesson9/homework) ||
