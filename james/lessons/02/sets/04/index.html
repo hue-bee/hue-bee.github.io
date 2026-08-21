@@ -126,7 +126,12 @@
   .prob-q { font-size: 0.82rem; color: var(--ink); font-weight: 600; line-height: 1.45; margin-bottom: 0.4rem; }
   .prob-q strong { color: #374151; }
   .answer-box { margin-top: 0.4rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 700; color: var(--slate); }
-  .answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.1rem; }
+  .answer-box input[type=text] {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
+    font-size: 0.8rem; font-weight: 700; color: var(--ink); background: transparent; outline: none;
+    padding: 1px 4px; min-height: 1.2rem;
+  }
+  .answer-box input[type=text]:focus { border-bottom-color: var(--blue); background: var(--blue-lt); }
   .fml-strip {
     display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md);
     border-radius: 10px; padding: 0.5rem 0.85rem; margin-bottom: 0.8rem; align-items: center;
@@ -182,32 +187,32 @@
     <div class="prob">
       <div class="prob-num">1 </div>
       <p class="prob-q">1.10² = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">2 </div>
       <p class="prob-q">1.05² = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">3 </div>
       <p class="prob-q">0.90² = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">4 </div>
       <p class="prob-q">1.20² = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">5 </div>
       <p class="prob-q">1.10³ = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">6 </div>
       <p class="prob-q">0.80² = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
   </div>
   <hr class="divider">
@@ -221,42 +226,42 @@
     <div class="prob">
       <div class="prob-num">1 </div>
       <p class="prob-q">3/8 = ___%</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">2 </div>
       <p class="prob-q">15% increase multiplier = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">3 </div>
       <p class="prob-q">60 decreased by 20% = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">4 </div>
       <p class="prob-q">3% to 5% is a gap of how many percentage points?</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">5 </div>
       <p class="prob-q">20% of 45 = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">6 </div>
       <p class="prob-q">1.15² ≈ ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">7 </div>
       <p class="prob-q">90% = ___ (fraction)</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
     <div class="prob">
       <div class="prob-num">8 </div>
       <p class="prob-q">25% decrease multiplier = ___</p>
-      <div class="answer-box"><span>Ans:</span><span class="answer-line"></span></div>
+      <div class="answer-box"><span>Ans:</span><input type="text" placeholder="…"></div>
     </div>
   </div>
   <hr class="divider">
