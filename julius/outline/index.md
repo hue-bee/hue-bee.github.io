@@ -115,7 +115,6 @@ No formula sheet is provided. Perimeter, area, volume, and surface-area formulas
 ### On-Screen Math Tools
 Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, Equation Editor.
 
----
 
 ## Question Formats Across Both Sections
 
