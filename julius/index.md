@@ -1,12 +1,13 @@
 ### 🏖️ Julius - CAT SHSAT 
 
 ![Level](https://img.shields.io/badge/level-beginner%20to%20advanced-brightgreen)
-![Updated](https://img.shields.io/badge/updated-2026-lightyellow)
+![Updated](https://img.shields.io/badge/updated-2026-lightyellow)  
 
 
 [2026 SHSAT Outline](https://hue-bee.github.io/julius/outline)  
-  
-  
+
+
+
   
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
