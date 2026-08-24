@@ -7,7 +7,7 @@
 [2026 SHSAT Outline](https://hue-bee.github.io/julius/outline)  
   
   
-
+  
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [The Bridge Method](https://hue-bee.github.io/julius/lesson1) | - ||
