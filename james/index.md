@@ -4,6 +4,11 @@
 ![Updated](https://img.shields.io/badge/updated-2026-lightyellow)
 
 
+[2026 SHSAT Outline](https://hue-bee.github.io/julius/outline)  
+  
+  
+  
+
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Percent Foundations & Function of a Detail](https://hue-bee.github.io/james/lessons/01) | [1 Homework](https://hue-bee.github.io/james/lessons/01/homework) ||
