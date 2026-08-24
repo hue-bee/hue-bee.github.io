@@ -4,7 +4,7 @@
 ![Updated](https://img.shields.io/badge/updated-2026-lightyellow)
 
 
-[2026 SHSAT Outline](https://hue-bee.github.io/julius/outline)  
+[2026 SHSAT Outline](https://hue-bee.github.io/james/outline)  
   
   
   
