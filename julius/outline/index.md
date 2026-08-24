@@ -15,8 +15,6 @@
 
 Grade 8 test forms draw on NYC curriculum through Grade 7; Grade 9 forms draw on material through Grade 8.
 
----
-
 ## Part 1 — English Language Arts (50 questions)
 
 Aligned to the NYS Next Generation ELA Standards. Three question families.
@@ -69,8 +67,6 @@ High-frequency grammar targets (NYS Grade 7 Language standards and earlier):
 
 ### On-Screen ELA Tools
 Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, bookmark (within a passage set only), pop-up definitions for glossed words.
-
----
 
 ## Part 2 — Mathematics (50 questions)
 
@@ -131,8 +127,6 @@ Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, Equat
   - inline drop-down menus inside a sentence or equation
   - number-line, graph, and point-plotting interactions
 
----
-
 ## Strategy Implications of the Adaptive Format
 
 - The first item or passage set is of average difficulty; each response re-estimates the score and sets the difficulty of what comes next, so early accuracy shapes the rest of the section.
@@ -143,7 +137,6 @@ Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, Equat
 - Budget time by passage set and by section in advance, since the clock is entirely self-managed across 180 minutes.
 - Rehearse on the official NYC SHSAT Portal: the Student Readiness Tool tutorial plus the full-length online practice tests mirror the real interface and tools.
 
----
 
 ## Accommodations Notes
 
