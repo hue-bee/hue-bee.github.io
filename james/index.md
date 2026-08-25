@@ -12,6 +12,6 @@
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Percent Foundations & Function of a Detail](https://hue-bee.github.io/james/lessons/01) | [1 Homework](https://hue-bee.github.io/james/lessons/01/homework) ||
-| **02** | [Repeated Growth & Percent Vocabulary](https://hue-bee.github.io/james/lessons/02) | [2 Homework](https://hue-bee.github.io/james/lessons/02/homework) |Sets: [1](https://hue-bee.github.io/james/lessons/02/sets/01) [2](https://hue-bee.github.io/james/lessons/02/sets/02) [3](https://hue-bee.github.io/james/lessons/02/sets/03) [4](https://hue-bee.github.io/james/lessons/02/sets/04) |
+| **02** | [Repeated Growth & Percent Vocabulary](https://hue-bee.github.io/james/lessons/02) | [2 Homework](https://hue-bee.github.io/james/lessons/02/homework) |[Set 1](https://hue-bee.github.io/james/lessons/02/sets/01) [Set 2](https://hue-bee.github.io/james/lessons/02/sets/02) [Set 3](https://hue-bee.github.io/james/lessons/02/sets/03) [Set 4](https://hue-bee.github.io/james/lessons/02/sets/04) |
 | **03** | [Percents of Derived Quantities & "Through" = Method](https://hue-bee.github.io/james/lessons/03) | [3 Homework](https://hue-bee.github.io/james/lessons/03/homework) ||
 
