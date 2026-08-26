@@ -1,1 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 Homework — Algebra: Inequalities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+  /* ── Annotation Toolbar ── */
+  .annotation-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.96);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 5px 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+  }
+  .annot-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 9px;
+    border-radius: 7px;
+    border: 1.5px solid var(--border);
+    background: #f8f8f8;
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    font-family: var(--ff-body);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+  .annot-btn.active { background: #374151; color: white; border-color: #374151; }
+  .annot-btn.active:hover { background: #1f2937; }
+  .annot-sep { width: 1px; height: 22px; background: var(--border); margin: 0 2px; }
+  .annot-color-row { display: flex; align-items: center; gap: 4px; }
+  .annot-color-swatch {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border);
+    cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+  }
+  .annot-color-swatch:hover { transform: scale(1.18); }
+  .annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+  .annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+  .annotatable-passage { position: relative; cursor: text; user-select: text; }
+  .passage-highlight { border-radius: 3px; padding: 0 1px; }
+  .passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+  .passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+  .passage-note {
+    display: inline-block;
+    width: 14px; height: 14px;
+    background: #374151; color: white;
+    border-radius: 50%;
+    font-size: 0.6rem; font-weight: 800;
+    text-align: center; line-height: 14px;
+    cursor: pointer;
+    position: relative;
+    vertical-align: super;
+    margin-left: 2px;
+    font-style: normal;
+  }
+  .passage-note .note-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    font-size: 0.72rem;
+    padding: 5px 9px;
+    border-radius: 8px;
+    z-index: 200;
+    pointer-events: none;
+    width: max-content;
+    max-width: 220px;
+    white-space: normal;
+  }
+  .passage-note:hover .note-tooltip { display: block; }
+  .clear-annotations-btn {
+    margin-left: auto;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: #fee2e2;
+    border: 1.5px solid #fca5a5;
+    color: #b91c1c;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--ff-body);
+    transition: background 0.15s;
+  }
+  .clear-annotations-btn:hover { background: #fecaca; }
+  @media print {
+    .annotation-toolbar { display: none !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>📐 Week 9 Homework</h1>
+      <div class="subtitle">Algebra: Inequalities &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PART A: ONE- & TWO-STEP INEQUALITIES ── -->
+  <div class="section-hd">
+    <span class="icon">➕</span>
+    <h2>Part A — One- &amp; Two-Step Inequalities</h2>
+    <span class="badge badge-blue">6 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Show ALL work. Solve for the variable, and remember: flip the inequality sign only when multiplying or dividing by a negative number.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Rules</span>
+    <span class="fml">Add/Subtract: sign stays the same</span>
+    <span class="fml">Multiply/Divide by (−): flip the sign</span>
+    <span class="fml">Isolate the variable</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: <strong>x + 7 &gt; 12</strong></p>
+      <textarea class="work-area" placeholder="x + 7 > 12 → x > …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: <strong>3x ≤ 21</strong></p>
+      <textarea class="work-area" placeholder="3x ≤ 21 → x ≤ …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: <strong>2x − 5 &lt; 9</strong></p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1 — add 5 to both sides: …&#10;Step 2 — divide by 2: …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: <strong>−4x + 3 ≥ −13</strong> (watch the negative coefficient!)</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1 — subtract 3: …&#10;Step 2 — divide by −4 (flip sign!): …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: <strong>5(x − 2) &lt; 3x + 6</strong></p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Step 1 — distribute: …&#10;Step 2 — collect x-terms: …&#10;Step 3 — isolate x: …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: <strong>−2(3x − 1) ≥ 4(x + 5)</strong></p>
+      <textarea class="work-area" style="min-height:80px;" placeholder="Step 1 — distribute both sides: …&#10;Step 2 — collect x-terms on one side: …&#10;Step 3 — divide (watch the sign!): …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+  </div><!-- /prob-grid one-two step -->
+
+</div><!-- /sheet 1 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART B: GRAPHING & COMPOUND INEQUALITIES ── -->
+  <div class="section-hd">
+    <span class="icon">📊</span>
+    <h2>Part B — Graphing &amp; Compound Inequalities</h2>
+    <span class="badge badge-sand">4 Problems · ~15 min</span>
+  </div>
+  <p class="instr">For graphing: open circle for &lt; or &gt;, closed (filled) circle for ≤ or ≥. Shade in the direction the inequality points.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Rules</span>
+    <span class="fml">&lt; or &gt; → open circle</span>
+    <span class="fml">≤ or ≥ → closed circle</span>
+    <span class="fml">Compound: solve middle term with all three parts</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve <strong>x − 3 ≥ 5</strong>, then graph the solution on the number line below.</p>
+      <div class="fig">
+        <svg width="220" height="50" viewBox="0 0 220 50">
+          <line x1="10" y1="25" x2="210" y2="25" stroke="#374151" stroke-width="2"/>
+          <line x1="30" y1="18" x2="30" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="70" y1="18" x2="70" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="110" y1="18" x2="110" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="150" y1="18" x2="150" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="190" y1="18" x2="190" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <text x="30" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">6</text>
+          <text x="70" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">7</text>
+          <text x="110" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">8</text>
+          <text x="150" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">9</text>
+          <text x="190" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">10</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="x − 3 ≥ 5 → x ≥ …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve <strong>−2x + 1 &gt; 9</strong>, then graph the solution on the number line below.</p>
+      <div class="fig">
+        <svg width="220" height="50" viewBox="0 0 220 50">
+          <line x1="10" y1="25" x2="210" y2="25" stroke="#374151" stroke-width="2"/>
+          <line x1="30" y1="18" x2="30" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="70" y1="18" x2="70" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="110" y1="18" x2="110" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="150" y1="18" x2="150" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="190" y1="18" x2="190" y2="32" stroke="#9ca3af" stroke-width="1"/>
+          <text x="30" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">−6</text>
+          <text x="70" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">−5</text>
+          <text x="110" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">−4</text>
+          <text x="150" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">−3</text>
+          <text x="190" y="45" font-family="Nunito" font-size="10" fill="#6b7280" text-anchor="middle">−2</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1 — subtract 1: …&#10;Step 2 — divide by −2 (flip!): …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve the compound inequality: <strong>−3 &lt; 2x + 1 ≤ 9</strong></p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Subtract 1 from all three parts: …&#10;Divide all three parts by 2: …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve the compound inequality: <strong>4 ≤ −3x + 10 &lt; 16</strong> (watch the negative coefficient when dividing!)</p>
+      <textarea class="work-area" style="min-height:80px;" placeholder="Subtract 10 from all three parts: …&#10;Divide all three parts by −3 (flip both signs!): …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+  </div><!-- /prob-grid graphing/compound -->
+
+  <hr class="divider">
+
+  <!-- ── PART B CONTINUED: Word Problems ── -->
+  <div class="section-hd">
+    <span class="icon">💬</span>
+    <h2>Part B Continued — Word Problems</h2>
+    <span class="badge badge-green">2 Problems · ~8 min</span>
+  </div>
+  <p class="instr">Read carefully. Underline the question. Translate the words into an inequality before you solve.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Word Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A parking garage charges <strong>$5 to enter</strong> plus <strong>$3 per hour</strong>. Malik has at most <strong>$26</strong> to spend. Write an inequality and solve for the maximum number of whole hours he can park.</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Let h = hours. Inequality: 5 + 3h ≤ 26&#10;Solve for h: …"></textarea>
+      <div class="answer-box">Max hours: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> hours</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Word Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A phone plan costs <strong>$20 per month</strong> plus <strong>$0.10 per text</strong> over the free limit. Priya wants to keep her monthly bill <strong>under $35</strong>. Write and solve an inequality for the number of extra texts <strong>t</strong> she can send.</p>
+      <textarea class="work-area" style="min-height:80px;" placeholder="Inequality: 20 + 0.10t < 35&#10;Solve for t: …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> texts</div>
+    </div>
+
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — ELA + ERROR LOG
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART C: ELA ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Revising &amp; Editing (Focus, Transitions, Off-Topic Sentences)</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read the passage once for understanding. Annotate: circle signal words, underline the main idea of each paragraph. Answer all 6 questions.</p>
+
+  <!-- Passage -->
+  <div class="annotation-toolbar" id="toolbar-passage">
+    <span class="annot-label">Tool:</span>
+    <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+    <button class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+    <button class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+    <button class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+    <div class="annot-sep"></div>
+    <span class="annot-label">Color:</span>
+    <div class="annot-color-row" id="colors-passage">
+      <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+      <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+      <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+      <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+      <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+    </div>
+    <button class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+  </div>
+  <div class="passage-box">
+    <div class="passage-title">Why Bridges Don't Fall Down</div>
+    <div class="passage-text annotatable-passage" id="passage-main">
+      <p><span class="para-lbl">[¶1]</span> In 1940, the Tacoma Narrows Bridge in Washington State collapsed just months after it opened — not because it was too weak, but because engineers had not accounted for how wind could make the whole structure twist and oscillate. The failure became one of the most studied events in engineering history. <span class="sw">As a result</span>, every bridge built since has been tested not only for weight, but for motion.</p>
+      <p><span class="para-lbl">[¶2]</span> Modern bridges rely on a small set of core ideas to stay standing under enormous stress. Trusses — networks of triangles — distribute weight evenly because a triangle is the only shape that cannot be pushed out of form without bending one of its sides. Suspension cables convert the downward pull of gravity into tension that travels up to giant towers and down into the earth. <span class="sw">In addition</span>, expansion joints allow a bridge to grow and shrink slightly with temperature changes without cracking.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">However</span>, no amount of clever design matters if a bridge is not inspected regularly. Steel corrodes, concrete cracks, and bolts loosen over decades of traffic and weather. Engineers use sensors, drones, and manual inspections to catch small problems before they become emergencies. <span class="sw">Consequently</span>, most bridge failures today are traced not to bad design, but to deferred maintenance.</p>
+      <p><span class="para-lbl">[¶4]</span> My cousin once tried to build a bridge out of spaghetti and marshmallows for a science fair, and it held exactly four pennies before collapsing. It was a fun afternoon, but it taught him that even a small structure needs a plan before you start stacking material onto it.</p>
+      <p><span class="para-lbl">[¶5]</span> Understanding these principles is not just for engineers. Every commuter who crosses a bridge is trusting a century of accumulated lessons about triangles, tension, and inspection schedules. The next time you drive over one, remember: it isn't standing by accident. It is standing because someone solved a very old set of problems in a very deliberate way.</p>
+    </div>
+  </div>
+
+  <!-- Questions 1–6 -->
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> What is the <strong>author's primary purpose</strong> in writing this passage? <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) To entertain readers with a story about a science fair</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) To explain the key engineering principles that keep bridges standing</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) To argue that the Tacoma Narrows Bridge should never have been built</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) To compare steel bridges to concrete bridges</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> The author opens with the Tacoma Narrows Bridge collapse primarily to: <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) Show a real-world event that changed how bridges are engineered</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) Prove that all bridges built before 1940 were unsafe</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) Entertain readers with a dramatic disaster story</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) Argue that wind is more dangerous than weight</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶1, the transition <em>"As a result"</em> signals a relationship of: <span class="lvl lvl-2" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#d9d9d9;color:#1f2937;">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Cause and effect</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Contrast</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Comparison</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Sequence only, with no causal link</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> Which sentence in the passage is <strong>off-topic</strong> and should be removed to keep the essay focused? <span class="lvl lvl-3" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#bdbdbd;color:#111827;">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) The sentence about the Tacoma Narrows Bridge collapse in ¶1</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) The sentence about trusses distributing weight in ¶2</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) The entire ¶4 about the spaghetti-bridge science fair project</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) The sentence about sensors and drones in ¶3</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which transition word, if inserted at the start of ¶4, would best connect it to ¶3 (assuming it were kept)? <span class="lvl lvl-3" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#bdbdbd;color:#111827;">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) Similarly</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) On a lighter note</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) Therefore</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) In contrast</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> A student claims: <em>"The author believes good design alone is enough to keep a bridge safe forever."</em> Using evidence from <strong>¶3 and ¶5</strong>, is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4" style="display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;background:#6b7280;color:#ffffff;">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) Supported — ¶5 says design lessons are all that matter</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) Partially supported — ¶3 emphasizes ongoing maintenance, not design alone, as key to safety</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Contradicted — ¶3 states design is irrelevant compared to inspections</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) Irrelevant — neither paragraph discusses safety over time</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART D: ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── REFLECTION ── -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The inequality rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 9 · SHSAT Prep &nbsp;·&nbsp; 📐 Algebra: Inequalities &nbsp;|&nbsp; 📖 ELA: Revising &amp; Editing
+  </div>
+
+</div><!-- /sheet 3 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+
+/* ── Passage Annotation System ── */
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.getElementById('toolbar-passage').querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.getElementById('colors-passage').querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note...';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '\u2713';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '\u2715';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      var noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') {
+        span2.className = 'passage-highlight';
+        span2.style.backgroundColor = color;
+        span2.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span2.className = 'passage-underline';
+        span2.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span2.className = 'passage-outline';
+        span2.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+(function(){
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.addEventListener('mouseup', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range);
+  });
+  passage.addEventListener('touchend', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    setTimeout(function(){ applyPassageAnnotation(range); }, 100);
+  });
+})();
+
+</script>
+</body>
+</html>
