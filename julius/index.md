@@ -20,3 +20,4 @@
 | **07** | [Absolute Value, Factors & Multiples](https://hue-bee.github.io/julius/lesson7) | [7 Homework](https://hue-bee.github.io/julius/lesson7/homework) ||
 | **08** | [Exponents, Radicals & Counting Principle](https://hue-bee.github.io/julius/lesson8) | [8 Homework](https://hue-bee.github.io/julius/lesson8/homework) ||
 | **09** | [Multi-Step Equations & Word Translations](https://hue-bee.github.io/julius/lesson9) | [9 Homework](https://hue-bee.github.io/julius/lesson9/homework) ||
+| **10** | [Algebra: Inequalities](https://hue-bee.github.io/julius/lesson10) | [9 Homework](https://hue-bee.github.io/julius/lesson10/homework) ||
