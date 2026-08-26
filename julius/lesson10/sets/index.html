@@ -1,1 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 Set — Roots & Compound Inequalities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Fredoka', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>√ Week 9 Set</h1>
+      <div class="subtitle">Algebra: Roots &amp; Compound Inequalities &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="10" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 10</div>
+        <div class="sc-lbl">Roots</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="10" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 10</div>
+        <div class="sc-lbl">Inequalities</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="20" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 20</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PART A: SQUARE & CUBE ROOTS ── -->
+  <div class="section-hd">
+    <span class="icon">√</span>
+    <h2>Part A — Simplifying Square &amp; Cube Roots</h2>
+    <span class="badge badge-blue">10 Problems · ~20 min</span>
+  </div>
+  <p class="instr">Find the largest perfect-square (or perfect-cube) factor hiding under the radical, then simplify before combining any terms.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">√(a·b) = √a · √b</span>
+    <span class="fml">∛(a·b) = ∛a · ∛b</span>
+    <span class="fml">√a² = a</span>
+    <span class="fml">Perfect squares: 1,4,9,16,25,36,49,64,81,100,121,144</span>
+    <span class="fml">Perfect cubes: 1,8,27,64,125,216</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Simplify completely: <strong>√50</strong></p>
+      <textarea class="work-area" placeholder="Largest perfect square factor of 50 is …&#10;√50 = √(25 · 2) = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Simplify completely: <strong>√72</strong></p>
+      <textarea class="work-area" placeholder="Largest perfect square factor of 72 is …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Simplify completely: <strong>∛54</strong></p>
+      <textarea class="work-area" placeholder="Largest perfect cube factor of 54 is …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">What is the cube root of <strong>216</strong>?</p>
+      <textarea class="work-area" placeholder="216 = 6 × 6 × 6, so ∛216 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify completely: <strong>√98 + √8</strong></p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Simplify each radical first, THEN combine like terms.&#10;√98 = …&#10;√8 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify completely: <strong>3√20 − √45</strong></p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="3√20 = 3 × … = …&#10;√45 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify completely: <strong>2∛40</strong></p>
+      <textarea class="work-area" placeholder="Largest perfect cube factor of 40 is …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Simplify completely: <strong>√12 · √3</strong></p>
+      <textarea class="work-area" placeholder="Multiply under one radical first: √(12 × 3) = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Simplify completely: <strong>√75 + 2√27 − √12</strong></p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Simplify all three radicals first.&#10;√75 = …    2√27 = …    √12 = …&#10;Then combine like terms."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Explain in words: why can't <strong>√8 + √2</strong> be simplified by just adding the numbers under the radical (like √10)? Then give the correct simplified value.</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Explain the rule, then show: √8 = … so √8 + √2 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+  </div><!-- /prob-grid roots -->
+
+</div><!-- /sheet 1 -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════════════ -->
+<div class="sheet page-break">
+
+  <!-- ── PART B: COMPOUND INEQUALITIES ── -->
+  <div class="section-hd">
+    <span class="icon">⚖️</span>
+    <h2>Part B — Compound Inequalities</h2>
+    <span class="badge badge-sand">10 Problems · ~22 min</span>
+  </div>
+  <p class="instr">Solve each part separately (if needed), flip the inequality sign whenever you multiply or divide by a negative number, then graph your answer on the number line.</p>
+
+  <!-- Formula strip -->
+  <div class="formula-strip">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">"AND" → overlap (both true)</span>
+    <span class="fml">"OR" → union (either true)</span>
+    <span class="fml">÷ or × by negative → FLIP the sign</span>
+    <span class="fml">Open circle: &lt; or &gt;</span>
+    <span class="fml">Closed circle: ≤ or ≥</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and graph: <strong>−3 &lt; x + 2 &lt; 5</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Subtract 2 from all three parts:&#10;−3 − 2 &lt; x &lt; 5 − 2"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and graph: <strong>2 ≤ 2x − 4 ≤ 10</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Add 4 to all three parts, then divide by 2."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 13 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and graph: <strong>x + 1 &lt; −2</strong> OR <strong>x − 3 &gt; 4</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Solve each part separately, then combine with OR (union)."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 14 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve and graph: <strong>−2x + 3 ≥ 9</strong> AND <strong>x + 5 &lt; 12</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Careful — dividing by −2 in the first part flips the sign!"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 15 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve and graph: <strong>−1 &lt; −3x + 5 ≤ 11</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Subtract 5 from all parts, then divide by −3 (FLIP both signs and reverse order!)"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 16 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Write a compound inequality for: "x is at least −4 but less than 6."</p>
+      <textarea class="work-area" placeholder="Use ≤ or &lt; correctly based on the wording ('at least' vs. 'less than')."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 17 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve and graph: <strong>3x − 1 &lt; 5</strong> OR <strong>2x + 4 ≥ 18</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Solve each inequality on its own, then think about whether the union covers all real numbers."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 18 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A carnival ride requires riders to be <strong>at least 42 inches</strong> but <strong>under 72 inches</strong> tall. Write a compound inequality using h for height, then state whether a rider who is exactly 72 inches tall qualifies.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Translate the words into ≤, ≥, &lt;, or &gt; carefully."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 19 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve and graph: <strong>4 ≤ 3 − x &lt; 9</strong></p>
+      <div class="fig">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="#374151" stroke-width="2"/>
+          <text x="75" y="45" font-family="Nunito" font-size="9" fill="#6b7280" text-anchor="middle">graph your solution</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Subtract 3 from all parts, then divide by −1 (flip signs and reverse order)."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 20 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Explain in your own words why the solution to an "AND" compound inequality can sometimes be <strong>no solution</strong>, while the solution to an "OR" compound inequality almost never is. Give a one-sentence example of each.</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Think about overlap vs. union of the two number lines."></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+  </div><!-- /prob-grid inequalities -->
+
+  <!-- ── PART C: ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part C — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── REFLECTION ── -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 9 · SHSAT Prep &nbsp;·&nbsp; √ Roots &amp; ⚖️ Compound Inequalities
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
