@@ -1,1 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 9: Algebra - Inequalities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --z1:#262626; --z1-soft:rgba(38,38,38,0.10);
+  --z2:#4d4d4d; --z2-soft:rgba(77,77,77,0.10);
+  --z3:#6a6a6a; --z3-soft:rgba(106,106,106,0.12);
+  --z4:#858585; --z4-soft:rgba(133,133,133,0.12);
+  --z5:#5c5c5c; --z5-soft:rgba(92,92,92,0.10);
+  --ela:#3e3e3e; --ela-soft:rgba(62,62,62,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--z5);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--z1);"></span> Session 10 · Phase II, Week 9
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.1rem,5.5vw,3.7rem);">Week 9 <br><span style="color:var(--z1);">Algebra: Inequalities</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">Aug 26 &nbsp;·&nbsp; Math Core 0:10–0:45 &nbsp;·&nbsp; ELA 0:45–0:58</h2>
+    <p class="reveal" style="font-size:0.82rem;color:var(--ink-3);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem;">SHSAT Prep · Solve, Flip, Graph &amp; Combine</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--z1-soft);color:var(--z1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">One- &amp; Two-Step Inequalities</span>
+      <span style="background:var(--z2-soft);color:var(--z2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Flipping the Sign</span>
+      <span style="background:var(--z3-soft);color:var(--z3);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Graphing on a Number Line</span>
+      <span style="background:var(--z4-soft);color:var(--z4);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Compound Inequalities</span>
+      <span style="background:var(--ela-soft);color:var(--ela);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">ELA · Revising &amp; Editing</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:00–0:10</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Warm-Up · Error Log</div>
+          <div class="tl-b">Inequalities scored 33–50% on both diagnostics. <em>Today we find out exactly which step is breaking — the algebra, or the sign flip.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:10–0:18</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">One- &amp; Two-Step Inequalities<span class="tag hot">High-Frequency</span></div>
+          <div class="tl-b">Solving an inequality uses the exact same moves as solving an equation. <em>The only new rule appears when you multiply or divide by a negative.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z2);">
+        <div class="tl-time">0:18–0:26</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Flipping the Sign<span class="tag hot">33–50% Zone</span></div>
+          <div class="tl-b">Multiplying or dividing both sides by a negative number reverses the direction of the inequality. <em>Test it with real numbers to see why it must be true.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z3);">
+        <div class="tl-time">0:26–0:34</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Graphing on a Number Line</div>
+          <div class="tl-b">Open circles mean "not included," closed circles mean "included." <em>The direction of the shaded arrow always matches the direction the variable points.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z4);">
+        <div class="tl-time">0:34–0:42</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Compound Inequalities</div>
+          <div class="tl-b">A compound inequality is really two conditions stitched into one line. <em>Split it into two pieces whenever the "and/or" logic feels unclear.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z5);">
+        <div class="tl-time">0:42–0:45</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Mixed Number Sense Check</div>
+          <div class="tl-b">SHSAT often disguises inequalities as word problems. <em>Translate the sentence into symbols before you touch a single number.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--ela);">
+        <div class="tl-time">0:45–0:58</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">ELA · Revising/Editing Part 2</div>
+          <div class="tl-b">Transitions, topic sentence revision, eliminating off-topic sentences. <em>Every fix must serve the paragraph's single main idea.</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — WARM UP -->
+<div class="slide" data-slide="3" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Warm-Up · Quick Recall</div>
+    <h2 class="slide-title reveal">Before We Move On: <span class="tint">Prove It Stuck</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think first</div>
+        <div class="socratic-body">If you solve x + 3 = 7, you get x = 4 — one exact answer. If instead you solve x + 3 &gt; 7, why should the answer be an entire range of numbers instead of just one? What does that tell you about what "&gt;" actually means?</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this matters</div>
+        <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Inequalities sit at 33–50% across both diagnostics — right in the middle, which usually means the algebra itself is fine but one specific rule (the sign flip) is inconsistent. Today we isolate that exact moment and drill it until it's automatic.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.9rem;">
+      <div class="trap-title">Your Habit Target</div>
+      <div class="trap-body">Every time you multiply or divide both sides of an inequality, say out loud: <em>"Am I multiplying or dividing by a negative? If yes, flip the sign now, before I forget."</em> Build the habit into the step itself, not as an afterthought.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — ONE/TWO STEP CONCEPT -->
+<div class="slide" data-slide="4" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · One- &amp; Two-Step Inequalities<span class="tag hot">High-Frequency</span></div>
+    <h2 class="slide-title reveal">Solving Inequalities Is <span class="tint">Solving Equations With a Range</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Solve 2x + 3 &lt; 11 exactly as you'd solve 2x + 3 = 11: subtract 3 from both sides, then divide by 2. What do you get? Since you never multiplied or divided by a negative, does the inequality symbol change at all?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The core process — same as equations</div>
+          <div class="math" style="font-size:1.05rem;">Add/subtract to isolate the x-term &#8594; divide by the coefficient</div>
+        </div>
+        <div class="info-card reveal" style="margin-top:0.7rem;">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Why this makes sense</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Adding or subtracting the same number from both sides never changes which side is bigger — the gap between them just shifts. That's why those two moves never require flipping the sign.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="170" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg">
+  <text x="15" y="30" font-size="15" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">2x + 3 &lt; 11</text>
+  <text x="15" y="60" font-size="14" fill="#4a4a4a" font-family="Nunito, sans-serif">&#8722;3 from both sides</text>
+  <text x="15" y="88" font-size="15" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2x &lt; 8</text>
+  <text x="15" y="118" font-size="14" fill="#4a4a4a" font-family="Nunito, sans-serif">&#247;2 (positive, no flip)</text>
+  <text x="15" y="146" font-size="16" font-weight="800" fill="#15803D" font-family="Nunito, sans-serif">x &lt; 4</text>
+  <path d="M175 20 L175 155" stroke="#767676" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <polygon points="170,55 180,55 175,65" fill="#4a4a4a"/>
+  <polygon points="170,110 180,110 175,120" fill="#4a4a4a"/>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — ONE/TWO STEP PRACTICE -->
+<div class="slide" data-slide="5" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Practice</div>
+    <h2 class="slide-title reveal">One- &amp; Two-Step Inequalities — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">x &#8722; 5 &gt; 2</span>. Which single operation isolates x, and does it require a sign flip?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">3x + 4 &#8804; 19</span>. What do you do first — subtract, or divide? Why does order matter here?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">5 &#8722; 2x &lt; 13</span>. Careful — after you subtract 5, what sign is attached to the x-term, and how does that change your next step?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">2(x + 3) &#8722; 4 &#8805; 3x &#8722; 1</span>. What must you do before you can combine any x-terms? Where do the variables end up relative to each other?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Distributing Before Combining</div>
+      <div class="trap-body">Multi-term problems require distributing across parentheses <em>before</em> you combine like terms. Skipping this step is the single most common source of wrong answers in Level 4 inequality problems.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — FLIP CONCEPT -->
+<div class="slide" data-slide="6" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Flipping the Sign<span class="tag hot">33–50% Zone</span></div>
+    <h2 class="slide-title reveal">Multiply or Divide by a Negative? <span class="tint">Flip the Sign</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Start with the true statement 2 &lt; 5. Multiply both sides by &#8722;1. You get &#8722;2 and &#8722;5 — which one is actually bigger on a number line? Is "&#8722;2 &lt; &#8722;5" still a true statement, or do you need to flip the symbol to keep it true?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div class="math" style="font-size:1.05rem;">If a &lt; b and c &lt; 0, then ac &gt; bc</div>
+        </div>
+        <div class="info-card reveal" style="margin-top:0.7rem;">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Why this makes sense</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Multiplying by a negative flips every number to the opposite side of zero, like a mirror. The number that was farther right becomes farther left — so the order of "bigger" and "smaller" reverses too.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="170" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg">
+  <text x="20" y="30" font-size="14" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">2 &lt; 5 &nbsp;(true)</text>
+  <line x1="20" y1="45" x2="240" y2="45" stroke="#B9C6D9" stroke-width="1.5"/>
+  <circle cx="80" cy="45" r="5" fill="#1D4ED8"/><text x="70" y="65" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">2</text>
+  <circle cx="190" cy="45" r="5" fill="#1D4ED8"/><text x="180" y="65" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">5</text>
+  <text x="20" y="105" font-size="13" fill="#4a4a4a" font-family="Nunito, sans-serif">&#215;(&#8722;1) &nbsp;mirror flip</text>
+  <polygon points="10,80 250,80" fill="none"/>
+  <text x="20" y="130" font-size="14" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">&#8722;2 &gt; &#8722;5 &nbsp;(flipped!)</text>
+  <line x1="20" y1="145" x2="240" y2="145" stroke="#B9C6D9" stroke-width="1.5"/>
+  <circle cx="150" cy="145" r="5" fill="#B45309"/><text x="140" y="165" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">&#8722;2</text>
+  <circle cx="60" cy="145" r="5" fill="#B45309"/><text x="45" y="165" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">&#8722;5</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — FLIP PRACTICE -->
+<div class="slide" data-slide="7" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice</div>
+    <h2 class="slide-title reveal">Flipping the Sign — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">&#8722;x &gt; 6</span>. What are you dividing by to isolate x, and what happens to the symbol?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">&#8722;3x &#8804; 12</span>. Divide both sides by &#8722;3 — remember the rule from the diagram. What's the resulting inequality?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div style="font-size:0.9rem;font-weight:700;color:var(--ink);margin-bottom:0.3rem;" class="reveal">7. Level 3: Solve <span class="math-inline">&#8722;2x + 5 &gt; &#8722;7</span>. Isolate the x-term first — then decide whether the final division step needs a flip.</div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">4 &#8722; 3x &#8805; 2x &#8722; 6</span>. If you move the x-terms to the side where the coefficient stays positive, do you ever need to flip the sign at all? Try both approaches and compare.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Forgetting the Flip on the Final Step</div>
+      <div class="trap-body">Test-writers love burying the negative division as the very last move. Even if you handled every earlier step correctly, one missed flip at the end gives the exact reversed (and wrong) answer choice — which is usually listed as a trap option.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — GRAPHING CONCEPT -->
+<div class="slide" data-slide="8" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Graphing on a Number Line</div>
+    <h2 class="slide-title reveal">Open Circle, Closed Circle, <span class="tint">and Which Way to Shade</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">For x &gt; 3, is 3 itself part of the solution? For x &#8805; 3, is 3 part of the solution? What visual difference should that produce at the point 3 on the number line — filled in, or hollow?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.82rem;font-weight:600;color:var(--ink-2);">&lt; and &gt; = open circle (not included) &nbsp;&nbsp; &#8804; and &#8805; = closed circle (included)</div>
+        </div>
+        <div class="info-card reveal" style="margin-top:0.7rem;">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Why this makes sense</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">The arrow always shades toward every number that makes the inequality true. For x &gt; 3, plug in 4 — true, so shade right. Plug in 2 — false, confirming you shade away from it.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="150" viewBox="0 0 270 150" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="25" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">x &gt; 3</text>
+  <line x1="20" y1="45" x2="250" y2="45" stroke="#B9C6D9" stroke-width="1.5"/>
+  <circle cx="120" cy="45" r="6" fill="#F0F7FF" stroke="#1D4ED8" stroke-width="2.4"/>
+  <line x1="120" y1="45" x2="250" y2="45" stroke="#1D4ED8" stroke-width="3"/>
+  <polygon points="245,39 258,45 245,51" fill="#1D4ED8"/>
+  <text x="112" y="65" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">3</text>
+  <text x="10" y="100" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">x &#8804; &#8722;1</text>
+  <line x1="20" y1="120" x2="250" y2="120" stroke="#B9C6D9" stroke-width="1.5"/>
+  <circle cx="150" cy="120" r="6" fill="#B45309" stroke="#B45309" stroke-width="2.4"/>
+  <line x1="20" y1="120" x2="150" y2="120" stroke="#B45309" stroke-width="3"/>
+  <polygon points="30,114 17,120 30,126" fill="#B45309"/>
+  <text x="140" y="140" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">&#8722;1</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — GRAPHING PRACTICE -->
+<div class="slide" data-slide="9" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Practice</div>
+    <h2 class="slide-title reveal">Graphing Inequalities — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Describe how to graph <span class="math-inline">x &#8805; &#8722;2</span>. Open or closed circle at &#8722;2? Which direction does the shading go?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve and graph <span class="math-inline">x + 4 &lt; 9</span>. What's the boundary point, and which type of circle matches "&lt;"?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve and graph <span class="math-inline">&#8722;2x &#8804; 10</span>. After you divide by a negative and flip, which way does the final arrow point?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">A number line shows an open circle at &#8722;3 with shading to the right. Write the inequality it represents. Then, if the circle were closed instead, how would the written inequality change?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Shading the Wrong Direction</div>
+      <div class="trap-body">Don't just look at which way the inequality symbol "points." Plug in one test number from each side of the boundary point to confirm which direction actually makes the statement true — symbols can mislead you after solving.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — COMPOUND CONCEPT -->
+<div class="slide" data-slide="10" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Compound Inequalities</div>
+    <h2 class="slide-title reveal">One Line, <span class="tint">Two Conditions at Once</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">The statement &#8722;2 &lt; x &lt; 5 is really saying two things at the same time: x is greater than &#8722;2, AND x is less than 5. If you split it into those two separate inequalities, what do you notice they share in common?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div class="math" style="font-size:1.05rem;">&#8722;2 &lt; x &lt; 5 &nbsp;&#8801;&nbsp; x &gt; &#8722;2 AND x &lt; 5</div>
+        </div>
+        <div class="info-card reveal" style="margin-top:0.7rem;">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Why this makes sense</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Whatever you do to solve, you must do to <em>all three parts</em> of the compound inequality — the left side, the middle, and the right side — to keep every piece balanced together.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="150" viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="25" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">&#8722;2 &lt; x &lt; 5</text>
+  <line x1="20" y1="60" x2="240" y2="60" stroke="#B9C6D9" stroke-width="1.5"/>
+  <circle cx="70" cy="60" r="6" fill="#F0F7FF" stroke="#B45309" stroke-width="2.4"/>
+  <circle cx="190" cy="60" r="6" fill="#F0F7FF" stroke="#B45309" stroke-width="2.4"/>
+  <line x1="70" y1="60" x2="190" y2="60" stroke="#B45309" stroke-width="3"/>
+  <text x="62" y="82" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">&#8722;2</text>
+  <text x="185" y="82" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">5</text>
+  <text x="60" y="120" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">Both circles open — squeeze between them</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — COMPOUND PRACTICE -->
+<div class="slide" data-slide="11" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Practice</div>
+    <h2 class="slide-title reveal">Compound Inequalities — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Graph <span class="math-inline">1 &#8804; x &lt; 6</span>. Which circle at 1 is closed, and which circle at 6 is open?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">&#8722;3 &#8804; x + 2 &#8804; 7</span>. What operation do you apply to all three parts to isolate x?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">4 &lt; 2x + 2 &#8804; 10</span>. After subtracting 2 from all three parts, what's your next move, and does it require a flip?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div style="font-size:0.95rem;color:var(--ink-2);line-height:1.55;">Solve <span class="math-inline">&#8722;6 &#8804; &#8722;2x + 4 &lt; 8</span>. Isolate the x-term in the middle first — then, when you divide by &#8722;2, what happens to the entire compound inequality, including which side each boundary ends up on?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Flipping Only One Side</div>
+      <div class="trap-body">When you divide a compound inequality by a negative, <em>both</em> inequality symbols flip, and the two boundary values swap positions (the smaller one moves to the left). Forgetting to swap positions is the most common Level 4 error.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — MIXED PRACTICE -->
+<div class="slide" data-slide="12" style="--zc:var(--z5);--zs:var(--z5-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="5"></div>
+    <div class="kicker reveal">Zone 5 · Mixed Practice</div>
+    <h2 class="slide-title reveal">Word Problems — <span class="tint">Translate Before You Solve</span></h2>
+    <div class="socratic reveal" style="margin-bottom:0.8rem;">
+      <div class="socratic-title">Think about it</div>
+      <div class="socratic-body">Before writing any symbols, ask: does the phrase mean "at least," "at most," "more than," or "fewer than"? Each phrase maps to exactly one inequality symbol — get the translation right first, and the algebra becomes routine.</div>
+    </div>
+    <div class="diagram-wrap reveal" style="margin-bottom:0.8rem;padding:0.6rem;">
+      <svg width="480" height="100" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="25" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">"at least" &#8594; &#8805;</text>
+  <text x="10" y="55" font-size="13" font-weight="700" fill="#1D4ED8" font-family="Nunito, sans-serif">"at most" &#8594; &#8804;</text>
+  <text x="230" y="25" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">"more than" &#8594; &gt;</text>
+  <text x="230" y="55" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">"fewer/less than" &#8594; &lt;</text>
+  <text x="10" y="85" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">"No more than" and "no less than" always mean &#8804; and &#8805; — they include the boundary.</text>
+</svg>
+    </div>
+    <div class="prob-card reveal">
+      <div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-4">Level 4</span></div>
+      <div style="font-size:0.98rem;color:var(--ink-2);line-height:1.55;">A parking garage charges $5 to enter plus $3 per hour. Julius has at most $23 to spend. Write an inequality for the number of hours h he can park, then solve it. Should the boundary hour value itself be included in the answer — and how do you know from the phrase "at most"?</div>
+      <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Skipping the Translation Step</div>
+      <div class="trap-body">Jumping straight to numbers without writing the inequality symbolically first is how "at least" and "more than" get mixed up — and that single symbol error changes whether the boundary value is included.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — CHECK YOUR WORK -->
+<div class="slide" data-slide="13" style="--zc:#17233B;--zs:rgba(23,35,59,0.08);">
+  <div class="content">
+    <div class="kicker reveal">Zone 5 · Accuracy</div>
+    <h2 class="slide-title reveal">Three Ways to <span class="tint">Check an Inequality Answer</span></h2>
+    <div class="formula-box reveal" style="margin-bottom:0.9rem;">
+      <span style="font-size:0.85rem;font-weight:600;color:var(--ink-2);">Worked example: solved x &lt; 4 — pick a test point to confirm</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-1">Before You Start</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Count Your Negative Multiplications</div>
+        <div class="prose" style="font-size:0.85rem;">Scan the whole problem first and count exactly how many times you'll divide or multiply by a negative — that's how many flips your final answer should have.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-2">After You Finish</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Plug In a Test Number</div>
+        <div class="prose" style="font-size:0.85rem;">Pick one number that satisfies your final answer and substitute it into the <em>original</em> inequality. If it doesn't work there, you missed a flip somewhere.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Check</span><span class="lvl-badge lvl-3">If Time Allows</span></div>
+        <div style="font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:0.35rem;">Match Circle Type to Symbol</div>
+        <div class="prose" style="font-size:0.85rem;">Before finalizing a graph, re-read the symbol: &lt; and &gt; must be open circles, &#8804; and &#8805; must be closed. A quick symbol-to-circle glance catches most graphing slips.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Trusting the Symbol Without Testing It</div>
+      <div class="trap-body">The fastest way to catch a missed flip is substitution — it takes ten seconds and catches almost every sign error. Build it into your routine on every inequality problem, not just the hard ones.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — ELA: REVISING/EDITING CONCEPT -->
+<div class="slide" data-slide="14" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Revising/Editing Part 2</div>
+    <h2 class="slide-title reveal">Every Sentence Must <span class="tint">Earn Its Place</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think about it</div>
+        <div class="socratic-body">If a paragraph is about the benefits of recycling, and one sentence suddenly describes a student's favorite pizza topping, what's wrong with that sentence — even if it's grammatically perfect? What question can you ask of every sentence to catch this?</div>
+      </div>
+      <div class="info-card reveal">
+        <div style="font-weight:600;font-size:0.92rem;color:var(--ink);margin-bottom:0.4rem;">The three moves in Part 2</div>
+        <ul class="prose" style="margin:0;padding-left:1.1rem;line-height:1.85;font-size:0.87rem;">
+          <li><strong>Transitions</strong>: words like "however," "therefore," "in addition" signal the logical relationship between ideas — pick the one that matches the actual logic, not just one that "sounds right."</li>
+          <li><strong>Topic sentence revision</strong>: a good topic sentence previews every idea the paragraph actually discusses — no more, no less.</li>
+          <li><strong>Off-topic sentences</strong>: ask "does this sentence support the paragraph's one main idea?" If not, it gets cut, regardless of how well-written it is.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15 — ELA PRACTICE: TRANSITIONS + TOPIC SENTENCES -->
+<div class="slide" data-slide="15" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Practice</div>
+    <h2 class="slide-title reveal">Transitions &amp; <span class="tint">Topic Sentences</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">"The team practiced every day for a month. ___, they lost the first game." Which transition word correctly signals the contrast between effort and outcome?</div>
+        <div class="mc-options" style="margin-top:0.45rem;">
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q18"><span class="opt-letter">A</span> Therefore</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q18"><span class="opt-letter">B</span> However</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q18"><span class="opt-letter">C</span> Similarly</label>
+        </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div style="font-size:0.9rem;color:var(--ink-2);line-height:1.55;">A paragraph discusses three causes of coral bleaching, but its topic sentence only mentions "rising ocean temperatures." Rewrite the topic sentence so it accurately previews all three causes.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Write your revised topic sentence…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Choosing a Transition That "Sounds Fancy"</div>
+      <div class="trap-body">Words like "furthermore" and "consequently" are often wrong-answer traps for students who pick based on tone rather than logical relationship. Always ask: is this addition, contrast, cause-effect, or example? Match the category, not the vocabulary level.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16 — ELA PRACTICE: OFF-TOPIC SENTENCES -->
+<div class="slide" data-slide="16" style="--zc:var(--ela);--zs:var(--ela-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">ELA · Practice</div>
+    <h2 class="slide-title reveal">Eliminating <span class="tint">Off-Topic Sentences</span></h2>
+    <div class="prob-card reveal" style="margin-bottom:0.8rem;">
+      <div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-1">Level 1</span></div>
+      <div style="font-size:0.92rem;color:var(--ink-2);line-height:1.6;">Paragraph: "Bees pollinate roughly a third of the food crops we eat. They travel from flower to flower collecting nectar. <em>My cousin is allergic to bee stings.</em> Without bees, many fruits and vegetables would become far more expensive." Which sentence should be removed, and why does it not belong?</div>
+      <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+    </div>
+    <div class="prob-card reveal">
+      <div class="prob-head"><span class="prob-num">21</span><span class="lvl-badge lvl-4">Level 4</span></div>
+      <div style="font-size:0.92rem;color:var(--ink-2);line-height:1.6;">A paragraph's main idea is "why sleep improves memory." One sentence reads: "Some people prefer to study in the morning rather than at night." Is this sentence off-topic, or does it subtly support the main idea? Justify your answer using the exact wording of the main idea.</div>
+      <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Confusing "Related Topic" With "Supports the Main Idea"</div>
+      <div class="trap-body">A sentence can be about the same general subject and still be off-topic if it doesn't support the paragraph's specific claim. Always re-read the exact main idea sentence before judging — not just the general topic.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17 — CLOSING -->
+<div class="slide" data-slide="17" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Wrap-Up</div>
+    <h2 class="slide-title reveal">What We <span class="tint">Locked In Today</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log Update</div>
+        <div class="tl-b">Every miss today gets categorized: forgot to flip a sign, distributed incorrectly, mixed up open/closed circles, or mistranslated a word problem's phrase.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Confidence Win</div>
+        <div class="tl-b">Inequalities sat at 33–50% before today. Every correctly flipped sign and correctly graphed boundary is a real, countable step toward consistency.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Skill Connections</div>
+        <div class="tl-b">The sign-flip rule you drilled today reappears anywhere you divide by a negative — including future systems of inequalities and absolute value problems.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Next Session</div>
+        <div class="tl-b">Week 13 (Aug 11): Algebra Plugins &amp; Substitution Strategy — picking smart numbers to test answer choices.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 17</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'One/Two-Step',t:'0:10',c:'var(--z1)'},
+  {n:'Flip the Sign',t:'0:18',c:'var(--z2)'},
+  {n:'Graphing',t:'0:26',c:'var(--z3)'},
+  {n:'Compound',t:'0:34',c:'var(--z4)'},
+  {n:'Mixed',t:'0:42',c:'var(--z5)'},
+  {n:'ELA',t:'0:45',c:'var(--ela)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
