@@ -1,1 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 Homework — Percents of Derived Quantities &amp; "Through" = Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>% Week 2 Homework</h1>
+      <div class="subtitle">Percents of Derived Quantities &amp; "Through" = Method &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="section-hd">
+    <span class="icon">%</span>
+    <h2>Part A — Percents of Derived Quantities</h2>
+    <span class="badge badge-blue">6 Problems · ~18 min</span>
+  </div>
+  <p class="instr">A "derived quantity" is a value you must calculate first (like an area, a difference, or a total) before you can take a percent of it. Show ALL work — find the base quantity BEFORE applying the percent.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">percent × base = part</span>
+    <span class="fml">% change = (new − old) ÷ old</span>
+    <span class="fml">Find the derived quantity FIRST</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A rectangular garden is <strong>20 ft by 15 ft</strong>. What is <strong>40% of the garden's area</strong>?</p>
+      <textarea class="work-area" placeholder="Step 1 — Area = l × w = …&#10;Step 2 — 40% of area = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> ft²</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A school had <strong>640 students</strong> last year. This year enrollment grew by <strong>25%</strong>. What is the <strong>increase in students</strong> (not the new total)?</p>
+      <textarea class="work-area" placeholder="Increase = 25% × 640 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> students</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A store's revenue was <strong>$8,000 in Week 1</strong> and <strong>$9,200 in Week 2</strong>. What <strong>percent</strong> of the Week 2 revenue does the increase from Week 1 to Week 2 represent?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1 — increase = 9200 − 8000 = …&#10;Step 2 — % of Week 2 = increase ÷ 9200 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> %</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A rectangle originally measuring <strong>60 m by 30 m</strong> has its length increased to <strong>72 m</strong> and its width increased to <strong>36 m</strong>. By what <strong>percent</strong> did the AREA increase?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Old area = … New area = …&#10;% increase = (new − old) ÷ old = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> %</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">In a survey of <strong>500 people</strong>, 55% support a new park, 20% oppose it, and the rest are undecided. If <strong>half</strong> of the undecided voters later join the "support" side, what is the NEW number of supporters?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Undecided % = 100 − 55 − 20 = …&#10;Half of undecided join support: new support % = …&#10;New supporters = new % × 500 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> people</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A city's population is <strong>72,000</strong>. Of these, 62% are adults. Of the adults, 30% are employed in manufacturing. How many people in the ENTIRE city work in manufacturing?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Adults = 62% × 72,000 = …&#10;Manufacturing workers = 30% × adults = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> people</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">🔢</span>
+    <h2>Part B — Small &amp; Multi-Step Percents</h2>
+    <span class="badge badge-sand">4 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Some percents are smaller than one whole percent, and some require you to scale a percent onto a real population. Convert carefully before computing.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">0.5% = 0.005</span>
+    <span class="fml">1/4% = 0.0025</span>
+    <span class="fml">Fix the % first, THEN scale to population</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">What is <strong>0.5% of 3,600</strong>?</p>
+      <textarea class="work-area" placeholder="0.5% = 0.005 → 0.005 × 3600 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A town of <strong>18,400 people</strong> has <strong>1/4%</strong> of its residents working as electricians. How many electricians live in the town?</p>
+      <textarea class="work-area" placeholder="1/4% = 0.25% = 0.0025&#10;0.0025 × 18,400 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> people</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">In a poll, 48% support a bill, 32% oppose it, and the rest are undecided. If <strong>two-thirds</strong> of the undecided later join the "oppose" side, what percent opposes the bill?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Undecided = 100 − 48 − 32 = …&#10;2/3 of undecided joins oppose: new oppose % = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> %</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A city of <strong>31,500 people</strong> has 40% supporting a proposal and 35% opposing it, with the rest undecided. If <strong>half</strong> of the undecided side eventually join the "support" group, how many actual PEOPLE support the proposal after the shift?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Undecided % = 100 − 40 − 35 = …&#10;New support % = 40 + half of undecided%&#10;People = new % × 31,500 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> people</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">💬</span>
+    <h2>Part B Continued — Word Problems</h2>
+    <span class="badge badge-green">2 Problems · ~8 min</span>
+  </div>
+  <p class="instr">Read carefully. Underline the question. Identify the derived quantity before you touch the percent.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Word Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A rectangular parking lot measuring <strong>90 ft by 40 ft</strong> is expanded so the length grows to <strong>108 ft</strong> and the width grows to <strong>52 ft</strong>. By what percent did the AREA of the lot increase?</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Old area = … New area = …&#10;% increase = (new − old) ÷ old × 100 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> %</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Word Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A company's total sales were <strong>$120,000</strong> last quarter, split so that 65% came from online sales and the rest from in-store sales. This quarter, online sales rose by 20% while in-store sales stayed the same. What percent of the NEW total sales comes from online sales?</p>
+      <textarea class="work-area" style="min-height:80px;" placeholder="Old online = 65% × 120,000 = …&#10;Old in-store = 35% × 120,000 = …&#10;New online = old online × 1.20 = …&#10;New total = new online + old in-store = …&#10;% online of new total = new online ÷ new total = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"> %</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PAGE 3 — ELA + ERROR LOG -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: "Through" = Method</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">When a question asks HOW an author conveys, illustrates, or develops an idea "through" something, the correct answer must name a METHOD (a technique), never a fact. Name the method silently before reading the choices.</p>
+
+  <div class="passage-box">
+    <div class="passage-title">The Locksmith's Hands</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> Mr. Alvarado had repaired locks in the same four-block radius for thirty-one years, and his shop smelled permanently of machine oil and brass filings. When a customer described a jammed deadbolt over the phone, he could often guess the exact make and model before he ever saw it — the sound of a sticking pin, described secondhand, was enough. His workbench, cluttered with hundreds of small metal pieces sorted by size rather than by name, looked chaotic to any visitor but was, to him, a perfectly ordered map.</p>
+      <p><span class="para-lbl">[¶2]</span> One winter afternoon, a young woman rushed in, locked out of her apartment with a sleeping infant inside. Mr. Alvarado did not ask questions. He grabbed a single tension wrench and a pick, walked the six blocks himself in the cold rather than wait for her to bring the door to him, and had the lock open within ninety seconds of kneeling before it. He refused payment, saying only that some jobs were not jobs at all.</p>
+      <p><span class="para-lbl">[¶3]</span> His fingers, thickened and scarred from three decades of work, moved with a precision that seemed to bypass conscious thought — the particular give of a pin tumbler lock, the faint click of a wafer lock giving way, the resistance of a rusted deadbolt versus a merely stiff one. He could distinguish these sensations the way a musician distinguishes notes, and he had long since stopped trying to explain the feeling to apprentices who asked him to describe it in words.</p>
+      <p><span class="para-lbl">[¶4]</span> When Mr. Alvarado finally retired at seventy-one, he did not sell his workbench or his thousands of sorted parts. He gave them, piece by piece, to the two young locksmiths he had trained, insisting that they memorize the feel of the tools before they ever touched a written manual. "The manual," he told them, "explains what a lock is. Only your hands will ever tell you how to open one."</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> The author conveys Mr. Alvarado's expertise in ¶3 primarily <strong>through</strong> ___. <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) A list of the locks he has repaired over the years</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) Sensory description of the physical feel and sound of different locks</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) A comparison between Mr. Alvarado and his apprentices</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) A chronological account of his thirty-one years in business</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> The passage illustrates Mr. Alvarado's generosity <strong>through</strong> ___. <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) A single specific anecdote about helping a locked-out mother in the cold</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) A statistic about how many customers he served</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) A contrast between his shop and a modern locksmith's shop</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) A definition of what a locksmith does</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶4, Mr. Alvarado's final statement to his apprentices ("The manual explains what a lock is...") functions primarily to: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Contrast written knowledge with hands-on, embodied skill</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Criticize apprentices for reading manuals at all</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Provide a technical definition of a lock</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Narrate a specific incident from his career</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> A student claims: <em>"The author uses only chronology, listing events strictly in the order they happened, to develop the passage."</em> Is this claim supported, partially supported, or contradicted? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) Supported — every paragraph moves strictly forward in time</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) Partially supported — ¶2 and ¶4 involve time but ¶1 and ¶3 rely on description, not sequence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) Contradicted — the passage uses no time markers anywhere</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) Irrelevant — chronology cannot appear in this type of passage</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which choice best names the method used in ¶2 to develop the idea that Mr. Alvarado prioritizes people over profit? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) A single anecdote depicting one urgent, specific act of kindness</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) A general statement about locksmiths as a profession</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) Sensory detail about the smell of the shop</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) A comparison between two different customers</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> The author most likely includes the detail that Mr. Alvarado's workbench "looked chaotic to any visitor but was, to him, a perfectly ordered map" (¶1) in order to: <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) Criticize Mr. Alvarado for being disorganized</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) Contrast outside appearance with the deep, earned expertise underneath it</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Prove that visitors dislike visiting his shop</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) Introduce a new character who will appear later</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C2 — ELA: Naming the Method</h2>
+    <span class="badge badge-blue">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read each mini-passage, then name the method BEFORE looking at any choice. Remember: WHAT is a fact; HOW is a method.</p>
+
+  <div class="passage-box">
+    <div class="passage-title">Six Short Passages</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[A]</span> Coach Reyes never gave motivational speeches before games. Instead, he would stand at half-court and simply say, "Remember December," referring to the single practice when the team, down by thirty points in a scrimmage, refused to quit and clawed back to win by two. That was all he ever needed to say.</p>
+      <p><span class="para-lbl">[B]</span> On one side of the border town, families gathered for a harvest festival with music and shared meals. On the other side, less than a mile away, a similar festival had been cancelled for the third year running due to drought. The two communities, once nearly identical, now told very different stories about the same season.</p>
+      <p><span class="para-lbl">[C]</span> The bakery opened its doors at 4:00 a.m. sharp. By 4:15, the first loaves were in the oven. By 6:00, the display case was full. By 7:30, half of it was already sold. By closing at 2:00 p.m., not a single loaf remained.</p>
+      <p><span class="para-lbl">[D]</span> The violin's opening notes were thin and hesitant, almost apologetic, like a whisper testing whether anyone in the room was listening. But as the piece progressed, the sound thickened and warmed, filling every corner of the hall until it seemed to press gently against the walls themselves.</p>
+      <p><span class="para-lbl">[E]</span> A single dented water bottle sat on the shelf of the climbing gym's lost-and-found for eleven years. No one ever claimed it. The owner kept it anyway, unwilling to throw away the one object that had outlasted three different gym locations and every staff member who had ever worked there.</p>
+      <p><span class="para-lbl">[F]</span> Compared to sedans, which prioritize a smooth low-speed ride, off-road trucks are built with reinforced suspensions that trade comfort for durability on uneven terrain — a difference that becomes obvious the moment either vehicle leaves a paved road.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> Passage [A] develops Coach Reyes's coaching philosophy primarily <strong>through</strong> ___. <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>A) A brief anecdote referencing one specific past event</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>B) A comparison between two different coaches</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>C) Sensory description of the gym</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>D) A step-by-step chronology of the whole season</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> Passage [B] illustrates the divide between the two communities primarily <strong>through</strong> ___. <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>A) Contrast between two neighboring places in the same season</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>B) A chronological history of both towns</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>C) An example of a festival tradition</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>D) A single anecdote about one family</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> Passage [C] conveys the bakery's popularity primarily <strong>through</strong> ___. <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>A) Chronology — a time-ordered sequence showing goods disappearing</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>B) A comparison to another bakery</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>C) Sensory description of the smell of bread</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>D) An anecdote about one specific customer</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q10.</span> Passage [D] conveys the change in the violin's sound primarily <strong>through</strong> ___. <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>A) Sensory description built on a comparison ("like a whisper")</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>B) A statistic about the length of the piece</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>C) A chronology of the composer's life</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span><span>D) An example of another musical piece</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q11.</span> Which passage relies MOST heavily on a single anecdote (a short, specific past-tense story) to make its point? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>A) Passage [E] — the dented water bottle kept for eleven years</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>B) Passage [F] — the comparison of sedans and trucks</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>C) Passage [C] — the bakery's timeline</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>D) Passage [B] — the two festivals</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q12.</span> A student claims: <em>"Passage [F] uses an anecdote to explain the difference between sedans and off-road trucks."</em> Is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>A) Supported — the passage tells a short story about a specific truck</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>B) Partially supported — it mentions a truck but no story is told</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>C) Contradicted — the passage uses comparison/contrast, not narrative anecdote, and contains no single specific incident</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>D) Irrelevant — the passage does not mention vehicles at all</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The percent skill I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 2 · SHSAT Prep &nbsp;·&nbsp; % Percents of Derived Quantities &nbsp;|&nbsp; 📖 ELA: "Through" = Method
+  </div>
+
+</div>
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
