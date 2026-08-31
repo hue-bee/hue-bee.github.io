@@ -1,4 +1,4 @@
-# Josephine Lupo: SHSAT Study Plan
+# Josephine: SHSAT Study Plan
 
 ## Score Trajectory Overview
 
