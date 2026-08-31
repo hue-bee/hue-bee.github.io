@@ -2,7 +2,7 @@
 
 ## Score Trajectory Overview
 
-Josephine took two diagnostics: the March 2026 SHSAT Form A Exam 26 (Total Scaled Score 441; ELA 240, Math 201) and the June 2026 SHSAT DOE Form B 2019 (Total Scaled Score 444; ELA 208, Math 236). The composite score barely moved, but the internal composition shifted sharply: Math improved from 45.61 percent correct to 63.16 percent correct, while ELA dropped from 64.91 percent correct to 49.12 percent correct. This is the single most important diagnostic finding — Josephine's ELA skills regressed in several core areas even as her math computation and algebra fluency grew substantially, and her overall score is currently well below every specialized high school cutoff, including the lowest (Brooklyn Latin at approximately 496).[^1][^2]
+Josephine took two diagnostics: the March 2026 SHSAT Form A Exam 26 (Total Scaled Score 441; ELA 240, Math 201) and the June 2026 SHSAT DOE Form B 2019 (Total Scaled Score 444; ELA 208, Math 236). The composite score barely moved, but the internal composition shifted sharply: Math improved from 45.61 percent correct to 63.16 percent correct, while ELA dropped from 64.91 percent correct to 49.12 percent correct. This is the single most important diagnostic finding — Josephine's ELA skills regressed in several core areas even as her math computation and algebra fluency grew substantially, and her overall score is currently well below every specialized high school cutoff, including the lowest (Brooklyn Latin at approximately 496).
 
 | Section | March Raw/Scaled | June Raw/Scaled | Change |
 |---|---|---|---|
@@ -32,7 +32,7 @@ Math domain accuracy across the two tests shows the following pattern (percent c
 | Algebra | 28.57 | 85.71 | Strong improvement |
 | Ratios/Proportions | 33.33 | 83.33 | Strong improvement |
 
-Josephine made real, durable gains in algebra, ratios/proportions, probability, and factors/multiples — likely the domains most recently drilled. But arithmetic and measurements collapsed from perfect scores to near-zero, and geometry and inequalities never improved. This is not a comprehension problem so much as a coverage and carelessness problem: skills not actively rehearsed decay quickly, and Josephine is prone to careless arithmetic slips (unit conversion, sign errors, decimal placement) that a stronger student would catch through checking work. Geometry (angle relationships, area/circumference, coordinate geometry) and inequalities remain conceptually unresolved in both attempts and require direct reteaching, not just practice volume.[^2][^1]
+Josephine made real, durable gains in algebra, ratios/proportions, probability, and factors/multiples — likely the domains most recently drilled. But arithmetic and measurements collapsed from perfect scores to near-zero, and geometry and inequalities never improved. This is not a comprehension problem so much as a coverage and carelessness problem: skills not actively rehearsed decay quickly, and Josephine is prone to careless arithmetic slips (unit conversion, sign errors, decimal placement) that a stronger student would catch through checking work. Geometry (angle relationships, area/circumference, coordinate geometry) and inequalities remain conceptually unresolved in both attempts and require direct reteaching, not just practice volume.
 
 ### ELA: The Priority Area
 
@@ -55,7 +55,7 @@ Two ELA skills are the clearest priority: "Connecting Specific Information to Ma
 
 ## Target and Gap Analysis
 
-Given the current scaled scores (441 and 444), Josephine is roughly 55 points below the Brooklyn Latin cutoff (~496), 60+ points below Brooklyn Tech (~505) and HS of American Studies (~504), and well over 100 points below Bronx Science/HSMSE/Queens Sciences (~518–527) and Stuyvesant (~556). A realistic first target is closing the 55–70 point gap to the Brooklyn Latin/Brooklyn Tech tier, which is achievable primarily by (a) stopping the ELA decline and recovering the March-level ELA performance, and (b) stabilizing math gains while fixing geometry, inequalities, and careless-error domains.[^1][^2]
+Given the current scaled scores (441 and 444), Josephine is roughly 55 points below the Brooklyn Latin cutoff (~496), 60+ points below Brooklyn Tech (~505) and HS of American Studies (~504), and well over 100 points below Bronx Science/HSMSE/Queens Sciences (~518–527) and Stuyvesant (~556). A realistic first target is closing the 55–70 point gap to the Brooklyn Latin/Brooklyn Tech tier, which is achievable primarily by (a) stopping the ELA decline and recovering the March-level ELA performance, and (b) stabilizing math gains while fixing geometry, inequalities, and careless-error domains.
 
 ## Sequenced Study Plan
 
