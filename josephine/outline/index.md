@@ -32,7 +32,7 @@ Math domain accuracy across the two tests shows the following pattern (percent c
 | Algebra | 28.57 | 85.71 | Strong improvement |
 | Ratios/Proportions | 33.33 | 83.33 | Strong improvement |
 
-This pattern is telling: Josephine made real, durable gains in algebra, ratios/proportions, probability, and factors/multiples — likely the domains most recently drilled. But arithmetic and measurements collapsed from perfect scores to near-zero, and geometry and inequalities never improved. This is not a comprehension problem so much as a coverage and carelessness problem: skills not actively rehearsed decay quickly, and Josephine is prone to careless arithmetic slips (unit conversion, sign errors, decimal placement) that a stronger student would catch through checking work. Geometry (angle relationships, area/circumference, coordinate geometry) and inequalities remain conceptually unresolved in both attempts and require direct reteaching, not just practice volume.[^2][^1]
+Josephine made real, durable gains in algebra, ratios/proportions, probability, and factors/multiples — likely the domains most recently drilled. But arithmetic and measurements collapsed from perfect scores to near-zero, and geometry and inequalities never improved. This is not a comprehension problem so much as a coverage and carelessness problem: skills not actively rehearsed decay quickly, and Josephine is prone to careless arithmetic slips (unit conversion, sign errors, decimal placement) that a stronger student would catch through checking work. Geometry (angle relationships, area/circumference, coordinate geometry) and inequalities remain conceptually unresolved in both attempts and require direct reteaching, not just practice volume.[^2][^1]
 
 ### ELA: The Priority Area
 
