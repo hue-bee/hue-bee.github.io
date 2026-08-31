@@ -101,5 +101,3 @@ Given the current scaled scores (441 and 444), Josephine is roughly 55 points be
 | 8 | Percents (Math) | Declined; likely a word-problem application issue, not raw computation |
 
 This sequencing prioritizes ELA recovery first because the score decline there is the most alarming and time-sensitive signal, while simultaneously auditing and correcting the careless-error pattern that undermined otherwise-strong math gains.
-
----
