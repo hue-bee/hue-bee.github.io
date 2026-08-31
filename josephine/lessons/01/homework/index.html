@@ -1,1 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Homework — Diagnostic Debrief &amp; Error Autopsy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .txt-line { flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px; }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 9px; border-radius: 20px; margin-left: auto; }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem; padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; }
+  .lvl { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.2rem; }
+  .work-area { width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px; background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink); box-sizing: border-box; outline: none; margin-top: 0.4rem; }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .passage-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); column-count: 2; column-gap: 1.4rem; }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl { background: rgba(100,116,139,0.15); border-radius: 3px; padding: 0 4px; font-weight: 800; color: #374151; font-size: 0.74rem; }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt { font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem; line-height: 1.45; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; transition: background 0.15s; }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] { flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
+  .score-banner { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem; }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md); border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center; }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .print-btn { display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white; font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s; }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>🩺 Week 1 Homework</h1>
+      <div class="subtitle">Diagnostic Debrief &amp; Error Autopsy · SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" class="txt-line" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" class="txt-line" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="10" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 10</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="22" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 22</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PART A: ARITHMETIC / CARELESS vs CONCEPTUAL ── -->
+  <div class="section-hd">
+    <span class="icon">🔢</span>
+    <h2>Part A — Decimal &amp; Fraction Arithmetic</h2>
+    <span class="badge badge-blue">5 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. After solving, check your answer using estimation, the reverse operation, or plug-in. Circle your final answer.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Check-Your-Work Tools</span>
+    <span class="fml">Estimate: round &amp; compare</span>
+    <span class="fml">Reverse: undo the operation</span>
+    <span class="fml">Plug In: substitute back</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve <strong>6.3 − 2.85</strong>. Then verify using the <strong>reverse operation</strong> (does your answer + 2.85 return 6.3?).</p>
+      <textarea class="work-area" placeholder="6.3 − 2.85 = …&#10;Check: … + 2.85 = 6.3 ?"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="txt-line"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve <strong>3/4 + 5/6</strong>. Write your answer as a simplified mixed number.</p>
+      <textarea class="work-area" placeholder="Common denominator = …&#10;3/4 = …/12   5/6 = …/12"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="txt-line"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A student solved <strong>8.07 − 3.2</strong> and got <strong>4.87</strong> by lining up the digits instead of the decimal points. Is this a <strong>careless</strong> or <strong>conceptual</strong> error? Then find the correct answer.</p>
+      <textarea class="work-area" placeholder="Error type: …&#10;Correct answer: 8.07 − 3.2 = …"></textarea>
+      <div class="answer-box">Correct Answer: <input type="text" class="txt-line"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve <strong>2 1/3 × 3/5</strong>. Estimate first (round 2 1/3 to 2), then solve exactly and compare.</p>
+      <textarea class="work-area" placeholder="Estimate: 2 × 3/5 ≈ …&#10;Exact: 2 1/3 × 3/5 = …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="txt-line"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A runner's time improved from <strong>14.65 minutes</strong> to <strong>13.9 minutes</strong>. Find the <strong>exact</strong> improvement, then explain in one sentence why estimating first (15 − 14 = 1) helps you catch a decimal-place mistake.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Estimate: …&#10;Exact: 14.65 − 13.9 = …&#10;Why estimating helps: …"></textarea>
+      <div class="answer-box">Improvement: <input type="text" class="txt-line"> min</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART A CONTINUED: RATIO / PERCENT WORD PROBLEMS ── -->
+  <div class="section-hd">
+    <span class="icon">💬</span>
+    <h2>Part A Continued — Ratio &amp; Percent Word Problems</h2>
+    <span class="badge badge-green">2 Problems · ~8 min</span>
+  </div>
+  <p class="instr">Read carefully. Underline the question. Identify what operation you need before you solve.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Word Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">On a diagnostic test, a student answered <strong>27 out of 36</strong> questions correctly. What <strong>percent</strong> did the student score? Then determine how many more correct answers were needed to reach <strong>85%</strong>.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1 — percent: 27 ÷ 36 = …&#10;Step 2 — target correct: 0.85 × 36 = …&#10;Step 3 — difference: …"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Score: <input type="text" class="txt-line">%</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">More needed: <input type="text" class="txt-line"></div>
+      </div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Word Problem 7 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">In a class of <strong>30 students</strong>, the ratio of <strong>careless errors to conceptual errors</strong> logged last week was <strong>5 : 3</strong>. If there were <strong>40 total errors</strong>, how many were careless, and how many were conceptual?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Total parts = 5 + 3 = …&#10;Value of 1 part = 40 ÷ … = …&#10;Careless = … × 5, Conceptual = … × 3"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Careless: <input type="text" class="txt-line"></div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Conceptual: <input type="text" class="txt-line"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART C: MULTI-STEP CHECK-YOUR-WORK ── -->
+  <div class="section-hd">
+    <span class="icon">🧮</span>
+    <h2>Part A Continued — Multi-Step Check Problems</h2>
+    <span class="badge badge-purple">3 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Solve each problem, then apply <strong>all three</strong> check methods (estimate, reverse, plug in). If they don't all agree, find your error before moving on.</p>
+
+  <div class="prob-grid single">
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve for x: <strong>3x − 7 = 29</strong>. Show the estimate, the reverse check, and the plug-in check.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Solve: 3x − 7 = 29 → x = …&#10;Estimate: 3x ≈ 30+7=36 → x ≈ 12&#10;Plug in: 3(…) − 7 = 29 ?"></textarea>
+      <div class="answer-box">x = <input type="text" class="txt-line"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A rectangle's length is <strong>3 more than twice its width</strong>. If the perimeter is <strong>36 cm</strong>, find the width and length. Check your answer by plugging both values back into the perimeter formula.</p>
+      <textarea class="work-area" style="min-height:72px;" placeholder="Let w = width, l = 2w + 3&#10;Perimeter: 2l + 2w = 36 → …&#10;Plug in check: 2(…) + 2(…) = 36 ?"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Width: <input type="text" class="txt-line"> cm</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;font-size:0.8rem;font-weight:700;color:var(--slate);">Length: <input type="text" class="txt-line"> cm</div>
+      </div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A student solved <strong>x/4 + 5 = 17</strong> and got <strong>x = 3</strong>. Use the plug-in check to show this answer is wrong, identify whether the mistake is careless or conceptual, and find the correct value of x.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Plug in x = 3: 3/4 + 5 = … ≠ 17&#10;Error type: …&#10;Correct: x/4 + 5 = 17 → x = …"></textarea>
+      <div class="answer-box">Correct x = <input type="text" class="txt-line"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART C: ELA — AUTHOR'S PURPOSE / PARAGRAPH JOBS ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Paragraph Jobs &amp; Author's Purpose</h2>
+    <span class="badge badge-purple">Passage 1 · 6 Questions</span>
+  </div>
+
+  <div class="passage-box">
+    <div class="passage-title">Passage 1: The Habit of Checking Your Work</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">¶1</span> Every year, thousands of students lose points on standardized tests not because they lack the skill to solve a problem, but because they never look back at their own answer. A wrong answer, once written down, is treated as final — a decision made and abandoned. <span class="sw">Yet</span> the single habit that separates high scorers from everyone else is not raw ability. It is the habit of checking.</p>
+      <p><span class="para-lbl">¶2</span> Checking is not the same as rereading. Rereading a solution tends to confirm whatever mistake was already made, because the eye sees what it expects to see. <span class="sw">In contrast</span>, a true check uses an independent method — estimating the size of the answer before solving, reversing the operation after solving, or substituting the answer back into the original problem. Each method attacks the problem from a different angle, which is exactly why errors that survive a first pass rarely survive a second.</p>
+      <p><span class="para-lbl">¶3</span> Consider a student who mismanages a decimal point and gets an answer ten times too large. A reread will not catch this, because the arithmetic steps, followed correctly on paper, look identical. <span class="sw">However</span>, an estimate — a quick mental approximation — would immediately flag the answer as unreasonable. This is why tutors so often ask, before any calculation begins, "About how big should this answer be?"</p>
+      <p><span class="para-lbl">¶4</span> Some students resist checking because it feels like doing the problem twice. <span class="sw">As a result</span>, they skip it under time pressure, precisely when checking matters most. But a check rarely takes as long as the original solution. Reversing an operation is often a single line of arithmetic. Plugging a value back into an equation is frequently faster than the algebra used to find it in the first place.</p>
+      <p><span class="para-lbl">¶5</span> The deepest benefit of checking is not the caught error itself, but the diagnosis it makes possible. A student who checks and finds a mismatch must ask why the two methods disagree — and that question, asked honestly, is what turns a careless slip into a lesson learned, rather than a habit repeated on the next ten problems.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> What is the <strong>author's primary purpose</strong> in writing this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span>To criticize students who make careless errors</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span>To compare estimation and reversing as two separate subjects</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span>To argue that checking your work is a distinct, valuable skill</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span>To explain the history of standardized testing</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> In ¶2, the author distinguishes "checking" from "rereading" primarily to: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span>Explain why an independent method catches errors a simple reread misses</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span>Show that rereading is a waste of time</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span>Introduce a new vocabulary term for the SHSAT</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span>Argue that all checking methods are equally reliable</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶3, the signal phrase <span class="sw">"However"</span> signals a relationship of: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span>Cause and effect</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span>Simple addition of a new example</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span>Chronological sequence</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span>Contrast — rereading fails where estimating succeeds</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> The author's tone toward students who skip checking under time pressure (¶4) is best described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span>Harshly critical and dismissive</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span>Understanding but corrective</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span>Indifferent and purely factual</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span>Sarcastic and mocking</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which statement best describes how the author organizes the passage across all five paragraphs? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span>A strict chronological history of test-taking strategies</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span>Five unrelated anecdotes about students</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span>A list of checking methods with no supporting reasoning</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span>Problem → distinction → example → objection/rebuttal → deeper benefit</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> A student claims: <em>"The author uses the decimal-point example in ¶3 to show that estimating is unnecessary for careful students."</em> Is this claim supported, partially supported, or contradicted by ¶3? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span>Contradicted — the example shows estimating catches what careful rereading misses</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span>Fully supported</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span>Partially supported</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span>Not addressed anywhere in the passage</label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART C CONTINUED: ELA PASSAGE 2 ── -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C Continued — ELA: Careless vs. Conceptual Errors</h2>
+    <span class="badge badge-purple">Passage 2 · 6 Questions</span>
+  </div>
+
+  <div class="passage-box">
+    <div class="passage-title">Passage 2: Two Kinds of Wrong</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">¶1</span> Not all wrong answers are created equal. A student who forgets to carry a negative sign has made a different kind of error than a student who never learned how negative numbers behave in the first place — even though both students end up with the same incorrect answer on the page.</p>
+      <p><span class="para-lbl">¶2</span> Educators call the first kind of mistake a <em>careless error</em>: a slip that occurs despite the student possessing the necessary knowledge. <span class="sw">Consequently</span>, careless errors are usually fixed quickly, often by nothing more than slowing down or adopting a check-your-work habit. The second kind, a <em>conceptual error</em>, is far more stubborn. It signals a genuine gap in understanding that will resurface, in slightly different disguises, until it is directly retaught.</p>
+      <p><span class="para-lbl">¶3</span> The trouble is that careless and conceptual errors look identical from the outside. Both produce a red X on a worksheet. <span class="sw">In contrast</span> to a doctor diagnosing an illness, a tutor cannot simply glance at the wrong answer and know which kind of error occurred; the diagnosis requires asking the student to explain their reasoning aloud.</p>
+      <p><span class="para-lbl">¶4</span> This is precisely why an error log — a simple table where a student records what went wrong on every missed problem — is so valuable. Writing the sentence "I forgot to convert units" is a very different confession than writing "I don't know how to convert units," even though both sentences might describe the same missed problem on the surface.</p>
+      <p><span class="para-lbl">¶5</span> Ultimately, the goal of any diagnostic session is not simply to correct the answer, but to correctly label the error. A student and tutor who misdiagnose a conceptual gap as mere carelessness will "fix" the mistake for one afternoon, only to watch it return the following week in a new form.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> What is the <strong>central claim</strong> of this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span>Careless and conceptual errors require the same fix</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span>Doctors are better diagnosticians than tutors</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span>Correctly identifying the type of error is essential to fixing it permanently</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span>Error logs are only useful for careless mistakes</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> In ¶2, the phrase <span class="sw">"Consequently"</span> signals that what follows is: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span>A contradiction of the previous sentence</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span>An unrelated new topic</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span>A direct quotation</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span>A result or effect of the definition just given</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> According to ¶3, why can't a tutor simply look at a wrong answer to diagnose the error type? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span>Because tutors are not trained to grade worksheets</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span>Because careless and conceptual errors look identical on paper</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span>Because most students refuse to explain their reasoning</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span>Because red X marks are not visible on some worksheets</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q10.</span> The author's tone toward the error log described in ¶4 can best be described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span>Approving and instructive</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span>Skeptical and doubtful</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span>Neutral and purely descriptive</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q10"><span class="bubble"></span>Dismissive of its usefulness</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q11.</span> Which piece of evidence from the passage <strong>best supports</strong> the claim that misdiagnosing an error type causes it to recur? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span>The negative-sign example in ¶1</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span>The doctor comparison in ¶3</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span>The claim in ¶5 that a misdiagnosed error "will return the following week in a new form"</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span>The definition of "careless error" in ¶2</label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q12.</span> A student claims: <em>"The author uses the two confession sentences in ¶4 to show that careless and conceptual errors are impossible to tell apart."</em> Using evidence from <strong>¶2 and ¶4</strong>, is this claim supported, partially supported, or contradicted? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span>Fully supported</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span>Partially supported — they look similar but a student's own words reveal the difference</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span>Contradicted — the passage says the two sentences are identical</label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span>Not addressed anywhere in the passage</label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PART D: ERROR LOG ── -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The check-your-work method I need to use more is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 1 · SHSAT Prep &nbsp;·&nbsp; 🩺 Diagnostic Debrief &amp; Error Autopsy &nbsp;|&nbsp; 📖 ELA: Checking Habits &amp; Error Types
+  </div>
+
+</div>
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
