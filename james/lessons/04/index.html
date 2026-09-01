@@ -1,1 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 4 · Session 4A: Inequalities — The Flip Rule &amp; Number-Line TEI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --z1:#262626; --z1-soft:rgba(38,38,38,0.10);
+  --z2:#4d4d4d; --z2-soft:rgba(77,77,77,0.10);
+  --z3:#6a6a6a; --z3-soft:rgba(106,106,106,0.12);
+  --z4:#858585; --z4-soft:rgba(133,133,133,0.12);
+  --z5:#5c5c5c; --z5-soft:rgba(92,92,92,0.10);
+  --ela:#3e3e3e; --ela-soft:rgba(62,62,62,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.prob-body{font-size:0.95rem;color:var(--ink);font-weight:600;line-height:1.55;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--z5);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--z5);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--z5);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow-y:auto;transform:translateX(320px);opacity:0;pointer-events:none;transition:transform 0.3s ease,opacity 0.3s ease;}
+.pip-panel.open{transform:translateX(0);opacity:1;pointer-events:all;}
+.pip-panel-inner{padding:1rem;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem;}
+.pip-panel-title{font-family:var(--font-display);font-weight:700;font-size:0.9rem;color:var(--ink);}
+.pip-close-btn{border:none;background:#EDF2F9;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:0.75rem;color:var(--ink-2);}
+.pip-mini-formula{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--ink);background:#EDF2F9;border-radius:10px;padding:0.5rem 0.7rem;margin-bottom:0.7rem;text-align:center;}
+.pip-mini-card{border:1px solid rgba(201,212,228,0.45);border-radius:10px;padding:0.55rem 0.7rem;margin-bottom:0.55rem;}
+.pip-mini-lvl{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:0.25rem;}
+.pip-mini-title{font-weight:700;font-size:0.8rem;color:var(--ink);}
+.pip-mini-body{font-size:0.76rem;color:var(--ink-2);line-height:1.5;margin-top:0.15rem;}
+.pip-mini-trap{border-radius:10px;background:#F6F6F6;border:1px solid rgba(201,212,228,0.45);padding:0.55rem 0.7rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.78rem;color:#B45309;margin-bottom:0.15rem;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--z1);"></span> Week 4 · Session 4A
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.1rem,5.5vw,3.7rem);">The Flip Rule <br><span style="color:var(--z1);">&amp; Number-Line TEI</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">Math-Only Session &nbsp;·&nbsp; 60 Minutes</h2>
+    <p class="reveal" style="font-size:0.82rem;color:var(--ink-3);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem;">SHSAT Prep · Inequalities, Compound Inequalities, Number-Line Plotting</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--z1-soft);color:var(--z1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">One-Step Flip</span>
+      <span style="background:var(--z2-soft);color:var(--z2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Compound Inequalities</span>
+      <span style="background:var(--z3-soft);color:var(--z3);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">The Mirror Trap</span>
+      <span style="background:var(--z4-soft);color:var(--z4);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Number-Line TEI</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:00–0:05</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Sprint · One-Step Inequalities</div>
+          <div class="tl-b">10 items, half requiring a flip. <em>Notice which ones you flip without thinking — and which you forget.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z1);">
+        <div class="tl-time">0:05–0:15</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Why the Sign Flips</div>
+          <div class="tl-b">Multiplying or dividing by a negative reverses order on the number line. <em>Not a rule to memorize — a fact to see.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z2);">
+        <div class="tl-time">0:15–0:20</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Practice · One-Step, Easy to Hard</div>
+          <div class="tl-b">Four levels. <em>Every answer gets a number line — closed vs. open circles, every time.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z2);">
+        <div class="tl-time">0:20–0:33</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Compound Inequalities <span class="tag hot">New Skill</span></div>
+          <div class="tl-b">Three-part inequalities, solved by doing the same operation to all three parts. <em>Meet "The Mirror" — the trap that's always an offered choice.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z3);">
+        <div class="tl-time">0:33–0:43</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Number-Line TEI Mechanics<span class="tag hot">Motor Skill</span></div>
+          <div class="tl-b">Closed circle means "or equal to." Open circle means strict. <em>All-or-nothing scoring — plotting it wrong loses the point even with the right answer.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z4);">
+        <div class="tl-time">0:43–0:50</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Catch the Tutor<span class="tag hot">Highest-Yield Drill</span></div>
+          <div class="tl-b">The tutor divides by a negative and forgets to flip. <em>You catch it, name the trap, and fix the number line.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z5);">
+        <div class="tl-time">0:50–0:53</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Reset</div>
+          <div class="tl-b">Stand up, water, 30 seconds of movement. <em>Non-negotiable.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--z3);">
+        <div class="tl-time">0:53–0:58</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Timed Mixed Finish</div>
+          <div class="tl-b">Compound inequalities against the clock, number line required on each. <em>Two-minute cap is live — flag and move on if you pass it.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:#17233B;">
+        <div class="tl-time">0:58–1:00</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">Exit Ticket · Error Log</div>
+          <div class="tl-b">You write the entries. <em>Then say "The Mirror" out loud — what does it mean, in your own words?</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — SPRINT -->
+<div class="slide" data-slide="3" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Sprint · Cold Start</div>
+    <h2 class="slide-title reveal">Ten One-Step Inequalities — <span class="tint">Half Need a Flip</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think first</div>
+          <div class="socratic-body">Before you solve a single one, sort these ten into two piles just by looking at them: "will need a flip" and "won't." What's the one thing you're scanning for to make that call in under a second?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Timed — 5 minutes, log your time</div>
+          <div class="prob-body" style="font-size:0.9rem;margin-top:0.3rem;">x + 4 &gt; 9 &nbsp;·&nbsp; −2x &lt; 8 &nbsp;·&nbsp; 3x ≥ 12 &nbsp;·&nbsp; −x ≤ 5 &nbsp;·&nbsp; x/−3 &gt; 2 &nbsp;·&nbsp; 5 − x &lt; 1 &nbsp;·&nbsp; −4x ≥ −16 &nbsp;·&nbsp; x − 7 ≤ 3 &nbsp;·&nbsp; −x/2 &gt; −3 &nbsp;·&nbsp; 6x &lt; −18</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <text x="130" y="25" font-size="12" font-weight="700" fill="#4a4a4a" text-anchor="middle" font-family="Nunito, sans-serif">the one-second scan</text>
+  <rect x="20" y="40" width="220" height="30" rx="6" fill="#e5e5e5" stroke="#262626" stroke-width="2"/>
+  <text x="130" y="60" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">is a negative multiplying or dividing x?</text>
+  <text x="70" y="100" font-size="12" font-weight="700" fill="#15803D" text-anchor="middle" font-family="Nunito, sans-serif">no &#8594; keep sign</text>
+  <text x="190" y="100" font-size="12" font-weight="700" fill="#B45309" text-anchor="middle" font-family="Nunito, sans-serif">yes &#8594; flip it</text>
+  <text x="130" y="140" font-size="11" fill="#4a4a4a" text-anchor="middle" font-family="Nunito, sans-serif">addition and subtraction</text>
+  <text x="130" y="158" font-size="11" fill="#4a4a4a" text-anchor="middle" font-family="Nunito, sans-serif">never flip anything</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — WHY THE FLIP CONCEPT -->
+<div class="slide" data-slide="4" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 1 · The Flip Rule</div>
+    <h2 class="slide-title reveal">Why Does the Sign Flip? — <span class="tint">See It, Don't Memorize It</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">You know 2 &lt; 5 is true. Multiply both sides by −1: is −2 &lt; −5, or is −2 &gt; −5? Look at a number line — which of −2 and −5 is actually farther right? What does that tell you about what negation does to order?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The rule, once you've seen it</div>
+          <div class="math" style="font-size:1.05rem;">2 &lt; 5 &nbsp;&#215;(&#8722;1)&#8594;&nbsp; &#8722;2 &gt; &#8722;5</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="50" x2="240" y2="50" stroke="#262626" stroke-width="2"/>
+  <circle cx="70" cy="50" r="6" fill="#262626"/><text x="70" y="35" font-size="11" text-anchor="middle" font-family="Nunito, sans-serif">2</text>
+  <circle cx="190" cy="50" r="6" fill="#6a6a6a"/><text x="190" y="35" font-size="11" text-anchor="middle" font-family="Nunito, sans-serif">5</text>
+  <text x="130" y="75" font-size="11" fill="#15803D" text-anchor="middle" font-family="Nunito, sans-serif">2 is left of 5 &#8594; 2 &lt; 5 &#10003;</text>
+  <line x1="20" y1="130" x2="240" y2="130" stroke="#262626" stroke-width="2"/>
+  <circle cx="190" cy="130" r="6" fill="#262626"/><text x="190" y="115" font-size="11" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;2</text>
+  <circle cx="70" cy="130" r="6" fill="#6a6a6a"/><text x="70" y="115" font-size="11" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;5</text>
+  <text x="130" y="155" font-size="11" fill="#B45309" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;2 is right of &#8722;5 &#8594; &#8722;2 &gt; &#8722;5</text>
+  <text x="130" y="172" font-size="10" fill="#4a4a4a" text-anchor="middle" font-family="Nunito, sans-serif">negation mirrors the whole line, left-right, around 0</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — ONE-STEP PRACTICE -->
+<div class="slide" data-slide="5" style="--zc:var(--z1);--zs:var(--z1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 1 · Practice</div>
+    <h2 class="slide-title reveal">One-Step Inequalities — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-body">Solve: x − 6 &gt; 2. Does this one flip? Draw the number line — open or closed circle at your boundary?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-body">Solve: −4x ≤ 20. Say out loud, before you divide: "I am dividing by a negative, so I flip." Then draw the line.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-body">Solve: 5 − 2x ≥ 11. The x-term is on the side with the negative coefficient — isolate x last, and watch when the flip actually happens.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-body">Solve: −x/3 + 2 &lt; −1. Two operations happen before you touch x's coefficient. Which step, exactly, triggers the flip — and is it the only one?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — COMPOUND INEQUALITIES CONCEPT -->
+<div class="slide" data-slide="6" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 2 · Compound Inequalities<span class="tag hot">New Skill</span></div>
+    <h2 class="slide-title reveal">Three Parts, One Move at a Time — <span class="tint">The Mirror</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">−5 ≤ 1 − 3x ≤ 4 is really two inequalities glued together sharing the middle term. Whatever you do to the middle, you must do to BOTH outer numbers. Subtract 1 from all three parts — what do you get? Then divide all three by −3. What has to happen to the direction of BOTH inequality signs?</div>
+        </div>
+        <div class="trap-card reveal">
+          <div class="trap-title">The Mirror</div>
+          <div class="trap-body">After dividing by −3, the mirror-image number line — the one you'd get by flipping only ONE sign, or none — is always sitting there as an offered wrong choice. Flip both signs, or flip neither. Never just one.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <text x="130" y="18" font-size="11" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;5 &#8804; 1 &#8722; 3x &#8804; 4</text>
+  <text x="130" y="40" font-size="11" fill="#4a4a4a" text-anchor="middle" font-family="Nunito, sans-serif">subtract 1 from all three parts</text>
+  <text x="130" y="58" font-size="11" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;6 &#8804; &#8722;3x &#8804; 3</text>
+  <text x="130" y="80" font-size="11" fill="#B45309" text-anchor="middle" font-family="Nunito, sans-serif">&#247; by &#8722;3 &#8594; flip BOTH signs</text>
+  <rect x="55" y="92" width="150" height="28" rx="6" fill="#cfcfcf" stroke="#262626" stroke-width="2.5"/>
+  <text x="130" y="111" font-size="12" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;1 &#8804; x &#8804; 2</text>
+  <line x1="30" y1="150" x2="230" y2="150" stroke="#262626" stroke-width="2"/>
+  <circle cx="90" cy="150" r="6" fill="#262626"/><text x="90" y="168" font-size="10" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;1</text>
+  <circle cx="170" cy="150" r="6" fill="#262626"/><text x="170" y="168" font-size="10" text-anchor="middle" font-family="Nunito, sans-serif">2</text>
+  <line x1="90" y1="150" x2="170" y2="150" stroke="#262626" stroke-width="4"/>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — COMPOUND PRACTICE -->
+<div class="slide" data-slide="7" style="--zc:var(--z2);--zs:var(--z2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 2 · Practice — Number Line on Every One</div>
+    <h2 class="slide-title reveal">Compound Inequalities — <span class="tint">Same Operation, All Three Parts</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.7rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-body" style="font-size:0.9rem;">Solve and plot: −2 &lt; x + 3 &lt; 5. No negative multiplication here — does either sign flip?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-body" style="font-size:0.9rem;">Solve and plot: 4 ≤ 2x ≤ 10. Divide all three parts by 2 — positive, so the signs stay put. Closed or open circles?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-body" style="font-size:0.9rem;">Solve and plot: 3 &lt; −2x + 1 &lt; 9. Subtract 1 from all three parts, then divide by −2. Say "flip both" before you write the new signs.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-body" style="font-size:0.9rem;">Solve and plot: −7 ≤ 5 − 4x &lt; 1. Notice the two ends use different symbols (≤ vs &lt;) — after the flip, which end gets the closed circle now?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">The Mirror, restated</div>
+      <div class="trap-body">If your final interval "looks backwards" compared to your intuition — like 5 ≤ x ≤ 2 — you flipped only one sign, or you flipped when you shouldn't have. Both boundary numbers must still make sense with the smaller one on the left.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — TEI MECHANICS -->
+<div class="slide" data-slide="8" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 3 · Number-Line TEI Mechanics<span class="tag hot">Motor Skill</span></div>
+    <h2 class="slide-title reveal">Closed vs. Open — <span class="tint">Plot It Right, or It Scores Zero</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">"x ≤ 2" includes 2 itself. "x &lt; 2" does not. If a number-line plotting question is scored all-or-nothing, what physically has to look different about the dot at 2 in each case — and which direction does the shading or arrow go?</div>
+        </div>
+        <div class="win-card reveal">
+          <div class="win-title">The mechanical rule</div>
+          <div class="prose" style="font-size:0.9rem;margin-top:0.25rem;">≤ or ≥ (equal allowed) &#8594; filled/closed circle. &lt; or &gt; (strict) &#8594; open circle. Shade or draw the ray/segment toward every value that satisfies the inequality — never toward the excluded side.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <text x="130" y="18" font-size="11" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">x &#8804; 2 &nbsp;&#8594;&nbsp; CLOSED, shade left</text>
+  <line x1="20" y1="45" x2="240" y2="45" stroke="#262626" stroke-width="2"/>
+  <line x1="20" y1="45" x2="130" y2="45" stroke="#262626" stroke-width="5"/>
+  <circle cx="130" cy="45" r="7" fill="#262626"/>
+  <text x="130" y="62" font-size="10" text-anchor="middle" font-family="Nunito, sans-serif">2</text>
+  <text x="130" y="95" font-size="11" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">x &gt; 2 &nbsp;&#8594;&nbsp; OPEN, shade right</text>
+  <line x1="20" y1="120" x2="240" y2="120" stroke="#262626" stroke-width="2"/>
+  <line x1="130" y1="120" x2="240" y2="120" stroke="#262626" stroke-width="5"/>
+  <circle cx="130" cy="120" r="7" fill="#F0F7FF" stroke="#262626" stroke-width="2.5"/>
+  <text x="130" y="137" font-size="10" text-anchor="middle" font-family="Nunito, sans-serif">2</text>
+  <text x="130" y="165" font-size="10" fill="#B45309" text-anchor="middle" font-family="Nunito, sans-serif">an open circle at the right value is still worth zero points</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — TEI PRACTICE -->
+<div class="slide" data-slide="9" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 3 · Practice — Plot, Don't Just Solve</div>
+    <h2 class="slide-title reveal">Solve, Then Plot Exactly — <span class="tint">Circle Type Matters</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-body">Plot: x &gt; −3. One boundary, one open circle, one direction. Draw it exactly as you'd click it on screen.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-body">Solve and plot: 2x + 1 ≤ 9. What kind of circle at the boundary, and which way does the ray point?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-body">Solve and plot: −1 ≤ x &lt; 4. A compound inequality has TWO circles — do they match, or does one need to be different from the other?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-body">Solve and plot: −6 &lt; 3 − 3x ≤ 12. Full pipeline — isolate, flip both signs correctly, then get both circle types right at once.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Number line…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — CATCH THE TUTOR -->
+<div class="slide" data-slide="10" style="--zc:var(--z4);--zs:var(--z4-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="5"></div>
+    <div class="kicker reveal">Zone 4 · Catch the Tutor<span class="tag hot">Highest-Yield Drill</span></div>
+    <h2 class="slide-title reveal">Watch the Tutor Solve This — <span class="tint">Then Fix It</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">The tutor's work (on purpose, wrong)</div>
+          <div class="socratic-body">"Solve −4 ≤ 2 − 3x ≤ 11. Subtract 2 from all three: −6 ≤ −3x ≤ 9. Divide by −3: 2 ≤ x ≤ −3." Look at that final answer — 2 ≤ x ≤ −3 says x is bigger than 2 AND smaller than −3 at the same time. Is that even possible? What actually went wrong?</div>
+        </div>
+        <div class="win-card reveal">
+          <div class="win-title">The fix, once you say it</div>
+          <div class="prose" style="font-size:0.9rem;margin-top:0.25rem;">Dividing by −3 flips BOTH signs — the tutor flipped neither. Correct: −6 ≤ −3x ≤ 9 &#8594; divide by −3 and flip &#8594; 2 ≥ x ≥ −3, rewritten in order as <strong>−3 ≤ x ≤ 2</strong>. An impossible-looking answer like 2 ≤ x ≤ −3 is always a sign that a flip got skipped.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <text x="130" y="20" font-size="11" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">tutor's answer (wrong)</text>
+  <rect x="20" y="30" width="220" height="26" rx="6" fill="#e5e5e5" stroke="#262626" stroke-width="2"/>
+  <text x="130" y="48" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">2 &#8804; x &#8804; &#8722;3</text>
+  <text x="130" y="75" font-size="14" fill="#B45309" text-anchor="middle" font-family="Nunito, sans-serif">&#10007; impossible — no such x exists</text>
+  <text x="130" y="105" font-size="11" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">correct answer</text>
+  <rect x="20" y="115" width="220" height="26" rx="6" fill="#cfcfcf" stroke="#262626" stroke-width="2.5"/>
+  <text x="130" y="133" font-size="12" font-weight="700" fill="#1f1f1f" text-anchor="middle" font-family="Nunito, sans-serif">&#8722;3 &#8804; x &#8804; 2</text>
+  <text x="130" y="160" font-size="10" fill="#15803D" text-anchor="middle" font-family="Nunito, sans-serif">&#10003; dividing by &#8722;3 flips BOTH signs</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — RESET -->
+<div class="slide" data-slide="11" style="--zc:var(--z5);--zs:var(--z5-soft);">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Reset · 3 Minutes</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Stand Up. <span class="tint">Water. Shake It Out.</span></h2>
+    <div class="win-card reveal" style="max-width:520px;margin:0 auto;text-align:left;">
+      <div class="win-title">Why this matters</div>
+      <div class="prose" style="font-size:0.9rem;margin-top:0.25rem;">You just spent 33 minutes on the flip rule and compound inequalities — the densest content of the session. A real physical break resets focus before the timed finish, where the two-minute cap has real teeth.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — TIMED MIXED FINISH -->
+<div class="slide" data-slide="12" style="--zc:var(--z3);--zs:var(--z3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="6"></div>
+    <div class="kicker reveal">Zone 5 · Timed Finish — Two-Minute Cap Live</div>
+    <h2 class="slide-title reveal">Compound Inequalities Against the Clock — <span class="tint">Plot Every One</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-body">Solve and plot: −8 ≤ 3x + 1 ≤ 7. No sign flip here — check that assumption before you divide.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-body">Solve and plot: 6 &gt; 4 − 2x &gt; −2. Isolate, then flip both — and rewrite in increasing order left to right when you plot.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-body">Solve and plot: −10 ≤ 2 − 6x &lt; 8. Mixed strict/non-strict ends — track which circle goes where AFTER the flip, not before.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-body">Solve and plot: 5 ≤ −½x + 3 &lt; 9. A fractional coefficient — same rule applies. If your final interval looks "backwards," you know exactly what to check first.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work + number line…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">Two-minute cap, live</div>
+      <div class="trap-body">Any item past 2 minutes: flag it out loud, write your best guess, and move to the next. This drill is the closest rehearsal you get for the adaptive test's no-backtracking rule.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — TRAP RECAP -->
+<div class="slide" data-slide="13" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Recap · Today's Guardrails</div>
+    <h2 class="slide-title reveal">One Rule, <span class="tint">One Motor Skill</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="trap-card reveal">
+        <div class="trap-title">The Mirror — Math</div>
+        <div class="trap-body">Multiplying or dividing an inequality by a negative flips the sign — in a compound inequality, it flips BOTH signs, every single time. The mirror-image (unflipped) answer is always an offered choice.</div>
+      </div>
+      <div class="trap-card reveal">
+        <div class="trap-title">Circle Type — TEI Mechanics</div>
+        <div class="trap-body">≤ / ≥ &#8594; closed circle (equal is allowed). &lt; / &gt; &#8594; open circle (strict). All-or-nothing scoring means the right interval with the wrong circle still scores zero.</div>
+      </div>
+    </div>
+    <div class="win-card reveal" style="margin-top:0.9rem;">
+      <div class="win-title">The self-check that catches almost every flip error</div>
+      <div class="prose" style="font-size:0.9rem;margin-top:0.25rem;">If your final compound answer reads like "bigger number ≤ x ≤ smaller number," it's impossible — you skipped a flip somewhere. Rewrite with the smaller boundary on the left before you plot anything.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — EXIT TICKET -->
+<div class="slide" data-slide="14" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Open the Log. <span class="tint">Say the Trap Out Loud.</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-top:0.8rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log — Four Columns</div>
+        <div class="tl-b">Question · What I did · What the question actually asked · Trap name. You write 2–4 entries, not the tutor.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">From Memory</div>
+        <div class="tl-b">Say "The Mirror" in your own words — what has to happen when you divide a compound inequality by a negative?</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Next: Session 4B</div>
+        <div class="tl-b">Substitution into multi-relationship word problems — variable definition line required before any algebra.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- PIP: Check Your Work floating panel (visible on every slide) -->
+<button class="pip-toggle-btn" id="pipToggleBtn" onclick="togglePip()" aria-label="Toggle Check Your Work picture-in-picture">
+  <span class="pip-dot"></span> Check Your Work
+</button>
+<div class="pip-panel" id="pipPanel">
+  <div class="pip-panel-inner">
+    <div class="pip-panel-header">
+      <span class="pip-panel-title">Check Your Work</span>
+      <button class="pip-close-btn" onclick="togglePip()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="pip-mini-formula">Flip Rule: &#215;/&#247; by negative &#8594; reverse inequality sign(s)</div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-1">Before You Start</span>
+      <div class="pip-mini-title">Is a Negative Multiplying or Dividing x?</div>
+      <div class="pip-mini-body">Addition/subtraction never flips anything. Multiplying/dividing by a negative always flips — in compound inequalities, flip BOTH signs at once.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-2">Before You Plot</span>
+      <div class="pip-mini-title">Closed or Open?</div>
+      <div class="pip-mini-body">≤ / ≥ &#8594; closed (filled) circle. &lt; / &gt; &#8594; open circle. Shade toward every value that works, never toward the excluded side.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-3">Self-Check</span>
+      <div class="pip-mini-title">Does the Answer Even Make Sense?</div>
+      <div class="pip-mini-body">"Bigger ≤ x ≤ smaller" is impossible. If you see that, a flip was skipped — go back and rewrite with the smaller boundary on the left.</div>
+    </div>
+    <div class="pip-mini-trap">
+      <div class="pip-mini-trap-title">The Mirror</div>
+      <div class="pip-mini-body">The unflipped, mirror-image number line is always an offered wrong choice. Flip both signs, or flip neither — never just one.</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 14</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Sprint',t:'0:00',c:'var(--z1)'},
+  {n:'Flip Rule',t:'0:05',c:'var(--z1)'},
+  {n:'One-Step Practice',t:'0:15',c:'var(--z1)'},
+  {n:'Compound Ineq.',t:'0:20',c:'var(--z2)'},
+  {n:'TEI Mechanics',t:'0:33',c:'var(--z3)'},
+  {n:'Catch the Tutor',t:'0:43',c:'var(--z4)'},
+  {n:'Timed Finish',t:'0:53',c:'var(--z3)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  panel.classList.toggle('open');
+}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
