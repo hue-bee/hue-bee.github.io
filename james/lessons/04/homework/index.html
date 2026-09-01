@@ -1,1 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Homework — Inequalities &amp; Number-Line TEI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0;
+  }
+  .lvl { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.2rem; }
+  .work-area {
+    width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px;
+    background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink);
+    box-sizing: border-box; outline: none; margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .passage-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); column-count: 2; column-gap: 1.4rem; }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl { background: rgba(100,116,139,0.15); border-radius: 3px; padding: 0 4px; font-weight: 800; color: #374151; font-size: 0.74rem; }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt { font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem; line-height: 1.45; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; transition: background 0.15s; }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] { flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
+  .score-banner { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem; }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md); border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center; }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .print-btn { display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white; font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s; }
+  .print-btn:hover { background: #1d4ed8; }
+  .numberline { display:flex; justify-content:center; margin: 0.3rem 0 0.5rem; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>📏 Week 4 Homework</h1>
+      <div class="subtitle">Inequalities: The Flip Rule &amp; Number-Line TEI &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" placeholder="__"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="section-hd">
+    <span class="icon">🔁</span>
+    <h2>Part A — One-Step Inequalities: The Flip Rule</h2>
+    <span class="badge badge-blue">6 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Solve each inequality. Say out loud whenever you multiply or divide by a negative number — that's the only time the sign flips!</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Rule</span>
+    <span class="fml">÷ or × by negative → FLIP the sign</span>
+    <span class="fml">÷ or × by positive → sign stays</span>
+    <span class="fml">Adding/subtracting → never flips</span>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve: <strong>x + 5 &lt; 12</strong>. Does this step ever require a flip? Explain in one sentence.</p>
+      <textarea class="work-area" placeholder="x + 5 < 12 → x < …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve: <strong>−3x &gt; 18</strong>. Say the flip rule out loud before you write your final sign.</p>
+      <textarea class="work-area" placeholder="-3x > 18 → x __ …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve: <strong>7 − 2x ≤ 1</strong>. The x-term has a negative coefficient — isolate x last and watch exactly when the flip happens.</p>
+      <textarea class="work-area" placeholder="7 - 2x ≤ 1 → -2x ≤ … → x __ …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve: <strong>x/−4 + 1 &gt; −2</strong>. Two operations happen before you touch the coefficient of x — which one actually triggers the flip?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1: subtract 1 from both sides&#10;Step 2: multiply by -4 → flip"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve: <strong>5x ≥ −25</strong>. Positive coefficient — does the sign flip here? Justify your answer.</p>
+      <textarea class="work-area" placeholder="5x ≥ -25 → x __ …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A tutor claims: <em>"Since I divided both sides by −6, I must flip the sign — every time I divide, I flip."</em> Is this claim about the flip rule fully correct, partially correct, or incorrect? Explain using a counterexample.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Counterexample: solve x/6 > 3 …"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B -->
+  <div class="section-hd">
+    <span class="icon">🎯</span>
+    <h2>Part B — Compound Inequalities &amp; Number-Line Plotting</h2>
+    <span class="badge badge-blue">6 Problems · ~18 min</span>
+  </div>
+  <p class="instr">Solve, then plot on the number line provided. Closed circle = ≤ or ≥. Open circle = &lt; or &gt;. Do the SAME operation to all three parts.</p>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and plot: <strong>−1 &lt; x + 2 &lt; 6</strong>. No negative multiplication here — do either sign flip?</p>
+      <div class="fig">
+        <svg width="220" height="46" viewBox="0 0 220 46">
+          <line x1="10" y1="23" x2="210" y2="23" stroke="#374151" stroke-width="2"/>
+          <polygon points="210,23 200,17 200,29" fill="#374151"/>
+          <text x="110" y="42" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">draw circles &amp; shade between</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="-1 < x + 2 < 6 → subtract 2 from all three parts"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and plot: <strong>6 ≤ 3x ≤ 15</strong>. Divide all three parts by 3 — positive, so the signs stay put. Closed or open circles?</p>
+      <div class="fig">
+        <svg width="220" height="46" viewBox="0 0 220 46">
+          <line x1="10" y1="23" x2="210" y2="23" stroke="#374151" stroke-width="2"/>
+          <polygon points="210,23 200,17 200,29" fill="#374151"/>
+          <text x="110" y="42" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">draw circles &amp; shade between</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="6 ≤ 3x ≤ 15 → divide all parts by 3"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve and plot: <strong>2 &lt; −3x + 5 &lt; 14</strong>. Subtract 5 from all three parts, then divide by −3. Say "flip both" before writing the new signs.</p>
+      <div class="fig">
+        <svg width="220" height="46" viewBox="0 0 220 46">
+          <line x1="10" y1="23" x2="210" y2="23" stroke="#374151" stroke-width="2"/>
+          <polygon points="210,23 200,17 200,29" fill="#374151"/>
+          <text x="110" y="42" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">draw circles &amp; shade between</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1: subtract 5&#10;Step 2: divide by -3 → flip both signs"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve and plot: <strong>−9 ≤ 4 − 3x &lt; 7</strong>. Notice the two ends use different symbols (≤ vs &lt;) — after the flip, which end gets the closed circle now?</p>
+      <div class="fig">
+        <svg width="220" height="46" viewBox="0 0 220 46">
+          <line x1="10" y1="23" x2="210" y2="23" stroke="#374151" stroke-width="2"/>
+          <polygon points="210,23 200,17 200,29" fill="#374151"/>
+          <text x="110" y="42" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">draw circles &amp; shade between</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1: subtract 4&#10;Step 2: divide by -3 → flip, swap ends"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Plot only (already solved): <strong>−4 ≤ x &lt; 3</strong>. Two circles — do they match, or is one different from the other? Draw exactly as you'd click it on screen.</p>
+      <div class="fig">
+        <svg width="220" height="46" viewBox="0 0 220 46">
+          <line x1="10" y1="23" x2="210" y2="23" stroke="#374151" stroke-width="2"/>
+          <polygon points="210,23 200,17 200,29" fill="#374151"/>
+          <text x="110" y="42" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">closed at −4, open at 3</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="Describe circle types and shading:"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve and plot: <strong>−5 &lt; 2 − ½x ≤ 9</strong>. Full pipeline — isolate, flip both signs correctly, then get both circle types right at once.</p>
+      <div class="fig">
+        <svg width="220" height="46" viewBox="0 0 220 46">
+          <line x1="10" y1="23" x2="210" y2="23" stroke="#374151" stroke-width="2"/>
+          <polygon points="210,23 200,17 200,29" fill="#374151"/>
+          <text x="110" y="42" font-family="Nunito" font-weight="600" font-size="10" fill="#6b7280" text-anchor="middle">draw circles &amp; shade between</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1: subtract 2&#10;Step 2: multiply by -2 → flip both, swap ends"></textarea>
+      <div class="answer-box">Answer: <input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;"></div>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Author's Purpose &amp; Tone</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read the passage once for understanding. Annotate: circle signal words, underline the main idea of each paragraph. Answer all 6 questions.</p>
+
+  <div class="passage-box">
+    <div class="passage-title">Why the Sign Flips: The Hidden Symmetry Behind Inequalities</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> When students first meet inequalities, they are usually handed a rule to memorize: multiply or divide by a negative number, and the sign flips. Few teachers explain why. The reason is not a trick of algebra but a simple fact about how negative numbers reorder the number line — and once a student sees it, the rule stops feeling arbitrary.</p>
+      <p><span class="para-lbl">[¶2]</span> Consider the true statement 2 &lt; 5. Multiply both sides by −1, and you get −2 and −5. <span class="sw">However</span>, −2 is actually greater than −5, because −2 sits to the right of −5 on the number line. The original relationship — "less than" — no longer holds unless the inequality symbol flips to match the new order. Multiplying by a negative number is really a reflection: it flips every point on the number line across zero, and reflections reverse order.</p>
+      <p><span class="para-lbl">[¶3]</span> Addition and subtraction, <span class="sw">by contrast</span>, do not reflect anything. Adding 3 to both sides of 2 &lt; 5 simply slides both numbers the same distance in the same direction; their relative order never changes. <span class="sw">As a result</span>, no flip is ever needed for addition or subtraction, no matter how large or small the number being added is.</p>
+      <p><span class="para-lbl">[¶4]</span> This distinction matters enormously on tests like the SHSAT, where compound inequalities often bury a negative coefficient in the middle of a multi-step problem. A student who has memorized "multiply by negative, flip" without understanding the reflection behind it will often forget to flip when the negative sign is disguised inside a fraction or a two-step expression.</p>
+      <p><span class="para-lbl">[¶5]</span> Ultimately, understanding the flip rule as a reflection — not a memorized trick — turns a fragile shortcut into permanent number sense. Students who see why the rule works rarely forget it under exam pressure, because they are no longer relying on memory alone; they are reasoning from a picture of the number line itself.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> What is the <strong>author's primary purpose</strong> in writing this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) To list every rule of algebra students must memorize</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) To explain the conceptual reason behind the flip rule</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) To criticize teachers who teach inequalities poorly</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) To describe the history of the number line</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> The author uses the example 2 &lt; 5 in ¶2 primarily to: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) Show that multiplying by −1 reverses the order of numbers</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) Prove that 2 is always less than 5</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) Compare two unrelated math rules</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) Introduce a completely different topic</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> In ¶3, the signal phrase <em>"by contrast"</em> signals a relationship of: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Cause and effect</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) Contrast</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Sequence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) Definition</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> The author's tone toward students who memorize rules without understanding them (¶4) is best described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) Mocking — the author ridicules students who forget the rule</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) Cautionary — the author warns that memorization alone is fragile</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) Indifferent — the author does not care how students learn</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) Celebratory — the author praises students who memorize quickly</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> Which statement best describes how the author organizes the passage across all five paragraphs? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) Chronological order — events from earliest to most recent</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) Hook → example → contrast → test relevance → takeaway</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) Problem → cause → effect → solution → conclusion</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) Comparison of addition vs. subtraction throughout</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> A student claims: <em>"The author uses the 2 &lt; 5 example to prove that negative numbers are always confusing."</em> Is this claim supported, partially supported, or contradicted by ¶2? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) Supported — ¶2 says negative numbers confuse everyone</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) Partially supported — ¶2 only discusses fractions</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Contradicted — ¶2 uses the example to reveal a clear, logical reflection rule</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) Contradicted — ¶2 does not mention negative numbers at all</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-hd">
+    <span class="icon">🔍</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The inequality rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 4 · SHSAT Prep &nbsp;·&nbsp; 📏 Inequalities &amp; The Flip Rule &nbsp;|&nbsp; 📖 ELA: Author's Purpose &amp; Tone
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
