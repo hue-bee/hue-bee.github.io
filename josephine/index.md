@@ -12,5 +12,5 @@
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Diagnostic Debrief & Error Autopsy](https://hue-bee.github.io/josephine/lessons/01) | [1 Homework](https://hue-bee.github.io/josephine/lessons/01/homework) ||
-
+| **02** | [Connecting Info to Purpose & Geometry — Angles](https://hue-bee.github.io/josephine/lessons/02) | [1 Homework](https://hue-bee.github.io/josephine/lessons/02/homework) ||
 
