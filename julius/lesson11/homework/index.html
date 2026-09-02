@@ -1,1 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 Homework — Revising/Editing &amp; Inequalities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+    .annotation-toolbar { display: none !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .hw-meta-row input {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);
+    font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .lvl-1 { background: #e8edf5; color: #3d4c63; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num {
+    font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem;
+  }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-box input {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);
+    font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;
+  }
+  .work-area {
+    width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px;
+    background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink);
+    box-sizing: border-box; outline: none; margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .passage-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); column-count: 2; column-gap: 1.4rem; }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl { background: rgba(100,116,139,0.15); border-radius: 3px; padding: 0 4px; font-weight: 800; color: #374151; font-size: 0.74rem; }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt {
+    font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem; line-height: 1.45;
+    cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px; border: 1.5px solid transparent; transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%;
+    margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; font-size: 0.73rem; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
+    font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px;
+  }
+  .score-banner {
+    display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-val input {
+    width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;
+    font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;
+  }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md);
+    border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center;
+  }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .rule-strip {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--purple-lt); border: 1.5px solid #c4b5fd;
+    border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center;
+  }
+  .rule-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--purple); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .rul { background: white; border: 1.5px solid #c4b5fd; border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.76rem; font-weight: 700; color: #5b21b6; font-family: var(--ff-body); }
+  .nline { display:flex; justify-content:center; margin: 0.5rem 0; }
+  .print-btn {
+    display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white;
+    font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none;
+    border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
 
+  /* ── Annotation Toolbar (ported from copy.html) ── */
+  .annotation-toolbar {
+    display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.96);
+    border: 1.5px solid rgba(0,0,0,0.10); border-radius: 12px; padding: 5px 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12); margin-bottom: 8px; flex-wrap: wrap; position: relative; z-index: 10;
+  }
+  .annot-btn {
+    display: flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 9px; border-radius: 7px;
+    border: 1.5px solid rgba(0,0,0,0.10); background: #f8f8f8; color: #374151; font-size: 0.72rem; font-weight: 700;
+    cursor: pointer; transition: background 0.15s, border-color 0.15s, transform 0.1s; font-family: 'Nunito', sans-serif;
+    white-space: nowrap; user-select: none;
+  }
+  .annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+  .annot-btn.active { background: #374151; color: white; border-color: #374151; }
+  .annot-btn.active:hover { background: #1f2937; }
+  .annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+  .annot-color-row { display: flex; align-items: center; gap: 4px; }
+  .annot-color-swatch {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+    cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+  }
+  .annot-color-swatch:hover { transform: scale(1.18); }
+  .annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+  .annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+  .annotatable-passage { position: relative; cursor: text; user-select: text; }
+  .passage-highlight { border-radius: 3px; padding: 0 1px; }
+  .passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+  .passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+  .passage-note {
+    display: inline-block; width: 14px; height: 14px; background: #374151; color: white; border-radius: 50%;
+    font-size: 0.6rem; font-weight: 800; text-align: center; line-height: 14px; cursor: pointer; position: relative;
+    vertical-align: super; margin-left: 2px; font-style: normal;
+  }
+  .passage-note .note-tooltip {
+    display: none; position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #1f2937;
+    color: white; font-size: 0.72rem; padding: 5px 9px; border-radius: 8px; z-index: 200; pointer-events: none;
+    width: max-content; max-width: 220px; white-space: normal;
+  }
+  .passage-note:hover .note-tooltip { display: block; }
+  .clear-annotations-btn {
+    margin-left: auto; padding: 3px 8px; border-radius: 6px; background: #fee2e2; border: 1.5px solid #fca5a5;
+    color: #b91c1c; font-size: 0.68rem; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; transition: background 0.15s;
+  }
+  .clear-annotations-btn:hover { background: #fecaca; }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>✏️ Week 10 Homework</h1>
+      <div class="subtitle">Revising/Editing &amp; Inequalities &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="10"> / 10</div><div class="sc-lbl">Math Problems</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="14"> / 14</div><div class="sc-lbl">ELA Questions</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="24"> / 24</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+
+  <!-- PART A: EDITING & REDUNDANCY -->
+  <div class="section-hd">
+    <span class="icon">✂️</span>
+    <h2>Part A — ELA: Clarity, Redundancy &amp; Modifiers</h2>
+    <span class="badge badge-purple">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Read each sentence carefully. Name the specific error before choosing or writing your fix — do not just guess by "feel."</p>
+
+  <div class="rule-strip">
+    <span class="fs-label">Rules</span>
+    <span class="rul">Redundant = says the same thing twice</span>
+    <span class="rul">Dangling modifier = opening phrase doesn't match next noun</span>
+    <span class="rul">"No change" can be correct</span>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> "The final outcome of the game surprised every single one of the players on the team." Which word or phrase is redundant? <span class="lvl lvl-1">L1</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) "final" (an outcome is already final)</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) "surprised"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) "players"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) "team"</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> Revise for clarity: "In my personal opinion, I believe that the new schedule is, in my view, a much better improvement." How many separate phrases repeat the idea of "my opinion"? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) One</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) Two</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) Three</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) None — the sentence has no redundancy</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> "Hoping to finish before dark, the trail was hiked quickly by the scouts." What is wrong with this sentence? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Nothing — the sentence is correct as written</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) "the trail" is placed as the doer of "hoping," which is a dangling modifier</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) It contains a redundant phrase</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) It uses the wrong homophone</span></label>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Question 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Rewrite this sentence so the modifier is no longer dangling: <strong>"Startled by the thunder, the groceries fell from Maya's hands."</strong></p>
+      <textarea class="work-area" placeholder="Rewritten sentence: ..."></textarea>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Question 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">"The reason the concert was postponed is because of the sudden thunderstorm that rolled in." Name the two words doing the same job, then rewrite the sentence correctly.</p>
+      <textarea class="work-area" placeholder="Repeated words: ...   Fixed sentence: ..."></textarea>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Question 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">This sentence has <strong>two</strong> separate issues — one redundancy and one dangling modifier. Find both and rewrite the full sentence correctly: <strong>"Eager to begin the exam early, the extra time was used by James to review each and every single question."</strong></p>
+      <textarea class="work-area" placeholder="Error 1: ...   Error 2: ...   Corrected sentence: ..."></textarea>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: MATH — INEQUALITIES -->
+  <div class="section-hd">
+    <span class="icon">📐</span>
+    <h2>Part B — Math: Solving &amp; Graphing Inequalities</h2>
+    <span class="badge badge-blue">10 Problems · ~20 min</span>
+  </div>
+  <p class="instr">Show ALL work in the work box. Remember: multiplying or dividing by a negative flips the inequality sign. Circle your final answer.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Rules</span>
+    <span class="fml">× or ÷ by negative → FLIP sign</span>
+    <span class="fml">&lt; or &gt; → open circle</span>
+    <span class="fml">≤ or ≥ → closed circle</span>
+    <span class="fml">"at most" = ≤ &nbsp;|&nbsp; "at least" = ≥</span>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Solve: <strong>x − 9 ≤ 4</strong>. Do you need to flip the sign?</p>
+      <textarea class="work-area" placeholder="x - 9 ≤ 4 → ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Solve: <strong>3x &gt; 21</strong>. Which operation isolates x?</p>
+      <textarea class="work-area" placeholder="3x > 21 → ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve: <strong>5x + 4 &lt; 24</strong>. Which operation do you undo first?</p>
+      <textarea class="work-area" placeholder="5x + 4 < 24 → ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve: <strong>−4x ≤ 20</strong>. Do you flip the sign here? Why or why not?</p>
+      <textarea class="work-area" placeholder="-4x ≤ 20 → ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve: <strong>−2x + 7 &gt; 19</strong>. At what exact step does the sign flip?</p>
+      <textarea class="work-area" placeholder="-2x + 7 > 19 → ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve: <strong>8 − 3x ≥ −7</strong>. Show each step in order.</p>
+      <textarea class="work-area" placeholder="8 - 3x ≥ -7 → ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve the compound inequality: <strong>−5 &lt; −3x + 4 ≤ 13</strong>. Subtract 4 from all three parts, then divide by −3. How many times do you flip the sign, and why?</p>
+      <textarea class="work-area" placeholder="Step-by-step work: ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve <strong>6x − 2 &lt; 4x + 10</strong>, then describe the graph: open or closed circle, and which direction does it shade?</p>
+      <div class="nline">
+        <svg width="220" height="60" viewBox="0 0 220 60">
+          <line x1="15" y1="30" x2="205" y2="30" stroke="#64748b" stroke-width="2"/>
+          <line x1="55" y1="24" x2="55" y2="36" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="110" y1="24" x2="110" y2="36" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="165" y1="24" x2="165" y2="36" stroke="#64748b" stroke-width="1.5"/>
+          <text x="55" y="50" font-family="Nunito" font-size="10" fill="#64748b" text-anchor="middle">0</text>
+          <text x="110" y="50" font-family="Nunito" font-size="10" fill="#64748b" text-anchor="middle">?</text>
+          <text x="165" y="50" font-family="Nunito" font-size="10" fill="#64748b" text-anchor="middle">?</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="Solve, then plot: open/closed, direction..."></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A number line shows an <strong>open circle at 4, shading right</strong>. Which inequality below matches it?</p>
+      <div class="mc-opts" style="margin-top:0.4rem;">
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9math"><span class="bubble"></span><span>A) −2x &lt; −8</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9math"><span class="bubble"></span><span>B) 2x &lt; 8</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9math"><span class="bubble"></span><span>C) x ≥ 4</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A rideshare app charges a <strong>$3 base fee plus $2 per mile</strong>. Priya has at most <strong>$25</strong> to spend on a ride. Write and solve an inequality for the number of miles, m, she can travel. Is the graph's circle open or closed?</p>
+      <textarea class="work-area" placeholder="Inequality: ...   Solve: ...   Circle type: ..."></textarea>
+      <div class="answer-box">Answer: <input type="text"> miles</div>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <!-- PART C: ELA PASSAGE -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part C — ELA: Editing Passage &amp; Inference</h2>
+    <span class="badge badge-coral">8 Questions · ~20 min</span>
+  </div>
+  <p class="instr">Read the whole passage once for meaning before answering. "No change" is a real answer choice — do not force an edit where none is needed.</p>
+
+  <!-- Annotation Toolbar (ported from copy.html) -->
+  <div class="annotation-toolbar" id="toolbar-passage">
+    <span class="annot-label">Tool:</span>
+    <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+    <button class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+    <button class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+    <button class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+    <div class="annot-sep"></div>
+    <span class="annot-label">Color:</span>
+    <div class="annot-color-row" id="colors-passage">
+      <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+      <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+      <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+      <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+      <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+    </div>
+    <button class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+  </div>
+
+  <div class="passage-box">
+    <div class="passage-title">Why Bridges Curve: The Hidden Math of Suspension</div>
+    <div class="passage-text annotatable-passage" id="passage-main">
+      <p><span class="para-lbl">[¶1]</span> Most students think of bridges as straight lines connecting two points, but the strongest bridges in the world are built around a curve. <span class="sw">Arriving at this conclusion</span>, the earliest suspension bridge, engineers began noticing centuries ago that a rope hanging freely between two poles naturally forms a smooth, sagging curve called a catenary.</p>
+      <p><span class="para-lbl">[¶2]</span> This shape is not random. <span class="sw">As a result</span> of gravity pulling evenly along the rope's length, every point along the curve carries an equal share of tension. Engineers realized that if they built a bridge cable in this exact shape, the structure would distribute weight far more efficiently than a straight or angular design ever could.</p>
+      <p><span class="para-lbl">[¶3]</span> The most best example of this principle in the most best way is the Golden Gate Bridge, whose two massive cables sweep down and back up in a pair of graceful catenary curves. Each cable is anchored deep into concrete at both ends, and their tension is because of the immense weight of the roadway pulling down from below.</p>
+      <p><span class="para-lbl">[¶4]</span> <span class="sw">In contrast</span> to a rigid steel beam, which resists bending forces directly, a suspension cable in tension is remarkably light for the distance it can span. This is why suspension bridges, despite their delicate appearance, can cross far wider gaps than beam bridges of similar weight — the curve itself does much of the structural work.</p>
+      <p><span class="para-lbl">[¶5]</span> Studying the geometry of suspension bridges, physics and algebra come together for engineering students in a single unavoidable lesson. The catenary curve is proof that the shape which looks the most graceful is often, in the end, also the shape which is the most and most efficient.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> In ¶1, "Arriving at this conclusion, the earliest suspension bridge, engineers began noticing..." contains a dangling modifier. Who is actually doing the "arriving"? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>A) The bridge</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>B) The engineers</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>C) The rope</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>D) The curve</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> In ¶2, the phrase <span class="sw">"As a result"</span> signals that what follows is: <span class="lvl lvl-1">L1</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>A) A contrast to what was just said</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>B) A definition of a new term</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>C) A consequence or effect of the previous sentence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>D) A sequence step in a process</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> Sentence 1 of ¶3 has a redundancy error: "The most best example of this principle in the most best way..." What is the correction? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>A) Cut "most" both times, keep "best example" and "best way"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>B) Cut "best" both times, keep "most"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>C) No change needed</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>D) Add "very" before "best" for emphasis</span></label>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Question 10 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">The last sentence of ¶3, "their tension is because of the immense weight," has an awkward construction issue similar to the "reason...is because" trap. Rewrite it correctly.</p>
+      <textarea class="work-area" placeholder="Corrected sentence: ..."></textarea>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q11.</span> What is the <strong>central claim</strong> of this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>A) The Golden Gate Bridge is the longest bridge in the world</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>B) The catenary curve lets suspension bridges distribute weight efficiently across wide spans</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>C) Beam bridges are stronger than suspension bridges</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q11"><span class="bubble"></span><span>D) Engineers no longer use straight lines in bridge design</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q12.</span> A student claims: <em>"¶4 argues that suspension bridges are weaker than beam bridges."</em> Is this claim supported, partially supported, or contradicted by ¶4? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>A) Supported — ¶4 says cables are "delicate"</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>B) Partially supported — ¶4 compares weight only</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>C) Contradicted — ¶4 states suspension bridges can cross wider gaps than beam bridges of similar weight</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q12"><span class="bubble"></span><span>D) Irrelevant — ¶4 never compares the two bridge types</span></label>
+    </div>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Question 13 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">¶5 ends with: "the shape which looks the most graceful is often, in the end, also the shape which is the most and most efficient." This sentence has <strong>two</strong> separate issues — one redundancy and one grammatical repetition error. Identify both and rewrite the sentence correctly.</p>
+      <textarea class="work-area" placeholder="Error 1: ...   Error 2: ...   Corrected sentence: ..."></textarea>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q14.</span> Which statement best describes how the author organizes the passage across all five paragraphs? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q14"><span class="bubble"></span><span>A) Hook → origin of the shape → key example → comparison → student relevance</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q14"><span class="bubble"></span><span>B) Chronological order of bridge-building history</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q14"><span class="bubble"></span><span>C) Problem → cause → effect → solution → conclusion</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q14"><span class="bubble"></span><span>D) A single extended comparison between two bridge types</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ERROR LOG -->
+  <div class="error-log">
+    <h3>🧾 Error Log — Track Your Misses</h3>
+    <p style="font-size:0.78rem;color:#9a3412;margin-bottom:0.5rem;">For every problem you got wrong, record it below before your next session.</p>
+    <table class="error-table">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills">
+      <span class="pill pill-cg">Content Gap</span>
+      <span class="pill pill-ce">Careless Error</span>
+      <span class="pill pill-ru">Rushing</span>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">My biggest ELA mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 10 · SHSAT Prep &nbsp;·&nbsp; ✂️ Revising/Editing &amp; Modifiers &nbsp;|&nbsp; 📐 Solving &amp; Graphing Inequalities
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+
+/* ── Passage Annotation System (ported from copy.html) ── */
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.getElementById('toolbar-passage').querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.getElementById('colors-passage').querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note...';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '\u2713';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '\u2715';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      var noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') {
+        span2.className = 'passage-highlight';
+        span2.style.backgroundColor = color;
+        span2.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span2.className = 'passage-underline';
+        span2.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span2.className = 'passage-outline';
+        span2.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+(function(){
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.addEventListener('mouseup', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range);
+  });
+  passage.addEventListener('touchend', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    setTimeout(function(){ applyPassageAnnotation(range); }, 100);
+  });
+})();
+</script>
+</body>
+</html>
