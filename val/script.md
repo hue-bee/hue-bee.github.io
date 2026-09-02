@@ -1,321 +1,305 @@
-# Week 2 · Session 2A — Full Tutor Script
-### "Percents of Derived Quantities & 'Through' = Method"
-**Run time: 56 minutes · 17 slides · Sprint 0:00–0:05 · Math 0:05–0:28 · ELA 0:28–0:51 · Exit 0:51–0:56**
+# Week 2 Tutor Script — Connecting Info to Purpose & Geometry: Angles
+**Deck:** `index.html` · 15 slides · 60 minutes
+**Blocks:** ELA 0:00–0:25 (Purpose Funnel) · Reset 0:25–0:28 · Math 0:28–0:53 (Angles) · Close 0:53–1:00
 
-**How to use this script:** everything in *italics* is stage direction (what you do, what you write, what you watch for). Everything in quotes is meant to be said close to verbatim — the phrasing is engineered so the same four or five sentences repeat all session and become the student's inner voice on test day.
+**How to use this script:** bolded lines are said aloud roughly verbatim. Bracketed lines are moves, not speech. Every "→" is a question you must actually wait on — silence is the instructional tool in this session. Target ratio: student talks 60% of the ELA block, 50% of the math block.
 
-**The two spines of the day**
-- Math spine: **Compute before you compare.** Percents that come from different places may never be added.
-- ELA spine: **Name the method before you choose.** "Through" asks HOW, never WHAT.
-
-**Board setup before the student arrives.** Draw a vertical line down the whiteboard. Left column header: `COMPUTE, DON'T COMBINE`. Right column header: `HOW, NOT WHAT`. Every insight today gets written into one of those two columns by the *student*, not by you. At the exit ticket the board is their summary.
+**Two non-negotiables for today**
+1. The student writes the purpose sentence *before* seeing any answer choice.
+2. The student names the angle relationship out loud *before* writing any equation.
 
 ---
 
-## Slide 1 · Title (0:00–0:01)
+## Slide 1 — Title (0:00–0:01)
 
-**Say:** "Two skills today, and they're secretly the same skill. In math you're going to stop trusting percents that look addable. In reading you're going to stop trusting answers that look true. Both traps work the same way — they feel right before you've checked anything."
+**"Two things today, and they're secretly the same skill. In reading, you'll stop guessing why an author included a detail — you'll derive it. In geometry, you'll stop memorizing angle rules — you'll rebuild them from two lines crossing. Both are: find the big structure first, then place the small piece inside it."**
 
-**Do:** Point at the two board columns. "By 0:56 both of these columns are full, and you wrote them, not me."
+[Point at the four chips: Purpose Funnel, Vertical & Supplementary, Triangle Sum, Draw-It-Yourself.]
 
-**Hook question (don't answer it yet, just plant it):** "If a field's length grows 15% and its width grows 20%, the area grows 35%, right?" *Let them say yes. Write their "35%" on the board in the corner and circle it.* "Hold that. We're coming back to kill it in twelve minutes."
-
----
-
-## Slide 2 · Session Roadmap (0:01–0:03)
-
-**Say:** "Five minutes of mental percents, twenty-three of math, twenty-three of reading, five to log it. The mastery target for the whole week is that you can say the six 'through' methods from memory with no notes, and that percent problems with two moving parts stop scaring you."
-
-**Do:** Have the student read the four time blocks out loud. Reading the clock out loud is a small thing that makes them own the pacing instead of drifting.
-
-**Say:** "One rule for the whole hour: when I ask 'what type of thing is the answer?', you answer before you touch numbers or choices. Type first, work second."
+→ **"Which of those four words is least familiar right now?"** (Note the answer; that's where you'll spend your slack time.)
 
 ---
 
-## Slide 3 · Sprint · Mental Math Warm-Up (0:03–0:08)
+## Slide 2 — Session Roadmap (0:01–0:03)
 
-*Ten items, calculator away, ~25 seconds each. Say each item aloud; they answer aloud. The point is not speed — it's the prediction habit.*
+Run this as an *error log check-in*, not a review — 30 seconds, hard stop.
 
-**Say first:** "Before every single answer, you predict one word: SMALLER or BIGGER than the original number. Under 1% means much smaller. Over 100% means bigger. Say the word, then compute."
+**"Open last week's error log. I don't want a full review. I want one thing: is there a mistake that shows up twice?"**
 
-| # | Item | Say-out-loud path | Answer |
-|---|---|---|---|
-| 1 | 0.5% of 480 | 1% is 4.8; half the percent, half the answer | 2.4 |
-| 2 | 250% of 60 | 100% is 60; two-and-a-half times | 150 |
-| 3 | 10% of 730 | slide the decimal once | 73 |
-| 4 | 1% of 6,200 | slide it twice | 62 |
-| 5 | 0.25% of 800 | 1% is 8; a quarter of 8 | 2 |
-| 6 | 150% of 40 | 40 + half of 40 | 60 |
-| 7 | 0.1% of 5,000 | 1% is 50; a tenth of 50 | 5 |
-| 8 | 300% of 12 | three whole copies | 36 |
-| 9 | 2.5% of 200 | 1% is 2; two-and-a-half twos | 5 |
-| 10 | 0.5% of 1,000 | 1% is 10; half of 10 | 5 |
+→ Wait. If the student says "I just made careless mistakes," push once: **"Careless is not a category. Was it a relationship you mixed up, or a question you didn't finish reading?"**
 
-**The clever line to repeat:** "One percent is always your ladder. Find 1%, then walk up or down from it. You never need to find 0.5% or 250% directly — you need 1% and then arithmetic you can do in your head."
+**"Here's the honest picture: geometry has shown zero net improvement across two diagnostics. That's not a effort problem — that means the *rules were never built*, they were just handed to you. So today we're not reviewing angles. We're constructing them from scratch, and you're doing the drawing."**
 
-**Diagnostic to watch for:** if they answer 0.5% of 480 as 240 or 24, that's the "decimal panic" error — they treated 0.5% as 50% or as a half. *Fix on the spot:* "0.5% is half of one percent, not half of the number. Which is a bigger cut of 480 — a half of it, or half of one hundredth of it?"
+[Trace the timeline once, then move. Do not narrate all eight rows.]
 
 ---
 
-## Slide 4 · Math Zone 1 · Percent of a Derived Quantity (0:08–0:13)
+## Slide 3 — The Purpose Funnel (0:03–0:06)
 
-**Say:** "Here's your 35% from the opening. Field is 80 by 50 meters. It grows to 92 by 60. Length up 15%, width up 20%. Compute the two areas — real numbers, no percents."
+Do not explain the funnel first. Ask the Socratic question first.
 
-*Student computes. Do not help.*
-- Before: 80 × 50 = **4,000 m²**
-- After: 92 × 60 = **5,520 m²**
-- Change ÷ original = 1,520 ÷ 4,000 = 0.38 = **38% increase**
+→ **"If I asked you 'why did the author mention rainfall data in paragraph 3?' — could you answer that without knowing what the whole passage is trying to do?"**
 
-**Say:** "Your instinct said 35. The truth is 38. That missing 3% is the whole lesson. Where did the extra area come from?"
+Let them try. Most students say "I'd reread paragraph 3." That's the trap you want them to walk into.
 
-**The clever visual — the Bonus Corner.** *Draw the 80×50 rectangle. Extend it to 92×60 and shade three new regions.*
-- A strip along the length: 12 × 50 = 600 m²
-- A strip along the width: 10 × 80 = 800 m²
-- A little rectangle in the far corner: 12 × 10 = **120 m²**
-- 600 + 800 + 120 = 1,520 ✓
+**"That's exactly what the test is counting on. Reread paragraph 3 and you learn what the detail *says*. But the question asks what the detail *does*. A detail's job only exists relative to the passage's job. So the order is forced: passage purpose first, detail purpose second. That's the funnel — wide at the top, narrow at the bottom."**
 
-**Say:** "When you add 15% and 20%, you're paying for the two strips and forgetting the corner. That corner exists because both sides grew *at the same time*. Percent-adding always loses the corner."
+Now the payoff, and say it slowly, because this is the whole strategy:
 
-**Named phrase to bank on the board:** *"Adding percents loses the corner."*
+**"Here's the part that makes this fast. Every correct answer to a 'why did the author include X' question restates one of exactly four relationships. The detail either supports the purpose, complicates it, contrasts with it, or illustrates it. Four verbs. That's the entire universe."**
 
-**Optional stretch (only if they're strong):** "The exact rule is 15% + 20% + (15% of 20%) = 15 + 20 + 3 = 38. The corner is the product of the two growths. That's why the true answer is always a little bigger than the sum — never smaller."
+→ **"Give me the difference between 'supports' and 'illustrates.'"**
 
----
+Coach toward: *supports* = evidence that makes the claim more believable; *illustrates* = a concrete instance that makes the claim easier to picture. Data supports. Anecdotes illustrate. This distinction wins the worked example in two slides.
 
-## Slide 5 · Math Zone 1 · Demolishing the Wrong Paths (0:13–0:16)
+→ **"And 'complicates' vs. 'contrasts'?"**
+Coach toward: *complicates* = same side, adds nuance or a qualification. *Contrasts* = opposing side, sets up a genuine against. Complicating keeps the argument; contrasting pushes back on it.
 
-*Run this as a diagnosis drill, not a lecture. Give each wrong answer as if a classmate said it; the student says what the classmate did wrong.*
-
-- **"The answer is 15%."** — "What did that student measure?" *(Only the length, 80→92. Threw away the width entirely.)*
-- **"The width grew 10."** — "What's wrong with 10 as a percent answer?" *(10 is meters, a raw amount, not a fraction. It confuses "how much" with "what share.")*
-- **"15% + 20% = 35%."** — "Say the phrase." *(Adding percents loses the corner.)*
-
-**The rule, said by the student, written by the student:**
-"Compute the real before-value and the real after-value first. Then percent change = (after − before) ÷ before. Never combine percents that came from two different dimensions."
-
-**Say:** "Notice what all three traps share: each one is a shortcut taken *before* any real quantity existed. That's the signature of this whole question type."
+**"Write those four verbs at the top of your scratch paper. They're going in the exit ticket from memory."**
 
 ---
 
-## Slide 6 · Math Zone 1 · Practice, Easy → Hard (0:16–0:20)
+## Slide 4 — Passage: Honeybees (0:06–0:11)
 
-**Item 1 (Level 1).** Rug 6 ft × 4 ft becomes 9 ft × 6 ft.
-- 24 ft² → 54 ft²; change 30 ÷ 24 = 1.25 = **125% increase**.
-- Coaching beat: "Both sides grew 50%. Did the area grow 100%? No — 50 + 50 + 25 = 125. Corner again, and this time the corner is huge."
+**"Read straight through, top to bottom, one time. Do not look at a single question. When you finish, you write one sentence: 'The purpose of this passage is to ______.' That's it."**
 
-**Item 2 (Level 2).** Volume, length +10%, width +10%, height fixed. Does volume grow 20%?
-- Use easy numbers: 10 × 10 × 10 = 1,000 → 11 × 11 × 10 = 1,210. **21%, not 20%.**
-- Coaching beat: "One extra percent. Small, but it's the difference between a right answer and a distractor the test wrote *specifically* for the student who added."
+[Show the annotation toolbar for 15 seconds only.]
 
-**Item 3 (Level 4, multiple choice).** Garden 45 m × 30 m → 54 m × 36 m. Percent increase in area?
-A) 20% B) 40% C) **44%** D) 50%
-- 1,350 → 1,944; 594 ÷ 1,350 = **0.44 → C**.
-- **Trap autopsy:** each side grew exactly 20%. (A) is one side's growth. (B) is the sum. The truth is 20 + 20 + 4 = 44. "Notice the test put both of your instincts in the answer choices. That is not an accident — those choices exist because they're the two most popular mistakes."
+**"Highlight, underline, outline, and sticky notes are here. One rule: annotate structure, not interesting facts. Highlight the sentence where the author's actual opinion shows up. Do not highlight the number 20,000 because it's cool."**
 
-**Pass condition before moving on:** the student can say, unprompted, "compute both areas, then divide the change by the original."
+[Silent read. ~2:30. Do not talk during it. Then have the student write the purpose sentence before you say anything.]
 
----
+**Tutor's own purpose sentence (do not reveal until they've written theirs):**
+> *The purpose of this passage is to argue that crediting honeybees with most pollination is an incomplete story that obscures the wild bees doing much of the work — and that this distortion misdirects conservation attention.*
 
-## Slide 7 · Math Zone 2 · Fractional Percents (0:20–0:23)
+**Diagnostic on their sentence — check for these three failure modes:**
+- **Too topical:** "This passage is about bees." → **"That's a topic, not a purpose. Purpose has a verb: to argue, to correct, to explain, to complicate."**
+- **Too strong:** "To argue honeybees don't matter." → **"Paragraph 4 says farming would struggle without managed hives. Your sentence has to survive every paragraph, including the one that pushes back."**
+- **Just right:** any version of *correct an incomplete story*. Accept "to correct a popular misconception" — that's functionally identical.
 
-**Ask first:** "1% means one part out of a hundred. So what does ½% mean — one out of a hundred, or one out of two hundred?"
-
-*Let them reason. The answer they should reach: half of 1/100 is 1/200.*
-
-**The three-form chain, written across the board as one line:**
-`½%  =  0.5%  =  0.005  =  5/1000  =  1/200`
-
-**Say:** "The SHSAT will hand you any one of those forms and expect you to recognize the others instantly. So drill the conversion direction that trips people: percent to decimal, move the point two places LEFT. 0.5 becomes 0.005. Two places, always, no exceptions, even when the percent already has a decimal in it."
-
-**Fast check — say them, they answer:** ¼% = 0.0025 = 1/400 · 2% = 0.02 = 1/50 · 0.1% = 0.001 = 1/1000.
-
-**Clever anchor:** "½% of 200 is exactly 1. If you ever doubt whether you've moved the decimal correctly, test your form on 200 — the answer should be 1. That's your ruler."
+**"Notice what your sentence has to do: it has to be true in paragraph 1 AND paragraph 4, where the author defends honeybees. A purpose sentence that only fits the paragraphs you liked is a purpose sentence that will get you two questions wrong."**
 
 ---
 
-## Slide 8 · Math Zone 2 · Named Trap: "Flip the Question" (0:23–0:26)
+## Slide 5 — Worked Example: Why Rachel Winfree? (0:11–0:14)
 
-**Ask:** "Question says: which of the following is NOT equivalent to ½%? Three choices are secretly equal to ½%; one is different. Is it safer to check every choice, or to stop when one looks right?"
+Read the stem aloud, then stop.
 
-**Say:** "Here's why this trap is so profitable for the test. You've been trained since second grade to hunt for the one right answer and stop reading. A negation stem inverts that. Now three answers are *correct math* and *wrong answers*. Your habit of stopping early is exactly the thing that loses the point."
+**"'The author most likely includes the details about Rachel Winfree's field studies in paragraph 2 in order to...' Before you answer — say your purpose sentence out loud."**
 
-**Work the model item together:**
-- ½% = 0.005 → choices 0.005 ✓, 1/200 ✓, 5/1000 ✓, 0.05 ✗
-- 0.05 = 5%, ten times too large. **That's the answer, because it's the odd one out.**
+→ [They recite it.] **"Good. Now: does Winfree's study support that purpose, complicate it, contrast with it, or illustrate it?"**
 
-**The physical fix, and make them do it physically:** "On any NOT / EXCEPT / FALSE stem, you circle the negation word in the booklet, then convert all four choices to decimals in the margin. Four conversions, every time. You do not get to stop at three."
+Work through the elimination out loud with them — this is the modeling moment:
 
-**Say:** "And notice the cheap version of this error: reading 0.05 as 'basically 0.005.' One zero. On this test, one zero is a whole question."
+- **Contrast?** **"Contrast needs two opposing sides. What's Winfree opposing here? Nothing — her data points the same direction as the author's claim. Out."**
+- **Illustrate?** **"Tempting. But an illustration is an example that makes a claim vivid. Winfree isn't a vivid example of wild bees pollinating — she's a *controlled comparison*: farms with wild habitat vs. farms without, and yields were higher even with zero honeybee hives. That's not an anecdote, that's evidence. Out."**
+- **Support.** **"Her study is proof for the exact claim the passage exists to make. Locked."**
 
----
+**"Now count what you did. You never reread paragraph 2 line by line. You matched a function to a verb. That's a 15-second question that most students spend 90 seconds on."**
 
-## Slide 9 · Math Zone 3 · Two-Stage Proportional Scale-Up (0:26–0:29)
+**The trap, named:**
 
-**Setup:** Survey: 60% support, 25% oppose, 15% undecided. Undecided voters split evenly when forced to choose. Full population is 24,100.
+**"Watch this wrong answer: 'Winfree's study proves honeybees are unnecessary for farming.' Every word of that sounds like the passage. And it's wrong — because paragraph 4 explicitly says monoculture farming would struggle without managed hives. The choice took a true direction and pushed it one step too far. We're calling that overshoot, and it's going in your error log by name."**
 
-**Ask before any computing:** "How many worlds does this problem have?"
-
-**The clever frame — two worlds:**
-- **Percent-world:** no people, just shares. Fix the percentage here.
-- **People-world:** actual humans. Only enter it once.
-
-**Stage 1 (percent-world):** half of 15% is 7.5%; 60% + 7.5% = **67.5% adjusted support.** *Say:* "Notice the 24,100 hasn't appeared yet. It's not allowed in yet."
-
-**Stage 2 (people-world):** 0.675 × 24,100 = 16,267.5 ≈ **16,268 people.**
-
-**The trap this defeats:** students who compute 60% of 24,100 = 14,460 first, then try to fix the undecided in people-world. It's more arithmetic, more rounding, more chances to break. *Say:* "One multiplication by the population, at the very end. If you multiply by 24,100 twice, you've done the problem wrong even if you land close."
-
-**Sanity check to teach:** "67.5% is a bit over two-thirds. Two-thirds of 24,100 is about 16,067. Your answer should be slightly above that. 16,268 — good. Estimate first, then trust the arithmetic."
+→ **"What's the tell for overshoot?"** Coach to: *the choice uses a stronger word than the passage does.* Proves, unnecessary, defund, refutes, disproves.
 
 ---
 
-## Slide 10 · Math Recap + Bridge to ELA (0:29–0:31)
+## Slide 6 — ELA Practice, Levels 1–2 (0:14–0:19)
 
-*Student recites all three, no prompting. If they stall, give only the first two words.*
+**"Two questions. For each one: purpose sentence, then verb. Write both in the box — I want to see the verb, not just a feeling."**
 
-1. **Compute, don't combine** — real before, real after, then divide.
-2. **Convert every choice** — negation stems get four conversions.
-3. **Resolve, then scale** — fix the percent in percent-world, multiply once at the end.
+[Let them work ~3 minutes, both problems, then discuss.]
 
-**The bridge line (say it exactly):** "All three habits are the same instruction: name what kind of thing you're looking for before you start choosing. The next twenty-three minutes is the reading version of that. In math you named a trap. In reading you're going to name a METHOD."
+**Q1 — "managed livestock species," paragraph 3 → SUPPORTS**
+Target reasoning: the phrase does one job — it separates honeybees from endangered species, which is what makes the funding critique land. **"Why does 'livestock' matter so much in one word?"** → Because livestock is *farmed and multiplied on purpose*; you can always make more. Endangered species can't be manufactured. That one word is the load-bearing beam under the whole critics' argument.
 
----
+**Q2 — "over 20,000 wild bee species" → SUPPORTS, by establishing scale**
+The slide asks the sorting question directly: *proving scale, or setting up a contrast with honeybees?*
+Target reasoning: scale. **"If the number were 12 wild species, would the author's argument survive?"** → No — the argument depends on wild bees being numerous enough to do a "substantial share." The contrast in that paragraph comes from the *flower shape* clause, not from the number. **"The number does volume. A different clause does the contrast. Don't let two jobs in one sentence blur into one."**
 
-## Slide 11 · ELA · The "Through" Rule (0:31–0:34)
-
-**Ask:** "'The author illustrates the character's loneliness THROUGH ___.' Is that blank asking for a fact about the character, or a technique the author used?"
-
-**Say:** "'Through' is a HOW word. It never asks WHAT happened. So a choice that only restates a plot detail — no matter how perfectly true it is — cannot be the answer. It answered a question nobody asked."
-
-**Board it:**
-`illustrated / conveyed / developed THROUGH ___`
-`WHAT → a fact → always wrong`
-`HOW → a method → correct`
-
-**The clever screening test — the Verb-or-Noun test:** "Read the choice by itself, out loud, with no passage. If it sounds like a technique a writer could use in *any* passage — an anecdote, a contrast, sensory detail — it's alive. If it only makes sense for this one passage because it names people and events, it's a fact, and it's dead. Cross it out before you even weigh it."
-
-**Say:** "Most students lose these questions in the four seconds where a true statement feels like a right answer. True is not the standard here. HOW is the standard."
+**Checkpoint (read it aloud):** **"If your verb doesn't match your own purpose sentence, one of the two is wrong — and it's almost always the purpose sentence. Fix that first."**
 
 ---
 
-## Slide 12 · ELA · The Six Methods Reference Card (0:34–0:37)
+## Slide 7 — ELA Practice, Levels 3–4 (0:19–0:24)
 
-*Have them hand-write the card now, on an actual index card, in their handwriting. Don't hand them a printed one — the writing is part of the memorization.*
+**Q3 — final paragraph vs. paragraph 3's criticism → COMPLICATES (qualifies/softens)**
+The slide gives the three-way choice: agreeing, softening, or reversing.
 
-| Method | One-line definition | The tell in a passage |
-|---|---|---|
-| Anecdote | A short story or single incident making a broader point real | Something *happens*, in sequence, once |
-| Comparison | Two things side by side to highlight a shared quality | Two subjects, parallel structure, "like/as" |
-| Sensory description | Vivid detail hitting sight, sound, touch, taste, smell | Textures, sounds, colors; nothing happens |
-| Contrast | Two things that differ sharply, sharpening both | "But," "while," opposite directions |
-| Chronology | Events in time order so change is trackable | Dates, "by 1935," "then," "over the years" |
-| Example | A specific instance proving a general claim already made | A claim first, then "for instance" |
+→ **"Read the last two paragraphs back to back. Is the author taking back the criticism, or fencing it in?"**
 
-**Mnemonic to say five times:** **A**ll **C**areful **S**tudents **C**an **C**ite **E**vidence — Anecdote, Comparison, Sensory, Contrast, Chronology, Example.
+Target reasoning: fencing it in. **"'Does not require abandoning honeybee conservation' — that sentence exists to stop a reader from over-reading paragraph 3. It's a guardrail. The author still thinks the messaging is distorted; he just refuses the extreme version of his own point. That's complicating, not reversing. Reversing would need him to say the critics are wrong."**
 
-**Say:** "Tape this to your desk for four weeks. From now on every 'through' question is a matching exercise against six known options — not a cold guess among four sentences the test wrote to confuse you."
+Teaching note worth 30 seconds: **"Notice that the author pre-empted the overshoot for you. Good passages usually do. When you see a 'none of this diminishes...' sentence, circle it — it's a map of which answer choices are too strong."**
 
----
+**Q4 — "paragraph 4 exists to argue honeybee conservation should be defunded" → overshoot, in one line**
+Target one-liner: *The passage argues for expanding the story to include wild bees, not for cutting honeybee funding — and it explicitly says complexity "does not require abandoning honeybee conservation."*
 
-## Slide 13 · Diagnostic Miss 1 of 3 · Lowell's Decline (0:37–0:40)
+→ **"Which single word in that answer choice is stronger than anything in the passage?"** → *Defunded.* The passage says resources "may do little," not that they should be cut. **"'May do little' to 'should be defunded' is the whole distance between right and wrong on this question."**
 
-*Have them read the passage aloud. Then cover the answer choices with your hand — literally.*
-
-**Ask:** "Before any choices: what TYPE of thing must the answer be?" *(A method.)* "Now, what is this passage actually doing? 40,000 in 1920 → 28,000 in 1935 → under 15,000 in 1950 → last mill closed 1957."
-
-**Student should name:** **chronology** — decline traced year by year — with **comparison** ("workers once fed looms" vs. "empty windows now") as the secondary structure.
-
-**Say:** "You just did the hard part with the choices covered. Now uncover them and match. This is the two-step, and the order is not optional: name it, then match it."
-
-**Why it was missed the first time:** a distractor restated "Lowell's mills closed" — completely true, names no method. **Say:** "Accurate and responsive are different things. That choice was accurate. It didn't answer the question that was asked."
+**"Overshoot vocabulary list, write it down: prove, disprove, unnecessary, defund, always, never, only, refute. When you spot one in a choice, suspect the choice before you suspect yourself."**
 
 ---
 
-## Slide 14 · Diagnostic Miss 2 of 3 · Moccasin Mastery (0:40–0:43)
+## Slide 8 — Reset (0:24–0:27) — do not skip
 
-*Read aloud. Then ask them to underline three details that hit a sense.*
-Likely: leather "like warm wax," "faint smoky scent," awl "clicked softly," beadwork "in flashes of red and white."
+**"Stand up, water, thirty seconds of moving. Not optional."**
 
-**Ask:** "Does anything *happen* in this passage — a single event with a beginning and end?" *(No. She works; nothing turns.)* "So which is it: anecdote or sensory description?"
+**"Here's why I'm strict about this: geometry has shown no net improvement across two diagnostics, and I'm not going to hand it a tired brain running on reading momentum. Angles reward patience, not speed. Three minutes now buys the next twenty-five."**
 
-**Answer:** **sensory description.**
-
-**The distinction, said cleanly:** "Anecdote = a short NARRATIVE; something occurs, in order. Sensory description = a scene rendered in detail; the reader feels it but no event turns. If you can't name an event, you can't call it an anecdote."
-
-**Why it was missed:** the distractor offered "a personal anecdote about her childhood" — a real method, plausible-sounding, and simply not what this passage did. **Say:** "Notice the upgrade in trap quality. This one didn't lure you with a fact — it lured you with the *wrong method*. That's why you name your own method first: you can't be sold someone else's."
+[Genuinely stop talking. Reset the deck to slide 9 while they're up.]
 
 ---
 
-## Slide 15 · Diagnostic Miss 3 of 3 · Marcus and the Company (0:43–0:46)
+## Slide 9 — Two Lines Cross (0:27–0:32)
 
-*Read aloud. Then draw two horizontal arrows on the board, one labeled "the shipping company," one labeled "Marcus," both starting at the 1880s and converging at 1893.*
+Pen in their hand before any rule appears.
 
-**Ask:** "Both tracks move through time. So is this chronology?"
+**"Blank paper. Draw two straight lines crossing in an X — make it deliberately lopsided, not a plus sign. Label the four angles 1, 2, 3, 4 going around clockwise."**
 
-**The resolution to teach — Structure vs. Background:**
-- **Chronology** = ONE sequence in time order.
-- **Comparison** = TWO things placed side by side to reveal a shared pattern.
-- Here two separate tracks — one life, one business era — run parallel to the same ruin. The author's *structural choice* is **comparison**. Time passing is just the background each track happens to sit in.
+[Wait for the drawing. This is the encoding step; a copied diagram teaches nothing.]
 
-**Say:** "When two methods both seem to fit, ask which one describes the shape the author BUILT, and which one is just a condition of the material. The built shape is the answer. Almost always."
+→ **"Angles 1 and 3 are directly across from each other. Equal, or different?"** → Equal.
+→ **"Angles 1 and 2 are next to each other, sitting on the same straight line. What do they add to, and why that number?"** → 180°, because a straight line *is* a straight angle — a half turn.
 
-**Bank the phrase:** *"Structure beats background."*
+Now derive vertical angles instead of asserting them. This is the cleverest 90 seconds in the deck:
 
----
+**"You just told me 1 + 2 = 180. And 2 + 3 also sit on a straight line, so 2 + 3 = 180. Both pairs contain angle 2. If two things both add with angle 2 to reach the same total, what has to be true about those two things?"**
 
-## Slide 16 · ELA · Practice — Four Items (0:46–0:51)
+→ **"They're equal — angle 1 = angle 3."**
 
-*Rule for all four: they say the method out loud BEFORE you reveal anything. Cover the choices with your hand every time.*
+**"So vertical angles aren't a separate fact you memorize. They're a consequence of the straight line rule. You now own two rules, and you only had to remember one."**
 
-**1 (Level 1) — The storm.** Moan through the eaves, shriek, rain like gravel, limb like a gunshot, flat pop, lightning strobing.
-→ **Sensory description.** Nothing happens as an event; the intensity is built out of sounds and sights. *Say:* "Four different sounds in five lines. When you can count the senses, you've found the method."
+[Show the formula box.] **"Vertical → equal. Straight-line pair → sums to 180°. Also give me complementary."** → Two angles summing to 90°, a corner. **"Complementary = Corner, both start with C. Supplementary = Straight."**
 
-**2 (Level 2) — Dr. Alvarez.** Forty-two papers, eleven students, six grants — then one night in year three: ninth failed trial, rebuilt the apparatus overnight, ran trial ten.
-→ **Anecdote.** *Say:* "There's a list in there too, and a list is tempting. But the paragraph pivots on 'but it was her third year' — one specific incident, told in sequence, doing the persuading. Story beats list."
-
-**3 (Level 3) — East side / west side.** Values tripled, cafes, townhouses vs. three factories closed, enrollment halved, for-sale signs; "opposite directions."
-→ **Contrast.** *Say:* "Careful here. Comparison highlights a SHARED quality; contrast highlights sharp DIFFERENCE. The passage literally says 'opposite directions.' Same-direction pairing is comparison — as in Marcus — and opposite-direction pairing is contrast. Same structure, opposite point."
-
-**4 (Level 4) — Grandmother's wooden spoon.** One worn spoon standing in for three generations and an ocean crossing.
-→ **Example.** *Say:* "The stem hands you the definition — 'a single small object stands in for an entire cultural practice.' One specific instance offered as proof of a general claim. If it had narrated a scene where something happened, we'd argue for anecdote; here the object itself is the evidence."
-
-**Non-negotiable sequence, recited by the student:** "Name the method silently. Then scan the four choices for the one naming that method. Never let a true-sounding fact substitute for a named technique."
+**Deliberate misconception probe:** → **"Do supplementary angles have to be touching?"** → No. Supplementary is a *statement about a sum*, not about position. Two angles in different diagrams can be supplementary. This is exactly the confusion that Slide 11 detonates.
 
 ---
 
-## Slide 17 · Exit Ticket (0:51–0:56)
+## Slide 10 — Why 180°? Tear the Corners (0:32–0:37)
 
-**1. Error log — sort every miss from today into exactly one bucket:**
-- derived-quantity computation (added percents instead of computing areas)
-- negation-trap slip (stopped before checking all four choices)
-- method-vs-fact confusion (picked a true statement over a named technique)
+Physical proof — actually tear paper if you have any.
 
-**2. Confidence win — say both out loud, cold:** "The field grows 38%, not 35%, because adding percents loses the corner." · "½% = 0.005 = 1/200."
+**"Draw any triangle. Make it ugly — long, skinny, whatever. Now tear off all three corners. Line the three torn tips up next to each other, point to point, on a straight edge."**
 
-**3. Recite from memory, no notes, no hints:** anecdote, comparison, sensory description, contrast, chronology, example. *(If they blank, the mnemonic: All Careful Students Can Cite Evidence.)*
+→ **"What happened?"** → They form a straight line, no gaps, no overlap.
 
-**4. Homework, 15 minutes total:** finish the index card and tape it up; three self-written percent-change problems where both dimensions grow, with the corner term identified in each.
+**"Try it with a totally different triangle. Same result. Every time. So if three corners always fill a straight line exactly, and a straight line is 180°, then a triangle's three angles must sum to —"** → 180°.
 
-**Preview Session 2B:** percent consolidation under time pressure, plus a physical sorting game splitting cards into "names a method" and "states a fact." Mastery check: **≥10/12 on a timed mixed percent set.**
+**"That's not a formula someone gave you. That's a thing you just observed with your hands. You can't forget it now, and if you ever blank on it mid-test, you can re-derive it in five seconds."**
+
+Then the extension, which students almost never get told:
+
+→ **"Take a rectangle and cut it along one diagonal. What do you have?"** → Two triangles.
+→ **"Do those two triangles' angles use up all four of the rectangle's corners?"** → Yes, every corner is accounted for.
+→ **"So a quadrilateral's angles sum to..."** → 2 × 180° = 360°.
+
+**"And this generalizes. Any five-sided figure splits into three triangles: 540°. Six sides, four triangles: 720°. The pattern is (sides − 2) × 180. You don't need it for the SHSAT, but knowing where 180 and 360 come from means you'll never mix up which one goes with which shape."**
 
 ---
 
-## Tutor Cheat Sheet — Say These, Not Longer Versions
+## Slide 11 — Catch the Tutor (0:37–0:41)
 
-- "Compute before you compare."
-- "Adding percents loses the corner."
-- "Find 1% first, then walk."
-- "Circle the NOT. Convert all four."
-- "Percent-world first, people-world once."
-- "'Through' asks HOW, never WHAT."
-- "Accurate is not the same as responsive."
-- "Structure beats background."
-- "Name it, then match it."
+The highest-value slide in the deck. Make it theatrical.
 
-## Three Places Students Break, and the Instant Repair
+**"I'm going to solve a problem now, and I'm going to get it wrong on purpose. Your job is to catch the exact sentence where I break."**
 
-| Break point | What it sounds like | Repair in one move |
-|---|---|---|
-| Percent-adding | "So 15 and 20 is 35" | "Draw me the corner." |
-| Early stop on negation | "Found it — 1/200" | "Read the stem's first word back to me." |
-| Fact-over-method | "But that really did happen in the passage" | "Read the choice with the passage covered. Is it a technique or a plot point?" |
+[Deliver it with total confidence, no hedging:]
+
+**"Triangle with 50°, 60°, and x. So x = 180 − 50 − 60 = 70°. Now this triangle sits against a straight line, so the angle supplementary to x is also 70°. Done."**
+
+→ [Long pause.] **"Two different angles, both labeled 70°. Is that possible? Where did I break?"**
+
+If they can't find it, narrow: → **"Which step was arithmetic, and which step was a *rule*? Check the rule."**
+
+**The fix, in their words if possible:**
+
+**"The triangle sum was fine — x really is 70°. The break is the word 'supplementary.' Supplementary means the two angles *add to 180*, not that they're the same size. So the angle next to x on that straight line is 180 − 70 = 110°, not 70°. I confused a rule that gives equality with a rule that gives a sum."**
+
+**"Say this back to me: vertical gives equal. Supplementary gives a total of 180. Those are the only two options and I just swapped them — which is, according to your error log, a mistake you've made too."**
+
+**Careful with the diagram — flag it out loud, it's a bonus lesson:** the picture's "?" is drawn adjacent to the **60°** angle, so *that* labeled angle is 180 − 60 = 120°, as the caption says. The 110° in the explanation is the supplement of **x**. Two different angles, two different supplements.
+
+→ **"So before you compute any supplement, point at the screen and say which angle you're the supplement *of*. If you can't point at it, you're about to answer a different question than the one being asked."**
+
+---
+
+## Slide 12 — Practice, Levels 1–2 (0:41–0:46)
+
+**"Four problems. New rule: before you write an equation, say the relationship out loud. 'These are supplementary, so they sum to 180.' Sentence first, algebra second."**
+
+[Work independently, then check. Enforce the verification habit — every answer gets added back up.]
+
+| # | Problem | Answer | Verify | Coaching note |
+|---|---|---|---|---|
+| 1 | Supplementary, one is 115° | **65°** | 115 + 65 = 180 ✓ | If they say 65 instantly, ask *"which rule?"* — the name matters more than the number today [file:1] |
+| 2 | Complementary, one is 37° | **53°** | 37 + 53 = 90 ✓ | Watch for 143° — that's the supplementary reflex firing on a complementary problem |
+| 3 | Lines cross, one angle 72° | vertical = **72°**, adjacent straight-line = **108°** | 72 + 108 = 180 ✓ | This single problem contains both rules; it's the deck's built-in check that Slide 9 landed |
+| 4 | Triangle with 42° and 88° | **50°** | 42 + 88 + 50 = 180 ✓ | Require the written equation 42 + 88 + x = 180, not mental math |
+
+**"Every one of those got checked by adding back to 90, 180, or 360. That verification is free and it catches almost every arithmetic slip you'll make on the real test."**
+
+---
+
+## Slide 13 — Practice, Levels 3–4 (0:46–0:52)
+
+**"Same four problems' worth of geometry, now with algebra bolted on. The geometry sentence is still first — the algebra only works if the sentence is right."**
+
+**Q5 — Quadrilateral 90°, 90°, 105°, x**
+90 + 90 + 105 + x = 360 → 285 + x = 360 → **x = 75°**. Verify: 90+90+105+75 = 360 ✓
+→ **"Why 360 and not 180?"** Make them cite the two-triangles proof from Slide 10.
+
+**Q6 — Supplementary angles 3x and 2x**
+3x + 2x = 180 → 5x = 180 → x = 36 → angles are **108° and 72°**. Verify: 108 + 72 = 180 ✓
+→ **"Careful — is x the answer?"** No. x = 36 is a bookkeeping number; the question wants the angles. **"The SHSAT loves putting 36 in the choices. Circle what the question asked for before you solve."**
+
+**Q7 — Triangle with x, x + 10, 2x − 10**
+x + (x + 10) + (2x − 10) = 180 → 4x = 180 → x = 45 → angles **45°, 55°, 80°**. Verify: 45+55+80 = 180 ✓
+→ **"Watch the +10 and the −10 cancel. That's a gift the problem writer gave you — did you notice it before or after you did the algebra?"**
+
+**Q8 — 4x and adjacent (2x + 30) on a straight line**
+Relationship first: adjacent on a straight line → supplementary.
+4x + (2x + 30) = 180 → 6x = 150 → x = 25 → 4x = **100°**, 2x + 30 = **80°**.
+All four angles around the intersection: **100°, 80°, 100°, 80°** (the verticals repeat).
+Verify: 100 + 80 + 100 + 80 = 360 ✓ — a full turn.
+→ **"Bonus check: the four angles around any crossing point sum to 360, because you've gone all the way around. Free verification on every intersection problem you'll ever see."**
+
+**The sorting question (read it aloud, it's the one takeaway):**
+**"Across from each other → vertical → equal. Next to each other on a line → supplementary → sums to 180. Name it out loud before you write anything."**
+
+---
+
+## Slide 14 — Error Log Review (0:52–0:56)
+
+**"Name it, don't just note it. 'I messed up angles' is useless in a week. Here are the two names from today."**
+
+- **Vertical vs. supplementary (math):** a *relationship confusion* — mixing up which rule gives equality and which gives a sum. Tie it back: **"This is the same shape as your compounding-vs-addition slip from Week 1. Not a gap in facts. A gap in reading the relationship."**
+- **Overshoot (ELA):** a choice that takes a true detail one step further than the passage goes. **"Same family as 'true but useless' — a choice you believe because it's mostly right."**
+
+**"Two diagnostics, zero net movement in geometry. What breaks that streak isn't more problems — it's you being able to say, next Saturday, 'this is a vertical-vs-supplementary problem and that's my trap.' A named trap is a trap you can watch for. An unnamed mistake just repeats."**
+
+---
+
+## Slide 15 — Exit Ticket (0:56–1:00)
+
+**"Log, four columns, you write it — not me. Question / What I did / What the question actually asked / Trap name. Two to four entries."**
+
+→ **"Now, no peeking: the four verbs of the Purpose Funnel."** → supports, complicates, contrasts, illustrates.
+→ **"And the two-word sorter for angles."** → vertical = equal, supplementary = 180.
+
+**"Next week: passage structure maps — same funnel logic, one level up — plus area, perimeter, circumference, and coordinate geometry. Everything you built today about deriving instead of memorizing is exactly how we'll handle circles."**
+
+---
+
+## Appendix — Tutor contingencies
+
+**If the ELA block runs long:** cut Slide 6 Q2 (the 20,000 statistic) and keep both Level 3–4 items. The overshoot lesson is the transferable one; a second "supports" question is not.
+
+**If the student nails vertical/supplementary immediately:** skip the Slide 9 derivation dialogue and spend the time on Slide 13 Q8, extended — *"now label one angle 5y − 20 and tell me what y is."* Multi-variable intersections are where the real Level 4 SHSAT items live.
+
+**If the student stalls on Slide 11:** give the narrowing hint, not the answer. **"One of my two steps was arithmetic and one was a rule. The arithmetic is right."** Catching it themselves is worth ten minutes of your explaining it.
+
+**If they resist drawing:** **"You can copy my diagram and remember it for an hour, or draw your own and remember it in November. Pick."**
+
+**Use of the floating "Check Your Work" panel:** open it only *after* a student has committed an answer. Opened early it becomes a crutch; opened late it becomes self-scoring. The panel already carries the four cues — purpose sentence first, watch for overshoot, name the relationship, and the triangle/quadrilateral sums.
