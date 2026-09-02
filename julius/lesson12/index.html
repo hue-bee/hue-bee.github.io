@@ -1,1 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 11: ELA Revising/Editing 2 & Algebra Plug-Ins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --e1:#3E5C9A; --e1-soft:rgba(62,92,154,0.10);
+  --e2:#7A5C9E; --e2-soft:rgba(122,92,158,0.10);
+  --e3:#9A5C6A; --e3-soft:rgba(154,92,106,0.10);
+  --m1:#1D7A5C; --m1-soft:rgba(29,122,92,0.10);
+  --m2:#B45309; --m2-soft:rgba(180,83,9,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+.prob-text{font-size:0.95rem;color:var(--ink);font-weight:600;line-height:1.55;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--m1);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--m1);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--m1);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow-y:auto;transform:translateX(320px);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;pointer-events:none;}
+.pip-panel.open{transform:translateX(0);opacity:1;pointer-events:all;}
+.pip-panel-inner{padding:0.9rem 1rem;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.pip-panel-title{font-weight:700;font-size:0.82rem;color:var(--ink);}
+.pip-close-btn{background:none;border:none;font-size:0.9rem;color:var(--ink-3);cursor:pointer;}
+.pip-mini-formula{font-size:0.78rem;font-weight:600;color:var(--ink-2);background:#EDF2F9;border-radius:8px;padding:0.4rem 0.6rem;margin-bottom:0.6rem;}
+.pip-mini-card{background:#FBFCFE;border:1px solid rgba(201,212,228,0.4);border-radius:10px;padding:0.5rem 0.65rem;margin-bottom:0.5rem;}
+.pip-mini-lvl{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:14px;}
+.pip-mini-title{font-weight:700;font-size:0.8rem;color:var(--ink);margin-top:0.3rem;}
+.pip-mini-body{font-size:0.76rem;color:var(--ink-2);line-height:1.5;margin-top:0.2rem;}
+.pip-mini-trap{background:#F0F0F0;border-radius:10px;padding:0.5rem 0.65rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.76rem;color:#3D3D3D;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--e1);"></span> Session 11 · Phase III, Week 11
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.1rem,5.5vw,3.7rem);">Week 11 <br><span style="color:var(--e1);">ELA: Revising/Editing 2 &amp; Algebra: Plug-Ins</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">Aug 31 &nbsp;·&nbsp; ELA 0:10–0:45 &nbsp;·&nbsp; Math Plug-Ins 0:45–0:58</h2>
+    <p class="reveal" style="font-size:0.82rem;color:var(--ink-3);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem;">SHSAT Prep · Rebuild the Zero-Percent Topic</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--e1-soft);color:var(--e1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Transitions</span>
+      <span style="background:var(--e2-soft);color:var(--e2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Topic Sentence Revision</span>
+      <span style="background:var(--e3-soft);color:var(--e3);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Eliminating Off-Topic Sentences</span>
+      <span style="background:var(--m1-soft);color:var(--m1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Algebra · Plug-In Strategy</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:00–0:10</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Warm-Up · Error Log</div>
+          <div class="tl-b">We revisit last week's revising/editing misses first. <em>Julius scored 0% on Diagnostic A Plug-Ins — today we rebuild that skill from zero.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:10–0:20</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Transitions<span class="tag hot">High-Frequency</span></div>
+          <div class="tl-b">Transitions are signposts that tell the reader HOW two ideas relate. <em>Match the relationship first, then pick the word.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e2);">
+        <div class="tl-time">0:20–0:30</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Topic Sentence Revision</div>
+          <div class="tl-b">A topic sentence is a promise the rest of the paragraph must keep. <em>If the paragraph breaks the promise, rewrite the promise — not the paragraph.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e3);">
+        <div class="tl-time">0:30–0:40</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Eliminating Off-Topic Sentences</div>
+          <div class="tl-b">Every sentence must serve the paragraph's one job. <em>Ask "does this prove the topic sentence?" — if not, it's the sentence to cut.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:40–0:45</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">ELA Wrap-Up Check</div>
+          <div class="tl-b">Quick mixed set combining all three revising/editing skills. <em>Name the skill being tested before you touch an answer choice.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--m1);">
+        <div class="tl-time">0:45–0:58</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">Math · Plug-In Strategy<span class="tag hot">0% Zone — Rebuild</span></div>
+          <div class="tl-b">Don't solve the algebra — test the answer choices as real numbers. <em>Work through 8 plug-in problems together; Julius explains his reasoning aloud each time.</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — WARM UP -->
+<div class="slide" data-slide="3" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Warm-Up · Quick Recall</div>
+    <h2 class="slide-title reveal">Before We Move On: <span class="tint">Prove It Stuck</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think first</div>
+        <div class="socratic-body">If you're given <span class="math-inline">x + 5 = 12</span> and four answer choices for x, is it faster to solve the equation algebraically, or to try each answer choice in the equation? What does "plug in" actually mean?</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this matters</div>
+        <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Plug-Ins earned 0% on your last diagnostic — but it's really the laziest, safest way to answer a multiple-choice algebra question: test real numbers instead of manipulating variables. Today, editing skills and algebra both get the same fix: stop guessing, start testing/checking systematically.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.9rem;">
+      <div class="trap-title">Your Habit Target</div>
+      <div class="trap-body">Today isn't about memorizing a checklist. It's about asking one clarifying question before you act: for ELA, "what relationship or job does this sentence need to do?" For math, "which answer choice, plugged in, makes both sides true?" Say the reasoning out loud before you commit.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — TRANSITIONS CONCEPT -->
+<div class="slide" data-slide="4" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Transitions<span class="tag hot">High-Frequency</span></div>
+    <h2 class="slide-title reveal">A Transition Is a <span class="tint">Signpost for the Reader's Brain</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Read: "The lab was cancelled. ___, the students still submitted their reports." Does the second sentence agree, disagree, add a surprise, or give an example? What single word signals "surprise despite the first sentence"?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">Match the relationship, THEN the word</div>
+          <div class="math" style="font-size:1.0rem;">Add-on: also, furthermore &nbsp;·&nbsp; Contrast: however, although &nbsp;·&nbsp; Cause: therefore, as a result &nbsp;·&nbsp; Example: for instance</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="170" viewBox="0 0 270 170" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="30" width="100" height="50" rx="10" fill="#DCEBFB" stroke="#3E5C9A" stroke-width="2"/>
+  <text x="20" y="58" font-size="12" font-weight="700" fill="#3E5C9A" font-family="Nunito, sans-serif">Idea A</text>
+  <rect x="160" y="30" width="100" height="50" rx="10" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/>
+  <text x="170" y="58" font-size="12" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">Idea B</text>
+  <path d="M110 55 L160 55" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+  <rect x="95" y="95" width="80" height="30" rx="8" fill="#fff" stroke="#767676" stroke-width="1.4"/>
+  <text x="103" y="115" font-size="12" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">"However..."</text>
+  <text x="60" y="150" font-size="12" fill="#4a4a4a" font-family="Nunito, sans-serif">The bridge word names the relationship</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — TRANSITIONS PRACTICE -->
+<div class="slide" data-slide="5" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Practice</div>
+    <h2 class="slide-title reveal">Transitions — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">"Maria loves painting. ___, she spends every weekend in the art studio." Does the second sentence add supporting proof, or contradict the first? Which word fits: <em>However</em> or <em>In fact</em>?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">"The bridge was under repair. ___, drivers had to take a ten-mile detour." Is the second sentence a RESULT of the first, or an EXAMPLE of it? What word do you need?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">"Many scientists believed the theory was flawed. ___, new evidence eventually proved them wrong." Careful — is this agreement, or a reversal across time? Which transition captures a turn against expectation?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">A paragraph moves: cause sentence &#8594; effect sentence &#8594; a sentence that seems to both restate the cause AND add a new contrasting idea. Which transition word would need to do "double duty," and is a single transition word ever enough — or does the sentence need restructuring instead?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Sound-Right Isn't Logic-Right</div>
+      <div class="trap-body">"Also" and "however" can both sound fine in a sentence, but only one matches the actual logical relationship. Always name the relationship first (agree/add, contrast, cause/effect, example) — THEN pick the word that matches it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — TOPIC SENTENCE CONCEPT -->
+<div class="slide" data-slide="6" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Topic Sentence Revision</div>
+    <h2 class="slide-title reveal">A Topic Sentence Is a <span class="tint">Promise the Paragraph Must Keep</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">A paragraph's topic sentence says "Dogs make excellent pets," but every sentence after it is actually about cat behavior. Is the fix to rewrite all the cat sentences, or to rewrite the promise (topic sentence) so it matches what the paragraph actually delivers?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">The two-question test</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;"><strong>1.</strong> What is every supporting sentence actually about? <strong>2.</strong> Does the topic sentence's promise match that shared subject exactly — not too broad, not too narrow? Revise the topic sentence to fit the evidence, not the other way around.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="15" width="220" height="34" rx="8" fill="#EFE3F5" stroke="#7A5C9E" stroke-width="2"/>
+  <text x="30" y="36" font-size="12" font-weight="700" fill="#7A5C9E" font-family="Nunito, sans-serif">Topic Sentence (the promise)</text>
+  <line x1="130" y1="49" x2="130" y2="65" stroke="#767676" stroke-width="1.6" stroke-dasharray="3,3"/>
+  <rect x="20" y="68" width="100" height="90" rx="6" fill="#fff" stroke="#B9C6D9" stroke-width="1.4"/>
+  <text x="28" y="86" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">Support 1</text>
+  <text x="28" y="106" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">Support 2</text>
+  <text x="28" y="126" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">Support 3</text>
+  <rect x="140" y="68" width="100" height="90" rx="6" fill="#fff" stroke="#B9C6D9" stroke-width="1.4"/>
+  <text x="148" y="86" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">Support 4</text>
+  <text x="148" y="106" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">Support 5</text>
+  <text x="55" y="172" font-size="12" font-weight="700" fill="#15803D" font-family="Nunito, sans-serif">All support = kept promise</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — TOPIC SENTENCE PRACTICE -->
+<div class="slide" data-slide="7" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice</div>
+    <h2 class="slide-title reveal">Topic Sentence Revision — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">Topic sentence: "Basketball is the most popular sport." Every supporting sentence discusses only soccer's global fan base. What single word in the topic sentence needs to change?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Topic sentence: "Recycling helps the planet." The paragraph only discusses how recycling saves cities money on landfill costs. Is "helps the planet" too broad or too narrow for this evidence — and what's a tighter promise?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">Topic sentence: "The trip was fun." Supporting sentences describe rain delays, a lost suitcase, AND one great beach afternoon. Does "fun" match ALL the evidence, or only part of it — what promise would actually fit every sentence?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Fixing the Wrong Half</div>
+      <div class="trap-body">When a topic sentence doesn't match its paragraph, students often try to rewrite every supporting sentence. It's almost always faster — and it's what the SHSAT is testing — to revise the ONE topic sentence to match the evidence that's already there.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — OFF-TOPIC SENTENCES CONCEPT -->
+<div class="slide" data-slide="8" style="--zc:var(--e3);--zs:var(--e3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Eliminating Off-Topic Sentences</div>
+    <h2 class="slide-title reveal">Every Sentence Has <span class="tint">One Job: Prove the Topic Sentence</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">A paragraph about "why bees are essential to farming" includes one sentence about a beekeeper's favorite hat color. Does that sentence prove bees are essential to farming? What test can you run on ANY sentence to check if it belongs?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">The one-question filter</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">For each sentence, ask: "does this directly support or explain the topic sentence's promise?" If the honest answer is no — even if the sentence is interesting or true — it's off-topic and gets cut.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="170" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="15" width="220" height="28" rx="6" fill="#EFDDE0" stroke="#9A5C6A" stroke-width="2"/>
+  <text x="30" y="34" font-size="11" font-weight="700" fill="#9A5C6A" font-family="Nunito, sans-serif">Topic: Bees help farming</text>
+  <rect x="20" y="50" width="220" height="24" rx="6" fill="#fff" stroke="#B9C6D9" stroke-width="1.3"/>
+  <text x="28" y="66" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">Bees pollinate crops &#10003;</text>
+  <rect x="20" y="80" width="220" height="24" rx="6" fill="#fff" stroke="#B9C6D9" stroke-width="1.3"/>
+  <text x="28" y="96" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">One hive pollinates acres &#10003;</text>
+  <rect x="20" y="110" width="220" height="24" rx="6" fill="#FBE3E3" stroke="#C0392B" stroke-width="1.3"/>
+  <text x="28" y="126" font-size="10" fill="#C0392B" font-family="Nunito, sans-serif" text-decoration="line-through">Beekeeper's hat is red &#10007;</text>
+  <line x1="24" y1="122" x2="230" y2="122" stroke="#C0392B" stroke-width="1.4"/>
+  <text x="40" y="155" font-size="11" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Doesn't prove the topic &#8594; cut it</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — OFF-TOPIC PRACTICE -->
+<div class="slide" data-slide="9" style="--zc:var(--e3);--zs:var(--e3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Practice</div>
+    <h2 class="slide-title reveal">Off-Topic Sentences — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">Topic: "Volcanoes reshape landscapes." Sentence: "Some volcanoes are found underwater." Does this prove HOW volcanoes reshape landscapes, or is it a side fact? Keep or cut?</div>
+        <div class="mc-options" style="margin-top:0.45rem;">
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8"><span class="opt-letter">A</span> Keep — it directly supports the topic</label>
+          <label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q8"><span class="opt-letter">B</span> Cut — it's a related but off-topic fact</label>
+        </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Topic: "The chef's new menu focuses on local vegetables." Which sentence should be cut: (A) "Carrots come from a farm ten miles away," or (B) "The chef once worked on a cruise ship"? Justify using the one-question filter.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A paragraph about "why the library extended its hours" includes: "The library was built in 1962." Is this sentence off-topic, or could it be background context that still needs cutting? Defend your call.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: "True and Interesting" Isn't the Same as "On-Topic"</div>
+      <div class="trap-body">Test writers often insert a factually true, mildly interesting sentence that simply doesn't prove the topic sentence's specific promise. True and interesting is not the bar — directly supporting the topic is the bar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — ELA MIXED CHECK -->
+<div class="slide" data-slide="10" style="--zc:#17233B;--zs:rgba(23,35,59,0.08);">
+  <div class="content">
+    <div class="kicker reveal">ELA · Wrap-Up Check</div>
+    <h2 class="slide-title reveal">Name the Skill <span class="tint">Before You Answer</span></h2>
+    <div class="socratic reveal" style="margin-bottom:0.8rem;">
+      <div class="socratic-title">Think about it</div>
+      <div class="socratic-body">The SHSAT often mixes transitions, topic-sentence fit, and off-topic sentences within a single revising/editing passage. Before touching any answer choice, ask: "is this question about the LOGIC between two sentences, the PROMISE of a paragraph, or whether a sentence BELONGS at all?"</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Skill</span><span class="lvl-badge lvl-1">Transitions</span></div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:0.3rem;">Signal words</div>
+        <div class="prose" style="font-size:0.82rem;">Name the relationship (agree, contrast, cause, example) first — then find the matching word.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Skill</span><span class="lvl-badge lvl-2">Topic Sentence</span></div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:0.3rem;">Match the promise</div>
+        <div class="prose" style="font-size:0.82rem;">Find what the evidence actually shows, then rewrite the topic sentence to fit that evidence exactly.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Skill</span><span class="lvl-badge lvl-3">Off-Topic</span></div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:0.3rem;">One-question filter</div>
+        <div class="prose" style="font-size:0.82rem;">Does this sentence directly prove the topic sentence? If not — even if true — cut it.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Reading the Question Too Fast</div>
+      <div class="trap-body">Revising/editing questions look similar at a glance but test three different logical moves. Slow down on the question stem — it always tells you which of the three jobs you're doing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — PLUG-IN CONCEPT -->
+<div class="slide" data-slide="11" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Plug-In Strategy<span class="tag hot">0% Zone — Rebuild</span></div>
+    <h2 class="slide-title reveal">Don't Solve It — <span class="tint">Test the Answer Choices</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">You're given <span class="math-inline">2x + 3 = 11</span> with choices A) 3 B) 4 C) 5 D) 6. Instead of solving for x algebraically, what happens if you substitute each choice for x and check which one makes the equation TRUE? Which one works?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The Plug-In Method, in 3 steps</div>
+          <div class="math" style="font-size:1rem;">1. Start with choice C (middle) &nbsp; 2. Substitute &amp; check both sides &nbsp; 3. Too big/small? Adjust direction, retest</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.7rem;">
+          <div class="win-title">Why this is the clever way</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">On multiple choice, the correct number is ALWAYS sitting right in front of you. Plugging in trades "can I do the algebra correctly" for "can I do arithmetic correctly" — and arithmetic is much harder to mess up under time pressure.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="200" viewBox="0 0 270 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="24" font-size="13" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">2x + 3 = 11</text>
+  <rect x="10" y="40" width="60" height="30" rx="6" fill="#fff" stroke="#B9C6D9" stroke-width="1.4"/>
+  <text x="20" y="60" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">A) x=3</text>
+  <text x="80" y="60" font-size="11" fill="#C0392B" font-family="Nunito, sans-serif">2(3)+3=9 &#10007;</text>
+  <rect x="10" y="76" width="60" height="30" rx="6" fill="#fff" stroke="#B9C6D9" stroke-width="1.4"/>
+  <text x="20" y="96" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">B) x=4</text>
+  <text x="80" y="96" font-size="11" fill="#1D7A5C" font-family="Nunito, sans-serif">2(4)+3=11 &#10003;</text>
+  <rect x="10" y="112" width="60" height="30" rx="6" fill="#E8F7EC" stroke="#1D7A5C" stroke-width="2"/>
+  <text x="20" y="132" font-size="12" font-weight="800" fill="#1D7A5C" font-family="Nunito, sans-serif">START HERE</text>
+  <path d="M110 91 L10 91" stroke="#767676" stroke-width="1.2" stroke-dasharray="2,2"/>
+  <text x="10" y="170" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Start with C (middle value) —</text>
+  <text x="10" y="188" font-size="12" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">too big or small tells you which way to move.</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — PLUG-IN PRACTICE SET 1 -->
+<div class="slide" data-slide="12" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Practice, Set 1</div>
+    <h2 class="slide-title reveal">Plug-Ins — <span class="tint">Easy to Hard, Part 1</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text"><span class="math-inline">3x - 4 = 11</span>. Choices: A) 3 &nbsp; B) 5 &nbsp; C) 7 &nbsp; D) 9. Start at C — plug in 7. Is <span class="math-inline">3(7)-4</span> too big, too small, or exactly 11?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">If <span class="math-inline">n + 9 = 2n</span>, what is n? Choices: A) 6 &nbsp; B) 7 &nbsp; C) 9 &nbsp; D) 12. Plug each choice into BOTH sides — which value makes them equal?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">A number increased by 6 equals twice the number decreased by 3. Choices for the number: A) 7 &nbsp; B) 8 &nbsp; C) 9 &nbsp; D) 10. Translate into an equation first, then plug in from C. Which side ends up bigger with 9 — and which direction should you move?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Julius is 4 years older than his sister. In 3 years, he will be twice as old as she is now. Choices for his sister's CURRENT age: A) 1 &nbsp; B) 3 &nbsp; C) 5 &nbsp; D) 7. Plug in an age for the sister, then build Julius's age from the clue — does the "in 3 years" condition hold?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Plugging In Only Half the Equation</div>
+      <div class="trap-body">Always substitute into BOTH sides of the equation (or every condition in a word problem) before declaring a match. A choice that satisfies only one clue and not the other is a trap answer.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — PLUG-IN PRACTICE SET 2 -->
+<div class="slide" data-slide="13" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Practice, Set 2</div>
+    <h2 class="slide-title reveal">Plug-Ins — <span class="tint">Easy to Hard, Part 2</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text"><span class="math-inline">x&#178; - 2x = 15</span>. Choices: A) 3 &nbsp; B) 5 &nbsp; C) 7 &nbsp; D) 9. Plug in from C: is 7&#178;-2(7) too big or too small compared to 15? Which direction do you move next?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">The product of two consecutive integers is 56. Choices for the smaller integer: A) 5 &nbsp; B) 6 &nbsp; C) 7 &nbsp; D) 8. Plug in, multiply the number by the very next integer — does it land exactly on 56?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">A rectangle's length is 3 more than twice its width, and its area is 65. Choices for the width: A) 4 &nbsp; B) 5 &nbsp; C) 6 &nbsp; D) 7. Plug in a width, build the length from the clue, then multiply for area — which width makes area = 65 exactly?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text"><span class="math-inline">x&#178; + x = 30</span>, and the answer must satisfy the equation AND be positive. Choices: A) &#8722;6 &nbsp; B) 5 &nbsp; C) 6 &nbsp; D) 30. Two choices might satisfy the equation algebraically — which extra condition in the problem eliminates one of them?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Quadratics Can Have Two "Correct" Numbers</div>
+      <div class="trap-body">Squared terms often produce two values that technically satisfy the equation (one positive, one negative). Always re-check the problem's wording — words like "positive," "a length," or "an age" eliminate the impossible option.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — CLOSE -->
+<div class="slide" data-slide="14" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Log the Misses, <span class="tint">Lock in the Habit</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-top:0.8rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log Update</div>
+        <div class="tl-b">Every miss today gets categorized: picked a transition by sound instead of logic, fixed the paragraph instead of the topic sentence, kept an off-topic sentence, or plugged into only one side of an equation.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Confidence Win</div>
+        <div class="tl-b">Plug-Ins was a 0% zone one diagnostic ago. Any correctly tested answer choice today — even with a small arithmetic slip — is real, measurable progress.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Keep Practicing</div>
+        <div class="tl-b">Revisit today's Socratic prompts on your own: name the relationship before picking a transition, and always start plug-in problems from the middle answer choice.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- PIP: Check Your Work floating panel (visible on every slide) -->
+<button class="pip-toggle-btn" id="pipToggleBtn" onclick="togglePip()" aria-label="Toggle Check Your Work picture-in-picture">
+  <span class="pip-dot"></span> Check Your Work
+</button>
+<div class="pip-panel" id="pipPanel">
+  <div class="pip-panel-inner">
+    <div class="pip-panel-header">
+      <span class="pip-panel-title">Check Your Work</span>
+      <button class="pip-close-btn" onclick="togglePip()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="pip-mini-formula">Worked example: 2x + 3 = 11 &#8594; try x = 4 &#8594; 2(4)+3 = 11 &#10003;</div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-1">Transitions</span>
+      <div class="pip-mini-title">Name the Relationship First</div>
+      <div class="pip-mini-body">Agree/add, contrast, cause/effect, or example? Match the logic before you match the word.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-2">Topic Sentences</span>
+      <div class="pip-mini-title">Revise the Promise, Not the Paragraph</div>
+      <div class="pip-mini-body">Find what the evidence shows, then rewrite the topic sentence to match it exactly.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-3">Plug-Ins</span>
+      <div class="pip-mini-title">Start From the Middle Choice</div>
+      <div class="pip-mini-body">Plug in the middle answer choice first. Too big or too small tells you which direction to move next.</div>
+    </div>
+    <div class="pip-mini-trap">
+      <div class="pip-mini-trap-title">Check Every Condition</div>
+      <div class="pip-mini-body">Plug into ALL sides/conditions, not just one. For quadratics, re-check wording (positive, length, age) to rule out extra roots.</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 14</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Transitions',t:'0:10',c:'var(--e1)'},
+  {n:'Topic Sentence',t:'0:20',c:'var(--e2)'},
+  {n:'Off-Topic',t:'0:30',c:'var(--e3)'},
+  {n:'Plug-Ins',t:'0:45',c:'var(--m1)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  panel.classList.toggle('open');
+}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
