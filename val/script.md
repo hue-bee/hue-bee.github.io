@@ -1,305 +1,291 @@
-# Week 2 Tutor Script — Connecting Info to Purpose & Geometry: Angles
-**Deck:** `index.html` · 15 slides · 60 minutes
-**Blocks:** ELA 0:00–0:25 (Purpose Funnel) · Reset 0:25–0:28 · Math 0:28–0:53 (Angles) · Close 0:53–1:00
+# Week 4 · Session 4B — Tutor Delivery Script
+**Substitution, Multi-Relationship Setup & Inequality Review · 60-minute math block**
 
-**How to use this script:** bolded lines are said aloud roughly verbatim. Bracketed lines are moves, not speech. Every "→" is a question you must actually wait on — silence is the instructional tool in this session. Target ratio: student talks 60% of the ELA block, 50% of the math block.
+How to use this: everything in *italics* is a stage direction (what you do, what you write, what you watch for). Everything in plain text is roughly what you say. Bracketed **[wait]** means stop talking and let the student answer — the whole design of this deck is that the student produces the rule, you only confirm it.
 
-**Two non-negotiables for today**
-1. The student writes the purpose sentence *before* seeing any answer choice.
-2. The student names the angle relationship out loud *before* writing any equation.
+Three sentences carry the entire hour. Say them in this exact wording every time they come up:
+1. **Substitute first, simplify second.**
+2. **Write the "let" line before you touch the algebra.**
+3. **Multiply or divide by a negative → flip every sign.**
 
 ---
 
 ## Slide 1 — Title (0:00–0:01)
 
-**"Two things today, and they're secretly the same skill. In reading, you'll stop guessing why an author included a detail — you'll derive it. In geometry, you'll stop memorizing angle rules — you'll rebuild them from two lines crossing. Both are: find the big structure first, then place the small piece inside it."**
+*Open on the title slide. Don't read the slide out loud — students tune out when you read text they can see.*
 
-[Point at the four chips: Purpose Funnel, Vertical & Supplementary, Triangle Sum, Draw-It-Yourself.]
+"Today is a setup day, not a computation day. You already know how to distribute and combine like terms. Almost every point you're going to lose on the real test this fall gets lost in the first ten seconds of a problem — before any arithmetic happens. So today we build three ten-second habits."
 
-→ **"Which of those four words is least familiar right now?"** (Note the answer; that's where you'll spend your slack time.)
+*Point at the four chips.* "Substitution, multi-relationship word problems, inequalities, and then a ten-question gate at the end. The gate is on inequalities and it needs nine out of ten, algebra plus number line."
 
----
-
-## Slide 2 — Session Roadmap (0:01–0:03)
-
-Run this as an *error log check-in*, not a review — 30 seconds, hard stop.
-
-**"Open last week's error log. I don't want a full review. I want one thing: is there a mistake that shows up twice?"**
-
-→ Wait. If the student says "I just made careless mistakes," push once: **"Careless is not a category. Was it a relationship you mixed up, or a question you didn't finish reading?"**
-
-**"Here's the honest picture: geometry has shown zero net improvement across two diagnostics. That's not a effort problem — that means the *rules were never built*, they were just handed to you. So today we're not reviewing angles. We're constructing them from scratch, and you're doing the drawing."**
-
-[Trace the timeline once, then move. Do not narrate all eight rows.]
+*One line worth saying because the test changed this year:* "The SHSAT is computer-adaptive now — you can't flag a question and come back to it, and there are drag-and-drop and type-in-your-answer items. That means a sloppy setup isn't recoverable later in the section. First pass has to be the clean pass."
 
 ---
 
-## Slide 3 — The Purpose Funnel (0:03–0:06)
+## Slide 2 — Session Map (0:01–0:02)
 
-Do not explain the funnel first. Ask the Socratic question first.
+"Here's the shape of the hour so you know when the hard part lands."
 
-→ **"If I asked you 'why did the author mention rainfall data in paragraph 3?' — could you answer that without knowing what the whole passage is trying to do?"**
+*Trace the timeline with a finger, one sentence per zone:*
+- "Five-minute sprint — eight one-liners, you're racing yourself, not a benchmark."
+- "Zone 1, substitution, until about :24. One variable is hiding as an expression of another."
+- "One-minute reset at :24. Stand up, water. Non-negotiable — the second half is the harder half."
+- "Zone 2 until :42 — word problems where three sentences give you three relationships. This is where setup errors die."
+- "Zone 3 until :54 — inequalities, and the one rule everyone forgets."
+- "Last six minutes, the gate."
 
-Let them try. Most students say "I'd reread paragraph 3." That's the trap you want them to walk into.
-
-**"That's exactly what the test is counting on. Reread paragraph 3 and you learn what the detail *says*. But the question asks what the detail *does*. A detail's job only exists relative to the passage's job. So the order is forced: passage purpose first, detail purpose second. That's the funnel — wide at the top, narrow at the bottom."**
-
-Now the payoff, and say it slowly, because this is the whole strategy:
-
-**"Here's the part that makes this fast. Every correct answer to a 'why did the author include X' question restates one of exactly four relationships. The detail either supports the purpose, complicates it, contrasts with it, or illustrates it. Four verbs. That's the entire universe."**
-
-→ **"Give me the difference between 'supports' and 'illustrates.'"**
-
-Coach toward: *supports* = evidence that makes the claim more believable; *illustrates* = a concrete instance that makes the claim easier to picture. Data supports. Anecdotes illustrate. This distinction wins the worked example in two slides.
-
-→ **"And 'complicates' vs. 'contrasts'?"**
-Coach toward: *complicates* = same side, adds nuance or a qualification. *Contrasts* = opposing side, sets up a genuine against. Complicating keeps the argument; contrasting pushes back on it.
-
-**"Write those four verbs at the top of your scratch paper. They're going in the exit ticket from memory."**
+"Question before we start: which zone do you think you'll lose the most points in?" **[wait]** *Whatever they say, write it on scrap paper and revisit at close. Students are usually wrong about this, and being wrong about it is the lesson.*
 
 ---
 
-## Slide 4 — Passage: Honeybees (0:06–0:11)
+## Slide 3 — Sprint Warm-Up (0:02–0:07)
 
-**"Read straight through, top to bottom, one time. Do not look at a single question. When you finish, you write one sentence: 'The purpose of this passage is to ______.' That's it."**
+*Read the Socratic box, then shut up.* "If y = 4x and you need y + 3 in terms of x — what's the very first move? Solve for something, or replace y right where it sits?" **[wait]**
 
-[Show the annotation toolbar for 15 seconds only.]
+*Target answer: replace y where it sits. If they say "solve for x," ask: "solve for x using what? You only have one equation and it's already solved for y." That usually lands it.*
 
-**"Highlight, underline, outline, and sticky notes are here. One rule: annotate structure, not interesting facts. Highlight the sentence where the author's actual opinion shows up. Do not highlight the number 20,000 because it's cool."**
+"Right — nothing to solve. y is a nickname. y + 3 is 4x + 3, done, no work shown because there is no work."
 
-[Silent read. ~2:30. Do not talk during it. Then have the student write the purpose sentence before you say anything.]
+*Run the eight sprint items at speed, ~30 seconds each, answers spoken not written:*
+- y = 4x → y + 3 = **4x + 3**
+- a = 2b → 3a + b = **7b**
+- m = n + 5 → 2m = **2n + 10** *(the parentheses are invisible here — this is the item most students miss)*
+- y = 3x → y − x = **2x**
 
-**Tutor's own purpose sentence (do not reveal until they've written theirs):**
-> *The purpose of this passage is to argue that crediting honeybees with most pollination is an incomplete story that obscures the wild bees doing much of the work — and that this distortion misdirects conservation attention.*
+*Then the habit target, said out loud by the student, not by you:* "Say this back to me: 'y is standing in for 4x, so everywhere I see y, I write 4x.'" **[wait]**
 
-**Diagnostic on their sentence — check for these three failure modes:**
-- **Too topical:** "This passage is about bees." → **"That's a topic, not a purpose. Purpose has a verb: to argue, to correct, to explain, to complicate."**
-- **Too strong:** "To argue honeybees don't matter." → **"Paragraph 4 says farming would struggle without managed hives. Your sentence has to survive every paragraph, including the one that pushes back."**
-- **Just right:** any version of *correct an incomplete story*. Accept "to correct a popular misconception" — that's functionally identical.
-
-**"Notice what your sentence has to do: it has to be true in paragraph 1 AND paragraph 4, where the author defends honeybees. A purpose sentence that only fits the paragraphs you liked is a purpose sentence that will get you two questions wrong."**
+"Why do I make you say it? Because you already know substitution as a fact. Today we're turning it into a reflex — and speech is how you install a reflex faster than repetition alone."
 
 ---
 
-## Slide 5 — Worked Example: Why Rachel Winfree? (0:11–0:14)
+## Slide 4 — Why Substitution Works (0:07–0:11)
 
-Read the stem aloud, then stop.
+"Think about it: if y = 3x, is y a separate quantity from x — or is it a nickname for 3x?" **[wait]**
 
-**"'The author most likely includes the details about Rachel Winfree's field studies in paragraph 2 in order to...' Before you answer — say your purpose sentence out loud."**
+*If they say "separate," push:* "Pick x = 2. What's y?" (6.) "x = 10?" (30.) "So can y ever be anything other than three-of-whatever-x-is?" *That kills the idea of independence.*
 
-→ [They recite it.] **"Good. Now: does Winfree's study support that purpose, complicate it, contrast with it, or illustrate it?"**
+"Here's the clever part, and it's not a math fact, it's a workload fact." *Point to the three-box diagram.* "Two letters in an expression means your brain is tracking two moving things at once. That is exactly where sign errors and dropped terms come from — not from not knowing how to distribute. The moment you replace y with 3x, the problem collapses to one letter, and one-letter problems you already do perfectly."
 
-Work through the elimination out loud with them — this is the modeling moment:
+*Write the rule on the board yourself, in the student's handwriting order:* **Substitute first. Simplify second. Never the reverse.**
 
-- **Contrast?** **"Contrast needs two opposing sides. What's Winfree opposing here? Nothing — her data points the same direction as the author's claim. Out."**
-- **Illustrate?** **"Tempting. But an illustration is an example that makes a claim vivid. Winfree isn't a vivid example of wild bees pollinating — she's a *controlled comparison*: farms with wild habitat vs. farms without, and yields were higher even with zero honeybee hives. That's not an anecdote, that's evidence. Out."**
-- **Support.** **"Her study is proof for the exact claim the passage exists to make. Locked."**
-
-**"Now count what you did. You never reread paragraph 2 line by line. You matched a function to a verb. That's a 15-second question that most students spend 90 seconds on."**
-
-**The trap, named:**
-
-**"Watch this wrong answer: 'Winfree's study proves honeybees are unnecessary for farming.' Every word of that sounds like the passage. And it's wrong — because paragraph 4 explicitly says monoculture farming would struggle without managed hives. The choice took a true direction and pushed it one step too far. We're calling that overshoot, and it's going in your error log by name."**
-
-→ **"What's the tell for overshoot?"** Coach to: *the choice uses a stronger word than the passage does.* Proves, unnecessary, defund, refutes, disproves.
+"Fewer letters tracked, fewer errors. That's the whole slide."
 
 ---
 
-## Slide 6 — ELA Practice, Levels 1–2 (0:14–0:19)
+## Slide 5 — Worked Deep Dive: 2y + 4(2y + 3) − x, where y = 3x (0:11–0:17)
 
-**"Two questions. For each one: purpose sentence, then verb. Write both in the box — I want to see the verb, not just a feeling."**
+*Do this one on the board with the student narrating each step to you. You hold the marker; they hold the logic.*
 
-[Let them work ~3 minutes, both problems, then discuss.]
+**Step 1 — Name the rule.** "What is y a nickname for?" **[wait]** (3x.) "So how many y's do I have to replace?" **[wait]** *Make them count: two — the loose 2y and the 2y inside the parentheses.*
 
-**Q1 — "managed livestock species," paragraph 3 → SUPPORTS**
-Target reasoning: the phrase does one job — it separates honeybees from endangered species, which is what makes the funding critique land. **"Why does 'livestock' matter so much in one word?"** → Because livestock is *farmed and multiplied on purpose*; you can always make more. Endangered species can't be manufactured. That one word is the load-bearing beam under the whole critics' argument.
+**Step 2 — Replace every y.** 2(3x) + 4(2(3x) + 3) − x. "Notice I have not simplified one single thing yet. That's on purpose."
 
-**Q2 — "over 20,000 wild bee species" → SUPPORTS, by establishing scale**
-The slide asks the sorting question directly: *proving scale, or setting up a contrast with honeybees?*
-Target reasoning: scale. **"If the number were 12 wild species, would the author's argument survive?"** → No — the argument depends on wild bees being numerous enough to do a "substantial share." The contrast in that paragraph comes from the *flower shape* clause, not from the number. **"The number does volume. A different clause does the contrast. Don't let two jobs in one sentence blur into one."**
+**Step 3 — Inside the parentheses first.** 2(3x) = 6x, so the inside is 6x + 3. Now: 6x + 4(6x + 3) − x.
 
-**Checkpoint (read it aloud):** **"If your verb doesn't match your own purpose sentence, one of the two is wrong — and it's almost always the purpose sentence. Fix that first."**
+**Step 4 — Distribute the 4.** 4(6x + 3) = 24x + 12. Now: 6x + 24x + 12 − x.
 
----
+**Step 5 — Combine.** *Deliberately do this out loud the messy way, exactly as the slide shows it:* "6x plus 24x minus x… that's 29x — wait, let me recount. 6x + 24x is 30x. 30x − x is 29x. Good, 29x." Then constants: just +12.
 
-## Slide 7 — ELA Practice, Levels 3–4 (0:19–0:24)
+**Final: 29x + 12.**
 
-**Q3 — final paragraph vs. paragraph 3's criticism → COMPLICATES (qualifies/softens)**
-The slide gives the three-way choice: agreeing, softening, or reversing.
+*Now the meta-move, which is the actual reason that recount is on the slide:* "Did you catch that I recounted? I want you to see a competent person double-check a three-term add instead of trusting it. On an adaptive test you cannot go back and fix it later. The recount costs two seconds and it's the cheapest insurance in the section."
 
-→ **"Read the last two paragraphs back to back. Is the author taking back the criticism, or fencing it in?"**
-
-Target reasoning: fencing it in. **"'Does not require abandoning honeybee conservation' — that sentence exists to stop a reader from over-reading paragraph 3. It's a guardrail. The author still thinks the messaging is distorted; he just refuses the extreme version of his own point. That's complicating, not reversing. Reversing would need him to say the critics are wrong."**
-
-Teaching note worth 30 seconds: **"Notice that the author pre-empted the overshoot for you. Good passages usually do. When you see a 'none of this diminishes...' sentence, circle it — it's a map of which answer choices are too strong."**
-
-**Q4 — "paragraph 4 exists to argue honeybee conservation should be defunded" → overshoot, in one line**
-Target one-liner: *The passage argues for expanding the story to include wild bees, not for cutting honeybee funding — and it explicitly says complexity "does not require abandoning honeybee conservation."*
-
-→ **"Which single word in that answer choice is stronger than anything in the passage?"** → *Defunded.* The passage says resources "may do little," not that they should be cut. **"'May do little' to 'should be defunded' is the whole distance between right and wrong on this question."**
-
-**"Overshoot vocabulary list, write it down: prove, disprove, unnecessary, defund, always, never, only, refute. When you spot one in a choice, suspect the choice before you suspect yourself."**
+*Closing question:* "After Step 2, how many times did I have to think about y?" **[wait]** (Zero.) "That's the point of substituting first."
 
 ---
 
-## Slide 8 — Reset (0:24–0:27) — do not skip
+## Slide 6 — Substitution Practice, Levels 1–4 (0:17–0:24)
 
-**"Stand up, water, thirty seconds of moving. Not optional."**
+*Rules for this block: student works, you say nothing for the first 60 seconds of each problem. When they get stuck, ask "what's the substitution rule here?" instead of pointing at the error.*
 
-**"Here's why I'm strict about this: geometry has shown no net improvement across two diagnostics, and I'm not going to hand it a tired brain running on reading momentum. Angles reward patience, not speed. Three minutes now buys the next twenty-five."**
+Answer key *(read each expression off the rendered slide — confirm the signs before you commit to an answer)*:
 
-[Genuinely stop talking. Reset the deck to slide 9 while they're up.]
-
----
-
-## Slide 9 — Two Lines Cross (0:27–0:32)
-
-Pen in their hand before any rule appears.
-
-**"Blank paper. Draw two straight lines crossing in an X — make it deliberately lopsided, not a plus sign. Label the four angles 1, 2, 3, 4 going around clockwise."**
-
-[Wait for the drawing. This is the encoding step; a copied diagram teaches nothing.]
-
-→ **"Angles 1 and 3 are directly across from each other. Equal, or different?"** → Equal.
-→ **"Angles 1 and 2 are next to each other, sitting on the same straight line. What do they add to, and why that number?"** → 180°, because a straight line *is* a straight angle — a half turn.
-
-Now derive vertical angles instead of asserting them. This is the cleverest 90 seconds in the deck:
-
-**"You just told me 1 + 2 = 180. And 2 + 3 also sit on a straight line, so 2 + 3 = 180. Both pairs contain angle 2. If two things both add with angle 2 to reach the same total, what has to be true about those two things?"**
-
-→ **"They're equal — angle 1 = angle 3."**
-
-**"So vertical angles aren't a separate fact you memorize. They're a consequence of the straight line rule. You now own two rules, and you only had to remember one."**
-
-[Show the formula box.] **"Vertical → equal. Straight-line pair → sums to 180°. Also give me complementary."** → Two angles summing to 90°, a corner. **"Complementary = Corner, both start with C. Supplementary = Straight."**
-
-**Deliberate misconception probe:** → **"Do supplementary angles have to be touching?"** → No. Supplementary is a *statement about a sum*, not about position. Two angles in different diagrams can be supplementary. This is exactly the confusion that Slide 11 detonates.
-
----
-
-## Slide 10 — Why 180°? Tear the Corners (0:32–0:37)
-
-Physical proof — actually tear paper if you have any.
-
-**"Draw any triangle. Make it ugly — long, skinny, whatever. Now tear off all three corners. Line the three torn tips up next to each other, point to point, on a straight edge."**
-
-→ **"What happened?"** → They form a straight line, no gaps, no overlap.
-
-**"Try it with a totally different triangle. Same result. Every time. So if three corners always fill a straight line exactly, and a straight line is 180°, then a triangle's three angles must sum to —"** → 180°.
-
-**"That's not a formula someone gave you. That's a thing you just observed with your hands. You can't forget it now, and if you ever blank on it mid-test, you can re-derive it in five seconds."**
-
-Then the extension, which students almost never get told:
-
-→ **"Take a rectangle and cut it along one diagonal. What do you have?"** → Two triangles.
-→ **"Do those two triangles' angles use up all four of the rectangle's corners?"** → Yes, every corner is accounted for.
-→ **"So a quadrilateral's angles sum to..."** → 2 × 180° = 360°.
-
-**"And this generalizes. Any five-sided figure splits into three triangles: 540°. Six sides, four triangles: 720°. The pattern is (sides − 2) × 180. You don't need it for the SHSAT, but knowing where 180 and 360 come from means you'll never mix up which one goes with which shape."**
-
----
-
-## Slide 11 — Catch the Tutor (0:37–0:41)
-
-The highest-value slide in the deck. Make it theatrical.
-
-**"I'm going to solve a problem now, and I'm going to get it wrong on purpose. Your job is to catch the exact sentence where I break."**
-
-[Deliver it with total confidence, no hedging:]
-
-**"Triangle with 50°, 60°, and x. So x = 180 − 50 − 60 = 70°. Now this triangle sits against a straight line, so the angle supplementary to x is also 70°. Done."**
-
-→ [Long pause.] **"Two different angles, both labeled 70°. Is that possible? Where did I break?"**
-
-If they can't find it, narrow: → **"Which step was arithmetic, and which step was a *rule*? Check the rule."**
-
-**The fix, in their words if possible:**
-
-**"The triangle sum was fine — x really is 70°. The break is the word 'supplementary.' Supplementary means the two angles *add to 180*, not that they're the same size. So the angle next to x on that straight line is 180 − 70 = 110°, not 70°. I confused a rule that gives equality with a rule that gives a sum."**
-
-**"Say this back to me: vertical gives equal. Supplementary gives a total of 180. Those are the only two options and I just swapped them — which is, according to your error log, a mistake you've made too."**
-
-**Careful with the diagram — flag it out loud, it's a bonus lesson:** the picture's "?" is drawn adjacent to the **60°** angle, so *that* labeled angle is 180 − 60 = 120°, as the caption says. The 110° in the explanation is the supplement of **x**. Two different angles, two different supplements.
-
-→ **"So before you compute any supplement, point at the screen and say which angle you're the supplement *of*. If you can't point at it, you're about to answer a different question than the one being asked."**
-
----
-
-## Slide 12 — Practice, Levels 1–2 (0:41–0:46)
-
-**"Four problems. New rule: before you write an equation, say the relationship out loud. 'These are supplementary, so they sum to 180.' Sentence first, algebra second."**
-
-[Work independently, then check. Enforce the verification habit — every answer gets added back up.]
-
-| # | Problem | Answer | Verify | Coaching note |
+| # | Level | Problem | Answer | The move that matters |
 |---|---|---|---|---|
-| 1 | Supplementary, one is 115° | **65°** | 115 + 65 = 180 ✓ | If they say 65 instantly, ask *"which rule?"* — the name matters more than the number today [file:1] |
-| 2 | Complementary, one is 37° | **53°** | 37 + 53 = 90 ✓ | Watch for 143° — that's the supplementary reflex firing on a complementary problem |
-| 3 | Lines cross, one angle 72° | vertical = **72°**, adjacent straight-line = **108°** | 72 + 108 = 180 ✓ | This single problem contains both rules; it's the deck's built-in check that Slide 9 landed |
-| 4 | Triangle with 42° and 88° | **50°** | 42 + 88 + 50 = 180 ✓ | Require the written equation 42 + 88 + x = 180, not mental math |
+| 1 | 1 | a = 5b, find a + 2b | **7b** | Swap a, then it's one letter |
+| 2 | 1 | m = n + 4, find 3m − n | **2n + 12** | 3m = 3(n + 4) — invisible parentheses |
+| 3 | 2 | p = 2q, simplify 3(p + q) − q | **8q** | Substituting first makes the parentheses trivial |
+| 4 | 3 | y = 3x, simplify 2y + 4(2y + 3) − x | **29x + 12** | Rebuild the 5 steps from memory, no peeking |
+| 5 | 4 | r = 2s + 1, simplify 5(r + s) − 3(s + r) | **6s + 2** | Same expression substituted twice; −3 hits every term inside |
+| 6 | 4 | k = 4h − 2, simplify per slide | *work it live with the student* | Two k's, both get swapped before anything distributes |
 
-**"Every one of those got checked by adding back to 90, 180, or 360. That verification is free and it catches almost every arithmetic slip you'll make on the real test."**
+*Coaching lines to have ready:*
+- On #2, if they write 3n + 4: "Say the swap out loud. m is standing in for…?" **[wait]** "So 3m is three of *that whole thing*. Where are the parentheses?"
+- On #5, if a sign flips wrong: "Distributing −3 across (s + r) — how many terms change sign?" **[wait]** (Both.) "Every term. Not just the first one."
+- On #6, if they start distributing before substituting, stop them mid-stroke: "Freeze. How many letters are in your expression right now?" **[wait]** "Two. What's the rule?"
 
----
-
-## Slide 13 — Practice, Levels 3–4 (0:46–0:52)
-
-**"Same four problems' worth of geometry, now with algebra bolted on. The geometry sentence is still first — the algebra only works if the sentence is right."**
-
-**Q5 — Quadrilateral 90°, 90°, 105°, x**
-90 + 90 + 105 + x = 360 → 285 + x = 360 → **x = 75°**. Verify: 90+90+105+75 = 360 ✓
-→ **"Why 360 and not 180?"** Make them cite the two-triangles proof from Slide 10.
-
-**Q6 — Supplementary angles 3x and 2x**
-3x + 2x = 180 → 5x = 180 → x = 36 → angles are **108° and 72°**. Verify: 108 + 72 = 180 ✓
-→ **"Careful — is x the answer?"** No. x = 36 is a bookkeeping number; the question wants the angles. **"The SHSAT loves putting 36 in the choices. Circle what the question asked for before you solve."**
-
-**Q7 — Triangle with x, x + 10, 2x − 10**
-x + (x + 10) + (2x − 10) = 180 → 4x = 180 → x = 45 → angles **45°, 55°, 80°**. Verify: 45+55+80 = 180 ✓
-→ **"Watch the +10 and the −10 cancel. That's a gift the problem writer gave you — did you notice it before or after you did the algebra?"**
-
-**Q8 — 4x and adjacent (2x + 30) on a straight line**
-Relationship first: adjacent on a straight line → supplementary.
-4x + (2x + 30) = 180 → 6x = 150 → x = 25 → 4x = **100°**, 2x + 30 = **80°**.
-All four angles around the intersection: **100°, 80°, 100°, 80°** (the verticals repeat).
-Verify: 100 + 80 + 100 + 80 = 360 ✓ — a full turn.
-→ **"Bonus check: the four angles around any crossing point sum to 360, because you've gone all the way around. Free verification on every intersection problem you'll ever see."**
-
-**The sorting question (read it aloud, it's the one takeaway):**
-**"Across from each other → vertical → equal. Next to each other on a line → supplementary → sums to 180. Name it out loud before you write anything."**
+*Close the zone with the trap card, phrased as a prediction:* "The SHSAT trap here is simplifying while two letters are still in play. It doesn't produce a random wrong answer — it produces one of the offered choices. Test writers know exactly which sign you'll drop."
 
 ---
 
-## Slide 14 — Error Log Review (0:52–0:56)
+## Reset (0:24–0:25)
 
-**"Name it, don't just note it. 'I messed up angles' is useless in a week. Here are the two names from today."**
-
-- **Vertical vs. supplementary (math):** a *relationship confusion* — mixing up which rule gives equality and which gives a sum. Tie it back: **"This is the same shape as your compounding-vs-addition slip from Week 1. Not a gap in facts. A gap in reading the relationship."**
-- **Overshoot (ELA):** a choice that takes a true detail one step further than the passage goes. **"Same family as 'true but useless' — a choice you believe because it's mostly right."**
-
-**"Two diagnostics, zero net movement in geometry. What breaks that streak isn't more problems — it's you being able to say, next Saturday, 'this is a vertical-vs-supplementary problem and that's my trap.' A named trap is a trap you can watch for. An unnamed mistake just repeats."**
+*Actually stand up. Actually stop talking.* "Sixty seconds. Water, walk, look at something more than five feet away. The next block is the one that decides your score."
 
 ---
 
-## Slide 15 — Exit Ticket (0:56–1:00)
+## Slide 7 — Why the "Let" Line Works (0:25–0:29)
 
-**"Log, four columns, you write it — not me. Question / What I did / What the question actually asked / Trap name. Two to four entries."**
+*Read the park problem, then ask the loaded question:* "Saturday sold 4 times Sunday. Together, 30,000. If you give both days their own letter — how many equations do you need?" **[wait]** (Two.) "And then what do you have to do to those two equations?" **[wait]** (Substitute.) "So two letters costs you an extra equation and an extra substitution step. What if only Sunday gets a letter?"
 
-→ **"Now, no peeking: the four verbs of the Purpose Funnel."** → supports, complicates, contrasts, illustrates.
-→ **"And the two-word sorter for angles."** → vertical = equal, supplementary = 180.
+*Draw the branching diagram yourself while narrating:* "Let S = Sunday. Then Saturday isn't a new unknown, it's 4S. And the total sentence becomes S + 4S = 30,000. One letter, one equation, one solve. S = 6,000."
 
-**"Next week: passage structure maps — same funnel logic, one level up — plus area, perimeter, circumference, and coordinate geometry. Everything you built today about deriving instead of memorizing is exactly how we'll handle circles."**
+**The clever bit, say it explicitly:** "I picked Sunday, not Saturday, on purpose. Pick the smaller, plainer quantity — the one every other sentence refers back to — and every other relationship stays a whole-number multiple. If I'd let S be Saturday, Sunday becomes one-fourth of S and now I'm dragging a fraction through the whole problem for no reason."
+
+*Quick check:* "Two numbers, one is 5 times the other. Which one gets the letter?" **[wait]** (The smaller.) "Why?" **[wait]** (Keeps the other as ×5 instead of ÷5.)
 
 ---
 
-## Appendix — Tutor contingencies
+## Slide 8 — The Four-Line Method (0:29–0:34)
 
-**If the ELA block runs long:** cut Slide 6 Q2 (the 20,000 statistic) and keep both Level 3–4 items. The overshoot lesson is the transferable one; a second "supports" question is not.
+*Write the four lines as headings before filling any of them in. The visual of four empty lines is the point.*
 
-**If the student nails vertical/supplementary immediately:** skip the Slide 9 derivation dialogue and spend the time on Slide 13 Q8, extended — *"now label one angle 5y − 20 and tell me what y is."* Multi-variable intersections are where the real Level 4 SHSAT items live.
+1. **Define.** Let S = number of Sunday tickets.
+2. **Each relationship gets its own equation.** Saturday = 4S. Total: S + 4S = 30,000.
+3. **Solve.** 5S = 30,000 → S = 6,000, so Saturday = 24,000.
+4. **Circle what the question actually asks.** If a weekday sells one-third of Sunday: 6,000 ÷ 3 = **2,000**.
 
-**If the student stalls on Slide 11:** give the narrowing hint, not the answer. **"One of my two steps was arithmetic and one was a rule. The arithmetic is right."** Catching it themselves is worth ten minutes of your explaining it.
+*Then the highest-value 30 seconds of the hour:* "Look at line 4. Same setup, three different possible correct answers: 6,000, 24,000, or 2,000. Which one is right depends entirely on a noun in the question, not on your algebra."
 
-**If they resist drawing:** **"You can copy my diagram and remember it for an hour, or draw your own and remember it in November. Pick."**
+"So here's the question I want you to be sick of hearing: **what noun and what unit does the question want?** Most missed word problems on this test aren't algebra failures. They're students solving perfectly and then handing in the letter's value when the question asked for something built from it. Circle the target *before* you compute, not after."
 
-**Use of the floating "Check Your Work" panel:** open it only *after* a student has committed an answer. Opened early it becomes a crutch; opened late it becomes self-scoring. The panel already carries the four cues — purpose sentence first, watch for overshoot, name the relationship, and the triangle/quadrilateral sums.
+*Optional zinger if they're an over-confident solver:* "Test writers put 6,000 and 24,000 in the choices for this exact problem. They're not there by accident. They're there for the student who didn't reread the question."
+
+---
+
+## Slide 9 — Word Problem Practice, Set 1 (0:34–0:38)
+
+*Requirement: no answer counts unless the "let" line is written down. Enforce it once and you won't have to enforce it again.*
+
+| # | Level | Setup | Answer |
+|---|---|---|---|
+| 7 | 1 | Let s = smaller; s + 3s = 40 | s = 10, larger = **30** |
+| 8 | 2 | Let h = hardcovers; h + 2h = 240 | h = 80, paperbacks = **160** |
+| 9 | 2 | Let L = Lena; L + (3L + 5) = 65 | L = 15, Maya = **50** — the letter goes to **Lena** |
+| 10 | 3 | Let c = child; c + 4c = 30,000 | c = 6,000, weekday = **2,000** |
+
+*On #9, make them justify the choice before solving:* "Maya is 3 times Lena plus 5. If Maya gets the letter, what does Lena equal?" **[wait]** ((M − 5)/3 — ugly.) "And if Lena gets it, Maya is?" **[wait]** (3L + 5 — clean.) "The letter goes to whoever is *described*, not whoever *describes*."
+
+*On #10, before they answer, ask:* "What's the noun?" **[wait]** (Weekday tickets.) "Not child tickets, not adult tickets. 2,000."
+
+---
+
+## Slide 10 — Word Problem Practice, Set 2 (0:38–0:42)
+
+**#11 (Level 3) — parking lot.** Let c = cars; motorcycles = 2c − 5; c + (2c − 5) = 100 → 3c = 105 → c = 35, motorcycles = 65. Wheels = 35(4) + 65(2) = 140 + 130 = **270 wheels**.
+*Say this:* "Notice this problem stacks two layers — a count layer and a wheels layer. The trap answer is 100, the vehicle count, because that's the number the equation hands you. The question wants wheels."
+
+**#12 (Level 4) — concert, three tiers.** *Heads up: as written this one does not come out whole.* Let V = VIP; floor = 3V; balcony = 3V + 2,000; total V + 3V + 3V + 2,000 = 22,000 → 7V = 20,000 → V ≈ 2,857.1.
+*Two ways to play it, both good:*
+- **Best option:** change the total to **23,000**. Then 7V = 21,000 → V = 3,000, floor = 9,000, balcony = **11,000**. Clean, and the structure of the lesson survives intact.
+- **Or teach the miss:** "Set it up, solve it, and tell me what your answer means." When they get 2,857.1, ask: "Can you sell 2,857.1 tickets?" **[wait]** "No. So either the problem is broken or you are — and checking which one is a real test skill. On a grid-in you'd catch it instantly, because a non-integer ticket count is a red flag."
+
+**#13 (Level 4) — charity race.** *Also over-determined as written — the three conditions conflict.*
+- From participants: w + (4w − 10) = 340 → 5w = 350 → w = 70, runners = **270**. Money check: 30(70) + 50(270) = 15,600, not 19,000.
+- From money alone: 30w + 50(340 − w) = 19,000 → w = 100, runners = 240 — which contradicts runners = 4w − 10.
+*Cleanest fix for live use:* drop the "340 total participants" clause and keep runners = 4w − 10 with the money equation, or change the money total to **15,600** and use it as a self-check. Either way, say out loud: "Two equations should agree. When they don't, that's information — on the real test it means you misread a sentence, so go back and reread before you pick anything."
+
+*Trap card wrap:* "When three relationships stack, skipping the define line almost always merges two relationships into one by accident. Four lines cost you five seconds and save you the problem."
+
+---
+
+## Slide 11 — Why the Flip Rule Works (0:42–0:46)
+
+*Do not state the rule. Extract it.*
+
+"2 < 5. True?" **[wait]** (Yes.) "Multiply both sides by −1. What do you get?" **[wait]** (−2 and −5.) "Is −2 < −5 true?" **[wait]** (No.) "So what has to happen to keep the statement true?" **[wait]** (The sign flips: −2 > −5.)
+
+"That's it. You just derived it. The flip isn't a trick somebody made up — it's the only way the statement stays true, because negatives reverse order on the number line. A bigger-looking negative is a smaller value."
+
+*Point at the two number lines.* "Top line: 2 sits left of 5. Bottom line: −5 is now left of −2. The multiplication didn't just change the numbers, it reflected the whole line."
+
+**Rule, in the student's words:** "Multiply or divide by a negative → flip **every** inequality sign in the statement." *Emphasize "every" — this is the setup for the compound problem on the next slide.*
+
+"And here's your escape hatch for the rest of your life: any time you're unsure mid-problem, test it with 2 < 5. Three seconds, zero memory required."
+
+---
+
+## Slide 12 — Compound Inequality Deep Dive: −5 ≤ 1 − 3x ≤ 4 (0:46–0:50)
+
+*Board work again, student narrating.*
+
+1. **Start.** −5 ≤ 1 − 3x ≤ 4. "Treat it as a sandwich. Every operation happens to all three parts."
+2. **Subtract 1 from all three.** −6 ≤ −3x ≤ 3. "Did anything flip?" **[wait]** (No.) "Right — adding and subtracting never flip. Only multiplying or dividing by a negative."
+3. **Divide all three by −3 — the dangerous step.** Both signs flip: 2 ≥ x ≥ −1.
+4. **Rewrite smallest-to-largest.** −1 ≤ x ≤ 2. "Always rewrite in number-line order. It removes all guessing about which way the circles face."
+5. **Sketch.** Closed circles at −1 and 2, shaded between, because both signs are ≤.
+
+*Now sell the trap using the right-hand diagram:* "If you forget to flip, you get 2 ≤ x ≤ ... wait — you get −2 to 1. Look at it. It's the exact mirror image, same width, shifted and reversed. And it is *always* one of the answer choices. The mirror isn't a coincidence; it's manufactured."
+
+*Ask:* "How would you catch the mirror in ten seconds without redoing the algebra?" **[wait]** *Target answer: plug in a number. Try x = 0 in the original: 1 − 0 = 1, and −5 ≤ 1 ≤ 4 is true, so 0 must be inside the shaded region. −1 ≤ x ≤ 2 contains 0; the mirror answer −2 ≤ x ≤ 1 also contains 0 — so try x = 2: 1 − 6 = −5, and −5 ≤ −5 ≤ 4 is true, so 2 is in. The mirror excludes 2. Dead.*
+
+"That's your verification move on a forward-only test: pick an endpoint, plug it into the original, see if it survives."
+
+---
+
+## Slide 13 — Inequality Practice (0:50–0:54)
+
+*Requirement: every answer needs a drawn number line. No line, no credit — same rule as the gate.*
+
+| # | Level | Problem | Answer | Circle |
+|---|---|---|---|---|
+| 14 | 1 | 3x + 4 < 19 | **x < 5** | open (strict) |
+| 15 | 2 | −2x + 5 ≥ 11 | **x ≤ −3** | closed — sign flipped |
+| 16 | 3 | −3 < 2x + 7 ≤ 5 | **−5 < x ≤ −1** | open left, closed right, no flip |
+| 17 | 4 | −5 ≤ 1 − 3x ≤ 4 | **−1 ≤ x ≤ 2** | both closed, both signs flipped |
+
+*Before #15, make them predict:* "Will the sign flip? Say yes or no before you divide." **[wait]** *Predicting out loud is the whole drill; a student who predicts correctly and then forgets anyway is rare.*
+
+*On #16, watch for the reflex-flip error:* dividing by **positive** 2 changes nothing. "You flip for negative *divisors*, not for negative *numbers lying around in the problem*." That distinction is worth ten seconds of explicit attention — over-flipping is the second most common error after under-flipping.
+
+---
+
+## Slide 14 — Mastery Check: 10 Inequalities, Gate 9/10 (0:54–1:00)
+
+*Set the rules once, then go quiet and time it.* "Test pace. An item counts only if the algebra *and* the sketch are right. A correct value with backwards circles scores zero on a drag-the-point or number-line item — that's a real item type on the digital test now, and it doesn't give partial credit."
+
+Answer key:
+
+| # | Problem | Answer | Note |
+|---|---|---|---|
+| 1 | x + 6 > 10 | x > 4 | open |
+| 2 | 2x − 3 ≤ 7 | x ≤ 5 | closed |
+| 3 | −x > 4 | x < −4 | flip — dividing by −1 counts |
+| 4 | −4x + 1 ≥ 9 | x ≤ −2 | flip, closed |
+| 5 | 3x + 2 < 12 | x < 10/3 ≈ 3.33 | *non-integer; if you want a clean line, change to 3x + 2 < 14 → x < 4* |
+| 6 | −1 ≤ x − 3 ≤ 6 | 2 ≤ x ≤ 9 | no flip |
+| 7 | −2 < 2x − 4 < 8 | 1 < x < 6 | positive divisor, no flip |
+| 8 | −10 ≤ −5x ≤ 15 | −3 ≤ x ≤ 2 | both flip, then reorder |
+| 9 | −6 ≤ 3 − x < 4 | −1 < x ≤ 9 | flip *and* the circle types swap ends |
+| 10 | −4 < 2 − 2x ≤ 6 | −2 ≤ x < 3 | flip; strict/inclusive swap ends |
+
+*Items 9 and 10 are the diagnostic pair.* When the signs flip, the **open circle changes ends too** — a student who flips the inequality but keeps the open circle on the same number has half the concept. Grade those two first.
+
+*If the gate isn't hit:* say it exactly as the slide does, no softening and no lecture. "No penalty, nothing gets re-taught from scratch. Ten extra minutes get added to next session's math block, and the sign-flip drill stays on the sprint until it's automatic." Then stop. The absence of drama is what keeps the gate credible.
+
+---
+
+## Slide 15 — Close (last 90 seconds)
+
+*Three moves, fast.*
+
+**1. Error log, categorized — not just counted.** Every miss today gets exactly one of three tags: *simplified before substituting*, *skipped the let line*, or *forgot the flip*. "Which tag has the most tallies?" **[wait]** *Then pull out the scrap paper from Slide 2:* "You predicted at the start that you'd lose the most points in ___. Were you right?" The gap between predicted and actual weakness is the most useful thing they take home.
+
+**2. Confidence win, stated concretely.** "Three shortcuts locked in today: collapse two letters to one, branch every relationship off a single letter, and test 2 < 5 to recover the flip rule. None of those are facts you memorized — you derived all three in this room."
+
+**3. Say the rules back, no slides, no notes.** **[wait for all three]**
+- Substitute first, simplify second.
+- Write the "let" line before any algebra.
+- Divide by a negative → flip every sign.
+
+"Next session opens with the sprint, and the sprint will have negatives in it. See you then."
+
+---
+
+## Pre-session prep checklist
+
+- [ ] Fix or decide how to handle **#12** (change total to 23,000) and **#13** (drop the 340-participant clause or reset the money total to 15,600) — both are inconsistent as written and will stall the room.
+- [ ] Decide on **mastery item 5** (currently x < 10/3; change to 3x + 2 < 14 if you want every gate item to land on an integer tick mark).
+- [ ] Verify the exact operators on practice **#5 and #6** against the rendered slide before quoting the answers above.
+- [ ] Have blank number lines pre-printed for Slides 13–14 so sketching costs the student zero setup time.
+- [ ] Keep the "Check Your Work" panel closed until Zone 3 — it contains the three rules, and the student should be generating them, not reading them.
