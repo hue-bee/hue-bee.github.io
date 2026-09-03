@@ -1,1 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 4, Session 4B: Substitution, Multi-Relationship Setup &amp; Inequality Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --e1:#3E5C9A; --e1-soft:rgba(62,92,154,0.10);
+  --e2:#7A5C9E; --e2-soft:rgba(122,92,158,0.10);
+  --e3:#9A5C6A; --e3-soft:rgba(154,92,106,0.10);
+  --m1:#1D7A5C; --m1-soft:rgba(29,122,92,0.10);
+  --m2:#B45309; --m2-soft:rgba(180,83,9,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1140px;padding:clamp(1rem,3vw,2.4rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:6px;flex-wrap:wrap;max-width:260px;}
+.slide-dots .dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.8rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.65rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.35rem,2.7vw,2.0rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 0.85rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.13em;color:var(--zc,var(--ink-3));margin-bottom:0.3rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.9rem;color:var(--ink-2);line-height:1.6;}
+.prob-text{font-size:0.88rem;color:var(--ink);font-weight:600;line-height:1.5;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.75rem 0.9rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.82rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.8rem 0.95rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.65rem 0.9rem;}
+.trap-title{font-weight:700;font-size:0.82rem;color:#3D3D3D;}
+.trap-body{font-size:0.82rem;color:var(--ink-2);margin-top:0.22rem;line-height:1.5;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--m1);background:#F4FBF5;border-radius:12px;padding:0.65rem 0.9rem;}
+.win-title{font-weight:700;font-size:0.82rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.5rem 0.95rem;text-align:center;}
+.formula-box .math{font-size:1.2rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.6rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.step-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.6rem 0.85rem;display:flex;gap:0.6rem;align-items:flex-start;box-shadow:0 8px 20px rgba(201,212,228,0.16),0 2px 5px rgba(201,212,228,0.1);margin-bottom:0.5rem;}
+.step-num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--zc,var(--e1));color:#fff;font-family:var(--font-display);font-weight:700;font-size:0.85rem;display:flex;align-items:center;justify-content:center;}
+.step-body{font-size:0.85rem;color:var(--ink-2);line-height:1.5;}
+.step-body b{color:var(--ink);}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:2.8rem;border:none;background:transparent;resize:vertical;padding:0.5rem 0.75rem;font-size:0.9rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.45;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+
+.tl-row{display:grid;grid-template-columns:88px 14px 1fr;gap:0 0.75rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.8rem;color:var(--rc);text-align:right;padding-top:0.68rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:13px;height:13px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.68rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.5rem 0.85rem;margin-bottom:0.5rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.88rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.8rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.45;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.65rem 0.9rem;}
+.socratic-title{font-weight:700;font-size:0.82rem;color:#2E2E2E;}
+.socratic-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.22rem;line-height:1.5;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--m1);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--m1);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow-y:auto;transform:translateX(320px);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;pointer-events:none;}
+.pip-panel.open{transform:translateX(0);opacity:1;pointer-events:all;}
+.pip-panel-inner{padding:14px 16px 18px;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.pip-panel-title{font-weight:700;font-size:0.82rem;color:var(--ink);}
+.pip-close-btn{background:none;border:none;font-size:0.9rem;color:var(--ink-3);cursor:pointer;}
+.pip-mini-formula{font-size:0.78rem;font-weight:600;color:var(--ink-2);background:#EDF2F9;border-radius:8px;padding:0.4rem 0.6rem;margin-bottom:0.6rem;}
+.pip-mini-card{border:1px solid rgba(201,212,228,0.4);border-radius:10px;padding:0.5rem 0.65rem;margin-bottom:0.5rem;}
+.pip-mini-lvl{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:16px;}
+.pip-mini-title{font-weight:700;font-size:0.8rem;color:var(--ink);margin-top:0.3rem;}
+.pip-mini-body{font-size:0.76rem;color:var(--ink-2);line-height:1.5;margin-top:0.2rem;}
+.pip-mini-trap{border-top:1px dashed rgba(201,212,228,0.6);margin-top:0.4rem;padding-top:0.5rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.76rem;color:#3D3D3D;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--e1);"></span> Week 4 · Session 4B
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.0rem,5vw,3.5rem);">Substitution, Multi-Relationship Setup <br><span style="color:var(--e1);">&amp; Inequality Review</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.0rem,2vw,1.4rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">Full 60-Minute Math Block · Deep-Dive Edition</h2>
+    <p class="reveal" style="font-size:0.8rem;color:var(--ink-3);letter-spacing:0.13em;text-transform:uppercase;font-weight:500;margin:0 0 1.1rem;">SHSAT Prep · Write the Variable Line Before You Touch the Algebra</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--e1-soft);color:var(--e1);border-radius:20px;padding:6px 15px;font-size:0.78rem;font-weight:600;">Substitution</span>
+      <span style="background:var(--e2-soft);color:var(--e2);border-radius:20px;padding:6px 15px;font-size:0.78rem;font-weight:600;">Multi-Relationship Word Problems</span>
+      <span style="background:var(--e3-soft);color:var(--e3);border-radius:20px;padding:6px 15px;font-size:0.78rem;font-weight:600;">Inequality &amp; Number-Line Review</span>
+      <span style="background:var(--m1-soft);color:var(--m1);border-radius:20px;padding:6px 15px;font-size:0.78rem;font-weight:600;">Mastery Check</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:00–0:05</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Sprint · Substitution One-Liners</div>
+          <div class="tl-b">Eight quick <span class="math-inline">y = 4x</span> style items. <em>Beat your own time — no outside benchmark.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:05–0:24</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Zone 1 · Substitution<span class="tag hot">Substitute First, Simplify Second</span></div>
+          <div class="tl-b">One variable is secretly hiding as an expression of another. <em>Swap it in completely before distributing or combining anything.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e2);">
+        <div class="tl-time">0:24–0:25</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Reset</div>
+          <div class="tl-b">Stand up, water, 30 seconds of movement.</div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e2);">
+        <div class="tl-time">0:25–0:42</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Zone 2 · Multi-Relationship Word Problems</div>
+          <div class="tl-b">Three sentences, three relationships, one variable. <em>Write "let ___ = ___" before any algebra — this is where setup errors die.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e3);">
+        <div class="tl-time">0:42–0:54</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Zone 3 · Inequality &amp; Number-Line Review<span class="tag hot">The Mirror</span></div>
+          <div class="tl-b">Dividing by a negative flips the sign — the mirror image on the number line is always an offered wrong choice.</div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--m1);">
+        <div class="tl-time">0:54–1:00</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">Mastery Check + Exit Ticket<span class="tag cool">10 Inequalities, ≥9 Correct</span></div>
+          <div class="tl-b">Every one needs a correctly drawn number line — open vs. closed circles included.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — WARM UP / SPRINT -->
+<div class="slide" data-slide="3" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Sprint · Substitution Warm-Up</div>
+    <h2 class="slide-title reveal">Eight Quick Ones: <span class="tint">Beat Your Own Score</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think first</div>
+        <div class="socratic-body">If <span class="math-inline">y = 4x</span> and you need <span class="math-inline">y + 3</span> in terms of x, what's the very first move — solve for something, or replace y right where it sits?</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this matters</div>
+        <div class="prose" style="margin-top:0.2rem;">Substitution is the engine behind every multi-relationship word problem today. If swapping a variable for its equivalent expression is automatic, the harder word problems later become pure setup, not new math.</div>
+      </div>
+    </div>
+    <div class="formula-box reveal" style="margin-top:0.85rem;">
+      <div style="font-size:0.78rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">Sprint items — 8, timed, mental math</div>
+      <div class="math" style="font-size:0.95rem;">y=4x, find y+3 &nbsp;·&nbsp; a=2b, find 3a−b &nbsp;·&nbsp; m=n+5, find 2m &nbsp;·&nbsp; y=3x, find y−x</div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.75rem;">
+      <div class="trap-title">Your Habit Target</div>
+      <div class="trap-body">Say the substitution out loud before writing it: "y is standing in for 4x, so everywhere I see y, I write 4x instead." Naming the swap out loud is what makes it stick as a motor skill, not just a fact you know.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — SUBSTITUTION: WHY IT WORKS -->
+<div class="slide" data-slide="4" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Substitution<span class="tag hot">Substitute First</span></div>
+    <h2 class="slide-title reveal">One Variable Is Just <span class="tint">Another One in Disguise</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.7rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">If <span class="math-inline">y = 3x</span>, is <span class="math-inline">y</span> a totally separate quantity from <span class="math-inline">x</span> — or is it just a nickname for "3x"? If it's a nickname, what happens the instant you replace every "y" with what it's a nickname for?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.78rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The rule, every time</div>
+          <div class="math" style="font-size:1.0rem;">Substitute first. Simplify second. Never the reverse.</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.65rem;">
+          <div class="win-title">Why this is the clever way</div>
+          <div class="prose" style="margin-top:0.2rem;">Two letters in one expression means two things to track at once — that's where sign errors and dropped terms happen. The instant you replace y with 3x, the whole problem collapses down to ONE variable. From there it's just ordinary distribute-and-combine, the exact same motion James already does automatically.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="190" viewBox="0 0 270 190" xmlns="http://www.w3.org/2000/svg">
+  <rect x="30" y="12" width="210" height="36" rx="10" fill="#DCEBFB" stroke="#3E5C9A" stroke-width="2"/>
+  <text x="45" y="35" font-size="13" font-weight="700" fill="#3E5C9A" font-family="Nunito, sans-serif">Two letters: y and x</text>
+  <path d="M135 48 L135 70" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow4)"/>
+  <defs><marker id="arrow4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+  <rect x="10" y="72" width="250" height="36" rx="10" fill="#fff" stroke="#767676" stroke-width="1.4"/>
+  <text x="20" y="95" font-size="12" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">Replace y with 3x everywhere</text>
+  <path d="M135 108 L135 130" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow4)"/>
+  <rect x="55" y="132" width="160" height="36" rx="10" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/>
+  <text x="70" y="155" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">One letter: only x</text>
+  <text x="35" y="185" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">Fewer letters tracked = fewer errors</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — SUBSTITUTION DEEP DIVE: STEP BY STEP -->
+<div class="slide" data-slide="5" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Deep Dive</div>
+    <h2 class="slide-title reveal">Worked Step-by-Step: <span class="tint">2y + 4(2y + 3) − x</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div>
+        <div class="step-card reveal">
+          <div class="step-num">1</div>
+          <div class="step-body"><b>Identify the substitution rule.</b> We're told <span class="math-inline">y = 3x</span>. Every "y" in the expression is a stand-in for "3x."</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">2</div>
+          <div class="step-body"><b>Replace every y, don't skip any.</b> <span class="math-inline">2y + 4(2y + 3) − x</span> becomes <span class="math-inline">2(3x) + 4(2(3x) + 3) − x</span>. Both y's get swapped — the one alone and the one inside the parentheses.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">3</div>
+          <div class="step-body"><b>Simplify inside the parentheses first.</b> <span class="math-inline">2(3x) = 6x</span>, so inside becomes <span class="math-inline">6x + 3</span>. Expression is now <span class="math-inline">6x + 4(6x + 3) − x</span>.</div>
+        </div>
+      </div>
+      <div>
+        <div class="step-card reveal">
+          <div class="step-num">4</div>
+          <div class="step-body"><b>Distribute the 4 across both terms.</b> <span class="math-inline">4(6x + 3) = 24x + 12</span>. Now: <span class="math-inline">6x + 24x + 12 − x</span>.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">5</div>
+          <div class="step-body"><b>Combine all the x-terms.</b> <span class="math-inline">6x + 24x − x = 29x</span>... wait — recount: <span class="math-inline">6x + 24x = 30x</span>, then <span class="math-inline">30x − x = 29x</span>. Combine constants separately: just <span class="math-inline">+12</span>.</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.4rem;">
+          <div class="win-title">Final answer</div>
+          <div class="prose" style="margin-top:0.2rem;"><span class="math-inline">29x + 12</span>. Notice the process never required tracking y and x at the same time after Step 2 — that's the entire point of substituting first.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — SUBSTITUTION PRACTICE -->
+<div class="slide" data-slide="6" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Practice</div>
+    <h2 class="slide-title reveal">Substitution — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">If <span class="math-inline">a = 5b</span>, what is <span class="math-inline">a + 2b</span> in terms of b? Swap the a first — what's left to combine?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">If <span class="math-inline">m = n − 4</span>, what is <span class="math-inline">3m + n</span> in terms of n? Replace m everywhere it appears, then combine like terms.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">If <span class="math-inline">p = 2q</span>, simplify <span class="math-inline">3(p + q) − q</span>. Substitute before you open the parentheses — does that save a step?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">If <span class="math-inline">y = 3x</span>, simplify <span class="math-inline">2y + 4(2y + 3) − x</span> completely — today's deep-dive example. Rebuild the five steps from memory without peeking back.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">If <span class="math-inline">r = 2s + 1</span>, simplify <span class="math-inline">5(r − s) + 3(s − r)</span> in terms of s. Two substitutions of the same expression, then combine — does distributing negative 3 change the sign of every term inside?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">If <span class="math-inline">k = 4h − 2</span>, simplify <span class="math-inline">2(k + 3h) − (k − h)</span> in terms of h. Substitute k in both places it appears before distributing anything — do the two k's simplify the same way?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">SHSAT Trap: Simplifying Before Substituting</div>
+      <div class="trap-body">Distributing or combining terms while two different letters are still mixed together invites sign errors and wrong combinations. Substitute completely first — reduce to one variable — then simplify once, cleanly.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — MULTI-RELATIONSHIP: WHY THE LET LINE WORKS -->
+<div class="slide" data-slide="7" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Multi-Relationship Word Problems</div>
+    <h2 class="slide-title reveal">Three Sentences, Three Relationships, <span class="tint">One Variable</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.7rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">An amusement park sells Saturday and Sunday tickets. Saturday sales were 4 times Sunday sales. Together the two days sold 30,000 tickets. If you tried to give BOTH quantities their own separate letter, how many equations would you need? What if you gave only Sunday a letter and built Saturday FROM it?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.78rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The rule, every time</div>
+          <div class="math" style="font-size:0.95rem;">Write "let ___ = ___" first. Every other relationship gets built FROM that one letter.</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.65rem;">
+          <div class="win-title">Why this is the clever way</div>
+          <div class="prose" style="margin-top:0.2rem;">Picking the SMALLER, plainest quantity as your letter (here, Sunday, not Saturday) keeps every other relationship a simple multiple — "4 times S" instead of "a quarter of Sat." One letter, one equation, one solve. Two letters would need two equations and a substitution step you don't need.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="210" viewBox="0 0 270 210" xmlns="http://www.w3.org/2000/svg">
+  <rect x="70" y="10" width="130" height="38" rx="10" fill="#fff" stroke="#767676" stroke-width="1.4"/>
+  <text x="82" y="34" font-size="12" font-weight="700" fill="#1f1f1f" font-family="Nunito, sans-serif">Let S = Sunday</text>
+  <path d="M100 48 L100 72" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow6)"/>
+  <path d="M170 48 L170 72" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow6)"/>
+  <defs><marker id="arrow6" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+  <rect x="20" y="74" width="110" height="38" rx="10" fill="#F3ECF8" stroke="#7A5C9E" stroke-width="2"/>
+  <text x="30" y="98" font-size="11.5" font-weight="700" fill="#7A5C9E" font-family="Nunito, sans-serif">Saturday = 4S</text>
+  <rect x="140" y="74" width="110" height="38" rx="10" fill="#F3ECF8" stroke="#7A5C9E" stroke-width="2"/>
+  <text x="150" y="98" font-size="11.5" font-weight="700" fill="#7A5C9E" font-family="Nunito, sans-serif">S + 4S=30,000</text>
+  <path d="M195 112 L195 136" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow6)"/>
+  <rect x="120" y="138" width="150" height="34" rx="10" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/>
+  <text x="140" y="160" font-size="13" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">S = 6,000</text>
+  <text x="20" y="196" font-size="11.5" fill="#4a4a4a" font-family="Nunito, sans-serif">Everything branches from the letter</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — MULTI-RELATIONSHIP DEEP DIVE: FOUR-LINE METHOD -->
+<div class="slide" data-slide="8" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Deep Dive</div>
+    <h2 class="slide-title reveal">The Four-Line Method, <span class="tint">Applied Fully</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div>
+        <div class="step-card reveal">
+          <div class="step-num">1</div>
+          <div class="step-body"><b>Define the variable.</b> "Let S = number of Sunday tickets." Always pick the quantity every other sentence refers back to.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">2</div>
+          <div class="step-body"><b>Write each relationship as its own equation.</b> "Saturday = 4 times Sunday" &#8594; <span class="math-inline">4S</span>. "Together they total 30,000" &#8594; <span class="math-inline">S + 4S = 30{,}000</span>.</div>
+        </div>
+      </div>
+      <div>
+        <div class="step-card reveal">
+          <div class="step-num">3</div>
+          <div class="step-body"><b>Solve.</b> <span class="math-inline">5S = 30{,}000 &#8594; S = 6{,}000</span>. Saturday = <span class="math-inline">4(6{,}000) = 24{,}000</span>.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">4</div>
+          <div class="step-body"><b>Circle what the question actually asks for — then answer THAT.</b> If a weekday sells a third of Sunday's total: <span class="math-inline">6{,}000 &#247; 3 = 2{,}000</span>. The same setup could ask for S, 4S, or this weekday value — three different correct final numbers from one setup.</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.3rem;">
+          <div class="win-title">Why Step 4 matters most</div>
+          <div class="prose" style="margin-top:0.2rem;">Most setup errors on the SHSAT aren't algebra mistakes — they're answering with the letter's value when the question wanted a DIFFERENT quantity built from it. Circling the target BEFORE computing catches this every time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — MULTI-RELATIONSHIP PRACTICE SET 1 -->
+<div class="slide" data-slide="9" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice, Set 1</div>
+    <h2 class="slide-title reveal">Multi-Relationship — <span class="tint">Easy to Hard, Part 1</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">Two numbers have a sum of 40. The larger is 3 times the smaller. Write "let ___ = ___" for the smaller number, then find both numbers.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">A bookstore sold twice as many paperbacks as hardcovers, and 240 books total. Define the variable for hardcovers first — how many paperbacks were sold?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Maya has 5 more than 3 times as many stickers as Lena. Together they have 65 stickers. Which quantity should get the letter — Maya's or Lena's — to keep the algebra simplest?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A theater sold adult and child tickets. Adult sales were 4 times child sales, and together they totaled 30,000 tickets — same setup as today's park problem. If a weekday sells one-third of the child total, how many weekday tickets are sold? Circle exactly which value the question wants before you answer.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">SHSAT Trap: Solving for the Variable, Answering the Wrong Thing</div>
+      <div class="trap-body">The letter you solve for is rarely the final answer by itself. After solving, go back to the question and circle exactly what noun and unit it's asking for — Saturday tickets, weekday tickets, the larger number — then compute that specific value.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — MULTI-RELATIONSHIP PRACTICE SET 2 -->
+<div class="slide" data-slide="10" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice, Set 2</div>
+    <h2 class="slide-title reveal">Multi-Relationship — <span class="tint">Easy to Hard, Part 2</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A parking lot has cars and motorcycles. There are 5 fewer motorcycles than twice the number of cars. Together there are 100 vehicles, and each car has 4 wheels while each motorcycle has 2. How many total wheels are in the lot? (Two relationships stack: count, then wheels.)</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">A concert sold VIP, floor, and balcony tickets: floor sales were 3 times VIP sales, and balcony sales were 2,000 more than floor sales. All three totaled 22,000 tickets. Write one "let" line, then build the other two entirely from it — what is the number of balcony tickets sold?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">A charity race had walkers and runners. Runners were 4 times the walkers minus 10. Combined, they raised $30 per walker and $50 per runner for a total of $19,000, with 340 total participants. Set up both the count equation and the money equation from one "let" line — how many runners were there?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">SHSAT Trap: Skipping the Variable-Definition Line</div>
+      <div class="trap-body">When a problem stacks three relationships, skipping straight to arithmetic almost always collapses two relationships into one by accident. The four-line habit — define, write each relationship as its own equation, solve, circle the target — is slower for 5 seconds and faster for the whole problem.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — INEQUALITY: WHY THE FLIP RULE WORKS -->
+<div class="slide" data-slide="11" style="--zc:var(--e3);--zs:var(--e3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Inequality Review<span class="tag hot">The Mirror</span></div>
+    <h2 class="slide-title reveal">Dividing by a Negative <span class="tint">Flips the World</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.7rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">You know <span class="math-inline">2 &lt; 5</span> is true. Multiply both sides by −1: is <span class="math-inline">−2 &lt; −5</span> still true, or does the relationship reverse? What does that tell you about what has to happen to the inequality SIGN every time you multiply or divide by a negative?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.78rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">The rule, every time</div>
+          <div class="math" style="font-size:1.0rem;">Multiply or divide by a negative &#8594; flip EVERY inequality sign in the statement.</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.65rem;">
+          <div class="win-title">Why this is the clever way</div>
+          <div class="prose" style="margin-top:0.2rem;">Negative numbers reverse order on the number line — bigger negative numbers are actually smaller values. The sign flip isn't a memorized trick; it's the only way to keep the statement mathematically true after multiplying by something negative. Test it with 2 &lt; 5 anytime you doubt yourself.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="150" viewBox="0 0 270 150" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="40" x2="250" y2="40" stroke="#767676" stroke-width="2"/>
+  <circle cx="70" cy="40" r="5" fill="#1D7A5C"/>
+  <circle cx="180" cy="40" r="5" fill="#1D7A5C"/>
+  <text x="60" y="30" font-size="11" font-weight="700" fill="#1D7A5C" font-family="Nunito, sans-serif">2 &lt; 5 (true)</text>
+  <text x="55" y="60" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">2</text>
+  <text x="175" y="60" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">5</text>
+  <line x1="20" y1="110" x2="250" y2="110" stroke="#767676" stroke-width="2"/>
+  <circle cx="90" cy="110" r="5" fill="#9A5C6A"/>
+  <circle cx="200" cy="110" r="5" fill="#9A5C6A"/>
+  <text x="55" y="100" font-size="11" font-weight="700" fill="#9A5C6A" font-family="Nunito, sans-serif">-2 &gt; -5 (flip needed to stay true)</text>
+  <text x="85" y="130" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">-5</text>
+  <text x="195" y="130" font-size="10" fill="#4a4a4a" font-family="Nunito, sans-serif">-2</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — INEQUALITY DEEP DIVE: COMPOUND STEP BY STEP -->
+<div class="slide" data-slide="12" style="--zc:var(--e3);--zs:var(--e3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Deep Dive</div>
+    <h2 class="slide-title reveal">Compound Inequality, <span class="tint">Solved and Sketched</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div>
+        <div class="step-card reveal">
+          <div class="step-num">1</div>
+          <div class="step-body"><b>Start:</b> <span class="math-inline">−5 ≤ 1 − 3x ≤ 4</span>. Treat all three parts as one sandwich — every operation happens to ALL THREE at once.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">2</div>
+          <div class="step-body"><b>Subtract 1 from all three parts:</b> <span class="math-inline">−6 ≤ −3x ≤ 3</span>. No sign flip yet — subtraction never flips inequalities.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">3</div>
+          <div class="step-body"><b>Divide all three parts by −3 — the dangerous step:</b> because −3 is negative, BOTH signs flip direction: <span class="math-inline">2 ≥ x ≥ −1</span>.</div>
+        </div>
+      </div>
+      <div>
+        <div class="step-card reveal">
+          <div class="step-num">4</div>
+          <div class="step-body"><b>Rewrite left-to-right, smallest to largest:</b> <span class="math-inline">−1 ≤ x ≤ 2</span>. This ordering habit prevents second-guessing which direction the circles point.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">5</div>
+          <div class="step-body"><b>Sketch it — closed circles at both ends</b> since the signs are ≤, meaning −1 and 2 are included.</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.35rem;">
+          <div class="win-title">Catch the trap before it catches you</div>
+          <div class="prose" style="margin-top:0.2rem;">If you divide by −3 and FORGET to flip, you'd get <span class="math-inline">−2 ≤ x ≤ 1</span> — the exact mirror image, always sitting among the answer choices. Sketching the line forces you to notice which side the circles actually land on.</div>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-wrap reveal" style="margin-top:0.6rem;">
+      <svg width="500" height="110" viewBox="0 0 500 110" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="35" x2="250" y2="35" stroke="#767676" stroke-width="2"/>
+  <text x="55" y="55" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">-1</text>
+  <text x="205" y="55" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">2</text>
+  <circle cx="60" cy="35" r="6" fill="#1D7A5C" stroke="#1D7A5C" stroke-width="2"/>
+  <circle cx="210" cy="35" r="6" fill="#1D7A5C" stroke="#1D7A5C" stroke-width="2"/>
+  <line x1="60" y1="35" x2="210" y2="35" stroke="#1D7A5C" stroke-width="4"/>
+  <text x="60" y="15" font-size="11" font-weight="700" fill="#1D7A5C" font-family="Nunito, sans-serif">Correct (flipped): -1 to 2</text>
+  <line x1="280" y1="35" x2="480" y2="35" stroke="#D9D9D9" stroke-width="2"/>
+  <text x="290" y="55" font-size="11" fill="#9A5C6A" font-family="Nunito, sans-serif">-2</text>
+  <text x="425" y="55" font-size="11" fill="#9A5C6A" font-family="Nunito, sans-serif">1</text>
+  <circle cx="300" cy="35" r="6" fill="none" stroke="#9A5C6A" stroke-width="2"/>
+  <circle cx="430" cy="35" r="6" fill="none" stroke="#9A5C6A" stroke-width="2"/>
+  <line x1="300" y1="35" x2="430" y2="35" stroke="#9A5C6A" stroke-width="4" stroke-dasharray="5,4"/>
+  <text x="290" y="15" font-size="11" font-weight="700" fill="#9A5C6A" font-family="Nunito, sans-serif">Mirror trap (forgot to flip): -2 to 1</text>
+</svg>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — INEQUALITY PRACTICE -->
+<div class="slide" data-slide="13" style="--zc:var(--e3);--zs:var(--e3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Practice</div>
+    <h2 class="slide-title reveal">Inequalities — <span class="tint">Easy to Hard, Number Line Required</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">Solve and sketch: <span class="math-inline">3x + 4 &lt; 19</span>. Open or closed circle — which one, and why?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Solve and sketch: <span class="math-inline">−2x + 5 ≥ 11</span>. Before dividing, predict out loud: will the sign flip?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">Solve and sketch: <span class="math-inline">−3 &lt; 2x − 7 ≤ 5</span>. Compound — isolate the middle term the same way on all three parts at once.</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">Solve and sketch: <span class="math-inline">−5 ≤ 1 − 3x ≤ 4</span> — today's deep-dive example. Rebuild all five steps from memory, then check: does your final line match the correct or the mirror-trap answer?</div>
+        <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work + number line here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">SHSAT Trap: The Mirror</div>
+      <div class="trap-body">A compound inequality solved without flipping both signs produces a number line that is the exact mirror image of the correct one — and that mirror is always sitting among the answer choices, waiting for the forgotten flip.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — MASTERY CHECK -->
+<div class="slide" data-slide="14" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Mastery Check<span class="tag cool">Gate: ≥9/10</span></div>
+    <h2 class="slide-title reveal">10 Inequalities — <span class="tint">Correct Answer AND Correct Number Line</span></h2>
+    <div class="info-card reveal">
+      <div class="prose">Work all 10 at test pace. Every item counts only if BOTH the algebra and the sketch are right — a correct value with the wrong-direction circles is exactly the kind of technology-enhanced-item error that scores zero on the real adaptive test.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.7rem;margin-top:0.7rem;">
+      <div class="prob-card reveal"><div class="prob-text">1. <span class="math-inline">x + 6 &gt; 10</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">2. <span class="math-inline">2x − 3 ≤ 7</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">3. <span class="math-inline">−x &gt; 4</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">4. <span class="math-inline">−4x + 1 ≤ 9</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">5. <span class="math-inline">3(x − 2) &lt; 12</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">6. <span class="math-inline">1 ≤ x + 3 ≤ 6</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">7. <span class="math-inline">−2 &lt; 2x − 4 &lt; 8</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">8. <span class="math-inline">−10 ≤ −5x ≤ 15</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">9. <span class="math-inline">−6 ≤ 3 − x &lt; 4</span></div></div>
+      <div class="prob-card reveal"><div class="prob-text">10. <span class="math-inline">−4 &lt; 2 − 2x ≤ 6</span></div></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.7rem;">
+      <div class="trap-title">If the gate isn't hit today</div>
+      <div class="trap-body">No penalty, no re-teaching from scratch — 10 extra minutes get added to next session's math block, and the sign-flip drill repeats on the sprint until it's automatic.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15 — CLOSE -->
+<div class="slide" data-slide="15" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Log the Misses, <span class="tint">Lock in the Habit</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:0.8rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log Update</div>
+        <div class="tl-b">Every miss today gets categorized: substituted before checking the whole expression, skipped the "let" line, or forgot to flip the sign.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Confidence Win</div>
+        <div class="tl-b">Three clever shortcuts got locked in today — collapsing to one variable, branching every relationship off one letter, and testing 2&lt;5 to remember the flip rule.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Keep Practicing</div>
+        <div class="tl-b">Say the three rules aloud from memory: substitute first, write the "let" line first, flip every sign when dividing by a negative.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- PIP: Check Your Work floating panel (visible on every slide) -->
+<button class="pip-toggle-btn" id="pipToggleBtn" onclick="togglePip()" aria-label="Toggle Check Your Work picture-in-picture">
+  <span class="pip-dot"></span> Check Your Work
+</button>
+<div class="pip-panel" id="pipPanel">
+  <div class="pip-panel-inner">
+    <div class="pip-panel-header">
+      <span class="pip-panel-title">Check Your Work</span>
+      <button class="pip-close-btn" onclick="togglePip()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="pip-mini-formula">Worked example: y=3x &#8594; 2y+4(2y+3)-x &#8594; 29x+12</div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-1">Substitution</span>
+      <div class="pip-mini-title">Substitute First, Simplify Second</div>
+      <div class="pip-mini-body">Swap in the equivalent expression everywhere before distributing or combining anything.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-2">Multi-Relationship</span>
+      <div class="pip-mini-title">Write the "Let" Line First</div>
+      <div class="pip-mini-body">Define one variable, build every other relationship from it, then circle exactly what the question asks for.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-3">Inequalities</span>
+      <div class="pip-mini-title">Flip Every Sign on a Negative</div>
+      <div class="pip-mini-body">Multiplying or dividing by a negative number flips every inequality sign in the statement — not just one.</div>
+    </div>
+    <div class="pip-mini-trap">
+      <div class="pip-mini-trap-title">Watch For: The Mirror</div>
+      <div class="pip-mini-body">The mirror-image number line (forgot to flip) is always an offered wrong choice. Sketch the line every time to catch it.</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 15</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Substitution',t:'0:05',c:'var(--e1)'},
+  {n:'Multi-Relationship',t:'0:25',c:'var(--e2)'},
+  {n:'Inequality Review',t:'0:42',c:'var(--e3)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.06;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  panel.classList.toggle('open');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
