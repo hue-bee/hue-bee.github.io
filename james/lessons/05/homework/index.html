@@ -1,1 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Homework — Substitution, Multi-Relationship &amp; Inequalities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .hw-meta-row input {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);
+    font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .lvl-1 { background: #EDF2F9; color: #3D4C63; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; width: 100%; }
+  .prob-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .math-inline { font-family: var(--ff-body); font-weight: 700; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-box input {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);
+    font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;
+  }
+  .work-area {
+    width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px;
+    background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink);
+    box-sizing: border-box; outline: none; margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] { flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem; color: var(--ink); background: transparent; outline: none; padding: 1px 6px; }
+  .score-banner { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem; }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .score-cell input { width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none; }
+  .formula-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md); border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center; }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .print-btn { display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white; font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s; }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>🧮 Week 4 Homework</h1>
+      <div class="subtitle">Substitution, Multi-Relationship &amp; Inequalities · SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="17" placeholder="__"> / 17</div><div class="sc-lbl">Math Problems</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="10" placeholder="__"> / 10</div><div class="sc-lbl">Mastery Check</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="27" placeholder="__"> / 27</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+
+  <!-- PART A: SUBSTITUTION -->
+  <div class="section-hd">
+    <span class="icon">🔁</span>
+    <h2>Part A — Substitution</h2>
+    <span class="badge badge-blue">6 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Substitute first, simplify second — never the reverse. Say the swap out loud before writing it.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Rule</span>
+    <span class="fml">Replace the letter EVERYWHERE it appears — then combine like terms</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">If <span class="math-inline">c = 6d</span>, what is <span class="math-inline">c − 2d</span> in terms of d?</p>
+      <textarea class="work-area" placeholder="Swap c first…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">If <span class="math-inline">t = w + 7</span>, what is <span class="math-inline">2t − w</span> in terms of w?</p>
+      <textarea class="work-area" placeholder="Replace t everywhere…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">If <span class="math-inline">j = 3k</span>, simplify <span class="math-inline">2(j + k) − k</span>.</p>
+      <textarea class="work-area" placeholder="Substitute before opening the parentheses…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">If <span class="math-inline">y = 2x</span>, simplify completely: <span class="math-inline">3y + 2(3y − 1) − x</span>.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1: replace both y's…&#10;Step 2: distribute, then combine…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">If <span class="math-inline">p = 3q + 2</span>, simplify <span class="math-inline">4(p − q) + 2(q − p)</span> in terms of q.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Two substitutions of the same expression, then combine…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">If <span class="math-inline">m = 5n − 3</span>, simplify <span class="math-inline">3(m + 2n) − (m − n)</span> in terms of n.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Substitute m in both places before distributing…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <!-- PART B: MULTI-RELATIONSHIP -->
+  <div class="section-hd">
+    <span class="icon">🔗</span>
+    <h2>Part B — Multi-Relationship Word Problems</h2>
+    <span class="badge badge-sand">5 Problems · ~18 min</span>
+  </div>
+  <p class="instr">Write "let ___ = ___" before any algebra. Build every other relationship FROM that one letter. Circle exactly what the question asks for.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Method</span>
+    <span class="fml">1. Define the variable</span>
+    <span class="fml">2. Write each relationship as an equation</span>
+    <span class="fml">3. Solve</span>
+    <span class="fml">4. Circle the target, then answer THAT</span>
+  </div>
+
+  <div class="prob-grid single">
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Two numbers have a sum of <strong>56</strong>. The larger is <strong>6 times</strong> the smaller. Write "let ___ = ___" for the smaller number, then find both numbers.</p>
+      <textarea class="work-area" placeholder="Let x = smaller number…"></textarea>
+      <div class="answer-box">Smaller: <input type="text"> &nbsp; Larger: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A bakery sold <strong>3 times</strong> as many cupcakes as muffins, and <strong>320 items</strong> total. Define the variable for muffins first — how many cupcakes were sold?</p>
+      <textarea class="work-area" placeholder="Let m = muffins…"></textarea>
+      <div class="answer-box">Cupcakes: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Deja has <strong>8 more than 2 times</strong> as many trading cards as Marcus. Together they have <strong>92</strong> cards. Which quantity should get the letter — Deja's or Marcus's — to keep the algebra simplest? Find both amounts.</p>
+      <textarea class="work-area" placeholder="Let m = Marcus's cards…"></textarea>
+      <div class="answer-box">Marcus: <input type="text"> &nbsp; Deja: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A stadium sold morning and evening tickets. Evening sales were <strong>5 times</strong> morning sales, and together they totaled <strong>36,000</strong> tickets. If a special matinee sells <strong>one-fourth</strong> of the morning total, how many matinee tickets were sold? Circle exactly which value the question wants before you answer.</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Let m = morning tickets…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A theater sold balcony, mezzanine, and orchestra seats: mezzanine sales were <strong>2 times</strong> balcony sales, and orchestra sales were <strong>1,500 more</strong> than mezzanine sales. All three totaled <strong>18,500</strong> seats. Write one "let" line, then build the other two entirely from it — how many orchestra seats were sold?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Let b = balcony seats…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART C: INEQUALITIES -->
+  <div class="section-hd">
+    <span class="icon">↔️</span>
+    <h2>Part C — Inequality &amp; Number-Line Review</h2>
+    <span class="badge badge-purple">6 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Solve and sketch every inequality on a number line. Multiplying or dividing by a negative flips EVERY sign — watch for the mirror trap!</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">The Rule</span>
+    <span class="fml">÷ or × by a negative → flip every inequality sign</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Solve and sketch: <span class="math-inline">4x − 3 &lt; 17</span>. Open or closed circle — which one, and why?</p>
+      <textarea class="work-area" placeholder="Solve + number line here…"></textarea>
+      <div class="answer-box">x <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 13 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and sketch: <span class="math-inline">−3x + 8 ≥ 20</span>. Before dividing, predict out loud: will the sign flip?</p>
+      <textarea class="work-area" placeholder="Solve + number line here…"></textarea>
+      <div class="answer-box">x <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 14 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve and sketch: <span class="math-inline">5(x + 1) ≤ 3x + 15</span>.</p>
+      <textarea class="work-area" placeholder="Distribute, collect x-terms, then solve…"></textarea>
+      <div class="answer-box">x <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 15 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve and sketch: <span class="math-inline">−4 &lt; 3x − 1 ≤ 8</span>. Compound — isolate the middle term the same way on all three parts at once.</p>
+      <textarea class="work-area" placeholder="Solve + number line here…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 16 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve and sketch: <span class="math-inline">−7 ≤ 2 − 3x ≤ 5</span>. Rebuild all the steps from memory, then check: does your final line match the correct or the mirror-trap answer?</p>
+      <textarea class="work-area" placeholder="Solve + number line here…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 17 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve and sketch: <span class="math-inline">−6 ≤ 4 − 2x &lt; 10</span>. Watch for the double-flip trap on the divide step.</p>
+      <textarea class="work-area" placeholder="Solve + number line here…"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="sheet page-break">
+
+  <!-- MASTERY CHECK -->
+  <div class="section-hd">
+    <span class="icon">✅</span>
+    <h2>Mastery Check — Gate: ≥9/10</h2>
+    <span class="badge badge-green">10 Inequalities</span>
+  </div>
+  <p class="instr">Work all 10 at test pace. Every item counts only if BOTH the algebra and the sketch are right.</p>
+
+  <div class="prob-grid">
+    <div class="prob"><p class="prob-q">1. <span class="math-inline">x + 9 &gt; 14</span></p><div class="answer-box">x <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">2. <span class="math-inline">3x − 5 ≤ 10</span></p><div class="answer-box">x <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">3. <span class="math-inline">−x &gt; 6</span></p><div class="answer-box">x <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">4. <span class="math-inline">−5x + 2 ≤ 17</span></p><div class="answer-box">x <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">5. <span class="math-inline">4(x − 3) &lt; 16</span></p><div class="answer-box">x <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">6. <span class="math-inline">2 ≤ x + 5 ≤ 9</span></p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">7. <span class="math-inline">−3 &lt; 2x − 5 &lt; 7</span></p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">8. <span class="math-inline">−12 ≤ −4x ≤ 20</span></p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">9. <span class="math-inline">−8 ≤ 4 − x &lt; 3</span></p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">10. <span class="math-inline">−5 &lt; 3 − 2x ≤ 9</span></p><div class="answer-box">Answer <input type="text"></div></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ERROR LOG -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 4 · SHSAT Prep &nbsp;·&nbsp; 🔁 Substitution &nbsp;|&nbsp; 🔗 Multi-Relationship &nbsp;|&nbsp; ↔️ Inequalities
+  </div>
+
+</div>
+
+<script>
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
