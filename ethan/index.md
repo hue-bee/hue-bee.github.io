@@ -11,6 +11,6 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **01** | [Percent Foundations & Function of a Detail](https://hue-bee.github.io/ethan/lessons/01) | [1 Homework](https://hue-bee.github.io/ethan/lessons/01/homework) ||
+| **01** | [Test 1 Error Review: Find the Clue, Not the Answer](https://hue-bee.github.io/ethan/lessons/01) | [1 Homework](https://hue-bee.github.io/ethan/lessons/01/homework) ||
 
 
