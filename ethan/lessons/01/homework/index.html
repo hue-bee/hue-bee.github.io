@@ -1,1 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Homework — Solids, Probability &amp; Algebra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .hw-meta-row input {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body); font-size: 0.82rem; color: var(--ink);
+    background: transparent; outline: none; padding: 1px 4px;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 0.85rem 1rem;
+  }
+  .prob-num { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--blue); margin-bottom: 0.35rem; }
+  .prob-q { font-size: 0.85rem; color: var(--ink); line-height: 1.5; margin-bottom: 0.55rem; }
+  .fig { display: flex; justify-content: center; margin-bottom: 0.5rem; }
+  .clue-list { list-style:none; display:flex; flex-direction:column; gap:0.3rem; margin-bottom:0.55rem; }
+  .clue-item { display:flex; gap:0.45rem; align-items:flex-start; font-size:0.78rem; color:var(--slate); line-height:1.4; }
+  .clue-num {
+    font-family: var(--ff-head); font-weight:700; font-size:0.68rem; color:var(--blue);
+    background: var(--blue-lt); border-radius:50%; width:1.2rem; height:1.2rem; min-width:1.2rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .work-area {
+    width: 100%; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 8px;
+    background: var(--white); padding: 0.5rem 0.65rem; font-family: var(--ff-body); font-size: 0.85rem;
+    color: var(--ink); resize: vertical; outline: none;
+  }
+  .work-area:focus { border-color: var(--blue); background: var(--blue-lt); }
+  .answer-box {
+    display: flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem;
+    font-size: 0.8rem; font-weight: 700; color: var(--slate);
+  }
+  .answer-box input[type=text] {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body);
+    font-size: 0.82rem; font-weight: 700; color: var(--ink); background: transparent; outline: none; padding: 1px 6px;
+  }
+  .formula-strip {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md);
+    border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem;
+  }
+  .fml {
+    background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem;
+    font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head);
+  }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem;
+    color: var(--ink); background: transparent; outline: none; padding: 1px 6px;
+  }
+  .score-banner {
+    display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white; border-radius: 10px; padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-val input {
+    width: 2.4rem; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.6);
+    color: white; font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; text-align: center; outline: none;
+  }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .info-card {
+    background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 0.85rem 1rem;
+  }
+  .print-btn {
+    display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white;
+    font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none;
+    border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>📦 Week 4 Homework</h1>
+      <div class="subtitle">Composite Solids, Probability &amp; Algebra &nbsp;·&nbsp; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="13" placeholder="__"> / 13</div><div class="sc-lbl">Math Problems</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="4" placeholder="__"> / 4</div><div class="sc-lbl">Reasoning Qs</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="17" placeholder="__"> / 17</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+
+  <!-- PART A: COMPOSITE SOLIDS -->
+  <div class="section-hd">
+    <span class="icon">📦</span>
+    <h2>Part A — Composite 3D Solids: Volume &amp; Surface Area</h2>
+    <span class="badge badge-blue">4 Problems · ~15 min</span>
+  </div>
+  <p class="instr">Split every composite solid into shapes you already know before you calculate anything. Show ALL work.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Formulas</span>
+    <span class="fml">V(prism) = l·w·h</span>
+    <span class="fml">V(pyramid) = ⅓·B·h</span>
+    <span class="fml">V(cylinder) = πr²h</span>
+    <span class="fml">V(cone) = ⅓πr²h</span>
+    <span class="fml">SA = sum of all faces</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-3">L3</span></div>
+      <div class="fig">
+        <svg width="150" height="130" viewBox="0 0 150 130">
+          <polygon points="25,95 25,120 105,120 105,95" fill="#eeeeee" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="25,95 45,75 125,75 105,95" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="105,95 125,75 125,100 105,120" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="45,75 85,25 125,75" fill="#f0d9b0" stroke="#92400e" stroke-width="1.5"/>
+          <polygon points="45,75 85,25 105,95 25,95" fill="#f6e6c8" stroke="#92400e" stroke-width="1.5" opacity="0.9"/>
+          <text x="65" y="112" font-family="Nunito" font-size="10" fill="#374151">12 cm</text>
+          <text x="112" y="88" font-family="Nunito" font-size="10" fill="#374151">10 cm</text>
+          <text x="75" y="70" font-family="Nunito" font-size="10" fill="#92400e" font-weight="700">h</text>
+        </svg>
+      </div>
+      <p class="prob-q">A rectangular box (base 12 cm × 10 cm, height 10 cm) has a square pyramid attached on top with the same base and height <strong>h</strong>. The total volume is <strong>1,560 cm³</strong>. Find h.</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Write the box's volume and the pyramid's volume as two separate formulas first.</li>
+        <li class="clue-item"><span class="clue-num">2</span> The box has no unknowns — calculate it fully before touching the pyramid.</li>
+        <li class="clue-item"><span class="clue-num">3</span> Subtract the box's volume from 1,560 to isolate the pyramid's volume.</li>
+        <li class="clue-item"><span class="clue-num">4</span> Plug the known base area into V = ⅓Bh and solve for h.</li>
+      </ul>
+      <textarea class="work-area" placeholder="V(box) = … , V(pyramid) = 1560 − … , solve for h"></textarea>
+      <div class="answer-box">h = <input type="text"> cm</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <div class="fig">
+        <svg width="140" height="120" viewBox="0 0 140 120">
+          <polygon points="30,50 30,95 90,95 90,50" fill="#dcebfb" stroke="#3E5C9A" stroke-width="1.5"/>
+          <polygon points="30,50 48,32 108,32 90,50" fill="#eef4fb" stroke="#3E5C9A" stroke-width="1.5"/>
+          <polygon points="90,50 108,32 108,77 90,95" fill="#c9d9ef" stroke="#3E5C9A" stroke-width="1.5"/>
+          <text x="45" y="85" font-family="Nunito" font-size="11" fill="#3E5C9A" font-weight="700">5 in</text>
+          <text x="15" y="30" font-family="Nunito" font-size="11" fill="#3E5C9A" font-weight="700">5 in</text>
+          <text x="100" y="65" font-family="Nunito" font-size="11" fill="#3E5C9A" font-weight="700">9 in</text>
+        </svg>
+      </div>
+      <p class="prob-q">What is the total surface area of a rectangular prism with dimensions <strong>5 in × 5 in × 9 in</strong>?</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Two faces are 5×5 squares; the other four are 5×9 rectangles.</li>
+        <li class="clue-item"><span class="clue-num">2</span> SA = 2(lw) + 2(lh) + 2(wh) — plug in 5, 5, 9 for each term.</li>
+        <li class="clue-item"><span class="clue-num">3</span> Add all six face areas together before you pick an answer.</li>
+      </ul>
+      <textarea class="work-area" placeholder="SA = 2(5·5) + 2(5·9) + 2(5·9) = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> in²</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <div class="fig">
+        <svg width="140" height="130" viewBox="0 0 140 130">
+          <rect x="45" y="55" width="50" height="55" fill="#dcebfb" stroke="#3E5C9A" stroke-width="1.5"/>
+          <ellipse cx="70" cy="55" rx="25" ry="10" fill="#eef4fb" stroke="#3E5C9A" stroke-width="1.5"/>
+          <ellipse cx="70" cy="110" rx="25" ry="10" fill="#c9d9ef" stroke="#3E5C9A" stroke-width="1.5"/>
+          <polygon points="45,55 70,15 95,55" fill="#f0d9b0" stroke="#92400e" stroke-width="1.5"/>
+          <text x="98" y="45" font-family="Nunito" font-size="10" fill="#92400e">cone h = 8</text>
+          <text x="98" y="90" font-family="Nunito" font-size="10" fill="#3E5C9A">r = 5</text>
+          <text x="15" y="90" font-family="Nunito" font-size="10" fill="#3E5C9A">cyl h = 12</text>
+        </svg>
+      </div>
+      <p class="prob-q">A cylinder (radius 5 in, height 12 in) has a cone (same radius, height 8 in) sitting on top. Find the total volume, in terms of <strong>π</strong>.</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Find V(cylinder) = πr²h and V(cone) = ⅓πr²h separately.</li>
+        <li class="clue-item"><span class="clue-num">2</span> Both shapes share the same radius, so B = πr² is identical for both formulas.</li>
+        <li class="clue-item"><span class="clue-num">3</span> Add the two volumes together — leave π in your final answer, don't multiply it out.</li>
+      </ul>
+      <textarea class="work-area" placeholder="V(cyl) = π·5²·12 = … , V(cone) = ⅓π·5²·8 = … , total = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"> in³ (in terms of π)</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A composite solid is a cube of side 8 cm with a smaller cube of side 3 cm removed from one corner. Find <strong>(a)</strong> the remaining volume and <strong>(b)</strong> whether the total surface area increases, decreases, or stays the same compared to the original cube. Explain in one sentence.</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Remaining volume = big cube's volume − small cube's volume.</li>
+        <li class="clue-item"><span class="clue-num">2</span> For surface area, think about what happens at the notch: some area is removed, but new inner faces are exposed.</li>
+      </ul>
+      <textarea class="work-area" style="min-height:70px;" placeholder="(a) V = 8³ − 3³ = …&#10;(b) Explanation: …"></textarea>
+      <div class="answer-box" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(a) V = <input type="text"> cm³</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;width:100%;">(b) SA <input type="text" placeholder="increases / decreases / stays the same"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">🎲</span>
+    <h2>Part B — "At Least" Probability</h2>
+    <span class="badge badge-sand">3 Problems · ~12 min</span>
+  </div>
+  <p class="instr">"At least" means that value OR MORE. Decide which rows/outcomes count before you add anything.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Key Idea</span>
+    <span class="fml">P(at least k) = sum of outcomes ≥ k ÷ total trials</span>
+    <span class="fml">P(rare) ≈ 0.01–0.10</span>
+    <span class="fml">P(almost certain) ≈ 0.90–0.99</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <div class="fig" style="width:100%;">
+        <table style="width:100%;font-family:var(--ff-body);font-size:0.78rem;border-collapse:collapse;">
+          <tr style="background:#EFF6FF;"><td style="padding:5px 8px;font-weight:700;">Heads</td><td style="padding:5px 8px;">0</td><td style="padding:5px 8px;">1</td><td style="padding:5px 8px;background:#BFDBFE;">2</td><td style="padding:5px 8px;background:#BFDBFE;">3</td></tr>
+          <tr><td style="padding:5px 8px;font-weight:700;">Times</td><td style="padding:5px 8px;">3</td><td style="padding:5px 8px;">6</td><td style="padding:5px 8px;background:#BFDBFE;font-weight:700;">8</td><td style="padding:5px 8px;background:#BFDBFE;font-weight:700;">3</td></tr>
+        </table>
+      </div>
+      <p class="prob-q">Three coins were tossed 20 times. Using this experimental data, what is the probability of getting <strong>at least 2 heads</strong> on the next toss?</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> "At least 2" includes the 2-heads and 3-heads columns only.</li>
+        <li class="clue-item"><span class="clue-num">2</span> Add those two counts, then divide by the total number of trials (20).</li>
+      </ul>
+      <textarea class="work-area" placeholder="P(at least 2) = (8 + 3) / 20 = …"></textarea>
+      <div class="answer-box">P = <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A bag has 4 red, 3 blue, and 5 green marbles. One marble is drawn at random. What is the probability of drawing <strong>at least a blue or a green</strong> marble?</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> "At least a blue or a green" means NOT red — use the complement rule.</li>
+        <li class="clue-item"><span class="clue-num">2</span> P(not red) = 1 − P(red). Find P(red) first, then subtract from 1.</li>
+      </ul>
+      <textarea class="work-area" placeholder="P(red) = 4/12 , P(at least blue or green) = 1 − 4/12 = …"></textarea>
+      <div class="answer-box">P = <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Which of the following is the <strong>most realistic</strong> probability that a randomly chosen New York City subway ride departs within 5 minutes of its scheduled time, given how frequently trains run on weekdays?</p>
+      <div class="mc-opts" style="display:grid;grid-template-columns:1fr 1fr;gap:0.25rem 1rem;margin-top:0.3rem;">
+        <label class="mc-opt" onclick="selMC(this)" style="font-size:0.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:0.3rem;cursor:pointer;padding:0.2rem 0.4rem;border-radius:5px;border:1.5px solid transparent;"><input type="radio" name="q7" style="display:none;"><span class="bubble" style="width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;"></span><span>A) 0.01</span></label>
+        <label class="mc-opt" onclick="selMC(this)" style="font-size:0.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:0.3rem;cursor:pointer;padding:0.2rem 0.4rem;border-radius:5px;border:1.5px solid transparent;"><input type="radio" name="q7" style="display:none;"><span class="bubble" style="width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;"></span><span>B) 0.85</span></label>
+        <label class="mc-opt" onclick="selMC(this)" style="font-size:0.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:0.3rem;cursor:pointer;padding:0.2rem 0.4rem;border-radius:5px;border:1.5px solid transparent;"><input type="radio" name="q7" style="display:none;"><span class="bubble" style="width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;"></span><span>C) 0.99</span></label>
+        <label class="mc-opt" onclick="selMC(this)" style="font-size:0.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:0.3rem;cursor:pointer;padding:0.2rem 0.4rem;border-radius:5px;border:1.5px solid transparent;"><input type="radio" name="q7" style="display:none;"><span class="bubble" style="width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;"></span><span>D) 0.30</span></label>
+      </div>
+      <p class="prob-q" style="margin-top:0.6rem;font-weight:400;font-style:italic;color:var(--muted);font-size:0.78rem;">No calculation — use real-world reasoning about how common this outcome is.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">📐</span>
+    <h2>Part C — Inequality Shading &amp; Coordinate Geometry</h2>
+    <span class="badge badge-purple">2 Problems · ~10 min</span>
+  </div>
+  <p class="instr">Never trust the line alone — always test a point to confirm the direction of shading.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <div class="fig">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <line x1="10" y1="75" x2="140" y2="75" stroke="#94a3b8" stroke-width="1"/>
+          <line x1="75" y1="10" x2="75" y2="140" stroke="#94a3b8" stroke-width="1"/>
+          <line x1="20" y1="130" x2="130" y2="30" stroke="#2563EB" stroke-width="2.5"/>
+          <polygon points="20,130 130,30 130,130" fill="#BFDBFE" opacity="0.55"/>
+          <text x="55" y="120" font-family="Nunito" font-size="10" fill="#1e3a8a">shaded region</text>
+        </svg>
+      </div>
+      <p class="prob-q">The graph shows a solid boundary line with the region below-right of it shaded. Which inequality matches the shaded region if the line's equation is <strong>y = −x + 6</strong>?</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> The line is solid, so the inequality includes "or equal to."</li>
+        <li class="clue-item"><span class="clue-num">2</span> Pick a clear point inside the shaded region, like (6, 0), and test it in each candidate inequality.</li>
+        <li class="clue-item"><span class="clue-num">3</span> The correct inequality is the one that makes your test point TRUE.</li>
+      </ul>
+      <textarea class="work-area" placeholder="Test (6,0): 0 ___ −6 + 6 → …"></textarea>
+      <div class="answer-box">Inequality: y <input type="text" style="max-width:60px;"> −x + 6</div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div>
+      <div class="fig">
+        <svg width="150" height="140" viewBox="0 0 150 140">
+          <polygon points="20,120 90,10 130,120" fill="none" stroke="#B45309" stroke-width="2"/>
+          <line x1="90" y1="10" x2="90" y2="120" stroke="#B45309" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="10" y="132" font-family="Nunito" font-size="11" fill="#374151" font-weight="700">C</text>
+          <text x="85" y="6" font-family="Nunito" font-size="11" fill="#374151" font-weight="700">A</text>
+          <text x="132" y="132" font-family="Nunito" font-size="11" fill="#374151" font-weight="700">B</text>
+          <text x="93" y="132" font-family="Nunito" font-size="11" fill="#374151" font-weight="700">L</text>
+          <text x="40" y="118" font-family="Nunito" font-size="10" fill="#B45309">15 cm</text>
+          <text x="93" y="35" font-family="Nunito" font-size="10" fill="#B45309">25°</text>
+        </svg>
+      </div>
+      <p class="prob-q">In right triangle ABC (right angle at A), AL is the angle bisector of angle A, and angle B measures 25°. If CL = 15 cm, find the length of LB.</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> AL splits the 90° right angle into two 45° angles — mark both on your sketch.</li>
+        <li class="clue-item"><span class="clue-num">2</span> In right triangle ACL, you know one angle (45°) and the side opposite it (CL = 15). Use tangent to find AC.</li>
+        <li class="clue-item"><span class="clue-num">3</span> Use the Angle Bisector Theorem: AB/AC = LB/LC to solve for LB.</li>
+      </ul>
+      <textarea class="work-area" style="min-height:64px;" placeholder="tan(45°) = CL/AC → AC = … , then AB/AC = LB/15 → LB = …"></textarea>
+      <div class="answer-box">LB = <input type="text"> cm</div>
+    </div>
+
+  </div>
+
+  <!-- PART C CONTINUED: ALGEBRA -->
+  <div class="section-hd">
+    <span class="icon">✳️</span>
+    <h2>Part C Continued — Exponents &amp; Factoring</h2>
+    <span class="badge badge-green">4 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Work inside-out on nested exponents. For factoring, check for a difference of squares before anything else.</p>
+
+  <div class="prob-grid">
+
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Simplify: [(b<sup>4</sup>)<sup>−3</sup>]<sup>−1</sup> ÷ (b<sup>5</sup> · b<sup>3</sup>)</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Simplify the numerator's nested exponents first: multiply −3, −1, and 4 together.</li>
+        <li class="clue-item"><span class="clue-num">2</span> In the denominator, add exponents of the same base: 5 + 3.</li>
+        <li class="clue-item"><span class="clue-num">3</span> Divide same-base powers by subtracting exponents.</li>
+      </ul>
+      <textarea class="work-area" placeholder="Numerator: b^(4·-3·-1) = … , Denominator: b^8 , simplify …"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Which expression is equivalent to <strong>y − 16z²</strong>? (Hint: rewrite y as (√y)².)</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Rewrite y as (√y)² and 16z² as (4z)² — both terms are now perfect squares.</li>
+        <li class="clue-item"><span class="clue-num">2</span> Difference of squares factors as (first − second)(first + second).</li>
+        <li class="clue-item"><span class="clue-num">3</span> Multiply your factors back out mentally to check you land back on y − 16z².</li>
+      </ul>
+      <textarea class="work-area" placeholder="y − 16z² = (√y)² − (4z)² = (√y − 4z)(…)"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">If x³ + 2x − 3 = (x − 1)(x² + ax + b), what is the value of a + b?</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> Expand (x − 1)(x² + ax + b) fully using distribution.</li>
+        <li class="clue-item"><span class="clue-num">2</span> Line up your expansion with x³ + 2x − 3 term by term — there's no x² term on the left.</li>
+        <li class="clue-item"><span class="clue-num">3</span> Since the x² coefficient is 0, use that to solve for a, then use another matched term to solve for b.</li>
+      </ul>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Expand: x³ + (a−1)x² + (b−a)x − b&#10;Match coefficients: a−1=0 → a=… , −b=−3 → b=…"></textarea>
+      <div class="answer-box">a + b = <input type="text"></div>
+    </div>
+
+    <div class="prob">
+      <div class="prob-num">Problem 13 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Simplify: (3m²n³)² ÷ (9m³n⁴)</p>
+      <ul class="clue-list">
+        <li class="clue-item"><span class="clue-num">1</span> First apply the outer exponent to every factor inside the parentheses.</li>
+        <li class="clue-item"><span class="clue-num">2</span> Then divide coefficients and subtract exponents of matching bases.</li>
+      </ul>
+      <textarea class="work-area" placeholder="(3m²n³)² = 9m⁴n⁶ , then ÷ 9m³n⁴ = …"></textarea>
+      <div class="answer-box">Answer: <input type="text"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="sheet page-break">
+
+  <div class="section-hd">
+    <span class="icon">🧠</span>
+    <h2>Part D — Reasoning Check (No Hints)</h2>
+    <span class="badge badge-blue">4 Questions · ~10 min</span>
+  </div>
+  <p class="instr">Fresh items, mixed order, no clue lists. This is a self-check — bring your struggles to session.</p>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Mixed 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A cylinder (radius 3 in, height 9 in) has a hemisphere (same radius) removed from the top. What is the remaining volume, in terms of π?</p>
+      <textarea class="work-area" placeholder="Work here…"></textarea>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Mixed 2 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A spinner has 8 equal sections numbered 1–8. What is the probability of landing on a number that is at least 6?</p>
+      <textarea class="work-area" placeholder="Work here…"></textarea>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Mixed 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Which inequality's graph would have a dashed boundary line and shading above the line y = 2x − 1?</p>
+      <textarea class="work-area" placeholder="Work here…"></textarea>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Mixed 4 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Simplify: [(c³)⁻²]⁻¹ ÷ (c⁴ · c)</p>
+      <textarea class="work-area" placeholder="Work here…"></textarea>
+    </div>
+  </div>
+
+  <!-- ERROR LOG -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part E — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The formula or rule I need to review most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 4 · SHSAT Prep &nbsp;·&nbsp; 📦 Composite Solids &nbsp;|&nbsp; 🎲 Probability &nbsp;|&nbsp; 📐 Inequalities &amp; Algebra
+  </div>
+
+</div>
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+    l.style.background = '';
+    l.style.borderColor = 'transparent';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.style.background = '#e5e7eb';
+  label.style.borderColor = '#374151';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+    l.style.background = '';
+    l.style.borderColor = 'transparent';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
