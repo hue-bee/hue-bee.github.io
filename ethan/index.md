@@ -1,4 +1,4 @@
-### 🍁 Ethan - CAT SHSAT 9th Grade
+### 🍁 Ethan - CAT SHSAT
 
 ![Level](https://img.shields.io/badge/level-beginner%20to%20advanced-brightgreen)
 ![Updated](https://img.shields.io/badge/updated-2026-lightyellow)
