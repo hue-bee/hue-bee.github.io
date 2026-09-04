@@ -1,8 +1,6 @@
 # SHSAT Grade 9 Outline — Fall 2026 Testing
 ### For current 9th graders competing for 10th-grade seats (entry September 2027)
 
----
-
 ## 1. What Makes the Grade 9 Test Different
 
 The Grade 9 form is a **superset of the Grade 8 form**: same two sections, same length, same timing, same adaptive delivery — but the content assumes a full additional year of school.
@@ -17,8 +15,6 @@ The Grade 9 form is a **superset of the Grade 8 form**: same two sections, same 
 | Cutoff scores | Lower | Substantially higher and far more volatile year to year |
 
 **Strategic reality:** because seats are scarce, the qualifying score can swing wildly. Recent Grade 9 lowest-qualifying scores include Stuyvesant 562 (2025), 572 (2024), 575 (2023); Bronx Science 525 (2025) but 650 (2024); Staten Island Tech 572 (2025) versus 524 (2024). Plan for a near-perfect performance, not for a historical average.
-
----
 
 ## 2. Format at a Glance (Fall 2026)
 
@@ -36,8 +32,6 @@ The Grade 9 form is a **superset of the Grade 8 form**: same two sections, same 
 | Navigation (Math) | Forward-only |
 | Navigation (ELA) | Review allowed only inside a passage set until submitted; stand-alone items forward-only |
 | Item types | Multiple choice (4 options), grid-in numeric entry, and technology-enhanced items — drag-and-drop, multiple-select, inline drop-downs, number-line and graph interactions |
-
----
 
 ## 3. Mathematics (50 questions)
 
@@ -96,8 +90,6 @@ Same five official domains as the Grade 8 form, but questions may assume complet
 - **Memorize the formulas.** Nothing is supplied. Area, perimeter, circumference, volume, surface area, distance, slope, exponent rules, and vocabulary such as *parallel* and *perpendicular* must be automatic.
 - **Rehearse the Equation Editor.** Grid-in responses are typed through an on-screen palette; practice entering fractions, radicals, parentheses, exponents, and the multiplication dot under time.
 
----
-
 ## 4. English Language Arts (50 questions)
 
 Aligned to the NYS Next Generation ELA Standards, with passages and revising tasks pitched at a higher reading level than the Grade 8 form. Three question families.
@@ -153,8 +145,6 @@ A single sentence, a short list of sentences, or a brief numbered paragraph.
 ### 4.4 On-Screen Tools
 Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, bookmark (within a passage set only), pop-up definitions, and the Equation Editor in Math.
 
----
-
 ## 5. Strategy for the Adaptive Grade 9 Test
 
 1. The opening item or passage set is average difficulty; each answer re-estimates the score and sets what comes next, so early accuracy determines the difficulty path for the rest of the section.
@@ -165,8 +155,6 @@ Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, bookm
 6. Because Grade 9 cutoffs sit near the top of the scale, the practical target is close to zero avoidable errors. Error-log every miss by cause: content gap, misread, careless arithmetic, or timing.
 7. Rehearse in the actual interface through the NYC SHSAT Portal — the Student Readiness Tool tutorial plus the full-length online practice tests.
 
----
-
 ## 6. Logistics and Accommodations
 
 - **Registration** runs through the student's school counselor or the MySchools dashboard. Test tickets, showing date, time, and location, post roughly two weeks after the registration deadline.
@@ -176,8 +164,6 @@ Highlighter, answer eliminator, notepad, digital pencil, line-reader mask, bookm
 - **English Language Learners and eligible former ELLs** receive 360 minutes with two 15-minute breaks after the first 180, translated directions in 12 languages, translated ELA footnotes, and paper bilingual glossaries.
 - **IEP and 504 accommodations** are delivered through the platform; paper exams are reserved for students whose approved accommodations require them.
 - **Test View:** students who test in fall 2026 may sign up to review their exam in spring 2027 after scores are released.
-
----
 
 ## 7. Suggested Prep Sequence
 
