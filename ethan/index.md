@@ -5,9 +5,7 @@
 
 
 [2026 SHSAT Outline](https://hue-bee.github.io/ethan/outline)  
-  
-[2026 SHSAT Out](https://hue-bee.github.io/ethan/plan/)  
-  
+
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
