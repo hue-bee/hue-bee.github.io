@@ -9,5 +9,5 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **01** | [TBD](https://hue-bee.github.io/lucas/lessons/01) | [1 Homework](https://hue-bee.github.io/lucas/lessons/01/homework) ||
+| **01** | [Diagnose It, Then Fix One Thing at a Time](https://hue-bee.github.io/lucas/lessons/01) | [1 Homework](https://hue-bee.github.io/lucas/lessons/01/homework) ||
 
