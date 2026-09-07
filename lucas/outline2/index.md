@@ -41,6 +41,7 @@ Given the parent's explicit notes on processing speed, focus, and forgetting, ev
 - New content should be chunked into 10-15 minute blocks with a change of activity or format (e.g., worked example, then timed mini-drill, then a game-style check) to sustain focus.
 - Every math or grammar rule should be tied to a concrete, repeatable "trigger phrase" or mnemonic Lucas can recall instantly under adaptive-test pressure, since he cannot revisit standalone items once submitted.
 - Incorporate light personal interest hooks (Minecraft resource ratios for proportion problems, piano-timing analogies for pacing drills, Animal Farm-based passages for reading practice) to increase engagement without diluting rigor.
+
 ## Phase 1 (Weeks 1-3, Sept 8 – Sept 28): Diagnostic Consolidation and Foundational Repair
 The first phase re-establishes fluency in the specific sub-skills where the diagnostic data shows the weakest raw accuracy, while introducing CAT-specific pacing habits early so they become automatic well before test day.
 
