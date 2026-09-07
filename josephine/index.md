@@ -13,5 +13,5 @@
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Diagnostic Debrief & Error Autopsy](https://hue-bee.github.io/josephine/lessons/01) | [1 Homework](https://hue-bee.github.io/josephine/lessons/01/homework) ||
 | **02** | [Connecting Info to Purpose & Geometry — Angles](https://hue-bee.github.io/josephine/lessons/02) | [2 Homework](https://hue-bee.github.io/josephine/lessons/02/homework) ||
-| **03** | [ELA: Structure Maps & Geometry: Area, Perimeter, Coordinate Plane](https://hue-bee.github.io/josephine/lessons/03) | [2 Homework](https://hue-bee.github.io/josephine/lessons/03/homework) ||
+| **03** | [ELA: Structure Maps & Geometry: Area, Perimeter, Coordinate Plane](https://hue-bee.github.io/josephine/lessons/03) | [3 Homework](https://hue-bee.github.io/josephine/lessons/03/homework) ||
 
