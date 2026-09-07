@@ -1,1 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 3: ELA Organization/Structure &amp; Geometry — Area, Perimeter, Coordinate Plane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --e1:#3E5C9A; --e1-soft:rgba(62,92,154,0.10);
+  --e2:#7A5C9E; --e2-soft:rgba(122,92,158,0.10);
+  --e3:#9A5C6A; --e3-soft:rgba(154,92,106,0.10);
+  --m1:#1D7A5C; --m1-soft:rgba(29,122,92,0.10);
+  --m2:#B45309; --m2-soft:rgba(180,83,9,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+.prob-text{font-size:0.95rem;color:var(--ink);font-weight:600;line-height:1.55;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--m1);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--m1);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--m1);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow:hidden;max-height:0;opacity:0;transition:max-height 0.3s ease,opacity 0.3s ease;}
+.pip-panel.open{max-height:calc(100vh - 110px);opacity:1;overflow-y:auto;}
+.pip-panel-inner{padding:1rem 1.1rem;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.pip-panel-title{font-family:var(--font-display);font-weight:700;font-size:0.85rem;color:var(--ink);}
+.pip-close-btn{background:none;border:none;font-size:0.9rem;color:var(--ink-3);cursor:pointer;}
+.pip-mini-formula{font-family:var(--font-math);font-weight:700;font-size:0.78rem;color:var(--m1);background:var(--m1-soft);border-radius:8px;padding:0.45rem 0.6rem;margin-bottom:0.6rem;line-height:1.4;}
+.pip-mini-card{border:1px solid rgba(201,212,228,0.45);border-radius:10px;padding:0.5rem 0.65rem;margin-bottom:0.5rem;}
+.pip-mini-lvl{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:14px;}
+.pip-mini-title{font-weight:700;font-size:0.78rem;color:var(--ink);margin-top:0.25rem;}
+.pip-mini-body{font-size:0.75rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.45;}
+.pip-mini-trap{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:10px;padding:0.5rem 0.65rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.78rem;color:#3D3D3D;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:24px;padding:6px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--e1);"></span> Session 3 · Phase I–II
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.1rem,5.5vw,3.7rem);">Week 3 <br><span style="color:var(--e1);">ELA: Structure Maps &amp; Geometry: Area, Perimeter, Coordinate Plane</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:500;color:var(--ink-2);margin:0.7rem 0 0.4rem;">ELA 0:00–0:25 &nbsp;·&nbsp; Math 0:25–0:50 &nbsp;·&nbsp; Editing Warm-Up 0:50–0:60</h2>
+    <p class="reveal" style="font-size:0.82rem;color:var(--ink-3);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem;">SHSAT Prep · Sharpest Decline Repair (57% &#8594; 14%)</p>
+    <div class="reveal" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--e1-soft);color:var(--e1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Structure Maps</span>
+      <span style="background:var(--m1-soft);color:var(--m1);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Area &amp; Perimeter</span>
+      <span style="background:var(--m2-soft);color:var(--m2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Coordinate Plane</span>
+      <span style="background:var(--e2-soft);color:var(--e2);border-radius:20px;padding:6px 15px;font-size:0.8rem;font-weight:600;">Grammar Warm-Up</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:00–0:05</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Warm-Up · The Steepest Drop<span class="tag hot">57% &#8594; 14%</span></div>
+          <div class="tl-b">Organization/Structure fell harder than any other ELA skill on the diagnostics. <em>Today we build a tool so you never have to hold the whole passage in your head.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e1);">
+        <div class="tl-time">0:05–0:25</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Structure Maps</div>
+          <div class="tl-b">Sketch a 4–6 box flowchart of how a passage is built. <em>Answer structure questions by pointing at boxes, not re-reading the whole passage.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--m1);">
+        <div class="tl-time">0:25–0:38</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Area &amp; Perimeter — Rectangles, Triangles, Circles</div>
+          <div class="tl-b">Every shape has an outside (perimeter) and an inside (area). <em>Build your own formula sheet instead of memorizing someone else's.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--m2);">
+        <div class="tl-time">0:38–0:50</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card"><div class="tl-h">Coordinate Plane — Distance &amp; Midpoint</div>
+          <div class="tl-b">A grid turns distance into a right-triangle problem. <em>Count boxes before you memorize a formula.</em></div></div>
+      </div>
+      <div class="tl-row" style="--rc:var(--e2);">
+        <div class="tl-time">0:50–0:60</div>
+        <div class="tl-rail"><div class="tl-dot"></div></div>
+        <div class="tl-card" style="margin-bottom:0;"><div class="tl-h">Timed Editing Warm-Up<span class="tag cool">3x/Week Habit Starts</span></div>
+          <div class="tl-b">A quick 10-minute grammar drill (commas, sentence combining) — the first rep of the 3x/week Writing-recovery cadence.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — WARM UP: WHY THIS MATTERS -->
+<div class="slide" data-slide="3" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Warm-Up · The Diagnosis</div>
+    <h2 class="slide-title reveal">Why Structure Questions <span class="tint">Feel So Slippery</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+      <div class="socratic reveal">
+        <div class="socratic-title">Think first</div>
+        <div class="socratic-body">If a question asks "how is this passage organized?", do you need to remember EVERY sentence, or just the big JOB each paragraph is doing? What's the smallest amount of information you'd need to answer that question correctly?</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this matters</div>
+        <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Organization/Structure accuracy dropped from 57.14 percent to 14.29 percent — one of the sharpest declines in the whole profile. That's not a knowledge gap; it's a memory-load problem. A structure map fixes it by turning "remember everything" into "read a diagram."</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.9rem;">
+      <div class="trap-title">Your Habit Target</div>
+      <div class="trap-body">Before answering ANY structure question, sketch the map first — even a messy one. The map is the answer key; the passage is just where you found the pieces.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — STRUCTURE MAPS CONCEPT -->
+<div class="slide" data-slide="4" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Structure Maps<span class="tag hot">Sharpest Decline</span></div>
+    <h2 class="slide-title reveal">A Structure Map Is a <span class="tint">Blueprint of the Passage's Logic</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">A passage opens with a claim, gives one example that seems to disagree, explains why it actually doesn't, then restates the claim. If you had to draw this as 4 boxes with arrows, what would each box say — and would the boxes be about IDEAS or about DETAILS?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">Every box gets a JOB, not a summary</div>
+          <div class="math" style="font-size:1.0rem;">Claim &#8594; Counter-Example &#8594; Rebuttal &#8594; Conclusion</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="270" height="190" viewBox="0 0 270 190" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="120" height="36" rx="9" fill="#DCEBFB" stroke="#3E5C9A" stroke-width="2"/>
+  <text x="18" y="33" font-size="11" font-weight="700" fill="#3E5C9A" font-family="Nunito, sans-serif">1. Claim</text>
+  <rect x="140" y="10" width="120" height="36" rx="9" fill="#F3E7F5" stroke="#7A5C9E" stroke-width="2"/>
+  <text x="148" y="33" font-size="11" font-weight="700" fill="#7A5C9E" font-family="Nunito, sans-serif">2. Counter-Example</text>
+  <path d="M130 28 L140 28" stroke="#4a4a4a" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="140" y="70" width="120" height="36" rx="9" fill="#EFDDE0" stroke="#9A5C6A" stroke-width="2"/>
+  <text x="148" y="93" font-size="11" font-weight="700" fill="#9A5C6A" font-family="Nunito, sans-serif">3. Rebuttal</text>
+  <path d="M200 46 L200 70" stroke="#4a4a4a" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="10" y="70" width="120" height="36" rx="9" fill="#E8F7EC" stroke="#1D7A5C" stroke-width="2"/>
+  <text x="18" y="93" font-size="11" font-weight="700" fill="#1D7A5C" font-family="Nunito, sans-serif">4. Conclusion</text>
+  <path d="M140 88 L130 88" stroke="#4a4a4a" stroke-width="2" marker-end="url(#a1)"/>
+  <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+  <text x="10" y="140" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">Each box = one JOB the paragraph does,</text>
+  <text x="10" y="158" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">not a detail summary of what it says.</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — STRUCTURE MAPS PRACTICE 1 -->
+<div class="slide" data-slide="5" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Practice, Set 1</div>
+    <h2 class="slide-title reveal">Structure Maps — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">A story goes: introduce character &#8594; character faces a problem &#8594; character solves it. Sketch this as 3 boxes. What job does the middle box do?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">A nonfiction passage: state a problem &#8594; describe two failed solutions &#8594; describe the solution that finally worked. How many boxes does this map need, and what's in the last one?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">A question asks: "Which paragraph most directly sets up the contrast developed in paragraph 4?" Using a structure map, do you scan every paragraph again, or check which earlier box the arrow to Box 4 comes from?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">A passage has 6 paragraphs, but paragraphs 2 and 3 do the SAME job (both give supporting examples for paragraph 1's claim). How many boxes should your map have — 6, or fewer? Why?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: One Box Per Paragraph Isn't the Rule</div>
+      <div class="trap-body">Structure questions test the passage's LOGIC, not its paragraph count. Multiple paragraphs doing the same job collapse into one box; one paragraph doing two jobs can split into two boxes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — STRUCTURE MAPS PRACTICE 2 -->
+<div class="slide" data-slide="6" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">Zone 1 · Practice, Set 2</div>
+    <h2 class="slide-title reveal">Naming the Box — <span class="tint">Harder Structure Calls</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A passage's map is: Myth &#8594; Evidence Against Myth &#8594; Explanation of Why Myth Persists &#8594; Call to Action. A question asks why the author includes a paragraph about why people still believe the myth. Which box answers this, and what's the box's job in one phrase?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A fiction passage's map is: Setting &#8594; Conflict Introduced &#8594; Rising Tension &#8594; Turning Point &#8594; Resolution. Which two boxes would a question about "the moment the story's outcome becomes clear" most likely target?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">A passage compares two scientific theories throughout, going back and forth: Theory A &#8594; Theory B &#8594; Theory A again &#8594; Theory B again &#8594; Synthesis. Is this passage organized by TIME, by CONTRAST, or by something else — and how would you draw that on a map that isn't a straight line?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">Two students map the SAME passage differently — one has 4 boxes, one has 6. Both get every structure question right. What does this tell you about whether there's one "correct" map?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Confusing "What Happens" with "What Job It Does"</div>
+      <div class="trap-body">A box label like "the fire happens" describes an event, not a job. A better label is "conflict escalates" — it tells you WHY that paragraph exists in the passage's argument or story.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — AREA/PERIMETER CONCEPT -->
+<div class="slide" data-slide="7" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Area &amp; Perimeter</div>
+    <h2 class="slide-title reveal">Perimeter Is the <span class="tint">Fence; Area Is the Lawn</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">If you walk around the OUTSIDE edge of a rectangular yard, are you measuring perimeter or area? If you're covering the INSIDE with sod, which one is that? Now: does a circle have a "perimeter," or does it get a special name?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">Build it yourself — don't just memorize it</div>
+          <div class="math" style="font-size:1.0rem;">Rectangle: P=2l+2w, A=lw &nbsp;·&nbsp; Triangle: A=&#189;bh &nbsp;·&nbsp; Circle: C=2&#960;r, A=&#960;r&#178;</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.7rem;">
+          <div class="win-title">Why this is the clever way</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">"Perimeter" and "circumference" are both just "distance around the outside" — one word for straight-sided shapes, one for circles. If you remember that ONE idea, you never have to guess which formula measures what.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="260" height="190" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="20" width="140" height="90" fill="#E8F7EC" stroke="#1D7A5C" stroke-width="4"/>
+  <text x="55" y="70" font-size="13" font-weight="700" fill="#1D7A5C" font-family="Nunito, sans-serif">AREA</text>
+  <text x="30" y="128" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">Inside = lw (the "lawn")</text>
+  <text x="30" y="146" font-size="11" fill="#B45309" font-family="Nunito, sans-serif">Border = 2l+2w (the "fence")</text>
+  <text x="20" y="12" font-size="10" fill="#B45309" font-family="Nunito, sans-serif">&#8594; the outline (perimeter)</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — AREA/PERIMETER PRACTICE 1 -->
+<div class="slide" data-slide="8" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice, Set 1</div>
+    <h2 class="slide-title reveal">Area &amp; Perimeter — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">A rectangle has length 9 and width 4. Write the formula first, then find the perimeter AND the area.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">A triangle has base 10 and height 6. Write the area formula, then compute. Why does the formula have a &#189; in it — what shape would you get WITHOUT the &#189;?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">A circle has radius 7. Find its circumference and its area (leave answers in terms of &#960;). Which formula uses r once, and which one uses it squared — and why does that make sense given what area measures?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">A rectangular garden has a perimeter of 36 feet and a length of 12 feet. Set up the perimeter formula and solve for the width first — then find the area.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Diameter vs. Radius</div>
+      <div class="trap-body">Circle problems love to give you the diameter and hope you plug it straight into a formula that needs the radius. Always write "r = d &#247; 2" as your very first step when a diameter appears.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — AREA/PERIMETER PRACTICE 2 (COMPOSITE) -->
+<div class="slide" data-slide="9" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div>
+    <div class="kicker reveal">Zone 2 · Practice, Set 2</div>
+    <h2 class="slide-title reveal">Composite Shapes — <span class="tint">Break It Into Pieces</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div class="diagram-wrap reveal">
+        <svg width="240" height="170" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="20" width="120" height="80" fill="#DCEBFB" stroke="#3E5C9A" stroke-width="2"/>
+  <path d="M140 20 L200 60 L140 100 Z" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/>
+  <text x="55" y="65" font-size="11" font-weight="700" fill="#3E5C9A" font-family="Nunito, sans-serif">Rectangle</text>
+  <text x="150" y="65" font-size="10" font-weight="700" fill="#B45309" font-family="Nunito, sans-serif">Triangle</text>
+  <text x="15" y="130" font-size="11" font-weight="700" fill="#4a4a4a" font-family="Nunito, sans-serif">Total area = rectangle + triangle</text>
+  <text x="15" y="148" font-size="11" fill="#4a4a4a" font-family="Nunito, sans-serif">Split first, solve each piece, then add.</text>
+</svg>
+      </div>
+      <div>
+        <div class="prob-card reveal">
+          <div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-3">Level 3</span></div>
+          <div class="prob-text">A figure is a 12-by-8 rectangle with a right triangle (base 6, height 8) attached to one side, as shown. What's the total area? Which piece do you compute first, and does it matter?</div>
+          <div class="work-box" style="margin-top:0.5rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;margin-top:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A square lawn (side 10) has a circular fountain (radius 2) cut out of the middle. What is the remaining lawn area? What operation connects the two shapes — adding or subtracting?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">A running track is a rectangle (length 40, width 20) with a semicircle (radius 10) attached to each short end. What's the total perimeter of the track? Do the two semicircles combine into one full circle's circumference, or two separate arcs?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Cut-Out Shapes Subtract, Attached Shapes Add</div>
+      <div class="trap-body">A fountain removed FROM a lawn subtracts area. A triangle attached TO a rectangle adds area. Always ask "is this piece INSIDE (remove it) or ADDED ON (include it)?" before combining formulas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — COORDINATE PLANE CONCEPT -->
+<div class="slide" data-slide="10" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Coordinate Plane</div>
+    <h2 class="slide-title reveal">Distance on a Grid Is Just <span class="tint">a Hidden Right Triangle</span></h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">Two points share the same row or same column on a grid. Can you find the distance between them just by counting boxes? Now two points DON'T share a row or column — what shape do you get if you connect them with a horizontal leg and a vertical leg?</div>
+        </div>
+        <div class="formula-box reveal">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ink-2);margin-bottom:0.3rem;">Two grid tools, both from counting</div>
+          <div class="math" style="font-size:1.0rem;">Same row/column: count boxes &nbsp;·&nbsp; Diagonal: count legs, then Pythagorean theorem</div>
+        </div>
+        <div class="win-card reveal" style="margin-top:0.7rem;">
+          <div class="win-title">Why this is the clever way</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">The SHSAT's coordinate questions rarely need the full distance formula memorized — most give you nice grid points where you can literally count the horizontal and vertical legs, then just apply <span class="math-inline">a&#178;+b&#178;=c&#178;</span>.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="180" x2="220" y2="180" stroke="#B9C6D9" stroke-width="1.2"/>
+  <line x1="20" y1="10" x2="20" y2="180" stroke="#B9C6D9" stroke-width="1.2"/>
+  <circle cx="40" cy="160" r="4" fill="#3E5C9A"/>
+  <text x="30" y="176" font-size="10" fill="#3E5C9A" font-family="Nunito, sans-serif">(2,2)</text>
+  <circle cx="180" cy="40" r="4" fill="#B45309"/>
+  <text x="150" y="32" font-size="10" fill="#B45309" font-family="Nunito, sans-serif">(8,7)</text>
+  <line x1="40" y1="160" x2="180" y2="160" stroke="#1D7A5C" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="90" y="175" font-size="10" font-weight="700" fill="#1D7A5C" font-family="Nunito, sans-serif">leg a = 6</text>
+  <line x1="180" y1="160" x2="180" y2="40" stroke="#1D7A5C" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="185" y="105" font-size="10" font-weight="700" fill="#1D7A5C" font-family="Nunito, sans-serif">leg b = 5</text>
+  <line x1="40" y1="160" x2="180" y2="40" stroke="#9A5C6A" stroke-width="2.4"/>
+  <text x="60" y="90" font-size="10" font-weight="700" fill="#9A5C6A" font-family="Nunito, sans-serif">c = ?</text>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — COORDINATE PLANE PRACTICE -->
+<div class="slide" data-slide="11" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div>
+    <div class="kicker reveal">Zone 3 · Practice</div>
+    <h2 class="slide-title reveal">Coordinate Plane — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">Point A is at (2, 3) and point B is at (2, 9). What's the distance between them? Do you need the Pythagorean theorem here — why or why not?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-1">Level 1</span></div>
+        <div class="prob-text">Point C is at (1, 4) and point D is at (7, 4). Find the midpoint by counting boxes along the row — what point sits exactly between them?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Point E is at (1, 1) and point F is at (4, 5). Count the horizontal leg and the vertical leg first, then use <span class="math-inline">a&#178;+b&#178;=c&#178;</span> to find the distance.</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-2">Level 2</span></div>
+        <div class="prob-text">Point G is at (&#8722;3, 2) and point H is at (1, 2). What's the distance? What does a negative x-coordinate change about how you count boxes?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-3">Level 3</span></div>
+        <div class="prob-text">A square is plotted with two of its corners at (0, 0) and (0, 6). If the square's area is 36, where could the other two corners be? Sketch it — what does the side length have to be?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">21</span><span class="lvl-badge lvl-4">Level 4</span></div>
+        <div class="prob-text">Point J is the midpoint of segment KL. K is at (2, 3) and J is at (5, 8). Where is point L? What operation "undoes" a midpoint calculation?</div>
+        <div class="work-box" style="margin-top:0.6rem;"><textarea placeholder="Work here…" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: Mixing Up Which Coordinate Changes</div>
+      <div class="trap-body">When points share the same y-coordinate, the DISTANCE lives in the x-coordinates (and vice versa). Circle the coordinate that's identical first — that tells you which numbers to subtract.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — MIXED GEOMETRY CHECK -->
+<div class="slide" data-slide="12" style="--zc:#17233B;--zs:rgba(23,35,59,0.08);">
+  <div class="content">
+    <div class="kicker reveal">Geometry · Wrap-Up Check</div>
+    <h2 class="slide-title reveal">Name the Tool <span class="tint">Before You Reach for a Formula</span></h2>
+    <div class="socratic reveal" style="margin-bottom:0.8rem;">
+      <div class="socratic-title">Think about it</div>
+      <div class="socratic-body">The SHSAT often mixes area, perimeter, and coordinate questions in the same set. Before writing anything, ask: "is this asking about the OUTSIDE of a shape, the INSIDE of a shape, or the DISTANCE between two points on a grid?"</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;">
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Skill</span><span class="lvl-badge lvl-1">Perimeter</span></div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:0.3rem;">The outside</div>
+        <div class="prose" style="font-size:0.82rem;">Add up every side, or use 2&#960;r for circles. Units are always linear (feet, cm — never squared).</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Skill</span><span class="lvl-badge lvl-2">Area</span></div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:0.3rem;">The inside</div>
+        <div class="prose" style="font-size:0.82rem;">Multiply the two dimensions that define the flat space. Units are always squared.</div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-head"><span class="prob-num">Skill</span><span class="lvl-badge lvl-3">Coordinate</span></div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:0.3rem;">Count first, then compute</div>
+        <div class="prose" style="font-size:0.82rem;">Same row/column: just count. Diagonal: count both legs, then Pythagorean theorem.</div>
+      </div>
+    </div>
+    <div class="win-card reveal" style="margin-top:0.8rem;">
+      <div class="win-title">The self-made formula sheet</div>
+      <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Before next week, write out all six formulas from today (rectangle P &amp; A, triangle A, circle C &amp; A, distance/midpoint) on one card in your own handwriting. Writing it yourself is what makes it stick — a printed sheet doesn't.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — EDITING WARM-UP -->
+<div class="slide" data-slide="13" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div>
+    <div class="kicker reveal">Zone 4 · Timed Editing Warm-Up<span class="tag cool">3x/Week Habit Starts</span></div>
+    <h2 class="slide-title reveal">10 Minutes, <span class="tint">One Rule at a Time</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal" style="margin-bottom:0.8rem;">
+          <div class="socratic-title">Think about it</div>
+          <div class="socratic-body">"After the game, the team, celebrated at the diner." Is there a comma error here — and if so, is the problem an EXTRA comma or a MISSING one? What's the rule about commas after introductory phrases versus commas splitting a subject from its verb?</div>
+        </div>
+        <div class="info-card reveal">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--ink);">Today's two rules on watch</div>
+          <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">1) Introductory phrases get ONE comma after them, not a comma splitting subject from verb. 2) Two complete sentences joined without a conjunction need a semicolon, comma+conjunction, or period — never just a comma alone.</div>
+        </div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-title">Why this is the clever way</div>
+        <div class="prose" style="font-size:0.85rem;margin-top:0.2rem;">Writing/Editing dropped from 90 percent to 40 percent — likely rust, not a knowledge gap. Naming ONE specific rule per error (not just "that sounds wrong") is what turns a guess into a skill that survives under time pressure.</div>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:0.8rem;">
+      <div class="trap-title">SHSAT Trap: "It Sounds Right" Isn't a Rule</div>
+      <div class="trap-body">If you can't name the specific comma or sentence rule being tested, you're guessing by ear — which is exactly how a strong 90 percent score can slip. Name the rule, every time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 — CLOSE -->
+<div class="slide" data-slide="14" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;">Map It, Split It, Count It — <span class="tint">Lock in the Habits</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-top:0.8rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Error Log Update</div>
+        <div class="tl-b">Every miss today gets categorized: skipped drawing a structure map, added instead of subtracted a cut-out shape, mixed up which coordinate carries the distance, or missed a comma rule by ear.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Confidence Win</div>
+        <div class="tl-b">Organization/Structure was the sharpest ELA decline on the diagnostics. A working structure map today is real, visible repair — not just a guess that happened to land.</div>
+      </div>
+      <div class="tl-card reveal" style="margin-bottom:0;">
+        <div class="tl-h">Keep Practicing</div>
+        <div class="tl-b">Between now and next session: sketch a structure map on any passage you read, and write your own formula sheet in your own handwriting before Week 4.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- PIP: Check Your Work floating panel (visible on every slide) -->
+<button class="pip-toggle-btn" id="pipToggleBtn" onclick="togglePip()" aria-label="Toggle Check Your Work picture-in-picture">
+  <span class="pip-dot"></span> Check Your Work
+</button>
+<div class="pip-panel" id="pipPanel">
+  <div class="pip-panel-inner">
+    <div class="pip-panel-header">
+      <span class="pip-panel-title">Check Your Work</span>
+      <button class="pip-close-btn" onclick="togglePip()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="pip-mini-formula">Rectangle: P=2l+2w, A=lw &#8594; Circle: C=2&#960;r, A=&#960;r&#178; &#8594; Right triangle: a&#178;+b&#178;=c&#178;</div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-1">Structure Maps</span>
+      <div class="pip-mini-title">One Box, One Job</div>
+      <div class="pip-mini-body">Label each box with the JOB a chunk of the passage does (claim, counter-example, rebuttal), not a summary of what it says.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-2">Area &amp; Perimeter</span>
+      <div class="pip-mini-title">Fence vs. Lawn</div>
+      <div class="pip-mini-body">Perimeter/circumference = outside distance (linear units). Area = inside space (squared units). Composite shapes: add attached pieces, subtract cut-outs.</div>
+    </div>
+    <div class="pip-mini-card">
+      <span class="pip-mini-lvl lvl-3">Coordinate Plane</span>
+      <div class="pip-mini-title">Count the Legs First</div>
+      <div class="pip-mini-body">Same row/column: just count boxes. Diagonal: count horizontal and vertical legs, then apply the Pythagorean theorem.</div>
+    </div>
+    <div class="pip-mini-trap">
+      <div class="pip-mini-trap-title">Watch For</div>
+      <div class="pip-mini-body">Diameter vs. radius mix-ups, adding instead of subtracting a cut-out shape, and picking a comma "by ear" instead of naming the rule.</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 14</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Structure Maps',t:'0:05',c:'var(--e1)'},
+  {n:'Area & Perimeter',t:'0:25',c:'var(--m1)'},
+  {n:'Coordinate Plane',t:'0:38',c:'var(--m2)'},
+  {n:'Editing Warm-Up',t:'0:50',c:'var(--e2)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  panel.classList.toggle('open');
+}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
