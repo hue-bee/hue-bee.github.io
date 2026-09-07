@@ -19,6 +19,7 @@ Three format changes directly affect how Lucas should train:
 - **Passage-set flexibility remains.** Within a single reading-comprehension or revising/editing passage, he can move between questions tied to that passage until he leaves the set — so passage-level time management (not individual-question time management) is the real skill to build for ELA.
 - **Difficulty responds to performance in real time**, meaning two students who get the same raw number correct can land on different scaled scores depending on how difficult the questions they reached were; sustained accuracy streaks matter more than previously, since early mistakes route him toward easier (lower-scoring) items.
 - **Technology-enhanced items (TEIs)** — drag-and-drop reordering, multiple-select (no partial credit), inline dropdowns, and number-line/graph click interactions — now appear alongside standard multiple choice and require dedicated practice since they are unfamiliar interaction formats.
+
 ## Target Score Context
 Cutoff scores are set retroactively based on that year's applicant pool and are not published in advance, but recent-cycle data provides a useful planning benchmark. Given Lucas's current combined trajectory (382 to 430 across two minitests), a realistic and motivating interim goal is closing the gap toward the Brooklyn Latin School range (approximately 495) or HSAS/Brooklyn Tech range (approximately 505-510), while keeping Beacon and Bard (which use separate, non-SHSAT admissions processes) as parallel goals.
 
@@ -78,8 +79,10 @@ The final stretch prioritizes retention and confidence over new content, consist
 - One final half-length timed section (25 questions) around November 12-13 to confirm pacing instincts are intact.
 - A relaxed final session on November 16 or 17 focused on test-day logistics: confirming the November 18, 2026 test date and location, reviewing what to bring, and a short confidence-building review of his strongest skills to end on a high note.
 - Reward planning: use the boba tea outing Lucas enjoys as a post-test celebration to reduce pre-test anxiety framing.
+
 ## Parallel Track: Beacon and Bard Essay Support
 Since Eunhee has also requested support for Beacon and Bard Bard High School Early College admissions, this track should run in parallel, not sequentially, using shorter dedicated blocks (20-30 minutes) every 1-2 weeks so it does not compete with SHSAT prep time. Beacon's application requires a written essay response via its own application portal, and Bard's Early College assessment includes a timed writing/essay component within its academic assessment day. Given Lucas's love of *Animal Farm* and Minecraft, brainstorming sessions should mine these genuine interests for authentic essay material rather than generic topics, since both schools value voice and reflective thinking over polish. A realistic essay-track timeline is: brainstorming and topic selection by early October, first full draft by late October, and revision rounds through mid-November, checked in briefly during existing sessions to avoid overloading Lucas's attention span.
+
 ## Weekly Session Structure Recommendation
 Given the family's initial single-session trial before committing to recurring sessions, the ideal cadence — once confirmed — is two 60-minute sessions per week (one math-heavy, one ELA-heavy) plus light independent practice (15-20 minutes, 3-4 days per week) assigned between sessions to reinforce retention without overwhelming his focus capacity. If only one weekly session is confirmed, alternate math and ELA emphasis week-to-week while keeping a brief warm-up review of the other subject each time so neither skill set decays.
 
