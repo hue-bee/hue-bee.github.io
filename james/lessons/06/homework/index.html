@@ -1,1 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5A Homework: Ratios, Proportions & Conversions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#2563EB; --blue-lt:#EFF6FF; --blue-md:#BFDBFE;
+  --coral:#F97066; --coral-lt:#FFF1F0;
+  --sand:#D4A574; --sand-lt:#FDF3E7;
+  --green:#16a34a; --green-lt:#DCFCE7;
+  --purple:#7c3aed; --purple-lt:#EDE9FE;
+  --ink:#0f172a; --slate:#334155; --muted:#64748b; --border:#CBD5E1;
+  --bg:#F8FAFF; --white:#FFFFFF;
+  --ff-head:'Baloo 2',sans-serif; --ff-body:'Nunito',sans-serif;
+}
+html{background:#e2e8f0;}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+@media print{
+  input,textarea{border-color:#cbd5e1 !important;background:white !important;}
+  input[type=radio]{accent-color:#000 !important;}
+  textarea{resize:none !important;}
+  [contenteditable]{border-bottom:1px solid #cbd5e1;}
+  html{background:white;}
+  body{max-width:100%;padding:0;}
+  .no-print{display:none !important;}
+  .page-break{page-break-before:always;}
+  .sheet{box-shadow:none !important;margin:0 !important;border-radius:0 !important;padding:1.2cm 1.5cm !important;}
+}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,0.10);border-radius:16px;}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.4rem;gap:1rem;flex-wrap:wrap;}
+.hw-header-left h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:700;color:var(--blue);line-height:1.1;}
+.hw-header-left .subtitle{font-size:0.85rem;color:var(--muted);font-weight:600;margin-top:0.2rem;text-transform:uppercase;letter-spacing:0.05em;}
+.hw-meta{display:flex;flex-direction:column;gap:0.35rem;min-width:220px;}
+.hw-meta-row{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--slate);font-weight:600;}
+.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:1px 7px;font-size:0.73rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;min-width:65px;text-align:center;}
+.hw-meta-row input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;}
+.section-hd{display:flex;align-items:center;gap:0.55rem;margin:1.5rem 0 0.8rem;}
+.section-hd .icon{font-size:1.25rem;}
+.section-hd h2{font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--ink);}
+.section-hd .badge{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:2px 9px;border-radius:20px;margin-left:auto;}
+.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md);}
+.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5;}
+.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86efac;}
+.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd;}
+.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d;}
+.instr{font-size:0.8rem;color:var(--muted);font-style:italic;margin-bottom:0.9rem;padding:0.35rem 0.75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;}
+.lvl{display:inline-block;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:0.3rem;}
+.lvl-1{background:#EDF2F9;color:#3D4C63;}
+.lvl-2{background:#d9d9d9;color:#1f2937;}
+.lvl-3{background:#bdbdbd;color:#111827;}
+.lvl-4{background:#6b7280;color:#ffffff;}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+.prob-grid.single{grid-template-columns:1fr;}
+.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:0.75rem 0.9rem;position:relative;width:100%;}
+.prob-num{font-family:var(--ff-head);font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;}
+.prob-q{font-size:0.84rem;color:var(--ink);font-weight:600;line-height:1.55;margin-bottom:0.5rem;}
+.prob-q strong{color:#374151;}
+.math-inline{font-family:var(--ff-body);font-weight:700;}
+.answer-box{margin-top:0.5rem;display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;font-weight:700;color:var(--slate);}
+.answer-box input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;}
+.work-area{width:100%;resize:vertical;min-height:56px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:0.35rem 0.55rem;font-family:var(--ff-body);font-size:0.78rem;color:var(--ink);box-sizing:border-box;outline:none;margin-top:0.4rem;}
+.work-area::placeholder{color:var(--muted);font-style:italic;}
+hr.divider{border:none;border-top:2px dashed var(--border);margin:1.6rem 0;}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:0.9rem 1.1rem;background:var(--coral-lt);margin-top:0.5rem;}
+.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:0.55rem;}
+.error-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.error-table th{background:var(--coral);color:white;font-family:var(--ff-head);font-weight:600;padding:0.35rem 0.6rem;text-align:left;font-size:0.75rem;}
+.error-table th:first-child{border-radius:6px 0 0 0;}
+.error-table th:last-child{border-radius:0 6px 0 0;}
+.error-table td{padding:0.45rem 0.6rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:white;font-weight:500;}
+.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center;}
+.error-table tr:last-child td{border-bottom:none;}
+.error-type-pills{display:flex;gap:0.4rem;flex-wrap:wrap;font-size:0.73rem;margin-top:0.55rem;}
+.pill{padding:2px 10px;border-radius:20px;font-weight:700;border:1.5px solid;}
+.pill-cg{background:#fee2e2;color:#b91c1c;border-color:#fca5a5;}
+.pill-ce{background:#fef9c3;color:#92400e;border-color:#fde68a;}
+.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd;}
+.reflect-box{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:0.8rem 1rem;margin-top:1rem;}
+.reflect-box h3{font-family:var(--ff-head);font-size:0.9rem;font-weight:700;color:var(--green);margin-bottom:0.45rem;}
+.reflect-lines{display:flex;flex-direction:column;gap:0.6rem;margin-top:0.3rem;}
+.reflect-line{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--slate);font-weight:600;}
+.reflect-line input[type=text]{flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.8rem;color:var(--ink);background:transparent;outline:none;padding:1px 6px;}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:white;border-radius:10px;padding:0.7rem 1.2rem;margin-bottom:1.4rem;flex-wrap:wrap;gap:0.5rem;}
+.score-banner .title{font-family:var(--ff-head);font-size:1.1rem;font-weight:700;}
+.score-banner .sub{font-size:0.78rem;opacity:0.85;}
+.score-cells{display:flex;gap:0.6rem;flex-wrap:wrap;}
+.score-cell{background:rgba(255,255,255,0.15);border-radius:8px;padding:0.3rem 0.75rem;text-align:center;min-width:80px;}
+.score-cell .sc-val{font-family:var(--ff-head);font-size:1.1rem;font-weight:700;}
+.score-cell .sc-lbl{font-size:0.65rem;opacity:0.8;text-transform:uppercase;letter-spacing:0.04em;}
+.score-cell input{width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;}
+.formula-strip{display:flex;gap:0.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:0.6rem 0.9rem;margin-bottom:0.9rem;align-items:center;}
+.formula-strip .fs-label{font-size:0.72rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:0.05em;margin-right:0.3rem;}
+.fml{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:0.2rem 0.6rem;font-size:0.78rem;font-weight:700;color:#1e3a8a;font-family:var(--ff-head);}
+.print-btn{display:block;width:fit-content;margin:0 auto 1rem;background:var(--blue);color:white;font-family:var(--ff-head);font-size:1rem;font-weight:600;padding:0.55rem 1.6rem;border:none;border-radius:30px;cursor:pointer;box-shadow:0 3px 10px rgba(37,99,235,0.3);transition:background 0.2s;}
+.print-btn:hover{background:#1d4ed8;}
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>Week 5A Homework</h1>
+      <div class="subtitle">Ratios, Proportions &amp; Conversions &middot; SHSAT Prep</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" placeholder=""></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work &mdash; bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="12" placeholder="/12"></div><div class="sc-lbl">Conversions &amp; Rates</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="6" placeholder="/6"></div><div class="sc-lbl">Similar Figures</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="10" placeholder="/10"></div><div class="sc-lbl">Mastery Check</div></div>
+      <div class="score-cell"><div class="sc-val"><input type="number" min="0" max="28" placeholder="/28"></div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+
+  <!-- PART A: CONVERSION DIRECTION -->
+  <div class="section-hd"><span class="icon">🧭</span><h2>Part A: Conversion Direction</h2><span class="badge badge-blue">6 Problems &middot; 12 min</span></div>
+  <p class="instr">Write the unit fraction first. Check that the unwanted unit cancels &mdash; that tells you multiply or divide.</p>
+  <div class="formula-strip">
+    <span class="fs-label">Rule</span>
+    <span class="fml">Write units as a fraction &mdash; if it doesn't cancel, flip it</span>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">1 meter = 100 centimeters. A ribbon is 350 centimeters long. How many meters is that?</p>
+      <textarea class="work-area" placeholder="Set up the unit fraction so cm cancels..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">1 gallon = 4 quarts. A container holds 18 quarts. How many gallons is that?</p>
+      <textarea class="work-area" placeholder="Which direction does the unit fraction point?"></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">1 pound = 16 ounces. A recipe needs 2.5 pounds of flour. How many ounces should you measure?</p>
+      <textarea class="work-area" placeholder="Bigger unit to smaller unit -- multiply or divide?"></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">On planet Kelvo, 1 zorp = 0.6 tabs. You have 9 zorps and need the answer in tabs. Which operation gets you there?</p>
+      <textarea class="work-area" placeholder="Write 9 zorps &times; (1 tab / 0.6 zorps)..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">1 hour = 60 minutes, and 1 minute = 60 seconds. A show is 7,200 seconds long. How many hours is that? Chain two unit fractions.</p>
+      <textarea class="work-area" placeholder="Which unit needs to cancel in the middle step?"></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">On planet Kelvo, 1 nix = 1.4 dabs, and 1 dab = 0.25 vims. You have 20 nixes and need the answer in vims. Name the Wrong-Direction trap answer choice before solving.</p>
+      <textarea class="work-area" placeholder="Chain the fractions, check both cancellations..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: UNIT RATES & FRACTIONS -->
+  <div class="section-hd"><span class="icon">💰</span><h2>Part B: Unit Rates &amp; Fractions</h2><span class="badge badge-sand">6 Problems &middot; 15 min</span></div>
+  <p class="instr">Ask: is this number the FULL amount, or a piece of it? Rebuild the whole before you divide by hours or units.</p>
+  <div class="formula-strip">
+    <span class="fs-label">Method</span>
+    <span class="fml">1. Is this the whole or a piece?</span>
+    <span class="fml">2. Add back what was removed</span>
+    <span class="fml">3. THEN divide</span>
+  </div>
+
+  <div class="prob-grid single">
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Compute <span class="math-inline">45 &divide; (3/4)</span>. Before calculating &mdash; will the answer be bigger or smaller than 45? Now solve.</p>
+      <textarea class="work-area" placeholder="Dividing by a fraction less than 1..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A tutor earns <strong>$280</strong> after a <strong>$40</strong> platform fee is subtracted, across an 8-hour week. What was her hourly rate BEFORE the fee? Rebuild the whole first.</p>
+      <textarea class="work-area" placeholder="Let full amount = 280 + 40..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Compute <span class="math-inline">72 &divide; (6/5)</span>. Two things happen at once here &mdash; estimate first: is the answer bigger or smaller than 72, and by about what factor? Then compute exactly.</p>
+      <textarea class="work-area" placeholder="Estimate, then solve exactly..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Two snack bags are for sale: a small bag has 3 cups for $4.50, and a large bag has 7 cups for $9.80. Which bag is the better unit rate per cup, and by how much per cup?</p>
+      <textarea class="work-area" placeholder="Find price per cup for each bag..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A freelancer's paycheck shows <strong>$540</strong> after a <strong>10% platform fee</strong> was already subtracted, for 30 hours of work. Find the hourly rate BEFORE the fee. Careful &mdash; this is a reverse-percent, not a simple add-back.</p>
+      <textarea class="work-area" placeholder="Set up: 0.90 &times; full amount = 540..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A worker's take-home pay is <strong>$399</strong> after <strong>$56</strong> is deducted for taxes and a <strong>$21</strong> uniform fee, across a 25-hour week. What is the hourly rate BEFORE any deductions?</p>
+      <textarea class="work-area" placeholder="Add back BOTH deductions before dividing..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART C: SIMILAR FIGURES -->
+  <div class="section-hd"><span class="icon">📐</span><h2>Part C: Similar Figures</h2><span class="badge badge-purple">6 Problems &middot; 15 min</span></div>
+  <p class="instr">State which quantity you're scaling BEFORE you pick the exponent. Perimeter scales once, area scales twice.</p>
+  <div class="formula-strip">
+    <span class="fs-label">Rule</span>
+    <span class="fml">Perimeter ratio = k &nbsp;&middot;&nbsp; Area ratio = k&sup2;</span>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 13 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Two similar squares have a side ratio of 1:5. If the small square's area is 4, what is the big square's area? Which power of 5 do you need?</p>
+      <textarea class="work-area" placeholder="k = 5, area ratio = k&sup2;..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 14 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Similar rectangles C and D have perimeters 20 and 60. What is the side ratio, and if rectangle C's area is 15, what is rectangle D's area?</p>
+      <textarea class="work-area" placeholder="Find k from perimeters first..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 15 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Two similar hexagons have areas 5 and 80. What is the ratio of their perimeters? Work backwards &mdash; find k from the area ratio first.</p>
+      <textarea class="work-area" placeholder="Area ratio = k&sup2; = 80/5, solve for k..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 16 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A small model boat has a sail with area 2 square feet; the real boat's sail area is 128 times bigger. What linear scale factor was used, and how many times longer is the real mast than the model's mast?</p>
+      <textarea class="work-area" placeholder="Area ratio 128 = k&sup2; -- solve for k..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 17 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Two similar triangles have a side ratio of 2:7. The small triangle's perimeter is 18 and its area is 24. Find BOTH the big triangle's perimeter AND its area. Label which rule you used for each.</p>
+      <textarea class="work-area" placeholder="Perimeter uses k, area uses k&sup2;..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 18 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A garden design is scaled up so its area increases by a factor of 225. A trap answer choice multiplies the fence length (perimeter) by 225 too. Explain why that's wrong, then find the correct perimeter scale factor.</p>
+      <textarea class="work-area" placeholder="225 = k&sup2; -- solve for k, then explain the trap..."></textarea>
+      <div class="answer-box">Answer <input type="text"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+  <!-- MASTERY CHECK -->
+  <div class="section-hd"><span class="icon">🎯</span><h2>Mastery Check &mdash; Gate 9/10</h2><span class="badge badge-green">10 Mixed Problems</span></div>
+  <p class="instr">Work all 10 at test pace. Every item counts only if the final line answers exactly what was asked.</p>
+
+  <div class="prob-grid">
+    <div class="prob"><p class="prob-q">1. 1 yard = 3 feet. Convert 27 feet to yards.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">2. Compute <span class="math-inline">36 &divide; (2/3)</span>.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">3. 1 kilometer = 1,000 meters. Convert 4.5 km to meters.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">4. A worker takes home $310 after a $50 deduction, over a 15-hour week. Find the hourly rate before the deduction.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">5. Two similar figures have a side ratio of 1:4. Small area = 9. Find the big area.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">6. Similar triangles have perimeters 12 and 30. Find the side ratio.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">7. 1 liter = 1,000 milliliters. Convert 2,300 mL to liters.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">8. Compute <span class="math-inline">50 &divide; (5/2)</span>. Is the result bigger or smaller than 50?</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">9. Two similar polygons have areas 6 and 54. Find the ratio of their perimeters.</p><div class="answer-box">Answer <input type="text"></div></div>
+    <div class="prob"><p class="prob-q">10. A snack mix uses chips to pretzels in a 5:3 ratio. If a batch has 20 cups of chips, how many cups of pretzels?</p><div class="answer-box">Answer <input type="text"></div></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ERROR LOG -->
+  <div class="section-hd"><span class="icon">🚩</span><h2>Error Log</h2><span class="badge badge-coral">Required &mdash; Every Missed Problem</span></div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest &mdash; this helps target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">CG = Content Gap (I didn't know how)</span>
+      <span class="pill pill-ce">CE = Careless Error (I knew it but slipped)</span>
+      <span class="pill pill-ru">RU = Rushing (I didn't read carefully)</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead><tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>Weekly Reflection (2&ndash;3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest math mistake this week was: <input type="text" placeholder=""></div>
+      <div class="reflect-line">I made this error because it was a: <input type="text" placeholder="Content Gap / Careless / Rushing"></div>
+      <div class="reflect-line">The rule I need to review most is: <input type="text" placeholder=""></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder=""></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Week 5A &middot; SHSAT Prep &nbsp;&nbsp;|&nbsp;&nbsp; Conversion Direction &nbsp;&nbsp;|&nbsp;&nbsp; Unit Rates &nbsp;&nbsp;|&nbsp;&nbsp; Similar Figures
+  </div>
+</div>
+
+<script>
+function clearAll(){
+  if(!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el=>el.value='');
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent='\u00a0');
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('textarea').forEach(ta=>{
+    ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});
+  });
+});
+</script>
+</body>
+</html>
