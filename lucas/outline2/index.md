@@ -1,5 +1,3 @@
-# Test Prep
-
 ## Student Profile and Diagnostic Summary
 Lucas Schrader is an 8th-grade student preparing for the Specialized High Schools Admissions Test (SHSAT), with additional support needed for Beacon and Bard Early College admissions essays. His parent, Eunhee, reports that Lucas processes information more slowly than peers, has difficulty sustaining focus, and tends to forget previously learned material without repeated reinforcement — meaning the study plan below is built around short, high-repetition, low-fatigue sessions rather than long content dumps. He responds best to warm, humorous, structured instruction, and has shown stronger gains under male teachers in the past year, though this is not a strict requirement. Motivational hooks available for engagement include Minecraft, boba tea outings as rewards, classical piano (Rachmaninoff), and his favorite novel, *Animal Farm* — all of which can be woven into example sentences, word problems, or session pacing incentives.
 ### Score History and Trend Analysis
