@@ -86,18 +86,3 @@ Given the family's initial single-session trial before committing to recurring s
 | 4-6 | Geometry, statistics, literary comprehension, pacing drills | Weekly mini-simulations begin week 5 |
 | 7-9 | Full-length simulations, error-pattern correction | Two full CAT-style practice tests |
 | 10-11 | Taper, review, logistics | Half-length timed check, confidence review |
-
----
-
-## References
-
-1. Handbook1920A_ELA-1-Feb-13th-_240.pdf
-2. Handbook1920A_MATH-1-March-27-_186.pdf
-3. image1.jpg
-4. image0.jpg
-5. image2.jpg
-6. image3.jpg
-7. image4.jpg
-8. student.txt
-9. minitest-3-May-4th.pdf
-10. [2026 SHSAT Goes Adaptive: What Changes, How to Prep](https://shsprep.com/blog/shsat-2026-adaptive-test-guide)
