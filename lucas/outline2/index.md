@@ -31,6 +31,7 @@ Cutoff scores are set retroactively based on that year's applicant pool and are 
 | Mid | Staten Island Tech, HSAS | 507-527 |
 | Accessible | Brooklyn Tech | 500-510 |
 | Realistic near-term target | Brooklyn Latin | 481-497 |
+
 ## Diagnostic Reading of the Attached Practice Materials
 Review of the ELA Handbook sample (Form A) confirms the two ELA sub-skills Lucas must master: Revising/Editing (Questions 1-9, testing sentence-combining, comma placement, subject-verb agreement, and paragraph-level argument construction) and Reading Comprehension (Questions 10-57, six passages spanning informational/nonfiction and narrative texts, e.g., "Cracking the Code" and "A Miracle Mile"). The Math Handbook sample (Form A) shows the breadth of topics tested: simple interest, order of operations with grouping symbols, angle relationships with parallel/perpendicular lines, linear equations, ratios and proportions, mean/statistics, percent word problems, and multi-step word problems combining several operations. Since Lucas's raw math score gain (6/25 to 12/25) occurred with heavy topic coverage, the study plan below sequences math by recurring SHSAT sub-domains rather than randomly, so repeated exposure reinforces retention given his noted tendency to forget material.
 ## Guiding Principles for Session Design
