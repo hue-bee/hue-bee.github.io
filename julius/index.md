@@ -23,5 +23,5 @@
 | **10** | [Algebra: Inequalities](https://hue-bee.github.io/julius/lesson10) | [10 Homework](https://hue-bee.github.io/julius/lesson10/homework) |[Set 1](https://hue-bee.github.io/julius/lesson10/sets) |
 | **11** | [Revising/Editing & Inequalities](https://hue-bee.github.io/julius/lesson11) | [11 Homework](https://hue-bee.github.io/julius/lesson11/homework) | |
 | **12** | [ELA: Revising/Editing 2 & Algebra: Plug-Ins](https://hue-bee.github.io/julius/lesson12) | [12 Homework](https://hue-bee.github.io/julius/lesson12/homework) | |
-
+| |  |  | |
 | **14** | [What the Numbers Say](https://hue-bee.github.io/julius/lesson14) | [14 Homework](https://hue-bee.github.io/julius/lesson14/homework) | |
