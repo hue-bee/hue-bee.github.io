@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oren — Homework: Digital SHSAT Diagnostic Follow-Up</title>
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Lexend', sans-serif;
+    --ff-body: 'Lexend', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta { display: flex; flex-direction: column; gap: 0.35rem; min-width: 220px; }
+  .hw-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+  .hw-meta-row .label {
+    background: var(--blue-lt); color: var(--blue); border-radius: 4px; padding: 1px 7px;
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 65px; text-align: center;
+  }
+  .section-hd { display: flex; align-items: center; gap: 0.55rem; margin: 1.5rem 0 0.8rem; }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 { font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .section-hd .badge {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 20px; margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+  .instr {
+    font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem; background: var(--blue-lt); border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .lvl {
+    display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+  .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 0.9rem; position: relative; }
+  .prob-num {
+    font-family: var(--ff-head); font-size: 0.72rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem;
+  }
+  .prob-q { font-size: 0.84rem; color: var(--ink); font-weight: 600; line-height: 1.55; margin-bottom: 0.5rem; }
+  .prob-q strong { color: #374151; }
+  .answer-box { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+  .answer-line { border-bottom: 1.5px solid var(--border); flex: 1; min-height: 1.2rem; }
+  .ans-input {
+    flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);
+    font-size:0.82rem;font-weight:700;color:var(--ink);background:transparent;outline:none;padding:1px 6px;
+  }
+  .work-area {
+    width: 100%; resize: vertical; min-height: 56px; border: 1.5px dashed var(--border); border-radius: 6px;
+    background: white; padding: 0.35rem 0.55rem; font-family: var(--ff-body); font-size: 0.78rem; color: var(--ink);
+    box-sizing: border-box; outline: none; margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+  hr.divider { border: none; border-top: 2px dashed var(--border); margin: 1.6rem 0; }
+  .passage-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .passage-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+  .passage-text { font-size: 0.82rem; line-height: 1.72; color: var(--slate); column-count: 2; column-gap: 1.4rem; }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+  .mc-q { margin-bottom: 1rem; padding: 0.7rem 0.85rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; }
+  .mc-q-text { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.5; }
+  .mc-q-text .qnum { font-family: var(--ff-head); color: var(--blue); margin-right: 0.3rem; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
+  .mc-opt {
+    font-size: 0.79rem; color: var(--slate); display: flex; align-items: flex-start; gap: 0.3rem;
+    line-height: 1.45; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 5px;
+    border: 1.5px solid transparent; transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px; border: 1.5px solid var(--border); border-radius: 50%;
+    margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800;
+  }
+  .error-log { border: 2px solid var(--coral); border-radius: 10px; padding: 0.9rem 1.1rem; background: var(--coral-lt); margin-top: 0.5rem; }
+  .error-log h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; color: #c2410c; margin-bottom: 0.55rem; }
+  .error-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .error-table th { background: var(--coral); color: white; font-family: var(--ff-head); font-weight: 600; padding: 0.35rem 0.6rem; text-align: left; font-size: 0.75rem; }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #fca5a5; color: var(--slate); background: white; font-weight: 500; }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.73rem; margin-top: 0.55rem; }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .reflect-box { background: var(--green-lt); border: 1.5px solid #86efac; border-radius: 10px; padding: 0.8rem 1rem; margin-top: 1rem; }
+  .reflect-box h3 { font-family: var(--ff-head); font-size: 0.9rem; font-weight: 700; color: var(--green); margin-bottom: 0.45rem; }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--slate); font-weight: 600; }
+  .reflect-line input[type=text] {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border); font-family: var(--ff-body); font-size: 0.8rem;
+    color: var(--ink); background: transparent; outline: none; padding: 1px 6px;
+  }
+  .score-banner {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-radius: 10px;
+    padding: 0.7rem 1.2rem; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.3rem 0.75rem; text-align: center; min-width: 80px; }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .formula-strip {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--blue-lt); border: 1.5px solid var(--blue-md);
+    border-radius: 10px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; align-items: center;
+  }
+  .formula-strip .fs-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.3rem; }
+  .fml { background: white; border: 1.5px solid var(--blue-md); border-radius: 7px; padding: 0.2rem 0.6rem; font-size: 0.78rem; font-weight: 700; color: #1e3a8a; font-family: var(--ff-head); }
+  .cat-box {
+    background: var(--sand-lt); border: 1.5px solid #fcd34d; border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 0.9rem;
+  }
+  .cat-box h3 { font-family: var(--ff-head); font-size: 0.92rem; font-weight: 700; color: #92400e; margin-bottom: 0.4rem; }
+  .cat-box ul { padding-left: 1.1rem; font-size: 0.82rem; color: var(--slate); line-height: 1.7; }
+  .print-btn {
+    display: block; width: fit-content; margin: 0 auto 1rem; background: var(--blue); color: white;
+    font-family: var(--ff-head); font-size: 1rem; font-weight: 600; padding: 0.55rem 1.6rem; border: none;
+    border-radius: 30px; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.3); transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
 
+<div class="no-print" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;">
+  <button class="print-btn" onclick="window.print()" style="margin:0;">🖨️ Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="sheet">
+
+  <div class="hw-header">
+    <div class="hw-header-left">
+      <h1>💻 Oren's Homework</h1>
+      <div class="subtitle">Digital CAT Diagnostic Follow-Up &nbsp;·&nbsp; SHSAT Prep, Fall 2026</div>
+    </div>
+    <div class="hw-meta">
+      <div class="hw-meta-row"><span class="label">Name</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;"></div>
+      <div class="hw-meta-row"><span class="label">Date</span><input type="text" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;"></div>
+    </div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom!</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Digital CAT reminder -->
+  <div class="cat-box">
+    <h3>💻 Digital CAT Format Reminder</h3>
+    <ul>
+      <li>Computer-adaptive — you must answer before advancing, and you <strong>cannot go back</strong> once you move past a math or standalone ELA question.</li>
+      <li>Use scrap paper for every problem — even on-screen problems need off-screen work.</li>
+      <li>Budget roughly <strong>1.8 minutes per question</strong>. If stuck past two minutes, eliminate and commit.</li>
+    </ul>
+  </div>
+
+  <!-- PART A: RATIOS, PERCENTS & PROPORTIONS -->
+  <div class="section-hd">
+    <span class="icon">🔢</span>
+    <h2>Part A — Ratios, Percents &amp; Proportions</h2>
+    <span class="badge badge-blue">4 Problems · ~12 min</span>
+  </div>
+  <p class="instr">Translate before you calculate: known info → what's asked → one equation. Show ALL work.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Reminders</span>
+    <span class="fml">Percent change ≠ additive</span>
+    <span class="fml">Stack: multiply factors</span>
+    <span class="fml">Ratio → set up a proportion</span>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A trail mix recipe uses nuts and raisins in a ratio of <strong>3:4</strong>. If a batch contains <strong>18 cups of nuts</strong>, how many cups of raisins are needed?</p>
+      <textarea class="work-area" placeholder="Set up the proportion: 3/4 = 18/x …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"> cups</div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A laptop's price is discounted <strong>15%</strong>, then the sale price is discounted another <strong>20%</strong>. If the original price was <strong>$600</strong>, what is the final price?</p>
+      <textarea class="work-area" placeholder="Apply each discount to the current price, not the original …"></textarea>
+      <div class="answer-box">Answer: $<input type="text" class="ans-input"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A school's enrollment increased from <strong>420</strong> students to <strong>483</strong> students. What was the <strong>percent increase</strong>?</p>
+      <textarea class="work-area" placeholder="Percent change = (new − old) ÷ old × 100 …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"> %</div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A shirt originally costs <strong>$45</strong>. It is marked up <strong>20%</strong>, then later put on clearance at <strong>30% off</strong> the marked-up price. Is the clearance price higher or lower than the original $45, and by how much?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Step 1: marked-up price. Step 2: clearance price. Step 3: compare to $45 …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: EQUATIONS & INEQUALITIES -->
+  <div class="section-hd">
+    <span class="icon">⚖️</span>
+    <h2>Part B — Equations &amp; Inequalities</h2>
+    <span class="badge badge-sand">3 Problems · ~9 min</span>
+  </div>
+  <p class="instr">Remember: dividing or multiplying both sides by a negative number flips the inequality sign.</p>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: &nbsp;<strong>4x − 9 = 2x + 11</strong></p>
+      <textarea class="work-area" placeholder="Get all x terms on one side …"></textarea>
+      <div class="answer-box">x = <input type="text" class="ans-input"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: &nbsp;<strong>-5x + 12 ≥ 32</strong></p>
+      <textarea class="work-area" placeholder="Isolate x — watch the sign when dividing by a negative …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A rope-jumping club charges a <strong>$25</strong> sign-up fee plus <strong>$8</strong> per session. A second club charges no sign-up fee but <strong>$12</strong> per session. After how many sessions does the first club become cheaper overall?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Set up two cost expressions and an inequality comparing them …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"> sessions</div>
+    </div>
+  </div>
+
+</div><!-- /sheet 1 -->
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+
+  <!-- PART C: PROBABILITY, STATISTICS & PACING -->
+  <div class="section-hd">
+    <span class="icon">🎲</span>
+    <h2>Part C — Probability &amp; Statistics</h2>
+    <span class="badge badge-green">3 Problems · ~10 min</span>
+  </div>
+  <p class="instr">List outcomes carefully before computing probability. Don't guess the total — count it.</p>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Two fair six-sided dice are rolled. What is the probability that the sum of the two dice is exactly <strong>9</strong>?</p>
+      <div class="fig">
+        <svg width="140" height="80" viewBox="0 0 140 80">
+          <rect x="10" y="15" width="50" height="50" rx="8" fill="#f5f5f5" stroke="#374151" stroke-width="2"/>
+          <text x="35" y="45" text-anchor="middle" font-family="Lexend" font-weight="700" font-size="16" fill="#374151">?</text>
+          <text x="70" y="45" text-anchor="middle" font-family="Lexend" font-weight="700" font-size="18" fill="#6b7280">+</text>
+          <rect x="80" y="15" width="50" height="50" rx="8" fill="#f5f5f5" stroke="#374151" stroke-width="2"/>
+          <text x="105" y="45" text-anchor="middle" font-family="Lexend" font-weight="700" font-size="16" fill="#374151">?</text>
+          <text x="70" y="76" text-anchor="middle" font-family="Lexend" font-size="10" fill="#6b7280">sum = 9</text>
+        </svg>
+      </div>
+      <textarea class="work-area" placeholder="List the outcomes that sum to 9, then count total possible outcomes …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A bag contains <strong>5 red</strong>, <strong>3 blue</strong>, and <strong>2 green</strong> marbles. If one marble is drawn at random, what is the probability it is <strong>not blue</strong>?</p>
+      <textarea class="work-area" placeholder="Find total marbles, then probability of the complement …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">The mean of five test scores is <strong>84</strong>. Four of the scores are <strong>78, 90, 85, and 82</strong>. What is the fifth score?</p>
+      <textarea class="work-area" style="min-height:64px;" placeholder="Mean × count = sum. Subtract the known four scores …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART D: TIMED PRACTICE -->
+  <div class="section-hd">
+    <span class="icon">⏱️</span>
+    <h2>Part D — Timed Practice (No Going Back!)</h2>
+    <span class="badge badge-coral">2 Problems · ~4 min</span>
+  </div>
+  <p class="instr">Set a timer for 4 minutes. Once you write an answer, do NOT erase it — simulate the CAT's "no return" rule.</p>
+
+  <div class="prob-grid">
+    <div class="prob">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A store marks up a <strong>$50</strong> item by <strong>40%</strong>, then later discounts the new price by <strong>25%</strong>. What is the final price?</p>
+      <textarea class="work-area" placeholder="Work here — no erasing once written!"></textarea>
+      <div class="answer-box">Answer: $<input type="text" class="ans-input"></div>
+    </div>
+    <div class="prob">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Solve for <strong>x</strong>: &nbsp;<strong>-2(3x − 5) &lt; 4x + 22</strong></p>
+      <textarea class="work-area" placeholder="Distribute first, then isolate x …"></textarea>
+      <div class="answer-box">Answer: <input type="text" class="ans-input"></div>
+    </div>
+  </div>
+
+</div><!-- /sheet 2 -->
+
+<!-- PAGE 3 — ELA + ERROR LOG -->
+<div class="sheet page-break">
+
+  <!-- PART E: GRAMMAR & EDITING -->
+  <div class="section-hd">
+    <span class="icon">✏️</span>
+    <h2>Part E — Revising &amp; Editing</h2>
+    <span class="badge badge-purple">3 Questions · ~7 min</span>
+  </div>
+  <p class="instr">Strip out distraction clauses mentally to test subject-verb agreement before choosing an answer.</p>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> Choose the correction: "The group of scientists, who have studied the reef for a decade, presents their findings tomorrow." <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>A) No error — the sentence is correct as written.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>B) ...who have studied the reef for a decade, present their findings tomorrow.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>C) ...who has studied the reef for a decade, presents their findings tomorrow.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q1"><span class="bubble"></span><span>D) ...who have studied the reef for a decade, presenting their findings tomorrow.</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> Choose the best revision: "Neither the coach nor the players was aware that practice had been cancelled." <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>A) ...nor the players were aware that practice had been cancelled.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>B) ...nor the players was aware that practice has been cancelled.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>C) No change is needed.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q2"><span class="bubble"></span><span>D) ...nor the players is aware that practice had been cancelled.</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> Which sentence contains a pronoun-antecedent error? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>A) Each of the interns submitted their report by Friday.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>B) The interns submitted their reports by Friday.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>C) Every intern submitted his or her report by Friday.</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q3"><span class="bubble"></span><span>D) The team submitted its report by Friday.</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART F: READING COMPREHENSION -->
+  <div class="section-hd">
+    <span class="icon">📖</span>
+    <h2>Part F — Reading Comprehension</h2>
+    <span class="badge badge-blue">6 Questions · ~15 min</span>
+  </div>
+  <p class="instr">Predict an answer from the passage before looking at the choices. Watch for half-right "trap" answers.</p>
+
+  <div class="passage-box">
+    <div class="passage-title">The Adaptive Advantage: Why Computer Testing Changes the Game</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> When the SHSAT moved from a paper-and-pencil format to a computer-adaptive test, many students assumed the content itself had changed. It had not. <span class="sw">However</span>, the way the test responds to a student's performance changed dramatically. On a paper test, every student answers the exact same fixed set of questions in the exact same order, and any student can skip a hard question and return to it later. A computer-adaptive test, or CAT, works differently: the difficulty of the next question depends on whether the previous one was answered correctly.</p>
+      <p><span class="para-lbl">[¶2]</span> This adaptive design has real consequences for strategy. Because each answer shapes the questions that follow, and because a student generally cannot revisit questions after moving forward, a wrong guess early on can route a test-taker toward an easier — and lower-scoring — path for the remainder of the section. <span class="sw">As a result</span>, test-prep experts increasingly emphasize accuracy on early questions over simple speed, since early mistakes carry outsized weight in an adaptive system.</p>
+      <p><span class="para-lbl">[¶3]</span> Some students find this pressure discouraging, imagining that one slip could ruin their entire score. That fear, <span class="sw">in contrast</span> to what intuition suggests, is somewhat overstated. Adaptive scoring algorithms are built to account for occasional errors and to estimate ability across many questions, not just one. A single missed question rarely derails a strong overall performance, provided the test-taker settles down and continues answering carefully.</p>
+      <p><span class="para-lbl">[¶4]</span> What the CAT format truly rewards is a specific kind of test-taking discipline: verifying an answer before submitting it, using scrap paper for every calculation, and resisting the urge to leave a question blank simply because time feels short. Since the test will not allow a return trip, the habits that mattered on paper — like skipping around — must be replaced with habits suited to a one-way street.</p>
+      <p><span class="para-lbl">[¶5]</span> For a student like Oren, preparing to take the digital SHSAT in November, the lesson is less about memorizing new content and more about rehearsing a new rhythm: read carefully, commit to an answer with confidence, and move forward without looking back.</p>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> What is the author's <strong>primary purpose</strong> in this passage? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>A) To criticize the switch from paper to digital testing</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>B) To explain how the adaptive format changes test-taking strategy</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>C) To describe the history of standardized testing</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q4"><span class="bubble"></span><span>D) To argue that computer tests are easier than paper tests</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> In ¶2, the phrase <span class="sw">"As a result"</span> signals that what follows is: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>A) A contrast to the previous sentence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>B) A consequence of the previous sentence</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>C) A definition of a new term</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q5"><span class="bubble"></span><span>D) An example unrelated to the claim</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> According to ¶3, why is the fear of "one slip ruining the whole score" somewhat overstated? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>A) The test allows students to redo missed questions later</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>B) Adaptive algorithms estimate ability across many questions, not just one</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>C) Most students never make any mistakes on the CAT</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q6"><span class="bubble"></span><span>D) Wrong answers are not counted at all in adaptive scoring</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> The author's tone toward Oren in ¶5 is best described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>A) Dismissive — implying the format doesn't matter much</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>B) Encouraging — framing preparation as rehearsing a rhythm, not memorizing new content</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>C) Critical — suggesting Oren is unprepared for the test</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q7"><span class="bubble"></span><span>D) Neutral — presenting facts with no judgment</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> Which statement best describes how the author organizes the passage across all five paragraphs? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>A) Chronological order of testing history</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>B) Explain the change → its consequence → address a fear → recommend habits → personal application</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>C) Problem → cause → effect → solution → conclusion</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q8"><span class="bubble"></span><span>D) A single extended comparison of paper vs. digital tests</span></label>
+    </div>
+  </div>
+
+  <div class="mc-q">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> A student claims: <em>"The passage argues that speed matters more than accuracy on the CAT."</em> Is this claim supported, partially supported, or contradicted by ¶2? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>A) Supported — ¶2 says speed is the top priority</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>B) Partially supported — ¶2 mentions both speed and accuracy equally</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>C) Contradicted — ¶2 explicitly says experts emphasize accuracy over simple speed</span></label>
+      <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q9"><span class="bubble"></span><span>D) Irrelevant — ¶2 does not discuss speed or accuracy</span></label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART G: ERROR LOG -->
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part G — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reflect-box">
+    <h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+    <div class="reflect-lines">
+      <div class="reflect-line">My biggest Math mistake this week was <input type="text" placeholder="…"></div>
+      <div class="reflect-line">I made this error because it was a <input type="text" placeholder="…"> (Content Gap / Careless / Rushing)</div>
+      <div class="reflect-line">The digital CAT habit I need to practice most is <input type="text" placeholder="…"></div>
+      <div class="reflect-line">One thing I want to ask my tutor about in session: <input type="text" placeholder="…"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);font-weight:600;">
+    Digital CAT Diagnostic Follow-Up · SHSAT Prep &nbsp;|&nbsp; 🔢 Ratios/Percents/Equations/Probability &nbsp;|&nbsp; 📖 ELA: Grammar &amp; Reading Comprehension
+  </div>
+
+</div><!-- /sheet 3 -->
+
+<script>
+function selMC(label) {
+  const group = label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  label.classList.add('selected');
+  label.querySelector('.bubble').textContent = '✓';
+  label.querySelector('input[type=radio]').checked = true;
+}
+function clearAll() {
+  if (!confirm('Clear all answers?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('.mc-opt').forEach(l => {
+    l.classList.remove('selected');
+    l.querySelector('.bubble').textContent = '';
+  });
+  document.querySelectorAll('[contenteditable]').forEach(el => el.textContent = '\u00a0');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+});
+</script>
+</body>
+</html>
