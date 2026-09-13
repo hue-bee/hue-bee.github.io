@@ -1,1 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 10: ELA Revising/Editing 2 & Algebra Plug-Ins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --e1:#3E5C9A; --e1-soft:rgba(62,92,154,0.10);
+  --e2:#7A5C9E; --e2-soft:rgba(122,92,158,0.10);
+  --e3:#9A5C6A; --e3-soft:rgba(154,92,106,0.10);
+  --m1:#1D7A5C; --m1-soft:rgba(29,122,92,0.10);
+  --m2:#B45309; --m2-soft:rgba(180,83,9,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+.prob-text{font-size:0.95rem;color:var(--ink);font-weight:600;line-height:1.55;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--m1);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.pip-toggle-btn{position:fixed;top:20px;right:20px;z-index:110;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:8px 16px;font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--m1);cursor:pointer;box-shadow:0 10px 24px rgba(201,212,228,0.30),0 2px 6px rgba(201,212,228,0.16);transition:background 0.2s,transform 0.2s;}
+.pip-toggle-btn:hover{background:#F4FBF5;transform:translateY(-1px);}
+.pip-toggle-btn .pip-dot{width:7px;height:7px;border-radius:50%;background:var(--m1);flex:none;}
+.pip-panel{position:fixed;top:68px;right:20px;z-index:109;width:280px;max-height:calc(100vh - 110px);background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:16px;box-shadow:0 20px 40px rgba(201,212,228,0.35);overflow-y:auto;transform:translateX(320px);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;pointer-events:none;}
+.pip-panel.open{transform:translateX(0);opacity:1;pointer-events:all;}
+.pip-panel-inner{padding:0.9rem 1rem;}
+.pip-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.pip-panel-title{font-weight:700;font-size:0.82rem;color:var(--ink);}
+.pip-close-btn{background:none;border:none;font-size:0.9rem;color:var(--ink-3);cursor:pointer;}
+.pip-mini-formula{font-size:0.78rem;font-weight:600;color:var(--ink-2);background:#EDF2F9;border-radius:8px;padding:0.4rem 0.6rem;margin-bottom:0.6rem;}
+.pip-mini-card{background:#FBFCFE;border:1px solid rgba(201,212,228,0.4);border-radius:10px;padding:0.5rem 0.65rem;margin-bottom:0.5rem;}
+.pip-mini-lvl{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 7px;border-radius:14px;}
+.pip-mini-title{font-weight:700;font-size:0.8rem;color:var(--ink);margin-top:0.3rem;}
+.pip-mini-body{font-size:0.76rem;color:var(--ink-2);line-height:1.5;margin-top:0.2rem;}
+.pip-mini-trap{background:#F0F0F0;border-radius:10px;padding:0.5rem 0.65rem;}
+.pip-mini-trap-title{font-weight:700;font-size:0.76rem;color:#3D3D3D;}
+
+    /* Preserve the original answer-space heights while using input.html-style textareas. */
+    .work-box.short textarea { min-height: 2.25rem; }
+    .work-box.tall textarea { min-height: 4.6rem; }
+    .compact .work-box textarea { min-height: 2.45rem; }
+  </style>
+
+<style>
+  .answer-space{margin-top:.55rem;min-height:3.15rem;border:1px dashed rgba(185,198,217,.85);border-radius:10px;background:#F9FBFE;padding:.52rem .72rem;color:#8A99AE;font-size:.76rem;display:flex;align-items:flex-start;gap:.5rem}
+  .answer-space.tall{min-height:4.6rem}.answer-space.short{min-height:2.25rem}
+  .answer-space::before{content:'Answer + reasoning:';font-weight:700;color:#7A899D;white-space:nowrap}
+  .passage{background:var(--surface);border:1px solid rgba(201,212,228,.55);border-radius:14px;padding:.8rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,.18);font-size:.82rem;line-height:1.57;color:var(--ink-2)}
+  .passage p{margin:.15rem 0 .55rem}.passage p:last-child{margin-bottom:0}
+  .sent{display:inline;font-weight:800;color:var(--zc);font-size:.72rem;margin-right:.18rem}
+  .under{text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--zc);text-underline-offset:3px}
+  .micro{font-size:.73rem;line-height:1.45;color:var(--ink-2)}
+  .rule-row{display:grid;grid-template-columns:88px 1fr;gap:.65rem;align-items:start;margin:.38rem 0}
+  .rule-key{border-radius:8px;padding:.28rem .45rem;font-size:.72rem;font-weight:800;text-align:center;background:var(--zs);color:var(--zc)}
+  .numline{width:100%;height:95px;display:block}
+  .commit-chip{display:inline-flex;align-items:center;gap:.35rem;padding:4px 10px;border-radius:16px;background:#EEF2F7;color:#526176;font-size:.65rem;font-weight:700}
+  .compact .prob-card{padding:.68rem .82rem}.compact .prob-text{font-size:.84rem;line-height:1.48}.compact .answer-space{min-height:2.45rem}
+  .choice-line{margin-top:.35rem;font-size:.78rem;color:var(--ink-2);font-weight:600;line-height:1.45}
+  .strategy-btn{position:fixed;top:20px;right:20px;z-index:110;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;padding:8px 15px;font-family:var(--font-body);font-size:.7rem;font-weight:700;color:var(--m1);box-shadow:0 10px 24px rgba(201,212,228,.26)}
+  .level-note{font-size:.7rem;color:var(--ink-3);margin-top:.45rem;font-style:italic}
+</style>
+</head>
+
+<body>
+<div class="deck">
+<!-- SLIDE 1 -->
+<div class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,.45);border-radius:24px;padding:6px 16px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--e1);"></span>Week 4 · November 2026 CAT Prep</div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2.05rem,5.2vw,3.55rem);">Writing/Editing Recovery<br><span style="color:var(--e1);">&amp; Inequalities: Translate + Graph</span></h1>
+    <h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.02rem,2vw,1.42rem);font-weight:500;color:var(--ink-2);margin:.7rem 0 .35rem;">One-hour Socratic workshop · First-pass accuracy for the adaptive test</h2>
+    <p class="reveal" style="font-size:.8rem;color:var(--ink-3);letter-spacing:.13em;text-transform:uppercase;font-weight:500;margin:0 0 1.15rem;">Rules before rhythm · Boundaries before punctuation · Words before symbols</p>
+    <div class="reveal" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
+      <span style="background:var(--e1-soft);color:var(--e1);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600;">Comma Logic</span>
+      <span style="background:var(--e2-soft);color:var(--e2);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600;">Sentence Combining</span>
+      <span style="background:var(--e3-soft);color:var(--e3);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600;">Agreement + Transitions</span>
+      <span style="background:var(--m1-soft);color:var(--m1);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600;">Inequality Number Lines</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" data-slide="2" style="--zc:#17233B;">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Roadmap</div>
+    <h2 class="slide-title reveal">Today’s <span class="tint">60-Minute Route</span></h2>
+    <div class="reveal">
+      <div class="tl-row" style="--rc:var(--e1);"><div class="tl-time">0:00–0:05</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">CAT Commit Warm-Up</div><div class="tl-b">Practice the one-way-door habit: <em>identify the tested rule before entering an answer.</em></div></div></div>
+      <div class="tl-row" style="--rc:var(--e1);"><div class="tl-time">0:05–0:20</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Editing Recovery</div><div class="tl-b">Comma logic, sentence boundaries, agreement, tense, and transitions. <em>Diagnose first; edit second.</em></div></div></div>
+      <div class="tl-row" style="--rc:var(--e2);"><div class="tl-time">0:20–0:35</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Timed Revising/Editing Passage</div><div class="tl-b">Read for meaning, then answer four rule-focused items. <em>No answer reveal; explain the rule aloud.</em></div></div></div>
+      <div class="tl-row" style="--rc:var(--m1);"><div class="tl-time">0:35–0:47</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Translate Inequalities</div><div class="tl-b">Turn boundary phrases into symbols. <em>Circle the boundary word before writing algebra.</em></div></div></div>
+      <div class="tl-row" style="--rc:var(--m2);"><div class="tl-time">0:47–0:58</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Graph + Negative-Sign Trap</div><div class="tl-b">Endpoint first, ray second; reverse only after multiplying or dividing by a negative.</div></div></div>
+      <div class="tl-row" style="--rc:#17233B;"><div class="tl-time">0:58–1:00</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card" style="margin-bottom:0;"><div class="tl-h">Error Log Exit</div><div class="tl-b">Name one editing trigger and one graphing trigger to carry into the CAT.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" data-slide="3" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div>
+    <div class="kicker reveal">CAT Warm-Up · 5 Minutes</div>
+    <h2 class="slide-title reveal">Treat Each Item Like a <span class="tint">One-Way Door</span></h2>
+    <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Think before typing</div><div class="socratic-body">If you cannot count on returning to a standalone item, which is safer: choosing the option that “sounds right,” or naming the exact rule that makes it right? What would your five-second pause contain?</div></div>
+        <div class="info-card reveal" style="margin-top:.75rem;"><div style="font-weight:800;font-size:.86rem;">The CAT commit routine</div><div class="rule-row"><div class="rule-key">1 · NAME</div><div class="micro">What is being tested: boundary, agreement, transition, translation, or graph?</div></div><div class="rule-row"><div class="rule-key">2 · PROVE</div><div class="micro">Use a rule, substitution, or endpoint test—not preference.</div></div><div class="rule-row"><div class="rule-key">3 · COMMIT</div><div class="micro">Enter the response only after the proof survives one quick challenge.</div></div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="360" height="230" viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+          <rect x="20" y="18" width="95" height="58" rx="12" fill="#DCEBFB" stroke="#3E5C9A" stroke-width="2"/><text x="47" y="42" font-size="13" font-weight="800" fill="#3E5C9A">NAME</text><text x="33" y="62" font-size="11" fill="#4a4a4a">the tested rule</text>
+          <path d="M116 47 L145 47" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arr3)"/>
+          <rect x="148" y="18" width="95" height="58" rx="12" fill="#EFE3F5" stroke="#7A5C9E" stroke-width="2"/><text x="178" y="42" font-size="13" font-weight="800" fill="#7A5C9E">PROVE</text><text x="160" y="62" font-size="11" fill="#4a4a4a">with one reason</text>
+          <path d="M244 47 L273 47" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arr3)"/>
+          <rect x="276" y="18" width="68" height="58" rx="12" fill="#E8F7EC" stroke="#1D7A5C" stroke-width="2"/><text x="284" y="42" font-size="12" font-weight="800" fill="#1D7A5C">COMMIT</text><text x="289" y="62" font-size="10" fill="#4a4a4a">then advance</text>
+          <path d="M310 82 C310 150 210 160 183 126" fill="none" stroke="#9AA9BF" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arr3)"/>
+          <rect x="62" y="104" width="235" height="86" rx="14" fill="#fff" stroke="#C9D4E4"/><text x="84" y="132" font-size="13" font-weight="800" fill="#1f1f1f">Socratic pause:</text><text x="84" y="155" font-size="12" fill="#4a4a4a">“What evidence would prove</text><text x="84" y="174" font-size="12" fill="#4a4a4a">my first instinct wrong?”</text>
+          <text x="95" y="216" font-size="11" font-weight="700" fill="#767676">Accuracy first; adaptivity follows.</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" data-slide="4" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Editing Rule 1 · Boundaries</div>
+    <h2 class="slide-title reveal">Punctuation Is <span class="tint">Traffic Control</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Ask the boundary question</div><div class="socratic-body">Can the words on the left stand alone? Can the words on the right stand alone? Your answer—not the sentence’s length—determines the punctuation.</div></div>
+        <div class="info-card reveal" style="margin-top:.75rem;"><div class="rule-row"><div class="rule-key">GREEN</div><div class="micro"><strong>One complete thought:</strong> no internal stop unless a phrase needs separation.</div></div><div class="rule-row"><div class="rule-key" style="background:#FFF4D8;color:#9A6200;">YELLOW</div><div class="micro"><strong>Complete + incomplete:</strong> use one comma where the dependent/introductory part ends.</div></div><div class="rule-row"><div class="rule-key" style="background:#FCE4E8;color:#9A3248;">RED</div><div class="micro"><strong>Complete + complete:</strong> period, semicolon, or comma + coordinating conjunction.</div></div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="330" height="230" viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="18" width="280" height="190" rx="22" fill="#263445"/>
+          <circle cx="82" cy="76" r="31" fill="#E75B68"/><text x="126" y="71" font-size="14" font-weight="800" fill="#fff">STOP TWO SENTENCES</text><text x="126" y="90" font-size="11" fill="#DCE5EF">.;  or  , + FANBOYS</text>
+          <circle cx="82" cy="137" r="25" fill="#F3BE45"/><text x="126" y="132" font-size="14" font-weight="800" fill="#fff">PAUSE AT A TURN</text><text x="126" y="151" font-size="11" fill="#DCE5EF">intro/dependent phrase, main clause</text>
+          <circle cx="82" cy="184" r="17" fill="#48A978"/><text x="126" y="181" font-size="14" font-weight="800" fill="#fff">KEEP MOVING</text><text x="126" y="198" font-size="11" fill="#DCE5EF">no comma by “breath” alone</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide compact" data-slide="5" style="--zc:var(--e1);--zs:var(--e1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Boundary Practice · Difficulty Uplifted</div>
+    <h2 class="slide-title reveal">Comma Logic <span class="tint">Levels 1–4</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prob-text">Choose punctuation for the blank: <em>After reviewing three conflicting forecasts ___ the committee postponed its vote.</em> First count the complete thoughts.</div><div class="choice-line">A) no punctuation &nbsp; B) comma &nbsp; C) semicolon &nbsp; D) colon</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prob-text"><em>The prototype appeared stable during the morning trial ___ however, its battery overheated after repeated use.</em> Which mark belongs before <strong>however</strong>, and why?</div><div class="choice-line">A) comma &nbsp; B) semicolon &nbsp; C) no punctuation &nbsp; D) apostrophe</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">Revise only the punctuation: <em>The archive contains maps, diaries, and ship logs, these records contradict the captain’s published account.</em> Preserve both independent clauses.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prob-text">In <em>The sensors, installed after the first failure, detected a pressure change that the older gauges had missed</em>, explain why one comma pair is necessary but a comma before <strong>that</strong> would alter meaning.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+    <div class="level-note reveal">Every badge is calibrated one step above the corresponding level in the supplied model deck.</div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" data-slide="6" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Editing Rule 2 · Combining</div>
+    <h2 class="slide-title reveal">Build a Sentence with <span class="tint">One Main Engine</span></h2>
+    <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:1rem;align-items:center;">
+      <div class="diagram-wrap reveal">
+        <svg width="360" height="235" viewBox="0 0 360 235" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr6" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+          <rect x="18" y="24" width="130" height="48" rx="10" fill="#EFE3F5" stroke="#7A5C9E" stroke-width="2"/><text x="35" y="45" font-size="12" font-weight="800" fill="#7A5C9E">CORE ENGINE</text><text x="31" y="62" font-size="11" fill="#4a4a4a">subject + finite verb</text>
+          <path d="M149 48 L205 48" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arr6)"/>
+          <rect x="208" y="24" width="132" height="48" rx="10" fill="#DCEBFB" stroke="#3E5C9A" stroke-width="2"/><text x="222" y="45" font-size="12" font-weight="800" fill="#3E5C9A">ATTACHMENTS</text><text x="219" y="62" font-size="11" fill="#4a4a4a">phrases + modifiers</text>
+          <rect x="42" y="112" width="278" height="76" rx="12" fill="#fff" stroke="#C9D4E4"/><text x="61" y="137" font-size="12" font-weight="800" fill="#1f1f1f">Original:</text><text x="118" y="137" font-size="11" fill="#4a4a4a">The rover crossed the ridge.</text><text x="61" y="157" font-size="11" fill="#4a4a4a">It transmitted images. The images were delayed.</text><text x="61" y="180" font-size="11" font-weight="700" fill="#7A5C9E">Goal: preserve all facts; remove repeated engines.</text>
+          <text x="76" y="219" font-size="11" fill="#767676">Subordination creates hierarchy, not just brevity.</text>
+        </svg>
+      </div>
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Which idea deserves the steering wheel?</div><div class="socratic-body">If two facts are not equally important, why coordinate them with <em>and</em>? Which fact should become the main clause, and which can ride as a phrase or dependent clause?</div></div>
+        <div class="info-card reveal" style="margin-top:.75rem;"><div style="font-weight:800;font-size:.86rem;margin-bottom:.3rem;">The “No Lost Cargo” test</div><div class="micro">1. Underline every distinct fact in the original. 2. Choose the fact that advances the paragraph. 3. Attach the other facts without changing time, cause, or emphasis. 4. Recount the facts after revising.</div></div>
+        <div class="trap-card reveal" style="margin-top:.7rem;"><div class="trap-title">SHSAT Trap · Shorter Is Not Automatically Better</div><div class="trap-body">A concise choice can still delete a cause, reverse a timeline, or create a dangling modifier. Meaning outranks elegance.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide compact" data-slide="7" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Combining + Agreement</div>
+    <h2 class="slide-title reveal">Grammar Recovery <span class="tint">Levels 1–4</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prob-text">Combine without repetition: <em>The mural was restored in 2024. The mural now reveals pigments hidden beneath soot.</em> Keep the restoration date and the cause-effect sequence.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prob-text">Choose the verb: <em>Neither the revised maps nor the field report ___ the location of the buried conduit.</em> Explain which subject controls agreement.</div><div class="choice-line">A) identify &nbsp; B) identifies &nbsp; C) have identified &nbsp; D) were identifying</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">Revise the modifier: <em>Crossing the flooded courtyard, the museum doors appeared locked to Lena.</em> Who is actually crossing, and how must the sentence show it?</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prob-text">Preserve the timeline: <em>By the time the review board meets next Tuesday, engineers ___ three additional stress tests.</em> Select a tense and defend it using the two future time markers.</div><div class="choice-line">A) complete &nbsp; B) completed &nbsp; C) will have completed &nbsp; D) had completed</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" data-slide="8" style="--zc:var(--e3);--zs:var(--e3-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Editing Rule 3 · Transition Logic</div>
+    <h2 class="slide-title reveal">A Transition Names the <span class="tint">Turn</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Cover the choices</div><div class="socratic-body">Before reading a transition list, finish this sentence: “Idea B ___ Idea A.” Does B support, qualify, contradict, result from, or exemplify A?</div></div>
+        <div class="formula-box reveal" style="margin-top:.75rem;"><div style="font-size:.78rem;font-weight:700;color:var(--ink-2);margin-bottom:.25rem;">RELATIONSHIP SENTENCE</div><div class="math" style="font-size:1rem;">B [relationship verb] A → choose the matching signal</div></div>
+        <div class="trap-card reveal" style="margin-top:.7rem;"><div class="trap-title">The Double-Turn Trap</div><div class="trap-body">A sentence may concede one point and then reverse direction. If one transition cannot express both moves, the sentence needs restructuring—not a fancier synonym.</div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="365" height="225" viewBox="0 0 365 225" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr8" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a4a4a"/></marker></defs>
+          <rect x="15" y="78" width="92" height="54" rx="10" fill="#F1E3E6" stroke="#9A5C6A" stroke-width="2"/><text x="39" y="102" font-size="13" font-weight="800" fill="#9A5C6A">IDEA A</text><text x="29" y="119" font-size="10" fill="#4a4a4a">first claim</text>
+          <path d="M108 105 L250 105" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arr8)"/>
+          <rect x="126" y="20" width="108" height="33" rx="8" fill="#DCEBFB"/><text x="145" y="41" font-size="11" font-weight="800" fill="#3E5C9A">supports / adds</text>
+          <rect x="126" y="62" width="108" height="33" rx="8" fill="#FBEBCF"/><text x="142" y="83" font-size="11" font-weight="800" fill="#B45309">causes / results</text>
+          <rect x="126" y="115" width="108" height="33" rx="8" fill="#F1E3E6"/><text x="142" y="136" font-size="11" font-weight="800" fill="#9A5C6A">contrasts / limits</text>
+          <rect x="126" y="157" width="108" height="33" rx="8" fill="#E8F7EC"/><text x="146" y="178" font-size="11" font-weight="800" fill="#1D7A5C">illustrates</text>
+          <rect x="254" y="78" width="95" height="54" rx="10" fill="#fff" stroke="#C9D4E4" stroke-width="2"/><text x="279" y="102" font-size="13" font-weight="800" fill="#1f1f1f">IDEA B</text><text x="270" y="119" font-size="10" fill="#4a4a4a">next claim</text>
+          <text x="72" y="215" font-size="11" font-weight="700" fill="#767676">Name the arrow before naming the word.</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 -->
+<div class="slide" data-slide="9" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Timed Editing Passage · Read First</div>
+    <h2 class="slide-title reveal">The <span class="tint">Cooling Library</span></h2>
+    <div style="display:grid;grid-template-columns:1.25fr .75fr;gap:1rem;align-items:stretch;">
+      <div class="passage reveal">
+        <p><span class="sent">[1]</span>On summer afternoons, the stone reading room of the East Harbor Library often became warmer indoors than the shaded courtyard outside. <span class="sent">[2]</span>The building’s tall windows admitted abundant light, <span class="under">they also trapped heat long after sunset</span>. <span class="sent">[3]</span>Replacing the historic windows would have reduced the heat, but preservation rules limited alterations to the façade.</p>
+        <p><span class="sent">[4]</span>Architects proposed a less visible solution: a narrow ventilation shaft running behind the bookcases. <span class="sent">[5]</span>As warm air rose through the shaft, cooler air entered at floor level. <span class="sent">[6]</span><span class="under">Consequently</span>, the system used no compressor; it depended on the movement of air caused by temperature differences.</p>
+        <p><span class="sent">[7]</span>During the first month, a cluster of sensors <span class="under">were recording</span> temperatures every two minutes. <span class="sent">[8]</span>The data showed that the room cooled most rapidly after librarians opened the lower vents. <span class="sent">[9]</span><span class="under">Designed to remain hidden from visitors, the preservation committee approved the shaft</span> for installation throughout the building.</p>
+      </div>
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Two-pass reading</div><div class="socratic-body"><strong>Pass 1:</strong> What problem, constraint, solution, and result shape the passage? <strong>Pass 2:</strong> For each underlined part, name the rule before considering a revision.</div></div>
+        <div class="info-card reveal" style="margin-top:.75rem;"><div style="font-weight:800;font-size:.84rem;">Margin labels</div><div class="micro" style="margin-top:.3rem;">Paragraph 1 job:</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div><div class="micro" style="margin-top:.35rem;">Paragraph 2 job:</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div><div class="micro" style="margin-top:.35rem;">Paragraph 3 job:</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 -->
+<div class="slide compact" data-slide="10" style="--zc:var(--e2);--zs:var(--e2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Timed Editing Passage · 10 Minutes</div>
+    <h2 class="slide-title reveal">Diagnose, Defend, <span class="tint">Commit</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prob-text">Sentence 2 contains two independent clauses. Revise the underlined boundary while preserving the contrast between abundant light and trapped heat.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">In sentence 6, does <em>Consequently</em> accurately connect passive airflow to the absence of a compressor, or does the sentence explain the mechanism instead? Supply a more precise transition or restructure the sentence.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">Revise <em>a cluster of sensors were recording</em> in sentence 7. Which noun is the grammatical head of the subject, and which tense best fits a completed first-month study?</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prob-text">Sentence 9 opens with a modifier that logically describes the shaft, not the committee. Rewrite the sentence so the modifier touches the noun it describes and the approval action remains clear.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 -->
+<div class="slide" data-slide="11" style="--zc:#17233B;--zs:rgba(23,35,59,.08);">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Midpoint Reset · 0:35</div>
+    <h2 class="slide-title reveal" style="justify-content:center;font-size:clamp(2rem,4vw,3rem);">ELA to Math: <span class="tint">Same Reasoning Move</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left;margin-top:.9rem;">
+      <div class="info-card reveal" style="border-left:5px solid var(--e2);"><div style="font-weight:800;color:var(--e2);">Editing</div><div class="prose" style="font-size:.88rem;margin-top:.25rem;">Name the relationship between ideas before choosing punctuation, tense, or a transition.</div></div>
+      <div class="info-card reveal" style="border-left:5px solid var(--m1);"><div style="font-weight:800;color:var(--m1);">Inequalities</div><div class="prose" style="font-size:.88rem;margin-top:.25rem;">Name the boundary relationship before choosing a symbol, endpoint, or ray direction.</div></div>
+    </div>
+    <div class="reveal" style="margin-top:1rem;font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--ink-2);">Words → relationship → symbol. Never reverse that order.</div>
+  </div>
+</div>
+
+<!-- SLIDE 12 -->
+<div class="slide" data-slide="12" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Math Concept · Translation</div>
+    <h2 class="slide-title reveal">Boundary Words Are <span class="tint">Fence Instructions</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Who may stand on the fence?</div><div class="socratic-body">If a museum admits <em>at most 240</em> people, may exactly 240 enter? Your answer decides whether the symbol includes equality—before any algebra begins.</div></div>
+        <div class="info-card reveal" style="margin-top:.7rem;"><div class="rule-row"><div class="rule-key">AT LEAST</div><div class="micro">boundary included; values extend upward: greater than or equal to</div></div><div class="rule-row"><div class="rule-key">MORE THAN</div><div class="micro">boundary excluded; values extend upward: strictly greater than</div></div><div class="rule-row"><div class="rule-key" style="background:#FBEBCF;color:#B45309;">AT MOST</div><div class="micro">boundary included; values extend downward: less than or equal to</div></div><div class="rule-row"><div class="rule-key" style="background:#FBEBCF;color:#B45309;">FEWER THAN</div><div class="micro">boundary excluded; values extend downward: strictly less than</div></div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="365" height="225" viewBox="0 0 365 225" xmlns="http://www.w3.org/2000/svg">
+          <line x1="45" y1="112" x2="320" y2="112" stroke="#4a4a4a" stroke-width="3"/>
+          <line x1="183" y1="82" x2="183" y2="143" stroke="#1D7A5C" stroke-width="3"/>
+          <circle cx="183" cy="112" r="9" fill="#fff" stroke="#1D7A5C" stroke-width="3"/>
+          <text x="169" y="163" font-size="12" font-weight="800" fill="#1D7A5C">BOUNDARY</text>
+          <path d="M58 93 L169 93" stroke="#B45309" stroke-width="6" stroke-linecap="round"/><path d="M307 131 L197 131" stroke="#1D7A5C" stroke-width="6" stroke-linecap="round"/>
+          <text x="46" y="71" font-size="12" font-weight="800" fill="#B45309">LOWER VALUES</text><text x="225" y="153" font-size="12" font-weight="800" fill="#1D7A5C">HIGHER VALUES</text>
+          <circle cx="183" cy="35" r="9" fill="#1D7A5C"/><text x="201" y="40" font-size="11" fill="#4a4a4a">“or equal to” = closed gate</text>
+          <circle cx="183" cy="192" r="9" fill="#fff" stroke="#1D7A5C" stroke-width="3"/><text x="201" y="197" font-size="11" fill="#4a4a4a">strict word = open gate</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 -->
+<div class="slide compact" data-slide="13" style="--zc:var(--m1);--zs:var(--m1-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Translation Practice · Difficulty Uplifted</div>
+    <h2 class="slide-title reveal">Words to Inequalities <span class="tint">Levels 1–4</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prob-text">A drone may carry <strong>no more than 7.5 kilograms</strong>, including a 1.2-kilogram camera. If <em>p</em> is payload mass, write an inequality for the total load.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prob-text">A student needs <strong>at least 18 points</strong>. She earns 3 points per solved puzzle and already has 4 points. Let <em>q</em> be puzzles solved. Translate only; do not solve yet.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">A subscription charges $12 plus $2.40 per download. The monthly bill must remain <strong>under $39</strong> after a $3 credit. Let <em>d</em> be downloads.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prob-text">A rectangular display has width <em>w</em> and length <em>w + 4</em>. Its perimeter is <strong>at least 52 but less than 68</strong>. Represent both restrictions in one mathematical statement.</div><div class="work-box short"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14 -->
+<div class="slide" data-slide="14" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Math Concept · Graphing</div>
+    <h2 class="slide-title reveal">Graph in Two Moves: <span class="tint">Endpoint, Then Ray</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Test the boundary itself</div><div class="socratic-body">For <span class="math-inline">x &lt; 3</span>, does 3 satisfy the statement? If not, what must the endpoint look like? Then test 2 and 4: which side contains true values?</div></div>
+        <div class="formula-box reveal" style="margin-top:.75rem;"><div style="font-size:.78rem;font-weight:700;color:var(--ink-2);margin-bottom:.25rem;">THE E.R.A. ROUTINE</div><div class="math" style="font-size:1rem;">E = Endpoint · R = Ray · A = Audit with one test value</div></div>
+        <div class="win-card reveal" style="margin-top:.7rem;"><div class="win-title">Clever check</div><div class="prose" style="font-size:.84rem;margin-top:.2rem;">Do not memorize “less points left.” Substitute one number on each side. The graph becomes evidence, not a drawing convention.</div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="390" height="230" viewBox="0 0 390 230" xmlns="http://www.w3.org/2000/svg">
+          <text x="25" y="32" font-size="13" font-weight="800" fill="#B45309">Example structure: x &lt; 3</text>
+          <line x1="35" y1="95" x2="355" y2="95" stroke="#4a4a4a" stroke-width="3"/>
+          <g stroke="#767676" stroke-width="2"><line x1="75" y1="85" x2="75" y2="105"/><line x1="135" y1="85" x2="135" y2="105"/><line x1="195" y1="82" x2="195" y2="108"/><line x1="255" y1="85" x2="255" y2="105"/><line x1="315" y1="85" x2="315" y2="105"/></g>
+          <g font-size="11" fill="#4a4a4a"><text x="70" y="125">1</text><text x="130" y="125">2</text><text x="190" y="125">3</text><text x="250" y="125">4</text><text x="310" y="125">5</text></g>
+          <path d="M45 95 L181 95" stroke="#B45309" stroke-width="7" stroke-linecap="round"/><path d="M46 95 L62 84 M46 95 L62 106" stroke="#B45309" stroke-width="4"/>
+          <circle cx="195" cy="95" r="11" fill="#fff" stroke="#B45309" stroke-width="4"/>
+          <rect x="45" y="158" width="300" height="45" rx="10" fill="#fff" stroke="#C9D4E4"/><text x="62" y="177" font-size="11" font-weight="800" fill="#1f1f1f">Audit:</text><text x="104" y="177" font-size="11" fill="#4a4a4a">2 makes the statement true; 4 does not.</text><text x="62" y="194" font-size="11" fill="#4a4a4a">The endpoint is open because 3 itself is excluded.</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15 -->
+<div class="slide compact" data-slide="15" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Graph Practice · Draw the Number Line</div>
+    <h2 class="slide-title reveal">Solutions to Graphs <span class="tint">Levels 1–4</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prob-text">Graph <span class="math-inline">n ≥ −2.5</span>. Label the boundary, choose the endpoint, draw the ray, and audit with a value on each side.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prob-text">Solve and graph <span class="math-inline">4x + 7 &lt; 31</span>. Show the algebra separately from the number line.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">A tank contains 86 liters and drains 6 liters per minute. Graph all whole-number values of <em>t</em> for which more than 32 liters remain.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prob-text">Solve and graph <span class="math-inline">5 − 2(3x − 4) ≤ 25</span>. Before drawing, explain whether the solving process crosses the “negative multiplier” trigger.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16 -->
+<div class="slide" data-slide="16" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">The Sign-Flip Rule</div>
+    <h2 class="slide-title reveal">Negative Multiplication <span class="tint">Mirrors the Number Line</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+      <div class="diagram-wrap reveal">
+        <svg width="380" height="235" viewBox="0 0 380 235" xmlns="http://www.w3.org/2000/svg">
+          <text x="22" y="28" font-size="13" font-weight="800" fill="#B45309">Start with a true statement</text><text x="240" y="28" font-size="14" font-weight="800" fill="#1f1f1f">2 &lt; 5</text>
+          <line x1="38" y1="78" x2="340" y2="78" stroke="#4a4a4a" stroke-width="3"/><circle cx="136" cy="78" r="8" fill="#1D7A5C"/><circle cx="286" cy="78" r="8" fill="#B45309"/><text x="128" y="104" font-size="11" fill="#1D7A5C">2</text><text x="278" y="104" font-size="11" fill="#B45309">5</text>
+          <path d="M80 130 C130 168 250 168 300 130" fill="none" stroke="#7A5C9E" stroke-width="3" stroke-dasharray="5,4"/><text x="130" y="155" font-size="12" font-weight="800" fill="#7A5C9E">multiply both by −1</text>
+          <line x1="38" y1="190" x2="340" y2="190" stroke="#4a4a4a" stroke-width="3"/><circle cx="94" cy="190" r="8" fill="#B45309"/><circle cx="244" cy="190" r="8" fill="#1D7A5C"/><text x="84" y="216" font-size="11" fill="#B45309">−5</text><text x="234" y="216" font-size="11" fill="#1D7A5C">−2</text><text x="274" y="216" font-size="12" font-weight="800" fill="#1f1f1f">−2 &gt; −5</text>
+        </svg>
+      </div>
+      <div>
+        <div class="socratic reveal"><div class="socratic-title">Why must the sign reverse?</div><div class="socratic-body">Multiplying by a negative reflects every value across zero. If 2 sits left of 5, where do −2 and −5 sit after reflection? Which number is now greater?</div></div>
+        <div class="formula-box reveal" style="margin-top:.75rem;"><div style="font-size:.78rem;font-weight:700;color:var(--ink-2);margin-bottom:.25rem;">ONLY ONE TRIGGER</div><div class="math" style="font-size:1rem;">Reverse the inequality only when multiplying or dividing both sides by a negative.</div></div>
+        <div class="trap-card reveal" style="margin-top:.7rem;"><div class="trap-title">Do Not Flip for Subtraction</div><div class="trap-body">Subtracting a positive from both sides shifts both values equally; it does not reverse their order. Circle the actual multiplication/division step that triggers the mirror.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17 -->
+<div class="slide compact" data-slide="17" style="--zc:var(--m2);--zs:var(--m2-soft);">
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">CAT Math Sprint · First-Pass Accuracy</div>
+    <h2 class="slide-title reveal">Translate, Solve, Graph <span class="tint">Without Backtracking</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">21</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prob-text">A theater row holds 24 seats. At least 70 seats must be reserved across 3 equal rows plus 2 accessible seats. Let <em>s</em> be reserved seats per row. Write, solve, and graph.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">22</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prob-text">A hiker is 14.5 kilometers from camp and walks toward it at 3.2 km/h. For what times <em>h</em> is she still more than 4.9 km away? Graph the physically meaningful solutions.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">23</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prob-text">Solve and graph <span class="math-inline">7 − 3(2x + 1) &gt; 4x − 16</span>. Mark the precise step, if any, that reverses the inequality.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">24</span><span class="lvl-badge lvl-4">Level 4+</span></div><div class="prob-text">A value <em>r</em> is no more than 5 units from −3. Represent the entire solution set with an inequality and a number-line graph. Explain why one ray is insufficient.</div><div class="work-box"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 18 -->
+<div class="slide compact" data-slide="18" style="--zc:#17233B;--zs:rgba(23,35,59,.08);">
+  <div class="content">
+    <div class="kicker reveal" style="color:var(--ink-3);">0:58–1:00 · Exit Log</div>
+    <h2 class="slide-title reveal">Name the Error <span class="tint">Before It Repeats</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">ELA</span><span class="lvl-badge lvl-2">Rule Trigger</span></div><div class="prob-text">Which editing decision slowed you most: sentence boundary, agreement head, tense timeline, modifier attachment, or transition relationship? State the question you will ask next time.</div><div class="work-box tall"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">MATH</span><span class="lvl-badge lvl-3">Graph Trigger</span></div><div class="prob-text">Which graphing decision slowed you most: included boundary, ray direction, negative-sign reversal, domain restriction, or translating the boundary phrase? State your audit value.</div><div class="work-box tall"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+    </div>
+    <div class="socratic reveal" style="margin-top:.8rem;"><div class="socratic-title">Final Socratic commit</div><div class="socratic-body">What evidence—not confidence—will tell you that your next answer is ready to submit?</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 19 -->
+<div class="slide" data-slide="19" style="--zc:#17233B;">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center;">
+    <div class="kicker reveal" style="color:var(--ink-3);">Session Close</div>
+    <h2 class="slide-title reveal" style="justify-content:center;font-size:clamp(2rem,4.6vw,3.25rem);">Rules Before Rhythm.<br><span class="tint">Words Before Symbols.</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.9rem;text-align:left;">
+      <div class="tl-card reveal" style="margin-bottom:0;border-top:4px solid var(--e1);"><div class="tl-h">ELA Boundary</div><div class="tl-b">Count complete thoughts before choosing punctuation.</div></div>
+      <div class="tl-card reveal" style="margin-bottom:0;border-top:4px solid var(--m1);"><div class="tl-h">Math Boundary</div><div class="tl-b">Decide whether the endpoint belongs before writing the symbol.</div></div>
+      <div class="tl-card reveal" style="margin-bottom:0;border-top:4px solid #17233B;"><div class="tl-h">CAT Habit</div><div class="tl-b">Name, prove, then commit. Do not submit a preference.</div></div>
+    </div>
+    <p class="reveal" style="margin-top:1.05rem;color:var(--ink-3);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;">End of in-session deck · Responses remain student-owned</p>
+  </div>
+</div>
+</div><!-- end .deck -->
+
+<button class="strategy-btn" aria-label="Strategy reminder">CAT Lens · Name → Prove → Commit</button>
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)" aria-label="Previous slide">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)" aria-label="Next slide">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 19</span>
+</div>
+<script>
+const ZONES=[
+  {n:'Editing Rules',t:'0:05',c:'var(--e1)'},
+  {n:'Editing Passage',t:'0:20',c:'var(--e2)'},
+  {n:'Translate',t:'0:35',c:'var(--m1)'},
+  {n:'Graph',t:'0:47',c:'var(--m2)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function togglePip(){
+  const panel=document.getElementById('pipPanel');
+  if(panel) panel.classList.toggle('open');
+}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
