@@ -315,17 +315,3 @@ The plan should be revised immediately if any of the following occurs:
 - Full-test stamina, anxiety, or accommodations change the observed performance profile.
 
 The final instructional emphasis is clear: **make Math fundamentals automatic, make word-problem and geometry setups visible on paper, and make every ELA answer traceable to evidence**. Those changes directly address the diagnostic profile while fitting the non-return, item-adaptive structure of the November 2026 SHSAT.
-
----
-
-## References
-
-1. [Specialized High Schools - Schools.nyc.gov](https://www.schools.nyc.gov/enrollment/enroll-grade-by-grade/specialized-high-schools) - During your child's 8th or (first-time) 9th grade year, register to audition and/or test to apply to...
-
-2. [Enroll Grade by Grade](https://www.schools.nyc.gov/enrollment/enroll-grade-by-grade) - How to apply and enroll in NYC public schools, grade by grade
-
-3. [Specialized High School Admissions Test - Schools.nyc.gov](https://www.schools.nyc.gov/learning/testing/specialized-high-school-admissions-test) - Beginning in fall 2026, the SHSAT will move to a computer-adaptive test. A computer-adaptive test ad...
-
-4. [How to Prepare for the Specialized High Schools Admissions Test](https://www.schools.nyc.gov/learning/testing/how-to-prepare-for-the-specialized-high-schools-admissions-test1) - On passage sets only, you can use the Bookmark to flag any question you want to revisit within the p...
-
-5. [How to Prepare for the Specialized High Schools Admissions Test](https://www.schools.nyc.gov/learning/testing/how-to-prepare-for-the-specialized-high-schools-admissions-test) - The New York City SHSAT Guide includes information about what to expect before, during and after Tes...
