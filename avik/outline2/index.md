@@ -209,7 +209,9 @@ For each ELA passage set:
 7. Submit only after this internal review because the set cannot be reopened.[^4]
 
 The latest ELA pace was fast, and three questions were answered in 9–13 seconds. Some rapid answers may reflect confidence, but the pattern warrants a minimum check: reread the question stem, identify the relevant text location, and compare the final two choices before submission.
+
 ## Nine-week sequence
+
 The sequence assumes one weekly tutor lesson plus five independent study days. If the actual test occurs on a weekend rather than the November 18 school day, preserve the sequence and shift only the final taper.[^1]
 
 | Week | Tutor focus | Independent work | Assessment gate |
