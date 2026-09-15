@@ -227,7 +227,9 @@ The sequence assumes one weekly tutor lesson plus five independent study days. I
 | Nov 2–8 | Adaptive stabilization: mixed medium/hard Math; inference/supporting evidence | Two 50-question section simulations; targeted remediation only | Math 38+/50 and ELA 40+/50 as practice targets, with no easy-question cluster |
 | Nov 9–15 | Final full simulation; pacing and tool rehearsal; close remaining repeat-error patterns | Light mixed sets; formula and grammar retrieval; sleep schedule | Stable pacing, all entries checked, no new content after Nov 13 |
 | Nov 16–18 | Taper and test execution | 20–30 minutes of confidence review only; materials/logistics; no full test | Rested and ready |
+
 ## Weekly workload
+
 A sustainable workload is approximately **6–7 hours per week**, including tutoring, until the final taper.
 
 | Component | Frequency | Time | Purpose |
