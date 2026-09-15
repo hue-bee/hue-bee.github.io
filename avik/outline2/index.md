@@ -6,6 +6,7 @@ The highest-return objective is to raise Math from 32/50 into a consistently str
 
 The November 18, 2026 school-day SHSAT is 64 days after September 15. Registration opens October 6 and closes October 30, so registration should be confirmed during the plan rather than left until the final weeks.[^1][^2]
 ## What the data shows
+
 ### Most recent diagnostic
 
 | Area | Result | Interpretation | Priority |
@@ -16,6 +17,7 @@ The November 18, 2026 school-day SHSAT is 64 days after September 15. Registrati
 | ELA time | 1:00:19, about 1:12 per question | Fast enough to permit a more deliberate evidence check | Adjust upward selectively |
 | Math time | 1:45:04, about 2:06 per question | Appropriate overall allocation, but several questions consumed 6–7 minutes | Make more consistent |
 | Total time | 2:45:23 of 3:00:00 | Finished with 14:37 unused | Use part of this margin for better first-pass verification |
+
 ### Performance by difficulty
 
 | Section | Easy | Medium | Hard | Instructional meaning |
@@ -25,6 +27,7 @@ The November 18, 2026 school-day SHSAT is 64 days after September 15. Registrati
 | Combined | 19/23, 83% | 31/46, 67% | 19/31, 61% | The student can solve difficult material but does not yet convert routine opportunities reliably |
 
 On a CAT, the Math pattern matters greatly. The system begins with an average-difficulty item, updates the score estimate after every response, and adjusts later difficulty from the full pattern of correct and incorrect responses; final performance reflects both response accuracy and item difficulty. Avik therefore needs dependable routine accuracy—not a strategy built around skipping routine-looking work to chase hard questions.[^3]
+
 ### ELA skill profile
 
 | ELA category | Correct/total | Accuracy | Action |
