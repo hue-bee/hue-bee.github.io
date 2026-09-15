@@ -7,6 +7,7 @@ The highest-return objective is to raise Math from 32/50 into a consistently str
 The November 18, 2026 school-day SHSAT is 64 days after September 15. Registration opens October 6 and closes October 30, so registration should be confirmed during the plan rather than left until the final weeks.[^1][^2]
 ## What the data shows
 ### Most recent diagnostic
+
 | Area | Result | Interpretation | Priority |
 |---|---:|---|---|
 | ELA overall | 37/50, 74% | Productive base; needs targeted rather than wholesale remediation | Secondary |
@@ -16,6 +17,7 @@ The November 18, 2026 school-day SHSAT is 64 days after September 15. Registrati
 | Math time | 1:45:04, about 2:06 per question | Appropriate overall allocation, but several questions consumed 6–7 minutes | Make more consistent |
 | Total time | 2:45:23 of 3:00:00 | Finished with 14:37 unused | Use part of this margin for better first-pass verification |
 ### Performance by difficulty
+
 | Section | Easy | Medium | Hard | Instructional meaning |
 |---|---:|---:|---:|---|
 | ELA | 16/16, 100% | 15/25, 60% | 6/9, 67% | Basic ELA is secure; passage reasoning and answer-choice discrimination break down as complexity rises |
@@ -24,6 +26,7 @@ The November 18, 2026 school-day SHSAT is 64 days after September 15. Registrati
 
 On a CAT, the Math pattern matters greatly. The system begins with an average-difficulty item, updates the score estimate after every response, and adjusts later difficulty from the full pattern of correct and incorrect responses; final performance reflects both response accuracy and item difficulty. Avik therefore needs dependable routine accuracy—not a strategy built around skipping routine-looking work to chase hard questions.[^3]
 ### ELA skill profile
+
 | ELA category | Correct/total | Accuracy | Action |
 |---|---:|---:|---|
 | Craft and Structure | 10/12 | 83% | Maintain; study tone, word choice, structure, and author decisions |
@@ -37,6 +40,7 @@ On a CAT, the Math pattern matters greatly. The system begins with an average-di
 
 The July assessment independently identified Reading Comprehension as weaker than Revising/Editing: 24/41 (59%) versus 13/16 (81%). Within reading, Inference was 4/8 (50%) and Main Idea was 11/19 (58%). The newer diagnostic indicates progress, but its four inference misses and three supporting-idea misses show that **text-based reasoning remains the ELA growth area**.
 ### Math skill profile
+
 | Math cluster | Correct/total | Accuracy | Priority |
 |---|---:|---:|---|
 | Numbers and Operations | 12/23 | 52% | Highest |
