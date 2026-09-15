@@ -214,6 +214,7 @@ The latest ELA pace was fast, and three questions were answered in 9–13 second
 
 The sequence assumes one weekly tutor lesson plus five independent study days. If the actual test occurs on a weekend rather than the November 18 school day, preserve the sequence and shift only the final taper.[^1]
 
+
 | Week | Tutor focus | Independent work | Assessment gate |
 |---|---|---|---|
 | Sep 15–20 | Diagnostic autopsy; classify all 31 recent errors; CAT navigation; no-calculator baseline | Daily number fluency; redo missed easy Math; one inference passage; Student Readiness Tool | Error log complete; student can explain one-way navigation |
