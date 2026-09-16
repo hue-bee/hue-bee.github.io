@@ -25,3 +25,4 @@
 | **12** | [ELA: Revising/Editing 2 & Algebra: Plug-Ins](https://hue-bee.github.io/julius/lesson12) | [12 Homework](https://hue-bee.github.io/julius/lesson12/homework) | |
 | **01A** | [What the Numbers Say](https://hue-bee.github.io/julius/lesson01A) | [1A Homework](https://hue-bee.github.io/julius/lesson01A/homework) | |
 | **01B** | [Reading the Picture](https://hue-bee.github.io/julius/lesson01B) | [1B Homework](https://hue-bee.github.io/julius/lesson01B/homework) | |
+| **02A** | [From 74 to Repeatable](https://hue-bee.github.io/julius/lesson02A) | [2A Homework](https://hue-bee.github.io/julius/lesson02A/homework) | |
