@@ -1,1 +1,783 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SHSAT CAT Homework — Math & Nonfiction Transfer</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* CAT activity additions */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.toolbar .print-btn{margin:0;min-height:44px}.toolbar .secondary{background:var(--muted)}
+.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue)}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.lvl-1{background:#eee;color:#1f2937}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.4rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800;cursor:pointer}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.sent-num{background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-weight:800;color:#374151;font-size:.72rem}
+.graph-audit{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .55rem;margin-top:.5rem}.graph-audit label{font-size:.7rem;font-weight:800;color:var(--muted)}.graph-audit select,.graph-audit input{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.22rem .35rem;font-size:.75rem;margin-top:.12rem;min-height:34px}.number-line{display:block;width:100%;height:42px;margin:.2rem 0;color:#64748b}.domain-note{font-size:.7rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.25rem .4rem;margin-top:.35rem}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.score-input{width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.6);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}
+.section-icon{width:24px;color:var(--blue);flex:0 0 auto}.hw-header-left h1{font-weight:800}.prob select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem;font-size:.78rem}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.mc-opts,.prob-grid{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.95);padding:.55rem;margin:0;z-index:10;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.graph-audit{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}}
+@media print{.commit-row{display:none!important}}
+
+/* Art direction: CAT homework workbook → calm, structured, student-ready.
+   Palette: inherited blue/coral/sand/green/purple homework palette.
+   Typography: Baloo 2 display + Nunito body, matching the lesson deck fonts.
+   Density: compact printable workbook with generous answer space. */
+.math { font-family: var(--ff-head); font-weight: 800; color: #1e3a8a; white-space: nowrap; }
+.mini-map { display:grid; grid-template-columns:repeat(4,1fr); gap:.45rem; margin:.65rem 0 .9rem; }
+.map-step { background:var(--white); border:1.5px solid var(--border); border-radius:8px; padding:.5rem; text-align:center; }
+.map-step strong { display:block; font-family:var(--ff-head); font-size:.78rem; color:var(--blue); }
+.map-step span { font-size:.7rem; color:var(--muted); line-height:1.3; }
+.factor-line { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:.45rem; margin-top:.45rem; }
+.factor-line label { font-size:.75rem; font-weight:800; color:var(--slate); }
+.factor-line input { border:none; border-bottom:1.5px solid var(--border); background:transparent; min-width:0; width:100%; font-family:var(--ff-body); font-size:.8rem; outline:none; }
+.data-table { width:100%; border-collapse:collapse; font-size:.78rem; margin:.55rem 0; }
+.data-table th { background:var(--blue); color:white; font-family:var(--ff-head); padding:.35rem .45rem; }
+.data-table td { border:1px solid var(--border); padding:.35rem .45rem; text-align:center; background:white; }
+.data-table caption { text-align:left; font-family:var(--ff-head); font-weight:700; margin-bottom:.35rem; }
+.job-row { display:grid; grid-template-columns:repeat(3,1fr); gap:.45rem; margin:.6rem 0 .85rem; }
+.job-card { border:1.5px solid var(--border); border-radius:8px; background:white; padding:.5rem .6rem; }
+.job-card strong { display:block; color:var(--purple); font-family:var(--ff-head); font-size:.76rem; }
+.job-card input { width:100%; border:0; border-bottom:1px solid var(--border); outline:0; font-size:.72rem; background:transparent; }
+.short-response { margin-top:.55rem; }
+.short-response label { display:block; font-size:.73rem; font-weight:800; color:var(--slate); margin-bottom:.18rem; }
+.short-response textarea { width:100%; min-height:48px; resize:vertical; border:1.5px dashed var(--border); border-radius:6px; padding:.4rem .5rem; font: .78rem/1.45 var(--ff-body); color:var(--ink); background:white; outline:none; }
+.set-controls { display:flex; justify-content:space-between; align-items:center; gap:.6rem; background:var(--purple-lt); border:1.5px solid #c4b5fd; border-radius:8px; padding:.55rem .7rem; margin:.8rem 0; }
+.set-controls p { font-size:.73rem; color:#5b21b6; font-weight:700; }
+.set-controls .commit-btn { background:var(--purple); min-height:40px; white-space:nowrap; }
+.set-locked .passage-item { background:#f1f5f9; border-color:#94a3b8; }
+.set-locked .passage-item .mc-opt:not(.selected) { opacity:.58; }
+.actor-grid { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; margin:.55rem 0; }
+.actor-grid label { background:white; border:1.5px solid var(--border); border-radius:7px; padding:.45rem .55rem; font-size:.73rem; font-weight:800; color:var(--slate); }
+.actor-grid input { width:100%; border:0; border-bottom:1px solid var(--border); margin-top:.2rem; font-size:.74rem; outline:0; }
+.audit-box { background:var(--sand-lt); border:1.5px solid #fcd34d; border-radius:10px; padding:.8rem 1rem; }
+.audit-box h3 { font-family:var(--ff-head); color:#92400e; font-size:.95rem; margin-bottom:.45rem; }
+.audit-grid { display:grid; grid-template-columns:1fr 1fr; gap:.5rem 1rem; }
+.audit-grid label { font-size:.76rem; font-weight:700; color:var(--slate); }
+.audit-grid input { width:100%; border:0; border-bottom:1.5px solid var(--border); background:transparent; outline:0; }
+.answer-key { margin-top:1rem; border:1.5px solid var(--border); border-radius:10px; background:var(--bg); padding:.75rem .9rem; }
+.answer-key summary { cursor:pointer; font-family:var(--ff-head); font-weight:700; color:var(--blue); min-height:44px; display:flex; align-items:center; }
+.answer-key p { font-size:.74rem; color:var(--slate); line-height:1.6; }
+.check-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.55rem; margin-top:.55rem; }
+.check-cell { background:white; border:1px solid var(--border); border-radius:7px; padding:.45rem; font-size:.72rem; color:var(--slate); }
+.check-cell input { width:2.2rem; border:0; border-bottom:1px solid var(--border); text-align:center; font-weight:800; }
+.source-note { font-size:.68rem; color:var(--muted); font-style:italic; margin-top:.55rem; }
+.option-note { display:block; font-size:.68rem; color:var(--muted); font-weight:600; margin-top:.12rem; }
+@media (max-width:680px){ .mini-map,.job-row,.audit-grid,.check-grid{grid-template-columns:1fr}.actor-grid{grid-template-columns:1fr}.set-controls{align-items:flex-start;flex-direction:column}.set-controls .commit-btn{width:100%} }
+@media print { .answer-key { display:none!important; } .set-controls { break-inside:avoid; } .mc-q,.prob,.passage-box{break-inside:avoid;} }
+
+
+/* ── Passage Annotation Toolbar (added from copy.html behavior) ── */
+.annotation-toolbar{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.96);border:1.5px solid rgba(0,0,0,.10);border-radius:12px;padding:5px 8px;box-shadow:0 2px 12px rgba(0,0,0,.12);margin-bottom:8px;flex-wrap:wrap;position:relative;z-index:10}
+.annot-btn{display:flex;align-items:center;justify-content:center;gap:4px;padding:4px 9px;border-radius:7px;border:1.5px solid rgba(0,0,0,.10);background:#f8f8f8;color:#374151;font-size:.72rem;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s,transform .1s;font-family:var(--ff-body);white-space:nowrap;user-select:none;min-height:30px}
+.annot-btn:hover{background:#e5e7eb;border-color:#9ca3af}.annot-btn.active{background:#374151;color:white;border-color:#374151}.annot-btn.active:hover{background:#1f2937}
+.annot-sep{width:1px;height:22px;background:rgba(0,0,0,.10);margin:0 2px}.annot-color-row{display:flex;align-items:center;gap:4px}.annot-color-swatch{width:18px;height:18px;border-radius:50%;border:2px solid rgba(0,0,0,.10);cursor:pointer;transition:transform .12s,border-color .12s;padding:0}.annot-color-swatch:hover{transform:scale(1.18)}.annot-color-swatch.active{border-color:#374151;transform:scale(1.18);box-shadow:0 0 0 2px white,0 0 0 4px #374151}
+.annot-label{font-size:.68rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em}.annotatable-passage{position:relative;cursor:text;user-select:text}.passage-highlight{border-radius:3px;padding:0 1px}.passage-underline{text-decoration:underline;text-decoration-thickness:2px}.passage-outline{outline:2px solid currentColor;outline-offset:2px;border-radius:3px}
+.passage-note{display:inline-block;width:14px;height:14px;background:#374151;color:white;border-radius:50%;font-size:.6rem;font-weight:800;text-align:center;line-height:14px;cursor:pointer;position:relative;vertical-align:super;margin-left:2px;font-style:normal}.passage-note .note-tooltip{display:none;position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#1f2937;color:white;font-size:.72rem;padding:5px 9px;border-radius:8px;z-index:200;pointer-events:none;width:max-content;max-width:220px;white-space:normal}.passage-note:hover .note-tooltip,.passage-note:focus .note-tooltip{display:block}
+.clear-annotations-btn{margin-left:auto;padding:3px 8px;border-radius:6px;background:#fee2e2;border:1.5px solid #fca5a5;color:#b91c1c;font-size:.68rem;font-weight:700;cursor:pointer;font-family:var(--ff-body);transition:background .15s;min-height:30px}.clear-annotations-btn:hover{background:#fecaca}.note-input-wrapper button{font-family:var(--ff-body)}
+@media(max-width:680px){.annotation-toolbar{position:relative;top:auto}.clear-annotations-btn{margin-left:0}}
+@media print{.annotation-toolbar{display:none!important}}
+
+</style></head><body><a class="skip-link" href="#main">Skip to homework</a><div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" onclick="clearAll()">Clear All</button></div><main id="main"><section class="sheet"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Math transfer · nonfiction evidence · November 2026</div></div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text"></label></div></header>
+<div class="score-banner"><div><div class="title">From Routines to Transfer</div><div class="sub">New questions only · one local check before every forward-only submit.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="12"> /12</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="11"> /11</div><div class="sc-lbl">ELA</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="23"> /23</div><div class="sc-lbl">Total</div></div></div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> Math items are forward-only. Commit only after you name the skill, show enough proof, and perform one local check.</p></div>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4H19v15.5H5.8A1.8 1.8 0 0 0 4 21.3" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h7M8 12h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h2>Part A — Math Retrieval</h2><span class="badge badge-blue">12 Questions · ~24 min</span></div>
+<p class="instr">Use scrap-paper thinking: factor completely, translate symbols into words, estimate before exact arithmetic, and test proportionality with two gates.</p>
+<div class="mini-map"><div class="map-step"><strong>Factor</strong><span>Every leaf prime</span></div><div class="map-step"><strong>Translate</strong><span>Say the inequality</span></div><div class="map-step"><strong>Estimate</strong><span>Predict the size</span></div><div class="map-step"><strong>Prove</strong><span>Use the measured quantity</span></div></div>
+<article class="mc-q" data-item="1"><p class="mc-q-text"><span class="qnum">1.</span> Which expression is the complete prime factorization of <span class="math">1,260</span>? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 1"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A</strong> 2<sup>2</sup> · 3<sup>2</sup> · 5 · 7</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B</strong> 2 · 3<sup>2</sup> · 5 · 14</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C</strong> 4 · 9 · 35</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D</strong> 2<sup>2</sup> · 3 · 5 · 21</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="2"><p class="mc-q-text"><span class="qnum">2.</span> Which expression is the complete prime factorization of <span class="math">2,376</span>? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 2"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A</strong> 2<sup>2</sup> · 3<sup>3</sup> · 11</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B</strong> 2<sup>3</sup> · 3<sup>3</sup> · 11</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C</strong> 2<sup>3</sup> · 3 · 9 · 11</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D</strong> 8 · 27 · 11</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="3"><p class="mc-q-text"><span class="qnum">3.</span> Solve <span class="math">−18 &gt; 6x</span>. <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 3"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A</strong> x &gt; −3</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B</strong> x &lt; −3</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C</strong> x &gt; 3</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D</strong> x &lt; 3</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="4"><p class="mc-q-text"><span class="qnum">4.</span> Solve <span class="math">7 − 5n ≤ 27</span>. <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 4"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A</strong> n ≤ −4</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B</strong> n ≥ −4</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C</strong> n ≤ 4</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D</strong> n ≥ 4</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="5"><p class="mc-q-text"><span class="qnum">5.</span> If <span class="math">x = −2</span>, what is <span class="math">|x³ − x| − |4x + 1|</span>? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 5"><label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A</strong> −1</span></label><label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B</strong> 1</span></label><label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C</strong> 11</span></label><label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D</strong> 13</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="6"><p class="mc-q-text"><span class="qnum">6.</span> If <span class="math">a = −2</span>, what is <span class="math">|2a² − 3a| − |a³ + 4|</span>? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 6"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A</strong> 6</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B</strong> 10</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C</strong> 14</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D</strong> 18</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<div class="footer-note">Page 1 · No answer earns a lock until its proof survives a five-second audit.</div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>Math Transfer</h1><div class="subtitle">Conversion estimates · proportional relationships</div></div></div><span class="badge badge-coral">Questions 7–12</span></header>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4H19v15.5H5.8A1.8 1.8 0 0 0 4 21.3" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h7M8 12h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h2>Part A — Continue</h2><span class="badge badge-coral">6 Questions · ~16 min</span></div>
+<div class="formula-strip"><span class="fs-label">Useful facts</span><span class="fml">1 gallon = 128 fluid ounces</span><span class="fml">Proportional: passes through (0, 0)</span><span class="fml">Nonzero y/x is constant</span></div>
+<article class="mc-q" data-item="7"><p class="mc-q-text"><span class="qnum">7.</span> Eight 7.5-fluid-ounce bottles of tea cost $4.96 total. To the nearest dollar, about how much would 1 gallon cost at the same rate? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 7"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A</strong> $7</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B</strong> $9</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C</strong> $11</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D</strong> $14</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="8"><p class="mc-q-text"><span class="qnum">8.</span> A 20-fluid-ounce bottle of juice costs $1.65. To the nearest dollar, about how much would 1 gallon cost at the same rate? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 8"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A</strong> $8</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B</strong> $9</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C</strong> $11</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D</strong> $13</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="9"><p class="mc-q-text"><span class="qnum">9.</span> Which table represents a proportional relationship? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 9"><label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble"></span><span><strong>A</strong> (0,0), (3,7.5), (8,20)</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble"></span><span><strong>B</strong> (0,1), (3,7.5), (8,20)</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble"></span><span><strong>C</strong> (0,0), (3,8), (8,20)</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble"></span><span><strong>D</strong> (0,0), (3,7.5), (8,21)</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="10"><p class="mc-q-text"><span class="qnum">10.</span> A table contains <span class="math">(0,0), (4,14), (10,36)</span>. Why is the relationship not proportional? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 10"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble"></span><span><strong>A</strong> It does not include the origin.</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble"></span><span><strong>B</strong> The x-values are not consecutive.</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble"></span><span><strong>C</strong> The nonzero ratios y/x are not equal.</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble"></span><span><strong>D</strong> The y-values are all even.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="11"><p class="mc-q-text"><span class="qnum">11.</span> Select the equation that represents a proportional relationship with constant of proportionality <span class="math">3.2</span>. <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 11"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble"></span><span><strong>A</strong> y = 3.2 + x</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble"></span><span><strong>B</strong> y = 3.2x</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble"></span><span><strong>C</strong> 3.2y = x</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble"></span><span><strong>D</strong> y = x/3.2 + 1</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="12"><p class="mc-q-text"><span class="qnum">12.</span> A printer produces 84 pages in 6 minutes at a constant rate. Which prediction uses the same proportional relationship? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 12"><label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble"></span><span><strong>A</strong> 126 pages in 8 minutes</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble"></span><span><strong>B</strong> 140 pages in 10 minutes</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble"></span><span><strong>C</strong> 168 pages in 14 minutes</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble"></span><span><strong>D</strong> 210 pages in 16 minutes</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<hr class="divider">
+<div class="audit-box"><h3>Math transfer audit</h3><div class="audit-grid"><label>The item on which estimation caught an error:<input type="text"></label><label>The item on which I checked two ratios:<input type="text"></label><label>The sign reversal I can explain aloud:<input type="text"></label><label>My calm response after a difficult item:<input type="text"></label></div></div>
+<div class="cat-strip" style="margin-top:1rem"><svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M16 6v20" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>Adaptive mindset:</strong> A harder-looking item is not feedback you should decode. Treat it as a fresh task and use the matching routine.</p></div>
+<div class="footer-note">Page 2 · Estimate first; exact work second; one local check last.</div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>ELA Evidence Lab</h1><div class="subtitle">Passage jobs · actor–verb relationships · relevance</div></div></div><span class="badge badge-purple">Questions 13–18</span></header>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4H19v15.5H5.8A1.8 1.8 0 0 0 4 21.3" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h7M8 12h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h2>Part B — Passage Set 1</h2><span class="badge badge-purple">6 Questions · ~16 min</span></div>
+<p class="instr">You may review within this passage set. Before submitting the set, map each paragraph’s job and verify every answer against exact text.</p>
+<div class="strategy-strip"><span class="strategy-label">Four-part map</span><span class="strategy-chip">Purpose</span><span class="strategy-chip">Paragraph job</span><span class="strategy-chip">Relationship</span><span class="strategy-chip">Evidence</span></div>
+<article class="passage-box"><div class="passage-title">Cooling One City Block</div><div class="annotation-toolbar no-print" id="toolbar-passage-1" data-passage="passage-main-1" aria-label="Passage annotation tools">
+<span class="annot-label">Tool</span>
+<button class="annot-btn active" type="button" data-tool="highlight" aria-pressed="true">🖊 Highlight</button>
+<button class="annot-btn" type="button" data-tool="underline" aria-pressed="false"><u>U</u> Underline</button>
+<button class="annot-btn" type="button" data-tool="outline" aria-pressed="false">▢ Outline</button>
+<button class="annot-btn" type="button" data-tool="note" aria-pressed="false">📝 Note</button>
+<div class="annot-sep" aria-hidden="true"></div><span class="annot-label">Color</span>
+<div class="annot-color-row">
+<button class="annot-color-swatch active" type="button" style="background:#fef08a" data-color="#fef08a" aria-label="Yellow"></button>
+<button class="annot-color-swatch" type="button" style="background:#86efac" data-color="#86efac" aria-label="Green"></button>
+<button class="annot-color-swatch" type="button" style="background:#93c5fd" data-color="#93c5fd" aria-label="Blue"></button>
+<button class="annot-color-swatch" type="button" style="background:#fca5a5" data-color="#fca5a5" aria-label="Pink"></button>
+<button class="annot-color-swatch" type="button" style="background:#c4b5fd" data-color="#c4b5fd" aria-label="Purple"></button>
+</div>
+<button class="clear-annotations-btn" type="button">✕ Clear</button>
+</div><div class="passage-text annotatable-passage" id="passage-main-1">
+<p><span class="sent-num">1</span>On sunny afternoons, the basketball court beside Harbor Middle School stayed warm long after nearby grass had cooled. Students in an environmental club wondered whether the dark pavement was storing heat.</p>
+<p><span class="sent-num">2</span>For two weeks, the club measured surface temperatures at the court, a concrete walkway, and a shaded garden. Members recorded each location at the same three times every day so that the comparisons would be consistent.</p>
+<p><span class="sent-num">3</span>A city engineer then suggested covering one small square of pavement with a pale, water-based coating. The coating was designed to reflect more sunlight than the original surface, but the engineer warned that a cooler surface might not immediately cool the surrounding air.</p>
+<p><span class="sent-num">4</span>Before the trial, residents raised practical concerns. Would glare bother nearby drivers? Would rainwater still drain safely? The team therefore tested only a narrow strip away from the street and checked it after each storm.</p>
+<p><span class="sent-num">5</span>At midday, the coated strip was usually cooler than an uncoated strip beside it. Air-temperature readings, however, varied from day to day, so the students could not claim that the coating had cooled the entire block.</p>
+<p><span class="sent-num">6</span>At the final meeting, the engineer called the strip “a useful first measurement, not a finished solution.” She recommended a larger trial that would compare several coatings and track both surface and air temperatures through an entire summer.</p>
+</div><div class="source-note">Original instructional passage created for this homework. It does not reproduce the lesson-deck passage.</div></article>
+<div class="job-row"><label class="job-card"><strong>¶1–2</strong><input type="text" aria-label="Job of paragraphs 1 and 2" placeholder="problem + method"></label><label class="job-card"><strong>¶3–4</strong><input type="text" aria-label="Job of paragraphs 3 and 4" placeholder="proposal + constraint"></label><label class="job-card"><strong>¶5–6</strong><input type="text" aria-label="Job of paragraphs 5 and 6" placeholder="result + next step"></label></div>
+<div id="set1"><article class="mc-q passage-item" data-item="13"><p class="mc-q-text"><span class="qnum">13.</span> What is the main purpose of the passage? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 13"><label class="mc-opt"><input type="radio" name="q13" value="A"><span class="bubble"></span><span><strong>A</strong> To prove that pale pavement always lowers city air temperatures</span></label><label class="mc-opt"><input type="radio" name="q13" value="B"><span class="bubble"></span><span><strong>B</strong> To describe a small cooling trial, its limits, and a next step</span></label><label class="mc-opt"><input type="radio" name="q13" value="C"><span class="bubble"></span><span><strong>C</strong> To argue that residents should stop driving near school courts</span></label><label class="mc-opt"><input type="radio" name="q13" value="D"><span class="bubble"></span><span><strong>D</strong> To compare the cost of gardens with the cost of pavement</span></label></div></article>
+<article class="mc-q passage-item" data-item="14"><p class="mc-q-text"><span class="qnum">14.</span> What is the primary job of paragraph 4? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 14"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble"></span><span><strong>A</strong> It introduces the original heat problem.</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble"></span><span><strong>B</strong> It reports the final temperature result.</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble"></span><span><strong>C</strong> It explains how concerns shaped the trial’s design.</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble"></span><span><strong>D</strong> It proves that stormwater caused the surface heat.</span></label></div></article>
+<article class="mc-q passage-item" data-item="15"><p class="mc-q-text"><span class="qnum">15.</span> Which choice best describes the relationship between the students and the engineer? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 15"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble"></span><span><strong>A</strong> The students designed the coating; the engineer measured every site.</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble"></span><span><strong>B</strong> The students gathered observations; the engineer proposed and qualified a possible intervention.</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble"></span><span><strong>C</strong> The students opposed the test; the engineer approved a citywide installation.</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble"></span><span><strong>D</strong> The students tracked traffic; the engineer studied only the garden.</span></label></div></article>
+<article class="mc-q passage-item" data-item="16"><p class="mc-q-text"><span class="qnum">16.</span> Why is the engineer’s quotation in paragraph 6 relevant to the results in paragraph 5? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 16"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble"></span><span><strong>A</strong> It turns the mixed findings into a reason for a broader, more careful trial.</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble"></span><span><strong>B</strong> It shows that the students recorded the wrong surface temperature.</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble"></span><span><strong>C</strong> It explains why residents preferred darker pavement.</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble"></span><span><strong>D</strong> It proves that one strip cooled the entire neighborhood.</span></label></div></article>
+<article class="mc-q passage-item" data-item="17"><p class="mc-q-text"><span class="qnum">17.</span> Why are the residents’ concerns important to the passage as a whole? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 17"><label class="mc-opt"><input type="radio" name="q17" value="A"><span class="bubble"></span><span><strong>A</strong> They provide the evidence that the coating reduced air temperature.</span></label><label class="mc-opt"><input type="radio" name="q17" value="B"><span class="bubble"></span><span><strong>B</strong> They explain why the team chose a limited, monitored test rather than a large installation.</span></label><label class="mc-opt"><input type="radio" name="q17" value="C"><span class="bubble"></span><span><strong>C</strong> They reveal that drivers designed the reflective coating.</span></label><label class="mc-opt"><input type="radio" name="q17" value="D"><span class="bubble"></span><span><strong>D</strong> They show that drainage mattered more than temperature.</span></label></div></article>
+<article class="mc-q passage-item" data-item="18"><p class="mc-q-text"><span class="qnum">18.</span> Which two details best support the idea that the trial produced promising but incomplete evidence? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 18"><label class="mc-opt"><input type="radio" name="q18" value="A"><span class="bubble"></span><span><strong>A</strong> The court stayed warm after grass cooled.</span></label><label class="mc-opt"><input type="radio" name="q18" value="B"><span class="bubble"></span><span><strong>B</strong> The club measured three locations at the same times.</span></label><label class="mc-opt"><input type="radio" name="q18" value="C"><span class="bubble"></span><span><strong>C</strong> The coated strip was usually cooler than the strip beside it.</span></label><label class="mc-opt"><input type="radio" name="q18" value="D"><span class="bubble"></span><span><strong>D</strong> Air-temperature readings varied from day to day.</span></label></div></article></div>
+<div class="set-controls"><p id="set1Note">Review all six responses. Once submitted, this passage set locks.</p><button class="commit-btn set-submit" data-set="set1" type="button">Submit passage set</button></div>
+<div class="footer-note">Page 3 · A true detail is not enough; it must perform the job asked in the stem.</div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>ELA Data & Scope</h1><div class="subtitle">Measured nouns · limits · whole-text importance</div></div></div><span class="badge badge-green">Questions 19–23</span></header>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4H19v15.5H5.8A1.8 1.8 0 0 0 4 21.3" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h7M8 12h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h2>Part C — Passage Set 2</h2><span class="badge badge-green">5 Questions · ~14 min</span></div>
+<p class="instr">Ask: What does the table actually count? Reject choices about people, plants, success, or opinions unless the passage—not the table—supports them.</p>
+<article class="passage-box"><div class="passage-title">When a Library Lends Seeds</div><div class="annotation-toolbar no-print" id="toolbar-passage-2" data-passage="passage-main-2" aria-label="Passage annotation tools">
+<span class="annot-label">Tool</span>
+<button class="annot-btn active" type="button" data-tool="highlight" aria-pressed="true">🖊 Highlight</button>
+<button class="annot-btn" type="button" data-tool="underline" aria-pressed="false"><u>U</u> Underline</button>
+<button class="annot-btn" type="button" data-tool="outline" aria-pressed="false">▢ Outline</button>
+<button class="annot-btn" type="button" data-tool="note" aria-pressed="false">📝 Note</button>
+<div class="annot-sep" aria-hidden="true"></div><span class="annot-label">Color</span>
+<div class="annot-color-row">
+<button class="annot-color-swatch active" type="button" style="background:#fef08a" data-color="#fef08a" aria-label="Yellow"></button>
+<button class="annot-color-swatch" type="button" style="background:#86efac" data-color="#86efac" aria-label="Green"></button>
+<button class="annot-color-swatch" type="button" style="background:#93c5fd" data-color="#93c5fd" aria-label="Blue"></button>
+<button class="annot-color-swatch" type="button" style="background:#fca5a5" data-color="#fca5a5" aria-label="Pink"></button>
+<button class="annot-color-swatch" type="button" style="background:#c4b5fd" data-color="#c4b5fd" aria-label="Purple"></button>
+</div>
+<button class="clear-annotations-btn" type="button">✕ Clear</button>
+</div><div class="passage-text annotatable-passage" id="passage-main-2">
+<p><span class="sent-num">1</span>The West Branch Library began lending packets of vegetable and flower seeds alongside books. Visitors could take a packet, grow the plants, and later return newly collected seeds if they wished.</p>
+<p><span class="sent-num">2</span>Librarians did not treat every returned seed as interchangeable. Volunteers labeled the plant variety, the collection year, and any unusual growing conditions. Packets with missing information were offered only for practice gardens.</p>
+<p><span class="sent-num">3</span>Workshops taught borrowers how to dry seeds and keep varieties separate. According to the program coordinator, careful labeling mattered because future gardeners needed to know what they were planting, not merely how many seeds were available.</p>
+<p><span class="sent-num">4</span>The lending totals rose overall during the first five months, although April was slightly lower than March. The coordinator cautioned that packet counts did not reveal how many plants survived or how many borrowers eventually returned seeds.</p>
+<p><span class="sent-num">5</span>For the next season, the library plans to pair its lending count with short, optional garden reports. Those reports could show whether the program is distributing packets, supporting successful gardens, or doing both.</p>
+</div><table class="data-table"><caption>Seed packets borrowed</caption><thead><tr><th>Month</th><th>January</th><th>February</th><th>March</th><th>April</th><th>May</th></tr></thead><tbody><tr><th>Packets</th><td>42</td><td>56</td><td>81</td><td>79</td><td>105</td></tr></tbody></table><div class="source-note">Original instructional passage and data created for this homework.</div></article>
+<div id="set2"><article class="mc-q passage-item" data-item="19"><p class="mc-q-text"><span class="qnum">19.</span> Which statement is directly supported by the table? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 19"><label class="mc-opt"><input type="radio" name="q19" value="A"><span class="bubble"></span><span><strong>A</strong> Every month had more borrowers than the month before.</span></label><label class="mc-opt"><input type="radio" name="q19" value="B"><span class="bubble"></span><span><strong>B</strong> April had two fewer packet loans than March.</span></label><label class="mc-opt"><input type="radio" name="q19" value="C"><span class="bubble"></span><span><strong>C</strong> May had more successful gardens than January.</span></label><label class="mc-opt"><input type="radio" name="q19" value="D"><span class="bubble"></span><span><strong>D</strong> Exactly 105 people borrowed seeds in May.</span></label></div></article>
+<article class="mc-q passage-item" data-item="20"><p class="mc-q-text"><span class="qnum">20.</span> Why does paragraph 4 caution readers about the lending totals? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 20"><label class="mc-opt"><input type="radio" name="q20" value="A"><span class="bubble"></span><span><strong>A</strong> Packet counts do not measure plant survival or seed returns.</span></label><label class="mc-opt"><input type="radio" name="q20" value="B"><span class="bubble"></span><span><strong>B</strong> The April count was probably recorded incorrectly.</span></label><label class="mc-opt"><input type="radio" name="q20" value="C"><span class="bubble"></span><span><strong>C</strong> The table excludes flower seeds.</span></label><label class="mc-opt"><input type="radio" name="q20" value="D"><span class="bubble"></span><span><strong>D</strong> Volunteers stopped labeling packets after March.</span></label></div></article>
+<article class="mc-q passage-item" data-item="21"><p class="mc-q-text"><span class="qnum">21.</span> How is paragraph 3 relevant to paragraph 2? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 21"><label class="mc-opt"><input type="radio" name="q21" value="A"><span class="bubble"></span><span><strong>A</strong> It explains why the labeling practices in paragraph 2 matter to later gardeners.</span></label><label class="mc-opt"><input type="radio" name="q21" value="B"><span class="bubble"></span><span><strong>B</strong> It argues that workshops should replace seed lending.</span></label><label class="mc-opt"><input type="radio" name="q21" value="C"><span class="bubble"></span><span><strong>C</strong> It shows that all returned seeds were placed in practice gardens.</span></label><label class="mc-opt"><input type="radio" name="q21" value="D"><span class="bubble"></span><span><strong>D</strong> It proves that labels increased the number of packets borrowed.</span></label></div></article>
+<article class="mc-q passage-item" data-item="22"><p class="mc-q-text"><span class="qnum">22.</span> Why is the plan in paragraph 5 important to the passage as a whole? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 22"><label class="mc-opt"><input type="radio" name="q22" value="A"><span class="bubble"></span><span><strong>A</strong> It would replace the library’s packet count with a list of workshop dates.</span></label><label class="mc-opt"><input type="radio" name="q22" value="B"><span class="bubble"></span><span><strong>B</strong> It addresses a limitation in the current evidence by adding information about outcomes.</span></label><label class="mc-opt"><input type="radio" name="q22" value="C"><span class="bubble"></span><span><strong>C</strong> It guarantees that every borrower will return seeds.</span></label><label class="mc-opt"><input type="radio" name="q22" value="D"><span class="bubble"></span><span><strong>D</strong> It explains why April’s total was lower than March’s.</span></label></div></article>
+<article class="mc-q passage-item" data-item="23"><p class="mc-q-text"><span class="qnum">23.</span> Which sentence best states a central idea of the passage? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 23"><label class="mc-opt"><input type="radio" name="q23" value="A"><span class="bubble"></span><span><strong>A</strong> A seed-lending program needs both careful information and measurements that match its goals.</span></label><label class="mc-opt"><input type="radio" name="q23" value="B"><span class="bubble"></span><span><strong>B</strong> Libraries should lend seeds only when every packet will be returned.</span></label><label class="mc-opt"><input type="radio" name="q23" value="C"><span class="bubble"></span><span><strong>C</strong> Monthly lending totals are the only reliable measure of a garden program.</span></label><label class="mc-opt"><input type="radio" name="q23" value="D"><span class="bubble"></span><span><strong>D</strong> Practice gardens are more valuable than successful home gardens.</span></label></div></article></div>
+<div class="set-controls"><p id="set2Note">Review all five responses. Submit only after the table-noun check.</p><button class="commit-btn set-submit" data-set="set2" type="button">Submit passage set</button></div>
+<hr class="divider">
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4H19v15.5H5.8A1.8 1.8 0 0 0 4 21.3" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h7M8 12h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h2>Part D — Error Log</h2><span class="badge badge-sand">8 min</span></div>
+<div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Reusable rule / fix</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table><div class="error-type-pills"><span class="pill pill-cg">CG · Careless / Graph</span><span class="pill pill-ce">CE · Concept / Evidence</span><span class="pill pill-ru">RU · Rule / Understanding</span></div></div>
+<div class="reflect-box"><h3>CAT Reflection</h3><div class="reflect-lines"><label class="reflect-line">The math routine I retrieved fastest was <input type="text"></label><label class="reflect-line">The evidence trap I rejected was <input type="text"></label><label class="reflect-line">Before I click Next, my local check will be <input type="text"></label><label class="reflect-line">When an item becomes harder, I will <input type="text"></label></div></div>
+<details class="answer-key no-print"><summary>Teacher / tutor key — open only during review</summary><p><strong>Math:</strong> 1 A, 2 B, 3 B, 4 B, 5 A, 6 B, 7 C, 8 C, 9 A, 10 C, 11 B, 12 B.<br><strong>Passage 1:</strong> 13 B, 14 C, 15 B, 16 A, 17 B, 18 C and D.<br><strong>Passage 2:</strong> 19 B, 20 A, 21 A, 22 B, 23 A.</p><div class="check-grid"><label class="check-cell">Math <input type="number" min="0" max="12"> / 12</label><label class="check-cell">ELA <input type="number" min="0" max="11"> / 11</label><label class="check-cell">Total <input type="number" min="0" max="23"> / 23</label></div></details>
+{footer(4,'Record the first wrong decision, then write the rule that repairs it.')}</section></main><script>
+function selectOption(label){
+  const card=label.closest('.mc-q');
+  if(card.classList.contains('locked')) return;
+  card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('.bubble').textContent='';});
+  label.classList.add('selected'); label.querySelector('.bubble').textContent='✓'; label.querySelector('input').checked=true;
+}
+function lockCard(card){
+  if(!card.querySelector('input:checked')){alert('Choose an answer before committing.');return;}
+  card.classList.add('locked'); card.querySelectorAll('input,button').forEach(e=>e.disabled=true);
+  const note=card.querySelector('.lock-note'); if(note) note.textContent='Locked — response committed.';
+}
+function submitSet(id,button){
+  const set=document.getElementById(id), cards=[...set.querySelectorAll('.passage-item')];
+  if(cards.some(c=>!c.querySelector('input:checked'))){alert('Answer every question in this passage set before submitting it.');return;}
+  if(!confirm('Submit this passage set? You will not be able to change its answers.')) return;
+  cards.forEach(c=>{c.classList.add('locked');c.querySelectorAll('input').forEach(e=>e.disabled=true);});
+  set.classList.add('set-locked'); button.disabled=true;
+  const note=document.getElementById(id+'Note'); if(note) note.textContent='Passage set locked — responses committed.';
+}
+function clearAll(){
+  if(!confirm('Clear every answer, annotation, work box, and committed response?')) return;
+  if(typeof clearAllPassageAnnotations==='function')clearAllPassageAnnotations();
+  document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio')e.checked=false;else e.value='';e.disabled=false;});
+  document.querySelectorAll('select').forEach(e=>{e.selectedIndex=0;e.disabled=false;});
+  document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');e.querySelector('.bubble').textContent='';});
+  document.querySelectorAll('.mc-q').forEach(e=>e.classList.remove('locked'));
+  document.querySelectorAll('.set-locked').forEach(e=>e.classList.remove('set-locked'));
+  document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);
+  document.querySelectorAll('.lock-note').forEach(e=>e.textContent='Choose, audit, then commit.');
+  document.getElementById('set1Note').textContent='Review all six responses. Once submitted, this passage set locks.';
+  document.getElementById('set2Note').textContent='Review all five responses. Submit only after the table-noun check.';
+  document.querySelectorAll('[contenteditable]').forEach(e=>e.innerHTML='&nbsp;');
+}
+document.querySelectorAll('.mc-opt').forEach(l=>{l.addEventListener('click',()=>selectOption(l));l.querySelector('input').addEventListener('change',()=>selectOption(l));});
+document.querySelectorAll('.mc-q:not(.passage-item) .commit-btn').forEach(b=>b.addEventListener('click',()=>lockCard(b.closest('.mc-q'))));
+document.querySelectorAll('.set-submit').forEach(b=>b.addEventListener('click',()=>submitSet(b.dataset.set,b)));
+document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';}));
+
+
+/* ── Passage Annotation System (mirrors copy.html; supports both passages) ── */
+const passageAnnotStates = new Map();
+
+document.querySelectorAll('.annotation-toolbar[data-passage]').forEach(function(toolbar){
+  const passageId = toolbar.dataset.passage;
+  passageAnnotStates.set(passageId,{tool:'highlight',color:'#fef08a',noteCount:0});
+  toolbar.querySelectorAll('.annot-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      const state=passageAnnotStates.get(passageId); state.tool=btn.dataset.tool;
+      toolbar.querySelectorAll('.annot-btn').forEach(function(b){b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',b===btn?'true':'false')});
+    });
+  });
+  toolbar.querySelectorAll('.annot-color-swatch').forEach(function(swatch){
+    swatch.addEventListener('click',function(){
+      passageAnnotStates.get(passageId).color=swatch.dataset.color;
+      toolbar.querySelectorAll('.annot-color-swatch').forEach(function(s){s.classList.toggle('active',s===swatch)});
+    });
+  });
+  toolbar.querySelector('.clear-annotations-btn').addEventListener('click',function(){clearPassageAnnotations(passageId)});
+  const passage=document.getElementById(passageId);
+  passage.addEventListener('mouseup',function(){annotateCurrentSelection(passageId)});
+  passage.addEventListener('touchend',function(){setTimeout(function(){annotateCurrentSelection(passageId)},100)},{passive:true});
+});
+
+function annotateCurrentSelection(passageId){
+  const passage=document.getElementById(passageId),sel=window.getSelection();
+  if(!passage||!sel||sel.rangeCount===0||sel.isCollapsed)return;
+  const range=sel.getRangeAt(0);
+  if(!passage.contains(range.commonAncestorContainer))return;
+  applyPassageAnnotation(passageId,range);
+}
+
+function unwrapAnnotation(el){
+  const parent=el&&el.parentNode;if(!parent)return;
+  while(el.firstChild)parent.insertBefore(el.firstChild,el);
+  parent.removeChild(el);parent.normalize();
+}
+
+function clearPassageAnnotations(passageId){
+  const passage=document.getElementById(passageId);if(!passage)return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){el.remove()});
+  passage.querySelectorAll('.passage-note').forEach(function(el){el.remove()});
+  passage.querySelectorAll('.passage-highlight,.passage-underline,.passage-outline').forEach(unwrapAnnotation);
+  const state=passageAnnotStates.get(passageId);if(state)state.noteCount=0;
+}
+
+function clearAllPassageAnnotations(){
+  passageAnnotStates.forEach(function(_,passageId){clearPassageAnnotations(passageId)});
+}
+
+function wrapRange(range,className,color){
+  const span=document.createElement('span');span.className=className;
+  if(className==='passage-highlight'){span.style.backgroundColor=color;span.style.color='#1f2937'}
+  if(className==='passage-underline')span.style.textDecorationColor=color!=='#fef08a'?color:'#374151';
+  if(className==='passage-outline')span.style.outlineColor=color!=='#fef08a'?color:'#374151';
+  try{range.surroundContents(span)}catch(e){try{span.appendChild(range.extractContents());range.insertNode(span)}catch(e2){return null}}
+  return span;
+}
+
+function applyPassageAnnotation(passageId,range){
+  const state=passageAnnotStates.get(passageId);if(!state||!range||range.collapsed)return;
+  if(state.tool!=='note'){
+    const className=state.tool==='highlight'?'passage-highlight':state.tool==='underline'?'passage-underline':'passage-outline';
+    wrapRange(range,className,state.color);window.getSelection().removeAllRanges();return;
+  }
+  const pendingSpan=wrapRange(range,'passage-highlight','#fef3c7');if(!pendingSpan)return;
+  pendingSpan.classList.add('passage-note-pending');pendingSpan.style.borderBottom='2px dashed #f59e0b';window.getSelection().removeAllRanges();
+  const wrapper=document.createElement('span');wrapper.className='note-input-wrapper';wrapper.style.cssText='display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);vertical-align:middle;font-style:normal;';
+  const input=document.createElement('input');input.type='text';input.placeholder='Type note...';input.setAttribute('aria-label','Annotation note');input.style.cssText='border:none;outline:none;font-size:.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+  const ok=document.createElement('button');ok.type='button';ok.textContent='✓';ok.setAttribute('aria-label','Save note');ok.style.cssText='border:none;background:#374151;color:white;border-radius:4px;width:22px;height:22px;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+  const cancel=document.createElement('button');cancel.type='button';cancel.textContent='✕';cancel.setAttribute('aria-label','Cancel note');cancel.style.cssText='border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:22px;height:22px;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+  wrapper.append(input,ok,cancel);pendingSpan.after(wrapper);input.focus();
+  function discard(){wrapper.remove();unwrapAnnotation(pendingSpan)}
+  function confirmNote(){
+    const text=input.value.trim();wrapper.remove();if(!text){unwrapAnnotation(pendingSpan);return}
+    state.noteCount++;pendingSpan.className='passage-highlight';pendingSpan.style.backgroundColor='#fef3c7';pendingSpan.style.borderBottom='';
+    const marker=document.createElement('span');marker.className='passage-note';marker.tabIndex=0;marker.textContent=state.noteCount;marker.setAttribute('aria-label','Note '+state.noteCount+': '+text);
+    const tip=document.createElement('span');tip.className='note-tooltip';tip.textContent='Note: '+text;marker.appendChild(tip);pendingSpan.after(marker);
+  }
+  ok.addEventListener('click',confirmNote);cancel.addEventListener('click',discard);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();confirmNote()}else if(e.key==='Escape'){e.preventDefault();discard()}});
+}
+
+</script></body></html>
