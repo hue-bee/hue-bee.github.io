@@ -1,1 +1,549 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Avik Week 1 SHSAT CAT Homework</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* CAT activity additions */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.toolbar .print-btn{margin:0;min-height:44px}.toolbar .secondary{background:var(--muted)}
+.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue)}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.lvl-1{background:#eee;color:#1f2937}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.4rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800;cursor:pointer}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.sent-num{background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-weight:800;color:#374151;font-size:.72rem}
+.graph-audit{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .55rem;margin-top:.5rem}.graph-audit label{font-size:.7rem;font-weight:800;color:var(--muted)}.graph-audit select,.graph-audit input{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.22rem .35rem;font-size:.75rem;margin-top:.12rem;min-height:34px}.number-line{display:block;width:100%;height:42px;margin:.2rem 0;color:#64748b}.domain-note{font-size:.7rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.25rem .4rem;margin-top:.35rem}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.score-input{width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.6);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}
+.section-icon{width:24px;color:var(--blue);flex:0 0 auto}.hw-header-left h1{font-weight:800}.prob select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem;font-size:.78rem}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.mc-opts,.prob-grid{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.95);padding:.55rem;margin:0;z-index:10;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.graph-audit{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}}
+@media print{.commit-row{display:none!important}}
+
+
+/* Week 1 CAT systems homework additions */
+.progress-banner{display:flex;align-items:center;justify-content:space-between;gap:.8rem;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem 1rem;margin-bottom:1.1rem;flex-wrap:wrap}.progress-banner strong{font-family:var(--ff-head);color:#92400e}.progress-count{font-family:var(--ff-head);font-weight:800;color:#92400e;font-variant-numeric:tabular-nums}.micro{font-size:.72rem;color:var(--muted);line-height:1.45}.item-card.correct{border-color:#86efac;background:var(--green-lt)}.item-card.incorrect{border-color:#fca5a5;background:var(--coral-lt)}.feedback{display:none;margin-top:.55rem;padding:.45rem .6rem;border-radius:6px;background:white;font-size:.73rem;line-height:1.45;color:var(--slate);font-weight:600}.checked .feedback{display:block}.entry-row{display:flex;align-items:center;gap:.55rem;margin-top:.45rem;flex-wrap:wrap}.entry-input{min-height:44px;min-width:150px;flex:1;border:1.5px solid var(--border);border-radius:6px;background:white;padding:.35rem .55rem;font-family:var(--ff-body);font-size:.82rem;color:var(--ink);outline:none}.entry-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12)}.multi-note{font-size:.7rem;color:var(--purple);font-weight:800;margin:.2rem 0}.mc-opt input[type=checkbox]{display:none}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:white}.passage-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.7rem;background:var(--purple-lt);border:1.5px solid #c4b5fd;border-radius:9px;padding:.6rem .8rem;margin:.8rem 0}.passage-toolbar .commit-btn{background:var(--purple)}.passage-toolbar .lock-note{color:var(--purple)}.grrsc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin:.6rem 0}.grrsc-cell{background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:8px;padding:.5rem}.grrsc-cell strong{display:block;font-family:var(--ff-head);color:var(--blue);font-size:.8rem;margin-bottom:.25rem}.grrsc-cell textarea{width:100%;min-height:62px;resize:vertical;border:1px dashed var(--border);border-radius:5px;padding:.35rem;font:inherit;font-size:.72rem;background:white}.teachback-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.teachback{background:var(--green-lt);border:1.5px solid #86efac;border-radius:9px;padding:.65rem}.teachback label{display:block;font-size:.76rem;font-weight:800;color:var(--green);margin-bottom:.3rem}.teachback textarea{width:100%;min-height:58px;border:1px dashed #86efac;border-radius:5px;padding:.4rem;font:inherit;font-size:.75rem;background:white}.key-panel{margin-top:1rem;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);padding:.8rem}.key-panel summary{cursor:pointer;font-family:var(--ff-head);font-size:.86rem;font-weight:800;color:var(--blue);min-height:44px;display:flex;align-items:center}.key-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.45rem;margin-top:.5rem;font-size:.73rem;color:var(--slate)}.key-item{background:white;border:1px solid var(--border);border-radius:6px;padding:.4rem .5rem}.check-btn{background:var(--green)}.check-btn:hover{background:#15803d}.status-msg{text-align:center;font-size:.76rem;font-weight:700;color:var(--slate);min-height:1.2rem;margin:.45rem 0}.set-label{display:inline-flex;align-items:center;gap:.3rem;background:var(--purple-lt);border:1px solid #c4b5fd;border-radius:20px;color:var(--purple);font-size:.67rem;font-weight:800;padding:2px 9px;margin-bottom:.45rem}.section-icon{font-style:normal}.locked .entry-input{background:#f1f5f9}.locked .mc-opt:not(.selected){opacity:.58}.locked .commit-btn{display:none}
+@media(max-width:680px){.grrsc-grid{grid-template-columns:1fr}.teachback-grid,.key-grid{grid-template-columns:1fr}.entry-input{width:100%}}
+@media print{.feedback,.key-panel,.status-msg{display:none!important}.item-card.correct,.item-card.incorrect{background:var(--bg)!important;border-color:var(--border)!important}.grrsc-grid{grid-template-columns:repeat(5,1fr)}.teachback-grid{grid-template-columns:1fr 1fr}}
+</style></head><body><a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" onclick="clearAll()">Clear All</button></div>
+<main id="main"><section class="sheet">
+<header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Avik · Diagnostic Autopsy, G-R-R-S-C &amp; Forward-Only Practice · November 2026</div></div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text"></label></div></header>
+<div class="score-banner"><div><div class="title">Week 1 Independent Activity</div><div class="sub">Lock each standalone response. Keep the passage set editable until you submit the whole set.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input id="processScore" class="score-input" readonly> / 6</div><div class="sc-lbl">Systems</div></div><div class="score-cell"><div class="sc-val"><input id="mathScore" class="score-input" readonly> / 8</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val"><input id="elaScore" class="score-input" readonly> / 8</div><div class="sc-lbl">ELA</div></div><div class="score-cell"><div class="sc-val"><input id="totalScore" class="score-input" readonly> / 22</div><div class="sc-lbl">Total</div></div></div></div>
+<div class="progress-banner"><div><strong>Commitment tracker</strong><div class="micro">This page simulates forward-only decisions; it does not adapt item difficulty.</div></div><div class="progress-count"><span id="committedCount">0</span> / 22 locked</div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT practice rule:</strong> Before advancing, check <strong>target · unit · sign · field</strong>. Mathematics and standalone ELA responses lock after you move on; questions in the current ELA passage set may be revised until the set is submitted.</p></div>
+<div class="section-hd"><span class="icon">🔒</span><h2>Part A — CAT Rules &amp; Error Codes</h2><span class="badge badge-blue">6 Questions · ~10 min</span></div><p class="instr">Choose the smallest code that explains the first failure. Add a second code only when it changes the remedy.</p>
+<article class="mc-q item-card" data-item="1" data-answer="B" data-domain="process"><p class="mc-q-text"><span class="qnum">1.</span> A student answers a Mathematics item and selects <em>Next</em>. What should the student expect? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 1"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A)</strong> The item remains available until the section ends.</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B)</strong> The response locks, and the item cannot be reopened.</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C)</strong> The item can be reopened only if it was incorrect.</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D)</strong> The test pauses so the student can review.</span></label></div><div class="feedback"><strong>Answer:</strong> B. Mathematics items become unavailable after the student advances.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="2" data-answer="C" data-domain="process"><p class="mc-q-text"><span class="qnum">2.</span> Which action is allowed before an ELA passage set is submitted? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 2"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A)</strong> Return to any earlier standalone ELA item.</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B)</strong> Skip every question in the set and submit blanks.</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C)</strong> Revise responses to questions inside that same passage set.</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D)</strong> Change a response from the completed Math section.</span></label></div><div class="feedback"><strong>Answer:</strong> C. Responses within the current passage set may be changed before the set is submitted.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="3" data-answer="B" data-domain="process"><p class="mc-q-text"><span class="qnum">3.</span> Halfway through a CAT section, several items begin to feel harder. Which interpretation best supports good decision-making? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 3"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A)</strong> The test is punishing the student for working slowly.</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B)</strong> Earlier responses may have raised the current score estimate; use the same careful process.</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C)</strong> The remaining items no longer count.</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D)</strong> The student should guess quickly so easier items appear.</span></label></div><div class="feedback"><strong>Answer:</strong> B. Increased difficulty may follow stronger earlier performance; the correct response is steady, evidence-based work.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="4" data-answer="B" data-domain="process"><p class="mc-q-text"><span class="qnum">4.</span> A student calculates a rectangle’s area correctly as 54 square inches but enters “54 inches.” Which error code is most precise? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 4"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A)</strong> Concept</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B)</strong> Unit</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C)</strong> Time</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D)</strong> Evidence</span></label></div><div class="feedback"><strong>Answer:</strong> B. The number is correct, but the measure is mislabeled.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="5" data-answer="A,C" data-domain="process" data-select-count="2"><p class="mc-q-text"><span class="qnum">5.</span> A problem asks for the number of blue tiles. The student’s algebra correctly finds the number of red tiles, and the student submits that value. Which two codes best describe the failure? <span class="lvl lvl-4">L4</span></p><p class="multi-note">Select exactly 2 answers.</p><div class="mc-opts" role="group" aria-label="Question 5"><label class="mc-opt"><input type="checkbox" name="q5" value="A"><span class="bubble"></span><span><strong>A)</strong> Reading/target</span></label><label class="mc-opt"><input type="checkbox" name="q5" value="B"><span class="bubble"></span><span><strong>B)</strong> Arithmetic</span></label><label class="mc-opt"><input type="checkbox" name="q5" value="C"><span class="bubble"></span><span><strong>C)</strong> Entry</span></label><label class="mc-opt"><input type="checkbox" name="q5" value="D"><span class="bubble"></span><span><strong>D)</strong> Time</span></label></div><div class="feedback"><strong>Answer:</strong> A and C. The student solved for the wrong target and then entered that nonrequested value.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="6" data-answer="B" data-domain="process"><p class="mc-q-text"><span class="qnum">6.</span> A student knows the correct percent method, writes every setup line, but multiplies 18 × 4 as 64. Which code identifies the first wrong step? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 6"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A)</strong> Translation</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B)</strong> Arithmetic</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C)</strong> Trap</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D)</strong> Concept</span></label></div><div class="feedback"><strong>Answer:</strong> B. The method is intact; the first incorrect step is computation.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<hr class="divider"><div class="section-hd"><span class="icon">∑</span><h2>Part B — Forward-Only Math</h2><span class="badge badge-sand">8 Questions · ~22 min</span></div><p class="instr">Write G-R-R-S-C on paper. Use equal parts, a baseline-and-extras model, a ratio table, or an equation—whichever makes the relationships clearest.</p><div class="strategy-strip"><span class="strategy-label">G-R-R-S-C</span><span class="strategy-chip">Goal</span><span class="strategy-chip">Relevant facts</span><span class="strategy-chip">Representation</span><span class="strategy-chip">Solve</span><span class="strategy-chip">Check</span></div>
+<article class="mc-q item-card" data-item="7" data-answer="C" data-domain="math"><p class="mc-q-text"><span class="qnum">7.</span> Evaluate: <strong>−8 − (−13)</strong>. <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 7"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A)</strong> −21</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B)</strong> −5</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C)</strong> 5</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D)</strong> 21</span></label></div><div class="feedback"><strong>Answer:</strong> C. Subtracting a negative gives −8 + 13 = 5.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="8" data-answer="B" data-domain="math"><p class="mc-q-text"><span class="qnum">8.</span> Which fraction is equivalent to <strong>0.375</strong>? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 8"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A)</strong> 3/5</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B)</strong> 3/8</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C)</strong> 5/8</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D)</strong> 37/50</span></label></div><div class="feedback"><strong>Answer:</strong> B. 0.375 = 375/1000 = 3/8.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="9" data-answer="6" data-domain="math"><p class="mc-q-text"><span class="qnum">9.</span> A school club scheduled 29 events. Five were canceled. Of the events held, there were three times as many indoor events as outdoor events. How many outdoor events were held? <span class="lvl lvl-3">L3</span></p><div class="entry-row"><label class="sr-only" for="q9">Answer to question 9</label><input id="q9" class="entry-input" name="q9" inputmode="decimal" autocomplete="off" placeholder="Enter your answer"><strong>events</strong></div><div class="feedback"><strong>Answer:</strong> 6. After 5 cancellations, 24 events remain. One outdoor part plus three indoor parts gives 4 equal parts, so 24 ÷ 4 = 6.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="10" data-answer="C" data-domain="math"><p class="mc-q-text"><span class="qnum">10.</span> A rental shop has 31 scooters and tricycles. Together they have 81 wheels. How many tricycles are there? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 10"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble"></span><span><strong>A)</strong> 12</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble"></span><span><strong>B)</strong> 15</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble"></span><span><strong>C)</strong> 19</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble"></span><span><strong>D)</strong> 23</span></label></div><div class="feedback"><strong>Answer:</strong> C. A 2-wheel baseline gives 62 wheels; the 19 extra wheels identify 19 tricycles.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="11" data-answer="B" data-domain="math"><p class="mc-q-text"><span class="qnum">11.</span> Two storage shelves hold 164 folders. The upper shelf holds 26 more folders than the lower shelf. How many folders are on the lower shelf? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 11"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble"></span><span><strong>A)</strong> 64</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble"></span><span><strong>B)</strong> 69</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble"></span><span><strong>C)</strong> 82</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble"></span><span><strong>D)</strong> 95</span></label></div><div class="feedback"><strong>Answer:</strong> B. Remove the extra 26, then split: (164 − 26) ÷ 2 = 69.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="12" data-answer="42" data-domain="math"><p class="mc-q-text"><span class="qnum">12.</span> Seven identical notebooks cost $24.50. At the same rate, what is the cost of 12 notebooks? <span class="lvl lvl-2">L2</span></p><div class="entry-row"><label class="sr-only" for="q12">Answer to question 12</label><input id="q12" class="entry-input" name="q12" inputmode="decimal" autocomplete="off" placeholder="Enter your answer"><strong>dollars</strong></div><div class="feedback"><strong>Answer:</strong> $42. Each notebook costs $24.50 ÷ 7 = $3.50; 12 × $3.50 = $42.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="13" data-answer="A,C" data-domain="math" data-select-count="2"><p class="mc-q-text"><span class="qnum">13.</span> Select both expressions equal to <strong>35% of 240</strong>. <span class="lvl lvl-2">L2</span></p><p class="multi-note">Select exactly 2 answers.</p><div class="mc-opts" role="group" aria-label="Question 13"><label class="mc-opt"><input type="checkbox" name="q13" value="A"><span class="bubble"></span><span><strong>A)</strong> 0.35 × 240</span></label><label class="mc-opt"><input type="checkbox" name="q13" value="B"><span class="bubble"></span><span><strong>B)</strong> 35 × 240</span></label><label class="mc-opt"><input type="checkbox" name="q13" value="C"><span class="bubble"></span><span><strong>C)</strong> (35/100) × 240</span></label><label class="mc-opt"><input type="checkbox" name="q13" value="D"><span class="bubble"></span><span><strong>D)</strong> 240 ÷ 0.35</span></label></div><div class="feedback"><strong>Answer:</strong> A and C. Both 0.35 and 35/100 represent 35%.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="14" data-answer="B" data-domain="math"><p class="mc-q-text"><span class="qnum">14.</span> A rectangle’s length is 3 inches greater than its width. Its perimeter is 38 inches. What is the rectangle’s area? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 14"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble"></span><span><strong>A)</strong> 80 square inches</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble"></span><span><strong>B)</strong> 88 square inches</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble"></span><span><strong>C)</strong> 96 square inches</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble"></span><span><strong>D)</strong> 104 square inches</span></label></div><div class="feedback"><strong>Answer:</strong> B. If width is w, then 2w + 2(w + 3) = 38, so w = 8 and length = 11; area = 88 square inches.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<hr class="divider"><div class="section-hd"><span class="icon">✎</span><h2>Part C — Standalone ELA</h2><span class="badge badge-green">4 Questions · ~8 min</span></div><p class="instr">Name the tested rule or relationship, prove it with words from the sentence, then commit.</p>
+<article class="mc-q item-card" data-item="15" data-answer="C" data-domain="ela"><p class="mc-q-text"><span class="qnum">15.</span> Which revision corrects the misplaced modifier?<br><em>After reviewing the blueprints, the doorway measurement seemed incorrect to Leila.</em> <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 15"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble"></span><span><strong>A)</strong> After reviewing the blueprints, the doorway measurement was incorrect.</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble"></span><span><strong>B)</strong> The blueprints, after reviewing, made Leila question the doorway.</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble"></span><span><strong>C)</strong> After reviewing the blueprints, Leila noticed that the doorway measurement seemed incorrect.</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble"></span><span><strong>D)</strong> Leila, the doorway measurement seemed incorrect after reviewing the blueprints.</span></label></div><div class="feedback"><strong>Answer:</strong> C. Leila—not the measurement—reviewed the blueprints.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="16" data-answer="B" data-domain="ela"><p class="mc-q-text"><span class="qnum">16.</span> Choose the punctuation that best completes the sentence:<br><em>The museum closed at six ___ however, the restoration crew remained until midnight.</em> <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 16"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble"></span><span><strong>A)</strong> comma</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble"></span><span><strong>B)</strong> semicolon</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble"></span><span><strong>C)</strong> apostrophe</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble"></span><span><strong>D)</strong> no punctuation</span></label></div><div class="feedback"><strong>Answer:</strong> B. A semicolon may join the independent clauses before the conjunctive adverb “however.”</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="17" data-answer="C" data-domain="ela"><p class="mc-q-text"><span class="qnum">17.</span> Which revision combines the sentences most effectively?<br><em>The library installed motion sensors. The sensors reduce electricity use in empty rooms.</em> <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 17"><label class="mc-opt"><input type="radio" name="q17" value="A"><span class="bubble"></span><span><strong>A)</strong> The library installed motion sensors, they reduce electricity use in empty rooms.</span></label><label class="mc-opt"><input type="radio" name="q17" value="B"><span class="bubble"></span><span><strong>B)</strong> Reducing electricity, the empty rooms had sensors installed by the library.</span></label><label class="mc-opt"><input type="radio" name="q17" value="C"><span class="bubble"></span><span><strong>C)</strong> The library installed motion sensors that reduce electricity use in empty rooms.</span></label><label class="mc-opt"><input type="radio" name="q17" value="D"><span class="bubble"></span><span><strong>D)</strong> The library installed sensors and the library reduces rooms and electricity use.</span></label></div><div class="feedback"><strong>Answer:</strong> C. The relative clause clearly and concisely explains what the sensors do.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q item-card" data-item="18" data-answer="B" data-domain="ela"><p class="mc-q-text"><span class="qnum">18.</span> The first prototype was inexpensive to build. ___, it failed when exposed to heavy rain. Which transition best completes the text? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 18"><label class="mc-opt"><input type="radio" name="q18" value="A"><span class="bubble"></span><span><strong>A)</strong> Similarly</span></label><label class="mc-opt"><input type="radio" name="q18" value="B"><span class="bubble"></span><span><strong>B)</strong> However</span></label><label class="mc-opt"><input type="radio" name="q18" value="C"><span class="bubble"></span><span><strong>C)</strong> For example</span></label><label class="mc-opt"><input type="radio" name="q18" value="D"><span class="bubble"></span><span><strong>D)</strong> Therefore</span></label></div><div class="feedback"><strong>Answer:</strong> B. “However” signals the contrast between low cost and poor performance.</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<hr class="divider"><div class="section-hd"><span class="icon">▤</span><h2>Part D — ELA Passage Set</h2><span class="badge badge-purple">4 Questions · ~12 min</span></div><p class="instr">Read for problem → response → result. You may revise any answer in this set until selecting “Submit passage set.”</p>
+<div class="passage-box"><div class="set-label">ELA passage set · editable until submission</div><h3 class="passage-title">A Garden That Collects Rain</h3><div class="passage-text" style="column-count:1"><p><span class="sent-num">[1]</span> A Queens science class noticed that puddles lingered beside its school long after storms ended. <span class="sent-num">[2]</span> Rather than request a costly replacement of the pavement, students mapped where water collected and measured how long the area took to drain.</p><p><span class="sent-num">[3]</span> They designed a shallow garden that was filled with native grasses and porous soil. <span class="sent-num">[4]</span> During installation, volunteers lowered the garden below sidewalk level so runoff could flow into it.</p><p><span class="sent-num">[5]</span> During the first heavy storm after installation, the garden captured runoff; by the next morning, the former puddle area was nearly dry. <span class="sent-num">[6]</span> The students plan to compare drainage records each season and replace plants that fail to thrive.</p></div></div><article class="mc-q item-card passage-item" data-item="19" data-answer="B" data-domain="ela"><p class="mc-q-text"><span class="qnum">19.</span> Which statement best expresses the central idea of the passage? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 19"><label class="mc-opt"><input type="radio" name="q19" value="A"><span class="bubble"></span><span><strong>A)</strong> Native plants grow only below sidewalk level.</span></label><label class="mc-opt"><input type="radio" name="q19" value="B"><span class="bubble"></span><span><strong>B)</strong> Students designed and tested a small, nature-based response to a drainage problem.</span></label><label class="mc-opt"><input type="radio" name="q19" value="C"><span class="bubble"></span><span><strong>C)</strong> Replacing pavement is the only reliable way to prevent puddles.</span></label><label class="mc-opt"><input type="radio" name="q19" value="D"><span class="bubble"></span><span><strong>D)</strong> Seasonal records are more useful than observations after storms.</span></label></div><div class="feedback"><strong>Answer:</strong> B. The passage follows the problem, student design, installation, and result.</div></article><article class="mc-q item-card passage-item" data-item="20" data-answer="C" data-domain="ela"><p class="mc-q-text"><span class="qnum">20.</span> Why was the garden installed below sidewalk level? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 20"><label class="mc-opt"><input type="radio" name="q20" value="A"><span class="bubble"></span><span><strong>A)</strong> To hide it from pedestrians</span></label><label class="mc-opt"><input type="radio" name="q20" value="B"><span class="bubble"></span><span><strong>B)</strong> To protect the grasses from sunlight</span></label><label class="mc-opt"><input type="radio" name="q20" value="C"><span class="bubble"></span><span><strong>C)</strong> To allow runoff to enter the garden</span></label><label class="mc-opt"><input type="radio" name="q20" value="D"><span class="bubble"></span><span><strong>D)</strong> To make the pavement more expensive to replace</span></label></div><div class="feedback"><strong>Answer:</strong> C. Sentence 4 states that the lower level lets runoff flow into the garden.</div></article><article class="mc-q item-card passage-item" data-item="21" data-answer="D" data-domain="ela"><p class="mc-q-text"><span class="qnum">21.</span> Which sentence provides the strongest evidence that the design improved drainage? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 21"><label class="mc-opt"><input type="radio" name="q21" value="A"><span class="bubble"></span><span><strong>A)</strong> Sentence 1</span></label><label class="mc-opt"><input type="radio" name="q21" value="B"><span class="bubble"></span><span><strong>B)</strong> Sentence 2</span></label><label class="mc-opt"><input type="radio" name="q21" value="C"><span class="bubble"></span><span><strong>C)</strong> Sentence 4</span></label><label class="mc-opt"><input type="radio" name="q21" value="D"><span class="bubble"></span><span><strong>D)</strong> Sentence 5</span></label></div><div class="feedback"><strong>Answer:</strong> D. Sentence 5 reports that the former puddle area was nearly dry the next morning.</div></article><article class="mc-q item-card passage-item" data-item="22" data-answer="D" data-domain="ela"><p class="mc-q-text"><span class="qnum">22.</span> Which revision of sentence 3 is most concise while preserving its meaning? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 22"><label class="mc-opt"><input type="radio" name="q22" value="A"><span class="bubble"></span><span><strong>A)</strong> They designed a shallow garden, and it was a garden filled with native grasses and porous soil.</span></label><label class="mc-opt"><input type="radio" name="q22" value="B"><span class="bubble"></span><span><strong>B)</strong> A shallow garden was designed by them that had a filling of native grasses and porous soil.</span></label><label class="mc-opt"><input type="radio" name="q22" value="C"><span class="bubble"></span><span><strong>C)</strong> They designed, with native grasses and porous soil, it being a shallow garden.</span></label><label class="mc-opt"><input type="radio" name="q22" value="D"><span class="bubble"></span><span><strong>D)</strong> They designed a shallow garden filled with native grasses and porous soil.</span></label></div><div class="feedback"><strong>Answer:</strong> D. The revision removes unnecessary words without losing information.</div></article>
+<div class="passage-toolbar"><span class="lock-note" id="setNote">Answer all four; review evidence before submitting.</span><button class="commit-btn" type="button" id="commitSet">Submit passage set</button></div>
+<hr class="divider"><div class="section-hd"><span class="icon">🧭</span><h2>Part E — Process Transfer</h2><span class="badge badge-coral">~15 min</span></div><p class="instr">The goal is a reusable procedure, not merely a final answer.</p>
+<h3 style="font-family:var(--ff-head);font-size:1rem;margin:.7rem 0 .35rem">One Full G-R-R-S-C Record</h3><p class="micro">Choose one Math item that required a decision. Record enough detail that you could reproduce the method with different numbers.</p><div class="grrsc-grid"><div class="grrsc-cell"><strong>G · Goal</strong><textarea aria-label="Goal" placeholder="What was asked?"></textarea></div><div class="grrsc-cell"><strong>R · Facts</strong><textarea aria-label="Relevant facts" placeholder="Numbers + units"></textarea></div><div class="grrsc-cell"><strong>R · Representation</strong><textarea aria-label="Representation" placeholder="Model or equation"></textarea></div><div class="grrsc-cell"><strong>S · Solve</strong><textarea aria-label="Solve" placeholder="One step per line"></textarea></div><div class="grrsc-cell"><strong>C · Check</strong><textarea aria-label="Check" placeholder="Target, unit, sign, field"></textarea></div></div>
+<div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>#</th><th>Item</th><th>First wrong step / code</th><th>Reusable rule or procedure</th><th>Clone recheck</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table><div class="error-type-pills"><span class="pill pill-cg">Concept / Translation</span><span class="pill pill-ce">Execution / Unit / Sign</span><span class="pill pill-ru">Reading / Evidence / Entry</span></div></div>
+<h3 style="font-family:var(--ff-head);font-size:1rem;margin:1rem 0 .4rem">Teach It Back</h3><div class="teachback-grid"><div class="teachback"><label for="tb1">When an item suddenly feels harder, I will…</label><textarea id="tb1"></textarea></div><div class="teachback"><label for="tb2">Before I advance, my four-point check is…</label><textarea id="tb2"></textarea></div><div class="teachback"><label for="tb3">The difference between a concept miss and an execution miss is…</label><textarea id="tb3"></textarea></div><div class="teachback"><label for="tb4">Inside an ELA passage set, I can… until…</label><textarea id="tb4"></textarea></div></div>
+<div class="status-msg" id="statusMsg" aria-live="polite"></div>
+<details class="key-panel"><summary>Post-check explanations (open only after all responses are locked)</summary><div class="key-grid"><div class="key-item"><strong>Systems:</strong> 1 B, 2 C, 3 B, 4 B, 5 A+C, 6 B</div><div class="key-item"><strong>Math:</strong> 7 C, 8 B, 9 6, 10 C, 11 B, 12 42, 13 A+C, 14 B</div><div class="key-item"><strong>ELA standalone:</strong> 15 C, 16 B, 17 C, 18 B</div><div class="key-item"><strong>ELA set:</strong> 19 B, 20 C, 21 D, 22 D</div></div></details>
+<p class="footer-note">Week 1 · Decision systems before speed · November 2026 computer-adaptive SHSAT practice</p>
+</section></main><script>
+const cards=[...document.querySelectorAll('.item-card')];
+function values(card){const checks=[...card.querySelectorAll('input[type="checkbox"]:checked')].map(x=>x.value).sort();if(checks.length)return checks.join(',');const radio=card.querySelector('input[type="radio"]:checked');if(radio)return radio.value;const entry=card.querySelector('.entry-input');return entry?entry.value.trim():''}
+function selectOption(label){const card=label.closest('.item-card');if(card.classList.contains('locked'))return;const input=label.querySelector('input');if(input.type==='radio'){card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('.bubble').textContent=''});input.checked=true;label.classList.add('selected');label.querySelector('.bubble').textContent='✓'}else{input.checked=!input.checked;label.classList.toggle('selected',input.checked);label.querySelector('.bubble').textContent=input.checked?'✓':''}}
+function valid(card){const need=Number(card.dataset.selectCount||0);if(need)return card.querySelectorAll('input[type="checkbox"]:checked').length===need;return Boolean(values(card))}
+function lockCard(card){if(!valid(card)){alert(card.dataset.selectCount?`Select exactly ${card.dataset.selectCount} answers before committing.`:'Enter or choose an answer before committing.');return}card.classList.add('locked');card.querySelectorAll('input,button').forEach(e=>e.disabled=true);const note=card.querySelector('.lock-note');if(note)note.textContent='Locked — response committed.';updateProgress()}
+function updateProgress(){document.getElementById('committedCount').textContent=document.querySelectorAll('.item-card.locked').length}
+function normalize(s){return String(s).toLowerCase().replace(/[$,\s]/g,'').replace(/\.0+$/,'')}
+function clearAll(){if(!confirm('Clear every response, work box, score, and committed answer?'))return;document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio'||e.type==='checkbox')e.checked=false;else e.value='';e.disabled=false});document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');e.querySelector('.bubble').textContent=''});cards.forEach(e=>e.classList.remove('locked','correct','incorrect','checked'));document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);document.querySelectorAll('.lock-note').forEach(e=>e.textContent=e.id==='setNote'?'Answer all four; review evidence before submitting.':'Choose, audit, then commit.');document.querySelectorAll('[contenteditable]').forEach(e=>e.innerHTML='&nbsp;');document.getElementById('statusMsg').textContent='';document.querySelector('.key-panel').open=false;updateProgress()}
+document.querySelectorAll('.mc-opt').forEach(label=>label.addEventListener('click',e=>{e.preventDefault();selectOption(label)}));
+document.querySelectorAll('.item-card:not(.passage-item) .commit-btn').forEach(b=>b.addEventListener('click',()=>lockCard(b.closest('.item-card'))));
+document.querySelectorAll('.entry-input').forEach(e=>e.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();lockCard(e.closest('.item-card'))}}));
+document.getElementById('commitSet').addEventListener('click',()=>{const set=[...document.querySelectorAll('.passage-item')];if(set.some(x=>!valid(x))){alert('Answer all four passage-set questions before submitting the set.');return}set.forEach(card=>{card.classList.add('locked');card.querySelectorAll('input').forEach(e=>e.disabled=true)});document.getElementById('commitSet').disabled=true;document.getElementById('setNote').textContent='Passage set locked — responses committed.';updateProgress()});
+document.getElementById('checkWork')?.addEventListener('click',()=>{const unlocked=cards.filter(c=>!c.classList.contains('locked'));if(unlocked.length){document.getElementById('statusMsg').textContent=`Lock all responses first: ${unlocked.length} item${unlocked.length===1?' remains':'s remain'}.`;return}const scores={process:0,math:0,ela:0};cards.forEach(card=>{const ok=normalize(values(card))===normalize(card.dataset.answer);card.classList.add('checked',ok?'correct':'incorrect');scores[card.dataset.domain]+=ok?1:0});document.getElementById('processScore').value=scores.process;document.getElementById('mathScore').value=scores.math;document.getElementById('elaScore').value=scores.ela;document.getElementById('totalScore').value=scores.process+scores.math+scores.ela;document.getElementById('statusMsg').textContent='Checked. Record the first wrong step for each miss, then test the rule on a fresh problem.';document.querySelector('.key-panel').open=true;document.querySelector('.checked').scrollIntoView({behavior:'smooth',block:'center'})});
+document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}));
+</script></body></html>
