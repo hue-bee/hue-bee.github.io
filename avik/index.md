@@ -9,5 +9,5 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **01** | [Test 1 Error Review: Find the Clue, Not the Answer](https://hue-bee.github.io/avik/lessons/01) | [1 Homework](https://hue-bee.github.io/avik/lessons/01/homework) ||
+| **01** | [Diagnostic Autopsy & CAT Rules](https://hue-bee.github.io/avik/lessons/01) | [1 Homework](https://hue-bee.github.io/avik/lessons/01/homework) ||
 
