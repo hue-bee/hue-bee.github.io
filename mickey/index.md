@@ -9,4 +9,4 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **01** | [Percent Foundations & Function of a Detail](https://hue-bee.github.io/mickey/lessons/01) | [1 Homework](https://hue-bee.github.io/mickey/lessons/01/homework) ||
+| **01** | [Baseline Audit & Error Log](https://hue-bee.github.io/mickey/lessons/01) | [1 Homework](https://hue-bee.github.io/mickey/lessons/01/homework) ||
