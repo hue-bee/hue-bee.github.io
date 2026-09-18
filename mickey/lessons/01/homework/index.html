@@ -1,1 +1,610 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Session 1 Homework — November 2026 Digital SAT</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Fredoka', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* Digital SAT additions */
+.progress-wrap{display:flex;align-items:center;gap:.6rem;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.55rem .8rem;margin-bottom:1rem}.progress-label{font-family:var(--ff-head);font-weight:700;font-size:.78rem;color:var(--blue);white-space:nowrap}.progress-track{height:8px;background:white;border-radius:20px;flex:1;overflow:hidden;border:1px solid var(--blue-md)}.progress-fill{height:100%;width:0;background:var(--blue);transition:width .2s ease}.progress-count{font-size:.75rem;font-weight:800;color:var(--slate);min-width:42px;text-align:right}
+.timer-box{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:9px;padding:.45rem .7rem;margin-bottom:.85rem;font-size:.76rem;color:#78350f;font-weight:700}.timer-controls{display:flex;gap:.35rem}.mini-btn{border:1px solid #d4a574;background:white;border-radius:7px;padding:.22rem .55rem;font-family:var(--ff-body);font-size:.7rem;font-weight:800;color:#78350f;cursor:pointer}.mini-btn:hover{background:#fff7ed}
+.math-opts{display:grid;grid-template-columns:1fr 1fr;gap:.2rem .5rem;margin-top:.35rem}.math-opt{display:flex;align-items:flex-start;gap:.3rem;padding:.2rem .35rem;border:1.5px solid transparent;border-radius:5px;font-size:.75rem;color:var(--slate);cursor:pointer;line-height:1.35}.math-opt:hover{background:#f0f0f0}.math-opt input{display:none}.math-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:800}.math-opt .bubble{width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;margin-top:1px}.math-opt.selected .bubble{background:#374151;border-color:#374151;color:white}.spr{display:flex;align-items:center;gap:.45rem;margin-top:.5rem;font-size:.78rem;font-weight:800;color:var(--slate)}.spr input{flex:1;min-width:0;border:none;border-bottom:1.5px solid var(--border);background:transparent;outline:none;padding:2px 6px;font-family:var(--ff-body);font-weight:800}.strategy-line{font-size:.72rem;color:var(--muted);font-weight:700;margin-top:.35rem}.strategy-line input{width:calc(100% - 118px);border:none;border-bottom:1px solid var(--border);background:transparent;font-family:var(--ff-body);font-size:.72rem;outline:none;padding:1px 4px}.notes-box{background:var(--purple-lt);border:1.5px solid #c4b5fd;border-radius:10px;padding:.75rem .9rem;margin-bottom:.9rem}.notes-box h3{font-family:var(--ff-head);font-size:.88rem;color:var(--purple);margin-bottom:.35rem}.notes-box ul{margin:0;padding-left:1.1rem;color:var(--slate);font-size:.76rem;line-height:1.55}.goal{display:inline-block;background:var(--purple-lt);color:var(--purple);border-radius:4px;padding:1px 6px;font-weight:800;font-size:.73rem}.q-meta{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin-bottom:.35rem}.skill-tag{font-size:.64rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.mini-source{font-size:.65rem;color:var(--muted);font-style:italic;margin-top:.25rem}.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:.6rem 0}.method-card{background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:.55rem .65rem}.method-card strong{font-family:var(--ff-head);font-size:.78rem;color:var(--ink)}.method-card p{font-size:.7rem;color:var(--muted);line-height:1.4;margin-top:.15rem}.completion-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:.7rem}.fig.compact svg{max-height:92px}
+@media(max-width:620px){.prob-grid,.mc-opts,.math-opts,.method-grid{grid-template-columns:1fr}.passage-text{column-count:1}.sheet{padding:1.15rem;margin:.5rem;border-radius:0}.hw-meta{min-width:100%}}
+@media print{.progress-wrap,.timer-box{display:none!important}.math-opt:hover,.mc-opt:hover{background:transparent}.sheet{page-break-after:always}.sheet:last-of-type{page-break-after:auto}}
+</style></head><body>
+<div class="no-print" style="display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap">
+  <button class="print-btn" onclick="window.print()" style="margin:0">Print / Save as PDF</button>
+  <button class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b">Clear All</button>
+</div>
+
+<section class="sheet">
+<header class="hw-header">
+  <div class="hw-header-left"><h1>🎯 Session 1 Homework</h1><div class="subtitle">November 2026 Digital SAT · Geometry + Expression of Ideas</div></div>
+  <div class="hw-meta">
+    <div class="hw-meta-row"><span class="label">Name</span><input type="text" aria-label="Student name" placeholder=""></div>
+    <div class="hw-meta-row"><span class="label">Date</span><input type="text" aria-label="Date" placeholder=""></div>
+    <div class="hw-meta-row"><span class="label">Target</span><input type="text" aria-label="Target score" placeholder="1500+"></div>
+  </div>
+</header>
+<div class="score-banner"><div><div class="title">Relationship First · Task First</div><div class="sub">Write the governing setup before calculating; predict the rhetorical job before choosing.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val">12</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val">12</div><div class="sc-lbl">R&amp;W</div></div><div class="score-cell"><div class="sc-val">55m</div><div class="sc-lbl">Target</div></div></div></div>
+<div class="progress-wrap no-print"><span class="progress-label">Completion</span><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span class="progress-count" id="progressCount">0 / 24</span></div>
+<div class="timer-box no-print"><span>⏱ Optional Math timer: <span id="timerDisplay">27:00</span></span><span class="timer-controls"><button class="mini-btn" onclick="toggleTimer()" id="timerBtn">Start</button><button class="mini-btn" onclick="resetTimer(1620)">Reset</button></span></div>
+<div class="section-hd"><span class="icon">📐</span><h2>Part A — Geometry &amp; Trigonometry</h2><span class="badge badge-blue">Questions 1–6 · 14 min</span></div>
+<p class="instr">Digital SAT routine: circle the requested quantity → write the relationship → solve. Calculator use is allowed, but your setup must be visible.</p>
+<div class="formula-strip"><span class="fs-label">Quick tools</span><span class="fml">Parallel lines → angle families</span><span class="fml">Similarity → matching ratios</span><span class="fml">tan θ = opp/adj</span><span class="fml">cos θ = adj/hyp</span></div>
+<div class="prob-grid">
+  <article class="prob"><div class="prob-num">Question 1 <span class="lvl lvl-2">L2</span></div><p class="prob-q">Parallel lines <strong>p</strong> and <strong>q</strong> are cut by a transversal. Two same-side interior angles measure <strong>(4x + 16)°</strong> and <strong>(6x − 6)°</strong>. What is <strong>x</strong>?</p><div class="fig compact"><svg width="170" height="92" viewBox="0 0 170 92" role="img" aria-label="Two parallel lines cut by a transversal"><line x1="10" y1="23" x2="160" y2="23" stroke="#374151" stroke-width="3"/><line x1="10" y1="69" x2="160" y2="69" stroke="#374151" stroke-width="3"/><line x1="48" y1="5" x2="120" y2="88" stroke="#64748b" stroke-width="3"/><text x="81" y="43" font-family="Nunito" font-size="10" font-weight="700">4x + 16</text><text x="75" y="64" font-family="Nunito" font-size="10" font-weight="700">6x − 6</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m1" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 15</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m1" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 17</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m1" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 19</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m1" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 21</span></label></div><div class="strategy-line">Relationship: <input type="text" aria-label="Question 1 relationship"></div></article>
+  <article class="prob"><div class="prob-num">Question 2 <span class="lvl lvl-2">L2</span></div><p class="prob-q">Two lines intersect. A pair of vertical angles measure <strong>(7y − 11)°</strong> and <strong>(5y + 21)°</strong>. What is <strong>y</strong>?</p><div class="fig compact"><svg width="150" height="92" viewBox="0 0 150 92" role="img" aria-label="Intersecting lines with vertical angles"><line x1="25" y1="10" x2="125" y2="82" stroke="#374151" stroke-width="3"/><line x1="125" y1="10" x2="25" y2="82" stroke="#374151" stroke-width="3"/><path d="M58 34 A24 24 0 0 1 92 34" fill="none" stroke="#2563EB" stroke-width="3"/><path d="M92 59 A24 24 0 0 1 58 59" fill="none" stroke="#F97066" stroke-width="3"/><text x="75" y="27" text-anchor="middle" font-family="Nunito" font-size="9" font-weight="700">7y−11</text><text x="75" y="76" text-anchor="middle" font-family="Nunito" font-size="9" font-weight="700">5y+21</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m2" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 12</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m2" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 14</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m2" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 16</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m2" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 18</span></label></div><div class="strategy-line">Angle rule: <input type="text" aria-label="Question 2 relationship"></div></article>
+  <article class="prob"><div class="prob-num">Question 3 <span class="lvl lvl-3">L3</span></div><p class="prob-q">In triangle <strong>ABC</strong>, P lies on AB, Q lies on AC, and <strong>PQ ∥ BC</strong>. If AP = 4, PB = 6, AQ = 6, and QC = z, what is <strong>z</strong>?</p><div class="fig compact"><svg width="170" height="100" viewBox="0 0 170 100" role="img" aria-label="Triangle with a segment parallel to its base"><polygon points="85,7 15,92 155,92" fill="#EFF6FF" stroke="#374151" stroke-width="2.5"/><line x1="53" y1="46" x2="117" y2="46" stroke="#2563EB" stroke-width="2.5"/><text x="79" y="13" font-family="Nunito" font-size="10" font-weight="700">A</text><text x="7" y="96" font-family="Nunito" font-size="10" font-weight="700">B</text><text x="158" y="96" font-family="Nunito" font-size="10" font-weight="700">C</text><text x="43" y="44" font-family="Nunito" font-size="10" font-weight="700">P</text><text x="120" y="44" font-family="Nunito" font-size="10" font-weight="700">Q</text><text x="55" y="26" font-family="Nunito" font-size="9">4</text><text x="27" y="70" font-family="Nunito" font-size="9">6</text><text x="111" y="26" font-family="Nunito" font-size="9">6</text><text x="139" y="70" font-family="Nunito" font-size="9">z</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m3" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 6</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m3" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 9</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m3" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 12</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m3" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 15</span></label></div><div class="strategy-line">Proportion: <input type="text" aria-label="Question 3 relationship"></div></article>
+  <article class="prob"><div class="prob-num">Question 4 <span class="lvl lvl-3">L3</span></div><p class="prob-q">Two triangles are similar. A side of length <strong>8</strong> in the smaller triangle corresponds to a side of length <strong>12</strong> in the larger triangle. If another side of the smaller triangle is <strong>14</strong>, what is its corresponding larger side?</p><div class="fig compact"><svg width="180" height="88" viewBox="0 0 180 88" role="img" aria-label="Two similar triangles"><polygon points="10,76 55,14 88,76" fill="#EFF6FF" stroke="#374151" stroke-width="2"/><polygon points="102,76 145,5 175,76" fill="#FDF3E7" stroke="#374151" stroke-width="2"/><text x="23" y="48" font-family="Nunito" font-size="10" font-weight="700">8</text><text x="65" y="82" font-family="Nunito" font-size="10" font-weight="700">14</text><text x="112" y="44" font-family="Nunito" font-size="10" font-weight="700">12</text><text x="150" y="84" font-family="Nunito" font-size="10" font-weight="700">?</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m4" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 18</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m4" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 20</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m4" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 21</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m4" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 24</span></label></div><div class="strategy-line">Scale factor: <input type="text" aria-label="Question 4 relationship"></div></article>
+  <article class="prob"><div class="prob-num">Question 5 <span class="lvl lvl-3">L3</span></div><p class="prob-q">In a right triangle, one acute angle is <strong>41°</strong>. The leg adjacent to that angle is <strong>14</strong>, and the opposite leg is <strong>h</strong>. What is h, to the nearest tenth?</p><div class="fig compact"><svg width="170" height="92" viewBox="0 0 170 92" role="img" aria-label="Right triangle with angle 41 degrees"><polygon points="18,80 152,80 18,12" fill="#EFF6FF" stroke="#374151" stroke-width="2.5"/><rect x="18" y="68" width="12" height="12" fill="none" stroke="#64748b"/><path d="M128 80 A24 24 0 0 0 130 69" fill="none" stroke="#2563EB" stroke-width="2.5"/><text x="119" y="65" font-family="Nunito" font-size="10" font-weight="700">41°</text><text x="84" y="90" text-anchor="middle" font-family="Nunito" font-size="10" font-weight="700">14</text><text x="7" y="49" font-family="Nunito" font-size="11" font-weight="700">h</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m5" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 10.6</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m5" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 12.2</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m5" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 18.7</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m5" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 21.4</span></label></div><div class="strategy-line">Trig equation: <input type="text" aria-label="Question 5 relationship"></div></article>
+  <article class="prob"><div class="prob-num">Question 6 <span class="lvl lvl-4">L4</span></div><p class="prob-q">In a right triangle, an acute angle is <strong>52°</strong>. The adjacent leg is <strong>9</strong>, and the hypotenuse is <strong>c</strong>. What is c, to the nearest tenth?</p><div class="fig compact"><svg width="170" height="92" viewBox="0 0 170 92" role="img" aria-label="Right triangle with unknown hypotenuse"><polygon points="18,80 152,80 18,12" fill="#FDF3E7" stroke="#374151" stroke-width="2.5"/><rect x="18" y="68" width="12" height="12" fill="none" stroke="#64748b"/><path d="M128 80 A24 24 0 0 0 130 69" fill="none" stroke="#F97066" stroke-width="2.5"/><text x="118" y="65" font-family="Nunito" font-size="10" font-weight="700">52°</text><text x="84" y="90" text-anchor="middle" font-family="Nunito" font-size="10" font-weight="700">9</text><text x="86" y="39" font-family="Nunito" font-size="11" font-weight="700">c</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m6" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 5.5</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m6" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 11.4</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m6" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 14.6</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m6" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 17.1</span></label></div><div class="strategy-line">Trig equation: <input type="text" aria-label="Question 6 relationship"></div></article>
+</div>
+<div class="completion-note">Do not check explanations yet. Mark any item that took longer than two minutes.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon">⭕</span><h2>Part A Continued — Circles, Area &amp; Volume</h2><span class="badge badge-sand">Questions 7–12 · 13 min</span></div>
+<p class="instr">For Questions 9, 11, and 12, enter your own response. Equivalent forms are acceptable. Keep units attached to every intermediate value.</p>
+<div class="formula-strip"><span class="fs-label">Quick tools</span><span class="fml">Sector = θ/360 · πr²</span><span class="fml">Arc = θ/360 · 2πr</span><span class="fml">V = Bh</span><span class="fml">(x − h)² + (y − k)² = r²</span></div>
+<div class="prob-grid">
+  <article class="prob"><div class="prob-num">Question 7 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A circle has radius <strong>12</strong>. A sector has central angle <strong>75°</strong>. What is the area of the sector?</p><div class="fig compact"><svg width="140" height="98" viewBox="0 0 140 98" role="img" aria-label="Circle with 75 degree sector"><circle cx="70" cy="49" r="42" fill="#f8fafc" stroke="#374151" stroke-width="2"/><path d="M70 49 L70 7 A42 42 0 0 1 110.6 38.1 Z" fill="#BFDBFE" stroke="#2563EB" stroke-width="2"/><text x="91" y="31" font-family="Nunito" font-size="10" font-weight="700">75°</text><text x="70" y="31" font-family="Nunito" font-size="10" font-weight="700">12</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m7" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 30π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m7" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 36π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m7" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 60π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m7" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 90π</span></label></div><div class="strategy-line">Fraction of whole: <input type="text" aria-label="Question 7 setup"></div></article>
+  <article class="prob"><div class="prob-num">Question 8 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A circle has radius <strong>15</strong>. What is the length of an arc intercepted by a central angle of <strong>144°</strong>?</p><div class="fig compact"><svg width="140" height="98" viewBox="0 0 140 98" role="img" aria-label="Circle with a 144 degree arc"><circle cx="70" cy="49" r="42" fill="#f8fafc" stroke="#CBD5E1" stroke-width="2"/><path d="M70 7 A42 42 0 0 1 94.7 83" fill="none" stroke="#F97066" stroke-width="4"/><line x1="70" y1="49" x2="70" y2="7" stroke="#374151" stroke-width="2"/><line x1="70" y1="49" x2="94.7" y2="83" stroke="#374151" stroke-width="2"/><text x="91" y="48" font-family="Nunito" font-size="10" font-weight="700">144°</text><text x="56" y="29" font-family="Nunito" font-size="10" font-weight="700">15</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m8" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 6π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m8" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 12π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m8" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 18π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m8" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 24π</span></label></div><div class="strategy-line">Arc setup: <input type="text" aria-label="Question 8 setup"></div></article>
+  <article class="prob"><div class="prob-num">Question 9 · Student-Produced Response <span class="lvl lvl-4">L4</span></div><p class="prob-q">A rectangular prism measures <strong>2.4 m</strong> by <strong>75 cm</strong> by <strong>0.5 m</strong>. What is its volume in <strong>cubic centimeters</strong>?</p><div class="fig compact"><svg width="170" height="92" viewBox="0 0 170 92" role="img" aria-label="Rectangular prism with mixed units"><polygon points="25,22 112,22 145,42 58,42" fill="#EFF6FF" stroke="#374151"/><polygon points="58,42 145,42 145,82 58,82" fill="#fff" stroke="#374151"/><polygon points="25,22 58,42 58,82 25,62" fill="#e2e8f0" stroke="#374151"/><text x="65" y="17" font-family="Nunito" font-size="9" font-weight="700">2.4 m</text><text x="118" y="34" font-family="Nunito" font-size="9" font-weight="700">75 cm</text><text x="149" y="64" font-family="Nunito" font-size="9" font-weight="700">0.5 m</text></svg></div><textarea class="work-area" placeholder="Convert every edge to centimeters first."></textarea><div class="spr">Answer: <input type="text" data-answer="1" aria-label="Question 9 answer"> cm³</div></article>
+  <article class="prob"><div class="prob-num">Question 10 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A right circular cylinder has radius <strong>4</strong> and height <strong>9</strong>. What is its volume?</p><div class="fig compact"><svg width="120" height="100" viewBox="0 0 120 100" role="img" aria-label="Cylinder radius 4 height 9"><ellipse cx="60" cy="18" rx="35" ry="11" fill="#EFF6FF" stroke="#374151" stroke-width="2"/><line x1="25" y1="18" x2="25" y2="80" stroke="#374151" stroke-width="2"/><line x1="95" y1="18" x2="95" y2="80" stroke="#374151" stroke-width="2"/><ellipse cx="60" cy="80" rx="35" ry="11" fill="#fff" stroke="#374151" stroke-width="2"/><line x1="60" y1="18" x2="92" y2="18" stroke="#2563EB" stroke-width="2"/><text x="75" y="14" font-family="Nunito" font-size="9" font-weight="700">4</text><text x="101" y="52" font-family="Nunito" font-size="9" font-weight="700">9</text></svg></div><div class="math-opts"><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m10" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> 72π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m10" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> 144π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m10" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> 288π</span></label><label class="math-opt" onclick="selGroup(this)"><input type="radio" name="m10" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> 1,296π</span></label></div><div class="strategy-line">Base area × height: <input type="text" aria-label="Question 10 setup"></div></article>
+  <article class="prob"><div class="prob-num">Question 11 · Student-Produced Response <span class="lvl lvl-4">L4</span></div><p class="prob-q">The equation <strong>x² + y² + 10x − 4y − 20 = 0</strong> represents a circle in the xy-plane. What is the radius?</p><textarea class="work-area" style="min-height:72px" placeholder="Group x- and y-terms; complete both squares; keep the equation balanced."></textarea><div class="spr">Radius: <input type="text" data-answer="1" aria-label="Question 11 answer"></div></article>
+  <article class="prob"><div class="prob-num">Question 12 · Student-Produced Response <span class="lvl lvl-2">L2</span></div><p class="prob-q">A circle has equation <strong>(x − 3)² + (y + 7)² = 81</strong>. What is the circle’s <strong>diameter</strong>?</p><textarea class="work-area" placeholder="Identify r², then answer the quantity requested."></textarea><div class="spr">Diameter: <input type="text" data-answer="1" aria-label="Question 12 answer"></div></article>
+</div>
+<hr class="divider">
+<div class="section-hd"><span class="icon">🧠</span><h2>Math Method Audit</h2><span class="badge badge-green">3 minutes</span></div>
+<div class="method-grid"><div class="method-card"><strong>Relationship</strong><p>Which question became easy only after you named the theorem or formula?</p><input class="short-answer" type="text" aria-label="Relationship reflection"></div><div class="method-card"><strong>Units</strong><p>Where did conversion need to happen before arithmetic?</p><input class="short-answer" type="text" aria-label="Units reflection"></div><div class="method-card"><strong>Tool choice</strong><p>Name one item where reasoning was faster than Desmos.</p><input class="short-answer" type="text" aria-label="Tool reflection"></div></div>
+</section>
+
+<section class="sheet page-break">
+<div class="timer-box no-print"><span>⏱ Optional R&amp;W timer: <span id="rwTimerDisplay">14:00</span></span><span class="timer-controls"><button class="mini-btn" onclick="toggleRWTimer()" id="rwTimerBtn">Start</button><button class="mini-btn" onclick="resetRWTimer()">Reset</button></span></div>
+<div class="section-hd"><span class="icon">🔗</span><h2>Part B — Transitions</h2><span class="badge badge-purple">Questions 1–6 · 7 min</span></div>
+<p class="instr">Read the sentence before and after the blank. Before viewing the choices, name the relationship: contrast, result, example, continuation, sequence, or clarification.</p>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q1.</span><span class="skill-tag">Transitions</span><span class="lvl lvl-2">L2</span></div><div class="mc-q-text">Researchers have found that urban trees can lower nearby summer temperatures. ______, newly planted trees may take years to provide substantial shade.</div><div class="strategy-line">Predicted relationship: <input type="text" aria-label="Question 1 prediction"></div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw1" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> Similarly,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw1" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Yet,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw1" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> For example,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw1" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Therefore,</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q2.</span><span class="skill-tag">Transitions</span><span class="lvl lvl-2">L2</span></div><div class="mc-q-text">The museum digitized thousands of fragile maps. ______, scholars around the world can now examine the collection without handling the originals.</div><div class="strategy-line">Predicted relationship: <input type="text" aria-label="Question 2 prediction"></div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw2" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> Nevertheless,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw2" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Likewise,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw2" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Consequently,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw2" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Meanwhile,</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q3.</span><span class="skill-tag">Transitions</span><span class="lvl lvl-3">L3</span></div><div class="mc-q-text">The restoration team uncovered several signs of the building’s original design. ______, workers found traces of blue pigment beneath a later coat of white paint.</div><div class="strategy-line">Predicted relationship: <input type="text" aria-label="Question 3 prediction"></div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw3" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> For instance,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw3" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Instead,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw3" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Therefore,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw3" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Still,</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q4.</span><span class="skill-tag">Transitions</span><span class="lvl lvl-3">L3</span></div><div class="mc-q-text">The new battery charges more rapidly than the earlier model. ______, it retains a greater percentage of its capacity after repeated use.</div><div class="strategy-line">Predicted relationship: <input type="text" aria-label="Question 4 prediction"></div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw4" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> In contrast,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw4" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Moreover,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw4" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> As a result,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw4" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Specifically,</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q5.</span><span class="skill-tag">Transitions</span><span class="lvl lvl-2">L2</span></div><div class="mc-q-text">The biologists first recorded the frogs’ calls at dusk. ______, they compared the recordings with samples collected before the storm.</div><div class="strategy-line">Predicted relationship: <input type="text" aria-label="Question 5 prediction"></div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw5" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> However,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw5" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Next,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw5" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> For example,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw5" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Thus,</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q6.</span><span class="skill-tag">Transitions</span><span class="lvl lvl-4">L4</span></div><div class="mc-q-text">The committee’s recommendation is provisional. ______, the proposal may be revised after the public-comment period.</div><div class="strategy-line">Predicted relationship: <input type="text" aria-label="Question 6 prediction"></div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw6" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> In other words,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw6" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Similarly,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw6" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Nevertheless,</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw6" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> For instance,</span></label></div></article>
+</section>
+
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon">🧩</span><h2>Part B Continued — Rhetorical Synthesis</h2><span class="badge badge-blue">Questions 7–12 · 7 min</span></div>
+<p class="instr">Read the rhetorical goal first. Use only notes that serve that goal. A choice may be true and still be off-task.</p>
+<div class="notes-box"><h3>Three-step filter</h3><ul><li><strong>Goal:</strong> underline the action—compare, emphasize, introduce, explain, or qualify.</li><li><strong>Notes:</strong> keep only facts needed to complete that action.</li><li><strong>Shape:</strong> predict what the correct sentence must contain before reading choices.</li></ul></div>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q7.</span><span class="goal">Goal: compare elevation gain</span><span class="lvl lvl-2">L2</span></div><div class="mc-q-text"><strong>Notes:</strong> Route M is 14 km long. Route N is 11 km long. Route M gains 320 m in elevation. Route N gains 510 m. <span class="goal">Goal: compare elevation gain</span><br><br>Which choice most effectively uses relevant information from the notes to accomplish the goal?</div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw7" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> Route M is 14 km long and gains 320 m in elevation.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw7" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Although Route N is shorter, it gains 190 m more in elevation than Route M.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw7" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Route N is 11 km long, whereas Route M is 14 km long.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw7" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Both routes involve elevation gain and differ in length.</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q8.</span><span class="goal">Goal: emphasize surprise</span><span class="lvl lvl-3">L3</span></div><div class="mc-q-text"><strong>Notes:</strong> Engineers predicted fabric X would block the most sound. Fabric X reduced sound by 18 decibels. Fabric Y reduced sound by 23 decibels. <span class="goal">Goal: emphasize an unexpected result</span><br><br>Which choice most effectively accomplishes the goal?</div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw8" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> Fabric X reduced sound by 18 decibels, and fabric Y reduced it by 23 decibels.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw8" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Although fabric X was expected to perform best, fabric Y reduced sound by 5 more decibels.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw8" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Engineers tested fabrics X and Y for their ability to reduce sound.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw8" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Fabric Y reduced sound by 23 decibels during the test.</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q9.</span><span class="goal">Goal: introduce an example</span><span class="lvl lvl-3">L3</span></div><div class="mc-q-text"><strong>Notes:</strong> Some coastal animals use camouflage to avoid predators. The decorator crab attaches pieces of algae and sponge to its shell. These materials help the crab blend into the seafloor. <span class="goal">Goal: introduce the crab as an example</span><br><br>Which choice most effectively accomplishes the goal?</div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw9" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> The decorator crab attaches algae and sponge to its shell on the seafloor.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw9" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Coastal animals and decorator crabs can avoid predators.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw9" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> For example, the decorator crab uses algae and sponge on its shell to blend into the seafloor and avoid predators.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw9" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> The seafloor contains algae, sponges, predators, and decorator crabs.</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q10.</span><span class="goal">Goal: describe change over time</span><span class="lvl lvl-2">L2</span></div><div class="mc-q-text"><strong>Notes:</strong> In 2018, the town library lent 42,000 digital books. In 2025, it lent 117,000 digital books. Print lending remained nearly constant. <span class="goal">Goal: describe the change in digital lending over time</span><br><br>Which choice most effectively accomplishes the goal?</div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw10" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> The library lent print and digital books in both 2018 and 2025.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw10" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> While print lending changed little, digital lending rose from 42,000 books in 2018 to 117,000 in 2025.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw10" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> In 2025, the library lent 117,000 digital books and many print books.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw10" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Digital books were available from the town library in 2018.</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q11.</span><span class="goal">Goal: highlight an advantage</span><span class="lvl lvl-3">L3</span></div><div class="mc-q-text"><strong>Notes:</strong> Sensor P weighs 35 g and lasts 8 hours per charge. Sensor Q weighs 62 g and lasts 17 hours per charge. <span class="goal">Goal: highlight one advantage of Sensor Q</span><br><br>Which choice most effectively accomplishes the goal?</div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw11" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> Sensor Q lasts 17 hours per charge, more than twice as long as Sensor P.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw11" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> Sensor Q weighs 62 g, while Sensor P weighs 35 g.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw11" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Sensor P is lighter and lasts 8 hours per charge.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw11" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> The two sensors differ in both weight and battery life.</span></label></div></article>
+<article class="mc-q"><div class="q-meta"><span class="qnum">Q12.</span><span class="goal">Goal: qualify a claim</span><span class="lvl lvl-4">L4</span></div><div class="mc-q-text"><strong>Notes:</strong> A study found that background music improved performance on a repetitive sorting task. The study included 24 adults. It did not test reading or mathematical reasoning. <span class="goal">Goal: qualify a broad claim about music and performance</span><br><br>Which choice most effectively accomplishes the goal?</div><div class="mc-opts"><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw12" data-answer="1"><span class="bubble"></span><span><strong>A.</strong> Background music improves performance on every kind of task.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw12" data-answer="1"><span class="bubble"></span><span><strong>B.</strong> A study of 24 adults found that music improved performance.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw12" data-answer="1"><span class="bubble"></span><span><strong>C.</strong> Although music improved performance on one repetitive sorting task, the study did not test reading or mathematical reasoning.</span></label><label class="mc-opt" onclick="selGroup(this)"><input type="radio" name="rw12" data-answer="1"><span class="bubble"></span><span><strong>D.</strong> Researchers studied background music, reading, mathematics, and sorting.</span></label></div></article>
+<hr class="divider">
+<div class="section-hd"><span class="icon">🧾</span><h2>Part C — Error Log</h2><span class="badge badge-coral">Required</span></div>
+<p class="instr">After checking with your tutor, log every miss and every correct answer that took too long. Replace “careless” with an observable failed action.</p>
+<div class="error-log"><h3>📋 Correction Tracker</h3><table class="error-table"><thead><tr><th>#</th><th>Question</th><th>Exact Failed Action</th><th>Better Rule / Trigger</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table><div class="error-type-pills"><span class="pill pill-cg">Content Gap</span><span class="pill pill-ce">Setup / Translation</span><span class="pill pill-ru">Execution · Timing · Tool</span></div></div>
+<div class="reflect-box"><h3>✍️ Delayed-Retry Plan</h3><div class="reflect-lines"><div class="reflect-line">The feature that should trigger a better method is <input type="text" aria-label="Trigger reflection"></div><div class="reflect-line">On my next attempt, my first written step will be <input type="text" aria-label="First step reflection"></div><div class="reflect-line">The one question I will retry in 48 hours is <input type="text" aria-label="Retry reflection"></div></div></div>
+</section>
+<script>
+function selGroup(label){
+  const group=label.parentElement;
+  group.querySelectorAll('label').forEach(l=>{l.classList.remove('selected');const b=l.querySelector('.bubble');if(b)b.textContent='';});
+  label.classList.add('selected');const b=label.querySelector('.bubble');if(b)b.textContent='✓';
+  const r=label.querySelector('input[type=radio]');if(r)r.checked=true;
+  updateProgress();
+}
+function clearAll(){
+  if(!confirm('Clear all answers and reflections?'))return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el=>el.value='');
+  document.querySelectorAll('input[type=radio]').forEach(el=>el.checked=false);
+  document.querySelectorAll('.math-opt,.mc-opt').forEach(l=>{l.classList.remove('selected');const b=l.querySelector('.bubble');if(b)b.textContent='';});
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.innerHTML='&nbsp;');
+  updateProgress();
+}
+function updateProgress(){
+  let done=0;
+  for(let i=1;i<=12;i++){
+    if(i===9||i===11||i===12){const e=document.querySelector(`[aria-label="Question ${i} answer"]`);if(e&&e.value.trim())done++;}
+    else if(document.querySelector(`input[name="m${i}"]:checked`))done++;
+  }
+  for(let i=1;i<=12;i++)if(document.querySelector(`input[name="rw${i}"]:checked`))done++;
+  document.getElementById('progressCount').textContent=`${done} / 24`;
+  document.getElementById('progressFill').style.width=`${done/24*100}%`;
+}
+document.addEventListener('input',updateProgress);
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('textarea').forEach(ta=>ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';}));updateProgress();});
+let timer=1620,timerId=null;
+function renderTimer(){const m=Math.floor(timer/60),s=timer%60;document.getElementById('timerDisplay').textContent=`${m}:${String(s).padStart(2,'0')}`;}
+function toggleTimer(){const b=document.getElementById('timerBtn');if(timerId){clearInterval(timerId);timerId=null;b.textContent='Start';return;}b.textContent='Pause';timerId=setInterval(()=>{if(timer<=0){clearInterval(timerId);timerId=null;b.textContent='Done';return;}timer--;renderTimer();},1000);}
+function resetTimer(v){if(timerId)clearInterval(timerId);timerId=null;timer=v;renderTimer();document.getElementById('timerBtn').textContent='Start';}
+let rwTimer=840,rwTimerId=null;
+function renderRW(){const m=Math.floor(rwTimer/60),s=rwTimer%60;document.getElementById('rwTimerDisplay').textContent=`${m}:${String(s).padStart(2,'0')}`;}
+function toggleRWTimer(){const b=document.getElementById('rwTimerBtn');if(rwTimerId){clearInterval(rwTimerId);rwTimerId=null;b.textContent='Start';return;}b.textContent='Pause';rwTimerId=setInterval(()=>{if(rwTimer<=0){clearInterval(rwTimerId);rwTimerId=null;b.textContent='Done';return;}rwTimer--;renderRW();},1000);}
+function resetRWTimer(){if(rwTimerId)clearInterval(rwTimerId);rwTimerId=null;rwTimer=840;renderRW();document.getElementById('rwTimerBtn').textContent='Start';}
+</script></body></html>
