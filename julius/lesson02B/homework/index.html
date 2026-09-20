@@ -1,1 +1,559 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>SHSAT CAT Homework — Units & Detail-to-Purpose</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* CAT activity additions */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.toolbar .print-btn{margin:0;min-height:44px}.toolbar .secondary{background:var(--muted)}
+.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue)}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.lvl-1{background:#eee;color:#1f2937}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.4rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800;cursor:pointer}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.sent-num{background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-weight:800;color:#374151;font-size:.72rem}
+.graph-audit{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .55rem;margin-top:.5rem}.graph-audit label{font-size:.7rem;font-weight:800;color:var(--muted)}.graph-audit select,.graph-audit input{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.22rem .35rem;font-size:.75rem;margin-top:.12rem;min-height:34px}.number-line{display:block;width:100%;height:42px;margin:.2rem 0;color:#64748b}.domain-note{font-size:.7rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.25rem .4rem;margin-top:.35rem}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.score-input{width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.6);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}
+.section-icon{width:24px;color:var(--blue);flex:0 0 auto}.hw-header-left h1{font-weight:800}.prob select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem;font-size:.78rem}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.mc-opts,.prob-grid{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.95);padding:.55rem;margin:0;z-index:10;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.graph-audit{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}}
+@media print{.commit-row{display:none!important}}
+
+/* Activity-specific extensions; source color and typography tokens remain unchanged. */
+.cat-note-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:.75rem 0 1rem}.cat-note{background:var(--blue-lt);border:1px solid var(--blue-md);border-radius:8px;padding:.55rem .65rem}.cat-note strong{display:block;color:var(--blue);font-family:var(--ff-head);font-size:.76rem}.cat-note span{display:block;color:var(--slate);font-size:.72rem;line-height:1.35}.passage-set{margin-bottom:1.25rem}.passage-set .passage-box{margin-bottom:.75rem}.set-commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin:.65rem 0 1.1rem}.bridge-line{display:grid;grid-template-columns:auto 1fr auto 1fr;align-items:center;gap:.4rem;background:var(--sand-lt);border:1px solid #fcd34d;border-radius:8px;padding:.55rem .7rem;margin:.65rem 0 .9rem;font-size:.74rem;font-weight:800;color:#92400e}.bridge-line input{width:100%;border:0;border-bottom:1.5px solid #d97706;background:transparent;outline:none;min-width:0}.math-card .mc-q-text{margin-bottom:.35rem}.unit-cue{font-size:.73rem;color:var(--muted);font-style:italic;margin:.15rem 0 .45rem}.scratch{width:100%;min-height:48px;resize:vertical;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:.35rem .55rem;font:inherit;font-size:.76rem;color:var(--ink);outline:none;margin:.25rem 0}.inline-response{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.45rem 0;font-size:.78rem;color:var(--slate);font-weight:700}.inline-response select,.inline-response input{min-height:36px;border:1.5px solid var(--border);border-radius:6px;background:white;padding:.3rem .5rem;color:var(--ink);font:inherit}.inline-response input{width:120px}.multi .bubble{border-radius:3px}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.passage-set.locked .mc-q{background:#f1f5f9;border-color:#94a3b8}.passage-set.locked .mc-opt:not(.selected){opacity:.58}.audit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.audit-card{background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:.7rem}.audit-card h3{font-family:var(--ff-head);font-size:.9rem;color:var(--ink);margin-bottom:.4rem}.audit-card textarea{width:100%;min-height:76px;border:1.5px dashed var(--border);border-radius:6px;padding:.45rem;font:inherit;font-size:.78rem;resize:vertical}.locked .lock-note{color:var(--green)}.answer-note{font-size:.7rem;color:var(--muted);margin-top:.35rem}.mc-opt:focus-within{outline:2px solid var(--blue);outline-offset:2px}.commit-btn:focus-visible,.print-btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue-md);outline-offset:2px}.print-btn:active,.commit-btn:active{transform:translateY(1px)}
+@media(max-width:680px){.cat-note-grid,.audit-grid{grid-template-columns:1fr}.bridge-line{grid-template-columns:1fr}.set-commit-row,.commit-row{align-items:flex-end;flex-direction:column}.set-commit-row .commit-btn,.commit-row .commit-btn{width:100%;min-height:44px}.inline-response select,.inline-response input{width:100%}}
+@media print{.scratch{min-height:42px}.cat-note-grid{grid-template-columns:repeat(3,1fr)}.mc-opt:hover{background:transparent}.commit-row,.set-commit-row{min-height:20px}.commit-btn{display:none}.lock-note{color:var(--muted)!important}.sheet{break-after:page}.sheet:last-child{break-after:auto}}
+</style></head><body><a class="skip-link" href="#main">Skip to homework</a><div class="toolbar no-print" aria-label="Document controls"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" onclick="clearAll()">Clear All</button></div><main id="main"><section class="sheet"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Units That Do Work · Detail → Purpose · November 2026</div></div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" aria-label="Student name"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" aria-label="Date"></label></div></header><div class="score-banner"><div><div class="title">Self-Score After Completion</div><div class="sub">Check answers only after every first-pass decision is locked.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="12" aria-label="ELA score"> / 12</div><div class="sc-lbl">ELA</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="12" aria-label="Math score"> / 12</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="24" aria-label="Total score"> / 24</div><div class="sc-lbl">Total</div></div></div></div><div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rehearsal:</strong> Within a passage set, review freely. Once the set is submitted, it locks. Each Math item locks by itself, so circle the requested unit, build the cancellation chain, and audit before committing.</p></div><div class="cat-note-grid"><div class="cat-note"><strong>ELA · Predict the bridge</strong><span>“This detail shows ___, which supports ___.”</span></div><div class="cat-note"><strong>Math · Let units drive</strong><span>Write the destination unit before computing.</span></div><div class="cat-note"><strong>Commit · One clean check</strong><span>Meaning, magnitude, units—then move forward.</span></div></div><div class="section-hd"><span class="icon" aria-hidden="true">✎</span><h2>Part A — Detail → Purpose</h2><span class="badge badge-blue">12 Questions · ~22 min</span></div><p class="instr">Read each passage. Before choices, connect the named detail to the author’s larger job. You may revise answers inside the active set until you submit the set.</p><div class="strategy-strip"><span class="strategy-label">Bridge test</span><span class="strategy-chip">1 · Detail</span><span class="strategy-chip">2 · So what?</span><span class="strategy-chip">3 · Main job</span></div><section class="passage-set" data-set="1"><div class="passage-box"><div class="passage-title">Passage Set 1 — The Moth Map</div><div class="passage-text"><p><span class="para-lbl">1</span> When Mira first volunteered for the county’s moth survey, the recording sheet looked almost empty: date, time, temperature, location, and a few pale marks where an insect had landed. She wondered how such small observations could matter. The coordinator, Dr. Han, did not promise a dramatic discovery. “Make the same kind of note every time,” she said.</p><p><span class="para-lbl">2</span> Volunteers placed white cloths beside porch lights for twenty minutes after sunset. They photographed each visitor, recorded the weather, and stopped at the same time each night. That routine mattered because a count made for two hours could not be fairly compared with one made for twenty minutes.</p><p><span class="para-lbl">3</span> By midsummer, hundreds of modest entries formed a map. A volunteer’s photograph of a brown moth with a silver hook on each wing appeared repeatedly near wetland edges but almost nowhere else. Researchers then checked those locations and found that the moth’s caterpillars depended on a plant common in damp soil.</p><p><span class="para-lbl">4</span> The map also shaped a decision at the public library. Survey nights showed heavy moth activity in its small native-plant garden. The library replaced an uncovered security lamp with a shielded fixture that directed light downward. Later counts suggested that more moths remained near the garden instead of circling the bulb.</p><p><span class="para-lbl">5</span> Yet the map’s blank spaces were as revealing as its clusters. Few observations came from apartment buildings, where residents had no porch on which to hang a cloth. The group created window-sized survey kits and partnered with tenant associations. The map grew more complete—not because any one observation became spectacular, but because many people learned to record ordinary things in the same careful way.</p></div></div><div class="bridge-line"><span>Named detail shows</span><input type="text" aria-label="Passage one detail bridge"><span>which supports</span><input type="text" aria-label="Passage one purpose bridge"></div><article class="mc-q passage-item" data-item="1"><p class="mc-q-text"><span class="qnum">1.</span>Why does the author describe the pale marks on the sheet in paragraph 1? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 1"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A)</strong> To show why Mira initially doubted that the marks could be useful</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B)</strong> To prove that moths damage paper records</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C)</strong> To explain why the porch light was unusually bright</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D)</strong> To suggest that Mira preferred drawing to observing insects</span></label></div></article><article class="mc-q passage-item" data-item="2"><p class="mc-q-text"><span class="qnum">2.</span>What is the main purpose of the final sentence of paragraph 2? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 2"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A)</strong> It identifies the equipment that professional researchers refused to use.</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B)</strong> It shows how a simple routine made observations comparable from night to night.</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C)</strong> It explains why moths are easiest to see after midnight.</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D)</strong> It argues that weather has no effect on insect behavior.</span></label></div></article><article class="mc-q passage-item" data-item="3"><p class="mc-q-text"><span class="qnum">3.</span>How does the detail about the volunteer's photograph in paragraph 3 support a larger idea in the passage? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 3"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A)</strong> It shows that all important discoveries begin with expensive cameras.</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B)</strong> It demonstrates that careful records can reveal a pattern worth investigating.</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C)</strong> It proves that one moth species had disappeared from the county.</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D)</strong> It suggests that volunteers competed to submit the rarest photograph.</span></label></div></article><article class="mc-q passage-item" data-item="4"><p class="mc-q-text"><span class="qnum">4.</span>Why does the author include the example of the library garden in paragraph 4? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 4"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A)</strong> To give a concrete case in which collected data influenced a local decision</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B)</strong> To criticize libraries for leaving outdoor lights on</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C)</strong> To compare two methods for counting caterpillars</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D)</strong> To show that native plants always attract the greatest number of moths</span></label></div></article><article class="mc-q passage-item" data-item="5"><p class="mc-q-text"><span class="qnum">5.</span>Which statement best describes how the detail about the blank spaces on the map contributes to the passage? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 5"><label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A)</strong> It introduces a problem that leads the group to broaden participation.</span></label><label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B)</strong> It proves that the county map was drawn incorrectly.</span></label><label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C)</strong> It reveals that volunteers disliked traveling beyond their own blocks.</span></label><label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D)</strong> It explains why scientists discarded the first year of observations.</span></label></div></article><article class="mc-q passage-item" data-item="6"><p class="mc-q-text"><span class="qnum">6.</span>Which sentence best states the passage's main purpose? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 6"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A)</strong> To explain why moths are more scientifically valuable than butterflies</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B)</strong> To describe how ordinary, consistent observations can become useful community evidence</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C)</strong> To persuade readers to replace porch lights with brighter bulbs</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D)</strong> To trace the life cycle of several moth species</span></label></div></article><div class="set-commit-row"><span class="lock-note">Review all six before leaving this passage set.</span><button class="commit-btn set-commit" type="button">Submit passage set</button></div></section></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>ELA Passage Set</h1><div class="subtitle">Evidence, Function, and Growth · Set 2</div></div></div></header><section class="passage-set" data-set="2"><div class="passage-box"><div class="passage-title">Passage Set 2 — The Narrow Route</div><div class="passage-text"><p><span class="para-lbl">1</span> The chalk line along Willow Street bent around tree pits, cellar doors, and one stubborn newspaper box. Lena, walking behind Mr. Ortiz with a clipboard, thought the line looked less like a route than a mistake someone had tried to erase.</p><p><span class="para-lbl">2</span> Their class was measuring whether the block left enough clear sidewalk space for wheelchairs and strollers. At each obstacle, two students stretched a tape measure across the narrowest point while Lena recorded the width. When someone declared a spot “obviously too tight,” Mr. Ortiz tapped the clipboard. “Numbers first, opinions second.”</p><p><span class="para-lbl">3</span> Outside a bakery, stacked flour deliveries reduced the open path to thirty-two inches. As the students wrote, a parent approached with a stroller. One wheel struck a bag, and the parent had to back up into the stream of pedestrians. The number on Lena’s sheet no longer felt like a mark for an assignment; it described the exact pinch point everyone had just watched.</p><p><span class="para-lbl">4</span> At lunch, Malik suggested that they measure how long the deliveries remained outside. If the bags blocked the route for only five minutes, he argued, a permanent barrier might solve the wrong problem. The group returned the next morning and timed the unloading. They also sketched a loading zone that would preserve a forty-eight-inch path.</p><p><span class="para-lbl">5</span> When the students presented their proposal, Lena began with the crooked chalk line. This time she did not see a mistake. She saw a question that their first measurements had sharpened and their second round of evidence had answered. Before sitting down, she asked the transportation committee one more thing: could the class measure the revised path after a trial week?</p></div></div><div class="bridge-line"><span>Named detail shows</span><input type="text" aria-label="Passage two detail bridge"><span>which supports</span><input type="text" aria-label="Passage two purpose bridge"></div><article class="mc-q passage-item" data-item="7"><p class="mc-q-text"><span class="qnum">7.</span>Why does the narrator mention the uneven chalk line in paragraph 1? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 7"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A)</strong> To show that the garden wall had been built carelessly</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B)</strong> To establish Lena's early uncertainty about whether the route was correct</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C)</strong> To explain why Mr. Ortiz carried extra chalk</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D)</strong> To suggest that the class wanted to take a shorter route</span></label></div></article><article class="mc-q passage-item" data-item="8"><p class="mc-q-text"><span class="qnum">8.</span>What is the effect of the sentence “Numbers first, opinions second” in paragraph 2? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 8"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A)</strong> It reveals Mr. Ortiz's rule for separating observation from assumption.</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B)</strong> It shows that Mr. Ortiz disliked hearing students speak.</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C)</strong> It proves that every sidewalk problem can be solved mathematically.</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D)</strong> It signals that the class has completed the project.</span></label></div></article><article class="mc-q passage-item" data-item="9"><p class="mc-q-text"><span class="qnum">9.</span>How does the detail about the stroller wheel in paragraph 3 advance the passage? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 9"><label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble"></span><span><strong>A)</strong> It changes the group's measurement task into a problem with a human consequence.</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble"></span><span><strong>B)</strong> It shows that the parent was responsible for damaging the sidewalk.</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble"></span><span><strong>C)</strong> It explains why Lena decided to leave the group.</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble"></span><span><strong>D)</strong> It proves that narrow sidewalks are safer than wide sidewalks.</span></label></div></article><article class="mc-q passage-item" data-item="10"><p class="mc-q-text"><span class="qnum">10.</span>Why does the author include Malik's suggestion to measure the delivery window? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 10"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble"></span><span><strong>A)</strong> To show that the students begin using evidence to refine their solution</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble"></span><span><strong>B)</strong> To show that Malik wants the deliveries to stop permanently</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble"></span><span><strong>C)</strong> To explain why the bakery closes early</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble"></span><span><strong>D)</strong> To reveal that Lena's measurements were inaccurate</span></label></div></article><article class="mc-q passage-item" data-item="11"><p class="mc-q-text"><span class="qnum">11.</span>Which detail most strongly supports the idea that the project changes Lena's way of thinking? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 11"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble"></span><span><strong>A)</strong> She carries the clipboard at the front of the group.</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble"></span><span><strong>B)</strong> She remembers the crooked chalk line.</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble"></span><span><strong>C)</strong> She asks what additional measurement would make their case stronger.</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble"></span><span><strong>D)</strong> She notices the smell of bread near the bakery.</span></label></div></article><article class="mc-q passage-item" data-item="12"><p class="mc-q-text"><span class="qnum">12.</span>How does the final paragraph contribute to the passage as a whole? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="group" aria-label="Answer choices for question 12"><label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble"></span><span><strong>A)</strong> It introduces a new conflict that remains unresolved.</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble"></span><span><strong>B)</strong> It returns to an earlier image to show Lena's growth from doubt to evidence-based confidence.</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble"></span><span><strong>C)</strong> It proves that the city has already approved the students' proposal.</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble"></span><span><strong>D)</strong> It explains why the group will repeat the route every week.</span></label></div></article><div class="set-commit-row"><span class="lock-note">Review all six before leaving this passage set.</span><button class="commit-btn set-commit" type="button">Submit passage set</button></div></section></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>Units That Do Work</h1><div class="subtitle">Rate · Unit Price · Scale · Density</div></div></div></header><div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 17 17 4m-9 0h9v9M4 7h5M4 12h3M4 17h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><h2>Part B — Forward-Only Math</h2><span class="badge badge-purple">12 Questions · ~28 min</span></div><p class="instr">Each item is independent and locks when committed. No calculator: use scratch work, estimate first, and keep units attached to every factor.</p><div class="strategy-strip"><span class="strategy-label">Unit GPS</span><span class="strategy-chip">1 · Circle destination</span><span class="strategy-chip">2 · Cancel</span><span class="strategy-chip">3 · Compute</span><span class="strategy-chip">4 · Sanity-check</span></div><article class="mc-q math-card" data-item="13" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">13.</span>A maintenance cart moves at 14 meters per second for 2.5 minutes. How far does it travel? <span class="lvl lvl-2">L2</span></p><p class="unit-cue">The rate uses seconds; the time does not—yet.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 13"><label class="mc-opt"><input type="radio" name="q13" value="A"><span class="bubble"></span><span><strong>A)</strong> 35 meters</span></label><label class="mc-opt"><input type="radio" name="q13" value="B"><span class="bubble"></span><span><strong>B)</strong> 210 meters</span></label><label class="mc-opt"><input type="radio" name="q13" value="C"><span class="bubble"></span><span><strong>C)</strong> 840 meters</span></label><label class="mc-opt"><input type="radio" name="q13" value="D"><span class="bubble"></span><span><strong>D)</strong> 2,100 meters</span></label></div><textarea class="scratch" aria-label="Scratch work for question 13" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="14" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">14.</span>A ferry travels 35 minutes at 18 miles per hour, then 25 minutes at 24 miles per hour. What total distance does it travel? <span class="lvl lvl-3">L3</span></p><p class="unit-cue">Find each leg separately; distances add, rates do not.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 14"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble"></span><span><strong>A)</strong> 18.5 miles</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble"></span><span><strong>B)</strong> 20.5 miles</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble"></span><span><strong>C)</strong> 21 miles</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble"></span><span><strong>D)</strong> 42 miles</span></label></div><textarea class="scratch" aria-label="Scratch work for question 14" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="15" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">15.</span>Nia runs 2.4 miles at 6 mph, rests 8 minutes, and then runs 1.8 miles at 9 mph. How many minutes pass from start to finish? <span class="lvl lvl-4">L4</span></p><p class="unit-cue">Elapsed time includes movement and rest.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 15"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble"></span><span><strong>A)</strong> 36 minutes</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble"></span><span><strong>B)</strong> 40 minutes</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble"></span><span><strong>C)</strong> 44 minutes</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble"></span><span><strong>D)</strong> 52 minutes</span></label></div><textarea class="scratch" aria-label="Scratch work for question 15" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="16" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">16.</span>Store A sells 26 ounces of oats for $7.54. Store B sells 34 ounces for $9.52. Which statement is correct? <span class="lvl lvl-2">L2</span></p><p class="unit-cue">Force both packages to speak dollars per ounce.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 16"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble"></span><span><strong>A)</strong> Store A is cheaper by $0.01 per ounce.</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble"></span><span><strong>B)</strong> Store B is cheaper by $0.01 per ounce.</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble"></span><span><strong>C)</strong> Store B is cheaper by $0.02 per ounce.</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble"></span><span><strong>D)</strong> The unit prices are equal.</span></label></div><textarea class="scratch" aria-label="Scratch work for question 16" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="17" data-kind="multi" data-min="2"><p class="mc-q-text"><span class="qnum">17.</span>Select the TWO expressions that correctly compare a box of 18 bars for $12.42 with a box of 30 bars for $19.50. <span class="lvl lvl-3">L3</span></p><p class="unit-cue">Different-looking methods can be equivalent if their comparison is fair.</p><div class="mc-opts multi" role="group" aria-label="Answer choices for question 17"><label class="mc-opt"><input type="checkbox" name="q17" value="A"><span class="bubble"></span><span><strong>A)</strong> $12.42 ÷ 18 and $19.50 ÷ 30</span></label><label class="mc-opt"><input type="checkbox" name="q17" value="B"><span class="bubble"></span><span><strong>B)</strong> 18 ÷ $12.42 and 30 ÷ $19.50</span></label><label class="mc-opt"><input type="checkbox" name="q17" value="C"><span class="bubble"></span><span><strong>C)</strong> $12.42 × 30 and $19.50 × 18</span></label><label class="mc-opt"><input type="checkbox" name="q17" value="D"><span class="bubble"></span><span><strong>D)</strong> $12.42 × 18 and $19.50 × 30</span></label></div><textarea class="scratch" aria-label="Scratch work for question 17" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="18" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">18.</span>A 3.2-kilogram bag of rice costs $14.40. A 7-pound bag costs $13.65. Use 1 kilogram ≈ 2.2 pounds. Which has the lower cost per pound? <span class="lvl lvl-4">L4</span></p><p class="unit-cue">Convert the first bag’s mass before comparing prices.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 18"><label class="mc-opt"><input type="radio" name="q18" value="A"><span class="bubble"></span><span><strong>A)</strong> The 3.2-kg bag</span></label><label class="mc-opt"><input type="radio" name="q18" value="B"><span class="bubble"></span><span><strong>B)</strong> The 7-lb bag</span></label><label class="mc-opt"><input type="radio" name="q18" value="C"><span class="bubble"></span><span><strong>C)</strong> They cost the same per pound</span></label><label class="mc-opt"><input type="radio" name="q18" value="D"><span class="bubble"></span><span><strong>D)</strong> There is not enough information</span></label></div><textarea class="scratch" aria-label="Scratch work for question 18" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>Scale & Compound Units</h1><div class="subtitle">Picture World → Real World → Requested Unit</div></div></div></header><article class="mc-q math-card" data-item="19" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">19.</span>On a trail map, 1.5 centimeters represents 12 kilometers. A route is 52 kilometers long in reality. How long is the route on the map? <span class="lvl lvl-2">L2</span></p><p class="unit-cue">You are moving from real world back to picture world.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 19"><label class="mc-opt"><input type="radio" name="q19" value="A"><span class="bubble"></span><span><strong>A)</strong> 4.3 cm</span></label><label class="mc-opt"><input type="radio" name="q19" value="B"><span class="bubble"></span><span><strong>B)</strong> 6.5 cm</span></label><label class="mc-opt"><input type="radio" name="q19" value="C"><span class="bubble"></span><span><strong>C)</strong> 39 cm</span></label><label class="mc-opt"><input type="radio" name="q19" value="D"><span class="bubble"></span><span><strong>D)</strong> 416 cm</span></label></div><textarea class="scratch" aria-label="Scratch work for question 19" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="20" data-kind="select" data-min="1"><p class="mc-q-text"><span class="qnum">20.</span>A blueprint uses 1/4 inch to represent 3 feet. Select the blueprint dimensions of a room that is 21 feet by 15 feet. <span class="lvl lvl-3">L3</span></p><p class="unit-cue">Convert each real dimension separately.</p><div class="inline-response"><label for="q20-select">Select the result:</label><select id="q20-select" name="q20"><option value="">Choose one</option><option value="1.75 × 1.25">1.75 inches by 1.25 inches</option><option value="5.25 × 3.75">5.25 inches by 3.75 inches</option><option value="7 × 5">7 inches by 5 inches</option><option value="84 × 60">84 inches by 60 inches</option></select></div><textarea class="scratch" aria-label="Scratch work for question 20" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="21" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">21.</span>A rectangular garden measures 6.4 cm by 3.5 cm on a map. The scale is 1 cm = 150 m. What is the garden’s actual area? <span class="lvl lvl-4">L4</span></p><p class="unit-cue">Length scale applies to both dimensions before area is found.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 21"><label class="mc-opt"><input type="radio" name="q21" value="A"><span class="bubble"></span><span><strong>A)</strong> 3,360 m²</span></label><label class="mc-opt"><input type="radio" name="q21" value="B"><span class="bubble"></span><span><strong>B)</strong> 22,400 m²</span></label><label class="mc-opt"><input type="radio" name="q21" value="C"><span class="bubble"></span><span><strong>C)</strong> 504,000 m²</span></label><label class="mc-opt"><input type="radio" name="q21" value="D"><span class="bubble"></span><span><strong>D)</strong> 3,360,000 m²</span></label></div><textarea class="scratch" aria-label="Scratch work for question 21" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="22" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">22.</span>A 3.6-liter sample contains 27 grams of dissolved mineral. At the same density, how many grams are in 5.2 liters? <span class="lvl lvl-2">L2</span></p><p class="unit-cue">Find grams per liter, then count 5.2 liter-chunks.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 22"><label class="mc-opt"><input type="radio" name="q22" value="A"><span class="bubble"></span><span><strong>A)</strong> 34.6 g</span></label><label class="mc-opt"><input type="radio" name="q22" value="B"><span class="bubble"></span><span><strong>B)</strong> 39 g</span></label><label class="mc-opt"><input type="radio" name="q22" value="C"><span class="bubble"></span><span><strong>C)</strong> 43.2 g</span></label><label class="mc-opt"><input type="radio" name="q22" value="D"><span class="bubble"></span><span><strong>D)</strong> 140.4 g</span></label></div><textarea class="scratch" aria-label="Scratch work for question 22" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="23" data-kind="radio" data-min="1"><p class="mc-q-text"><span class="qnum">23.</span>A printer uses 0.65 mL of ink per page. A cartridge holds 31.2 mL. How many complete 24-page packets can it print? <span class="lvl lvl-3">L3</span></p><p class="unit-cue">Pages are a bridge unit; the requested answer is complete packets.</p><div class="mc-opts" role="group" aria-label="Answer choices for question 23"><label class="mc-opt"><input type="radio" name="q23" value="A"><span class="bubble"></span><span><strong>A)</strong> 1 packet</span></label><label class="mc-opt"><input type="radio" name="q23" value="B"><span class="bubble"></span><span><strong>B)</strong> 2 packets</span></label><label class="mc-opt"><input type="radio" name="q23" value="C"><span class="bubble"></span><span><strong>C)</strong> 3 packets</span></label><label class="mc-opt"><input type="radio" name="q23" value="D"><span class="bubble"></span><span><strong>D)</strong> 48 packets</span></label></div><textarea class="scratch" aria-label="Scratch work for question 23" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><article class="mc-q math-card" data-item="24" data-kind="number" data-min="1"><p class="mc-q-text"><span class="qnum">24.</span>A pipe moves 22 gallons per minute. Water has a mass of 8.34 pounds per gallon. How many pounds of water move through the pipe in 45 seconds? Round to the nearest tenth. <span class="lvl lvl-4">L4</span></p><p class="unit-cue">Convert seconds to minutes; gallons must cancel before pounds remain.</p><div class="inline-response"><label for="q24-number">Enter the value:</label><input id="q24-number" name="q24" type="number" step="any" inputmode="decimal"><span>pounds</span></div><textarea class="scratch" aria-label="Scratch work for question 24" placeholder="Show the unit chain or brief reasoning..."></textarea><div class="commit-row"><span class="lock-note">Choose, audit units, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article><div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 16h20M16 6v20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>Final audit:</strong> A plausible number with the wrong unit is still wrong. For every miss, identify the first line where the units stopped behaving.</p></div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div class="hw-header-left"><h1>Review the Process</h1><div class="subtitle">Error Log · Transfer · Next-Step Plan</div></div></div></header><div class="section-hd"><span class="icon" aria-hidden="true">↺</span><h2>Part C — Error Log</h2><span class="badge badge-coral">Complete after checking</span></div><p class="instr">Do not write only “careless.” Locate the decision that produced the miss and write a replacement move you can repeat.</p><div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>#</th><th>Skill / unit destination</th><th>My first wrong move</th><th>Replacement rule</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table><div class="error-type-pills"><span class="pill pill-ce">C · Concept</span><span class="pill pill-cg">G · Computation</span><span class="pill pill-ru">R · Reading / unit</span><span class="pill">T · Time</span><span class="pill">S · Strategy</span></div></div><hr class="divider"><div class="section-hd"><span class="icon" aria-hidden="true">✓</span><h2>Part D — Transfer Reflection</h2><span class="badge badge-green">3 short responses</span></div><div class="audit-grid"><div class="audit-card"><h3>ELA bridge</h3><textarea aria-label="ELA bridge reflection" placeholder="One detail I nearly paraphrased was... Its larger job was..."></textarea></div><div class="audit-card"><h3>Unit chain</h3><textarea aria-label="Unit chain reflection" placeholder="One unwanted unit that had to disappear was... I canceled it by..."></textarea></div><div class="audit-card"><h3>Commit decision</h3><textarea aria-label="Commit decision reflection" placeholder="Before one difficult commit, I checked..."></textarea></div><div class="audit-card"><h3>Next repetition</h3><textarea aria-label="Next practice goal" placeholder="On my next set, I will repeat this exact move..."></textarea></div></div><p class="footer-note">Bring the completed sheet, scratch work, and error log to the next session.</p></section></main>
+<script>
+function updateChoice(input){
+  const card=input.closest('.mc-q');
+  if(!card||card.classList.contains('locked')||card.closest('.passage-set')?.classList.contains('locked'))return;
+  if(input.type==='radio'){
+    card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');const b=o.querySelector('.bubble');if(b)b.textContent=''});
+  }
+  const label=input.closest('.mc-opt');
+  if(label){label.classList.toggle('selected',input.checked);const bubble=label.querySelector('.bubble');if(bubble)bubble.textContent=input.checked?'✓':'';}
+}
+function hasResponse(card){
+  const kind=card.dataset.kind||'radio';
+  if(kind==='multi')return card.querySelectorAll('input[type="checkbox"]:checked').length>=Number(card.dataset.min||1);
+  if(kind==='select')return Boolean(card.querySelector('select')?.value);
+  if(kind==='number')return card.querySelector('input[type="number"]')?.value!=='';
+  return Boolean(card.querySelector('input[type="radio"]:checked'));
+}
+function lockCard(card){
+  if(!hasResponse(card)){
+    const needed=card.dataset.kind==='multi'?`Select ${card.dataset.min||2} answers before committing.`:'Choose an answer before committing.';
+    alert(needed);return;
+  }
+  card.classList.add('locked');
+  card.querySelectorAll('input,select,button').forEach(e=>e.disabled=true);
+  const n=card.querySelector('.lock-note');if(n)n.textContent='Locked — response committed.';
+}
+function lockSet(set){
+  const cards=[...set.querySelectorAll('.passage-item')];
+  if(cards.some(c=>!c.querySelector('input[type="radio"]:checked'))){alert('Answer all six questions in this passage set before submitting it.');return;}
+  set.classList.add('locked');
+  set.querySelectorAll('input,button').forEach(e=>e.disabled=true);
+  const n=set.querySelector('.lock-note');if(n)n.textContent='Passage set locked — responses committed.';
+}
+function clearAll(){
+  if(!confirm('Clear every answer, work box, reflection, and committed response?'))return;
+  document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio'||e.type==='checkbox')e.checked=false;else e.value='';e.disabled=false});
+  document.querySelectorAll('select').forEach(e=>{e.selectedIndex=0;e.disabled=false});
+  document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');const b=e.querySelector('.bubble');if(b)b.textContent=''});
+  document.querySelectorAll('.mc-q,.passage-set').forEach(e=>e.classList.remove('locked'));
+  document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);
+  document.querySelectorAll('.math-card .lock-note').forEach(e=>e.textContent='Choose, audit units, then commit.');
+  document.querySelectorAll('.passage-set .lock-note').forEach(e=>e.textContent='Review all six before leaving this passage set.');
+  document.querySelectorAll('[contenteditable]').forEach(e=>e.innerHTML='&nbsp;');
+}
+document.querySelectorAll('.mc-opt input').forEach(i=>i.addEventListener('change',()=>updateChoice(i)));
+document.querySelectorAll('.math-card .commit-btn').forEach(b=>b.addEventListener('click',()=>lockCard(b.closest('.mc-q'))));
+document.querySelectorAll('.set-commit').forEach(b=>b.addEventListener('click',()=>lockSet(b.closest('.passage-set'))));
+document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=Math.max(t.scrollHeight,48)+'px'}));
+</script></body></html>
