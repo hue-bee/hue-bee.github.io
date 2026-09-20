@@ -26,3 +26,4 @@
 | **01A** | [What the Numbers Say](https://hue-bee.github.io/julius/lesson01A) | [1A Homework](https://hue-bee.github.io/julius/lesson01A/homework) | |
 | **01B** | [Reading the Picture](https://hue-bee.github.io/julius/lesson01B) | [1B Homework](https://hue-bee.github.io/julius/lesson01B/homework) | |
 | **02A** | [From 74 to Repeatable](https://hue-bee.github.io/julius/lesson02A) | [2A Homework](https://hue-bee.github.io/julius/lesson02A/homework) | |
+| **02B** | [Units That Do Work](https://hue-bee.github.io/julius/lesson02B) | [2B Homework](https://hue-bee.github.io/julius/lesson02B/homework) | |
