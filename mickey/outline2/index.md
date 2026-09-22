@@ -1,279 +1,123 @@
-# Mickey’s Digital SAT Study Plan: September 23–November 7, 2026
+# Mickey’s Digital SAT Study Plan
 
-## Instructional Priority
+**Test date:** November 7, 2026  
+**Instruction:** One 60-minute meeting per week; baseline audit already completed  
+**Planning window:** September 23–November 7, 2026
 
-Mickey’s preparation should focus on **score stabilization rather than broad content review**. He has already demonstrated a 1530 practice-test ceiling (770 Reading and Writing, 760 Math), with only 5 missed questions, but earned 1440 on the August 22 official SAT (730 Reading and Writing, 710 Math). The 90-point difference indicates that the main objective is to make strong performance repeatable under official timing and adaptive-test pressure.[^1][^2]
+## The instructional diagnosis
 
-The two clearest content priorities in the official score report are:
+Mickey scored **1530** on Bluebook Practice Test 4 on August 8 (770 Reading and Writing, 760 Math; 1 Reading and Writing error and 4 Math errors), followed by **1440** on the official August 22 SAT (730 Reading and Writing, 710 Math). The 90-point difference is a reason to prioritize reliable performance under actual conditions, not to assume every topic needs reteaching. A 1500+ official result is a reasonable working target, not a guarantee. 
 
-1. **Reading and Writing: Expression of Ideas**, reported in the 610–670 performance band.
-2. **Math: Geometry and Trigonometry**, also reported in the 610–670 performance band.[^2]
+The August score report puts **Expression of Ideas** in the 610–670 performance band in Reading and Writing and **Geometry and Trigonometry** in the 610–670 band in Math. The remaining six reported content domains fall in 680–800 bands. These are broad domain indicators, not question-level diagnoses: the completed audit and future error logs should determine which specific subskills need the most work. The practice-test PDF reports section scores and totals, but does not provide an extractable question-level error breakdown; do not assign its five errors to particular domains without viewing the question review. 
 
-All six remaining weekly meetings should therefore be concentrated on those two domains, with shorter maintenance sets for the already stronger domains. No additional broad baseline test is needed because the baseline audit has already been completed.
+| Priority | Domain | What success looks like |
+|---|---|---|
+| 1 | Expression of Ideas | Reliably identify the logical relationship in transitions and satisfy the precise goal in rhetorical synthesis. |
+| 1 | Geometry and Trigonometry | Translate figures and words into the right theorem or equation; avoid unit, scale-factor, trig-ratio, and radius/diameter errors. |
+| 2 | Execution | Protect first-module accuracy, avoid time-consuming stalls, and verify flagged work within each module. |
+| 3 | Maintenance | Keep stronger Reading and Writing and Math domains active with small mixed sets. |
 
-## Score Profile
+## The adaptive-test constraint
 
-| Evidence | Reading and Writing | Math | Total | Instructional meaning |
-|---|---:|---:|---:|---|
-| Bluebook Practice Test 4, August 8 | 770; 1 incorrect | 760; 4 incorrect | 1530 | Demonstrates that a 1500+ result is already within reach.[^1] |
-| Official SAT, August 22 | 730 | 710 | 1440 | Shows a need for greater consistency and better transfer to official test conditions.[^2] |
-| Lowest reported domain | Expression of Ideas, 610–670 | Geometry and Trigonometry, 610–670 | — | These are the primary remediation areas.[^2] |
-| Stronger reported domains | Information and Ideas, Craft and Structure, and Standard English Conventions: 680–800 | Algebra, Advanced Math, and Problem-Solving and Data Analysis: 680–800 | — | Maintain rather than reteach comprehensively.[^2] |
+The SAT is **multistage adaptive by module**, not adaptive after every question: performance in the first module of each section determines the difficulty of the second module. Reading and Writing has two 32-minute modules (54 questions total); Math has two 35-minute modules (44 total). A student can revisit questions **within** a module but cannot return after it closes. 
 
-A sensible performance objective is a **stable 1500+ level**, with 1530–1560 as a reach range rather than a promised outcome. Success should be measured not only by scaled score but also by fewer repeated errors, clean first modules, improved accuracy in the two weak domains, and consistent timing.
+Teach Mickey to prioritize correct, efficient work on both first modules, while preserving a return pass. Proposed pacing checkpoints—not official rules—are a Reading and Writing first pass with 6–8 minutes left and a Math first pass with 7–9 minutes left. If progress is blocked, make the best available choice, flag the item, and move on; no question should remain blank.
 
-## Adaptive-Test Implications
+## What to teach: Expression of Ideas
 
-The November 7 SAT is a **two-stage multistage adaptive test**, rather than a question-by-question computerized adaptive test. Each section has a mixed-difficulty first module; performance on that module routes the student to a second module with an easier or harder average difficulty.[^3][^4]
-
-Reading and Writing contains 54 questions across two 32-minute modules, while Math contains 44 questions across two 35-minute modules. Students may move freely within the current module but cannot return after the module ends. This makes first-module accuracy especially important, but Mickey should not become so cautious that he leaves questions unanswered.[^3]
-
-Questions testing similar Reading and Writing skills are grouped and arranged from easier to harder, so the student should expect time demand to increase within a skill group. The pacing system should therefore use controlled skipping and a final return pass instead of spending excessive time on one difficult question.[^5]
-
-### Module routine
-
-- **Reading and Writing:** Aim to complete the first pass in 24–26 minutes, leaving 6–8 minutes for marked questions and verification. Flexible checkpoints are approximately question 9 with 21 minutes remaining and question 18 with 10–11 minutes remaining.
-- **Math:** Aim to complete the first pass in 26–28 minutes, leaving 7–9 minutes for marked questions, substitution checks, unit checks, and Desmos verification. Flexible checkpoints are approximately question 11 with 17–18 minutes remaining and question 18 with 6–7 minutes remaining.
-- **Mark-and-move rule:** If no defensible setup appears after roughly 60–75 seconds in Reading and Writing or 90–120 seconds in Math, eliminate what is possible, mark the question, and return later.
-- **Module 1 rule:** Verify answers, not entire solutions. Recheck the exact point where an answer was selected: relationship word, rhetorical goal, sign, unit, radius versus diameter, or requested quantity.
-- **Module 2 rule:** Expect several questions to require more steps. Preserve time for the final third instead of interpreting early ease or difficulty as evidence about routing.
-
-## Expression of Ideas
-
-Expression of Ideas makes up about 20% of Reading and Writing and tests two skills: **Transitions** and **Rhetorical Synthesis**. Mickey needs a repeatable decision process for each type, not a larger memorized list of transition words.[^6][^7]
+Expression of Ideas accounts for approximately 20% of Reading and Writing and contains **Transitions** and **Rhetorical Synthesis**. This is revision for meaning and purpose, not a broad grammar unit; Standard English Conventions is a separate domain. 
 
 ### Transitions
 
-For every transition question, Mickey should complete this sequence before evaluating answer choices:
+Teach a consistent five-step routine:
 
-1. Read the sentence before and after the blank.
-2. Paraphrase the logical relationship in plain language.
-3. Classify that relationship: continuation/addition, contrast/concession, cause/effect, example/elaboration, sequence, or conclusion.
-4. Predict a simple connector such as “however,” “therefore,” or “for example.”
-5. Select the choice matching the logic and then reread the completed passage.
+1. Read the sentence on each side of the blank before looking at choices.
+2. Say the relationship in ordinary language: addition, contrast, concession, cause/result, example, clarification, or sequence.
+3. Predict a simple connector that would convey that relationship.
+4. Choose by *logic*, not by how polished or familiar a word sounds.
+5. Reread the completed text and check whether the relationship remains accurate.
 
-What must be accomplished:
+Target frequent confusions explicitly: contrast versus concession; reason versus consequence; example versus restatement; and before/after versus simultaneous events. Mix these relationships in homework so Mickey must diagnose the connection rather than recognize a memorized answer pattern. When a response is wrong, require him to identify the actual relationship and the incorrect relationship his answer would have implied.
 
-- Distinguish **contrast** from **concession**. “However” signals opposition, while “even so” or “nevertheless” concedes the previous idea and then preserves the next claim.
-- Distinguish **cause** from **result**. The student must identify which sentence supplies the reason and which supplies the consequence.
-- Separate **example** from **restatement**. A specific instance illustrates; a rephrasing clarifies the same general claim.
-- Treat chronology as logic. “Subsequently,” “previously,” and “meanwhile” depend on the sequence or overlap of events.
-- Ignore whether a transition merely “sounds academic.” Only the relationship between the two ideas determines the answer.
-- Check punctuation only after resolving meaning; a grammatically possible connector can still express the wrong logical relationship.
-
-Mastery standard: at least **90% on medium mixed transition sets and 80–85% on hard sets**, with the relationship correctly named before the answer choices are discussed.
+**Mastery check:** Two separate timed mixed sets at roughly 90% accuracy overall, with at least 80% on hard questions. For every miss, he should explain the link between the two sentences without merely quoting a transition-word definition.
 
 ### Rhetorical synthesis
 
-Rhetorical Synthesis asks the student to integrate notes strategically to satisfy a stated writing goal. The central skill is selection: the strongest answer includes the facts necessary for the requested purpose and excludes true but irrelevant information.[^8][^9]
+These questions ask which sentence best uses supplied notes to accomplish a specific writing goal. The trap is often a true sentence that does **not** fulfill that goal.
 
-Required procedure:
+1. Read the goal **before** the notes and underline its operative language: introduce, compare, emphasize, support, explain, or summarize.
+2. Write a short goal checklist: required subject, audience, relationship, and evidence.
+3. Locate only notes relevant to that checklist; true but irrelevant details do not earn a place in the answer.
+4. Predict what the successful answer must say, then evaluate the options.
+5. Reject answers that are incomplete, overgeneralized, unsupported, or directed at a different purpose.
 
-1. Read the rhetorical goal first.
-2. Translate it into a checklist: purpose, audience, required comparison or emphasis, and any specified source or time period.
-3. Scan the notes only for information that satisfies that checklist.
-4. Predict the content of the answer without drafting a polished sentence.
-5. Reject choices that are accurate but incomplete, overbroad, unsupported, or aimed at a different rhetorical purpose.
+Practice goal families separately before mixing them: introducing an unfamiliar subject; comparing two people, studies, or approaches; supporting a claim with evidence; emphasizing chronology; explaining a finding; and distinguishing a study’s method from its result.
 
-Mickey should explicitly practice these goal families:
+**Mastery check:** At least 9/10 correct on two mixed sets; Mickey should be able to state the goal and explain why the best distractor fails it. Track correct-to-incorrect answer changes as a separate behavior.
 
-- Introduce a topic to an unfamiliar audience.
-- Emphasize a similarity or difference.
-- Summarize a study’s method or finding.
-- Support a generalization with a relevant example.
-- Explain a chronology or development.
-- Make and support a claim.
-- Highlight information from one source rather than combining every note.
+## What to teach: Geometry and Trigonometry
 
-Mastery standard: at least **9 correct out of every 10 mixed Expression of Ideas questions**, with no more than one answer changed from correct to incorrect during review across two consecutive timed sets.
-
-## Geometry and Trigonometry
-
-Geometry and Trigonometry represents about 15% of SAT Math. College Board divides it into area and volume; lines, angles, and triangles; right triangles and trigonometry; and circles. Because this domain contains only about 5–7 questions per test, a small number of recurring gaps can materially affect Mickey’s Math result.[^10][^11][^2]
+This domain is about 15% of SAT Math, or roughly 5–7 questions. Its tested families include area and volume; lines, angles, and triangles; right triangles and trigonometry; and circles. The plan allocates enough time to repair repeated errors without sacrificing the larger algebra/advanced-math domains. 
 
 ### Area, volume, and scale
 
-Mickey must be able to:
-
-- Select and apply perimeter, area, surface-area, and volume formulas without confusing dimensions.
-- Decompose composite figures and subtract missing regions.
-- Convert units before calculating, especially squared and cubed units.
-- Apply scale factors correctly: if lengths change by factor `k`, areas change by `k²`, and volumes change by `k³`.
-- Work backward from area or volume to an unknown dimension.
-- Distinguish total surface area from lateral surface area and radius from diameter.
-
-The instructional emphasis should be on **model construction and units**, not formula recitation. Each solution should begin with a labeled figure and end with a unit and reasonableness check.
+Mickey should select the appropriate area, circumference, surface-area, or volume formula, label dimensions before substitution, and check whether the problem asks for a length, area, or volume. Practice composite figures, missing lengths inferred from area or volume, and unit conversions; lengths, areas, and volumes do not scale in the same way. For similar figures with linear scale factor \(k\), the area scale factor is \(k^2\) and volume scale factor is \(k^3\). The exit criterion is explaining the model and units before computing the numeric answer.
 
 ### Lines, angles, and triangles
 
-Mickey must be fluent with:
-
-- Vertical angles, linear pairs, and supplementary relationships.
-- Angle relationships formed by parallel lines and a transversal.
-- Triangle angle sum and exterior-angle relationships.
-- Triangle similarity, congruence, and corresponding parts.
-- Scale factor versus area ratio in similar figures.
-- Coordinate geometry involving slope, distance, midpoint, and perpendicular lines.
-- Translating a verbal diagram description into equations rather than relying on an unscaled drawing.
-
-The key accomplishment is to identify the governing theorem before doing arithmetic. A correct setup should be explainable in one sentence, such as “the triangles are similar by angle-angle, so corresponding sides are proportional.”
+Review angle relationships with intersecting and parallel lines; triangle angle sums and exterior angles; similar triangles, corresponding sides, and scale factors; and coordinate applications of slope and distance. Require one verbal justification before each equation: for example, “These triangles are similar by angle–angle, so their corresponding sides form a proportion.” Diagrams are not necessarily to scale, so conclusions must come from marked or stated relationships, not appearance.
 
 ### Right triangles and trigonometry
 
-Mickey must be able to:
-
-- Use the Pythagorean theorem in direct and embedded applications.
-- Recall and apply the 45-45-90 and 30-60-90 side ratios.
-- Define sine, cosine, and tangent from the correct reference angle.
-- Solve for a missing side or angle and decide whether trigonometry or a special-triangle relationship is faster.
-- Use complementary-angle relationships.
-- Recognize when a three-dimensional or coordinate problem contains a hidden right triangle.
-- Work with degree and radian measures when the problem requires them.
-
-A frequent prevention rule should be written at the top of early practice sets: **label opposite, adjacent, and hypotenuse relative to the stated angle before writing a trig ratio**.
+Secure the Pythagorean theorem, 45–45–90 and 30–60–90 ratios, and sine/cosine/tangent relative to the angle **specified in the question**. Mickey should label opposite, adjacent, and hypotenuse before writing any trigonometric ratio; decide whether a special-triangle shortcut is more efficient; and identify hidden right triangles in geometric or coordinate contexts. Include degree/radian interpretation when it appears in official questions.
 
 ### Circles
 
-Mickey must be able to:
+Practice radius versus diameter, circumference versus area, arc length and sector area, central versus inscribed angles, tangents and perpendicular radii, and coordinate equations of circles. Add completing the square when a circle equation is written in expanded form. In each solution, first ask what quantity is requested; a correct radius is not automatically the requested diameter or area. 
 
-- Use radius, diameter, circumference, and area relationships precisely.
-- Connect central angles to arc measure and calculate arc length and sector area as fractions of a full circle.
-- Apply the fact that a radius to a tangent point is perpendicular to the tangent.
-- Use inscribed-angle and central-angle relationships.
-- Interpret and create the coordinate equation of a circle.
-- Complete the square to identify a circle’s center and radius.
-- Distinguish a circle’s equation from a distance-formula setup.
+**Mastery check:** Across two distinct sets, about 90% accuracy on medium questions and at least 80% on hard questions; correct setup on at least 9/10 even when arithmetic slips occur. Repeated mistakes in radius/diameter, degrees/radians, linear versus area scale, and trig-ratio orientation must disappear across two successive weeks. These thresholds are instructional goals, not official SAT scoring conversions.
 
-College Board’s own question-bank description includes tangents, arc lengths, sector areas, circle graphs, radians, the unit circle, distance, and completing the square. Circle work should therefore include both classical geometry and algebraic/coordinate forms.[^12]
+## Six weekly meetings
 
-### Geometry mastery
+Schedule one meeting in each window. If the first meeting starts late, combine the transitions lesson with rhetorical synthesis, but do not sacrifice the later full-test review. Exact dates can shift to match the standing weekly appointment.
 
-Before test week, Mickey should demonstrate:
+| Meeting | Window | 60-minute lesson | Between-session work |
+|---|---|---|---|
+| 1 | Sep 23–29 | 5 min retrieve audit findings; 10 min classify transition relationships; 15 min tutor think-aloud and student explanation; 20 min timed medium/hard transitions; 10 min errors and assignment. | Three short transition sets totaling 24–30 official questions; redo misses after 48 hours; 12 mixed maintenance questions. |
+| 2 | Sep 30–Oct 6 | 5 min transition retrieval; 20 min rhetorical-goal checklist and distractors; 15 min timed synthesis; 15 min area/volume/scale problems; 5 min exit question. | 20–24 synthesis questions and 16–20 geometry foundations questions; rebuild essential formulas from memory twice. |
+| 3 | Oct 7–13 | 5 min retrieval; 15 min angle/similarity setup; 15 min special triangles/trig; 15 min hard geometry; 5 min answer verification; 5 min assignment. | 24–30 targeted geometry questions; one timed Math module; one **unused** Bluebook full-length test, outside the lesson. |
+| 4 | Oct 14–20 | 10 min full-test review; 20 min reconstruct high-value misses before reading solutions; 15 min alternate strategies; 10 min timed redo cluster; 5 min update error rules. | Redo all misses, guesses, and slow answers; 12 hard Expression of Ideas and 12 hard Geometry and Trigonometry questions; light maintenance. |
+| 5 | Oct 21–27 | 10 min first-module accuracy review; 15 min pacing and strategic flags; 15 min hard Reading and Writing sprint; 15 min hard Math sprint; 5 min personal checklist. | A second **unused** full-length Bluebook test in authentic conditions; written review within 24 hours; drill top two recurring error families. |
+| 6 | Oct 28–Nov 3 | 10 min compare recent trends; 20 min final weak-skill repair; 15 min mixed timed exit set; 10 min module/test-day rehearsal; 5 min taper plan. | Finish redos by Nov 3. Nov 4–5: two brief targeted sets. Nov 6: device and logistics check, no full-length test. |
 
-- At least **90% accuracy on medium Geometry and Trigonometry questions**.
-- At least **80% accuracy on hard questions** across two separate sets.
-- Correct setup on at least 9 of 10 questions, even if an arithmetic error occurs.
-- No repeated radius/diameter, degree/radian, linear/area scale-factor, or special-triangle ratio error over two consecutive weeks.
-- Completion of a 10-question mixed set in approximately 16 minutes with time to verify marked items.
+The official test is Saturday, November 7, 2026. Check registration status early: College Board lists October 23 as the regular-registration deadline and October 27 as the late-registration deadline.
 
-## Six-Week Sequence
+## Between-session workflow
 
-The following schedule assumes one 60-minute meeting during each date window. If the first meeting occurs after September 29, combine the transition mini-lesson from Session 1 with the rhetorical-synthesis work in Session 2 and retain the final full-test review.
+On ordinary weeks, assign roughly **90–150 minutes** across three or four days instead of one long cram session. Reserve an additional test-length block plus review time in the two full-test weeks. Bluebook offers full-length digital practice and question review; the official Student Question Bank and Educator Question Bank support domain- and difficulty-targeted sets. Avoid reusing already-seen questions as a primary measure of score growth. [web:50][web:63][web:64]
 
-| Session | Date window | Primary objective | 60-minute lesson sequence | Homework before next meeting |
-|---|---|---|---|---|
-| 1 | Sep. 23–29 | Expression of Ideas: transitions | 5 min retrieval from the completed audit; 10 min relationship taxonomy; 15 min untimed think-alouds; 20 min medium-to-hard timed official questions; 5 min error classification; 5 min assignment and success criteria | 24–30 official transition questions in three short sets; reattempt every miss after 48 hours; one 12-question mixed Reading and Writing maintenance set |
-| 2 | Sep. 30–Oct. 6 | Rhetorical synthesis plus geometry foundations | 5 min transition retrieval; 20 min rhetorical-goal checklist and distractor analysis; 15 min timed synthesis set; 15 min geometry formula/scale-factor retrieval; 5 min exit ticket | 20–24 rhetorical-synthesis questions; 16–20 area/volume/scale questions; formula reconstruction twice from memory |
-| 3 | Oct. 7–13 | Lines, triangles, right-triangle trig | 5 min retrieval; 15 min angle/similarity theorem selection; 15 min special triangles and trig setup; 15 min hard mixed geometry set; 5 min Desmos or substitution verification; 5 min exit ticket | 24–30 targeted geometry/trig questions; one timed Math module; one full Bluebook test on the weekend under official conditions |
-| 4 | Oct. 14–20 | Full-test autopsy and hard-question conversion | 10 min score/process review; 20 min reconstruct the two highest-value misses without explanations; 15 min alternate-solution comparison; 10 min timed redo cluster; 5 min update error rules | Redo every missed, guessed, or slow question from the full test; 12 hard Expression of Ideas questions; 12 hard Geometry and Trigonometry questions; one maintenance set from stronger domains |
-| 5 | Oct. 21–27 | Adaptive-module execution and score protection | 10 min module-1 accuracy review; 15 min pacing/skip decisions; 15 min mixed hard Reading and Writing sprint; 15 min mixed hard Math sprint; 5 min personal checklist | One unused full Bluebook test under exact test-day conditions; complete a written autopsy within 24 hours; drill only the top two recurring error families |
-| 6 | Oct. 28–Nov. 3 | Final repair and dress rehearsal review | 10 min trend review; 20 min final weak-skill reteach; 15 min targeted timed set; 10 min test-day decision rehearsal; 5 min taper plan | By Nov. 3: finish all redo work. Nov. 4–5: two short confidence sets only. Nov. 6: no full section or full test; prepare device and logistics, then rest |
+- **First work block:** Learn or refresh the week’s decision procedure, then complete an untimed targeted set.
+- **Second work block:** Complete a short timed set with a clear accuracy and pacing target.
+- **Third work block:** Redo every miss without a solution, ideally 48 hours later.
+- **Fourth work block:** Complete a short mixed set from stronger domains or reattempt prior error-log items.
 
-The November 7, 2026 SAT begins at 7:45 a.m. local time, and College Board lists October 23 as the regular registration deadline and October 27 as the late-registration deadline.[^13][^14]
+For each full-length test, use the actual Bluebook interface, comparable morning start time, planned device and permitted tools, and normal breaks. Review not only incorrect questions but also guesses, unusually slow correct answers, and changes made without a reason. The objective is to make the score reproducible, not to accumulate test administrations.
 
-## Homework Structure
+## Error log and tutor decisions
 
-A high-scoring student benefits more from **deliberate correction** than from indiscriminate volume. On ordinary weeks, homework should total about 90–150 minutes, divided across three or four days. Full-test weeks require the additional 2 hours 14 minutes of test time plus approximately 60–90 minutes of review; that is the official standard testing time before setup and breaks.[^3]
-
-### Ordinary week
-
-- Day 1: 20–30 minutes of concept-focused official questions.
-- Day 2: 20–30 minutes of mixed timed practice.
-- Day 3: 20 minutes reattempting misses without notes.
-- Day 4: 20–30 minutes of maintenance work from stronger domains.
-
-### Full-test week
-
-- Take an unused adaptive Bluebook practice test in one sitting, at approximately the same morning start time as the official SAT.
-- Use the same device, charger arrangement, calculator mode, snack, and break routine planned for November 7.
-- Do not pause except for a genuine interruption.
-- Within 24 hours, classify every missed, guessed, changed, or unusually slow problem.
-- Do not take another full test until the previous one has been completely reviewed.
-
-Bluebook’s full-length practice tests are timed and scored, and My Practice provides question review, explanations, and targeted follow-up practice. College Board’s Student Question Bank contains thousands of official questions that can be filtered by section, domain, skill, and difficulty.[^15][^16]
-
-## Error-Log Protocol
-
-The error log should include more than wrong answers. It should capture any question that was guessed, took too long, was changed without a clear reason, or was answered correctly using fragile reasoning.
-
-| Field | Required entry |
+| Log field | What to record |
 |---|---|
-| Source | Bluebook test or official question-bank set and question identifier |
-| Domain and skill | For example, Expression of Ideas—Transitions or Geometry and Trigonometry—Circles |
-| Difficulty | Easy, medium, or hard when available |
-| Outcome | Wrong, lucky correct, slow correct, or changed answer |
-| Error cause | Knowledge, setup, misread, logic, computation, timing, tool misuse, or answer-choice trap |
-| Correct principle | One sentence stating the rule or theorem that controls the problem |
-| Prevention trigger | A short executable cue, such as “name the relationship before choices” or “mark radius and diameter” |
-| Reattempts | 48-hour redo and 7-day redo, both without viewing the solution |
+| Item | Source, test/set, module, question identifier, domain, and subskill. |
+| Performance | Wrong, guessed right, slow right, or changed answer; time taken if available. |
+| Root cause | Content knowledge, setup, misread, faulty inference, computation, time management, or tool misuse. |
+| Correct principle | The shortest explanation of why the correct answer follows. |
+| Prevention cue | An actionable phrase: “Name the transition relationship”; “Read the stated goal first”; “Label radius”; “Verify the requested unit.” |
+| Retention check | Correct independent reattempt after 48 hours and again about one week later. |
 
-Tutor review should look for **repeatable causes**, not isolated topics. For example, three apparently different geometry misses may all result from failing to label the requested quantity, while two transition misses may both come from choosing by tone rather than logical relationship.
+At the start of each meeting, sort errors by **process**, not merely by topic. Three different-looking mistakes may share the same cause. A repeated cause earns direct instruction; an isolated one earns a targeted correction and later retrieval. If the next full test reveals a new persistent weakness outside the two priority domains, replace some maintenance time with that skill, but avoid rebuilding the entire plan around one item.
 
-## Lesson Template
+## Readiness and final week
 
-Every one-hour meeting should follow a predictable structure:
+Use several signals together: fewer repeat errors; at least two successful timed sets in each weak domain; first-pass pacing that leaves time for flagged items; and two late-cycle practice performances without a major section collapse. Practice scaled scores are informative but do not establish a guaranteed November score, and broad score-report bands do not identify the exact underlying missed subskills.
 
-1. **0–5 minutes: Retrieval.** Two or three questions from the previous week, completed without notes.
-2. **5–15 minutes: Error-pattern review.** Discuss only recurring or high-value errors.
-3. **15–30 minutes: Explicit instruction.** Model one decision process or theorem family.
-4. **30–50 minutes: Guided-to-independent practice.** Begin with a think-aloud, then remove support.
-5. **50–57 minutes: Timed exit set.** Use official questions at the target difficulty.
-6. **57–60 minutes: Assignment.** Specify question source, quantity, timing, mastery threshold, and redo date.
-
-The tutor should avoid spending most of the lesson solving homework questions one by one. The lesson’s purpose is to identify the common cause, teach the replacement process, test the process under time, and assign enough official practice to make it automatic.
-
-## Progress Dashboard
-
-Track the following after each assignment and practice test:
-
-| Metric | Test-ready threshold |
-|---|---|
-| Expression of Ideas accuracy | 90% overall; at least 80–85% on hard questions |
-| Geometry and Trigonometry accuracy | 90% medium; at least 80% hard across two sets |
-| Repeated error rate | No same-process error in two consecutive assignments |
-| Reading and Writing pacing | First pass finished with 6–8 minutes available for returns |
-| Math pacing | First pass finished with 7–9 minutes available for returns |
-| First-module execution | No unanswered questions; ideally no more than one avoidable error per section |
-| Review quality | Every miss can be explained without copying the official rationale |
-| Full-test consistency | Two late-cycle tests with controlled timing and no major domain collapse; scaled score is considered alongside process data |
-
-The final readiness decision should rely on the dashboard rather than one practice score. College Board reports domain performance in broad score bands, so a single band does not reveal the exact subskill or exact number of questions missed. The existing audit and ongoing question-level error log should determine whether transitions or synthesis—and which geometry family—receives the final week’s limited time.[^17]
-
-## Test-Week Plan
-
-### November 4–5
-
-- Complete one 8–10-question Expression of Ideas set and one 8–10-question Geometry and Trigonometry set.
-- Review the personal transition taxonomy, geometry trigger sheet, and error-prevention rules.
-- Stop each set while accuracy and confidence remain high; do not chase volume.
-
-### November 6
-
-- Do not take a full practice test or full timed section.
-- Complete Bluebook exam setup, charge the device, pack the charger and acceptable calculator, confirm transportation, and prepare identification and admission information.
-- Review formulas and the personal checklist for no more than 20 minutes.
-- Follow the planned sleep and morning routine rather than adding last-minute study.
-
-### November 7
-
-- Treat each module as a separate test.
-- On Reading and Writing, name the relationship or rhetorical goal before selecting an answer.
-- On Math, label the figure, write the governing relationship, and verify the requested quantity and units.
-- Use marking strategically and never leave an answer blank.
-- After each module ends, release it completely; later modules cannot be used to repair earlier ones.
-
-## Instructor Preparation
-
-Before each meeting, prepare one short official set filtered by the week’s domain, skill, and difficulty. The Educator Question Bank supports filtering by assessment, section, domain, and other criteria, and provides official prompts and rationales.[^18][^19]
-
-For each lesson, bring:
-
-- A 2–3 question retrieval set from prior errors.
-- One model problem that exposes the week’s core reasoning process.
-- A 6–10 question timed exit set.
-- A one-page answer key that identifies the controlling rule, likely trap, and quickest reliable approach.
-- A homework set divided into learning, timed application, and delayed reattempts.
-
-The instructional sequence should remain stable unless new full-test evidence shows a different repeated weakness. A one-off miss should be corrected; a repeated process error should change the following lesson.
-
-19. [Educator Question Bank: Overview - SAT Suite - College Board](https://satsuite.collegeboard.org/k12-educators/tools-resources/question-bank/overview) - Filter to create targeted question sets that meet your specified criteria, including assessment type...
+From November 4–5, use only short 8–10-question sets in each priority domain and review the personal error-prevention sheet. On November 6, avoid a full section or test; complete Bluebook setup, charge the device, confirm admission details and transportation, and protect sleep. On test day, treat each module independently, answer every question, and use the within-module return pass to verify high-risk choices.
