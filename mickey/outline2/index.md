@@ -1,4 +1,4 @@
-# Mickey’s Digital SAT Study Plan
+# Mickey’s Provisional Digital SAT Study Plan
 
 **Test date:** November 7, 2026  
 **Instruction:** One 60-minute meeting per week; baseline audit already completed  
