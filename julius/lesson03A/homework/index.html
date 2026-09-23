@@ -1,1 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Homework — Measurement, Percents & Fiction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+/* Art direction: cheerful, structured SHSAT worksheet matching the supplied homework reference.
+   Palette: blue/coral/sand/green/purple from homework.html.
+   Typography: Baloo 2 display + Nunito body from index.html. */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16A34A;--green-lt:#DCFCE7;--purple:#7C3AED;--purple-lt:#EDE9FE;
+  --ink:#0F172A;--slate:#334155;--muted:#64748B;--border:#CBD5E1;
+  --bg:#F8FAFF;--white:#FFFFFF;--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif;
+}
+html{background:#E2E8F0;scroll-behavior:smooth}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;font-size:16px;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+button,input,textarea,select{font:inherit}.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.action-btn{min-height:44px;border:0;border-radius:24px;padding:.55rem 1.15rem;background:var(--blue);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(37,99,235,.18);transition:background .18s ease,transform .18s ease}.action-btn:hover{background:#1D4ED8;transform:translateY(-1px)}.action-btn:active{transform:translateY(0)}.action-btn.secondary{background:var(--muted)}.action-btn.secondary:hover{background:#475569}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.15rem}.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue);flex:0 0 auto}.hw-header-left h1{font-family:var(--ff-head);font-size:1.7rem;line-height:1.05;font-weight:800;color:var(--ink)}.subtitle{font-size:.83rem;color:var(--muted);font-weight:700;margin-top:.2rem}.hw-meta{display:flex;flex-direction:column;gap:.5rem;min-width:210px}.hw-meta-row{display:flex;align-items:center;gap:.45rem}.hw-meta-row .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;width:34px}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}
+.score-banner{display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--blue);color:#fff;border-radius:12px;padding:.8rem 1rem;margin-bottom:1rem}.score-banner .title{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.score-banner .sub{font-size:.76rem;opacity:.86}.score-cells{display:flex;gap:.55rem;flex-wrap:wrap}.score-cell{min-width:66px;text-align:center;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:.28rem .5rem;background:rgba(255,255,255,.08)}.sc-val{font-family:var(--ff-head);font-size:1.02rem;font-weight:700}.sc-lbl{font-size:.63rem;opacity:.82;text-transform:uppercase;letter-spacing:.05em}.score-input{width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.65);color:#fff;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #FCD34D;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400E}.cat-strip strong{font-family:var(--ff-head);color:#92400E}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1rem 0 .25rem}.section-hd .icon{font-size:1.25rem}.section-hd h2{font-family:var(--ff-head);font-size:1.38rem;line-height:1.1;font-weight:800;color:var(--ink)}.badge{margin-left:auto;padding:.22rem .65rem;border-radius:20px;font-size:.69rem;font-weight:800;white-space:nowrap}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#C2410C;border:1px solid #FCA5A5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86EFAC}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #C4B5FD}.instr{font-size:.79rem;color:var(--muted);margin-bottom:.8rem}.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:#fff;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1E3A8A}
+.formula-strip{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;background:var(--purple-lt);border:1.5px solid #C4B5FD;border-radius:10px;padding:.65rem .85rem;margin-bottom:.9rem}.fs-label{font-size:.7rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:.05em}.fml{background:#fff;border:1px solid #C4B5FD;border-radius:7px;padding:.22rem .55rem;font-size:.76rem;font-weight:800;color:#4C1D95}
+.mc-q{border:1.5px solid var(--border);border-radius:10px;padding:.76rem .85rem;margin:.72rem 0;background:#fff;break-inside:avoid}.mc-q-text{font-size:.84rem;line-height:1.43;color:var(--slate);font-weight:650}.qnum{font-family:var(--ff-head);color:var(--blue);font-weight:800;font-size:1rem;margin-right:.2rem}.lvl{display:inline-flex;align-items:center;justify-content:center;min-width:28px;border-radius:12px;padding:1px 7px;font-size:.62rem;font-weight:800;margin-left:.3rem;vertical-align:1px}.lvl-1{background:#EEE;color:#1F2937}.lvl-2{background:#D9D9D9;color:#1F2937}.lvl-3{background:#BDBDBD;color:#111827}.lvl-4{background:#6B7280;color:#fff}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .5rem;margin-top:.55rem}.mc-opt{display:flex;align-items:flex-start;gap:.42rem;border:1px solid #E2E8F0;border-radius:7px;padding:.42rem .5rem;min-height:42px;font-size:.76rem;color:var(--slate);cursor:pointer;transition:background .16s ease,border-color .16s ease}.mc-opt:hover{background:#F0F0F0}.mc-opt input{position:absolute;opacity:0;pointer-events:none}.bubble{display:flex;align-items:center;justify-content:center;width:19px;height:19px;flex:0 0 19px;border:1.5px solid #94A3B8;border-radius:50%;font-size:.65rem;margin-top:1px}.mc-opt.selected{background:#E5E7EB;border-color:#374151;font-weight:700}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}.mc-q.locked{background:#F1F5F9;border-color:#94A3B8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.45rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:#fff;font-size:.7rem;font-weight:800;cursor:pointer}.commit-btn:hover{background:#1D4ED8}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.work-prompt{margin-top:.5rem;border-top:1px dashed var(--border);padding-top:.45rem}.work-prompt label{display:block;font-size:.68rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.work-area{width:100%;min-height:48px;margin-top:.25rem;border:1px solid var(--border);border-radius:7px;padding:.4rem .5rem;resize:vertical;background:repeating-linear-gradient(#fff,#fff 23px,#E2E8F0 24px);font-size:.76rem;line-height:24px}.work-area::placeholder{color:var(--muted);font-style:italic}
+.passage-box{background:#F8FAFC;border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.05rem;margin:.75rem 0 1rem;column-count:2;column-gap:1.6rem;column-rule:1px solid #E2E8F0}.passage-title{column-span:all;font-family:var(--ff-head);font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:.45rem}.passage-text{font-family:var(--ff-body);font-size:.76rem;line-height:1.55;color:var(--slate)}.passage-text p{margin-bottom:.62rem;break-inside:avoid}.line-no{font-size:.64rem;font-weight:800;color:var(--blue);display:inline-block;min-width:22px}.quote{font-style:italic}
+.passage-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.7rem;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:.65rem .85rem;margin:.8rem 0}.passage-toolbar p{font-size:.74rem;color:var(--muted);font-weight:700}.passage-toolbar .commit-btn{background:var(--blue);white-space:nowrap}.passage-toolbar .commit-btn:hover{background:#1D4ED8}
+.short-response{border:1.5px solid var(--border);border-radius:10px;padding:.75rem .85rem;margin:.75rem 0;background:#fff;break-inside:avoid}.short-response h3{font-family:var(--ff-head);font-size:.95rem;color:var(--blue)}.short-response p{font-size:.77rem;color:var(--slate);margin:.15rem 0 .45rem}.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.evidence-grid label{font-size:.68rem;font-weight:800;color:var(--muted)}.evidence-grid textarea{margin-top:.2rem}
+.error-log{background:var(--coral-lt);border:1.5px solid var(--coral);border-radius:12px;padding:.9rem;margin-top:.8rem}.error-log h3{font-family:var(--ff-head);font-size:1.02rem;color:#C2410C;margin-bottom:.35rem}.error-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.69rem;background:#fff;border-radius:8px;overflow:hidden}.error-table th{background:var(--coral);color:#fff;padding:.38rem .45rem;text-align:left}.error-table td{height:47px;padding:.35rem .45rem;border-bottom:1px solid #FCA5A5;border-right:1px solid #FCA5A5}.error-table th:last-child,.error-table td:last-child{border-right:0}.error-table td:first-child{font-weight:800;color:var(--ink);width:6%;text-align:center}.error-table input,.error-table textarea{width:100%;border:0;background:transparent;resize:none;outline:none;font-size:.69rem;min-height:32px}
+.reflect-box{background:var(--sand-lt);border:1.5px solid #FCD34D;border-radius:12px;padding:.85rem;margin-top:.9rem}.reflect-box h3{font-family:var(--ff-head);font-size:1.02rem;color:#92400E}.reflect-line{display:flex;align-items:flex-end;gap:.4rem;margin-top:.55rem;font-size:.74rem;color:var(--slate)}.reflect-line label{font-weight:700;white-space:nowrap}.reflect-line input{flex:1;border:0;border-bottom:1.5px solid #D4A574;background:transparent;outline:none;min-width:80px}.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}
+@media(max-width:680px){body{background:#fff}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.96);z-index:10;margin:0;padding:.55rem;border-bottom:1px solid #E2E8F0}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.hw-header{flex-direction:column}.hw-meta{width:100%;min-width:0}.score-banner{align-items:flex-start;flex-direction:column}.mc-opts{grid-template-columns:1fr}.passage-box{column-count:1}.evidence-grid{grid-template-columns:1fr}.reflect-line{align-items:stretch;flex-direction:column}.reflect-line label{white-space:normal}.reflect-line input{width:100%;min-width:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.badge{margin-left:0}.error-table{display:block;overflow-x:auto}.action-btn{flex:1;max-width:180px}}
+@media print{
+  @page{size:letter;margin:.42in}
+  html{background:#fff}.no-print{display:none!important}body{max-width:100%;background:#fff;font-size:14px}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:.18in .25in!important;min-height:9.85in;page-break-after:always}.sheet:last-of-type{page-break-after:auto}.page-break{page-break-before:always}.mc-q{padding:.55rem .65rem;margin:.52rem 0}.mc-opt{min-height:34px;padding:.28rem .4rem}.commit-row{display:none}.work-area{resize:none;min-height:42px}.passage-box{font-size:.7rem}.score-banner,.cat-strip,.strategy-strip,.formula-strip,.passage-toolbar,.error-log,.reflect-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}input,textarea{border-color:#CBD5E1!important}textarea{resize:none!important}}
 
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+
+@media print { .annotation-toolbar { display: none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to activity</a>
+<div class="toolbar no-print" aria-label="Worksheet controls">
+  <button class="action-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+  <button class="action-btn secondary" type="button" id="clearAll">Clear All</button>
+</div>
+<main id="main">
+<section class="sheet">
+  <header class="hw-header">
+    <div class="brand">
+      <svg class="brand-mark" aria-label="Forward-only answer door" role="img" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg>
+      <div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Measurement, Multi-Step Percents &amp; Fiction · November 2026</div></div>
+    </div>
+    <div class="hw-meta">
+      <label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" autocomplete="name"></label>
+      <label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" inputmode="numeric"></label>
+    </div>
+  </header>
+  <div class="score-banner">
+    <div><div class="title">Self-Score After One Pass</div><div class="sub">Check only after every first-pass response has been committed.</div></div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="6"> / 6</div><div class="sc-lbl">ELA</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="12"> / 12</div><div class="sc-lbl">Math</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="18"> / 18</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+  <div class="cat-strip">
+    <svg aria-hidden="true" viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg>
+    <p><strong>CAT rule:</strong> Math items move forward only. Build the setup, run a five-second B–M–S–U check, then commit without planning a second pass.</p>
+  </div>
+  <div class="section-hd"><span class="icon">⌁</span><h2>Part A — Measurement Transfer</h2><span class="badge badge-blue">4 Questions · ~10 min</span></div>
+  <p class="instr">Circle the requested unit. Write conversion factors so unwanted units cancel before calculating.</p>
+  <div class="strategy-strip"><span class="strategy-label">Unit chain</span><span class="strategy-chip">Given quantity</span><span class="strategy-chip">× conversion</span><span class="strategy-chip">= requested unit</span></div>
+
+  <article class="mc-q" data-item="1"><p class="mc-q-text"><span class="qnum">1.</span> On an architectural drawing, 5 centimeters represents 18 meters. A courtyard is 13.5 centimeters long on the drawing. What is its actual length? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 1"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A)</strong> 37.5 m</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B)</strong> 48.6 m</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C)</strong> 67.5 m</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D)</strong> 243 m</span></label></div><div class="work-prompt"><label for="w1">Unit setup</label><textarea id="w1" class="work-area" placeholder="Show the factor that cancels centimeters."></textarea></div><div class="commit-row"><span class="lock-note">Check the unit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="2"><p class="mc-q-text"><span class="qnum">2.</span> A reservoir receives water at 2.75 liters per second for 24 seconds and then at 1.8 liters per second for 15 seconds. How many liters enter altogether? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 2"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A)</strong> 66 L</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B)</strong> 82.2 L</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C)</strong> 93 L</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D)</strong> 106.5 L</span></label></div><div class="commit-row"><span class="lock-note">Audit both time intervals.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="3"><p class="mc-q-text"><span class="qnum">3.</span> A robot travels 42 inches during one wheel rotation. How many feet does it travel during 7.5 rotations? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 3"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A)</strong> 21.0 ft</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B)</strong> 26.25 ft</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C)</strong> 31.5 ft</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D)</strong> 315 ft</span></label></div><div class="commit-row"><span class="lock-note">Which unit must disappear?</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="4"><p class="mc-q-text"><span class="qnum">4.</span> A metal sample has a density of 1.6 grams per cubic centimeter and a volume of 75 cubic centimeters. What is the sample’s mass in kilograms? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 4"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A)</strong> 0.012 kg</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B)</strong> 0.12 kg</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C)</strong> 12 kg</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D)</strong> 120 kg</span></label></div><div class="work-prompt"><label for="w4">Two-stage setup</label><textarea id="w4" class="work-area" placeholder="Find grams, then convert grams to kilograms."></textarea></div><div class="commit-row"><span class="lock-note">Number and unit must agree.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  <p class="footer-note">Page 1 · Measurement is complete only when the unit is correct.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon">%</span><h2>Part B — Percent Routes</h2><span class="badge badge-purple">8 Questions · ~22 min</span></div>
+  <p class="instr">Before calculating, identify the 100% base and write each percent change as a multiplier.</p>
+  <div class="formula-strip"><span class="fs-label">B–M–S–U audit</span><span class="fml">Base: who owns the percent?</span><span class="fml">Multiplier: direction?</span><span class="fml">Size + unit: sensible?</span></div>
+
+  <article class="mc-q" data-item="5"><p class="mc-q-text"><span class="qnum">5.</span> A museum receives 96 artifact donations in one month. The next month, donations increase by 12.5%. How many donations are received the next month? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 5"><label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A)</strong> 102</span></label><label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B)</strong> 106</span></label><label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C)</strong> 108</span></label><label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D)</strong> 120</span></label></div><div class="commit-row"><span class="lock-note">Write a multiplier above 1.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="6"><p class="mc-q-text"><span class="qnum">6.</span> A concert hall reduces its number of available seats from 850 to 748. What is the percent decrease? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 6"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A)</strong> 10%</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B)</strong> 12%</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C)</strong> 13.6%</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D)</strong> 15%</span></label></div><div class="commit-row"><span class="lock-note">Divide the change by the original.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="7"><p class="mc-q-text"><span class="qnum">7.</span> A quantity decreases by 18% and then increases by 18%. Compared with the original quantity, what is the final result? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 7"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A)</strong> It is unchanged.</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B)</strong> It is 3.24% less.</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C)</strong> It is 3.24% greater.</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D)</strong> It is 36% less.</span></label></div><div class="commit-row"><span class="lock-note">Multiply; do not cancel the words.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="8"><p class="mc-q-text"><span class="qnum">8.</span> A $240 instrument is discounted by 25% and then by an additional 8%. What is the final price? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 8"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A)</strong> $160.80</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B)</strong> $165.60</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C)</strong> $170.40</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D)</strong> $177.60</span></label></div><div class="commit-row"><span class="lock-note">The second discount has a new base.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="9"><p class="mc-q-text"><span class="qnum">9.</span> Store R offers 32% off a desk. Store S offers 20% off and then an additional 15% off. For the same original price, which statement is true? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 9"><label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble"></span><span><strong>A)</strong> Store R is cheaper by 3% of the original.</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble"></span><span><strong>B)</strong> Store S is cheaper by 3% of the original.</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble"></span><span><strong>C)</strong> The final prices are equal.</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble"></span><span><strong>D)</strong> The comparison requires the original dollar price.</span></label></div><div class="commit-row"><span class="lock-note">Compare remaining-price multipliers.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="10"><p class="mc-q-text"><span class="qnum">10.</span> A sale price of $113.40 reflects a 10% discount. What was the original price? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 10"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble"></span><span><strong>A)</strong> $124.74</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble"></span><span><strong>B)</strong> $125.00</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble"></span><span><strong>C)</strong> $126.00</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble"></span><span><strong>D)</strong> $127.40</span></label></div><div class="commit-row"><span class="lock-note">Run the multiplier machine backward.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="11"><p class="mc-q-text"><span class="qnum">11.</span> At a school, 45% of students join at least one club. Of those students, 40% volunteer at a school event. What percent of all students both join a club and volunteer? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 11"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble"></span><span><strong>A)</strong> 18%</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble"></span><span><strong>B)</strong> 22.5%</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble"></span><span><strong>C)</strong> 42.5%</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble"></span><span><strong>D)</strong> 85%</span></label></div><div class="commit-row"><span class="lock-note">Zoom inside the 45% subgroup.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="12"><p class="mc-q-text"><span class="qnum">12.</span> A shop marks up its cost by 25% and then gives a 12% discount on the marked price. The customer pays $99 before tax. What was the shop’s cost? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 12"><label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble"></span><span><strong>A)</strong> $87.12</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble"></span><span><strong>B)</strong> $90.00</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble"></span><span><strong>C)</strong> $92.40</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble"></span><span><strong>D)</strong> $99.00</span></label></div><div class="work-prompt"><label for="w12">Full multiplier chain</label><textarea id="w12" class="work-area" placeholder="cost × ___ × ___ = 99; then reverse the machine."></textarea></div><div class="commit-row"><span class="lock-note">Estimate before dividing.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  <p class="footer-note">Page 2 · A percent belongs to a specific base at a specific step.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon">▤</span><h2>Part C — Fiction Passage</h2><span class="badge badge-coral">Read · Mark · Decide</span></div>
+  <p class="instr">Mark only four things: goal, obstacle, pressure shift, and what dialogue reveals. Questions for this passage begin on the next page.</p>
+  <div class="strategy-strip"><span class="strategy-label">Pressure-point read</span><span class="strategy-chip">Who wants what?</span><span class="strategy-chip">What changes?</span><span class="strategy-chip">Which detail proves it?</span></div>
+  <div class="annotation-toolbar" id="toolbar-passage">
+    <span class="annot-label">Tool:</span>
+    <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+    <button class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+    <button class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+    <button class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+    <div class="annot-sep"></div>
+    <span class="annot-label">Color:</span>
+    <div class="annot-color-row" id="colors-passage">
+      <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+      <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+      <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+      <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+      <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+    </div>
+    <button class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+  </div>
+  <article class="passage-box" aria-labelledby="passage-title">
+    <h3 class="passage-title" id="passage-title">Wind at the Roofline</h3>
+    <div class="passage-text annotatable-passage" id="passage-main">
+      <p><span class="line-no">1</span>Noor had checked the rooftop weather station three times before the science fair judges arrived. The anemometer cups spun freely. The rain gauge stood level. On her tablet, a blue line recorded each gust that crossed the school roof. After six weeks of missed lunches and cold fingertips, the station was finally collecting clean data.</p>
+      <p><span class="line-no">7</span>“You built all this yourself?” asked Mr. Ibarra, the custodian, setting down his toolbox.</p>
+      <p><span class="line-no">9</span>“Mostly,” Noor said. Her father had helped drill the mounting holes, and her classmate Theo had written two lines of code, but those facts felt like footnotes. The judges were coming to see <em>her</em> project.</p>
+      <p><span class="line-no">14</span>A gust rattled the fence around the roof. The tablet’s blue line jumped, vanished, and became a row of gray dashes.</p>
+      <p><span class="line-no">17</span>Noor restarted the program. Nothing. She unplugged the sensor cable and pushed it back in. The dashes remained.</p>
+      <p><span class="line-no">21</span>“Wind tugged something loose,” Mr. Ibarra said. He opened his toolbox.</p>
+      <p><span class="line-no">24</span>“I’ve got it.” Noor crouched beside the station. If he repaired it now, the judges might think the whole project belonged to an adult with a toolbox.</p>
+      <p><span class="line-no">29</span>Through the stairwell window, Noor saw the first judge crossing the courtyard below. She traced the cable beneath the platform, but it disappeared behind a metal bracket. Her gloves were too thick to reach the connector. When she pulled them off, the wind stung her fingers.</p>
+      <p><span class="line-no">36</span>Mr. Ibarra did not move closer. “A weather station is a team,” he said. “Every instrument does one job, and the record works because the jobs connect.”</p>
+      <p><span class="line-no">41</span>Noor looked at the silent tablet. On its screen, six weeks of blue lines ended in a blank space. She remembered her father holding the ladder steady while she measured the roof, and Theo squinting at the code until the numbers appeared. The project had never been less hers because other hands had steadied it.</p>
+      <p><span class="line-no">49</span>“Can you hold the bracket back?” she asked.</p>
+      <p><span class="line-no">51</span>Mr. Ibarra wedged a screwdriver beneath the metal. Noor reached past it and found the cable pinched against a sharp edge. She freed the wire, pressed the connector into place, and wrapped it with a strip of rubber from the toolbox.</p>
+      <p><span class="line-no">59</span>The gray dashes blinked. Then a blue line climbed across the screen.</p>
+      <p><span class="line-no">62</span>When the judges stepped onto the roof, Noor was labeling the repair in her display notes. Under <span class="quote">Unexpected Problems</span>, she wrote: <em>Loose sensor cable. Diagnosed and repaired with assistance.</em></p>
+      <p><span class="line-no">69</span>“Ready?” one judge asked.</p>
+      <p><span class="line-no">71</span>Noor glanced at Mr. Ibarra, who had already lifted his toolbox. “We are,” she said, and began with the wind.</p>
+    </div>
+  </article>
+  <div class="short-response">
+    <h3>Evidence Bookmark</h3><p>Complete these before reading the choices. Keep each response to one sentence.</p>
+    <div class="evidence-grid"><label for="shift">The pressure shifts when…<textarea id="shift" class="work-area"></textarea></label><label for="lesson">The ending suggests…<textarea id="lesson" class="work-area"></textarea></label></div>
+  </div>
+  <p class="footer-note">Page 3 · Read the full passage before judging any single detail.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon">✓</span><h2>Part D — Passage Set</h2><span class="badge badge-green">6 Questions · ~14 min</span></div>
+  <p class="instr">Answer all six. Make one evidence check within this set, then submit the set and move forward.</p>
+
+  <article class="mc-q passage-item" data-item="13"><p class="mc-q-text"><span class="qnum">13.</span> Which statement best describes Noor near the beginning of the passage? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 13"><label class="mc-opt"><input type="radio" name="q13" value="A"><span class="bubble"></span><span><strong>A)</strong> She wants full credit and minimizes other people’s contributions.</span></label><label class="mc-opt"><input type="radio" name="q13" value="B"><span class="bubble"></span><span><strong>B)</strong> She distrusts the data collected by the weather station.</span></label><label class="mc-opt"><input type="radio" name="q13" value="C"><span class="bubble"></span><span><strong>C)</strong> She hopes the judges will postpone their visit.</span></label><label class="mc-opt"><input type="radio" name="q13" value="D"><span class="bubble"></span><span><strong>D)</strong> She regrets choosing a project that requires outdoor work.</span></label></div></article>
+
+  <article class="mc-q passage-item" data-item="14"><p class="mc-q-text"><span class="qnum">14.</span> Why does Noor initially refuse Mr. Ibarra’s help? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 14"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble"></span><span><strong>A)</strong> She believes his tools will damage the sensor.</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble"></span><span><strong>B)</strong> She worries that accepting help will weaken her claim to the work.</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble"></span><span><strong>C)</strong> She wants to hide the broken equipment from him.</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble"></span><span><strong>D)</strong> She expects the program to restart on its own.</span></label></div></article>
+
+  <article class="mc-q passage-item" data-item="15"><p class="mc-q-text"><span class="qnum">15.</span> What is the main effect of the description of the judge crossing the courtyard in line 29? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 15"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble"></span><span><strong>A)</strong> It explains how the judge found the rooftop.</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble"></span><span><strong>B)</strong> It introduces a character who later repairs the station.</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble"></span><span><strong>C)</strong> It increases urgency by showing Noor’s time is running out.</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble"></span><span><strong>D)</strong> It contrasts the calm courtyard with the dangerous roof.</span></label></div></article>
+
+  <article class="mc-q passage-item" data-item="16"><p class="mc-q-text"><span class="qnum">16.</span> Mr. Ibarra’s statement in line 36 mainly helps Noor understand that <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 16"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble"></span><span><strong>A)</strong> every instrument should collect the same kind of data.</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble"></span><span><strong>B)</strong> connected contributions can strengthen rather than diminish a project.</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble"></span><span><strong>C)</strong> scientific equipment is too complicated for one student.</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble"></span><span><strong>D)</strong> weather data matters only when several stations agree.</span></label></div></article>
+
+  <article class="mc-q passage-item" data-item="17"><p class="mc-q-text"><span class="qnum">17.</span> Which detail best shows that Noor’s thinking has changed? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 17"><label class="mc-opt"><input type="radio" name="q17" value="A"><span class="bubble"></span><span><strong>A)</strong> She removes her gloves despite the cold wind.</span></label><label class="mc-opt"><input type="radio" name="q17" value="B"><span class="bubble"></span><span><strong>B)</strong> She wraps the connector with rubber.</span></label><label class="mc-opt"><input type="radio" name="q17" value="C"><span class="bubble"></span><span><strong>C)</strong> She records that the repair was made with assistance.</span></label><label class="mc-opt"><input type="radio" name="q17" value="D"><span class="bubble"></span><span><strong>D)</strong> She begins her presentation by discussing the wind.</span></label></div></article>
+
+  <article class="mc-q passage-item" data-item="18"><p class="mc-q-text"><span class="qnum">18.</span> Which theme is developed most clearly by the passage? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 18"><label class="mc-opt"><input type="radio" name="q18" value="A"><span class="bubble"></span><span><strong>A)</strong> Careful planning can prevent every serious mistake.</span></label><label class="mc-opt"><input type="radio" name="q18" value="B"><span class="bubble"></span><span><strong>B)</strong> Recognition matters more than the process used to earn it.</span></label><label class="mc-opt"><input type="radio" name="q18" value="C"><span class="bubble"></span><span><strong>C)</strong> Honest collaboration can coexist with personal responsibility.</span></label><label class="mc-opt"><input type="radio" name="q18" value="D"><span class="bubble"></span><span><strong>D)</strong> Difficult conditions reveal which scientific tools are reliable.</span></label></div></article>
+
+  <div class="passage-toolbar"><p id="setNote">Review all six answers once. After submission, the passage set locks.</p><button class="commit-btn" type="button" id="commitSet">Submit passage set</button></div>
+  <p class="footer-note">Page 4 · Evidence first; interpretation second; commitment last.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon">↻</span><h2>Part E — Error Log &amp; Transfer</h2><span class="badge badge-blue">~10 min</span></div>
+  <p class="instr">After checking with the assigned key or in session, record the first incorrect decision—not only the final wrong answer.</p>
+  <div class="error-log">
+    <h3>My Highest-Value Corrections</h3>
+    <table class="error-table">
+      <thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Rule or repair for next time</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input aria-label="Correction 1 item"></td><td><textarea aria-label="Correction 1 wrong step"></textarea></td><td><textarea aria-label="Correction 1 repair"></textarea></td></tr>
+        <tr><td>2</td><td><input aria-label="Correction 2 item"></td><td><textarea aria-label="Correction 2 wrong step"></textarea></td><td><textarea aria-label="Correction 2 repair"></textarea></td></tr>
+        <tr><td>3</td><td><input aria-label="Correction 3 item"></td><td><textarea aria-label="Correction 3 wrong step"></textarea></td><td><textarea aria-label="Correction 3 repair"></textarea></td></tr>
+        <tr><td>4</td><td><input aria-label="Correction 4 item"></td><td><textarea aria-label="Correction 4 wrong step"></textarea></td><td><textarea aria-label="Correction 4 repair"></textarea></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="reflect-box">
+    <h3>Weekly CAT Reflection</h3>
+    <div class="reflect-line"><label for="r1">The cue that will help me identify the percent base is</label><input id="r1" type="text"></div>
+    <div class="reflect-line"><label for="r2">The unit I am most likely to forget to convert is</label><input id="r2" type="text"></div>
+    <div class="reflect-line"><label for="r3">Before submitting a passage set, I will verify</label><input id="r3" type="text"></div>
+    <div class="reflect-line"><label for="r4">One committed decision I made well was</label><input id="r4" type="text"></div>
+  </div>
+  <div class="cat-strip" style="margin-top:1rem">
+    <svg aria-hidden="true" viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg>
+    <p><strong>Recovery rule:</strong> One difficult item is not a verdict. Treat the next item as fresh evidence: identify the task, make one defensible decision, and continue.</p>
+  </div>
+  <p class="footer-note">Page 5 · Repair the decision that caused the error.</p>
+</section>
+</main>
+<script>
+/* ── Passage Annotation System ── */
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.getElementById('toolbar-passage').querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.getElementById('colors-passage').querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note...';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '\u2713';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '\u2715';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      var noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') {
+        span2.className = 'passage-highlight';
+        span2.style.backgroundColor = color;
+        span2.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span2.className = 'passage-underline';
+        span2.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span2.className = 'passage-outline';
+        span2.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+(function(){
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.addEventListener('mouseup', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range);
+  });
+  passage.addEventListener('touchend', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    setTimeout(function(){ applyPassageAnnotation(range); }, 100);
+  });
+})();
+
+
+(() => {
+  const choose = label => {
+    const card = label.closest('.mc-q');
+    if (card.classList.contains('locked')) return;
+    card.querySelectorAll('.mc-opt').forEach(option => {
+      option.classList.remove('selected');
+      option.querySelector('.bubble').textContent = '';
+    });
+    label.classList.add('selected');
+    label.querySelector('.bubble').textContent = '✓';
+    label.querySelector('input').checked = true;
+  };
+
+  const lockCard = card => {
+    if (!card.querySelector('input:checked')) {
+      alert('Choose an answer before committing.');
+      return;
+    }
+    card.classList.add('locked');
+    card.querySelectorAll('input[type="radio"], .commit-btn').forEach(control => { control.disabled = true; });
+    const note = card.querySelector('.lock-note');
+    if (note) note.textContent = 'Locked — response committed.';
+  };
+
+  document.querySelectorAll('.mc-opt').forEach(label => {
+    label.addEventListener('click', event => {
+      event.preventDefault();
+      choose(label);
+    });
+  });
+
+  document.querySelectorAll('.mc-q:not(.passage-item) .commit-btn').forEach(button => {
+    button.addEventListener('click', () => lockCard(button.closest('.mc-q')));
+  });
+
+  document.getElementById('commitSet').addEventListener('click', () => {
+    const cards = [...document.querySelectorAll('.passage-item')];
+    if (cards.some(card => !card.querySelector('input:checked'))) {
+      alert('Answer all six questions before submitting the passage set.');
+      return;
+    }
+    cards.forEach(card => {
+      card.classList.add('locked');
+      card.querySelectorAll('input[type="radio"]').forEach(input => { input.disabled = true; });
+    });
+    document.getElementById('commitSet').disabled = true;
+    document.getElementById('setNote').textContent = 'Passage set locked — responses committed.';
+  });
+
+  document.querySelectorAll('textarea').forEach(area => {
+    area.addEventListener('input', () => {
+      area.style.height = 'auto';
+      area.style.height = `${area.scrollHeight}px`;
+    });
+  });
+
+  document.getElementById('clearAll').addEventListener('click', () => {
+    if (!confirm('Clear every answer, work box, score, and committed response?')) return;
+    document.querySelectorAll('input, textarea').forEach(control => {
+      if (control.type === 'radio') control.checked = false;
+      else control.value = '';
+      control.disabled = false;
+      if (control.tagName === 'TEXTAREA') control.style.height = '';
+    });
+    document.querySelectorAll('.mc-opt').forEach(option => {
+      option.classList.remove('selected');
+      option.querySelector('.bubble').textContent = '';
+    });
+    document.querySelectorAll('.mc-q').forEach(card => card.classList.remove('locked'));
+    document.querySelectorAll('.commit-btn').forEach(button => { button.disabled = false; });
+    document.querySelectorAll('.lock-note').forEach(note => { note.textContent = 'Choose, audit, then commit.'; });
+    document.getElementById('setNote').textContent = 'Review all six answers once. After submission, the passage set locks.';
+  });
+})();
+</script>
+</body>
+</html>
