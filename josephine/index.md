@@ -16,3 +16,5 @@
 | **03** | [ELA: Structure Maps & Geometry: Area, Perimeter, Coordinate Plane](https://hue-bee.github.io/josephine/lessons/03) | [3 Homework](https://hue-bee.github.io/josephine/lessons/03/homework) ||
 | **04** | [Writing/Editing Recovery & Inequalities: Translate + Graph](https://hue-bee.github.io/josephine/lessons/04) | [4 Homework](https://hue-bee.github.io/josephine/lessons/04/homework) ||
 | **05** | [Fiction Main Idea + Compound Inequalities](https://hue-bee.github.io/josephine/lessons/05) | [5 Homework](https://hue-bee.github.io/josephine/lessons/05/homework) ||
+| **06** | [Debrief, Percents & Vocab in Context](https://hue-bee.github.io/josephine/lessons/06) | [6 Homework](https://hue-bee.github.io/josephine/lessons/06/homework) ||
+| **07** | [Connecting Info to Purpose Round 2](https://hue-bee.github.io/josephine/lessons/07) | [7 Homework](https://hue-bee.github.io/josephine/lessons/07/homework) ||
