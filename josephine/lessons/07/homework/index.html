@@ -1,1 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Homework — Purpose, Data, Statistics & Averages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;
+  --sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16a34a;--green-lt:#DCFCE7;
+  --purple:#7c3aed;--purple-lt:#EDE9FE;
+  --ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;--bg:#F8FAFF;--white:#FFFFFF;
+  --ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif;
+}
+html{background:#e2e8f0;scroll-behavior:smooth}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.5}
+button,input,textarea,select{font:inherit}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:30}.skip-link:focus{left:1rem;top:1rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.toolbar-btn{min-height:44px;border:0;border-radius:30px;padding:.55rem 1.6rem;background:var(--blue);color:white;font-family:var(--ff-head);font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(37,99,235,.3)}.toolbar-btn:hover{background:#1d4ed8}.toolbar-btn.secondary{background:var(--muted)}.toolbar-btn.secondary:hover{background:#475569}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px;min-height:1020px;position:relative}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.2rem;gap:1rem;flex-wrap:wrap}.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue);flex:none}.hw-header-left h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:800;color:var(--blue);line-height:1.1}.subtitle{font-size:.85rem;color:var(--muted);font-weight:700;margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em}.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:225px}.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:700}.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:1px 7px;font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.page-kicker{display:flex;justify-content:flex-end;margin:-.3rem 0 .4rem;font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:white;border-radius:10px;padding:.7rem 1.2rem;margin-bottom:1.1rem;flex-wrap:wrap;gap:.5rem}.score-banner .title{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.score-banner .sub{font-size:.78rem;opacity:.88}.score-cells{display:flex;gap:.6rem;flex-wrap:wrap}.score-cell{background:rgba(255,255,255,.15);border-radius:8px;padding:.3rem .75rem;text-align:center;min-width:80px}.score-input{width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.65);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}.sc-val{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.sc-lbl{font-size:.65rem;opacity:.85;text-transform:uppercase;letter-spacing:.04em}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.1rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.3rem 0 .7rem}.section-hd h2{font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--ink)}.section-icon{width:24px;color:var(--blue);flex:0 0 auto}.badge{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:20px;margin-left:auto}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86efac}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}
+.instr{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;padding:.35rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.55rem .8rem;margin-bottom:.8rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.18rem .5rem;font-size:.73rem;font-weight:800;color:#1e3a8a}
+.lvl{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:.3rem}.lvl-1{background:#eee;color:#1f2937}.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:#fff}
+.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;margin-bottom:.8rem}.passage-title{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.45rem}.passage-text{font-family:Georgia,'Times New Roman',serif;font-size:.81rem;line-height:1.67;color:var(--slate);column-count:2;column-gap:1.4rem}.passage-text p{margin-bottom:.55rem;break-inside:avoid}.sent-num{background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-family:var(--ff-body);font-weight:800;color:#374151;font-size:.7rem}
+.mc-q{margin-bottom:.72rem;padding:.65rem .8rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px}.mc-q-text{font-size:.82rem;font-weight:700;color:var(--ink);margin-bottom:.42rem;line-height:1.5}.qnum{font-family:var(--ff-head);color:var(--blue);margin-right:.3rem}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.22rem .85rem}.mc-opt{font-size:.76rem;color:var(--slate);display:flex;align-items:flex-start;gap:.3rem;line-height:1.4;cursor:pointer;padding:.2rem .35rem;border-radius:5px;border:1.5px solid transparent;transition:background .15s}.mc-opt:hover{background:#f0f0f0}.mc-opt input{display:none}.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}.bubble{width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:white}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.35rem}.commit-btn{min-height:34px;border:0;border-radius:20px;padding:.22rem .75rem;background:var(--blue);color:white;font-size:.68rem;font-weight:800;cursor:pointer}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.66rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.data-card,.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.72rem .82rem;position:relative}.prob-num{font-family:var(--ff-head);font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem}.prob-q{font-size:.8rem;color:var(--ink);font-weight:700;line-height:1.5;margin-bottom:.4rem}.data-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.74rem;color:var(--slate);overflow:hidden;border:1px solid var(--border);border-radius:8px;background:white;margin:.35rem 0}.data-table th{background:var(--blue-lt);color:var(--ink);font-weight:800;padding:.3rem .4rem;border-bottom:1px solid var(--border)}.data-table td{padding:.26rem .4rem;text-align:center;border-bottom:1px solid #e2e8f0}.data-table tr:last-child td{border-bottom:none}.mini-work{width:100%;min-height:48px;resize:vertical;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:.35rem .5rem;font-family:var(--ff-body);font-size:.76rem;color:var(--ink);outline:none}.mini-work::placeholder{color:var(--muted);font-style:italic}.answer-box{margin-top:.38rem;display:flex;align-items:center;gap:.4rem;font-size:.76rem;font-weight:800;color:var(--slate)}
+.fig{display:flex;justify-content:center;margin:.2rem 0 .35rem}.fig svg{width:100%;max-height:128px;overflow:visible}.chart-label{font-family:var(--ff-body);fill:#4a4a4a;font-size:10px}.chart-title{font-family:var(--ff-body);fill:#1f1f1f;font-size:11px;font-weight:800}.axis{stroke:#75859b;stroke-width:1.4}.tick{stroke:#9AA9BF;stroke-width:1}.dot{fill:#5c5c5c;stroke:#fff;stroke-width:1.5}
+.formula-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.55rem .8rem;margin-bottom:.8rem;align-items:center}.fs-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.fml{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.18rem .55rem;font-size:.76rem;font-weight:800;color:#1e3a8a;font-family:var(--ff-head)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.work-area{width:100%;resize:vertical;min-height:66px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:.35rem .55rem;font-family:var(--ff-body);font-size:.76rem;color:var(--ink);outline:none;margin-top:.3rem}.work-area::placeholder{color:var(--muted);font-style:italic}.audit-row{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin-top:.38rem}.audit-row label{font-size:.68rem;font-weight:800;color:var(--muted)}.audit-row input,.audit-row select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.2rem .3rem;font-size:.72rem;margin-top:.1rem;min-height:32px}.domain-note{font-size:.68rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.24rem .38rem;margin-top:.32rem}
+hr.divider{border:none;border-top:2px dashed var(--border);margin:1.2rem 0}.footer-note{text-align:center;color:var(--muted);font-size:.68rem;margin-top:1rem}.footer-note.bottom{position:absolute;left:2.4rem;right:2.4rem;bottom:1.2rem}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:.55rem}.error-table{width:100%;border-collapse:collapse;font-size:.78rem}.error-table th{background:var(--coral);color:white;font-family:var(--ff-head);font-weight:600;padding:.35rem .6rem;text-align:left;font-size:.75rem}.error-table th:first-child{border-radius:6px 0 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.55rem .6rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:white;font-weight:500;height:48px}.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center}.error-table tr:last-child td{border-bottom:none}.error-type-pills{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.73rem;margin-top:.55rem}.pill{padding:2px 10px;border-radius:20px;font-weight:700;border:1.5px solid}.pill-cg{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}.pill-ce{background:#fef9c3;color:#92400e;border-color:#fde68a}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd}
+.reflect-box{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}.reflect-box h3{font-family:var(--ff-head);font-size:.9rem;font-weight:700;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.65rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.79rem;color:var(--slate);font-weight:700}.reflect-line input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.8rem;color:var(--ink);background:transparent;outline:none;padding:1px 6px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem}.check-card{background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.65rem .8rem}.check-card h3{font-family:var(--ff-head);font-size:.87rem;color:var(--blue)}.check-card p{font-size:.74rem;color:var(--slate);margin-top:.2rem}
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
 
+
+.passage-note:focus .note-tooltip{display:block}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none;min-height:auto}.mc-opts,.prob-grid,.data-grid,.check-grid{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.96);padding:.55rem;margin:0;z-index:20;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.mc-opt{min-height:44px;align-items:center}.footer-note.bottom{position:static;margin-top:1rem}}
+@media print{
+  html,body{background:white}body{max-width:100%;padding:0}.no-print{display:none!important}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.05cm 1.25cm!important;min-height:0;height:auto;page-break-after:always}.sheet:last-child{page-break-after:auto}.page-break{page-break-before:always}.commit-row{display:none!important}.mc-q,.prob,.data-card,.passage-box,.error-log,.reflect-box{break-inside:avoid}.footer-note.bottom{position:static;margin-top:.7rem}.work-area,.mini-work{resize:none;background:white!important}.error-table td{height:42px}input,textarea{border-color:#cbd5e1!important;background:white!important}input[type=radio]{accent-color:#000!important}}
+.data-card.locked,.prob.locked{background:#f1f5f9;border-color:#94a3b8}.data-card.locked .lock-note,.prob.locked .lock-note{color:var(--green)}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print" aria-label="Homework actions">
+  <button class="toolbar-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+  <button class="toolbar-btn secondary" type="button" onclick="clearAll()">Clear All</button>
+</div>
+<main id="main">
+<section class="sheet">
+  <header class="hw-header">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg>
+      <div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Session 7 · Purpose, Data, Statistics &amp; Averages · November 2026</div></div>
+    </div>
+    <div class="hw-meta">
+      <label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" aria-label="Student name"></label>
+      <label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" aria-label="Date"></label>
+    </div>
+  </header>
+  <div class="score-banner">
+    <div><div class="title">Self-Score Before Session</div><div class="sub">Check only after every first-pass decision is complete.</div></div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="8" aria-label="Purpose score"> / 8</div><div class="sc-lbl">Purpose</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="16" aria-label="Math score"> / 16</div><div class="sc-lbl">Math</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="24" aria-label="Total score"> / 24</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+  <div class="cat-strip">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg>
+    <p><strong>CAT rule:</strong> Predict the detail’s job before opening the choices. Once committed, move forward; do not let the next item’s difficulty rewrite the evidence you already proved.</p>
+  </div>
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16M4 12h10M4 19h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m17 10 3 2-3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2>Part A — Detail to Purpose</h2><span class="badge badge-blue">8 Questions · ~16 min</span>
+  </div>
+  <p class="instr">For each item, complete this thought before reading choices: “The author includes this detail in order to ___.” Then commit.</p>
+  <div class="strategy-strip"><span class="strategy-label">Purpose funnel</span><span class="strategy-chip">1 Whole-text aim</span><span class="strategy-chip">2 Local detail</span><span class="strategy-chip">3 Function verb</span><span class="strategy-chip">4 Evidence bridge</span></div>
+
+  <div class="annotation-toolbar no-print" id="toolbar-passage">
+    <span class="annot-label">Tool:</span>
+    <button type="button" class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+    <button type="button" class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+    <button type="button" class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+    <button type="button" class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+    <div class="annot-sep"></div>
+    <span class="annot-label">Color:</span>
+    <div class="annot-color-row" id="colors-passage">
+      <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+      <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+      <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+      <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+      <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+    </div>
+    <button type="button" class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+  </div>
+  <article class="passage-box">
+    <div class="passage-title">The Library of Smells</div>
+    <div class="passage-text annotatable-passage" id="passage-main">
+      <p><span class="sent-num">1</span> At a conservation lab in France, researchers preserve more than pages and bindings: they preserve the odors of old books. <span class="sent-num">2</span> Paper made from different fibers releases distinctive compounds as it ages, and leather covers contribute scents of their own.</p>
+      <p><span class="sent-num">3</span> To capture an odor, technicians place a book in a sealed chamber and draw the surrounding air through a small absorbent tube. <span class="sent-num">4</span> The collected compounds can later be studied without repeatedly handling the fragile volume.</p>
+      <p><span class="sent-num">5</span> One researcher compared the project to recording a voice before it disappears. <span class="sent-num">6</span> The comparison points to the lab’s larger goal: preserving a sensory part of history that ordinary photographs and catalog entries cannot contain.</p>
+    </div>
+  </article>
+
+  <article class="mc-q" data-item="1"><p class="mc-q-text"><span class="qnum">1.</span> How does sentence 1 contribute to the passage’s purpose? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 1">
+    <label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A.</strong> It introduces the project’s unusual subject by contrasting it with what libraries normally preserve.</span></label>
+    <label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B.</strong> It argues that bindings matter more than the words inside books.</span></label>
+    <label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C.</strong> It explains why French libraries contain unusually old books.</span></label>
+    <label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D.</strong> It proves that photographs damage paper fibers.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="2"><p class="mc-q-text"><span class="qnum">2.</span> What is the main function of sentence 3? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 2">
+    <label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A.</strong> It shifts from explaining the project’s value to criticizing its expense.</span></label>
+    <label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B.</strong> It illustrates the procedure used to make an invisible feature available for study.</span></label>
+    <label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C.</strong> It suggests that technicians can reproduce the smell of any new book.</span></label>
+    <label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D.</strong> It compares modern paper with leather from France.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="3"><p class="mc-q-text"><span class="qnum">3.</span> Why does the author include the researcher’s comparison in sentence 5? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 3">
+    <label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A.</strong> To imply that spoken recordings are more accurate than chemical tests</span></label>
+    <label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B.</strong> To emphasize the urgency of capturing a historical feature before it fades</span></label>
+    <label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C.</strong> To show that the researcher once worked in broadcasting</span></label>
+    <label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D.</strong> To question whether odors can be preserved at all</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="4"><p class="mc-q-text"><span class="qnum">4.</span> Which statement best describes how sentence 6 develops the central idea? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 4">
+    <label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A.</strong> It narrows the passage from cultural history to a list of laboratory supplies.</span></label>
+    <label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B.</strong> It complicates the claim that all forms of preservation are equally useful.</span></label>
+    <label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C.</strong> It connects the technical process to the broader value of preserving experiences other records miss.</span></label>
+    <label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D.</strong> It argues that catalog entries should be replaced with odor samples.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  <div class="footer-note">Page 1 · Predict the job; do not merely repeat the topic.</div>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">Session 7 Homework · Page 2</div>
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4v16M5 20h15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m8 15 4-4 3 2 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2>Part A — Function Under Pressure</h2><span class="badge badge-purple">Questions 5–8 · ~10 min</span>
+  </div>
+  <p class="instr">Reject a choice that is true somewhere but does not describe the cited detail’s exact job, time frame, or effect.</p>
+
+  <article class="mc-q" data-item="5"><p class="mc-q-text"><span class="qnum">5.</span> A profile of a wheelchair designer first describes her frustration with heavy, difficult-to-repair models. It then explains how she built a chair from standard bicycle parts available in many towns. What is the frustration detail’s primary function? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 5">
+    <label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A.</strong> It establishes the practical problem that motivates the later design.</span></label>
+    <label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B.</strong> It proves bicycle parts are stronger than medical equipment.</span></label>
+    <label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C.</strong> It shows that the designer disliked every existing chair.</span></label>
+    <label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D.</strong> It forecasts how towns will change transportation laws.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="6"><p class="mc-q-text"><span class="qnum">6.</span> An article praises a successful wetland restoration but notes that one returning bird species nests only near the noisiest highway edge. How does this detail most likely affect the article’s purpose? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 6">
+    <label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A.</strong> It reverses the claim that restoration helped wildlife.</span></label>
+    <label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B.</strong> It complicates the success by identifying an unexpected limitation in habitat use.</span></label>
+    <label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C.</strong> It transitions from birds to the history of highway construction.</span></label>
+    <label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D.</strong> It demonstrates that all birds prefer loud environments.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="7"><p class="mc-q-text"><span class="qnum">7.</span> A narrative repeatedly describes a cracked pocket watch that no longer keeps time. Near the end, the narrator repairs the watch but chooses not to reset it. How does the final action contribute to the narrative’s meaning? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 7">
+    <label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A.</strong> It shows the narrator has forgotten how clocks work.</span></label>
+    <label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B.</strong> It suggests that restoring an object need not erase the moment or memory attached to its damage.</span></label>
+    <label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C.</strong> It proves that sentimental objects should never be repaired.</span></label>
+    <label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D.</strong> It shifts attention from the narrator to the watchmaker’s career.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q" data-item="8"><p class="mc-q-text"><span class="qnum">8.</span> A science essay ends with a small study whose results partly conflict with the dramatic story used in its opening. Why would the author most likely end this way? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 8">
+    <label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A.</strong> To refine the initial impression by showing that a memorable example may not represent the broader pattern</span></label>
+    <label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B.</strong> To admit that the study contains no usable evidence</span></label>
+    <label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C.</strong> To replace the essay’s topic with an unrelated scientific debate</span></label>
+    <label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D.</strong> To prove that personal stories are always false</span></label>
+  </div><div class="commit-row"><span class="lock-note">Choose, bridge, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19h16M6 16V9m4 7V5m4 11v-4m4 4V7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2>Part B — Read the Display</h2><span class="badge badge-green">Questions 9–14 · ~18 min</span>
+  </div>
+  <p class="instr">Annotate title, unit, scale, and requested statistic before calculating. Show rank work for medians and endpoint work for ranges.</p>
+  <div class="strategy-strip"><span class="strategy-label">Four-part scan</span><span class="strategy-chip">Title</span><span class="strategy-chip">Unit</span><span class="strategy-chip">Scale</span><span class="strategy-chip">Ask</span></div>
+
+  <div class="data-grid">
+    <article class="data-card"><div class="prob-num">Problem 9 <span class="lvl lvl-1">L1</span></div><p class="prob-q">The table shows completed practice sets for 24 students. What is the mode?</p><table class="data-table" aria-label="Practice sets frequency table"><tr><th>Sets completed</th><th>Students</th></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>7</td></tr><tr><td>4</td><td>9</td></tr><tr><td>5</td><td>5</td></tr></table><textarea class="mini-work" aria-label="Work for problem 9" placeholder="Highest frequency → value"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 9"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="data-card"><div class="prob-num">Problem 10 <span class="lvl lvl-2">L2</span></div><p class="prob-q">The table shows the number of minutes 30 students read. What is the median reading time?</p><table class="data-table" aria-label="Reading time frequency table"><tr><th>Minutes</th><th>Students</th></tr><tr><td>10</td><td>4</td></tr><tr><td>20</td><td>8</td></tr><tr><td>30</td><td>11</td></tr><tr><td>40</td><td>5</td></tr><tr><td>50</td><td>2</td></tr></table><textarea class="mini-work" aria-label="Work for problem 10" placeholder="Locate positions 15 and 16"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 10"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="data-card"><div class="prob-num">Problem 11 <span class="lvl lvl-2">L2</span></div><p class="prob-q">The dot plot shows bus delays in minutes. Find the median and range.</p><div class="fig"><svg viewBox="0 0 330 125" role="img" aria-label="Dot plot of bus delays"><text x="165" y="14" text-anchor="middle" class="chart-title">BUS DELAY (MINUTES)</text><line x1="30" y1="98" x2="305" y2="98" class="axis"/><g class="chart-label" text-anchor="middle"><text x="45" y="116">0</text><text x="85" y="116">1</text><text x="125" y="116">2</text><text x="165" y="116">3</text><text x="205" y="116">4</text><text x="245" y="116">5</text><text x="285" y="116">6</text></g><g class="dot"><circle cx="45" cy="86" r="7"/><circle cx="85" cy="86" r="7"/><circle cx="85" cy="69" r="7"/><circle cx="125" cy="86" r="7"/><circle cx="125" cy="69" r="7"/><circle cx="125" cy="52" r="7"/><circle cx="165" cy="86" r="7"/><circle cx="205" cy="86" r="7"/><circle cx="285" cy="86" r="7"/></g></svg></div><textarea class="mini-work" aria-label="Work for problem 11" placeholder="Order/rank; then max − min"></textarea><div class="answer-box">Median / Range <input class="line-input" type="text" aria-label="Answer 11"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="data-card"><div class="prob-num">Problem 12 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A box plot has minimum 6, Q1 14, median 18, Q3 27, and maximum 31. Which statement is guaranteed?</p><div class="audit-row"><label>Claim<select aria-label="Answer 12"><option value="">Choose</option><option>At least 50% of values are from 14 through 27.</option><option>The mean is exactly 18.</option><option>No value is between 18 and 27.</option><option>Exactly one value equals 31.</option></select></label><label>Evidence<input type="text" aria-label="Evidence for problem 12"></label></div><textarea class="mini-work" aria-label="Work for problem 12" placeholder="Guaranteed / possible / impossible"></textarea><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  </div>
+  <div class="footer-note">Page 2 · A display is a model: read its structure before its numbers.</div>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">Session 7 Homework · Page 3</div>
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4v16M5 20h15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m8 15 4-4 3 2 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2>Part B — Statistics That Move</h2><span class="badge badge-green">Questions 13–14 · ~8 min</span>
+  </div>
+  <div class="data-grid">
+    <article class="data-card"><div class="prob-num">Problem 13 <span class="lvl lvl-3">L3</span></div><p class="prob-q">The data are 4, 6, 6, 7, 9, 10. The 10 is changed to 22. Determine which of mean, median, mode, and range change.</p><textarea class="work-area" aria-label="Work for problem 13" placeholder="Recompute only what the changed endpoint can affect."></textarea><div class="answer-box">Changes <input class="line-input" type="text" aria-label="Answer 13"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="data-card"><div class="prob-num">Problem 14 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A data set has 9 values with median 12. A tenth value greater than every original value is added. What can be concluded about the new median?</p><textarea class="work-area" aria-label="Work for problem 14" placeholder="Name the old middle position and the two new middle positions."></textarea><div class="answer-box">Conclusion <input class="line-input" type="text" aria-label="Answer 14"></div><p class="domain-note">Do not assume the original values are equally spaced.</p><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  </div>
+
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 4v16M16 4v16" stroke="currentColor" stroke-width="1.5"/></svg>
+    <h2>Part C — Recover the Total</h2><span class="badge badge-coral">Questions 15–20 · ~22 min</span>
+  </div>
+  <p class="instr">Never manipulate a mean as if it were a total. Restore each group’s total first, change the total, and divide only at the end.</p>
+  <div class="formula-strip"><span class="fs-label">Average engine</span><span class="fml">Total = Mean × Count</span><span class="fml">New value = New total − Old total</span><span class="fml">Combined mean = Combined total ÷ Combined count</span></div>
+  <div class="prob-grid">
+    <article class="prob"><div class="prob-num">Problem 15 <span class="lvl lvl-1">L1</span></div><p class="prob-q">Seven plant heights have a mean of 18 cm. What is their total height?</p><textarea class="work-area" aria-label="Work for problem 15" placeholder="mean × count"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 15"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 16 <span class="lvl lvl-2">L2</span></div><p class="prob-q">Six delivery times have a mean of 24 minutes. Five of the times sum to 113 minutes. Find the missing time.</p><textarea class="work-area" aria-label="Work for problem 16" placeholder="target total − known total"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 16"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 17 <span class="lvl lvl-3">L3</span></div><p class="prob-q">After 8 games, a player’s mean is 11 points. After game 9, the mean is 12 points. How many points were scored in game 9?</p><textarea class="work-area" aria-label="Work for problem 17" placeholder="9-game total − 8-game total"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 17"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 18 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A choir of 14 students has a mean age of 13 years. Six adult volunteers with mean age 38 join. Find the combined mean age.</p><textarea class="work-area" aria-label="Work for problem 18" placeholder="total A + total B; count A + count B"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 18"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 19 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A group of 18 runners has mean time 52 minutes. After 6 more runners finish, the mean for all 24 runners is 55 minutes. What was the mean time of the 6 new runners?</p><textarea class="work-area" aria-label="Work for problem 19" placeholder="new total − original total; then ÷ 6"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 19"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 20 <span class="lvl lvl-4">L4</span></div><p class="prob-q">Two study groups have mean scores 68 and 80. Their combined mean is 77. Determine the ratio of the size of the 68-mean group to the size of the 80-mean group.</p><textarea class="work-area" aria-label="Work for problem 20" placeholder="Balance distances from 77 or write a weighted equation."></textarea><div class="answer-box">Ratio <input class="line-input" type="text" aria-label="Answer 20"></div><p class="domain-note">Estimate first: the combined mean is closer to 80, so which group must be larger?</p><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  </div>
+  <div class="footer-note">Page 3 · A mean is compressed total information. Decompress it before changing the set.</div>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">Session 7 Homework · Page 4</div>
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2>Part D — Mixed CAT Sprint</h2><span class="badge badge-blue">Questions 21–24 · ~14 min</span>
+  </div>
+  <p class="instr">Treat each new item as independent evidence. Name the domain first: purpose bridge, display scan, statistic, or total recovery.</p>
+  <div class="prob-grid">
+    <article class="prob"><div class="prob-num">Problem 21 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A history of a neighborhood market opens with a vendor unlocking an empty stall before dawn. The article later explains how dozens of businesses transformed the block. Explain the opening scene’s most likely function.</p><textarea class="work-area" aria-label="Work for problem 21" placeholder="Detail → function verb → whole-text purpose"></textarea><div class="answer-box">Job verb <input class="line-input" type="text" aria-label="Answer 21"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 22 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A biography describes an engineer’s public confidence, then quotes a private notebook entry filled with doubts. Explain how the notebook changes the reader’s understanding of the achievement.</p><textarea class="work-area" aria-label="Work for problem 22" placeholder="Before the detail / after the detail"></textarea><div class="answer-box">Function <input class="line-input" type="text" aria-label="Answer 22"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 23 <span class="lvl lvl-3">L3</span></div><p class="prob-q">Five measurements have mean 32. A sixth measurement is added, and the mean becomes 35. Find the sixth measurement.</p><textarea class="work-area" aria-label="Work for problem 23" placeholder="6-value total − 5-value total"></textarea><div class="answer-box">Answer <input class="line-input" type="text" aria-label="Answer 23"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+    <article class="prob"><div class="prob-num">Problem 24 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A set contains 11 different values. Its median is 40 and its range is 58. The greatest value increases by 7. Which statistics are guaranteed to change, and by how much?</p><textarea class="work-area" aria-label="Work for problem 24" placeholder="Separate rank-based and endpoint-based statistics."></textarea><div class="answer-box">Conclusion <input class="line-input" type="text" aria-label="Answer 24"></div><div class="commit-row"><span class="lock-note">Enter an answer, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  </div>
+  <hr class="divider">
+  <div class="cat-strip">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 16h20M16 6v20" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.4"/></svg>
+    <p><strong>CAT recovery rule:</strong> Difficulty is not feedback about the previous answer. Reset the scratch line, identify the current skill, and make one evidence-based decision.</p>
+  </div>
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h12v18H6z" stroke="currentColor" stroke-width="2"/><path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2>First-Pass Audit</h2><span class="badge badge-sand">2 min</span>
+  </div>
+  <div class="check-grid">
+    <div class="check-card"><h3>ELA proof</h3><p>Can I state the whole-text purpose, the detail’s local job, and the evidence bridge without copying an answer choice?</p></div>
+    <div class="check-card"><h3>Math proof</h3><p>Did I read the display before calculating and convert every mean back into a total before changing a group?</p></div>
+  </div>
+  <div class="footer-note bottom">Page 4 · One item, one model, one defensible commitment.</div>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">Session 7 Homework · Page 5</div>
+  <div class="section-hd">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h14v16H5z" stroke="currentColor" stroke-width="2"/><path d="m8 9 2 2 5-5M8 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2>Part E — Error Log</h2><span class="badge badge-sand">~10 min</span>
+  </div>
+  <p class="instr">Check with the assigned key or in session. Record the first incorrect decision—not merely the final wrong answer.</p>
+  <div class="error-log">
+    <h3>My Highest-Value Corrections</h3>
+    <table class="error-table">
+      <thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Rule / fix for next time</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills"><span class="pill pill-cg">EX · Execution</span><span class="pill pill-ce">MD · Model / Data Read</span><span class="pill pill-ru">CU · Concept Understanding</span></div>
+  </div>
+  <div class="reflect-box">
+    <h3>Weekly CAT Reflection</h3>
+    <div class="reflect-lines">
+      <label class="reflect-line">The function verb I need to use more precisely is <input type="text"></label>
+      <label class="reflect-line">The true-but-wrong purpose trap I will reject is <input type="text"></label>
+      <label class="reflect-line">Before reading a graph or table, I will annotate <input type="text"></label>
+      <label class="reflect-line">Before changing a mean, I will recover <input type="text"></label>
+      <label class="reflect-line">One difficult item I handled calmly was <input type="text"></label>
+    </div>
+  </div>
+  <div class="check-grid">
+    <div class="check-card"><h3>Purpose sentence frame</h3><p>“The detail [function verb] the passage’s purpose by [specific effect supported by words in the detail].”</p></div>
+    <div class="check-card"><h3>Average sentence frame</h3><p>“The original total is ___ because mean × count = ___. After the change, the total/count becomes ___.”</p></div>
+  </div>
+  <div class="footer-note bottom">Page 5 · Bring this completed sheet and your questions to the next session.</div>
+</section>
+</main>
+<script>
+
+/* Passage annotation controls (adapted from copy.html). */
+var passageAnnotState = {tool: 'highlight', color: '#fef08a', noteCount: 0};
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.querySelectorAll('#toolbar-passage .annot-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.querySelectorAll('#colors-passage .annot-color-swatch').forEach(function(s) { s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+function clearPassageAnnotations() {
+  var passage = document.getElementById('passage-main');
+  passage.querySelectorAll('.note-input-wrapper, .passage-note').forEach(function(el) { el.remove(); });
+  var marks = Array.from(passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline'));
+  marks.reverse().forEach(function(el) {
+    if (!el.parentNode) return;
+    el.replaceWith.apply(el, Array.from(el.childNodes));
+  });
+  passage.normalize();
+  passageAnnotState.noteCount = 0;
+}
+function annotationTextParts(range, passage) {
+  var walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+  var parts = [], node;
+  while ((node = walker.nextNode())) {
+    if (!node.length || !range.intersectsNode(node)) continue;
+    if (node.parentElement.closest('.passage-note, .note-input-wrapper')) continue;
+    var start = node === range.startContainer ? range.startOffset : 0;
+    var end = node === range.endContainer ? range.endOffset : node.length;
+    if (start < end) parts.push({node: node, start: start, end: end});
+  }
+  return parts;
+}
+function makePassageMark(tool, color) {
+  var span = document.createElement('span');
+  if (tool === 'note') {
+    span.className = 'passage-highlight passage-note-pending';
+    span.style.backgroundColor = 'rgba(251,191,36,0.35)';
+    span.style.borderBottom = '2px dashed #f59e0b';
+  } else if (tool === 'highlight') {
+    span.className = 'passage-highlight';
+    span.style.backgroundColor = color;
+    span.style.color = '#1f2937';
+  } else if (tool === 'underline') {
+    span.className = 'passage-underline';
+    span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+  } else if (tool === 'outline') {
+    span.className = 'passage-outline';
+    span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+  }
+  return span;
+}
+function unwrapPassageMarks(marks) {
+  marks.slice().reverse().forEach(function(el) {
+    if (el.parentNode) el.replaceWith.apply(el, Array.from(el.childNodes));
+  });
+}
+function applyPassageAnnotation(range) {
+  var passage = document.getElementById('passage-main');
+  if (!range || range.collapsed || !passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return;
+  var tool = passageAnnotState.tool, color = passageAnnotState.color;
+  var parts = annotationTextParts(range, passage);
+  if (!parts.length) return;
+  var marks = [];
+  // Wrap only selected text nodes, keeping paragraph and sentence-number markup intact.
+  parts.slice().reverse().forEach(function(part) {
+    var subrange = document.createRange();
+    subrange.setStart(part.node, part.start);
+    subrange.setEnd(part.node, part.end);
+    var mark = makePassageMark(tool, color);
+    subrange.surroundContents(mark);
+    marks.unshift(mark);
+  });
+  window.getSelection().removeAllRanges();
+  if (tool !== 'note') return;
+
+  var anchor = marks[marks.length - 1];
+  var inputWrapper = document.createElement('span');
+  inputWrapper.className = 'note-input-wrapper';
+  inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+  var inp = document.createElement('input');
+  inp.type = 'text';
+  inp.placeholder = 'Type note...';
+  inp.setAttribute('aria-label', 'Passage note');
+  inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+  var confirmBtn = document.createElement('button');
+  confirmBtn.type = 'button';
+  confirmBtn.textContent = '\u2713';
+  confirmBtn.setAttribute('aria-label', 'Save passage note');
+  confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+  var cancelBtn = document.createElement('button');
+  cancelBtn.type = 'button';
+  cancelBtn.textContent = '\u2715';
+  cancelBtn.setAttribute('aria-label', 'Cancel passage note');
+  cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+  inputWrapper.append(inp, confirmBtn, cancelBtn);
+  anchor.after(inputWrapper);
+  inp.focus();
+  function cancelNote() {
+    inputWrapper.remove();
+    unwrapPassageMarks(marks);
+  }
+  function confirmNote() {
+    var noteText = inp.value.trim();
+    if (!noteText) { cancelNote(); return; }
+    inputWrapper.remove();
+    passageAnnotState.noteCount++;
+    marks.forEach(function(mark) {
+      mark.className = 'passage-highlight';
+      mark.style.backgroundColor = '#fef3c7';
+      mark.style.borderBottom = '';
+    });
+    var noteEl = document.createElement('span');
+    noteEl.className = 'passage-note';
+    noteEl.tabIndex = 0;
+    noteEl.textContent = passageAnnotState.noteCount;
+    noteEl.setAttribute('aria-label', 'Note ' + passageAnnotState.noteCount + ': ' + noteText);
+    var tooltip = document.createElement('span');
+    tooltip.className = 'note-tooltip';
+    tooltip.textContent = 'Note: ' + noteText;
+    noteEl.appendChild(tooltip);
+    anchor.after(noteEl);
+  }
+  confirmBtn.addEventListener('click', confirmNote);
+  cancelBtn.addEventListener('click', cancelNote);
+  inp.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+    if (e.key === 'Escape') { e.preventDefault(); cancelNote(); }
+  });
+}
+(function() {
+  var passage = document.getElementById('passage-main');
+  function annotateSelection() {
+    var sel = window.getSelection();
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+    applyPassageAnnotation(sel.getRangeAt(0).cloneRange());
+  }
+  passage.addEventListener('mouseup', annotateSelection);
+  passage.addEventListener('touchend', function() { setTimeout(annotateSelection, 100); });
+  passage.addEventListener('keyup', function(e) {
+    if (e.key === 'Shift' || e.key.startsWith('Arrow')) annotateSelection();
+  });
+})();
+
+function selectOption(label){
+  const card=label.closest('.mc-q');
+  if(card.classList.contains('locked'))return;
+  card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('.bubble').textContent=''});
+  label.classList.add('selected');label.querySelector('.bubble').textContent='✓';label.querySelector('input').checked=true;
+}
+function lockCard(card){
+  if(!card || card.classList.contains('locked'))return;
+  const answer=card.classList.contains('mc-q')
+    ? card.querySelector('input[type="radio"]:checked')
+    : card.querySelector('select[aria-label^="Answer"],input[aria-label^="Answer"]');
+  if(!answer || (answer.type!=='radio' && !answer.value.trim())){
+    alert(card.classList.contains('mc-q') ? 'Choose an answer before committing.' : 'Enter an answer before committing.');
+    return;
+  }
+  card.classList.add('locked');
+  card.querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=true);
+  const note=card.querySelector('.lock-note');if(note)note.textContent='Locked response committed.';
+}
+function clearAll(){
+  if(!confirm('Clear every answer, work box, and committed response?'))return;
+  document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio')e.checked=false;else e.value='';e.disabled=false});
+  document.querySelectorAll('select').forEach(e=>{e.selectedIndex=0;e.disabled=false});
+  document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');e.querySelector('.bubble').textContent=''});
+  document.querySelectorAll('.mc-q,.data-card,.prob').forEach(e=>e.classList.remove('locked'));
+  document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);
+  document.querySelectorAll('.lock-note').forEach(e=>e.textContent=e.closest('.mc-q') ? 'Choose, bridge, then commit.' : 'Enter an answer, then commit.');
+  document.querySelectorAll('[contenteditable="true"]').forEach(e=>e.innerHTML='&nbsp;');
+  clearPassageAnnotations();
+}
+document.querySelectorAll('.mc-opt').forEach(label=>{
+  label.addEventListener('click',()=>selectOption(label));
+  label.querySelector('input').addEventListener('change',()=>selectOption(label));
+});
+document.querySelectorAll('.commit-btn').forEach(btn=>btn.addEventListener('click',()=>lockCard(btn.closest('.mc-q,.data-card,.prob'))));
+document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}));
+</script>
+</body>
+</html>
