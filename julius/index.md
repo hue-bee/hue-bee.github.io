@@ -27,3 +27,4 @@
 | **01B** | [Reading the Picture](https://hue-bee.github.io/julius/lesson01B) | [1B Homework](https://hue-bee.github.io/julius/lesson01B/homework) | |
 | **02A** | [From 74 to Repeatable](https://hue-bee.github.io/julius/lesson02A) | [2A Homework](https://hue-bee.github.io/julius/lesson02A/homework) | |
 | **02B** | [Units That Do Work](https://hue-bee.github.io/julius/lesson02B) | [2B Homework](https://hue-bee.github.io/julius/lesson02B/homework) | |
+| **03A** | [Measurement in Context & Multi-Step Percents](https://hue-bee.github.io/julius/lesson03A) | [3A Homework](https://hue-bee.github.io/julius/lesson03A/homework) | |
