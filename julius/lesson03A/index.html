@@ -1,1 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Measurement in Context
+& Multi-Step Percents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;
+  --surface:#ffffff;
+  --ink:#1f1f1f;
+  --ink-2:#4a4a4a;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,0.45);
+  --z1:#262626; --z1-soft:rgba(38,38,38,0.10);
+  --z2:#4d4d4d; --z2-soft:rgba(77,77,77,0.10);
+  --z3:#6a6a6a; --z3-soft:rgba(106,106,106,0.12);
+  --z4:#858585; --z4-soft:rgba(133,133,133,0.12);
+  --z5:#5c5c5c; --z5-soft:rgba(92,92,92,0.10);
+  --ela:#3e3e3e; --ela-soft:rgba(62,62,62,0.10);
+  --font-display:'Baloo 2','Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{background:var(--bg);margin:0;}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400;}
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all;}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem);}
+.slide::before{content:none;display:none;}
 
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,0.32),0 2px 8px rgba(201,212,228,0.18);}
+.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.nav-btn:hover{background:#DCE7F7;}
+.slide-dots{display:flex;gap:7px;}
+.slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.18);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.slide-dots .dot.active{background:var(--ink);transform:scale(1.35);}
+.slide-counter{font-size:0.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600;}
+.reveal{opacity:0;transform:translateY(16px);}
+
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.9rem;}
+.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:500;letter-spacing:0.01em;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid rgba(201,212,228,0.45);color:var(--ink-3);white-space:nowrap;}
+.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4);flex:none;}
+.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc);}
+.zone-chip.on .zdot{background:rgba(255,255,255,0.85);}
+.zone-chip .zt{opacity:0.75;font-weight:400;}
+.zone-chip.on .zt{opacity:0.9;}
+
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;margin:0;}
+h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-0.01em;margin:0 0 1rem;color:var(--ink);}
+h2.slide-title .tint{color:var(--zc);}
+.kicker{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--zc,var(--ink-3));margin-bottom:0.35rem;}
+
+.math{font-family:var(--font-math);font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:0.02em;font-variant-numeric:lining-nums;}
+.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em;}
+.prose{font-size:0.95rem;color:var(--ink-2);line-height:1.65;}
+
+.prob-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.prob-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;}
+.prob-num{font-family:var(--font-display);font-weight:600;font-size:0.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px;}
+.lvl-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;}
+.lvl-1{background:#E8EDF5;color:#3D4C63;}
+.lvl-2{background:#DCEBFB;color:#1D4ED8;}
+.lvl-3{background:#FBEBCF;color:#B45309;}
+.lvl-4{background:#E2E2E2;color:#3D3D3D;}
+.info-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.85rem 1rem;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.trap-card{border:1px solid rgba(201,212,228,0.45);background:#F6F6F6;border-radius:12px;padding:0.7rem 0.95rem;}
+.trap-title{font-weight:700;font-size:0.85rem;color:#3D3D3D;}
+.trap-body{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+.win-card{border:1px solid rgba(201,212,228,0.45);border-left:5px solid var(--z5);background:#F4FBF5;border-radius:12px;padding:0.7rem 0.95rem;}
+.win-title{font-weight:700;font-size:0.85rem;color:#15803D;}
+.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb, var(--zc,var(--ink-3)) 35%, white);border-radius:12px;padding:0.55rem 1rem;text-align:center;}
+.formula-box .math{font-size:1.3rem;}
+.diagram-wrap{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:14px;padding:0.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(201,212,228,0.20),0 2px 6px rgba(201,212,228,0.14);}
+.diagram-wrap svg text{font-family:var(--font-math);}
+.diagram-wrap img{max-width:100%;max-height:170px;border-radius:8px;object-fit:cover;}
+
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+.mc-options{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.45rem;}
+.mc-option{display:flex;align-items:flex-start;gap:0.5rem;padding:0.38rem 0.6rem;border-radius:9px;border:1px solid rgba(201,212,228,0.45);background:#FBFCFE;cursor:pointer;font-size:0.85rem;line-height:1.45;color:var(--ink-2);transition:background 0.15s,border-color 0.15s;user-select:none;}
+.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9;}
+.mc-option input[type=radio]{display:none;}
+.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink);}
+.mc-option .opt-letter{font-family:var(--font-math);font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3));}
+
+.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 0.8rem;align-items:stretch;}
+.tl-time{font-family:var(--font-math);font-weight:700;font-size:0.85rem;color:var(--rc);text-align:right;padding-top:0.72rem;letter-spacing:0.02em;}
+.tl-rail{position:relative;display:flex;justify-content:center;}
+.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-rail .tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:0.72rem;box-shadow:0 0 0 2px color-mix(in srgb, var(--rc) 45%, white),0 6px 14px rgba(201,212,228,0.16);}
+.tl-card{background:var(--surface);border:1px solid rgba(201,212,228,0.45);border-radius:12px;padding:0.55rem 0.9rem;margin-bottom:0.55rem;box-shadow:0 8px 20px rgba(201,212,228,0.18),0 2px 5px rgba(201,212,228,0.12);}
+.tl-card .tl-h{font-weight:600;font-size:0.92rem;color:var(--ink);}
+.tl-card .tl-b{font-size:0.82rem;color:var(--ink-2);margin-top:0.15rem;line-height:1.5;}
+.tl-card .tl-b em{color:var(--rc);font-style:normal;font-weight:600;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tag.hot{background:#E2E2E2;color:#3D3D3D;}
+.tag.cool{background:#E8F7EC;color:#15803D;}
+.socratic{border:1px solid rgba(201,212,228,0.45);background:#EFEFEF;border-radius:12px;padding:0.7rem 0.95rem;}
+.socratic-title{font-weight:700;font-size:0.85rem;color:#2E2E2E;}
+.socratic-body{font-size:0.88rem;color:var(--ink-2);margin-top:0.25rem;line-height:1.55;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+</style>
+
+<style>
+:root{
+  --z1:#2563EB;--z1-soft:rgba(37,99,235,.10);
+  --z2:#7C3AED;--z2-soft:rgba(124,58,237,.10);
+  --z3:#D97706;--z3-soft:rgba(217,119,6,.11);
+  --z4:#0F766E;--z4-soft:rgba(15,118,110,.10);
+  --z5:#BE123C;--z5-soft:rgba(190,18,60,.09);
+  --ela:#4B5563;--ela-soft:rgba(75,85,99,.10);
+}
+.mult-chain{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.45rem;align-items:center;width:100%;}
+.chain-node{background:var(--surface);border:1px solid rgba(201,212,228,.55);border-radius:13px;padding:.7rem .65rem;text-align:center;box-shadow:0 8px 18px rgba(201,212,228,.18);}
+.chain-arrow{font-size:1.3rem;font-weight:800;color:var(--zc,var(--ink-3));}
+.bar-model{width:100%;height:46px;border-radius:10px;overflow:hidden;border:1px solid rgba(201,212,228,.65);display:flex;background:#F7FAFD;}
+.bar-piece{height:100%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;border-right:1px solid rgba(255,255,255,.8);}
+.passage{background:var(--surface);border:1px solid rgba(201,212,228,.48);border-radius:14px;padding:1rem 1.15rem;box-shadow:0 10px 24px rgba(201,212,228,.20);font-size:.82rem;line-height:1.55;color:var(--ink-2);column-count:2;column-gap:1.5rem;}
+.line-no{color:var(--ink-3);font-weight:700;font-size:.7rem;margin-right:.3rem;}
+.mini-rule{font-weight:800;color:var(--zc,var(--ink));}
+.error-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;}
+.error-card{background:var(--surface);border:1px solid rgba(201,212,228,.48);border-radius:12px;padding:.75rem;text-align:center;box-shadow:0 8px 18px rgba(201,212,228,.16);}
+.error-letter{font-family:var(--font-display);font-size:1.65rem;font-weight:800;color:var(--zc,var(--ink));}
+@media(max-width:760px){.passage{column-count:1;font-size:.75rem}.mult-chain{grid-template-columns:1fr}.chain-arrow{transform:rotate(90deg)}.error-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="deck">
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" data-slide="1" style="--zc:var(--z1);--zs:var(--z1-soft)">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content">
+<div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(201,212,228,.45);border-radius:24px;padding:6px 16px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--z1)"></span>Session B · Phase A, Week 12</div>
+<h1 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.55rem)">Measurement in Context<br><span style="color:var(--z1)">&amp; Multi-Step Percents</span></h1>
+<h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.05rem,2.2vw,1.45rem);font-weight:500;color:var(--ink-2);margin:.7rem 0 .4rem">Sept 14–20 · Session B · 60 Minutes</h2>
+<p class="reveal" style="font-size:.82rem;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin:0 0 1.2rem">Percent of a Percent · Digital SHSAT CAT Practice</p>
+<div class="reveal" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+<span style="background:var(--z1-soft);color:var(--z1);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600">Measurement Retrieval</span>
+<span style="background:var(--z2-soft);color:var(--z2);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600">Multiplier Method</span>
+<span style="background:var(--z3-soft);color:var(--z3);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600">Successive Changes</span>
+<span style="background:var(--z4-soft);color:var(--z4);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600">Reverse Percent</span>
+<span style="background:var(--ela-soft);color:var(--ela);border-radius:20px;padding:6px 15px;font-size:.8rem;font-weight:600">ELA Fiction Passage</span>
+</div></div>
+</div>
+<!-- SLIDE 2 — SESSION MAP -->
+<div class="slide" data-slide="2" style="--zc:17233B;--zs:rgba(23,35,59,.08)">
+  
+  <div class="content">
+<div class="kicker reveal" style="color:var(--ink-3)">Session Roadmap</div><h2 class="slide-title reveal">Today's <span class="tint">60-Minute Route</span></h2>
+<div class="reveal">
+<div class="tl-row" style="--rc:var(--z1)"><div class="tl-time">0:00–0:05</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Measurement Cold Start <span class="tag hot">Forward-Only</span></div><div class="tl-b">Two context problems. Circle the requested unit, narrate the setup, commit, and move.</div></div></div><div class="tl-row" style="--rc:var(--z2)"><div class="tl-time">0:05–0:13</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Multiplier Lens</div><div class="tl-b">Translate every percent move into one multiplication before doing arithmetic.</div></div></div><div class="tl-row" style="--rc:var(--z3)"><div class="tl-time">0:13–0:22</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Successive Discounts + Markup</div><div class="tl-b">Track the changing base instead of adding percentages that act on different amounts.</div></div></div><div class="tl-row" style="--rc:var(--z4)"><div class="tl-time">0:22–0:32</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Percent of a Percent + Reverse Percent</div><div class="tl-b">Move forward by multiplying; move backward by dividing by the known multiplier.</div></div></div><div class="tl-row" style="--rc:var(--ela)"><div class="tl-time">0:32–0:56</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Fiction Passage Set</div><div class="tl-b">Read once, answer six questions, write the detail-to-purpose frame twice, self-check once, submit.</div></div></div><div class="tl-row" style="--rc:var(--z5)"><div class="tl-time">0:56–1:00</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card" style="margin-bottom:0"><div class="tl-h">C or G?</div><div class="tl-b">Tag the pattern: arithmetic slip, misread, content gap, timing, or strategy.</div></div></div></div></div>
+</div>
+<!-- SLIDE 3 — PROTOCOL -->
+<div class="slide" data-slide="3" style="--zc:var(--z1);--zs:var(--z1-soft)">
+  
+  <div class="content">
+<div class="kicker reveal">Digital SHSAT Routine</div><h2 class="slide-title reveal">One Screen, <span class="tint">One Decision</span></h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="socratic reveal"><div class="socratic-title">Before touching numbers</div><div class="socratic-body">What quantity is changing? What is the original base? What unit must the answer use? Say all three aloud.</div></div>
+<div class="win-card reveal"><div class="win-title">Commit Clock</div><div class="prose" style="font-size:.86rem;margin-top:.2rem">At 90 seconds, eliminate what you can, choose the strongest remaining response, and advance. Math is practiced as forward-only.</div></div>
+<div class="trap-card reveal"><div class="trap-title">No phantom second pass</div><div class="trap-body">Do not solve halfway and plan to return. Your check happens before you click Next: base, multiplier, size, unit.</div></div>
+<div class="info-card reveal"><div style="font-weight:700;font-size:.88rem">Socratic narration</div><div class="prose" style="font-size:.85rem;margin-top:.2rem">On Problems 1, 8, and 14, explain why your operation makes sense before computing. A correct answer with no reason is not finished.</div></div>
+</div></div>
+</div>
+<!-- SLIDE 4 — MEASUREMENT RETENTION -->
+<div class="slide" data-slide="4" style="--zc:var(--z1);--zs:var(--z1-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">0:00–0:05 · Cold Start</div><h2 class="slide-title reveal">Measurement Retention <span class="tint">Answer Once</span></h2>
+<div class="socratic reveal" style="margin-bottom:.75rem"><div class="socratic-title">Circle first</div><div class="socratic-body">Before calculating, circle the unit the answer must be in. Which given units must disappear? Write conversion factors so those units cancel.</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.9rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">On a scale drawing, 3 inches represents 12 feet. A hallway measures 7.5 inches on the drawing. What is its actual length in feet? Show the unit fraction that makes inches cancel.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A tank fills at 3.2 gallons per minute for 18 minutes, then at 2.4 gallons per minute for 25 minutes. How many quarts enter the tank altogether? Label every number with its unit.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+</div></div>
+</div>
+<!-- SLIDE 5 — UNIT BRIDGE -->
+<div class="slide" data-slide="5" style="--zc:var(--z1);--zs:var(--z1-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Measurement Debrief</div><h2 class="slide-title reveal">Units Are <span class="tint">Algebraic Luggage</span></h2>
+<div style="display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:center">
+<div>
+<div class="socratic reveal"><div class="socratic-title">Airport test</div><div class="socratic-body">If an unwanted unit is still “on the luggage tag” at the end, can the answer be ready to board? Where must that unit appear so it cancels?</div></div>
+<div class="formula-box reveal" style="margin-top:.7rem"><div style="font-size:.8rem;font-weight:700;color:var(--ink-2)">Build a cancellation chain</div><div class="math" style="font-size:1.05rem">given quantity × conversion factor × conversion factor</div></div>
+<div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Trap: a correct number wearing the wrong unit</div><div class="trap-body">A numerical result is not complete until its unit matches the question. Check the label before checking the arithmetic.</div></div>
+</div>
+<div class="diagram-wrap reveal"><svg width="350" height="190" viewBox="0 0 350 190" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="62" width="90" height="55" rx="10" fill="#EAF1FE" stroke="#2563EB"/><text x="63" y="84" text-anchor="middle" font-size="12" fill="#4a4a4a">starting</text><text x="63" y="103" text-anchor="middle" font-size="15" font-weight="800" fill="#2563EB">unit A</text><path d="M112 89 H150" stroke="#767676" stroke-width="2"/><polygon points="150,89 140,83 140,95" fill="#767676"/><rect x="154" y="42" width="80" height="95" rx="10" fill="#F6F2FE" stroke="#7C3AED"/><text x="194" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#7C3AED">unit B</text><line x1="173" y1="82" x2="215" y2="82" stroke="#767676"/><text x="194" y="105" text-anchor="middle" font-size="13" fill="#4a4a4a">unit A</text><path d="M238 89 H276" stroke="#767676" stroke-width="2"/><polygon points="276,89 266,83 266,95" fill="#767676"/><rect x="280" y="62" width="55" height="55" rx="10" fill="#E8F7F4" stroke="#0F766E"/><text x="307" y="84" text-anchor="middle" font-size="12" fill="#4a4a4a">final</text><text x="307" y="103" text-anchor="middle" font-size="15" font-weight="800" fill="#0F766E">unit B</text><line x1="42" y1="144" x2="214" y2="144" stroke="#BE123C" stroke-width="2" stroke-dasharray="5 4"/><text x="128" y="165" text-anchor="middle" font-size="12" fill="#BE123C">unit A cancels</text></svg></div>
+</div></div>
+</div>
+<!-- SLIDE 6 — MULTIPLIER LENS -->
+<div class="slide" data-slide="6" style="--zc:var(--z2);--zs:var(--z2-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">0:05–0:13 · Core Tool</div><h2 class="slide-title reveal">Put on <span class="tint">Multiplier Goggles</span></h2>
+<div class="socratic reveal" style="margin-bottom:.8rem"><div class="socratic-title">Ask one question</div><div class="socratic-body">After the change, what fraction of the original remains? Convert that “after fraction” directly to a decimal multiplier.</div></div>
+<div class="mult-chain reveal">
+<div class="chain-node"><div style="font-size:.72rem;color:var(--ink-3);font-weight:700">WORDS</div><div style="font-weight:800">increase by p%</div></div><div class="chain-arrow">→</div><div class="chain-node"><div style="font-size:.72rem;color:var(--ink-3);font-weight:700">MULTIPLIER</div><div class="math">1 + p/100</div></div><div class="chain-arrow">→</div><div class="chain-node"><div style="font-size:.72rem;color:var(--ink-3);font-weight:700">ACTION</div><div style="font-weight:800">original × multiplier</div></div>
+</div>
+<div class="mult-chain reveal" style="margin-top:.65rem">
+<div class="chain-node"><div style="font-size:.72rem;color:var(--ink-3);font-weight:700">WORDS</div><div style="font-weight:800">decrease by p%</div></div><div class="chain-arrow">→</div><div class="chain-node"><div style="font-size:.72rem;color:var(--ink-3);font-weight:700">MULTIPLIER</div><div class="math">1 − p/100</div></div><div class="chain-arrow">→</div><div class="chain-node"><div style="font-size:.72rem;color:var(--ink-3);font-weight:700">ACTION</div><div style="font-weight:800">original × multiplier</div></div>
+</div>
+<div class="win-card reveal" style="margin-top:.8rem"><div class="win-title">Clever check: multiplier weather report</div><div class="prose" style="font-size:.84rem;margin-top:.2rem">A multiplier above 1 predicts growth; a multiplier between 0 and 1 predicts shrinkage. If the answer moves the wrong direction, stop before submitting.</div></div></div>
+</div>
+<!-- SLIDE 7 — BASE MATTERS -->
+<div class="slide" data-slide="7" style="--zc:var(--z2);--zs:var(--z2-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Percent Change</div><h2 class="slide-title reveal">The Base Is the <span class="tint">Measuring Stick</span></h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center">
+<div>
+<div class="socratic reveal"><div class="socratic-title">Which amount earns the 100% label?</div><div class="socratic-body">When a quantity changes from old to new, why must the change be compared with the old amount rather than the new one?</div></div>
+<div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.05rem">percent change = change ÷ original × 100%</div></div>
+<div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Same gap, different percent</div><div class="trap-body">The same numerical increase can represent different percent changes when the starting amounts differ. Name the base before dividing.</div></div>
+</div>
+<div class="diagram-wrap reveal"><svg width="350" height="185" viewBox="0 0 350 185" xmlns="http://www.w3.org/2000/svg"><text x="20" y="25" font-size="13" font-weight="800" fill="#1f1f1f">OLD = the 100% ruler</text><rect x="20" y="43" width="230" height="40" rx="8" fill="#EAF1FE" stroke="#2563EB"/><text x="135" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#2563EB">original base</text><text x="20" y="111" font-size="13" font-weight="800" fill="#1f1f1f">NEW = base ± change</text><rect x="20" y="128" width="230" height="40" rx="8" fill="#EAF1FE" stroke="#2563EB"/><rect x="250" y="128" width="70" height="40" rx="8" fill="#FDECCF" stroke="#D97706"/><text x="135" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#2563EB">same base</text><text x="285" y="153" text-anchor="middle" font-size="12" font-weight="700" fill="#D97706">change</text></svg></div>
+</div></div>
+</div>
+<!-- SLIDE 8 — PERCENT CHANGE PRACTICE -->
+<div class="slide" data-slide="8" style="--zc:var(--z2);--zs:var(--z2-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Guided Practice</div><h2 class="slide-title reveal">Percent Change <span class="tint">Easy to Hard</span></h2>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-1">Level 1</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A jacket costs $80 before a 15% increase. Write the multiplier and determine the new price.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-2">Level 2</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">Attendance rises from 640 students to 704 students. What is the percent increase? Which number is the measuring stick?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A town’s population decreases by 12%. Must a 12% increase restore the original population? Use multipliers to justify your answer without guessing.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A price is increased by 25%. By what percent must the increased price be reduced to return exactly to the original price? Explain why the two percentages need not match.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+</div></div>
+</div>
+<!-- SLIDE 9 — SUCCESSIVE DISCOUNTS -->
+<div class="slide" data-slide="9" style="--zc:var(--z3);--zs:var(--z3-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">0:13–0:18 · Successive Changes</div><h2 class="slide-title reveal">Two Discounts, <span class="tint">Two Different Bases</span></h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center">
+<div>
+<div class="socratic reveal"><div class="socratic-title">Why not add?</div><div class="socratic-body">After the first discount, is the second percent acting on the original price or the smaller sale price? What changed between the two steps?</div></div>
+<div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.05rem">final = original × m₁ × m₂</div></div>
+<div class="win-card reveal" style="margin-top:.7rem"><div class="win-title">Multiplier train</div><div class="prose" style="font-size:.84rem;margin-top:.2rem">Each percent change is a train car. Couple the multipliers in order. Do not flatten them into one added percent unless you first multiply the cars together.</div></div>
+</div>
+<div class="diagram-wrap reveal"><svg width="355" height="190" viewBox="0 0 355 190" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="62" width="85" height="58" rx="11" fill="#EAF1FE" stroke="#2563EB"/><text x="57" y="85" text-anchor="middle" font-size="12" fill="#4a4a4a">original</text><text x="57" y="105" text-anchor="middle" font-size="17" font-weight="800" fill="#2563EB">P</text><path d="M104 91 H135" stroke="#767676" stroke-width="2"/><text x="120" y="77" text-anchor="middle" font-size="12" font-weight="700" fill="#D97706">×m₁</text><polygon points="135,91 125,85 125,97" fill="#767676"/><rect x="140" y="62" width="85" height="58" rx="11" fill="#FDECCF" stroke="#D97706"/><text x="182" y="85" text-anchor="middle" font-size="12" fill="#4a4a4a">new base</text><text x="182" y="105" text-anchor="middle" font-size="17" font-weight="800" fill="#D97706">P·m₁</text><path d="M229 91 H260" stroke="#767676" stroke-width="2"/><text x="245" y="77" text-anchor="middle" font-size="12" font-weight="700" fill="#7C3AED">×m₂</text><polygon points="260,91 250,85 250,97" fill="#767676"/><rect x="265" y="62" width="75" height="58" rx="11" fill="#F6F2FE" stroke="#7C3AED"/><text x="302" y="85" text-anchor="middle" font-size="12" fill="#4a4a4a">final</text><text x="302" y="105" text-anchor="middle" font-size="14" font-weight="800" fill="#7C3AED">P·m₁·m₂</text><text x="177" y="155" text-anchor="middle" font-size="12" fill="#4a4a4a">The middle price becomes the second base.</text></svg></div>
+</div></div>
+</div>
+<!-- SLIDE 10 — DISCOUNT PRACTICE -->
+<div class="slide" data-slide="10" style="--zc:var(--z3);--zs:var(--z3-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Successive Discount Practice</div><h2 class="slide-title reveal">Do Not <span class="tint">Add the Stickers</span></h2>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-1">Level 1</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A $60 backpack is discounted 20%. Write one multiplier and determine the sale price.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-2">Level 2</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A $150 coat is discounted 20% and then 10%. Narrate which price serves as the base for the second discount, then determine the final price.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">Store A offers 30% off. Store B offers 20% off and then 12% off. For the same original price, which store gives the lower final price, and by what percent of the original?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A tablet receives a 25% discount, then 8.875% sales tax is applied. The customer has $410. What is the greatest original sticker price the customer can afford?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+</div></div>
+</div>
+<!-- SLIDE 11 — MARKUP THEN DISCOUNT -->
+<div class="slide" data-slide="11" style="--zc:var(--z3);--zs:var(--z3-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">0:18–0:22 · Opposite Directions</div><h2 class="slide-title reveal">Markup Then Discount: <span class="tint">A Seesaw With a Moving Pivot</span></h2>
+<div style="display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:center">
+<div>
+<div class="socratic reveal"><div class="socratic-title">Equal percentages, equal effect?</div><div class="socratic-body">If a price rises and then falls by the same percent, is the decrease taken from the original price or the larger marked-up price? Which move acts on more dollars?</div></div>
+<div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.05rem">cost × markup multiplier × discount multiplier</div></div>
+<div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Trap: “they cancel”</div><div class="trap-body">Opposite percent changes cancel only when their combined multipliers equal 1. Check the product, not the wording.</div></div>
+</div>
+<div class="diagram-wrap reveal"><svg width="340" height="190" viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="125" x2="280" y2="65" stroke="#4a4a4a" stroke-width="7" stroke-linecap="round"/><polygon points="170,90 145,145 195,145" fill="#CBD5E1" stroke="#767676"/><circle cx="72" cy="122" r="27" fill="#E8F7F4" stroke="#0F766E"/><text x="72" y="118" text-anchor="middle" font-size="12" fill="#4a4a4a">original</text><text x="72" y="136" text-anchor="middle" font-size="14" font-weight="800" fill="#0F766E">base 1</text><circle cx="270" cy="68" r="31" fill="#FDECCF" stroke="#D97706"/><text x="270" y="63" text-anchor="middle" font-size="12" fill="#4a4a4a">marked-up</text><text x="270" y="81" text-anchor="middle" font-size="14" font-weight="800" fill="#D97706">base 2</text><text x="170" y="173" text-anchor="middle" font-size="12" fill="#4a4a4a">The pivot moves because the base changes.</text></svg></div>
+</div></div>
+</div>
+<!-- SLIDE 12 — MARKUP PRACTICE -->
+<div class="slide" data-slide="12" style="--zc:var(--z3);--zs:var(--z3-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Markup + Discount Practice</div><h2 class="slide-title reveal">Follow the <span class="tint">Price Story</span></h2>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-1">Level 1</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A shop pays $50 for an item and marks it up 20%. What is the marked price?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-2">Level 2</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A store pays $72 for a lamp, marks it up 35%, then advertises 20% off the marked price. What price does the customer pay before tax?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A jacket sells for $91.80 after a 15% discount. Before the discount, the store had marked the wholesale cost up 20%. What was the wholesale cost?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A store wants a 12% profit even after customers use a 30%-off coupon. By what percent should the store mark up the wholesale cost? Explain your equation before solving.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+</div></div>
+</div>
+<!-- SLIDE 13 — PERCENT OF PERCENT -->
+<div class="slide" data-slide="13" style="--zc:var(--z4);--zs:var(--z4-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">0:22–0:26 · Nested Groups</div><h2 class="slide-title reveal">Percent of a Percent: <span class="tint">Zoom Into the Subgroup</span></h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center">
+<div>
+<div class="socratic reveal"><div class="socratic-title">Who is inside whom?</div><div class="socratic-body">If 40% of a group has Trait A and 25% of that subgroup has Trait B, are you finding 25% of everyone or 25% of the 40% slice?</div></div>
+<div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.05rem">whole × subgroup percent × nested percent</div></div>
+<div class="win-card reveal" style="margin-top:.7rem"><div class="win-title">Camera zoom</div><div class="prose" style="font-size:.84rem;margin-top:.2rem">The first percent frames the scene; the second zooms inside that frame. Multiplication preserves the nesting.</div></div>
+</div>
+<div class="diagram-wrap reveal"><svg width="335" height="210" viewBox="0 0 335 210" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#CBD5E1" stroke-width="1"/></pattern></defs><rect x="22" y="22" width="280" height="140" rx="8" fill="url(#grid)" stroke="#767676"/><rect x="22" y="22" width="112" height="140" rx="8" fill="#EAF1FE" opacity=".95"/><rect x="22" y="22" width="112" height="35" rx="8" fill="#7C3AED" opacity=".82"/><text x="162" y="188" text-anchor="middle" font-size="12" fill="#4a4a4a">whole → subgroup → subgroup inside subgroup</text><text x="78" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#2563EB">first percent</text><text x="78" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">second percent</text></svg></div>
+</div></div>
+</div>
+<!-- SLIDE 14 — REVERSE PERCENT -->
+<div class="slide" data-slide="14" style="--zc:var(--z4);--zs:var(--z4-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">0:26–0:29 · Reverse Percent</div><h2 class="slide-title reveal">Run the <span class="tint">Machine Backward</span></h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center">
+<div>
+<div class="socratic reveal"><div class="socratic-title">What operation undoes multiplication?</div><div class="socratic-body">If the final amount equals the original times a known multiplier, how can you recover the original from the final amount?</div></div>
+<div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.05rem">original = final ÷ multiplier</div></div>
+<div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Trap: subtracting the percent from the final</div><div class="trap-body">The stated percent was taken from the unknown original, not from the final amount. Rebuild the equation before choosing an operation.</div></div>
+</div>
+<div class="diagram-wrap reveal"><svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="65" width="85" height="65" rx="12" fill="#EAF1FE" stroke="#2563EB"/><text x="62" y="91" text-anchor="middle" font-size="12" fill="#4a4a4a">original</text><text x="62" y="113" text-anchor="middle" font-size="20" font-weight="800" fill="#2563EB">?</text><path d="M110 84 H235" stroke="#0F766E" stroke-width="3"/><polygon points="235,84 224,77 224,91" fill="#0F766E"/><text x="173" y="68" text-anchor="middle" font-size="13" font-weight="800" fill="#0F766E">× multiplier</text><rect x="240" y="65" width="85" height="65" rx="12" fill="#E8F7F4" stroke="#0F766E"/><text x="282" y="91" text-anchor="middle" font-size="12" fill="#4a4a4a">final</text><text x="282" y="113" text-anchor="middle" font-size="17" font-weight="800" fill="#0F766E">known</text><path d="M235 150 H110" stroke="#BE123C" stroke-width="3"/><polygon points="110,150 121,143 121,157" fill="#BE123C"/><text x="173" y="176" text-anchor="middle" font-size="13" font-weight="800" fill="#BE123C">÷ same multiplier</text></svg></div>
+</div></div>
+</div>
+<!-- SLIDE 15 — MIXED PERCENT PRACTICE -->
+<div class="slide" data-slide="15" style="--zc:var(--z4);--zs:var(--z4-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">0:29–0:32 · Mixed Checkpoint</div><h2 class="slide-title reveal">Choose the Route <span class="tint">Before the Arithmetic</span></h2>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-1">Level 1</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A $48 sale price reflects a 20% discount. What was the original price? Name the multiplier before solving.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-2">Level 2</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">35% of students play an instrument, and 40% of those students play piano. What percent of all students play piano?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">After a 15% markup and then a 20% discount, an item sells for $78.20. What was the store’s cost? Write the entire multiplier chain first.</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">A population falls 10% in Year 1 and rises 12% in Year 2. It then equals 49,896. What was the population before Year 1, and is the two-year net change an increase or decrease?</div><div class="work-box" style="margin-top:.55rem"><textarea placeholder="Work here" spellcheck="false"></textarea></div></div>
+</div></div>
+</div>
+<!-- SLIDE 16 — CHECK ROUTINE -->
+<div class="slide" data-slide="16" style="--zc:17233B;--zs:rgba(23,35,59,.08)">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content">
+<div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Math Accuracy</div><h2 class="slide-title reveal">The <span class="tint">B-M-S Check</span></h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">B</span><span class="lvl-badge lvl-1">Base</span></div><div style="font-weight:800;margin-bottom:.3rem">Who owns the percent?</div><div class="prose" style="font-size:.85rem">Point to the exact amount that represents 100% at this step. If it changes, rename it.</div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">M</span><span class="lvl-badge lvl-2">Multiplier</span></div><div style="font-weight:800;margin-bottom:.3rem">Which direction?</div><div class="prose" style="font-size:.85rem">Above 1 grows; between 0 and 1 shrinks. Reverse problems divide by the known multiplier.</div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S</span><span class="lvl-badge lvl-3">Size</span></div><div style="font-weight:800;margin-bottom:.3rem">Does the result fit the story?</div><div class="prose" style="font-size:.85rem">Estimate first. A discount should not increase price; a nested percent should be smaller than its parent group.</div></div>
+</div>
+<div class="socratic reveal" style="margin-top:.85rem"><div class="socratic-title">Five-second final question</div><div class="socratic-body">If I hid my arithmetic, could I still predict whether the answer should be larger or smaller than the starting amount? If not, I have not modeled the story yet.</div></div></div>
+</div>
+<!-- SLIDE 17 — ELA LAUNCH -->
+<div class="slide" data-slide="17" style="--zc:var(--ela);--zs:var(--ela-soft)">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content">
+<div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">0:32–0:56 · Fiction Passage Set</div><h2 class="slide-title reveal">Read for the <span class="tint">Pressure Point</span></h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="socratic reveal"><div class="socratic-title">Four marks only</div><div class="socratic-body">Who wants what? What blocks the goal? Where does the emotional pressure shift? What does dialogue reveal that narration does not?</div></div>
+<div class="info-card reveal"><div style="font-weight:800;font-size:.9rem">Passage-Set Window</div><div class="prose" style="font-size:.85rem;margin-top:.25rem">Read the full passage. Answer all six questions. Make exactly one self-check pass. Then submit the whole set and close it.</div></div>
+<div class="win-card reveal"><div class="win-title">Detail-to-purpose sentence frame</div><div class="prose" style="font-size:.85rem;margin-top:.25rem">“This detail shows ___, which supports the author’s point that ___.” Write it before reading choices on Questions 21 and 24.</div></div>
+<div class="trap-card reveal"><div class="trap-title">Trap: retelling instead of interpreting</div><div class="trap-body">A strong answer explains what the detail does in the passage, not merely what happened in that sentence.</div></div>
+</div></div>
+</div>
+<!-- SLIDE 18 — PASSAGE I -->
+<div class="slide" data-slide="18" style="--zc:var(--ela);--zs:var(--ela-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Fiction Passage · Part I</div><h2 class="slide-title reveal">The Model City <span class="tint">Lines 1–18</span></h2>
+<div class="passage reveal" style="column-count:1;font-size:.9rem">
+<p><span class="line-no">1</span>By four o’clock, the library’s basement smelled of cardboard, wet paint, and the peppermints Mr. Vale kept in his coat pocket. Eli stood over the neighborhood model he had promised to finish for Saturday’s history exhibit. Tiny brick buildings surrounded a strip of blue cellophane river. At the center, the old train station waited beneath a desk lamp, its paper clock frozen at 6:12.</p>
+<p><span class="line-no">6</span>“You made the windows too even,” Mr. Vale said from the doorway.</p>
+<p><span class="line-no">7</span>Eli looked up. “That’s what rulers are for.”</p>
+<p><span class="line-no">8</span>Mr. Vale set down a box of photographs. In one, the station leaned slightly toward the tracks, as if listening for a train. One second-floor window was narrow; another had been patched with darker brick. “Buildings remember mistakes,” he said. “Perfect copies forget them.”</p>
+<p><span class="line-no">13</span>Eli disliked advice that arrived dressed as a riddle. The model had already taken three afternoons, and the exhibit card carried his name alone. He imagined visitors bending close, searching for a crooked wall or a smear of glue. Still, he lifted the roof and examined the neat row of identical windows.</p>
+</div>
+<div class="socratic reveal" style="margin-top:.65rem"><div class="socratic-title">Pause without answering</div><div class="socratic-body">What does Eli want people to see in his work? What does Mr. Vale want the model to preserve instead?</div></div></div>
+</div>
+<!-- SLIDE 19 — PASSAGE II -->
+<div class="slide" data-slide="19" style="--zc:var(--ela);--zs:var(--ela-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Fiction Passage · Part II</div><h2 class="slide-title reveal">The Model City <span class="tint">Lines 19–38</span></h2>
+<div class="passage reveal" style="column-count:1;font-size:.86rem">
+<p><span class="line-no">19</span>At the bottom of the box, Eli found a photograph dated 1978. A crowd filled the platform. Near the edge stood a girl holding a handmade sign: <em>DON’T CLOSE OUR STOP.</em> Beside her, a boy no older than Eli held the sign’s other end. The boy was Mr. Vale.</p>
+<p><span class="line-no">24</span>“They closed it anyway?” Eli asked.</p>
+<p><span class="line-no">25</span>“For eleven years.” Mr. Vale unwrapped a peppermint but did not eat it. “People kept writing letters. Kept meeting. Eventually, the trains came back.”</p>
+<p><span class="line-no">29</span>Eli studied the photograph again. The sign sagged in the middle, and the painted letters crowded one another. It was badly measured. It was also the first thing his eyes returned to.</p>
+<p><span class="line-no">33</span>He reached for his craft knife. Instead of replacing the station wall, he narrowed one window and added a patch of darker brick beneath it. Then he cut a sign no wider than his thumb. The letters would not fit if he made them perfectly even.</p>
+<p><span class="line-no">37</span>“Do you have a red pencil?” he asked.</p>
+<p><span class="line-no">38</span>Mr. Vale smiled and slid one across the table.</p>
+</div>
+<div class="socratic reveal" style="margin-top:.6rem"><div class="socratic-title">Trace the shift</div><div class="socratic-body">Which object changes Eli’s idea of accuracy? Does he abandon precision, or does he redefine what an accurate model should include?</div></div></div>
+</div>
+<!-- SLIDE 20 — ELA QUESTIONS 1-3 -->
+<div class="slide" data-slide="20" style="--zc:var(--ela);--zs:var(--ela-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Passage Questions 19–21</div><h2 class="slide-title reveal">Character, Inference, <span class="tint">Purpose</span></h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-2">Level 2</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">Which statement best describes Eli at the beginning of the passage?</div><div class="mc-options"><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q19"><span class="opt-letter">A</span>He values visible precision because he fears public mistakes.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q19"><span class="opt-letter">B</span>He rushes through projects because he dislikes history.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q19"><span class="opt-letter">C</span>He wants Mr. Vale to complete the model for him.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q19"><span class="opt-letter">D</span>He believes old buildings should be replaced.</label></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">What does Mr. Vale’s choice not to eat the peppermint most strongly suggest in line 25?</div><div class="mc-options"><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">A</span>He has forgotten why he entered the basement.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">B</span>The memory of the station’s closing affects him emotionally.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">C</span>He is annoyed that Eli opened the photograph box.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q20"><span class="opt-letter">D</span>He plans to leave before the model is finished.</label></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">21</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">Why does the author describe the protest sign as “badly measured” but compelling in lines 29–31? Write the detail-to-purpose frame before choosing.</div><div class="mc-options"><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q21"><span class="opt-letter">A</span>To show that Eli now sees meaning can matter more than surface perfection.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q21"><span class="opt-letter">B</span>To prove that the protesters lacked artistic skill.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q21"><span class="opt-letter">C</span>To explain why the station remained closed for eleven years.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q21"><span class="opt-letter">D</span>To suggest that Eli intends to repair the original sign.</label></div></div>
+</div></div>
+</div>
+<!-- SLIDE 21 — ELA QUESTIONS 4-6 -->
+<div class="slide" data-slide="21" style="--zc:var(--ela);--zs:var(--ela-soft)">
+  
+  <div class="content">
+<div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Passage Questions 22–24</div><h2 class="slide-title reveal">Tone, Theme, <span class="tint">Detail-to-Purpose</span></h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">22</span><span class="lvl-badge lvl-2">Level 2</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">The passage’s tone shifts most clearly from</div><div class="mc-options"><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q22"><span class="opt-letter">A</span>hurried to angry.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q22"><span class="opt-letter">B</span>guarded to reflective.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q22"><span class="opt-letter">C</span>playful to frightened.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q22"><span class="opt-letter">D</span>confused to triumphant.</label></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">23</span><span class="lvl-badge lvl-3">Level 3</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">Which theme is best supported by Eli’s final changes to the model?</div><div class="mc-options"><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q23"><span class="opt-letter">A</span>Accuracy can require preserving human history, not only neat proportions.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q23"><span class="opt-letter">B</span>Advice is useful only when it is stated directly.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q23"><span class="opt-letter">C</span>Public exhibits should avoid controversial events.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q23"><span class="opt-letter">D</span>Young people understand communities better than adults do.</label></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">24</span><span class="lvl-badge lvl-4">Level 4</span></div><div style="font-size:.9rem;color:var(--ink-2);line-height:1.5">What is the main purpose of Mr. Vale sliding the red pencil across the table in the final line? Write the detail-to-purpose frame before choosing.</div><div class="mc-options"><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q24"><span class="opt-letter">A</span>To reveal that he accepts Eli’s new understanding without explaining it aloud.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q24"><span class="opt-letter">B</span>To remind Eli that the exhibit card must be written in red.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q24"><span class="opt-letter">C</span>To show that he is impatient with Eli’s questions.</label><label class="mc-option" onclick="selectMC(this)"><input type="radio" name="q24"><span class="opt-letter">D</span>To introduce a new conflict about the model’s color.</label></div></div>
+</div></div>
+</div>
+<!-- SLIDE 22 — ERROR LOG -->
+<div class="slide" data-slide="22" style="--zc:var(--z5);--zs:var(--z5-soft)">
+  <canvas class="particle-canvas"></canvas>
+  <div class="content">
+<div class="kicker reveal">0:56–1:00 · Session Debrief</div><h2 class="slide-title reveal">Is the Pattern <span class="tint">C or G?</span></h2>
+<div class="error-grid reveal">
+<div class="error-card"><div class="error-letter">C</div><div style="font-weight:800;font-size:.82rem">Careless</div><div class="prose" style="font-size:.72rem">Arithmetic slip</div></div>
+<div class="error-card"><div class="error-letter">M</div><div style="font-weight:800;font-size:.82rem">Misread</div><div class="prose" style="font-size:.72rem">Wrong base or task</div></div>
+<div class="error-card"><div class="error-letter">G</div><div style="font-weight:800;font-size:.82rem">Gap</div><div class="prose" style="font-size:.72rem">Method not known</div></div>
+<div class="error-card"><div class="error-letter">T</div><div style="font-weight:800;font-size:.82rem">Timing</div><div class="prose" style="font-size:.72rem">Rushed or ran long</div></div>
+<div class="error-card"><div class="error-letter">S</div><div style="font-weight:800;font-size:.82rem">Strategy</div><div class="prose" style="font-size:.72rem">Wrong route chosen</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.85rem">
+<div class="socratic reveal"><div class="socratic-title">Math reflection</div><div class="socratic-body">When the percent work broke down, did you know the multiplier but execute it poorly, or did you choose the wrong base or direction?</div></div>
+<div class="socratic reveal"><div class="socratic-title">ELA reflection</div><div class="socratic-body">On the two purpose questions, did your sentence frame explain what the detail showed and how it supported the passage’s larger point?</div></div>
+</div>
+<div class="win-card reveal" style="margin-top:.75rem"><div class="win-title">One sentence to keep</div><div class="prose" style="font-size:.87rem;margin-top:.2rem">“Percent problems are stories about a changing base; I name the base, choose the multiplier, then check the direction.”</div></div></div>
+</div>
+</div><!-- end .deck -->
+
+<div class="nav-controls">
+  <button class="nav-btn" aria-label="Previous slide" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" aria-label="Next slide" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 22</span>
+</div>
+
+<script>
+const ZONES=[
+  {n:'Measurement',t:'0:00',c:'var(--z1)'},
+  {n:'Multiplier',t:'0:05',c:'var(--z2)'},
+  {n:'Successive',t:'0:13',c:'var(--z3)'},
+  {n:'Reverse',t:'0:22',c:'var(--z4)'},
+  {n:'ELA',t:'0:32',c:'var(--ela)'}
+];
+document.querySelectorAll('.zone-strip').forEach(strip=>{
+  const active=parseInt(strip.dataset.zone,10);
+  strip.innerHTML=ZONES.map((z,i)=>
+    `<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`
+  ).join('');
+});
+
+let current=1;
+const total=document.querySelectorAll('.slide').length;
+const dotsContainer=document.getElementById('dots');
+const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}
+function goToSlide(n){
+  const prev=document.querySelector('.slide.active');
+  const next=document.querySelector(`.slide[data-slide="${n}"]`);
+  if(prev)prev.classList.remove('active');
+  if(next){next.classList.add('active');animateSlide(next);}
+  current=n;updateNav();
+}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n);}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}
+});
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});
+function animateSlide(slide){
+  slide.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';
+    el.offsetHeight;
+    const delay=i*0.07;
+    el.style.transition=`opacity 0.32s ease ${delay}s,transform 0.32s ease ${delay}s`;
+    el.style.opacity='1';el.style.transform='translateY(0)';
+  });
+}
+try{animateSlide(document.querySelector('.slide.active'));}catch(e){}
+function selectMC(label){
+  const group=label.closest('.mc-options');
+  group.querySelectorAll('.mc-option').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  canvas.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = e.clientX - rc.left; my = e.clientY - rc.top; });
+  const ownSlide = canvas.closest('.slide');
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
