@@ -10,3 +10,4 @@
 | Session | Lesson | Homework | Practice | Notes |
 |:-----:|:----------|:---------------:|:----------|:----------|
 | **01** | [Baseline Audit & Error Log](https://hue-bee.github.io/mickey/lessons/01) | [1 Homework](https://hue-bee.github.io/mickey/lessons/01/homework) |[Set 1](https://hue-bee.github.io/mickey/lessons/01/sets/01) [Set 2](https://hue-bee.github.io/mickey/lessons/01/sets/02)| |
+| **02** | [Lines, Angles, Triangles & Right-Triangle Trig](https://hue-bee.github.io/mickey/lessons/02) | [2 Homework](https://hue-bee.github.io/mickey/lessons/02/homework) | |
