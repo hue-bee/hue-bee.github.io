@@ -10,4 +10,4 @@
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Diagnostic Autopsy & CAT Rules](https://hue-bee.github.io/avik/lessons/01) | [1 Homework](https://hue-bee.github.io/avik/lessons/01/homework) ||
-
+| **02** | [Number Sense & Operations](https://hue-bee.github.io/avik/lessons/02) | [1 Homework](https://hue-bee.github.io/avik/lessons/02/homework) ||
