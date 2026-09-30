@@ -29,4 +29,4 @@
 | **02B** | [Units That Do Work](https://hue-bee.github.io/julius/lesson02B) | [2B Homework](https://hue-bee.github.io/julius/lesson02B/homework) | |
 | **03A** | [Measurement in Context & Multi-Step Percents](https://hue-bee.github.io/julius/lesson03A) | [3A Homework](https://hue-bee.github.io/julius/lesson03A/homework) | |
 | **03B** | [Arithmetic Speed & Accuracy Audit](https://hue-bee.github.io/julius/lesson03B) | [3B Homework](https://hue-bee.github.io/julius/lesson03B/homework) | |
-| **04A** | [Ratios Under Complexity](https://hue-bee.github.io/julius/lesson04A) | [3B Homework](https://hue-bee.github.io/julius/lesson04A/homework) | |
+| **04A** | [Ratios Under Complexity](https://hue-bee.github.io/julius/lesson04A) | [4A Homework](https://hue-bee.github.io/julius/lesson04A/homework) | |
