@@ -11,3 +11,4 @@
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Diagnostic Autopsy & CAT Rules](https://hue-bee.github.io/avik/lessons/01) | [1 Homework](https://hue-bee.github.io/avik/lessons/01/homework) ||
 | **02** | [Number Sense & Operations](https://hue-bee.github.io/avik/lessons/02) | [2 Homework](https://hue-bee.github.io/avik/lessons/02/homework) ||
+| **03** | [Ratios, Rates, Proportions & Percent](https://hue-bee.github.io/avik/lessons/03) | [3 Homework](https://hue-bee.github.io/avik/lessons/03/homework) ||
