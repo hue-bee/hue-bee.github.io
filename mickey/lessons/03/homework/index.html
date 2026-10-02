@@ -1,1 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital SAT Homework — Circles, Scaling &amp; Desmos Triage</title>
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;
+  --sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16A34A;--green-lt:#DCFCE7;
+  --purple:#7C3AED;--purple-lt:#EDE9FE;
+  --ink:#0F172A;--slate:#334155;--muted:#64748B;
+  --border:#CBD5E1;--bg:#F8FAFF;--white:#FFFFFF;
+  --ff-head:'Chillax','Lexend',sans-serif;--ff-body:'Lexend',sans-serif;
+}
+html{background:#E2E8F0;-webkit-text-size-adjust:100%}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:900px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.actions{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.action-btn{min-height:44px;border:0;border-radius:30px;padding:.58rem 1.45rem;background:var(--blue);color:white;font-family:var(--ff-head);font-size:.95rem;font-weight:600;box-shadow:0 3px 10px rgba(37,99,235,.28);transition:transform .18s,background .18s}
+.action-btn:hover{background:#1D4ED8;transform:translateY(-1px)}
+.action-btn.clear{background:var(--muted);box-shadow:0 3px 10px rgba(100,116,139,.25)}
+.action-btn.clear:hover{background:#475569}
+.sheet{background:var(--white);margin:2rem auto;padding:2.15rem 2.35rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.25rem;gap:1rem;flex-wrap:wrap}
+.hw-header h1{font-family:var(--ff-head);font-size:1.72rem;font-weight:700;color:var(--blue);line-height:1.12;letter-spacing:-.01em}
+.subtitle{font-size:.79rem;color:var(--muted);font-weight:600;margin-top:.28rem;text-transform:uppercase;letter-spacing:.045em}
+.hw-meta{display:flex;flex-direction:column;gap:.38rem;min-width:230px}
+.meta-row{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--slate);font-weight:600}
+.meta-label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:2px 7px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;min-width:66px;text-align:center}
+.line-input{flex:1;min-width:0;border:0;border-bottom:1.5px solid var(--border);background:transparent;outline:0;padding:2px 5px}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1D4ED8);color:#fff;border-radius:10px;padding:.72rem 1.1rem;margin-bottom:1.35rem;gap:.7rem;flex-wrap:wrap}
+.score-title{font-family:var(--ff-head);font-size:1.02rem;font-weight:600}.score-sub{font-size:.72rem;opacity:.86;margin-top:.08rem}
+.score-cells{display:flex;gap:.55rem}.score-cell{background:rgba(255,255,255,.15);border-radius:8px;padding:.32rem .7rem;text-align:center;min-width:92px}.score-cell input{width:2.5rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.65);color:#fff;font-family:var(--ff-head);font-weight:600;text-align:center;outline:0}.score-lbl{font-size:.61rem;opacity:.82;text-transform:uppercase;letter-spacing:.04em;margin-top:.12rem}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:.15rem 0 .72rem}.section-hd+.instr{margin-top:0}.section-hd .icon{font-size:1.18rem}.section-hd h2{font-family:var(--ff-head);font-size:1.12rem;font-weight:600;color:var(--ink)}
+.badge{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.045em;padding:3px 9px;border-radius:20px;margin-left:auto;white-space:nowrap}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-sand{background:var(--sand-lt);color:#92400E;border:1px solid #FCD34D}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #C4B5FD}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86EFAC}
+.instr{font-size:.76rem;color:var(--muted);font-style:italic;margin-bottom:.82rem;padding:.38rem .72rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;line-height:1.48}
+.formula-strip{display:flex;gap:.46rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.55rem .8rem;margin-bottom:.82rem;align-items:center}.fs-label{font-size:.68rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-right:.15rem}.fml{background:#fff;border:1.5px solid var(--blue-md);border-radius:7px;padding:.18rem .52rem;font-size:.72rem;font-weight:650;color:#1E3A8A}
+.pacing{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-bottom:.9rem}.pace-cell{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:.48rem .6rem}.pace-cell b{display:block;color:var(--blue);font-family:var(--ff-head);font-size:.72rem;margin-bottom:.1rem}.pace-cell span{font-size:.68rem;color:var(--muted);line-height:1.35;display:block}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:.82rem}.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.72rem .82rem;break-inside:avoid;display:flex;flex-direction:column}.prob.wide{grid-column:1/-1}.prob-head{display:flex;align-items:center;gap:.35rem;margin-bottom:.28rem}.prob-num{font-family:var(--ff-head);font-size:.69rem;font-weight:650;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.lvl{display:inline-block;font-size:.59rem;font-weight:800;text-transform:uppercase;letter-spacing:.045em;padding:2px 7px;border-radius:20px}.lvl-2{background:#D9D9D9;color:#1F2937}.lvl-3{background:#BDBDBD;color:#111827}.lvl-4{background:#6B7280;color:#fff}.lvl-5{background:#374151;color:#fff}.type-tag{margin-left:auto;font-size:.58rem;font-weight:750;color:var(--blue);background:var(--blue-lt);border:1px solid var(--blue-md);border-radius:20px;padding:2px 7px;text-transform:uppercase;letter-spacing:.04em}.prob-q{font-size:.78rem;color:var(--ink);font-weight:500;line-height:1.52;margin-bottom:.42rem}.prob-q strong{color:#1F2937;font-weight:750}.math{font-weight:650;white-space:nowrap}.fig{display:flex;justify-content:center;align-items:center;margin:.15rem 0 .42rem;min-height:70px}.fig svg{max-width:100%;height:auto;overflow:visible}.fig text{font-family:var(--ff-body);fill:#374151;font-weight:600}.fig .soft{fill:#EFF6FF;stroke:#64748B}.fig .line{stroke:#374151;stroke-width:2;fill:none}.fig .dash{stroke:#94A3B8;stroke-width:1.5;stroke-dasharray:5 4;fill:none}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.25rem .55rem;margin-top:auto}.mc-opt{font-size:.72rem;color:var(--slate);display:flex;align-items:flex-start;gap:.3rem;line-height:1.38;cursor:pointer;padding:.24rem .34rem;border-radius:5px;border:1.5px solid transparent;transition:background .15s,border-color .15s}.mc-opt:hover{background:#F0F0F0}.mc-opt input{position:absolute;opacity:0;pointer-events:none}.bubble{width:16px;height:16px;min-width:16px;border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-top:0}.mc-opt.selected{background:#E5E7EB;border-color:#374151;font-weight:700}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}.spr{margin-top:auto;background:#fff;border:1.5px solid var(--border);border-radius:7px;padding:.42rem .55rem;display:flex;align-items:center;gap:.48rem;font-size:.7rem;color:var(--slate);font-weight:700}.spr input{flex:1;min-width:0;border:0;border-bottom:1.5px solid var(--border);outline:0;background:transparent;padding:2px 5px;font-weight:650}.work-area{width:100%;resize:vertical;min-height:48px;border:1.5px dashed var(--border);border-radius:6px;background:#fff;padding:.35rem .5rem;font-size:.72rem;color:var(--ink);outline:0;margin-top:.35rem;line-height:1.45}.work-area::placeholder{color:var(--muted);font-style:italic}.work-area:focus,.spr input:focus,.line-input:focus{border-color:var(--blue);background:#fff}
+.method-row{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin:.15rem 0 .35rem;font-size:.66rem;font-weight:650;color:var(--muted)}.method-choice{position:relative;display:inline-flex;align-items:center;gap:.25rem;padding:.18rem .42rem;background:#fff;border:1px solid var(--border);border-radius:20px;cursor:pointer}.method-choice input{position:absolute;opacity:0}.method-choice:has(input:checked){background:var(--purple-lt);border-color:#A78BFA;color:var(--purple)}
+.tip{font-size:.68rem;color:#92400E;background:var(--sand-lt);border:1px solid #FCD34D;border-radius:7px;padding:.38rem .55rem;line-height:1.42;margin-bottom:.72rem}.tip strong{font-family:var(--ff-head)}
+.mini-table{width:100%;border-collapse:collapse;font-size:.68rem}.mini-table th{background:var(--blue);color:#fff;text-align:left;padding:.38rem .45rem;font-family:var(--ff-head);font-weight:600}.mini-table td{border:1px solid var(--border);padding:.38rem .45rem;background:#fff;vertical-align:middle}.mini-table input{width:100%;border:0;border-bottom:1px solid var(--border);outline:0;background:transparent}.mini-table select{width:100%;border:1px solid var(--border);border-radius:5px;background:#fff;padding:.2rem}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:600;color:#C2410C;margin-bottom:.25rem}.error-intro{font-size:.72rem;color:#9A3412;margin-bottom:.55rem}.error-table{width:100%;border-collapse:collapse;font-size:.7rem}.error-table th{background:var(--coral);color:#fff;font-family:var(--ff-head);font-weight:600;padding:.38rem .48rem;text-align:left}.error-table th:first-child{border-radius:6px 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.34rem .42rem;border-bottom:1px solid #FCA5A5;color:var(--slate);background:#fff}.error-table tr:last-child td{border-bottom:0}.error-table td:first-child{width:5%;text-align:center;font-weight:700}.error-table input,.error-table select{width:100%;border:0;border-bottom:1px solid var(--border);background:transparent;outline:0;padding:.2rem}.error-type-pills{display:flex;gap:.36rem;flex-wrap:wrap;font-size:.66rem;margin-top:.5rem}.pill{padding:2px 9px;border-radius:20px;font-weight:700;border:1.5px solid}.pill-cg{background:#FEE2E2;color:#B91C1C;border-color:#FCA5A5}.pill-ce{background:#FEF9C3;color:#92400E;border-color:#FDE68A}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#C4B5FD}
+.reflect-box{background:var(--green-lt);border:1.5px solid #86EFAC;border-radius:10px;padding:.8rem 1rem;margin-top:.85rem}.reflect-box h3{font-family:var(--ff-head);font-size:.9rem;font-weight:600;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.55rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--slate);font-weight:600}.reflect-line input{flex:1;min-width:0;border:0;border-bottom:1.5px solid var(--border);background:transparent;outline:0;padding:2px 5px}
+.footer-note{text-align:center;font-size:.64rem;color:var(--muted);margin-top:.75rem}
+@media(max-width:700px){body{max-width:100%}.sheet{margin:.75rem;padding:1.2rem;border-radius:12px}.prob-grid{grid-template-columns:1fr}.prob.wide{grid-column:auto}.mc-opts{grid-template-columns:1fr}.pacing{grid-template-columns:1fr}.hw-meta{width:100%}.score-cells{width:100%}.score-cell{flex:1}.section-hd{align-items:flex-start;flex-wrap:wrap}.badge{margin-left:0}.error-log{overflow-x:auto}.error-table{min-width:680px}.fig{min-height:54px}}
+@media print{
+  @page{size:letter;margin:.36in}
+  html{background:#fff}.no-print{display:none!important}body{max-width:100%;background:#fff}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:.22in .3in!important;min-height:10.25in;page-break-after:always}.sheet:first-child{min-height:10.25in;padding:.10in .22in!important}
+  .sheet:first-child .hw-header{padding-bottom:.45rem;margin-bottom:.5rem}
+  .sheet:first-child .hw-header h1{font-size:1.38rem}
+  .sheet:first-child .score-banner{padding:.38rem .72rem;margin-bottom:.5rem}
+  .sheet:first-child .pacing{gap:.3rem;margin-bottom:.45rem}
+  .sheet:first-child .pace-cell{padding:.28rem .4rem}
+  .sheet:first-child .section-hd{margin:0 0 .35rem}
+  .sheet:first-child .instr{padding:.22rem .55rem;margin-bottom:.35rem}
+  .sheet:first-child .formula-strip{padding:.3rem .55rem;margin-bottom:.4rem}
+  .sheet:first-child .prob-grid{gap:.4rem}
+  .sheet:first-child .prob{padding:.42rem .55rem}
+  .sheet:first-child .prob-head{margin-bottom:.12rem}
+  .sheet:first-child .prob-q{font-size:.65rem;line-height:1.34;margin-bottom:.18rem}
+  .sheet:first-child .mc-opt{font-size:.60rem;padding:.10rem .2rem}
+  .sheet:first-child .fig{min-height:42px;margin:-.15rem 0 .05rem}
+  .sheet:first-child .fig svg{max-height:58px}
+  .sheet:first-child .work-area{min-height:31px;margin-top:.12rem;padding:.22rem .4rem;font-size:.62rem}
+  .sheet:first-child .spr{padding:.22rem .4rem;font-size:.62rem}
+  .sheet:first-child .footer-note{margin-top:.25rem}.sheet:last-of-type{page-break-after:auto}.page-break{page-break-before:always}.prob,.error-log,.reflect-box{break-inside:avoid}.prob-grid{gap:.62rem}.prob{padding:.58rem .68rem}.prob-q{font-size:.72rem}.mc-opt{font-size:.66rem}.work-area{resize:none;min-height:42px}.section-hd{margin:.05rem 0 .58rem}.formula-strip,.pacing{margin-bottom:.62rem}input,textarea,select{background:#fff!important} .footer-note{margin-top:.45rem}
+}
+</style>
+</head>
+<body>
+<div class="actions no-print" aria-label="Document actions">
+  <button class="action-btn" type="button" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  <button class="action-btn clear" type="button" onclick="clearAll()">🗑️ Clear All</button>
+</div>
 
+<main>
+<section class="sheet" aria-labelledby="doc-title">
+  <header class="hw-header">
+    <div>
+      <h1 id="doc-title">⭕ Digital SAT Homework</h1>
+      <div class="subtitle">Circles, Measurement, Scaling &amp; Desmos Triage</div>
+    </div>
+    <div class="hw-meta">
+      <label class="meta-row"><span class="meta-label">Name</span><input class="line-input" type="text" aria-label="Student name"></label>
+      <label class="meta-row"><span class="meta-label">Date</span><input class="line-input" type="text" aria-label="Date"></label>
+    </div>
+  </header>
+
+  <div class="score-banner">
+    <div><div class="score-title">Post-Check Score</div><div class="score-sub">Complete every item before checking. Then log every miss.</div></div>
+    <div class="score-cells">
+      <div class="score-cell"><div><input type="number" min="0" max="22" aria-label="Correct answers"> / 22</div><div class="score-lbl">Correct</div></div>
+      <div class="score-cell"><div><input type="number" min="0" max="22" aria-label="Questions reviewed"></div><div class="score-lbl">Reviewed</div></div>
+    </div>
+  </div>
+
+  <div class="pacing" aria-label="Digital SAT directions">
+    <div class="pace-cell"><b>Target time</b><span>About 2 minutes per question; move on and return if needed.</span></div>
+    <div class="pace-cell"><b>Calculator</b><span>Calculator use is permitted. Decide whether Desmos actually saves time.</span></div>
+    <div class="pace-cell"><b>Student-produced</b><span>Enter a decimal or fraction unless the prompt requests an exact form.</span></div>
+  </div>
+
+  <div class="section-hd"><span class="icon">◯</span><h2>Part A — Circle Measures</h2><span class="badge badge-blue">6 Questions · 12 min</span></div>
+  <p class="instr">Write the governing relationship before substituting. Distinguish radius from diameter, and identify whether the problem asks for an arc, sector, angle, or full-circle measure.</p>
+  <div class="formula-strip"><span class="fs-label">Reference</span><span class="fml">C = 2πr</span><span class="fml">A = πr²</span><span class="fml">arc = (θ/360)·2πr</span><span class="fml">sector = (θ/360)·πr²</span></div>
+
+  <div class="prob-grid">
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 1</span><span class="lvl lvl-2">L2</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">A circle has circumference <strong>22π</strong>. What is the area of the circle?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 1 choices">
+        <label class="mc-opt"><input type="radio" name="q1"><span class="bubble">A</span><span>44π</span></label>
+        <label class="mc-opt"><input type="radio" name="q1"><span class="bubble">B</span><span>110π</span></label>
+        <label class="mc-opt"><input type="radio" name="q1"><span class="bubble">C</span><span>121π</span></label>
+        <label class="mc-opt"><input type="radio" name="q1"><span class="bubble">D</span><span>484π</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 2</span><span class="lvl lvl-3">L3</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">A sector of a circle has radius <strong>15</strong> and central angle <strong>72°</strong>. Its area is <span class="math">kπ</span>. What is the value of <strong>k</strong>?</p>
+      <div class="fig" aria-hidden="true"><svg width="126" height="82" viewBox="0 0 126 82"><path d="M62 70 L62 12 A58 58 0 0 1 117 52 Z" fill="#EFF6FF" stroke="#374151" stroke-width="2"/><line x1="62" y1="70" x2="62" y2="12" class="line"/><line x1="62" y1="70" x2="117" y2="52" class="line"/><path d="M62 51 A19 19 0 0 1 80 64" class="line"/><text x="69" y="49" font-size="10">72°</text><text x="34" y="39" font-size="10">r = 15</text></svg></div>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 2 answer"></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 3</span><span class="lvl lvl-4">L4</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">Points A, B, and C lie on a circle of radius <strong>12</strong>. If <span class="math">∠ACB = 42°</span>, what is the length of minor arc AB?</p>
+      <div class="fig" aria-hidden="true"><svg width="128" height="92" viewBox="0 0 128 92"><circle cx="64" cy="46" r="40" fill="#EFF6FF" stroke="#64748B" stroke-width="1.5"/><circle cx="64" cy="46" r="2.5" fill="#374151"/><line x1="35" y1="19" x2="100" y2="28" class="line"/><line x1="35" y1="19" x2="81" y2="83" class="line"/><text x="26" y="17" font-size="10">C</text><text x="102" y="28" font-size="10">A</text><text x="81" y="91" font-size="10">B</text><text x="39" y="33" font-size="10">42°</text><text x="68" y="43" font-size="9">12</text></svg></div>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 3 choices">
+        <label class="mc-opt"><input type="radio" name="q3"><span class="bubble">A</span><span>14π/5</span></label>
+        <label class="mc-opt"><input type="radio" name="q3"><span class="bubble">B</span><span>28π/5</span></label>
+        <label class="mc-opt"><input type="radio" name="q3"><span class="bubble">C</span><span>7π</span></label>
+        <label class="mc-opt"><input type="radio" name="q3"><span class="bubble">D</span><span>56π/5</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 4</span><span class="lvl lvl-3">L3</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">A circle has radius <strong>9</strong>. An arc of the circle has length <strong>6π</strong>. What is the central angle of the arc, in degrees?</p>
+      <textarea class="work-area" aria-label="Question 4 work" placeholder="Write arc/full circumference = angle/360."></textarea>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 4 answer"><span>degrees</span></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 5</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">The equation <span class="math">x² + y² + 12x − 4y = 24</span> represents a circle. What are its center and radius?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 5 choices">
+        <label class="mc-opt"><input type="radio" name="q5"><span class="bubble">A</span><span>(−6, 2), r = 8</span></label>
+        <label class="mc-opt"><input type="radio" name="q5"><span class="bubble">B</span><span>(6, −2), r = 8</span></label>
+        <label class="mc-opt"><input type="radio" name="q5"><span class="bubble">C</span><span>(−6, 2), r = 64</span></label>
+        <label class="mc-opt"><input type="radio" name="q5"><span class="bubble">D</span><span>(6, −2), r = 64</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 6</span><span class="lvl lvl-4">L4</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">The graph of <span class="math">x² + y² − 6x + 10y = c</span> is a circle with radius <strong>10</strong>. What is the value of <strong>c</strong>?</p>
+      <textarea class="work-area" aria-label="Question 6 work" placeholder="Complete the square for x and y."></textarea>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 6 answer"></div>
+    </article>
+  </div>
+  <div class="footer-note">Complete all questions before checking answers. Mark uncertain answers for review.</div>
+</section>
+
+<section class="sheet page-break" aria-labelledby="part-b">
+  <div class="section-hd"><span class="icon">∟</span><h2 id="part-b">Part B — Angles, Tangents &amp; Exact Forms</h2><span class="badge badge-sand">6 Questions · 13 min</span></div>
+  <p class="instr">When a tangent appears, draw the radius to the point of tangency and mark the 90° angle. For inscribed angles, identify the intercepted arc before calculating.</p>
+  <div class="formula-strip"><span class="fs-label">Relationships</span><span class="fml">radius ⟂ tangent</span><span class="fml">inscribed angle = ½ intercepted arc</span><span class="fml">radian arc: s = rθ</span></div>
+
+  <div class="prob-grid">
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 7</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">From point P, segment PT is tangent to a circle with center O at T. Segment OP intersects the circle first at Q. If <strong>OP = 17</strong> and <strong>PT = 15</strong>, what is PQ?</p>
+      <div class="fig" aria-hidden="true"><svg width="168" height="92" viewBox="0 0 168 92"><circle cx="55" cy="46" r="31" fill="#EFF6FF" stroke="#64748B" stroke-width="1.5"/><line x1="55" y1="46" x2="151" y2="46" class="line"/><line x1="55" y1="46" x2="85" y2="16" class="line"/><line x1="85" y1="16" x2="151" y2="46" class="line"/><path d="M81 20 L87 26 L91 20" class="line"/><text x="48" y="58" font-size="10">O</text><text x="84" y="12" font-size="10">T</text><text x="112" y="42" font-size="10">Q</text><text x="153" y="50" font-size="10">P</text><text x="119" y="25" font-size="9">15</text><text x="94" y="60" font-size="9">17</text></svg></div>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 7 choices">
+        <label class="mc-opt"><input type="radio" name="q7"><span class="bubble">A</span><span>2</span></label><label class="mc-opt"><input type="radio" name="q7"><span class="bubble">B</span><span>8</span></label><label class="mc-opt"><input type="radio" name="q7"><span class="bubble">C</span><span>9</span></label><label class="mc-opt"><input type="radio" name="q7"><span class="bubble">D</span><span>15</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 8</span><span class="lvl lvl-4">L4</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">A circle has center <strong>(−2, 3)</strong>, and <strong>(2, 6)</strong> lies on the circle. Which equation represents the line tangent to the circle at (2, 6)?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 8 choices">
+        <label class="mc-opt"><input type="radio" name="q8"><span class="bubble">A</span><span>y − 6 = (3/4)(x − 2)</span></label>
+        <label class="mc-opt"><input type="radio" name="q8"><span class="bubble">B</span><span>y − 6 = (4/3)(x − 2)</span></label>
+        <label class="mc-opt"><input type="radio" name="q8"><span class="bubble">C</span><span>y − 6 = −(3/4)(x − 2)</span></label>
+        <label class="mc-opt"><input type="radio" name="q8"><span class="bubble">D</span><span>y − 6 = −(4/3)(x − 2)</span></label>
+      </div>
+      <textarea class="work-area" aria-label="Question 8 work" placeholder="Find the radius slope, then use its negative reciprocal."></textarea>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 9</span><span class="lvl lvl-4">L4</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">Points A, B, and C lie on a circle, and AC is a diameter. If <span class="math">∠BAC = 31°</span>, what is the measure of minor arc AB, in degrees?</p>
+      <div class="fig" aria-hidden="true"><svg width="132" height="95" viewBox="0 0 132 95"><circle cx="66" cy="47" r="41" fill="#EFF6FF" stroke="#64748B" stroke-width="1.5"/><line x1="25" y1="47" x2="107" y2="47" class="line"/><line x1="25" y1="47" x2="82" y2="9" class="line"/><line x1="82" y1="9" x2="107" y2="47" class="line"/><text x="15" y="51" font-size="10">A</text><text x="80" y="8" font-size="10">B</text><text x="111" y="51" font-size="10">C</text><text x="34" y="42" font-size="10">31°</text></svg></div>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 9 answer"><span>degrees</span></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 10</span><span class="lvl lvl-5">L5</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">A regular hexagon is inscribed in a circle of radius <strong>10</strong>. The area inside the circle but outside the hexagon is <span class="math">aπ − b√3</span>, where a and b are positive integers. What is <strong>a + b</strong>?</p>
+      <div class="fig" aria-hidden="true"><svg width="110" height="100" viewBox="0 0 110 100"><circle cx="55" cy="50" r="43" fill="#FDF3E7" stroke="#64748B" stroke-width="1.5"/><polygon points="98,50 76.5,87.2 33.5,87.2 12,50 33.5,12.8 76.5,12.8" fill="#fff" stroke="#374151" stroke-width="2"/><line x1="55" y1="50" x2="98" y2="50" class="line"/><text x="69" y="45" font-size="10">10</text></svg></div>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 10 answer"></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 11</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">At point A, line ℓ is tangent to a circle. Chord AB intercepts a minor arc measuring <strong>128°</strong>. What is the acute angle between ℓ and chord AB?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 11 choices">
+        <label class="mc-opt"><input type="radio" name="q11"><span class="bubble">A</span><span>32°</span></label><label class="mc-opt"><input type="radio" name="q11"><span class="bubble">B</span><span>52°</span></label><label class="mc-opt"><input type="radio" name="q11"><span class="bubble">C</span><span>64°</span></label><label class="mc-opt"><input type="radio" name="q11"><span class="bubble">D</span><span>128°</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 12</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">A sector has radius <strong>6</strong> and central angle <span class="math">2π/3</span> radians. What is the area of the sector?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 12 choices">
+        <label class="mc-opt"><input type="radio" name="q12"><span class="bubble">A</span><span>4π</span></label><label class="mc-opt"><input type="radio" name="q12"><span class="bubble">B</span><span>6π</span></label><label class="mc-opt"><input type="radio" name="q12"><span class="bubble">C</span><span>12π</span></label><label class="mc-opt"><input type="radio" name="q12"><span class="bubble">D</span><span>24π</span></label>
+      </div>
+    </article>
+  </div>
+  <div class="footer-note">Exact-form answers should remain exact unless the question requests a decimal.</div>
+</section>
+
+<section class="sheet page-break" aria-labelledby="part-c">
+  <div class="section-hd"><span class="icon">↗</span><h2 id="part-c">Part C — Scaling, Units &amp; Models</h2><span class="badge badge-purple">6 Questions · 12 min</span></div>
+  <p class="instr">Write the linear scale factor first. Then decide whether the requested quantity is one-dimensional, two-dimensional, or three-dimensional.</p>
+  <div class="formula-strip"><span class="fs-label">Dimension rule</span><span class="fml">length × k</span><span class="fml">area × k²</span><span class="fml">volume × k³</span><span class="fml">1 m³ = 1,000,000 cm³</span></div>
+
+  <div class="prob-grid">
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 13</span><span class="lvl lvl-2">L2</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">A rectangular image has area <strong>45 square inches</strong>. Each side length is multiplied by <strong>4/3</strong>. What is the area of the enlarged image?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 13 choices">
+        <label class="mc-opt"><input type="radio" name="q13"><span class="bubble">A</span><span>60</span></label><label class="mc-opt"><input type="radio" name="q13"><span class="bubble">B</span><span>75</span></label><label class="mc-opt"><input type="radio" name="q13"><span class="bubble">C</span><span>80</span></label><label class="mc-opt"><input type="radio" name="q13"><span class="bubble">D</span><span>90</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 14</span><span class="lvl lvl-4">L4</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">Two similar solids have a surface-area ratio of <strong>9:16</strong>, smaller to larger. The smaller solid has volume <strong>216</strong>. What is the volume of the larger solid?</p>
+      <textarea class="work-area" aria-label="Question 14 work" placeholder="Area ratio → linear ratio → volume ratio."></textarea>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 14 answer"></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 15</span><span class="lvl lvl-5">L5</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">A scale model is built at a scale of <strong>1:25</strong>. The model has volume <strong>640 cm³</strong>. What is the actual object's volume, in cubic meters?</p>
+      <div class="tip"><strong>Unit checkpoint:</strong> Scale in cubic centimeters first; then convert cubic centimeters to cubic meters.</div>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 15 answer"><span>m³</span></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 16</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">On a floor plan, <strong>1 inch represents 3 feet</strong>. A room has area <strong>54 square inches</strong> on the plan. What is the room's actual area, in square feet?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 16 choices">
+        <label class="mc-opt"><input type="radio" name="q16"><span class="bubble">A</span><span>162</span></label><label class="mc-opt"><input type="radio" name="q16"><span class="bubble">B</span><span>324</span></label><label class="mc-opt"><input type="radio" name="q16"><span class="bubble">C</span><span>486</span></label><label class="mc-opt"><input type="radio" name="q16"><span class="bubble">D</span><span>1,458</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 17</span><span class="lvl lvl-4">L4</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">Two cones are similar. Their volumes are in the ratio <strong>125:27</strong>, larger to smaller. If the smaller cone's height is <strong>9</strong>, what is the larger cone's height?</p>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 17 answer"></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 18</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">A container has volume <strong>0.006 cubic meter</strong>. What is its volume in cubic centimeters?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 18 choices">
+        <label class="mc-opt"><input type="radio" name="q18"><span class="bubble">A</span><span>6</span></label><label class="mc-opt"><input type="radio" name="q18"><span class="bubble">B</span><span>60</span></label><label class="mc-opt"><input type="radio" name="q18"><span class="bubble">C</span><span>60,000</span></label><label class="mc-opt"><input type="radio" name="q18"><span class="bubble">D</span><span>6,000</span></label>
+      </div>
+    </article>
+  </div>
+  <div class="footer-note">If the exponent on the scale factor does not match the quantity's dimension, stop and correct the setup.</div>
+</section>
+
+<section class="sheet page-break" aria-labelledby="part-d">
+  <div class="section-hd"><span class="icon">⌁</span><h2 id="part-d">Part D — Desmos Triage &amp; Mixed Practice</h2><span class="badge badge-green">4 Questions · 10 min</span></div>
+  <p class="instr">Before solving, select Graph or Reason. Graph when equations and intersections make the work faster; reason when a relationship gives an exact answer more efficiently.</p>
+  <div class="tip"><strong>15-second rule:</strong> If you can type two equations and click an intersection, graphing may win. If the task is an exact angle, ratio, or scale relationship, reasoning usually wins.</div>
+
+  <div class="prob-grid">
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 19</span><span class="lvl lvl-4">L4</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">The line <span class="math">y = −x + 4</span> intersects the circle <span class="math">(x − 2)² + (y − 1)² = 25</span> at two points. What is the sum of the x-coordinates of the two points?</p>
+      <div class="method-row"><span>Method:</span><label class="method-choice"><input type="radio" name="m19"><span>Graph</span></label><label class="method-choice"><input type="radio" name="m19"><span>Reason</span></label><label class="method-choice"><input type="radio" name="m19"><span>Both</span></label></div>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 19 answer"></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 20</span><span class="lvl lvl-4">L4</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">The circles <span class="math">x² + y² = 25</span> and <span class="math">(x − 6)² + y² = 9</span> intersect at two points. What is the positive y-coordinate of an intersection point?</p>
+      <div class="method-row"><span>Method:</span><label class="method-choice"><input type="radio" name="m20"><span>Graph</span></label><label class="method-choice"><input type="radio" name="m20"><span>Reason</span></label><label class="method-choice"><input type="radio" name="m20"><span>Both</span></label></div>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 20 choices">
+        <label class="mc-opt"><input type="radio" name="q20"><span class="bubble">A</span><span>√14/3</span></label><label class="mc-opt"><input type="radio" name="q20"><span class="bubble">B</span><span>2√14/3</span></label><label class="mc-opt"><input type="radio" name="q20"><span class="bubble">C</span><span>√14</span></label><label class="mc-opt"><input type="radio" name="q20"><span class="bubble">D</span><span>14/3</span></label>
+      </div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 21</span><span class="lvl lvl-5">L5</span><span class="type-tag">Student-produced</span></div>
+      <p class="prob-q">The line <span class="math">y = kx</span> intersects the circle <span class="math">x² + y² − 10x + 4y = 0</span> at exactly one point. What is the value of <strong>k</strong>?</p>
+      <div class="method-row"><span>Method:</span><label class="method-choice"><input type="radio" name="m21"><span>Graph</span></label><label class="method-choice"><input type="radio" name="m21"><span>Reason</span></label><label class="method-choice"><input type="radio" name="m21"><span>Both</span></label></div>
+      <textarea class="work-area" aria-label="Question 21 work" placeholder="Check whether the origin is on the circle. What must 'exactly one point' mean?"></textarea>
+      <div class="spr"><span>Answer</span><input type="text" inputmode="decimal" aria-label="Question 21 answer"></div>
+    </article>
+
+    <article class="prob">
+      <div class="prob-head"><span class="prob-num">Question 22</span><span class="lvl lvl-3">L3</span><span class="type-tag">Multiple choice</span></div>
+      <p class="prob-q">Which problem is most efficiently solved by graphing in Desmos?</p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 22 choices">
+        <label class="mc-opt"><input type="radio" name="q22"><span class="bubble">A</span><span>Find a sector area from its radius and central angle.</span></label>
+        <label class="mc-opt"><input type="radio" name="q22"><span class="bubble">B</span><span>Find where a line and a circle intersect in the xy-plane.</span></label>
+        <label class="mc-opt"><input type="radio" name="q22"><span class="bubble">C</span><span>Find an inscribed angle from its intercepted arc.</span></label>
+        <label class="mc-opt"><input type="radio" name="q22"><span class="bubble">D</span><span>Find a new area after a linear scale factor is given.</span></label>
+      </div>
+    </article>
+  </div>
+
+  <div class="section-hd" style="margin-top:1rem"><span class="icon">⏱</span><h2>Mini-Module Debrief</h2><span class="badge badge-blue">Complete before checking</span></div>
+  <table class="mini-table">
+    <thead><tr><th>Metric</th><th>Part A</th><th>Part B</th><th>Part C</th><th>Part D</th></tr></thead>
+    <tbody>
+      <tr><td>Minutes used</td><td><input aria-label="Part A minutes"></td><td><input aria-label="Part B minutes"></td><td><input aria-label="Part C minutes"></td><td><input aria-label="Part D minutes"></td></tr>
+      <tr><td>Questions flagged</td><td><input aria-label="Part A flagged"></td><td><input aria-label="Part B flagged"></td><td><input aria-label="Part C flagged"></td><td><input aria-label="Part D flagged"></td></tr>
+      <tr><td>Pure guesses</td><td><input aria-label="Part A guesses"></td><td><input aria-label="Part B guesses"></td><td><input aria-label="Part C guesses"></td><td><input aria-label="Part D guesses"></td></tr>
+    </tbody>
+  </table>
+  <div class="footer-note">Do not change an answer merely because it “looks wrong.” Change it only when you can identify the original error.</div>
+</section>
+
+<section class="sheet page-break" aria-labelledby="review-heading">
+  <div class="section-hd"><span class="icon">✓</span><h2 id="review-heading">Review &amp; Error Log</h2><span class="badge badge-blue">Required after checking</span></div>
+  <p class="instr">For every missed or guessed question, identify the exact decision that failed. “Careless” is not specific enough.</p>
+
+  <div class="error-log">
+    <h3>⚠ Error Log — Turn Misses Into Rules</h3>
+    <p class="error-intro">Use one row for every question you missed, guessed, or solved too slowly.</p>
+    <table class="error-table">
+      <thead><tr><th>#</th><th>Question</th><th>What I did wrong</th><th>Error type</th><th>My new rule</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input aria-label="Error 1 question"></td><td><input aria-label="Error 1 description"></td><td><select aria-label="Error 1 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 1 new rule"></td></tr>
+        <tr><td>2</td><td><input aria-label="Error 2 question"></td><td><input aria-label="Error 2 description"></td><td><select aria-label="Error 2 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 2 new rule"></td></tr>
+        <tr><td>3</td><td><input aria-label="Error 3 question"></td><td><input aria-label="Error 3 description"></td><td><select aria-label="Error 3 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 3 new rule"></td></tr>
+        <tr><td>4</td><td><input aria-label="Error 4 question"></td><td><input aria-label="Error 4 description"></td><td><select aria-label="Error 4 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 4 new rule"></td></tr>
+        <tr><td>5</td><td><input aria-label="Error 5 question"></td><td><input aria-label="Error 5 description"></td><td><select aria-label="Error 5 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 5 new rule"></td></tr>
+        <tr><td>6</td><td><input aria-label="Error 6 question"></td><td><input aria-label="Error 6 description"></td><td><select aria-label="Error 6 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 6 new rule"></td></tr>
+        <tr><td>7</td><td><input aria-label="Error 7 question"></td><td><input aria-label="Error 7 description"></td><td><select aria-label="Error 7 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 7 new rule"></td></tr>
+        <tr><td>8</td><td><input aria-label="Error 8 question"></td><td><input aria-label="Error 8 description"></td><td><select aria-label="Error 8 type"><option value=""></option><option>Concept gap</option><option>Calculation</option><option>Reading / units</option><option>Strategy / pacing</option></select></td><td><input aria-label="Error 8 new rule"></td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills"><span class="pill pill-cg">Concept Gap</span><span class="pill pill-ce">Calculation Error</span><span class="pill pill-ru">Reading / Units / Strategy</span></div>
+  </div>
+
+  <div class="reflect-box">
+    <h3>Reflection — Write Transferable Rules</h3>
+    <div class="reflect-lines">
+      <label class="reflect-line"><span>Before using a circle formula, I will always identify</span><input type="text" aria-label="Circle formula reflection"></label>
+      <label class="reflect-line"><span>When a scale factor is given, I will check</span><input type="text" aria-label="Scale factor reflection"></label>
+      <label class="reflect-line"><span>I should use Desmos when</span><input type="text" aria-label="Desmos reflection"></label>
+      <label class="reflect-line"><span>The one question I want explained in our next session is</span><input type="text" aria-label="Question for next session"></label>
+    </div>
+  </div>
+  <div class="footer-note">Bring this completed log to the next session. The goal is not just a corrected answer; it is a reusable decision rule.</div>
+</section>
+</main>
+
+<script>
+(function(){
+  document.querySelectorAll('.mc-opt input[type="radio"]').forEach(function(radio){
+    radio.addEventListener('change',function(){
+      var group=document.querySelectorAll('input[name="'+this.name+'"]');
+      group.forEach(function(item){item.closest('.mc-opt').classList.remove('selected')});
+      this.closest('.mc-opt').classList.add('selected');
+    });
+  });
+})();
+function clearAll(){
+  if(!window.confirm('Clear every answer, note, score, and error-log entry?')) return;
+  document.querySelectorAll('input').forEach(function(el){
+    if(el.type==='radio'||el.type==='checkbox') el.checked=false; else el.value='';
+  });
+  document.querySelectorAll('textarea').forEach(function(el){el.value=''});
+  document.querySelectorAll('select').forEach(function(el){el.selectedIndex=0});
+  document.querySelectorAll('.mc-opt.selected').forEach(function(el){el.classList.remove('selected')});
+}
+</script>
+</body>
+</html>
