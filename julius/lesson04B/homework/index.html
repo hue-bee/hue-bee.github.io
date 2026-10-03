@@ -1,1 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Homework — Mental Math & Fiction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;--coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;--green:#16a34a;--green-lt:#DCFCE7;--purple:#7c3aed;--purple-lt:#EDE9FE;--ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;--bg:#F8FAFF;--white:#FFFFFF;--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:16px;line-height:1.45}.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}:focus-visible{outline:3px solid var(--coral);outline-offset:2px}.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.print-btn,.commit-btn{border:0;border-radius:8px;background:var(--blue);color:#fff;font:800 .86rem var(--ff-head);padding:.62rem 1rem;min-height:44px;cursor:pointer}.print-btn:hover,.commit-btn:hover{background:#1d4ed8}.toolbar .secondary{background:var(--muted)}.toolbar .secondary:hover{background:#475569}.sheet{width:min(8.5in,calc(100% - 2rem));margin:0 auto 1.25rem;background:var(--white);padding:.56in .62in;border-radius:14px;box-shadow:0 8px 28px rgba(15,23,42,.09)}.page-break{break-before:page}.hw-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;border-bottom:3px solid var(--blue);padding-bottom:.8rem;margin-bottom:1rem}.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:44px;height:44px;color:var(--blue);flex:none}.hw-header h1{font:800 1.62rem/1.05 var(--ff-head);margin:0;color:var(--blue)}.subtitle{font-size:.82rem;color:var(--muted);font-weight:700;margin-top:.14rem}.hw-meta{width:235px;display:grid;gap:.42rem}.hw-meta-row{display:flex;align-items:end;gap:.4rem}.hw-meta .label{font:800 .72rem var(--ff-head);text-transform:uppercase;letter-spacing:.08em}.line-input{flex:1;border:0;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.score-banner{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border-radius:10px;padding:.72rem .9rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center;margin-bottom:.8rem}.score-banner .title{font:700 1.05rem var(--ff-head)}.score-banner .sub{font-size:.7rem;opacity:.9}.score-cells{display:flex;gap:.42rem}.score-cell{text-align:center;background:rgba(255,255,255,.14);padding:.36rem .5rem;border-radius:7px;min-width:67px}.score-input{width:34px;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.8);color:#fff;text-align:center;font-weight:800}.sc-val{font:700 .94rem var(--ff-head)}.sc-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.07em}.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip p{margin:0;font-size:.78rem;color:#78350f}.section-hd{display:flex;gap:.55rem;align-items:center;margin:.9rem 0 .3rem}.section-hd .icon{font-size:1.35rem;color:var(--blue)}h2{font:800 1.34rem/1.1 var(--ff-head);margin:0;color:var(--ink)}.badge{margin-left:auto;border-radius:999px;padding:.2rem .55rem;font-size:.68rem;font-weight:800;white-space:nowrap}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.instr{font-size:.78rem;color:var(--slate);margin:.25rem 0 .72rem}.strategy-strip{display:flex;gap:.45rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.54rem .75rem;margin-bottom:.72rem;align-items:center}.strategy-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-right:.1rem}.strategy-chip{font-size:.7rem;font-weight:800;color:var(--slate);background:#fff;border:1px solid var(--blue-md);border-radius:999px;padding:.16rem .48rem}.mc-q{border:1.5px solid var(--border);border-radius:9px;padding:.72rem .8rem;margin:.58rem 0;background:#fff;break-inside:avoid}.mc-q-text{font-size:.86rem;font-weight:700;margin:0 0 .52rem;color:var(--ink)}.qnum{font:800 1rem var(--ff-head);color:var(--blue);margin-right:.16rem}.lvl{display:inline-block;border-radius:999px;padding:.05rem .34rem;font-size:.6rem;font-weight:800;vertical-align:middle;margin-left:.2rem}.lvl-2{background:#e0f2fe;color:#075985}.lvl-3{background:var(--purple-lt);color:var(--purple)}.lvl-4{background:var(--coral-lt);color:#c2410c}.lvl-5{background:#fef3c7;color:#92400e}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .5rem}.mc-opt{display:flex;gap:.42rem;align-items:flex-start;border:1px solid #e2e8f0;border-radius:7px;padding:.38rem .5rem;cursor:pointer;font-size:.76rem;min-height:38px}.mc-opt:hover{background:var(--blue-lt);border-color:var(--blue-md)}.mc-opt input{position:absolute;opacity:0;pointer-events:none}.bubble{width:18px;height:18px;border:1.5px solid #94a3b8;border-radius:50%;display:inline-grid;place-items:center;flex:none;color:#fff;font-size:.65rem;margin-top:1px}.mc-opt.selected{background:var(--blue-lt);border-color:var(--blue)}.mc-opt.selected .bubble{background:var(--blue);border-color:var(--blue)}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.48rem}.tool-select{border:1px solid var(--border);border-radius:6px;background:#fff;padding:.3rem .4rem;font-size:.7rem;max-width:175px}.lock-note{font-size:.65rem;color:var(--muted);margin-right:auto}.commit-btn{font-size:.72rem;padding:.38rem .68rem;min-height:34px}.commit-btn:disabled{background:#94a3b8;cursor:not-allowed}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.mid-banner{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.65rem 0}.mini-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem .7rem}.mini-card strong{font:800 .78rem var(--ff-head);color:var(--blue)}.mini-card p{font-size:.7rem;color:var(--slate);margin:.1rem 0 0}.passage{border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;background:#fff;margin:.55rem 0 .85rem}.passage-title{font:800 1.14rem var(--ff-head);color:var(--blue);margin:0}.passage-kicker{font-size:.66rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:800}.passage-text{column-count:2;column-gap:1.3rem;column-rule:1px solid #e2e8f0;margin-top:.55rem}.passage-text p{font-size:.77rem;line-height:1.55;margin:.08rem 0 .62rem;break-inside:avoid}.line-no{display:inline-block;color:var(--muted);font-size:.62rem;font-weight:800;width:1.25rem}.set-submit{background:var(--purple-lt);border:1.5px solid #c4b5fd;border-radius:9px;padding:.6rem .75rem;display:flex;gap:.7rem;align-items:center;justify-content:flex-end;margin-top:.75rem}.set-submit .lock-note{color:#5b21b6}.set-submit .commit-btn{background:var(--purple)}.set-submit .commit-btn:hover{background:#6d28d9}.response-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.reflection-card{border:1px solid var(--border);border-radius:8px;padding:.65rem;break-inside:avoid}.reflection-card label{display:block;font-size:.75rem;font-weight:800;color:var(--slate);margin-bottom:.3rem}.work-area{width:100%;min-height:72px;resize:vertical;border:1.5px dashed var(--border);border-radius:7px;padding:.5rem;font:400 .78rem var(--ff-body);color:var(--ink)}.work-area::placeholder{color:var(--muted);font-style:italic}.error-log{border:2px solid var(--coral);background:var(--coral-lt);border-radius:11px;padding:.8rem;margin-top:.85rem}.error-log h3{font:800 1.05rem var(--ff-head);margin:0;color:#9f2f28}.error-log>p{font-size:.72rem;color:#7f1d1d;margin:.12rem 0 .62rem}.error-type-pills{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.55rem}.pill{border:1px solid;border-radius:999px;padding:.12rem .4rem;font-size:.62rem;font-weight:800}.pill-c{background:#fee2e2;color:#991b1b;border-color:#fca5a5}.pill-r{background:var(--blue-lt);color:#1d4ed8;border-color:var(--blue-md)}.pill-s{background:var(--green-lt);color:#166534;border-color:#86efac}.pill-t{background:#fef3c7;color:#92400e;border-color:#fcd34d}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd}.error-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:7px;overflow:hidden}.error-table th{background:var(--coral);color:#fff;font:800 .68rem var(--ff-head);padding:.4rem;border-right:1px solid rgba(255,255,255,.35);text-align:left}.error-table td{height:48px;border-bottom:1px solid #fecaca;border-right:1px solid #fecaca;padding:.35rem;color:var(--slate);font-size:.7rem;vertical-align:top}.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center}.error-table tr:last-child td{border-bottom:0}.error-table td:last-child,.error-table th:last-child{border-right:0}.error-table [contenteditable]{min-height:35px;outline:none}.footer-note{text-align:center;color:var(--muted);font-size:.66rem;margin-top:1rem}.final-check{background:var(--green-lt);border:1.5px solid #86efac;border-radius:9px;padding:.65rem .78rem;margin-top:.8rem}.final-check strong{font:800 .86rem var(--ff-head);color:var(--green)}.final-check p{font-size:.72rem;color:#166534;margin:.1rem 0 0}
+@media(max-width:680px){body{background:#fff}.sheet{width:100%;margin:0;padding:1.1rem .9rem;border-radius:0;box-shadow:none}.hw-header{flex-direction:column}.hw-meta{width:100%}.mc-opts,.response-grid,.mid-banner{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.score-banner{align-items:flex-start;flex-direction:column}.score-cells{width:100%}.score-cell{flex:1}.commit-row{flex-wrap:wrap}.tool-select{max-width:100%}}
+@media print{@page{size:letter;margin:.34in}body{background:#fff;font-size:12px}.no-print,.commit-row,.set-submit{display:none!important}.sheet{width:100%;margin:0;padding:0;box-shadow:none;border-radius:0}.page-break{page-break-before:always}.mc-q{padding:.48rem .58rem;margin:.38rem 0}.mc-opt{min-height:30px;padding:.28rem .4rem}.passage{padding:.62rem .8rem}.passage-text p{font-size:.71rem}.error-table td{height:42px}textarea{border-color:#94a3b8!important}.footer-note{margin-top:.55rem}}
+</style>
 
+<style>
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+
+.annot-color-swatch{padding:0;flex:none}
+.passage-highlight,.passage-underline,.passage-outline{-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.passage-note:focus .note-tooltip{display:block}
+.passage-note{user-select:none}
+@media print{.annotation-toolbar,.note-input-wrapper{display:none!important}.passage-highlight{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" onclick="clearAll()">Clear All</button></div>
+<main id="main">
+<section class="sheet">
+<header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg><div><h1>SHSAT CAT Homework</h1><div class="subtitle">Mental Math Toolkit &amp; Fiction Evidence · November 2026</div></div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" aria-label="Name"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" aria-label="Date"></label></div></header>
+<div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Score only after every first-pass response is complete.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="24" aria-label="Math score"> / 24</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="6" aria-label="ELA score"> / 6</div><div class="sc-lbl">ELA</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="30" aria-label="Total score"> / 30</div><div class="sc-lbl">Total</div></div></div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT practice rule:</strong> For each stand-alone item, choose the tool, solve, perform one size check, and commit. Once committed, the item locks. Do not interpret a harder next question as proof that your last answer was correct.</p></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">✦</span><h2>Part A — Translate &amp; Decompose</h2><span class="badge badge-blue">8 Questions · ~10 min</span></div>
+<p class="instr">Avoid long computation. Convert to the form that removes work, then choose one answer.</p>
+<div class="strategy-strip"><span class="strategy-label">Decision path</span><span class="strategy-chip">Name the tool</span><span class="strategy-chip">Compute</span><span class="strategy-chip">Check size</span><span class="strategy-chip">Commit</span></div>
+<div id="mathA"></div>
+<p class="footer-note">Page 1 · Title, name, and date appear only here.</p>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">◇</span><h2>Part B — Round &amp; Repair</h2><span class="badge badge-purple">8 Questions · ~12 min</span></div>
+<p class="instr">Use a nearby friendly number, distribute, and make exactly one correction. Keep intermediate values easy to audit.</p>
+<div class="mid-banner"><div class="mini-card"><strong>Round-number check</strong><p>State what you changed and which correction restores the original expression.</p></div><div class="mini-card"><strong>CAT recovery cue</strong><p>Treat every new item as fresh evidence. Difficulty is not feedback.</p></div></div>
+<div id="mathB"></div>
+<p class="footer-note">Page 2 · Stand-alone responses are forward-only once committed.</p>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">◎</span><h2>Part C — Estimate &amp; Verify</h2><span class="badge badge-coral">8 Questions · ~12 min</span></div>
+<p class="instr">Estimate before exact work. Eliminate choices with the wrong sign, scale, or direction.</p>
+<div class="strategy-strip"><span class="strategy-label">Five-second audit</span><span class="strategy-chip">Sign</span><span class="strategy-chip">Magnitude</span><span class="strategy-chip">Units</span><span class="strategy-chip">Reasonableness</span></div>
+<div id="mathC"></div>
+<p class="footer-note">Page 3 · One deliberate check is enough; do not spiral into repeated checking.</p>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">⌁</span><h2>Part D — Fiction Passage Set</h2><span class="badge badge-purple">6 Questions · ~12 min</span></div>
+<p class="instr">Read once for desire, obstacle, choice, and change. You may revise answers within this set until you submit the entire set.</p>
+<div class="annotation-toolbar no-print" role="toolbar" aria-label="Passage annotation tools" id="toolbar-passage">
+  <span class="annot-label">Tool:</span>
+  <button type="button" class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+  <button type="button" class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+  <button type="button" class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+  <button type="button" class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color:</span>
+  <div class="annot-color-row" id="colors-passage">
+    <button type="button" class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></button>
+    <button type="button" class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></button>
+    <button type="button" class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></button>
+    <button type="button" class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></button>
+    <button type="button" class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></button>
+  </div>
+  <button type="button" class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+</div>
+<article class="passage" aria-labelledby="passage-title"><div class="passage-kicker">Original fiction passage</div><h3 class="passage-title" id="passage-title">The Measure of Quiet</h3><div class="passage-text annotatable-passage" id="passage-main">
+<p><span class="line-no">1</span>On the morning of the harbor survey, Elena arrived with two watches. One was digital, borrowed from her brother; the other was her grandfather’s brass pocket watch, which ran seven minutes slow unless she tapped its case twice. She carried both because Mr. Kwan had asked the science club to record the interval between the warning bell and the first visible rise of water in the old tide channel.</p>
+<p><span class="line-no">7</span>“Use the school timer,” her partner Malik said, nodding at the tablet between them. “It records to the hundredth of a second.” Elena agreed, but she kept the brass watch open on her palm. Its second hand advanced with a faint, stubborn tick.</p>
+<p><span class="line-no">12</span>The harbor had once been crowded with repair boats. Now the empty slips made every gull sound important. Across the channel, a rusted bell hung beneath the weather station. When the wind shifted, the bell gave a dry scrape, as if clearing its throat.</p>
+<p><span class="line-no">18</span>Mr. Kwan raised one arm. The tablet began counting. The bell struck, and the students leaned toward the concrete wall where a strip of blue tape marked the morning’s waterline. Ten seconds passed. Then twenty. Nothing touched the tape.</p>
+<p><span class="line-no">23</span>Malik frowned at the tablet. “Maybe the sensor triggered too early.” He reached to restart it, but Elena heard another sound beneath the gulls: a soft tapping from inside the drainage pipe. The taps were uneven, then closer together.</p>
+<p><span class="line-no">29</span>“Wait,” she said. She crouched and watched the dark mouth of the pipe instead of the blue mark. A thread of water appeared there, trembling. Three seconds later, the channel lifted against the wall.</p>
+<p><span class="line-no">35</span>Mr. Kwan asked what she had noticed. Elena explained the tapping. The pipe, he said, carried pockets of air ahead of the incoming water. The sound was not part of their planned measurement, but it predicted the rise more reliably than the distant bell did that morning.</p>
+<p><span class="line-no">42</span>Malik entered a note beside the official time: <em>Air pulse heard before visible rise.</em> Then he looked at the pocket watch. “Did that antique catch it too?”</p>
+<p><span class="line-no">47</span>Elena closed the brass lid. She had forgotten to tap it, and the watch had fallen behind again. “No,” she said, “but it reminded me to listen.” On the walk back, the harbor no longer seemed empty. It seemed full of small clocks, each keeping time in its own way.</p>
+</div></article>
+<div id="fictionQs"></div>
+<div class="set-submit"><span class="lock-note" id="setNote">Review all six answers before leaving this passage set.</span><button class="commit-btn" type="button" id="commitSet">Submit passage set</button></div>
+<p class="footer-note">Page 4 · Evidence first: point to the line or action that limits the answer.</p>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">↺</span><h2>Part E — Review the Process</h2><span class="badge badge-coral">~10 min</span></div>
+<p class="instr">Check with the assigned key or in session. Diagnose the first wrong step, not merely the final wrong answer.</p>
+<div class="response-grid"><div class="reflection-card"><label for="pattern1">Which mental-math tool saved the most written steps?</label><textarea id="pattern1" class="work-area" placeholder="Name the tool and one item where it helped."></textarea></div><div class="reflection-card"><label for="pattern2">Where did your first-pass decision become uncertain?</label><textarea id="pattern2" class="work-area" placeholder="Identify the exact step, word, or choice."></textarea></div><div class="reflection-card"><label for="pattern3">What passage detail most strongly revealed Elena’s change?</label><textarea id="pattern3" class="work-area" placeholder="Cite the detail, then explain the inference."></textarea></div><div class="reflection-card"><label for="pattern4">Write one cue for your next forward-only item.</label><textarea id="pattern4" class="work-area" placeholder="Example structure: When I notice ___, I will ___."></textarea></div></div>
+<div class="error-log"><h3>My Highest-Value Corrections</h3><p>Record the first incorrect move and a specific replacement behavior.</p><div class="error-type-pills" aria-label="Error codes"><span class="pill pill-c">C · careless</span><span class="pill pill-r">R · read/misread</span><span class="pill pill-s">S · strategy</span><span class="pill pill-t">T · timing</span><span class="pill pill-ru">RU · rule/understanding</span></div><table class="error-table"><thead><tr><th>#</th><th>Item + code</th><th>My first wrong step or decision</th><th>Rule / fix for next time</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr><tr><td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr><tr><td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr><tr><td>4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr><tr><td>5</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr></tbody></table></div>
+<div class="final-check"><strong>Carry-forward rule</strong><p>Fast arithmetic means fewer decisions, not rushed decisions. For fiction, locate the action or image that makes one interpretation stronger than the others.</p></div>
+<p class="footer-note">Page 5 · Translate → Transform → Test → Commit</p>
+</section>
+</main>
+<script>
+const toolOptions='<option value="">Tool used…</option><option>Translate forms</option><option>Benchmark percents</option><option>Quarter multiplier</option><option>Round and repair</option><option>Estimate first</option><option>Size check</option><option>Factor / regroup</option>';
+const groups={mathA:[
+['Order from least to greatest: <strong>0.72, 71%, 3/4</strong>.','71%, 0.72, 3/4','0.72, 71%, 3/4','3/4, 0.72, 71%','71%, 3/4, 0.72','2'],
+['Find <strong>18% of 250</strong> by building from benchmark percents.','40','42.5','45','47.5','2'],
+['Find <strong>7% of 640</strong> using 5% + 2%.','42.8','44.8','46.4','448','3'],
+['Find <strong>12.5% of 560</strong> by using a familiar fraction.','56','65','70','75','3'],
+['Compute <strong>44 × 25</strong> without long multiplication.','440','900','1,100','1,200','2'],
+['Compute <strong>28 × 75</strong> by treating 75 as three quarters of 100.','1,400','1,800','2,100','2,800','3'],
+['Compute <strong>96 × 50</strong> mentally.','4,600','4,800','5,000','9,600','2'],
+['A $320 fee increases by <strong>6.25%</strong>. Use 6.25% = 1/16. What is the new fee?','$326','$336','$340','$360','4']],
+mathB:[
+['Compute <strong>87 × 11</strong> by using 10 + 1.','870','947','957','977','2'],
+['Compute <strong>104 × 29</strong> by using 30 − 1.','2,916','3,016','3,026','3,120','3'],
+['Compute <strong>398 × 51</strong> using 50 + 1.','19,998','20,198','20,298','20,398','3'],
+['Compute <strong>997 × 43</strong> by using 1,000 − 3.','42,571','42,871','42,957','43,000','4'],
+['Without separate products, evaluate <strong>62 × 49 + 38 × 49</strong>.','4,800','4,900','5,000','5,100','3'],
+['Evaluate <strong>125 × 32 − 25 × 32</strong> by factoring.','3,000','3,100','3,200','4,800','3'],
+['Find <strong>999²</strong> by rewriting around 1,000.','998,001','998,999','999,001','999,999','4'],
+['Which expression is exactly equal to <strong>503 × 47</strong>?','500 × 47 + 3','500 × 47 + 141','503 × 50 − 47','503 × 40 + 7','4']],
+mathC:[
+['Which interval contains <strong>63.2 × 19.8</strong>?','120–130','600–700','1,200–1,300','12,000–13,000','3'],
+['About how many dollars is a <strong>31% discount on $150</strong>?','$15','$30','$45','$75','2'],
+['Without exact division, choose the closest value of <strong>2,403 ÷ 79</strong>.','3','30','300','3,000','3'],
+['A container is <strong>47% full</strong> and holds 602 mL. Which amount is most reasonable?','30 mL','90 mL','300 mL','540 mL','2'],
+['Compare <strong>24% of 350</strong> and <strong>7/25 of 300</strong>.','The first is larger','The second is larger','They are equal','Not enough information','4'],
+['Convert <strong>0.0375</strong> to a percent.','0.375%','3.75%','37.5%','375%','3'],
+['An $860 price is reduced by <strong>15%</strong>. What is the sale price?','$129','$701','$731','$845','4'],
+['A student claims <strong>42% of 180 = 756</strong>. Which diagnosis is best?','Correct: 42 × 18 = 756','Incorrect: the result should exceed 180','Incorrect: the decimal placement is off by a factor of 10','Incorrect: percent cannot be multiplied','4']]};
+const fiction=[
+['Why does Elena bring both watches to the harbor?','She plans to compare which watch is more expensive.','She wants a precise tool but also values the old watch’s presence.','Mr. Kwan requires every student to carry two timers.','She expects the school tablet to stop working.','2'],
+['The bell’s “dry scrape, as if clearing its throat” mainly makes the bell seem','ready to announce something after a pause.','damaged beyond repair.','angry with the students.','too quiet for anyone to hear.','3'],
+['Lines 23–35 mark a shift from','formal measurement to careful observation.','confidence to embarrassment.','competition to cooperation.','scientific work to guessing.','3'],
+['Why does Elena stop Malik from restarting the tablet?','She believes the tide survey should end.','She wants to repair the brass watch first.','She notices a possible signal that the planned method missed.','She thinks Malik entered the wrong date.','3'],
+['Which detail best supports the idea that useful evidence can be unexpected?','The harbor once held repair boats.','The tablet records hundredths of a second.','The pipe’s air pulses predict the visible rise.','The pocket watch has a brass lid.','4'],
+['The final image of “small clocks” suggests Elena now understands that','only machines can measure change accurately.','the harbor contains many patterns that reward attention.','the tide rises at a different time each day.','her grandfather’s watch is finally accurate.','4']];
+function cardHTML(q,n,prefix,passage=false){const opts=q.slice(1,5).map((o,i)=>`<label class="mc-opt"><input type="radio" name="${prefix}${n}" value="${String.fromCharCode(65+i)}"><span class="bubble"></span><span><strong>${String.fromCharCode(65+i)})</strong> ${o}</span></label>`).join('');return `<article class="mc-q${passage?' passage-item':''}" data-item="${prefix}${n}"><p class="mc-q-text"><span class="qnum">${passage?'F':''}${n}.</span> ${q[0]} <span class="lvl lvl-${q[5]}">L${q[5]}</span></p><div class="mc-opts" role="radiogroup" aria-label="${passage?'Fiction question':'Math question'} ${n}">${opts}</div>${passage?'':`<div class="commit-row"><span class="lock-note">Choose a tool and answer, then commit.</span><select class="tool-select" aria-label="Tool used for question ${n}">${toolOptions}</select><button class="commit-btn" type="button">Commit answer</button></div>`}</article>`}
+Object.entries(groups).forEach(([id,qs])=>{document.getElementById(id).innerHTML=qs.map((q,i)=>cardHTML(q,i+1,id)).join('')});document.getElementById('fictionQs').innerHTML=fiction.map((q,i)=>cardHTML(q,i+1,'f',true)).join('');
+function selectOption(label){const card=label.closest('.mc-q');if(card.classList.contains('locked'))return;card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('.bubble').textContent=''});label.classList.add('selected');label.querySelector('.bubble').textContent='✓';label.querySelector('input').checked=true}
+function lockCard(card){const selected=card.querySelector('input:checked'),tool=card.querySelector('.tool-select');if(!selected){alert('Choose an answer before committing.');return}if(tool&&!tool.value){alert('Name the mental-math tool before committing.');return}card.classList.add('locked');card.querySelectorAll('input,button,select').forEach(e=>e.disabled=true);card.querySelector('.lock-note').textContent='Locked — response committed.'}
+function clearAll(){if(!confirm('Clear every answer, score, work box, and committed response?'))return;document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio')e.checked=false;else e.value='';e.disabled=false});document.querySelectorAll('select').forEach(e=>{e.selectedIndex=0;e.disabled=false});document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');e.querySelector('.bubble').textContent=''});document.querySelectorAll('.mc-q').forEach(e=>e.classList.remove('locked'));document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);document.querySelectorAll('.mc-q:not(.passage-item) .lock-note').forEach(e=>e.textContent='Choose a tool and answer, then commit.');document.getElementById('setNote').textContent='Review all six answers before leaving this passage set.';document.querySelectorAll('[contenteditable]').forEach(e=>e.innerHTML='')}
+document.addEventListener('click',e=>{const label=e.target.closest('.mc-opt');if(label)selectOption(label);const btn=e.target.closest('.mc-q:not(.passage-item) .commit-btn');if(btn)lockCard(btn.closest('.mc-q'))});document.getElementById('commitSet').addEventListener('click',()=>{const items=[...document.querySelectorAll('.passage-item')];if(items.some(x=>!x.querySelector('input:checked'))){alert('Answer all six questions before submitting the passage set.');return}items.forEach(c=>{c.classList.add('locked');c.querySelectorAll('input').forEach(e=>e.disabled=true)});document.getElementById('commitSet').disabled=true;document.getElementById('setNote').textContent='Passage set locked — responses committed.'});document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}));
+</script>
+
+<script>
+/* ── Passage Annotation System ── */
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.getElementById('toolbar-passage').querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.getElementById('colors-passage').querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+
+// Wrap only selected text nodes so paragraphs, columns, and emphasis stay intact.
+function wrapPassageSelection(range, decorate) {
+  var passage = document.getElementById('passage-main');
+  var walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+  var pieces = [], node;
+  while ((node = walker.nextNode())) {
+    if (node.parentElement.closest('.line-no, .passage-note, .note-input-wrapper')) continue;
+    if (!range.intersectsNode(node)) continue;
+    var start = node === range.startContainer ? range.startOffset : 0;
+    var end = node === range.endContainer ? range.endOffset : node.length;
+    if (end > start && node.data.slice(start, end).trim()) {
+      pieces.push({node: node, start: start, end: end});
+    }
+  }
+  return pieces.map(function(piece) {
+    var part = document.createRange();
+    part.setStart(piece.node, piece.start);
+    part.setEnd(piece.node, piece.end);
+    var span = document.createElement('span');
+    decorate(span);
+    part.surroundContents(span);
+    return span;
+  });
+}
+
+function applyPassageAnnotation(range) {
+  var passage = document.getElementById('passage-main');
+  if (!range || range.collapsed || !passage.contains(range.commonAncestorContainer)) return;
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  var spans = wrapPassageSelection(range, function(span) {
+    if (tool === 'note') {
+      span.className = 'passage-highlight passage-note-pending';
+      span.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      span.style.borderBottom = '2px dashed #f59e0b';
+    } else if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+  });
+  if (!spans.length) return;
+  window.getSelection().removeAllRanges();
+  if (tool !== 'note') return;
+
+  var inputWrapper = document.createElement('span');
+  inputWrapper.className = 'note-input-wrapper';
+  inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+  var inp = document.createElement('input');
+  inp.type = 'text';
+  inp.placeholder = 'Type note...';
+  inp.setAttribute('aria-label', 'Passage annotation note');
+  inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+  var confirmBtn = document.createElement('button');
+  confirmBtn.type = 'button';
+  confirmBtn.textContent = '\u2713';
+  confirmBtn.setAttribute('aria-label', 'Save note');
+  confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+  var cancelBtn = document.createElement('button');
+  cancelBtn.type = 'button';
+  cancelBtn.textContent = '\u2715';
+  cancelBtn.setAttribute('aria-label', 'Cancel note');
+  cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+  inputWrapper.append(inp, confirmBtn, cancelBtn);
+  spans[spans.length - 1].after(inputWrapper);
+  inp.focus();
+
+  function cancelNote() {
+    inputWrapper.remove();
+    spans.forEach(function(span) {
+      if (span.parentNode) span.replaceWith.apply(span, Array.from(span.childNodes));
+    });
+  }
+  function confirmNote() {
+    if (!inputWrapper.isConnected) return;
+    var noteText = inp.value.trim();
+    if (!noteText) { cancelNote(); return; }
+    inputWrapper.remove();
+    passageAnnotState.noteCount++;
+    spans.forEach(function(span) {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = '#fef3c7';
+      span.style.borderBottom = '';
+    });
+    var noteEl = document.createElement('span');
+    noteEl.className = 'passage-note';
+    noteEl.textContent = passageAnnotState.noteCount;
+    noteEl.tabIndex = 0;
+    noteEl.setAttribute('role', 'note');
+    noteEl.setAttribute('aria-label', 'Note ' + passageAnnotState.noteCount + ': ' + noteText);
+    var tooltip = document.createElement('span');
+    tooltip.className = 'note-tooltip';
+    tooltip.textContent = 'Note: ' + noteText;
+    noteEl.appendChild(tooltip);
+    spans[spans.length - 1].after(noteEl);
+  }
+  confirmBtn.addEventListener('click', confirmNote);
+  cancelBtn.addEventListener('click', cancelNote);
+  inp.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+    if (e.key === 'Escape') { e.preventDefault(); cancelNote(); }
+  });
+}
+
+(function() {
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  function annotateSelection(event) {
+    if (event && event.target.closest && event.target.closest('.passage-note, .note-input-wrapper')) return;
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    applyPassageAnnotation(sel.getRangeAt(0));
+  }
+  passage.addEventListener('mouseup', annotateSelection);
+  passage.addEventListener('touchend', function(event) {
+    if (event.target.closest('.passage-note, .note-input-wrapper')) return;
+    setTimeout(function() { annotateSelection(); }, 100);
+  });
+  passage.addEventListener('keyup', function(event) {
+    if (event.key === 'Shift') annotateSelection(event);
+  });
+})();
+</script>
+</body>
+</html>
