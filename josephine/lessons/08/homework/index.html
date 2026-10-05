@@ -1,1 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Homework — Rhetorical Precision &amp; Measurement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;family=Nunito:wght@300..800&amp;display=swap" rel="stylesheet">
+<style>
+/* Art direction: rigorous CAT homework → friendly, structured, print-first.
+   Palette: homework.html blue/coral system; Typography: index.html Baloo 2 + Nunito. */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-dark:#1D4ED8;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16A34A;--green-lt:#DCFCE7;--purple:#7C3AED;--purple-lt:#EDE9FE;
+  --ink:#0F172A;--slate:#334155;--muted:#64748B;--border:#CBD5E1;
+  --bg:#F8FAFF;--white:#FFFFFF;--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif;
+}
+html{background:#E2E8F0;scroll-behavior:smooth}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.5}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid #F59E0B;outline-offset:2px}
+.skip-link{position:fixed;left:1rem;top:-5rem;z-index:100;background:var(--ink);color:#fff;padding:.6rem 1rem;border-radius:8px;font-weight:800}.skip-link:focus{top:1rem}
+.toolbar{position:sticky;top:0;z-index:20;display:flex;justify-content:flex-end;gap:.55rem;padding:.7rem 1rem;background:rgba(248,250,255,.94);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.print-btn{min-height:44px;border:0;border-radius:24px;padding:.45rem 1rem;background:var(--blue);color:#fff;font-size:.82rem;font-weight:800;box-shadow:0 2px 6px rgba(37,99,235,.18)}
+.print-btn:hover{background:var(--blue-dark)}.print-btn:active{transform:translateY(1px)}
+.print-btn.secondary{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
+.print-btn.secondary:hover{background:var(--blue-lt)}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.4rem;gap:1rem;flex-wrap:wrap}
+.brand{display:flex;gap:.75rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue);flex:none}
+.hw-header-left h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:700;color:var(--blue);line-height:1.1}
+.hw-header-left .subtitle{font-size:.85rem;color:var(--muted);font-weight:600;margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em}
+.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:220px}.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:700}
+.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:1px 7px;font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}
+.line-input{min-height:28px;flex:1;border:0;border-bottom:1.5px solid var(--border);background:transparent;padding:1px 5px;outline:none}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;border-radius:10px;padding:.7rem 1.2rem;margin-bottom:1.1rem;flex-wrap:wrap;gap:.6rem}
+.score-banner .title{font-family:var(--ff-head);font-size:1.08rem;font-weight:700}.score-banner .sub{font-size:.76rem;opacity:.88}
+.score-cells{display:flex;gap:.5rem;flex-wrap:wrap}.score-cell{background:rgba(255,255,255,.15);border-radius:8px;padding:.28rem .65rem;text-align:center;min-width:72px}
+.score-cell .sc-val{font-family:var(--ff-head);font-size:1.03rem;font-weight:700}.score-cell .sc-lbl{font-size:.64rem;opacity:.82;text-transform:uppercase;letter-spacing:.04em}
+.score-input{width:30px;border:0;border-bottom:1px solid rgba(255,255,255,.75);background:transparent;color:#fff;text-align:center;font-weight:800;outline:none}.score-input::-webkit-inner-spin-button{display:none}
+.cat-strip{display:flex;align-items:center;gap:.7rem;padding:.55rem .8rem;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:9px;color:var(--slate);font-size:.78rem;margin-bottom:1rem}.cat-strip svg{width:30px;height:30px;color:var(--blue);flex:none}.cat-strip strong{color:var(--blue)}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.35rem 0 .75rem}.section-hd .icon{font-size:1.2rem}.section-hd h2{font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--ink)}
+.badge{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:20px;margin-left:auto;white-space:nowrap}
+.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#C2410C;border:1px solid #FCA5A5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86EFAC}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #C4B5FD}.badge-sand{background:var(--sand-lt);color:#92400E;border:1px solid #FCD34D}
+.instr{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;padding:.35rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}
+.strategy-strip{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:0 0 .9rem;font-size:.7rem}.strategy-label{font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--slate)}.strategy-chip{background:#F1F5F9;border:1px solid var(--border);border-radius:999px;padding:2px 8px;font-weight:800;color:var(--slate)}
+.lvl{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:.3rem}.lvl-1{background:#EEE;color:#1F2937}.lvl-2{background:#D9D9D9;color:#1F2937}.lvl-3{background:#BDBDBD;color:#111827}.lvl-4{background:#6B7280;color:#fff}
+.mc-q,.fill-q{margin-bottom:.85rem;padding:.7rem .85rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;break-inside:avoid}
+.mc-q-text{font-size:.83rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;line-height:1.5}.qnum{font-family:var(--ff-head);color:var(--blue);margin-right:.3rem;font-size:.95rem}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.25rem 1rem}.mc-opt{font-size:.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:.35rem;line-height:1.45;cursor:pointer;padding:.25rem .4rem;border-radius:5px;border:1.5px solid transparent;transition:background .15s,border-color .15s;min-height:34px}.mc-opt:hover{background:#F0F0F0}.mc-opt input{position:absolute;opacity:0;pointer-events:none}
+.bubble{width:15px;height:15px;min-width:15px;border:1.5px solid var(--border);border-radius:50%;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900}.mc-opt.selected{background:#E5E7EB;border-color:#374151;font-weight:800}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}.mc-opt.selected .bubble::after{content:'✓'}
+.mc-q.locked,.fill-q.locked{background:#F1F5F9;border-color:#94A3B8}.locked .mc-opt:not(.selected){opacity:.56}.locked .lock-note{color:var(--green)}
+.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.42rem}.commit-btn{min-height:38px;border:0;border-radius:20px;padding:.3rem .85rem;background:var(--blue);color:#fff;font-size:.71rem;font-weight:900}.commit-btn:hover{background:var(--blue-dark)}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}
+.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:1rem 1.15rem;margin-bottom:1rem}.passage-title{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.55rem}.passage-text{font-size:.82rem;line-height:1.7;color:var(--slate);column-count:2;column-gap:1.35rem}.passage-text p{margin-bottom:.6rem;break-inside:avoid}.sentence-num{font-weight:900;color:var(--blue)}
+.passage-set{border:2px solid var(--blue-md);border-radius:12px;padding:.8rem;background:#FCFDFF}.passage-set.submitted{border-color:#86EFAC;background:#F7FFF9}.set-submit{display:flex;justify-content:flex-end;align-items:center;gap:.65rem;margin-top:.6rem}.set-status{font-size:.72rem;color:var(--muted);font-weight:800}.passage-set.submitted .set-status{color:var(--green)}
+.math-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}.math-card{display:flex;flex-direction:column}.math-card .commit-row{margin-top:auto}.math-line{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin-top:.45rem;font-size:.77rem;font-weight:800;color:var(--slate)}
+.short-input{min-height:38px;width:125px;border:1.5px solid var(--border);border-radius:6px;background:#fff;padding:.3rem .5rem;outline:none}.short-input.wide{width:100%}.unit-tag{background:var(--blue-lt);color:var(--blue);padding:2px 7px;border-radius:5px;font-size:.7rem}
+.work-area{width:100%;resize:vertical;min-height:66px;border:1.5px dashed var(--border);border-radius:6px;background:#fff;padding:.4rem .55rem;font-family:var(--ff-body);font-size:.78rem;color:var(--ink);outline:none;margin-top:.45rem}.work-area::placeholder,.short-input::placeholder{color:#94A3B8;font-style:italic}
+.precision-gate{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin:.75rem 0}.gate-item{background:var(--sand-lt);border:1px solid #FCD34D;border-radius:8px;padding:.45rem;text-align:center;font-size:.7rem;font-weight:800;color:#92400E}.gate-item strong{display:block;font-family:var(--ff-head);font-size:.86rem}
+hr.divider{border:0;border-top:2px dashed var(--border);margin:1.35rem 0}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#C2410C;margin-bottom:.55rem}
+.error-table{width:100%;border-collapse:collapse;font-size:.78rem}.error-table th{background:var(--coral);color:#fff;font-family:var(--ff-head);font-weight:600;padding:.35rem .6rem;text-align:left;font-size:.75rem}.error-table th:first-child{border-radius:6px 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.42rem .55rem;border-bottom:1px solid #FCA5A5;color:var(--slate);background:#fff;font-weight:500;height:44px}.error-table td:first-child{font-weight:800;color:var(--ink);width:5%;text-align:center}.error-table tr:last-child td{border-bottom:0}.cell-edit{min-height:32px;outline:none}
+.error-type-pills{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.73rem;margin-top:.55rem}.pill{padding:2px 10px;border-radius:20px;font-weight:800;border:1.5px solid}.pill-cg{background:#FEE2E2;color:#B91C1C;border-color:#FCA5A5}.pill-ce{background:#FEF9C3;color:#92400E;border-color:#FDE68A}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#C4B5FD}
+.reflect-box{background:var(--green-lt);border:1.5px solid #86EFAC;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}.reflect-box h3{font-family:var(--ff-head);font-size:.92rem;font-weight:700;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.65rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--slate);font-weight:700}.reflect-line input{flex:1;border:0;border-bottom:1.5px solid var(--border);background:transparent;min-height:30px;outline:none;padding:1px 5px}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.8rem}.check-item{display:flex;align-items:flex-start;gap:.45rem;background:#fff;border:1px solid #86EFAC;border-radius:7px;padding:.45rem .55rem;font-size:.77rem;font-weight:700;color:var(--slate)}.check-item input{margin-top:3px;accent-color:var(--green)}
+.footer-note{text-align:center;font-size:.68rem;color:var(--muted);margin-top:1rem;font-weight:700}
+@media(max-width:680px){.sheet{margin:.75rem;padding:1.15rem;border-radius:10px}.toolbar{position:static}.mc-opts,.math-grid,.checklist{grid-template-columns:1fr}.passage-text{column-count:1}.precision-gate{grid-template-columns:1fr 1fr}.badge{white-space:normal}.score-banner{align-items:flex-start}.hw-meta{width:100%}.section-hd{align-items:flex-start;flex-wrap:wrap}.section-hd .badge{margin-left:0}.commit-row{justify-content:space-between}.error-table{font-size:.7rem}.error-table th,.error-table td{padding:.3rem}.brand-mark{width:34px;height:34px}}
+@media print{
+  @page{size:letter;margin:.35in}
+  html,body{background:#fff;max-width:100%}.no-print{display:none!important}.page-break{break-before:page;page-break-before:always}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:.25in .38in!important;min-height:10.25in}.mc-q,.fill-q,.passage-box,.error-log,.reflect-box{break-inside:avoid}.mc-q,.fill-q{margin-bottom:.55rem;padding:.55rem .7rem}.mc-q-text{font-size:.76rem}.mc-opt{font-size:.72rem;min-height:25px;padding:.12rem .25rem}.commit-row{display:none}.passage-text{font-size:.75rem}.work-area{resize:none;min-height:52px}.toolbar{display:none}.section-hd{margin:1rem 0 .55rem}.instr{margin-bottom:.55rem}.math-grid{gap:.55rem}.precision-gate{margin:.5rem 0}.footer-note{margin-top:.5rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print" aria-label="Homework controls">
+  <button class="print-btn" type="button" id="printBtn">Print / Save as PDF</button>
+  <button class="print-btn secondary" type="button" id="clearBtn">Clear All</button>
+</div>
+<main id="main">
+<section class="sheet">
+  <header class="hw-header">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg>
+      <div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Rhetorical Precision &amp; Measurement · November 2026</div></div>
+    </div>
+    <div class="hw-meta">
+      <label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" autocomplete="name"></label>
+      <label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" inputmode="numeric"></label>
+    </div>
+  </header>
+  <div class="score-banner">
+    <div><div class="title">Self-Score After One Complete Pass</div><div class="sub">Score only after every response has been committed or submitted.</div></div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input class="score-input" aria-label="ELA score" type="number" min="0" max="12"> / 12</div><div class="sc-lbl">ELA</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" aria-label="Math score" type="number" min="0" max="12"> / 12</div><div class="sc-lbl">Math</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" aria-label="Total score" type="number" min="0" max="24"> / 24</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+  <div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT practice rule:</strong> Stand-alone responses lock when committed. Read the result as a sentence, check meaning and evidence, and then advance. A harder next item is not feedback about the last response.</p></div>
 
+  <div class="section-hd"><span class="icon" aria-hidden="true">✎</span><h2>Part A — Stand-Alone ELA Decisions</h2><span class="badge badge-blue">8 Questions · ~14 min</span></div>
+  <p class="instr">Identify the exact target before comparing choices. A choice that shares the topic but misses the claim is not support.</p>
+  <div class="strategy-strip"><span class="strategy-label">Four-second gate</span><span class="strategy-chip">Target</span><span class="strategy-chip">Text proof</span><span class="strategy-chip">Certainty</span><span class="strategy-chip">Commit</span></div>
+
+  <article class="mc-q standalone" data-item="1"><p class="mc-q-text"><span class="qnum">1.</span> A student claims that adding a morning bus route improved access to an after-school robotics club. Which fact most directly supports the claim? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 1">
+    <label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A)</strong> The club ordered twelve new tool kits.</span></label>
+    <label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B)</strong> Club attendance by students from the northern neighborhood rose from 8 to 19 after the route began.</span></label>
+    <label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C)</strong> The bus is painted the school’s colors.</span></label>
+    <label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D)</strong> Robotics meetings are held twice each week.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Match subject + action + measurable result.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="2"><p class="mc-q-text"><span class="qnum">2.</span> Claim: “A new checkout system shortened the time customers waited at a neighborhood market.” Which evidence is strongest? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 2">
+    <label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A)</strong> The market sells produce from eleven farms.</span></label>
+    <label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B)</strong> Customers described the new screens as bright.</span></label>
+    <label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C)</strong> Median checkout time fell from 6.4 minutes to 3.1 minutes during equally busy periods.</span></label>
+    <label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D)</strong> Two cashiers attended a training session.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Demand a before-and-after measure.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="3"><p class="mc-q-text"><span class="qnum">3.</span> A paragraph explains that a school’s refill stations reduced purchases of single-use water bottles during one semester. Which conclusion best stays within the evidence? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 3">
+    <label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A)</strong> Refill stations can help a school reduce its use of disposable bottles.</span></label>
+    <label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B)</strong> Refill stations will permanently eliminate plastic pollution.</span></label>
+    <label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C)</strong> Every school should replace its drinking fountains immediately.</span></label>
+    <label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D)</strong> Plastic was first manufactured more than a century ago.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Close the claim; do not enlarge it.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="4"><p class="mc-q-text"><span class="qnum">4.</span> A paragraph’s purpose is to explain how rehearsal recordings helped a student orchestra improve timing. Which sentence should be deleted as irrelevant? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 4">
+    <label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A)</strong> Players compared the recording with the conductor’s marked score.</span></label>
+    <label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B)</strong> The first violins discovered that they entered early in two measures.</span></label>
+    <label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C)</strong> The auditorium seats are upholstered in dark red fabric.</span></label>
+    <label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D)</strong> At the next rehearsal, the sections practiced those transitions slowly.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Give every sentence a job badge.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="5"><p class="mc-q-text"><span class="qnum">5.</span> Which sentence correctly punctuates a nonessential relative clause? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 5">
+    <label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A)</strong> The observatory which stands on Ridge Hill, opens at dusk.</span></label>
+    <label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B)</strong> The observatory, which stands on Ridge Hill, opens at dusk.</span></label>
+    <label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C)</strong> The observatory which, stands on Ridge Hill opens at dusk.</span></label>
+    <label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D)</strong> The observatory, that stands on Ridge Hill opens at dusk.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Remove the clause: is the noun still identified?</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="6"><p class="mc-q-text"><span class="qnum">6.</span> The photographer ___ the magazine hired documented the restoration. Which word correctly completes the sentence? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 6">
+    <label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A)</strong> who</span></label>
+    <label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B)</strong> whom</span></label>
+    <label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C)</strong> which</span></label>
+    <label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D)</strong> whose</span></label>
+  </div><div class="commit-row"><span class="lock-note">The magazine hired him—not he.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="7"><p class="mc-q-text"><span class="qnum">7.</span> One class tested a peer-feedback checklist for three weeks and revised more errors than it had during the previous three weeks. Which conclusion is most defensible? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 7">
+    <label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A)</strong> The checklist proves that all students everywhere will become excellent editors.</span></label>
+    <label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B)</strong> The short trial suggests that the checklist may help this class notice revision needs.</span></label>
+    <label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C)</strong> Checklists are the only reliable way to teach writing.</span></label>
+    <label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D)</strong> The class should now study the history of printing.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Match certainty to sample and duration.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+  <article class="mc-q standalone" data-item="8"><p class="mc-q-text"><span class="qnum">8.</span> Claim: “Installing motion sensors caused the recreation center to use less electricity for lighting.” Which evidence best separates that effect from seasonal changes? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 8">
+    <label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A)</strong> Visitors said the hallways seemed modern.</span></label>
+    <label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B)</strong> Lighting use fell in the sensor-equipped wing but stayed nearly constant in a similar unsensored wing over the same months.</span></label>
+    <label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C)</strong> Electricity prices changed twice that year.</span></label>
+    <label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D)</strong> The center also replaced its front doors.</span></label>
+  </div><div class="commit-row"><span class="lock-note">Look for a meaningful comparison.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon" aria-hidden="true">▤</span><h2>Part B — Revising/Editing Passage Set</h2><span class="badge badge-purple">4 Questions · ~12 min</span></div>
+  <p class="instr">Responses remain editable inside this set. Recheck all four against the passage, then submit the set once.</p>
+  <div class="passage-set" id="passageSet">
+    <article class="passage-box">
+      <h3 class="passage-title">Borrow, Build, Return</h3>
+      <div class="passage-text">
+        <p><span class="sentence-num">[1]</span> The East Harbor Library had long lent books, films, and recordings. <span class="sentence-num">[2]</span> In March, it opened a “Library of Tools” that allowed cardholders to borrow drills, levels, sewing machines, and gardening equipment. <span class="sentence-num">[3]</span> The pilot program aimed to help residents complete occasional repairs without purchasing tools they might use only once.</p>
+        <p><span class="sentence-num">[4]</span> Before the opening, library staff surveyed 260 households about the equipment they needed and the obstacles they faced. <span class="sentence-num">[5]</span> Sixty-eight percent of respondents named cost as the main reason they had delayed a small repair. <span class="sentence-num">[6]</span> The library building, which was completed in 1987, has pale brick walls. <span class="sentence-num">[7]</span> Staff used the survey results to choose the first 75 tools and to create short safety demonstrations.</p>
+        <p><span class="sentence-num">[8]</span> During the program’s first twelve weeks, members borrowed 612 items. <span class="sentence-num">[9]</span> In follow-up forms, 154 of 181 respondents reported completing a task they otherwise would have postponed. <span class="sentence-num">[10]</span> These early results do not show how the program will perform over many years. <span class="sentence-num">[11]</span> Still, they suggest that a carefully selected lending collection can remove one practical barrier to household repairs.</p>
+      </div>
+    </article>
+
+    <article class="mc-q set-question" data-item="9"><p class="mc-q-text"><span class="qnum">9.</span> Which sentence provides the most direct numerical support for the idea that the program helped residents complete delayed tasks? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 9">
+      <label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble"></span><span><strong>A)</strong> Sentence 2</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble"></span><span><strong>B)</strong> Sentence 5</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble"></span><span><strong>C)</strong> Sentence 8</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble"></span><span><strong>D)</strong> Sentence 9</span></label>
+    </div></article>
+
+    <article class="mc-q set-question" data-item="10"><p class="mc-q-text"><span class="qnum">10.</span> Which sentence should be deleted because it does not support the passage’s explanation of the tool-lending program? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 10">
+      <label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble"></span><span><strong>A)</strong> Sentence 3</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble"></span><span><strong>B)</strong> Sentence 4</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble"></span><span><strong>C)</strong> Sentence 6</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble"></span><span><strong>D)</strong> Sentence 10</span></label>
+    </div></article>
+
+    <article class="mc-q set-question" data-item="11"><p class="mc-q-text"><span class="qnum">11.</span> Which revision of sentence 6 correctly treats the information about the building’s completion date as extra information? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 11">
+      <label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble"></span><span><strong>A)</strong> The library building which was completed in 1987 has pale brick walls.</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble"></span><span><strong>B)</strong> The library building, which was completed in 1987, has pale brick walls.</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble"></span><span><strong>C)</strong> The library building which was completed, in 1987 has pale brick walls.</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble"></span><span><strong>D)</strong> The library building, that was completed in 1987 has pale brick walls.</span></label>
+    </div></article>
+
+    <article class="mc-q set-question" data-item="12"><p class="mc-q-text"><span class="qnum">12.</span> Which choice best describes why sentences 10 and 11 form an effective conclusion? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 12">
+      <label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble"></span><span><strong>A)</strong> They claim that the program will solve every household repair problem.</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble"></span><span><strong>B)</strong> They acknowledge the trial’s limit and state only the implication supported by the early evidence.</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble"></span><span><strong>C)</strong> They introduce a new argument about library construction.</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble"></span><span><strong>D)</strong> They repeat every numerical detail from the passage.</span></label>
+    </div></article>
+    <div class="set-submit no-print"><span class="set-status" id="setStatus">Answer all four; then audit the set.</span><button class="commit-btn" id="submitSet" type="button">Submit passage set</button></div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-hd"><span class="icon" aria-hidden="true">⇄</span><h2>Part C — Conversion Chains</h2><span class="badge badge-green">4 Questions · ~12 min</span></div>
+  <p class="instr">Predict larger or smaller. Write factors so unwanted units cancel. Enter a number and surviving unit before committing.</p>
+  <div class="math-grid">
+    <article class="fill-q math-card standalone" data-item="13"><p class="mc-q-text"><span class="qnum">13.</span> Convert 6.75 yards to feet. <span class="lvl lvl-1">L1</span></p><div class="math-line"><label>Estimate: <input class="short-input" type="text" aria-label="Question 13 estimate"></label><label>Exact: <input class="short-input required-response" type="text" aria-label="Question 13 exact answer"></label><span class="unit-tag">feet</span></div><textarea class="work-area" aria-label="Question 13 conversion work" placeholder="Write the conversion factor and cancel units."></textarea><div class="commit-row"><span class="lock-note">Labels first; numbers second.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="14"><p class="mc-q-text"><span class="qnum">14.</span> A tank contains 1.85 liters. Convert the volume to milliliters. <span class="lvl lvl-2">L2</span></p><div class="math-line"><label>Prediction: <select class="short-input" aria-label="Question 14 size prediction"><option value="">Choose</option><option>Larger number</option><option>Smaller number</option></select></label><label>Exact: <input class="short-input required-response" type="text" aria-label="Question 14 exact answer"></label><span class="unit-tag">mL</span></div><textarea class="work-area" aria-label="Question 14 conversion work" placeholder="Show a fraction equal to 1."></textarea><div class="commit-row"><span class="lock-note">A smaller unit needs more units.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="15"><p class="mc-q-text"><span class="qnum">15.</span> Convert 3.25 miles to feet, using 1 mile = 5,280 feet. <span class="lvl lvl-3">L3</span></p><div class="math-line"><label>Estimate: <input class="short-input" type="text" aria-label="Question 15 estimate"></label><label>Exact: <input class="short-input required-response" type="text" aria-label="Question 15 exact answer"></label><span class="unit-tag">feet</span></div><textarea class="work-area" aria-label="Question 15 conversion work" placeholder="Show decomposition or multiplication."></textarea><div class="commit-row"><span class="lock-note">Check size before committing.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="16"><p class="mc-q-text"><span class="qnum">16.</span> A rectangular banner is 2.4 meters long and 175 centimeters wide. Find its area in square meters. <span class="lvl lvl-4">L4</span></p><div class="math-line"><label>Exact: <input class="short-input required-response" type="text" aria-label="Question 16 exact answer"></label><span class="unit-tag">m²</span></div><textarea class="work-area" aria-label="Question 16 conversion work" placeholder="Convert one dimension before multiplying. Show units."></textarea><div class="commit-row"><span class="lock-note">Do not multiply unlike units.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  </div>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon" aria-hidden="true">±</span><h2>Part D — Arithmetic &amp; Rate Precision</h2><span class="badge badge-sand">8 Questions · ~24 min</span></div>
+  <p class="instr">Make the negative sign, operation layer, numerator, denominator, and final unit visible. Each response locks independently.</p>
+  <div class="precision-gate" aria-label="Precision checklist"><div class="gate-item"><strong>Meaning</strong>What is requested?</div><div class="gate-item"><strong>Unit</strong>What survives?</div><div class="gate-item"><strong>Sign</strong>Is direction sensible?</div><div class="gate-item"><strong>Size</strong>Does the estimate fit?</div></div>
+  <div class="math-grid">
+    <article class="fill-q math-card standalone" data-item="17"><p class="mc-q-text"><span class="qnum">17.</span> Evaluate −3 2/5 + 7/10. Give the result as a simplified fraction or mixed number. <span class="lvl lvl-2">L2</span></p><textarea class="work-area" aria-label="Question 17 work" placeholder="Convert the entire negative mixed number first."></textarea><div class="math-line"><label>Answer: <input class="short-input required-response" type="text" aria-label="Question 17 answer"></label></div><div class="commit-row"><span class="lock-note">Attach the sign to the whole value.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="18"><p class="mc-q-text"><span class="qnum">18.</span> Evaluate 7 − 2(1.8 − 0.55). <span class="lvl lvl-2">L2</span></p><textarea class="work-area" aria-label="Question 18 work" placeholder="Mark the grouping layer; estimate; calculate."></textarea><div class="math-line"><label>Answer: <input class="short-input required-response" type="text" aria-label="Question 18 answer"></label></div><div class="commit-row"><span class="lock-note">Equal-priority operations go left to right.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="19"><p class="mc-q-text"><span class="qnum">19.</span> Convert 54 kilometers per hour to meters per minute. <span class="lvl lvl-3">L3</span></p><textarea class="work-area" aria-label="Question 19 work" placeholder="Write the rate as a fraction and cancel both units."></textarea><div class="math-line"><label>Rate: <input class="short-input required-response" type="text" aria-label="Question 19 answer"></label><span class="unit-tag">m/min</span></div><div class="commit-row"><span class="lock-note">Time starts in the denominator.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="20"><p class="mc-q-text"><span class="qnum">20.</span> A label printer produces 126 labels in 9 minutes. At this constant rate, how many labels does it produce in 25 minutes? <span class="lvl lvl-2">L2</span></p><textarea class="work-area" aria-label="Question 20 work" placeholder="Find the unit rate, then scale."></textarea><div class="math-line"><label>Answer: <input class="short-input required-response" type="text" aria-label="Question 20 answer"></label><span class="unit-tag">labels</span></div><div class="commit-row"><span class="lock-note">Name the numerator and denominator.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="21"><p class="mc-q-text"><span class="qnum">21.</span> On a map, 3 centimeters represent 22.5 kilometers. Two stations are 8.4 centimeters apart. Find the actual distance. <span class="lvl lvl-3">L3</span></p><textarea class="work-area" aria-label="Question 21 work" placeholder="Set up a proportion with matching units."></textarea><div class="math-line"><label>Distance: <input class="short-input required-response" type="text" aria-label="Question 21 answer"></label><span class="unit-tag">km</span></div><div class="commit-row"><span class="lock-note">Keep map/map and actual/actual aligned.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="22"><p class="mc-q-text"><span class="qnum">22.</span> A pump moves 2.7 cubic meters of water in 30 minutes. Express the rate in liters per second. Use 1 m³ = 1,000 L. <span class="lvl lvl-4">L4</span></p><textarea class="work-area" aria-label="Question 22 work" placeholder="Convert volume and time before dividing."></textarea><div class="math-line"><label>Rate: <input class="short-input required-response" type="text" aria-label="Question 22 answer"></label><span class="unit-tag">L/s</span></div><div class="commit-row"><span class="lock-note">Cancel both compound-rate units.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="23"><p class="mc-q-text"><span class="qnum">23.</span> A 1:25 scale model shows a bench 6.8 centimeters long. What is the bench’s actual length in meters? <span class="lvl lvl-4">L4</span></p><textarea class="work-area" aria-label="Question 23 work" placeholder="Scale first; then convert centimeters to meters."></textarea><div class="math-line"><label>Length: <input class="short-input required-response" type="text" aria-label="Question 23 answer"></label><span class="unit-tag">m</span></div><div class="commit-row"><span class="lock-note">Separate scaling from unit conversion.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+
+    <article class="fill-q math-card standalone" data-item="24"><p class="mc-q-text"><span class="qnum">24.</span> Evaluate −4² + 1.2[5 − (−0.5)] ÷ 0.6. <span class="lvl lvl-4">L4</span></p><textarea class="work-area" aria-label="Question 24 work" placeholder="Distinguish −4² from (−4)². Mark each operation layer."></textarea><div class="math-line"><label>Answer: <input class="short-input required-response" type="text" aria-label="Question 24 answer"></label></div><div class="commit-row"><span class="lock-note">The exponent acts before the leading negative.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+  </div>
+  <div class="cat-strip" style="margin-top:1rem"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 16h22M19 8l8 8-8 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>CAT recovery:</strong> Do not interpret difficulty. Treat the next item as new evidence: identify its target, show one defensible chain, audit, and advance.</p></div>
+</section>
+
+<section class="sheet page-break">
+  <div class="section-hd"><span class="icon" aria-hidden="true">◎</span><h2>Part E — Error Log &amp; Transfer Plan</h2><span class="badge badge-coral">~10 min</span></div>
+  <p class="instr">After checking with an assigned key or during session, record the first wrong decision—not only the final wrong answer.</p>
+  <div class="error-log">
+    <h3>My Highest-Value Corrections</h3>
+    <table class="error-table">
+      <thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Rule / fix for next time</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 1 item"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 1 wrong step"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 1 fix"></div></td></tr>
+        <tr><td>2</td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 2 item"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 2 wrong step"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 2 fix"></div></td></tr>
+        <tr><td>3</td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 3 item"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 3 wrong step"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 3 fix"></div></td></tr>
+        <tr><td>4</td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 4 item"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 4 wrong step"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 4 fix"></div></td></tr>
+        <tr><td>5</td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 5 item"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 5 wrong step"></div></td><td><div class="cell-edit" contenteditable="true" aria-label="Correction 5 fix"></div></td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills"><span class="pill pill-cg">Claim / evidence</span><span class="pill pill-ce">Conclusion / relevance</span><span class="pill pill-ru">Clause / punctuation</span><span class="pill pill-cg">Unit / rate</span><span class="pill pill-ce">Sign / operation</span></div>
+  </div>
+
+  <div class="reflect-box">
+    <h3>Weekly CAT Reflection</h3>
+    <div class="reflect-lines">
+      <label class="reflect-line">My most common first wrong decision was:<input type="text"></label>
+      <label class="reflect-line">The exact cue I will notice next time is:<input type="text"></label>
+      <label class="reflect-line">My one-sentence repair rule is:<input type="text"></label>
+    </div>
+    <div class="checklist">
+      <label class="check-item"><input type="checkbox">I matched evidence to the claim’s action, not just its topic.</label>
+      <label class="check-item"><input type="checkbox">I kept each conclusion within the passage’s certainty.</label>
+      <label class="check-item"><input type="checkbox">I decided essential vs. extra before punctuating a clause.</label>
+      <label class="check-item"><input type="checkbox">I canceled units before doing conversion arithmetic.</label>
+      <label class="check-item"><input type="checkbox">I converted negative mixed numbers before combining them.</label>
+      <label class="check-item"><input type="checkbox">I checked meaning, unit, sign, and size before commitment.</label>
+    </div>
+  </div>
+  <p class="footer-note">Designed for fall 2026 SHSAT CAT habits · 24 original practice items · first-pass accuracy over answer chasing</p>
+</section>
+</main>
+<script>
+(() => {
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+  function setOption(label) {
+    const group = label.closest('.mc-opts');
+    if (!group || label.closest('.locked') || label.closest('.passage-set.submitted')) return;
+    $$('.mc-opt', group).forEach(option => option.classList.remove('selected'));
+    label.classList.add('selected');
+    const radio = $('input[type="radio"]', label);
+    if (radio) radio.checked = true;
+  }
+
+  $$('.mc-opt').forEach(label => {
+    label.addEventListener('click', () => setOption(label));
+    label.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setOption(label); }
+    });
+    label.tabIndex = 0;
+  });
+
+  $$('.standalone .commit-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.standalone');
+      if (!card || card.classList.contains('locked')) return;
+      const radio = $('input[type="radio"]:checked', card);
+      const required = $('.required-response', card);
+      if (!radio && required && !required.value.trim()) {
+        required.focus();
+        required.setCustomValidity('Enter a response before committing.');
+        required.reportValidity();
+        required.setCustomValidity('');
+        return;
+      }
+      if (!radio && !required) {
+        const firstRadio = $('input[type="radio"]', card);
+        if (firstRadio) firstRadio.closest('label').focus();
+        return;
+      }
+      card.classList.add('locked');
+      $$('input, textarea, select', card).forEach(control => control.disabled = true);
+      button.disabled = true;
+      button.textContent = 'Committed';
+      const note = $('.lock-note', card);
+      if (note) note.textContent = 'Locked — advance to the next item.';
+    });
+  });
+
+  $('#submitSet').addEventListener('click', () => {
+    const set = $('#passageSet');
+    if (set.classList.contains('submitted')) return;
+    const unanswered = $$('.set-question', set).find(card => !$('input[type="radio"]:checked', card));
+    if (unanswered) {
+      $('#setStatus').textContent = 'Complete every question before submitting.';
+      const first = $('input[type="radio"]', unanswered);
+      if (first) first.closest('label').focus();
+      return;
+    }
+    set.classList.add('submitted');
+    $$('input[type="radio"]', set).forEach(input => input.disabled = true);
+    $('#submitSet').disabled = true;
+    $('#submitSet').textContent = 'Set submitted';
+    $('#setStatus').textContent = 'Locked — the full passage set has been submitted.';
+  });
+
+  $('#printBtn').addEventListener('click', () => window.print());
+  $('#clearBtn').addEventListener('click', () => {
+    if (!window.confirm('Clear every response and unlock all items?')) return;
+    $$('input').forEach(input => { input.checked = false; input.value = ''; input.disabled = false; });
+    $$('textarea').forEach(area => { area.value = ''; area.disabled = false; });
+    $$('select').forEach(select => { select.selectedIndex = 0; select.disabled = false; });
+    $$('[contenteditable="true"]').forEach(cell => { cell.textContent = ''; });
+    $$('.mc-opt').forEach(option => option.classList.remove('selected'));
+    $$('.standalone').forEach(card => {
+      card.classList.remove('locked');
+      const button = $('.commit-btn', card);
+      if (button) { button.disabled = false; button.textContent = 'Commit answer'; }
+      const note = $('.lock-note', card);
+      if (note) note.textContent = card.dataset.item <= 12 ? 'Choose, audit, then commit.' : 'Audit meaning, unit, sign, and size.';
+    });
+    const set = $('#passageSet');
+    set.classList.remove('submitted');
+    $('#submitSet').disabled = false;
+    $('#submitSet').textContent = 'Submit passage set';
+    $('#setStatus').textContent = 'Answer all four; then audit the set.';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
