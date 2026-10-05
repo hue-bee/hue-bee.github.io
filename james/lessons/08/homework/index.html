@@ -1,1 +1,459 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Homework — Compound Probability &amp; Poetry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;--coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;--green:#16a34a;--green-lt:#DCFCE7;--purple:#7c3aed;--purple-lt:#EDE9FE;--ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;--bg:#F8FAFF;--white:#FFFFFF;--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif}
+html{background:#e2e8f0;scroll-behavior:smooth}body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}button,input,textarea,select{font:inherit}button{cursor:pointer}.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.action-btn{min-height:44px;border:0;border-radius:30px;padding:.55rem 1.6rem;background:var(--blue);color:white;font-family:var(--ff-head);font-size:1rem;font-weight:600;box-shadow:0 3px 10px rgba(37,99,235,.3)}.action-btn:hover{background:#1d4ed8}.action-btn.secondary{background:var(--muted);box-shadow:0 3px 10px rgba(100,116,139,.25)}.action-btn.secondary:hover{background:#475569}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.4rem;gap:1rem;flex-wrap:wrap}.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue)}.hw-header-left h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:700;color:var(--blue);line-height:1.1}.subtitle{font-size:.85rem;color:var(--muted);font-weight:600;margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em}.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:220px}.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:600}.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:1px 7px;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}.line-input{flex:1;min-width:0;border:0;border-bottom:1.5px solid var(--border);background:transparent;padding:2px 5px;color:var(--ink)}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:white;border-radius:10px;padding:.7rem 1.2rem;margin-bottom:1.2rem;flex-wrap:wrap;gap:.5rem}.score-banner .title{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.score-banner .sub{font-size:.78rem;opacity:.85}.score-cells{display:flex;gap:.6rem;flex-wrap:wrap}.score-cell{background:rgba(255,255,255,.15);border-radius:8px;padding:.3rem .75rem;text-align:center;min-width:80px}.sc-val{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.sc-lbl{font-size:.65rem;opacity:.8;text-transform:uppercase;letter-spacing:.04em}.score-input{width:34px;border:0;border-bottom:1px solid rgba(255,255,255,.65);background:transparent;color:white;text-align:center;font-weight:700;outline:none}.score-input::placeholder{color:rgba(255,255,255,.75)}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate);line-height:1.45}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.5rem 0 .8rem}.section-hd .icon{font-size:1.25rem}.section-hd h2{font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--ink)}.badge{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:20px;margin-left:auto}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}.instr{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:.9rem;padding:.35rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;line-height:1.5}.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.mc-q{margin-bottom:1rem;padding:.7rem .85rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;break-inside:avoid}.mc-q-text{font-size:.83rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;line-height:1.5}.qnum{font-family:var(--ff-head);color:var(--blue);margin-right:.3rem}.lvl{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:.3rem}.lvl-1{background:#eee;color:#1f2937}.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:white}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.25rem 1rem}.mc-opt{font-size:.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:.3rem;line-height:1.45;cursor:pointer;padding:.3rem .4rem;border-radius:5px;border:1.5px solid transparent;transition:background .15s,border-color .15s;min-height:34px}.mc-opt:hover{background:#f0f0f0}.mc-opt input{position:absolute;opacity:0;pointer-events:none}.bubble{width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800}.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:white}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.4rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem}.passage-title{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.15rem}.passage-credit{font-size:.69rem;color:var(--muted);font-style:italic;margin-bottom:.65rem}.poem{font-family:Georgia,'Times New Roman',serif;font-size:.87rem;line-height:1.75;color:var(--slate);column-count:2;column-gap:2rem}.poem-stanza{break-inside:avoid;margin-bottom:.6rem}.line-no{display:inline-block;width:1.15rem;color:var(--muted);font-family:var(--ff-body);font-size:.65rem;text-align:right;margin-right:.45rem;user-select:none}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:.55rem}.error-table{width:100%;border-collapse:collapse;font-size:.78rem}.error-table th{background:var(--coral);color:white;font-family:var(--ff-head);font-weight:600;padding:.35rem .6rem;text-align:left;font-size:.75rem}.error-table th:first-child{border-radius:6px 0 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.45rem .6rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:white;font-weight:500;height:38px}.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center}.error-table tr:last-child td{border-bottom:none}.error-type-pills{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.73rem;margin-top:.55rem}.pill{padding:2px 10px;border-radius:20px;font-weight:700;border:1.5px solid}.pill-cg{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}.pill-ce{background:#fef9c3;color:#92400e;border-color:#fde68a}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd}.reflect-box{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}.reflect-box h3{font-family:var(--ff-head);font-size:.9rem;font-weight:700;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.6rem;margin-top:.3rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--slate);font-weight:600}.reflect-line input{flex:1;border:0;border-bottom:1.5px solid var(--border);background:transparent;outline:none;padding:1px 6px;color:var(--ink)}.footer-note{margin-top:1.3rem;padding-top:.7rem;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted);text-align:center;font-weight:600}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.95);padding:.55rem;margin:0;z-index:10;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.mc-opts{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}.section-hd{align-items:flex-start;flex-wrap:wrap}.badge{margin-left:0}.poem{column-count:1}.reflect-line{align-items:flex-start;flex-direction:column}.reflect-line input{width:100%}.error-log{overflow-x:auto}.error-table{min-width:620px}}
+@media print{html{background:white}body{max-width:100%}.no-print{display:none!important}.page-break{break-before:page;page-break-before:always}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.1cm 1.35cm!important}.commit-row{display:none!important}.mc-opt{min-height:auto}input,textarea{background:white!important}[contenteditable]{outline:none}}
+</style>
+<style id="passage-annotation-styles">
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
 
+
+.passage-note:focus .note-tooltip,.passage-note.note-open .note-tooltip{display:block}
+.passage-highlight,.passage-outline{-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.annotation-toolbar .annot-color-swatch{padding:0;flex-shrink:0}
+.note-input-wrapper{display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);vertical-align:middle;font-style:normal;line-height:normal}
+.note-input-wrapper input{border:none;font-size:.72rem;width:130px;color:#374151;background:transparent;font-family:var(--ff-body)}
+.note-input-wrapper button{border:none;background:#374151;color:white;border-radius:4px;width:20px;height:20px;font-size:.7rem;padding:0}
+@media print{.annotation-toolbar,.note-input-wrapper{display:none!important}}
+</style>
+</head><body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print" aria-label="Document controls"><button class="action-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="action-btn secondary" type="button" onclick="clearAll()">Clear All</button></div>
+<main id="main">
+<section class="sheet">
+<header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="Probability path and poetry page logo" role="img"><rect x="6" y="6" width="15" height="36" rx="4" stroke="currentColor" stroke-width="3"/><circle cx="13.5" cy="16" r="3" fill="currentColor"/><circle cx="13.5" cy="31" r="3" fill="currentColor"/><path d="M27 8h15v34H27M31 17h7M31 24h7M31 31h7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Compound Probability I + Poetry Toolkit · November 2026</div></div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" autocomplete="name"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text"></label></div></header>
+<div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Score only after completing every first-pass decision.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="16" aria-label="Math score"> / 16</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="8" aria-label="ELA score"> / 8</div><div class="sc-lbl">ELA</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="24" aria-label="Total score"> / 24</div><div class="sc-lbl">Total</div></div></div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> Decide the structure before calculating. Once you commit an item, it locks; clear the entire sheet only if you intend to restart.</p></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">◉</span><h2>Part A — Count, Pool, Decide</h2><span class="badge badge-blue">8 Questions · ~14 min</span></div>
+<p class="instr">For every item, identify the favorable count and total count first. When groups merge, convert every ratio, fraction, or percent to an object count before pooling.</p>
+<div class="strategy-strip"><span class="strategy-label">Structure check</span><span class="strategy-chip">One draw → one count</span><span class="strategy-chip">Groups merge → pool objects</span><span class="strategy-chip">Requested category → reread</span></div>
+<article class="mc-q" data-item="1">
+      <p class="mc-q-text"><span class="qnum">1.</span> A pouch contains 5 amber tiles and 7 teal tiles. One tile is selected at random. What is the probability that the tile is <strong>not amber</strong>? <span class="lvl lvl-1">L1</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 1"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 5/12</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 7/12</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 5/7</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 7/5</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="2">
+      <p class="mc-q-text"><span class="qnum">2.</span> An integer is selected at random from 1 through 15. What is the probability that the integer is a multiple of 4? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 2"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 1/5</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 1/4</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 4/15</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 3/14</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="3">
+      <p class="mc-q-text"><span class="qnum">3.</span> Tray A holds 18 soil samples, and one-third are acidic. Tray B holds 12 soil samples, and one-half are acidic. The trays are combined. What is the probability that a randomly chosen sample from the combined tray is acidic? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 3"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 1/6</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 2/5</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 5/12</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 5/6</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="4">
+      <p class="mc-q-text"><span class="qnum">4.</span> Walking Club P has 20 members with a bike-to-walk ratio of 3:2. Walking Club Q has 15 members, 40% of whom walk. If the clubs merge, what is the probability that a randomly selected member walks? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 4"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 2/7</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 2/5</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 7/15</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 14/20</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="5">
+      <p class="mc-q-text"><span class="qnum">5.</span> Bin M contains 9 circuit boards, 4 of which passed inspection. Bin N contains 15 circuit boards, 11 of which passed. The bins are pooled. Which expression correctly gives the probability that a board selected from the pooled bin passed? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 5"><label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> (4 + 11)/(9 + 15)</span></label><label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> (4/9 + 11/15)/2</span></label><label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> (9 + 15)/(4 + 11)</span></label><label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> (4 × 11)/(9 × 15)</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="6">
+      <p class="mc-q-text"><span class="qnum">6.</span> A spinner has 16 equal sectors: 6 violet, 5 orange, and 5 gray. Which fraction is the probability of landing on orange or gray? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 6"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 5/16</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 5/8</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 10/11</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 11/16</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="7">
+      <p class="mc-q-text"><span class="qnum">7.</span> Crate R contains 25 lamps, 20% of which are defective. Crate S contains 15 lamps, 2 of which are defective. After the crates are combined, what is the probability that a randomly selected lamp is <strong>not defective</strong>? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 7"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 7/40</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 13/40</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 33/40</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 7/20</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="8">
+      <p class="mc-q-text"><span class="qnum">8.</span> Aquarium A has 8 tagged fish out of 10 fish. Aquarium B has 6 tagged fish out of 30 fish. After all fish are moved into one tank, a student averages 8/10 and 6/30. What is the student’s first error? <span class="lvl lvl-4">L4</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 8"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> The student should subtract the two probabilities.</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> The student treated unequal groups as if they had equal weight.</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> The student should multiply the two probabilities.</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> The student counted too many total fish.</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<div class="footer-note">First section · Counts carry the meaning; fractions report the result.</div>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">⟲</span><h2>Part B — Without Replacement</h2><span class="badge badge-coral">8 Questions · ~16 min</span></div>
+<p class="instr">Take a new snapshot after each draw. The total decreases every time; the favorable count changes only when an object from that category leaves.</p>
+<div class="strategy-strip"><span class="strategy-label">Draw audit</span><span class="strategy-chip">Recount</span><span class="strategy-chip">Write one factor per draw</span><span class="strategy-chip">Multiply for “and”</span></div>
+<article class="mc-q" data-item="9">
+      <p class="mc-q-text"><span class="qnum">9.</span> A drawer contains 5 copper washers and 3 silver washers. Two washers are selected without replacement. What is the probability of copper first, then silver? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 9"><label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 15/56</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 15/64</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 3/14</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 5/14</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="10">
+      <p class="mc-q-text"><span class="qnum">10.</span> A case holds 6 oak samples and 4 pine samples. Three samples are selected without replacement. What is the probability that all three are pine? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 10"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 1/30</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 1/24</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 2/15</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 3/25</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="11">
+      <p class="mc-q-text"><span class="qnum">11.</span> Cards numbered 1 through 10 are shuffled. Three cards are drawn without replacement. What is the probability of odd, then odd, then even? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 11"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 1/8</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 5/36</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 1/6</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 5/32</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="12">
+      <p class="mc-q-text"><span class="qnum">12.</span> A bag contains 4 blue tokens and 3 red tokens. Three tokens are drawn without replacement. What is the probability of this exact order: blue, red, blue? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 12"><label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 6/35</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 12/35</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 4/21</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 9/35</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="13">
+      <p class="mc-q-text"><span class="qnum">13.</span> A display has 7 square badges and 5 round badges. Two badges are selected without replacement. Which product represents the probability of round first, then square? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 13"><label class="mc-opt"><input type="radio" name="q13" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 5/12 × 7/11</span></label><label class="mc-opt"><input type="radio" name="q13" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 5/12 × 7/12</span></label><label class="mc-opt"><input type="radio" name="q13" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 7/12 × 5/11</span></label><label class="mc-opt"><input type="radio" name="q13" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 5/7 × 7/12</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="14">
+      <p class="mc-q-text"><span class="qnum">14.</span> A box contains 3 white, 2 black, and 4 gold markers. Two are selected without replacement. What is the probability that the first is not gold and the second is gold? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 14"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 5/9 × 4/8</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 5/9 × 3/8</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 4/9 × 5/8</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 5/9 × 4/9</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="15">
+      <p class="mc-q-text"><span class="qnum">15.</span> A student models three successful draws without replacement from a set with 6 successes among 11 objects as 6/11 × 5/10 × 4/10. Which revision fixes the first incorrect factor? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 15"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> Change 6/11 to 5/11.</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> Change 5/10 to 5/11.</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> Change 4/10 to 4/9.</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> Change 4/10 to 3/9.</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="16">
+      <p class="mc-q-text"><span class="qnum">16.</span> A bag originally contains 6 red and 4 blue beads. One bead is drawn and is known to be blue; it is not replaced. What is the probability that the next bead is red? <span class="lvl lvl-4">L4</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 16"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> 3/5</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> 2/3</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> 6/10</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> 5/9</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4a12 12 0 1 0 12 12" stroke="currentColor" stroke-width="2.4"/><path d="M19 4h9v9" stroke="currentColor" stroke-width="2.4"/><path d="m28 4-9 9" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>Recovery rule:</strong> Do not carry the emotional result of one item into the next. A harder item changes neither the counting rules nor the value of a careful first step.</p></div>
+<div class="footer-note">Second section · Every nonreturned object changes the next photograph.</div>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">¶</span><h2>Part C — Poetry Passage Set</h2><span class="badge badge-purple">8 Questions · ~18 min</span></div>
+<p class="instr">Read once for story, once for voice and tone, and once for shape. State a plain-language claim before evaluating the choices.</p>
+<div class="strategy-strip"><span class="strategy-label">Three lenses</span><span class="strategy-chip">Story · What happens?</span><span class="strategy-chip">Voice · Who feels what?</span><span class="strategy-chip">Shape · Why this line or image?</span></div>
+<div class="annotation-toolbar" id="toolbar-passage" role="group" aria-label="Passage annotation tools" title="Choose a tool and color, then select passage text.">
+  <span class="annot-label">Tool:</span>
+  <button type="button" class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+  <button type="button" class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+  <button type="button" class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+  <button type="button" class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color:</span>
+  <div class="annot-color-row" id="colors-passage">
+    <button type="button" class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></button>
+    <button type="button" class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></button>
+    <button type="button" class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></button>
+    <button type="button" class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></button>
+    <button type="button" class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></button>
+  </div>
+  <button type="button" class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+</div>
+<article class="passage-box"><div class="passage-title">Platform at Dawn</div><div class="passage-credit">Original instructional poem created for this activity</div><div class="poem" aria-label="Poem, Platform at Dawn">
+<div class="poem-stanza"><div><span class="line-no">1</span>Before the first train lifts its doors,</div><div><span class="line-no">2</span>the station holds its breath;</div><div><span class="line-no">3</span>a broom draws circles through the dust,</div><div><span class="line-no">4</span>the clocks rehearse their steps.</div></div>
+<div class="poem-stanza"><div><span class="line-no">5</span>I wait beneath the timetable</div><div><span class="line-no">6</span>that flickers, loses names;</div><div><span class="line-no">7</span>across the tracks, one window warms</div><div><span class="line-no">8</span>and steadies into flame.</div></div>
+<div class="poem-stanza"><div><span class="line-no">9</span>You said that leaving changes maps,</div><div><span class="line-no">10</span>not roads. I doubted then.</div><div><span class="line-no">11</span>Now rails divide the paling dark</div><div><span class="line-no">12</span>and join it end to end.</div></div>
+</div></article>
+<article class="mc-q" data-item="17">
+      <p class="mc-q-text"><span class="qnum">17.</span> What is the speaker literally doing for most of the poem? <span class="lvl lvl-1">L1</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 17"><label class="mc-opt"><input type="radio" name="q17" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> Cleaning an empty station</span></label><label class="mc-opt"><input type="radio" name="q17" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> Waiting at a station before a train arrives</span></label><label class="mc-opt"><input type="radio" name="q17" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> Studying a map while riding a train</span></label><label class="mc-opt"><input type="radio" name="q17" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> Watching someone leave from a window</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="18">
+      <p class="mc-q-text"><span class="qnum">18.</span> The word “You” in line 9 most strongly suggests that the speaker is— <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 18"><label class="mc-opt"><input type="radio" name="q18" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> addressing a remembered person whose earlier statement now matters</span></label><label class="mc-opt"><input type="radio" name="q18" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> speaking directly to the station worker</span></label><label class="mc-opt"><input type="radio" name="q18" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> asking the reader to change the timetable</span></label><label class="mc-opt"><input type="radio" name="q18" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> quoting an announcement over the station speakers</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="19">
+      <p class="mc-q-text"><span class="qnum">19.</span> Which choice best describes the poem’s tonal movement? <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 19"><label class="mc-opt"><input type="radio" name="q19" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> From impatient to furious</span></label><label class="mc-opt"><input type="radio" name="q19" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> From uncertain reflection to measured understanding</span></label><label class="mc-opt"><input type="radio" name="q19" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> From cheerful anticipation to regret</span></label><label class="mc-opt"><input type="radio" name="q19" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> From fear to complete relief</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="20">
+      <p class="mc-q-text"><span class="qnum">20.</span> What is the main effect of the line break after “timetable” in lines 5–6? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 20"><label class="mc-opt"><input type="radio" name="q20" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> It makes the timetable seem physically larger than the station.</span></label><label class="mc-opt"><input type="radio" name="q20" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> It delays the detail that the sign is unstable, mirroring the speaker’s uncertainty.</span></label><label class="mc-opt"><input type="radio" name="q20" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> It proves the timetable has stopped working permanently.</span></label><label class="mc-opt"><input type="radio" name="q20" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> It separates the speaker from every other person in the station.</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="21">
+      <p class="mc-q-text"><span class="qnum">21.</span> In line 2, the description “the station holds its breath” primarily— <span class="lvl lvl-2">L2</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 21"><label class="mc-opt"><input type="radio" name="q21" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> shows that the building is unsafe</span></label><label class="mc-opt"><input type="radio" name="q21" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> creates a hushed pause before movement begins</span></label><label class="mc-opt"><input type="radio" name="q21" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> suggests that the speaker cannot breathe</span></label><label class="mc-opt"><input type="radio" name="q21" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> explains why the clocks have stopped</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="22">
+      <p class="mc-q-text"><span class="qnum">22.</span> What does the window that “steadies into flame” most likely contribute to the poem? <span class="lvl lvl-3">L3</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 22"><label class="mc-opt"><input type="radio" name="q22" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> A literal warning that a building is burning</span></label><label class="mc-opt"><input type="radio" name="q22" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> A small point of warmth and certainty in an unsettled scene</span></label><label class="mc-opt"><input type="radio" name="q22" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> Evidence that sunrise has already ended</span></label><label class="mc-opt"><input type="radio" name="q22" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> A reminder that the speaker missed the train</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="23">
+      <p class="mc-q-text"><span class="qnum">23.</span> How do the verbs “divide” and “join” in lines 11–12 work together? <span class="lvl lvl-4">L4</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 23"><label class="mc-opt"><input type="radio" name="q23" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> They create a contradiction with no connection to the poem’s ideas.</span></label><label class="mc-opt"><input type="radio" name="q23" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> They show that the rails are being repaired overnight.</span></label><label class="mc-opt"><input type="radio" name="q23" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> They present distance and connection as simultaneous parts of leaving.</span></label><label class="mc-opt"><input type="radio" name="q23" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> They prove the speaker has decided not to travel.</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<article class="mc-q" data-item="24">
+      <p class="mc-q-text"><span class="qnum">24.</span> Which statement best expresses a central idea developed by the poem? <span class="lvl lvl-4">L4</span></p>
+      <div class="mc-opts" role="radiogroup" aria-label="Question 24"><label class="mc-opt"><input type="radio" name="q24" value="A"><span class="bubble" aria-hidden="true"></span><span><strong>A)</strong> Change can alter how a person understands distance without erasing the path between people.</span></label><label class="mc-opt"><input type="radio" name="q24" value="B"><span class="bubble" aria-hidden="true"></span><span><strong>B)</strong> Travel is valuable only when every plan remains certain.</span></label><label class="mc-opt"><input type="radio" name="q24" value="C"><span class="bubble" aria-hidden="true"></span><span><strong>C)</strong> Memories disappear once a person enters a new place.</span></label><label class="mc-opt"><input type="radio" name="q24" value="D"><span class="bubble" aria-hidden="true"></span><span><strong>D)</strong> Machines are more dependable than human relationships.</span></label></div>
+      <div class="commit-row"><span class="lock-note" aria-live="polite">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+<div class="footer-note">Third section · Follow syntax first; then explain what the poem’s choices make possible.</div>
+</section>
+<section class="sheet page-break">
+<div class="section-hd"><span class="icon" aria-hidden="true">▤</span><h2>Part D — Error Log</h2><span class="badge badge-sand">~10 min · Bring to session</span></div>
+<p class="instr">Check your work with the assigned key or in session. Record the first incorrect decision—not merely the final answer.</p>
+<div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Rule / fix for next time</th></tr></thead><tbody>
+<tr><td>1</td><td contenteditable="true" aria-label="Correction 1 item"></td><td contenteditable="true" aria-label="Correction 1 first wrong step"></td><td contenteditable="true" aria-label="Correction 1 next-time fix"></td></tr><tr><td>2</td><td contenteditable="true" aria-label="Correction 2 item"></td><td contenteditable="true" aria-label="Correction 2 first wrong step"></td><td contenteditable="true" aria-label="Correction 2 next-time fix"></td></tr><tr><td>3</td><td contenteditable="true" aria-label="Correction 3 item"></td><td contenteditable="true" aria-label="Correction 3 first wrong step"></td><td contenteditable="true" aria-label="Correction 3 next-time fix"></td></tr><tr><td>4</td><td contenteditable="true" aria-label="Correction 4 item"></td><td contenteditable="true" aria-label="Correction 4 first wrong step"></td><td contenteditable="true" aria-label="Correction 4 next-time fix"></td></tr><tr><td>5</td><td contenteditable="true" aria-label="Correction 5 item"></td><td contenteditable="true" aria-label="Correction 5 first wrong step"></td><td contenteditable="true" aria-label="Correction 5 next-time fix"></td></tr>
+</tbody></table><div class="error-type-pills"><span class="pill pill-cg">CG · Careless / Count</span><span class="pill pill-ce">CE · Concept / Evidence</span><span class="pill pill-ru">RU · Rule / Understanding</span></div></div>
+<div class="reflect-box"><h3>Weekly CAT Reflection</h3><div class="reflect-lines"><label class="reflect-line">The probability structure I need to identify faster is <input type="text"></label><label class="reflect-line">The count I most often forget to update is <input type="text"></label><label class="reflect-line">The poetry lens I need to use more deliberately is <input type="text"></label><label class="reflect-line">Before I commit, my five-second proof will be <input type="text"></label></div></div>
+<div class="footer-note">Final section · Bring this completed sheet and your questions to the next session.</div>
+</section>
+</main>
+<script>
+function setOption(input){const card=input.closest('.mc-q');if(card.classList.contains('locked'))return;card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('.bubble').textContent=''});const label=input.closest('.mc-opt');label.classList.add('selected');label.querySelector('.bubble').textContent='✓';input.checked=true}
+document.querySelectorAll('.mc-opt input').forEach(input=>input.addEventListener('change',()=>setOption(input)));
+document.querySelectorAll('.commit-btn').forEach(button=>button.addEventListener('click',()=>{const card=button.closest('.mc-q');if(!card.querySelector('input:checked')){alert('Choose an answer before committing.');return}card.classList.add('locked');card.querySelectorAll('input,button').forEach(el=>el.disabled=true);card.querySelector('.lock-note').textContent='Locked — response committed.'}));
+function clearAll(){if(!confirm('Clear every answer, score, reflection, and committed response?'))return;document.querySelectorAll('input,textarea').forEach(el=>{if(el.type==='radio')el.checked=false;else el.value='';el.disabled=false});document.querySelectorAll('[contenteditable="true"]').forEach(el=>el.textContent='');document.querySelectorAll('.mc-opt').forEach(el=>{el.classList.remove('selected');el.querySelector('.bubble').textContent=''});document.querySelectorAll('.mc-q').forEach(card=>{card.classList.remove('locked');card.querySelectorAll('button').forEach(b=>b.disabled=false);card.querySelector('.lock-note').textContent='Choose, audit, then commit.'});window.scrollTo({top:0,behavior:'smooth'})}
+</script>
+<script id="passage-annotation-script">
+
+/* Passage annotation tools, adapted from copy.html without changing worksheet controls. */
+(function () {
+  'use strict';
+  const passage = document.querySelector('.poem');
+  const toolbar = document.getElementById('toolbar-passage');
+  if (!passage || !toolbar) return;
+  const state = {tool: 'highlight', color: '#fef08a', noteCount: 0};
+  let cancelPending = null;
+  function unwrap(el) {
+    if (!el.parentNode) return;
+    el.replaceWith(...el.childNodes);
+  }
+  window.setPassageTool = function (tool, button) {
+    state.tool = tool;
+    toolbar.querySelectorAll('.annot-btn').forEach(function (b) {
+      const active = b === button;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', String(active));
+    });
+  };
+  window.setPassageColor = function (color, button) {
+    state.color = color;
+    toolbar.querySelectorAll('.annot-color-swatch').forEach(function (b) {
+      const active = b === button;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', String(active));
+    });
+  };
+  toolbar.querySelectorAll('.annot-btn,.annot-color-swatch').forEach(function (b) {
+    b.setAttribute('aria-pressed', String(b.classList.contains('active')));
+    if (b.title) b.setAttribute('aria-label', b.title);
+  });
+  window.clearPassageAnnotations = function () {
+    if (cancelPending) cancelPending();
+    passage.querySelectorAll('.passage-note,.note-input-wrapper').forEach(el => el.remove());
+    Array.from(passage.querySelectorAll('.passage-highlight,.passage-underline,.passage-outline')).reverse().forEach(unwrap);
+    passage.normalize();
+    state.noteCount = 0;
+  };
+  function wrapSelection(range, tool, color) {
+    const walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+    const pieces = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!node.textContent.trim() || node.parentElement.closest('.line-no,.passage-note,.note-input-wrapper')) continue;
+      if (!range.intersectsNode(node)) continue;
+      const start = range.startContainer === node ? range.startOffset : 0;
+      const end = range.endContainer === node ? range.endOffset : node.length;
+      if (end > start) pieces.push({node, start, end});
+    }
+    const spans = [];
+    // Wrap text only: never move poem lines or stanzas into inline elements.
+    pieces.forEach(function (piece) {
+      const part = document.createRange();
+      part.setStart(piece.node, piece.start);
+      part.setEnd(piece.node, piece.end);
+      const span = document.createElement('span');
+      if (tool === 'highlight' || tool === 'note') {
+        span.className = 'passage-highlight';
+        span.style.backgroundColor = tool === 'note' ? 'rgba(251,191,36,.35)' : color;
+        if (tool === 'note') span.style.borderBottom = '2px dashed #f59e0b';
+        else span.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span.className = 'passage-underline';
+        span.style.textDecorationColor = color === '#fef08a' ? '#374151' : color;
+      } else {
+        span.className = 'passage-outline';
+        span.style.outlineColor = color === '#fef08a' ? '#374151' : color;
+      }
+      part.surroundContents(span);
+      spans.push(span);
+    });
+    return spans;
+  }
+  function addNote(spans) {
+    const editor = document.createElement('span');
+    editor.className = 'note-input-wrapper';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Type note...';
+    input.setAttribute('aria-label', 'Annotation note');
+    const save = document.createElement('button');
+    save.type = 'button'; save.textContent = '✓'; save.setAttribute('aria-label', 'Save note');
+    const cancel = document.createElement('button');
+    cancel.type = 'button'; cancel.textContent = '✕'; cancel.setAttribute('aria-label', 'Cancel note');
+    editor.append(input, save, cancel);
+    spans[spans.length - 1].after(editor);
+    const discard = function () {
+      editor.remove(); spans.forEach(unwrap); cancelPending = null;
+    };
+    cancelPending = discard;
+    save.addEventListener('click', function () {
+      const text = input.value.trim();
+      if (!text) { discard(); return; }
+      spans.forEach(function (span) {
+        span.style.backgroundColor = '#fef3c7'; span.style.borderBottom = '';
+      });
+      const note = document.createElement('span');
+      note.className = 'passage-note';
+      note.textContent = String(++state.noteCount);
+      note.tabIndex = 0;
+      note.setAttribute('role', 'button');
+      note.setAttribute('aria-label', 'Note ' + state.noteCount + ': ' + text);
+      note.setAttribute('aria-expanded', 'false');
+      const tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip'; tooltip.textContent = 'Note: ' + text;
+      note.append(tooltip);
+      function toggle() {
+        note.classList.toggle('note-open');
+        note.setAttribute('aria-expanded', String(note.classList.contains('note-open')));
+      }
+      note.addEventListener('click', toggle);
+      note.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        if (e.key === 'Escape') { note.classList.remove('note-open'); note.setAttribute('aria-expanded', 'false'); note.blur(); }
+      });
+      editor.replaceWith(note);
+      cancelPending = null;
+    });
+    cancel.addEventListener('click', discard);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); save.click(); }
+      if (e.key === 'Escape') { e.preventDefault(); discard(); }
+    });
+    input.focus();
+  }
+  function annotate(event) {
+    if (event && event.target.closest && event.target.closest('.note-input-wrapper,.passage-note')) return;
+    const selection = window.getSelection();
+    if (!selection || !selection.rangeCount || selection.isCollapsed || cancelPending) return;
+    const range = selection.getRangeAt(0);
+    if (!passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return;
+    const spans = wrapSelection(range, state.tool, state.color);
+    if (!spans.length) return;
+    selection.removeAllRanges();
+    if (state.tool === 'note') addNote(spans);
+  }
+  passage.addEventListener('mouseup', annotate);
+  passage.addEventListener('touchend', function (event) {
+    if (event.target.closest('.note-input-wrapper,.passage-note')) return;
+    setTimeout(function () { annotate(); }, 100);
+  });
+  passage.addEventListener('keyup', function (event) {
+    if (event.key === 'Shift') annotate(event);
+  });
+})();
+</script>
+</body></html>
