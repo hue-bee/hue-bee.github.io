@@ -43,6 +43,7 @@ Every session after the first opens with the error log, not re-teaching. With on
 21 of the 31 missed Math items were Arithmetic. Goal: make basic skills automatic so the other topics have something to stand on.
 
 ### Session 1 — Number sense and operations
+
 | Skill | Diagnostic item | What to accomplish |
 |---|---|---|
 | Place value / expanded form | Q1 | Write 50,310.04 in expanded form and back, fluently |
