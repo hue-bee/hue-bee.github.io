@@ -1,1 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TACHS Session 1 Homework — Arithmetic Foundations + Paper Folding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+/* Art direction: match the supplied homework sheet; use the supplied lesson's Baloo 2 + Nunito fonts. */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16a34a;--green-lt:#DCFCE7;--purple:#7c3aed;--purple-lt:#EDE9FE;
+  --ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;
+  --bg:#F8FAFF;--white:#FFFFFF;--ff-head:'Baloo 2',sans-serif;--ff-body:'Nunito',sans-serif;
+}
+html{background:#e2e8f0;-webkit-text-size-adjust:100%}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid rgba(37,99,235,.38);outline-offset:2px}
+.toolbar{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;padding:1rem 1rem 0}
+.print-btn{display:block;background:var(--blue);color:#fff;font-family:var(--ff-head);font-size:1rem;font-weight:700;padding:.55rem 1.25rem;border:0;border-radius:30px;box-shadow:0 3px 10px rgba(37,99,235,.3);transition:background .2s,transform .2s;min-height:44px}
+.print-btn:hover{background:#1d4ed8;transform:translateY(-1px)}
+.print-btn:active{transform:translateY(0)}
+.print-btn.secondary{background:#475569;box-shadow:0 3px 10px rgba(71,85,105,.25)}
+.print-btn.secondary:hover{background:#334155}
+.sheet{background:var(--white);margin:1rem auto 2rem;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.1);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.3rem;gap:1rem;flex-wrap:wrap}
+.hw-header-left h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:700;color:var(--blue);line-height:1.12}
+.hw-header-left .subtitle{font-size:.85rem;color:var(--muted);font-weight:700;margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em}
+.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:240px}
+.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:700}
+.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:2px 7px;font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;min-width:68px;text-align:center}
+.meta-input{flex:1;min-width:0;border:0;border-bottom:1.5px solid var(--border);background:transparent;padding:1px 5px;outline:0}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border-radius:10px;padding:.7rem 1.2rem;margin-bottom:1.35rem;flex-wrap:wrap;gap:.5rem}
+.score-banner .title{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.score-banner .sub{font-size:.78rem;opacity:.9}
+.score-cells{display:flex;gap:.55rem;flex-wrap:wrap}.score-cell{background:rgba(255,255,255,.15);border-radius:8px;padding:.3rem .65rem;text-align:center;min-width:86px}.score-cell input{width:34px;border:0;border-bottom:1.5px solid rgba(255,255,255,.8);background:transparent;color:#fff;text-align:center;font-family:var(--ff-head);font-size:1rem;font-weight:700;outline:0}.score-cell .sc-lbl{display:block;font-size:.63rem;opacity:.85;text-transform:uppercase;letter-spacing:.04em}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.35rem 0 .8rem}.section-hd .icon{font-size:1.25rem}.section-hd h2{font-family:var(--ff-head);font-size:1.18rem;font-weight:700;color:var(--ink);line-height:1.2}.section-hd .badge{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:20px;margin-left:auto;white-space:nowrap}
+.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86efac}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}
+.instr{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:.9rem;padding:.4rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}
+.digital-note{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:start;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .85rem;margin-bottom:1rem;color:#78350f;font-size:.78rem}.digital-note strong{font-family:var(--ff-head);font-size:.86rem}.digital-note .mark{font-family:var(--ff-head);font-size:1.1rem;background:#fff;border:1px solid #fcd34d;border-radius:7px;padding:.08rem .42rem}
+.formula-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.formula-strip .fs-label{font-size:.72rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-right:.2rem}.fml{background:#fff;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .6rem;font-size:.77rem;font-weight:700;color:#1e3a8a;font-family:var(--ff-head)}
+.lvl{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:.3rem}.lvl-1{background:#ededed;color:#374151}.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:#fff}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.prob-grid.single{grid-template-columns:1fr}.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.75rem .9rem;position:relative;break-inside:avoid}.prob-num{font-family:var(--ff-head);font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}.prob-q{font-size:.84rem;color:var(--ink);font-weight:650;line-height:1.55;margin-bottom:.45rem}.prob-q strong{color:#374151}.answer-box{margin-top:.45rem;display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:800;color:var(--slate)}.short-answer{border:0;border-bottom:1.5px solid var(--border);flex:1;min-width:0;background:transparent;padding:.1rem .3rem;outline:0}.work-area{width:100%;resize:vertical;min-height:58px;border:1.5px dashed var(--border);border-radius:6px;background:#fff;padding:.35rem .55rem;font-family:var(--ff-body);font-size:.78rem;color:var(--ink);outline:0;margin-top:.35rem}.work-area::placeholder{color:var(--muted);font-style:italic}
+hr.divider{border:0;border-top:2px dashed var(--border);margin:1.45rem 0}
+.mc-q{margin-bottom:.9rem;padding:.75rem .85rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;break-inside:avoid}.mc-q-text{font-size:.83rem;font-weight:750;color:var(--ink);margin-bottom:.5rem;line-height:1.5}.mc-q-text .qnum{font-family:var(--ff-head);color:var(--blue);margin-right:.3rem}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem}.mc-opt{font-size:.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:.35rem;line-height:1.4;cursor:pointer;padding:.3rem .4rem;border-radius:6px;border:1.5px solid transparent;transition:background .15s,border-color .15s;min-height:42px}.mc-opt:hover{background:#f0f0f0}.mc-opt input[type=radio]{position:absolute;opacity:0;pointer-events:none}.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:800}.mc-opt .bubble{width:17px;height:17px;min-width:17px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;background:#fff}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}
+.fold-layout{display:grid;grid-template-columns:210px 1fr;gap:1rem;align-items:center}.fold-diagram{background:#fff;border:1.5px solid var(--blue-md);border-radius:8px;padding:.45rem;display:flex;justify-content:center}.fold-diagram svg{display:block;width:100%;height:auto;max-height:145px}.diagram-label{font-size:10px;fill:#475569;font-family:'Nunito',sans-serif;font-weight:700}.sheet-shape{fill:#eff6ff;stroke:#2563eb;stroke-width:2}.crease{stroke:#f97066;stroke-width:2;stroke-dasharray:5 4}.fold-arrow{fill:none;stroke:#7c3aed;stroke-width:2}.punch{fill:#0f172a}.mirror{fill:#fff;stroke:#0f172a;stroke-width:2}.choice-grid .mc-opt{align-items:center}.choice-svg{width:76px;height:48px;flex:0 0 76px;background:#fff;border:1px solid #dbeafe;border-radius:4px}.choice-svg rect{fill:#fff;stroke:#64748b}.choice-svg circle{fill:#0f172a}
+.step-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.2rem 0 1rem}.step{background:#fff;border:1.5px solid var(--blue-md);border-radius:9px;padding:.55rem .65rem;font-size:.75rem;color:var(--slate)}.step b{display:block;font-family:var(--ff-head);color:var(--blue);font-size:.84rem}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:.55rem}.error-table{width:100%;border-collapse:collapse;font-size:.78rem}.error-table th{background:var(--coral);color:#fff;font-family:var(--ff-head);font-weight:650;padding:.4rem .55rem;text-align:left;font-size:.75rem}.error-table th:first-child{border-radius:6px 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.25rem .35rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:#fff;font-weight:500}.error-table td:first-child{font-weight:800;color:var(--ink);width:5%;text-align:center}.error-table tr:last-child td{border-bottom:0}.table-input{width:100%;min-height:33px;border:0;background:transparent;padding:.2rem;outline:0;font-size:.76rem}.error-type-pills{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.73rem;margin-top:.55rem}.pill{padding:2px 10px;border-radius:20px;font-weight:800;border:1.5px solid}.pill-cg{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}.pill-ce{background:#fef9c3;color:#92400e;border-color:#fde68a}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd}
+.reflect-box{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}.reflect-box h3{font-family:var(--ff-head);font-size:.92rem;font-weight:700;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.6rem;margin-top:.3rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--slate);font-weight:700}.reflect-line input{flex:1;min-width:0;border:0;border-bottom:1.5px solid var(--border);font-size:.8rem;background:transparent;outline:0;padding:1px 6px}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem;padding-top:.7rem;border-top:1px dashed var(--border)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:680px){body{background:#fff}.toolbar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);padding-bottom:.8rem;border-bottom:1px solid var(--border)}.sheet{margin:0;padding:1.25rem 1rem;border-radius:0;box-shadow:none}.prob-grid,.mc-opts{grid-template-columns:1fr}.fold-layout{grid-template-columns:1fr}.fold-diagram{max-width:270px;margin:auto}.step-strip{grid-template-columns:1fr}.hw-meta{width:100%}.score-banner{align-items:flex-start}.section-hd{align-items:flex-start}.section-hd .badge{margin-left:0}.choice-grid{grid-template-columns:1fr 1fr}.choice-grid .mc-opt{flex-direction:column;min-height:100px}.error-table{display:block;overflow-x:auto}.reflect-line{align-items:flex-start;flex-direction:column}.reflect-line input{width:100%}}
+@media print{@page{size:letter;margin:.45in}html,body{background:#fff;max-width:100%}.no-print{display:none!important}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:.1in .16in!important}.page-break{break-before:page;page-break-before:always}.prob,.mc-q,.error-log,.reflect-box{break-inside:avoid}.work-area{resize:none;min-height:42px}.sheet:not(:first-of-type){padding-top:.12in!important}.footer-note{margin-top:.6rem}.section-hd{margin-top:.8rem}.mc-q{margin-bottom:.55rem;padding:.55rem .7rem}.fold-diagram svg{max-height:115px}}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#main">Skip to activity</a>
+<div class="toolbar no-print" aria-label="Worksheet controls">
+  <button class="print-btn" type="button" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  <button class="print-btn secondary" type="button" onclick="clearAll()">🗑️ Clear All</button>
+</div>
+<main id="main">
+<section class="sheet">
+  <header class="hw-header">
+    <div class="hw-header-left">
+      <h1>Session 1 Homework</h1>
+      <div class="subtitle">Arithmetic Foundations + Paper Folding · TACHS 2026</div>
+    </div>
+    <div class="hw-meta">
+      <label class="hw-meta-row"><span class="label">Name</span><input class="meta-input" type="text" aria-label="Student name"></label>
+      <label class="hw-meta-row"><span class="label">Date</span><input class="meta-input" type="text" aria-label="Date"></label>
+    </div>
+  </header>
 
+  <div class="score-banner">
+    <div><div class="title">Self-Score Before Session</div><div class="sub">Check your work, classify every miss, and bring the completed sheet.</div></div>
+    <div class="score-cells">
+      <label class="score-cell"><input type="number" min="0" max="14" aria-label="Arithmetic score"><span class="sc-lbl">Arithmetic / 14</span></label>
+      <label class="score-cell"><input type="number" min="0" max="6" aria-label="Ability score"><span class="sc-lbl">Ability / 6</span></label>
+      <label class="score-cell"><input type="number" min="0" max="10" aria-label="Sprint score"><span class="sc-lbl">Sprint / 10</span></label>
+    </div>
+  </div>
+
+  <div class="digital-note"><span class="mark">2026</span><div><strong>Digital-format habit:</strong> Make a choice before moving on, use scratch paper to preserve structure, and never leave an item blank. A basic four-function calculator is available only on applicable test questions; this page is designed for no-calculator fluency.</div></div>
+
+  <div class="section-hd"><span class="icon">➗</span><h2>Part A — Arithmetic Foundations</h2><span class="badge badge-blue">14 Problems · ~24 min</span></div>
+  <div class="instr">Show one legal change per line. For place value, name the position; for negatives, name the operation; for products, estimate before computing.</div>
+  <div class="formula-strip"><span class="fs-label">Quick rules</span><span class="fml">Powers before products</span><span class="fml">× and ÷: left to right</span><span class="fml">−(negative) = add opposite</span><span class="fml">Decimal points align</span></div>
+
+  <div class="prob-grid">
+    <article class="prob"><div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div><div class="prob-q">Write <strong>708,040.305</strong> in expanded form. Identify the place held by each zero.</div><textarea class="work-area" aria-label="Work for problem 1" placeholder="Expanded form + zero placeholders…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 1"></label></article>
+    <article class="prob"><div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div><div class="prob-q">Write the number with <strong>9 hundred-thousands, 6 hundreds, 2 tenths, and 8 thousandths</strong>.</div><textarea class="work-area" aria-label="Work for problem 2" placeholder="Build the place-value chart…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 2"></label></article>
+    <article class="prob"><div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div><div class="prob-q">In <strong>42,814.4</strong>, how many times the value of the leftmost 4 is the value of the rightmost 4?</div><textarea class="work-area" aria-label="Work for problem 3" placeholder="Name both places before dividing…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 3"></label></article>
+    <article class="prob"><div class="prob-num">Problem 4 <span class="lvl lvl-2">L2</span></div><div class="prob-q">Evaluate: <strong>3³ + 2(5² − 7)</strong>.</div><textarea class="work-area" aria-label="Work for problem 4" placeholder="Expand powers first; one change per line…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 4"></label></article>
+    <article class="prob"><div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div><div class="prob-q">Compare <strong>(−4)²</strong> and <strong>−4²</strong> using &lt;, &gt;, or =. Expand each expression to justify.</div><textarea class="work-area" aria-label="Work for problem 5" placeholder="The parentheses determine the base…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 5"></label></article>
+    <article class="prob"><div class="prob-num">Problem 6 <span class="lvl lvl-3">L3</span></div><div class="prob-q">Evaluate: <strong>[36 ÷ (9 − 3)] × 5 + 2</strong>.</div><textarea class="work-area" aria-label="Work for problem 6" placeholder="Finish grouping, then work left to right…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 6"></label></article>
+  </div>
+</section>
+
+<section class="sheet page-break" aria-label="Arithmetic foundations continued">
+  <div class="section-hd"><span class="icon">🧮</span><h2>Part A Continued — Structure & Number Sense</h2><span class="badge badge-sand">8 Problems · ~14 min</span></div>
+  <div class="instr">No heading information to copy again—continue directly. Protect signs, use divisibility tests, and place the decimal only after estimating.</div>
+  <div class="prob-grid">
+    <article class="prob"><div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div><div class="prob-q">Evaluate <strong>48 ÷ 6 × 2 − 7</strong>. Explain why the first two operations must be read from left to right.</div><textarea class="work-area" aria-label="Work for problem 7" placeholder="One legal operation per line…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 7"></label></article>
+    <article class="prob"><div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div><div class="prob-q">Evaluate: <strong>−6 − (−11) + (−3)</strong>. Rewrite subtraction before computing.</div><textarea class="work-area" aria-label="Work for problem 8" placeholder="Rewrite as addition of the opposite…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 8"></label></article>
+    <article class="prob"><div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div><div class="prob-q">At sunrise the temperature was <strong>−7°F</strong>. By noon it was <strong>5°F</strong>. What signed change occurred?</div><textarea class="work-area" aria-label="Work for problem 9" placeholder="final − initial = change…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 9"></label></article>
+    <article class="prob"><div class="prob-num">Problem 10 <span class="lvl lvl-3">L3</span></div><div class="prob-q">Find the <strong>greatest common factor</strong> of 42, 70, and 98. Then list every common factor.</div><textarea class="work-area" aria-label="Work for problem 10" placeholder="Find the GCF efficiently; use its factors…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 10"></label></article>
+    <article class="prob"><div class="prob-num">Problem 11 <span class="lvl lvl-3">L3</span></div><div class="prob-q">Write the <strong>prime factorization of 252</strong> using exponents.</div><textarea class="work-area" aria-label="Work for problem 11" placeholder="Use a factor tree and verify by multiplying…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 11"></label></article>
+    <article class="prob"><div class="prob-num">Problem 12 <span class="lvl lvl-2">L2</span></div><div class="prob-q">Estimate first, then compute: <strong>8.4 − 3.975</strong>.</div><textarea class="work-area" aria-label="Work for problem 12" placeholder="Rename 8.4 with placeholder zeros…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 12"></label></article>
+    <article class="prob"><div class="prob-num">Problem 13 <span class="lvl lvl-3">L3</span></div><div class="prob-q">Compute <strong>49 × 25</strong> by using a friendly number and one correction. Do not use the standard algorithm.</div><textarea class="work-area" aria-label="Work for problem 13" placeholder="Think 50 groups minus 1 group…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 13"></label></article>
+    <article class="prob"><div class="prob-num">Problem 14 <span class="lvl lvl-4">L4</span></div><div class="prob-q">A student says <strong>7.2 ÷ 0.6 = 1.2</strong>. Diagnose the place-value error and find the correct quotient.</div><textarea class="work-area" aria-label="Work for problem 14" placeholder="Create an equivalent whole-number division…"></textarea><label class="answer-box">Answer <input class="short-answer" aria-label="Answer for problem 14"></label></article>
+  </div>
+  <div class="footer-note">Arithmetic checkpoint: Was the difficulty a missing rule, a dropped detail, or pacing?</div>
+</section>
+
+<section class="sheet page-break" aria-label="Paper folding ability practice">
+  <div class="section-hd"><span class="icon">⬚</span><h2>Part B — Ability: Paper Folding</h2><span class="badge badge-purple">6 Problems · ~12 min</span></div>
+  <div class="instr">For each item: count layers, undo the newest fold first, and reflect every existing hole the same perpendicular distance across the crease.</div>
+  <div class="step-strip"><div class="step"><b>1 · Count</b>Predict the final number of holes before viewing choices.</div><div class="step"><b>2 · Reverse</b>Open the most recent fold first.</div><div class="step"><b>3 · Mirror</b>Preserve equal perpendicular distance from each crease.</div></div>
+
+  <article class="mc-q">
+    <div class="fold-layout">
+      <div class="fold-diagram"><svg viewBox="0 0 210 135" role="img" aria-label="Square folded upward across a horizontal center crease, then punched in the upper-right of folded rectangle"><rect class="sheet-shape" x="20" y="10" width="120" height="110"/><line class="crease" x1="20" y1="65" x2="140" y2="65"/><path class="fold-arrow" d="M78 103 Q102 84 80 70"/><path d="M76 75l4-7 7 4" fill="none" stroke="#7c3aed" stroke-width="2"/><rect class="sheet-shape" x="152" y="38" width="48" height="54"/><circle class="punch" cx="187" cy="51" r="4"/><text class="diagram-label" x="22" y="132">bottom folds up</text><text class="diagram-label" x="153" y="104">folded view</text></svg></div>
+      <div><div class="mc-q-text"><span class="qnum">15.</span>One horizontal half-fold is made. The folded sheet receives one punch away from the crease. Which description must match the unfolded sheet? <span class="lvl lvl-2">L2</span></div><div class="mc-opts">
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q15" value="A"><span class="bubble"></span><span><b>A.</b> Two vertically aligned holes, equally far above and below the crease</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q15" value="B"><span class="bubble"></span><span><b>B.</b> Two horizontally aligned holes on the upper half</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q15" value="C"><span class="bubble"></span><span><b>C.</b> One hole because the fold hides the lower half</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q15" value="D"><span class="bubble"></span><span><b>D.</b> Four holes, one in each quadrant</span></label>
+      </div></div>
+    </div>
+  </article>
+
+  <article class="mc-q">
+    <div class="fold-layout">
+      <div class="fold-diagram"><svg viewBox="0 0 210 135" role="img" aria-label="Square folded left to right, then bottom to top, with one punch in folded quarter"><rect class="sheet-shape" x="14" y="10" width="112" height="112"/><line class="crease" x1="70" y1="10" x2="70" y2="122"/><line class="crease" x1="14" y1="66" x2="126" y2="66"/><path class="fold-arrow" d="M32 45 Q52 26 66 42"/><path class="fold-arrow" d="M92 105 Q113 87 94 70"/><rect class="sheet-shape" x="150" y="36" width="48" height="48"/><circle class="punch" cx="184" cy="50" r="4"/><text class="diagram-label" x="12" y="133">left → right, then bottom ↑</text></svg></div>
+      <div><div class="mc-q-text"><span class="qnum">16.</span>A square is folded left to right and then bottom to top. One punch is made away from both creases. What is guaranteed after both unfolds? <span class="lvl lvl-2">L2</span></div><div class="mc-opts">
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q16" value="A"><span class="bubble"></span><span><b>A.</b> 2 holes with vertical symmetry only</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q16" value="B"><span class="bubble"></span><span><b>B.</b> 3 holes forming a triangle</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q16" value="C"><span class="bubble"></span><span><b>C.</b> 4 holes symmetric across both center creases</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q16" value="D"><span class="bubble"></span><span><b>D.</b> 8 holes because each fold doubles twice</span></label>
+      </div></div>
+    </div>
+  </article>
+
+  <article class="mc-q">
+    <div class="fold-layout">
+      <div class="fold-diagram"><svg viewBox="0 0 210 135" role="img" aria-label="Square with diagonal crease from lower left to upper right and a punch near the lower right"><rect class="sheet-shape" x="28" y="9" width="112" height="112"/><line class="crease" x1="28" y1="121" x2="140" y2="9"/><path class="fold-arrow" d="M112 101 Q145 76 122 47"/><circle class="punch" cx="113" cy="90" r="4"/><text class="diagram-label" x="31" y="133">reflect across diagonal</text></svg></div>
+      <div><div class="mc-q-text"><span class="qnum">17.</span>The paper is folded on the shown diagonal. Which statement locates the partner hole after unfolding? <span class="lvl lvl-3">L3</span></div><div class="mc-opts">
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q17" value="A"><span class="bubble"></span><span><b>A.</b> Directly left at the same height</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q17" value="B"><span class="bubble"></span><span><b>B.</b> Across the diagonal at equal perpendicular distance</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q17" value="C"><span class="bubble"></span><span><b>C.</b> At the opposite corner regardless of distance</span></label>
+        <label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q17" value="D"><span class="bubble"></span><span><b>D.</b> On the diagonal at the nearest point</span></label>
+      </div></div>
+    </div>
+  </article>
+
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">18.</span>A square is folded in half vertically. Two punches are made in the folded sheet, both away from the crease and at different heights. How many holes should appear after unfolding? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18" value="A"><span class="bubble"></span><span><b>A.</b> 2</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18" value="B"><span class="bubble"></span><span><b>B.</b> 3</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18" value="C"><span class="bubble"></span><span><b>C.</b> 4</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q18" value="D"><span class="bubble"></span><span><b>D.</b> 8</span></label></div></article>
+
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">19.</span>After one vertical half-fold, a punch is made <em>exactly on the folded crease</em>. What changes about the usual doubling rule? <span class="lvl lvl-3">L3</span></div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q19" value="A"><span class="bubble"></span><span><b>A.</b> The punch creates one crease-centered hole rather than a separate mirrored pair.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q19" value="B"><span class="bubble"></span><span><b>B.</b> The punch creates four corner holes.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q19" value="C"><span class="bubble"></span><span><b>C.</b> The hole disappears when the sheet opens.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q19" value="D"><span class="bubble"></span><span><b>D.</b> Nothing changes; every punch always doubles.</span></label></div></article>
+
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">20.</span>A sheet is folded vertically first and diagonally second. Which crease is reversed first, and what happens to the existing punch? <span class="lvl lvl-4">L4</span></div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q20" value="A"><span class="bubble"></span><span><b>A.</b> Vertical first; slide the punch horizontally.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q20" value="B"><span class="bubble"></span><span><b>B.</b> Diagonal first; reflect the punch perpendicularly across that diagonal.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q20" value="C"><span class="bubble"></span><span><b>C.</b> Either crease first; the final position is guessed from the corners.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q20" value="D"><span class="bubble"></span><span><b>D.</b> Open both at once; rotate the punch 180°.</span></label></div></article>
+  <div class="footer-note">Ability checkpoint: eliminate by hole count, symmetry, then exact position.</div>
+</section>
+
+<section class="sheet page-break" aria-label="Mixed digital sprint and error log">
+  <div class="section-hd"><span class="icon">⚡</span><h2>Part C — Mixed Digital Sprint</h2><span class="badge badge-green">10 Questions · 8 min</span></div>
+  <div class="instr">Simulate the screen: select one response for every item. If stuck after a reasonable attempt, eliminate, choose, and continue.</div>
+
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">21.</span>Which is the expanded form of 305,070.09?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q21"><span class="bubble"></span><span><b>A.</b> 300,000 + 5,000 + 70 + 0.09</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q21"><span class="bubble"></span><span><b>B.</b> 300,000 + 500 + 70 + 0.9</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q21"><span class="bubble"></span><span><b>C.</b> 300,000 + 5,000 + 7 + 0.09</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q21"><span class="bubble"></span><span><b>D.</b> 30,000 + 5,000 + 70 + 0.09</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">22.</span>What is the value of 2⁴ + 3(6 − 2)?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q22"><span class="bubble"></span><span><b>A.</b> 20</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q22"><span class="bubble"></span><span><b>B.</b> 28</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q22"><span class="bubble"></span><span><b>C.</b> 40</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q22"><span class="bubble"></span><span><b>D.</b> 76</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">23.</span>Which expression has a value of −2?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q23"><span class="bubble"></span><span><b>A.</b> −9 + 7</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q23"><span class="bubble"></span><span><b>B.</b> −9 − 7</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q23"><span class="bubble"></span><span><b>C.</b> 9 + (−7)</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q23"><span class="bubble"></span><span><b>D.</b> −7 − (−9)</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">24.</span>What is the greatest common factor of 54 and 90?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q24"><span class="bubble"></span><span><b>A.</b> 6</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q24"><span class="bubble"></span><span><b>B.</b> 9</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q24"><span class="bubble"></span><span><b>C.</b> 18</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q24"><span class="bubble"></span><span><b>D.</b> 27</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">25.</span>Which number is prime?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q25"><span class="bubble"></span><span><b>A.</b> 51</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q25"><span class="bubble"></span><span><b>B.</b> 57</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q25"><span class="bubble"></span><span><b>C.</b> 61</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q25"><span class="bubble"></span><span><b>D.</b> 69</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">26.</span>What is 12.05 − 7.8?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q26"><span class="bubble"></span><span><b>A.</b> 4.25</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q26"><span class="bubble"></span><span><b>B.</b> 4.75</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q26"><span class="bubble"></span><span><b>C.</b> 5.25</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q26"><span class="bubble"></span><span><b>D.</b> 11.27</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">27.</span>Which rewrite makes 72 × 25 easiest to compute mentally?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q27"><span class="bubble"></span><span><b>A.</b> 72 × (100 ÷ 4)</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q27"><span class="bubble"></span><span><b>B.</b> 70 × 20 + 2 × 5</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q27"><span class="bubble"></span><span><b>C.</b> 72 × (30 − 10)</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q27"><span class="bubble"></span><span><b>D.</b> 72 + 25</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">28.</span>Two perpendicular half-folds and two punches away from both creases normally produce how many final holes?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q28"><span class="bubble"></span><span><b>A.</b> 4</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q28"><span class="bubble"></span><span><b>B.</b> 6</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q28"><span class="bubble"></span><span><b>C.</b> 8</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q28"><span class="bubble"></span><span><b>D.</b> 16</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">29.</span>A result from one vertical fold has holes at unequal distances from the vertical crease. What is the fastest conclusion?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q29"><span class="bubble"></span><span><b>A.</b> It is possible if the punch was deep.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q29"><span class="bubble"></span><span><b>B.</b> It is impossible; a mirror preserves crease-distance.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q29"><span class="bubble"></span><span><b>C.</b> It is possible only on a square.</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q29"><span class="bubble"></span><span><b>D.</b> More information about paper thickness is needed.</span></label></div></article>
+  <article class="mc-q"><div class="mc-q-text"><span class="qnum">30.</span>Which scratch-paper note best protects accuracy on a two-fold problem?</div><div class="mc-opts"><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q30"><span class="bubble"></span><span><b>A.</b> “Choose the most symmetric picture.”</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q30"><span class="bubble"></span><span><b>B.</b> “4 layers; undo fold 2, mirror; undo fold 1, mirror both.”</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q30"><span class="bubble"></span><span><b>C.</b> “Open both folds at the same time.”</span></label><label class="mc-opt" onclick="selMC(this)"><input type="radio" name="q30"><span class="bubble"></span><span><b>D.</b> “Count only the visible punch marks.”</span></label></div></article>
+
+  <hr class="divider">
+  <div class="section-hd"><span class="icon">🧾</span><h2>Part D — Error Log</h2><span class="badge badge-coral">Required for Every Miss</span></div>
+  <div class="instr">Record the problem number, the exact breakdown, and the repair you will use next time. “Careless” alone is not a diagnosis.</div>
+  <div class="error-log">
+    <h3>My Errors This Week</h3>
+    <table class="error-table">
+      <thead><tr><th>#</th><th>Problem</th><th>What I Did Wrong</th><th>Error Type + Repair</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input class="table-input" aria-label="Error 1 problem number"></td><td><input class="table-input" aria-label="Error 1 description"></td><td><input class="table-input" aria-label="Error 1 type and repair"></td></tr>
+        <tr><td>2</td><td><input class="table-input" aria-label="Error 2 problem number"></td><td><input class="table-input" aria-label="Error 2 description"></td><td><input class="table-input" aria-label="Error 2 type and repair"></td></tr>
+        <tr><td>3</td><td><input class="table-input" aria-label="Error 3 problem number"></td><td><input class="table-input" aria-label="Error 3 description"></td><td><input class="table-input" aria-label="Error 3 type and repair"></td></tr>
+        <tr><td>4</td><td><input class="table-input" aria-label="Error 4 problem number"></td><td><input class="table-input" aria-label="Error 4 description"></td><td><input class="table-input" aria-label="Error 4 type and repair"></td></tr>
+        <tr><td>5</td><td><input class="table-input" aria-label="Error 5 problem number"></td><td><input class="table-input" aria-label="Error 5 description"></td><td><input class="table-input" aria-label="Error 5 type and repair"></td></tr>
+        <tr><td>6</td><td><input class="table-input" aria-label="Error 6 problem number"></td><td><input class="table-input" aria-label="Error 6 description"></td><td><input class="table-input" aria-label="Error 6 type and repair"></td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills"><span class="pill pill-cg">Content Gap · rule missing</span><span class="pill pill-ce">Careless Error · detail dropped</span><span class="pill pill-ru">Rushing · method skipped</span></div>
+  </div>
+
+  <div class="reflect-box"><h3>Weekly Reflection</h3><div class="reflect-lines">
+    <label class="reflect-line"><span>The arithmetic habit that would have prevented my biggest miss is</span><input type="text" aria-label="Arithmetic reflection"></label>
+    <label class="reflect-line"><span>In paper folding, I need to improve</span><input type="text" aria-label="Paper folding reflection"></label>
+    <label class="reflect-line"><span>One question I will ask my tutor is</span><input type="text" aria-label="Tutor question"></label>
+  </div></div>
+  <div class="footer-note">TACHS 2026 · Preserve structure in arithmetic. Count, reverse, and mirror in paper folding.</div>
+</section>
+</main>
+<script>
+function selMC(label){
+  const group=label.closest('.mc-opts');
+  group.querySelectorAll('.mc-opt').forEach(item=>{item.classList.remove('selected');item.querySelector('.bubble').textContent=''});
+  label.classList.add('selected');label.querySelector('.bubble').textContent='✓';
+  const radio=label.querySelector('input[type="radio"]');radio.checked=true;
+}
+function clearAll(){
+  if(!confirm('Clear all answers and selections?'))return;
+  document.querySelectorAll('input[type="text"],input[type="number"],textarea').forEach(el=>{el.value='';if(el.tagName==='TEXTAREA')el.style.height=''});
+  document.querySelectorAll('input[type="radio"]').forEach(el=>el.checked=false);
+  document.querySelectorAll('.mc-opt').forEach(item=>{item.classList.remove('selected');item.querySelector('.bubble').textContent=''});
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('textarea').forEach(ta=>ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'}));
+  document.querySelectorAll('.mc-opt input').forEach(r=>r.addEventListener('focus',()=>r.closest('.mc-opt').classList.add('keyboard-focus')));
+});
+</script>
+</body>
+</html>
