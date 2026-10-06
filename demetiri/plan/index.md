@@ -4,8 +4,6 @@
 **Meeting schedule:** Tuesdays, 1 hour — Oct 6, Oct 13, Oct 20, Oct 27, Nov 3
 **Test date:** Saturday, Nov 7, 2026 (Brooklyn/Queens, Rockville Centre). *Archdiocese of New York tests Friday, Nov 6 — confirm which applies.*
 
----
-
 ## 1. Where the Points Are
 
 | Section | Diagnostic | Main problem | Target for Nov 7 |
@@ -27,8 +25,6 @@ Of the 103 points lost, 68 came from Math and Ability — these get most of the 
 ### First five minutes of Session 1
 Ask: **"Did you finish the Math section?"** From Q13 onward, 24 of 38 answers were B or K (the 2nd choice), only 12 correct. The answer decides whether Math is mainly a content problem or a pacing problem.
 
----
-
 ## 2. Weekly Session Plan
 
 | Session | In the 60 minutes | Homework (25–35 min/day) |
@@ -41,7 +37,6 @@ Ask: **"Did you finish the Math section?"** From Q13 onward, 24 of 38 answers we
 
 Every session after the first opens with the error log, not re-teaching. With one hour a week, homework carries most of the gain.
 
----
 
 ## 3. Mathematics — Detailed Scope (Priority #1)
 
@@ -60,6 +55,7 @@ Every session after the first opens with the error log, not re-teaching. With on
 **Calculator note:** the on-screen calculator helps with raw computation (Q5, Q8) but not with order-of-operations traps, primes, or deciding what to compute. Drill these without it; use it to check, not to think.
 
 ### Session 2 — Percents and proportional reasoning
+
 | Skill | Item | What to accomplish |
 |---|---|---|
 | Percent of a number | Q46 | 5% of ~600 = 30 (find 10%, halve it) |
@@ -69,6 +65,7 @@ Every session after the first opens with the error log, not re-teaching. With on
 | Proportions / rates | Q3, Q15, Q50 | Cross-multiply (x = 12). Track units: fraction × 4 × 3 = 8 hours; 8 × 9 = 72 minutes |
 
 ### Session 3 — Geometry, measurement, data
+
 | Skill | Item | What to accomplish |
 |---|---|---|
 | Angle facts | Q20, Q37 | Triangle = 180°, quadrilateral = 360° (x = 111). Isosceles base angles equal (72° each) |
@@ -77,6 +74,7 @@ Every session after the first opens with the error log, not re-teaching. With on
 | Graphs, tables, mean | Q23, Q24, Q25, Q39 | Circle the row/column asked about before answering. Ratio 30:30 = 1:1; 34 − 33 = 1; smallest row sum; mean = total ÷ count |
 
 ### Session 4 — Estimation, parity, pacing
+
 | Skill | Item | What to accomplish |
 |---|---|---|
 | Estimation block | Q42, Q44, Q47, Q49 | Round *first*, then compute: 4(10)+3(20) = 100; 5+7+10 = 22; 300 × 200 = 60,000; 1,800 ÷ 9 = 200 |
@@ -85,7 +83,6 @@ Every session after the first opens with the error log, not re-teaching. With on
 
 *Section timing is not published officially; third-party estimates put Math near 40 minutes. Treat as a rough guide.*
 
----
 
 ## 4. Ability — Detailed Scope (Priority #2)
 
@@ -107,7 +104,7 @@ Matrices (3/20) and Paper Folding (2/10) are at chance level. This section rewar
 - If more than one choice fits, the rule is too loose — add a second feature (shading, side count) until one choice remains.
 - Pacing target: roughly 35–40 seconds per Ability item (third-party estimate). Build toward it with weekly timed sets.
 
----
+
 
 ## 5. Written Expression (Session 4 + homework)
 
@@ -121,7 +118,7 @@ Usage & Composition was 10/10; all losses are mechanics.
 | Grammar / word choice | Q16, Q24 | edition vs. addition; pronoun-antecedent agreement (two people → "them") |
 | "No change" discipline | Q35, Q44 | Reread the original once more before deciding it has an error |
 
----
+
 
 ## 6. Reading (Session 4 + homework)
 
@@ -133,7 +130,7 @@ Usage & Composition was 10/10; all losses are mechanics.
 | Point of view | Q26 | Identify narrator pronouns first (third-person) |
 | Main idea / title | Q17, Q40 | Ask "what is the *whole* passage about?" — not one paragraph |
 
----
+
 
 ## 7. Error Log Template (student keeps daily)
 
@@ -141,7 +138,6 @@ Usage & Composition was 10/10; all losses are mechanics.
 |---|---|---|---|---|---|---|
 | | | | | | | |
 
----
 
 ## 8. Test-Day Checklist (cover in Session 5)
 - Night before: test the computer, browser, and internet; charge the device; quiet room arranged.
