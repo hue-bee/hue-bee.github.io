@@ -1,1 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Homework — Purpose, Counting, Geometry &amp; Fiction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16a34a;--green-lt:#DCFCE7;--purple:#7c3aed;--purple-lt:#EDE9FE;
+  --ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;
+  --bg:#F8FAFF;--white:#FFFFFF;
+  --ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif;
+}
+html{background:#e2e8f0;scroll-behavior:smooth}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.45}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:30}.skip-link:focus{left:1rem;top:1rem}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.tool-btn{min-height:44px;border:0;border-radius:30px;padding:.55rem 1.6rem;background:var(--blue);color:white;font-family:var(--ff-head);font-size:1rem;font-weight:700;box-shadow:0 3px 10px rgba(37,99,235,.3);transition:background .18s,transform .18s}.tool-btn:hover{background:#1d4ed8;transform:translateY(-1px)}.tool-btn.secondary{background:var(--muted);box-shadow:0 3px 10px rgba(100,116,139,.24)}.tool-btn.secondary:hover{background:#475569}
+.sheet{background:var(--white);margin:2rem auto;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}
+.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.25rem;gap:1rem;flex-wrap:wrap}.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue);flex:none}.hw-header h1{font-family:var(--ff-head);font-size:1.75rem;font-weight:800;color:var(--blue);line-height:1.1}.subtitle{font-size:.85rem;color:var(--muted);font-weight:700;margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em}.hw-meta{display:flex;flex-direction:column;gap:.35rem;min-width:220px}.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:700}.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:1px 7px;font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}.line-input{flex:1;border:0;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:0;padding:1px 4px;min-width:0}
+.score-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--blue),#1d4ed8);color:white;border-radius:10px;padding:.7rem 1.2rem;margin-bottom:1.2rem;flex-wrap:wrap;gap:.5rem}.score-banner .title{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.score-banner .sub{font-size:.78rem;opacity:.88}.score-cells{display:flex;gap:.6rem;flex-wrap:wrap}.score-cell{background:rgba(255,255,255,.15);border-radius:8px;padding:.3rem .75rem;text-align:center;min-width:80px}.sc-val{font-family:var(--ff-head);font-size:1.1rem;font-weight:700}.sc-lbl{font-size:.65rem;opacity:.82;text-transform:uppercase;letter-spacing:.04em}.score-input{width:2.2rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.65);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:0}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.15rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.page-kicker{display:flex;align-items:center;gap:.55rem;padding-bottom:.7rem;border-bottom:2px solid var(--blue-md);margin-bottom:1rem}.page-kicker svg{width:25px;color:var(--blue);flex:none}.page-kicker h2{font-family:var(--ff-head);font-size:1.28rem;line-height:1.15}.page-kicker .range{margin-left:auto;font-size:.7rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);background:var(--blue-lt);border:1px solid var(--blue-md);border-radius:20px;padding:3px 10px;white-space:nowrap}
+.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.25rem 0 .72rem}.section-hd .icon{font-size:1.25rem}.section-hd h2{font-family:var(--ff-head);font-size:1.15rem;font-weight:700}.badge{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:20px;margin-left:auto}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86efac}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}
+.instr{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:.85rem;padding:.35rem .75rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.lvl{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 8px;border-radius:20px;vertical-align:middle;margin-left:.3rem}.lvl-1{background:#eee;color:#1f2937}.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:#fff}.lvl-5{background:#374151;color:#fff;border:1px solid #111827}
+.mc-q,.short-q{margin-bottom:1rem;padding:.72rem .85rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px}.mc-q-text,.short-q-text{font-size:.83rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;line-height:1.5}.qnum{font-family:var(--ff-head);color:var(--blue);margin-right:.3rem}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.25rem 1rem}.mc-opt{font-size:.79rem;color:var(--slate);display:flex;align-items:flex-start;gap:.3rem;line-height:1.45;cursor:pointer;padding:.24rem .4rem;border-radius:5px;border:1.5px solid transparent;transition:background .15s}.mc-opt:hover{background:#f0f0f0}.mc-opt input{position:absolute;opacity:0;pointer-events:none}.bubble{width:14px;height:14px;min-width:14px;border:1.5px solid var(--border);border-radius:50%;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800}.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:white}.mc-opt.selected .bubble::after{content:'✓'}.mc-q.locked,.short-q.locked{background:#f1f5f9;border-color:#94a3b8}.locked .mc-opt:not(.selected){opacity:.56}.locked input,.locked textarea,.locked select{pointer-events:none}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.45rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .85rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.answer-input{width:100%;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:.48rem .6rem;font-size:.8rem;outline:0}.work-area{width:100%;resize:vertical;min-height:66px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:.45rem .58rem;font-size:.78rem;outline:0;margin-top:.4rem}.answer-input::placeholder,.work-area::placeholder{color:var(--muted);font-style:italic}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.prob{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.78rem .9rem;position:relative}.prob .commit-row{margin-top:.55rem}.prob-num{font-family:var(--ff-head);font-size:.72rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}.prob-q{font-size:.84rem;color:var(--ink);font-weight:700;line-height:1.55;margin-bottom:.45rem}.prob select,.graph-audit select,.graph-audit input{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem;font-size:.78rem;min-height:36px}.model-row{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}.model-row label{font-size:.69rem;color:var(--muted);font-weight:800}.locked-card{background:#f1f5f9;border-color:#94a3b8}.locked-card input,.locked-card textarea,.locked-card select{pointer-events:none;background:#f8fafc}.locked-card .lock-note{color:var(--green)}
+.fig{display:flex;justify-content:center;margin:.35rem 0 .55rem}.fig svg{max-width:100%;height:auto;overflow:visible}.formula-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.fs-label{font-size:.72rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-right:.3rem}.fml{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .6rem;font-size:.78rem;font-weight:800;color:#1e3a8a;font-family:var(--ff-head)}
+.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem}.passage-title{font-family:var(--ff-head);font-size:1rem;font-weight:700;margin-bottom:.55rem}.passage-text{font-family:Georgia,'Times New Roman',serif;font-size:.82rem;line-height:1.72;color:var(--slate);column-count:2;column-gap:1.45rem}.passage-text p{margin-bottom:.65rem;break-inside:avoid}.para-lbl{font-family:var(--ff-body);background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-weight:800;color:#374151;font-size:.72rem}.set-panel{border:1.5px solid var(--purple);background:var(--purple-lt);border-radius:10px;padding:.7rem .85rem;margin:.9rem 0}.set-panel p{font-size:.77rem;color:#4c1d95;font-weight:700}.set-panel .commit-row{margin-top:.35rem}.set-panel .commit-btn{background:var(--purple)}
+hr.divider{border:0;border-top:2px dashed var(--border);margin:1.5rem 0}
+.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:.55rem}.error-table{width:100%;border-collapse:collapse;font-size:.78rem}.error-table th{background:var(--coral);color:white;font-family:var(--ff-head);font-weight:600;padding:.35rem .6rem;text-align:left;font-size:.75rem}.error-table th:first-child{border-radius:6px 0 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.45rem .6rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:white;font-weight:500;min-height:46px}.error-table td:first-child{font-weight:700;color:var(--ink);width:5%;text-align:center}.error-table tr:last-child td{border-bottom:0}.editable{outline:0;min-width:70px}.error-type-pills{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.73rem;margin-top:.55rem}.pill{padding:2px 10px;border-radius:20px;font-weight:700;border:1.5px solid}.pill-cg{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}.pill-ce{background:#fef9c3;color:#92400e;border-color:#fde68a}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd}
+.reflect-box{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}.reflect-box h3{font-family:var(--ff-head);font-size:.9rem;font-weight:700;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.6rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--slate);font-weight:700}.reflect-line input{flex:1;border:0;border-bottom:1.5px solid var(--border);font-size:.8rem;background:transparent;outline:0;padding:1px 6px}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}.micro-note{font-size:.71rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.3rem .45rem;margin-top:.35rem}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.97);padding:.55rem;margin:0;z-index:20;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.mc-opts,.prob-grid,.model-row{grid-template-columns:1fr}.passage-text{column-count:1}.section-hd,.page-kicker{align-items:flex-start;flex-wrap:wrap}.badge,.page-kicker .range{margin-left:0}.mc-opt{min-height:44px;align-items:center}.error-log{overflow-x:auto}.error-table{min-width:670px}}
+@media print{
+  html{background:white}.no-print{display:none!important}body{max-width:100%}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.15cm 1.4cm!important}.page-break{break-before:page;page-break-before:always}.commit-row{display:none!important}.mc-q,.short-q,.prob,.passage-box,.error-log,.reflect-box{break-inside:avoid}input,textarea,select{border-color:#cbd5e1!important;background:white!important}textarea{resize:none!important}.passage-text{font-size:9.5pt}.footer-note{margin-top:.65rem}
+  .score-input{color:#000!important;-webkit-text-fill-color:#000!important;border-bottom:2px solid #000!important;appearance:textfield;-moz-appearance:textfield}
+  .score-input::-webkit-inner-spin-button,.score-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+}
+</style>
 
+<style id="passage-annotation-styles">
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+
+.annot-color-swatch { padding:0; flex-shrink:0; }
+.annotatable-passage { -webkit-user-select:text; }
+.passage-note { user-select:none; font-family:var(--ff-body); }
+.passage-note:focus .note-tooltip { display:block; }
+.note-input-wrapper { display:inline-flex; align-items:center; gap:4px; background:white; border:1.5px solid #374151; border-radius:8px; padding:2px 6px; margin-left:4px; box-shadow:0 2px 8px rgba(0,0,0,.15); vertical-align:middle; font-style:normal; font-family:var(--ff-body); user-select:none; }
+.note-input-wrapper input { border:none; font-size:.72rem; width:130px; max-width:40vw; color:#374151; background:transparent; font-family:inherit; }
+.note-input-wrapper button { border:none; background:#374151; color:white; border-radius:4px; width:22px; height:22px; font-size:.7rem; cursor:pointer; padding:0; flex-shrink:0; }
+.note-input-wrapper .note-cancel { background:#e5e7eb; color:#374151; }
+@media print { .annotation-toolbar,.note-input-wrapper { display:none!important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print" aria-label="Document actions">
+  <button class="tool-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+  <button class="tool-btn secondary" type="button" onclick="clearAll()">Clear All</button>
+</div>
+<main id="main">
+<section class="sheet">
+  <header class="hw-header">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="One-way answer door logo" role="img"><rect x="7" y="5" width="27" height="38" rx="5" stroke="currentColor" stroke-width="3"/><path d="M18 24h23m-7-7 7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27" cy="24" r="2" fill="currentColor"/></svg>
+      <div><h1>SHSAT CAT Homework</h1><div class="subtitle">Purpose, Counting, Geometry &amp; Fiction · November 2026</div></div>
+    </div>
+    <div class="hw-meta">
+      <label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" aria-label="Student name"></label>
+      <label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" aria-label="Date"></label>
+    </div>
+  </header>
+  <div class="score-banner">
+    <div><div class="title">Self-Score Before Session</div><div class="sub">Score only after every first-pass response is complete.</div></div>
+    <div class="score-cells">
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="12" aria-label="ELA score"> / 12</div><div class="sc-lbl">ELA</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="12" aria-label="Math score"> / 12</div><div class="sc-lbl">Math</div></div>
+      <div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="24" aria-label="Total score"> / 24</div><div class="sc-lbl">Total</div></div>
+    </div>
+  </div>
+  <div class="cat-strip">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg>
+    <p><strong>CAT habit:</strong> Answer deliberately before advancing. For an individual item, “Commit answer” locks your response; for the fiction passage set, review all six responses before submitting the set.</p>
+  </div>
+  <div class="section-hd"><span class="icon" aria-hidden="true">◎</span><h2>Part A — Detail to Purpose</h2><span class="badge badge-blue">6 Questions · ~12 min</span></div>
+  <p class="instr">Before reading the choices, complete this bridge: “The author includes this detail to ___, which helps show ___.”</p>
+  <div class="strategy-strip"><span class="strategy-label">Purpose funnel</span><span class="strategy-chip">1 · Name the whole</span><span class="strategy-chip">2 · Name the detail’s job</span><span class="strategy-chip">3 · Test the bridge</span></div>
+
+  <article class="mc-q" data-item="1">
+    <p class="mc-q-text"><span class="qnum">1.</span> An article explains how a vacant lot became a community orchard. The author adds that, by August, neighbors had posted a waiting list for Saturday watering shifts. What is the main purpose of this detail? <span class="lvl lvl-2">L2</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 1">
+      <label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A)</strong> To show that the project inspired more participation than organizers expected</span></label>
+      <label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B)</strong> To argue that watering trees should be a paid job</span></label>
+      <label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C)</strong> To explain why fruit ripens in August</span></label>
+      <label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D)</strong> To criticize the orchard’s weekend schedule</span></label>
+    </div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+
+  <article class="mc-q" data-item="2">
+    <p class="mc-q-text"><span class="qnum">2.</span> A profile of a marine engineer notes that her first wave sensor returned readings even while sitting motionless on a laboratory shelf. How does this detail support the profile’s focus on careful problem solving? <span class="lvl lvl-3">L3</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 2">
+      <label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A)</strong> It proves that laboratory shelves interfere with all sensors.</span></label>
+      <label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B)</strong> It introduces an unexpected flaw that the engineer must investigate rather than ignore.</span></label>
+      <label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C)</strong> It shows that ocean waves are impossible to measure accurately.</span></label>
+      <label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D)</strong> It compares the engineer’s device with a shelf.</span></label>
+    </div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+
+  <article class="mc-q" data-item="3">
+    <p class="mc-q-text"><span class="qnum">3.</span> A narrator claims that the delayed train “hardly matters,” but then refreshes the arrival screen three times in less than a minute. Why does the author include the repeated action? <span class="lvl lvl-3">L3</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 3">
+      <label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A)</strong> To reveal impatience that conflicts with the narrator’s statement</span></label>
+      <label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B)</strong> To explain how arrival screens are repaired</span></label>
+      <label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C)</strong> To prove that the train has already arrived</span></label>
+      <label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D)</strong> To shift the passage toward a history of rail travel</span></label>
+    </div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+
+  <article class="mc-q" data-item="4">
+    <p class="mc-q-text"><span class="qnum">4.</span> An essay argues that repairing familiar objects can preserve family history. Why does the writer describe the shallow grooves worn into a wooden recipe box by generations of thumbs? <span class="lvl lvl-4">L4</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 4">
+      <label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A)</strong> To recommend sanding every old object smooth</span></label>
+      <label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B)</strong> To provide physical evidence that repeated use can carry personal history</span></label>
+      <label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C)</strong> To show that wood is unsuitable for storage</span></label>
+      <label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D)</strong> To list the tools needed to build a recipe box</span></label>
+    </div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+
+  <article class="mc-q" data-item="5">
+    <p class="mc-q-text"><span class="qnum">5.</span> A science article first describes coral nurseries as promising, then reports that one nursery lost most of its young coral during an unusually warm month. What job does the second detail perform? <span class="lvl lvl-4">L4</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 5">
+      <label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A)</strong> It complicates the initial optimism by showing a serious limitation.</span></label>
+      <label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B)</strong> It proves that coral nurseries never succeed.</span></label>
+      <label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C)</strong> It defines the word <em>nursery</em>.</span></label>
+      <label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D)</strong> It explains how ocean temperatures are recorded.</span></label>
+    </div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+
+  <article class="mc-q" data-item="6">
+    <p class="mc-q-text"><span class="qnum">6.</span> In a story, Mateo repeatedly leaves one chair empty while arranging a crowded dinner table. Only later does the reader learn that his sister may arrive after years away. The empty chair mainly serves to— <span class="lvl lvl-5">L5</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 6">
+      <label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A)</strong> explain that the family owns too many chairs</span></label>
+      <label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B)</strong> foreshadow Mateo’s hope before the reason for it is revealed</span></label>
+      <label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C)</strong> show that Mateo dislikes crowded meals</span></label>
+      <label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D)</strong> establish that dinner has been canceled</span></label>
+    </div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+  <p class="footer-note">Page 1 · A true statement is not enough; the answer must explain the detail’s job.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 25 12 8l5 10 4-7 6 14H5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="24" cy="7" r="3" stroke="currentColor" stroke-width="2.2"/></svg>
+    <h2>Part B — Probability &amp; Counting</h2><span class="range">Questions 7–14 · ~24 min</span>
+  </div>
+  <p class="instr">For every item, decide the structure before computing: slots, order, reuse, or complement.</p>
+  <div class="strategy-strip"><span class="strategy-label">Decision map</span><span class="strategy-chip">Slots?</span><span class="strategy-chip">Does order matter?</span><span class="strategy-chip">Reuse allowed?</span><span class="strategy-chip">Count the complement?</span></div>
+
+  <div class="prob-grid">
+    <article class="prob" data-item="7">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">A museum audio guide is offered in 5 languages and at 2 playback speeds. How many language–speed settings are possible?</p>
+      <div class="model-row"><label>Model type<select aria-label="Question 7 model"><option value="">Choose</option><option>Multiply independent choices</option><option>Add separate cases</option><option>Use a complement</option></select></label><label>Answer<input class="answer-input" inputmode="numeric" aria-label="Question 7 answer" placeholder="number"></label></div>
+      <textarea class="work-area" aria-label="Question 7 work" placeholder="Show the slots or multiplication model."></textarea>
+      <div class="commit-row"><span class="lock-note">Model first.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="8">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A café offers 4 soups, 3 sandwiches, and 3 drinks. How many meals contain exactly one item from each category?</p>
+      <div class="model-row"><label>Structure<select aria-label="Question 8 structure"><option value="">Choose</option><option>Three ordered choice stages</option><option>Choose 3 from 10</option><option>Add the categories</option></select></label><label>Answer<input class="answer-input" inputmode="numeric" aria-label="Question 8 answer" placeholder="number"></label></div>
+      <textarea class="work-area" aria-label="Question 8 work" placeholder="Write the product and explain why it counts each meal once."></textarea>
+      <div class="commit-row"><span class="lock-note">Audit the word “each.”</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="9">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Five distinct photographs—B, C, D, E, and F—are arranged in a row. How many arrangements place photograph B at either end?</p>
+      <div class="model-row"><label>First decision<select aria-label="Question 9 first decision"><option value="">Choose</option><option>Choose B’s end, then arrange the rest</option><option>Choose 1 photograph from 5</option><option>Subtract one forbidden arrangement</option></select></label><label>Answer<input class="answer-input" inputmode="numeric" aria-label="Question 9 answer" placeholder="number"></label></div>
+      <textarea class="work-area" aria-label="Question 9 work" placeholder="Show every factor in the counting model."></textarea>
+      <div class="commit-row"><span class="lock-note">Keep the two end cases disjoint.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="10">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A robotics club has 9 members and selects 3 members for an outreach team. No roles are assigned. How many different teams are possible?</p>
+      <div class="model-row"><label>Swap test<select aria-label="Question 10 swap test"><option value="">Choose</option><option>A reorder is the same team</option><option>A reorder is a new team</option></select></label><label>Answer<input class="answer-input" inputmode="numeric" aria-label="Question 10 answer" placeholder="number"></label></div>
+      <textarea class="work-area" aria-label="Question 10 work" placeholder="Use a combination or divide out duplicate orders."></textarea>
+      <div class="commit-row"><span class="lock-note">No roles means order does not matter.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="11">
+      <div class="prob-num">Problem 11 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">From the same 9 members, a presenter, a demonstrator, and a timekeeper are assigned. How many assignments are possible?</p>
+      <div class="model-row"><label>Swap test<select aria-label="Question 11 swap test"><option value="">Choose</option><option>A reorder changes the assignment</option><option>A reorder gives the same assignment</option></select></label><label>Answer<input class="answer-input" inputmode="numeric" aria-label="Question 11 answer" placeholder="number"></label></div>
+      <textarea class="work-area" aria-label="Question 11 work" placeholder="Compare the role structure with Problem 10."></textarea>
+      <div class="commit-row"><span class="lock-note">Roles create distinct slots.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="12">
+      <div class="prob-num">Problem 12 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A bag contains 6 black tiles and 4 white tiles. Two tiles are drawn without replacement. What is the probability that both are white?</p>
+      <div class="model-row"><label>Second denominator<select aria-label="Question 12 denominator"><option value="">Choose</option><option>9</option><option>10</option><option>8</option></select></label><label>Answer<input class="answer-input" aria-label="Question 12 answer" placeholder="simplified fraction"></label></div>
+      <textarea class="work-area" aria-label="Question 12 work" placeholder="Write the changing numerators and denominators."></textarea>
+      <div class="commit-row"><span class="lock-note">No replacement changes both counts.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+  </div>
+
+  <article class="short-q" data-item="13" style="margin-top:.9rem">
+    <p class="short-q-text"><span class="qnum">13.</span> A shipment contains 8 working flashlights and 2 defective flashlights. Two are tested without replacement. Find the probability that <em>at least one</em> tested flashlight is defective. <span class="lvl lvl-4">L4</span></p>
+    <div class="model-row"><label>Best complement<select aria-label="Question 13 complement"><option value="">Choose</option><option>Both flashlights work</option><option>Both are defective</option><option>Exactly one works</option></select></label><label>Final probability<input class="answer-input" aria-label="Question 13 answer" placeholder="simplified fraction"></label></div>
+    <textarea class="work-area" aria-label="Question 13 work" placeholder="Compute 1 minus the probability of the complement; show both factors."></textarea>
+    <div class="commit-row"><span class="lock-note">“At least one” often becomes “none.”</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+
+  <article class="short-q" data-item="14">
+    <p class="short-q-text"><span class="qnum">14.</span> A robot travels from S to T using exactly 5 moves right and 3 moves up. The marked intersection is blocked. How many shortest routes avoid it? <span class="lvl lvl-5">L5</span></p>
+    <div class="fig">
+      <svg viewBox="0 0 360 170" width="360" role="img" aria-label="Five by three route grid from S to T with blocked intersection after two right moves and one up move">
+        <g stroke="#94a3b8" stroke-width="1.4"> <path d="M30 140H330M30 105H330M30 70H330M30 35H330"/><path d="M30 35V140M90 35V140M150 35V140M210 35V140M270 35V140M330 35V140"/></g>
+        <circle cx="150" cy="105" r="8" fill="#F97066"/><path d="M144 99l12 12m0-12-12 12" stroke="white" stroke-width="2.4" stroke-linecap="round"/><text x="15" y="157" font-family="Nunito" font-weight="800" fill="#2563EB">S</text><text x="337" y="30" font-family="Nunito" font-weight="800" fill="#2563EB">T</text><text x="164" y="109" font-family="Nunito" font-size="12" fill="#c2410c">blocked</text>
+      </svg>
+    </div>
+    <div class="model-row"><label>Route strategy<select aria-label="Question 14 strategy"><option value="">Choose</option><option>All shortest routes minus routes through the block</option><option>All routes plus routes through the block</option><option>Multiply 5 by 3</option></select></label><label>Answer<input class="answer-input" inputmode="numeric" aria-label="Question 14 answer" placeholder="number of routes"></label></div>
+    <textarea class="work-area" aria-label="Question 14 work" placeholder="Count all routes. Then split each forbidden route into S→block and block→T."></textarea>
+    <div class="commit-row"><span class="lock-note">Show all three counts.</span><button class="commit-btn" type="button">Commit answer</button></div>
+  </article>
+  <p class="footer-note">Page 2 · Model first, compute second, and sanity-check last.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2.2"/><path d="M16 5v22M5 16h22" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 3"/></svg>
+    <h2>Part C — Geometry Spiral</h2><span class="range">Questions 15–18 · ~16 min</span>
+  </div>
+  <p class="instr">Translate every label before calculating. Write the formula symbolically, substitute, solve, and attach the correct units.</p>
+  <div class="formula-strip"><span class="fs-label">Formula bank</span><span class="fml">A = πr²</span><span class="fml">C = 2πr</span><span class="fml">V = Bh</span><span class="fml">P = 2l + 2w</span><span class="fml">a² + b² = c²</span></div>
+
+  <div class="prob-grid">
+    <article class="prob" data-item="15">
+      <div class="prob-num">Problem 15 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">A circular fountain has circumference 18π meters. Find its exact area.</p>
+      <div class="fig"><svg viewBox="0 0 180 92" width="180" role="img" aria-label="Circle with circumference eighteen pi meters"><circle cx="72" cy="46" r="34" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><path d="M72 46h34" stroke="#F97066" stroke-width="2"/><text x="91" y="41" font-family="Nunito" font-size="11" fill="#c2410c">r = ?</text><text x="114" y="70" font-family="Nunito" font-size="11" fill="#334155">C = 18π m</text></svg></div>
+      <textarea class="work-area" aria-label="Question 15 work" placeholder="Use circumference to find the radius before using area."></textarea>
+      <input class="answer-input" aria-label="Question 15 answer" placeholder="Exact area with square units">
+      <div class="commit-row"><span class="lock-note">Do not place 18 in the radius slot.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="16">
+      <div class="prob-num">Problem 16 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A triangular prism has a right-triangle base with legs 6 cm and 8 cm. Its volume is 360 cm³. Find the prism’s length.</p>
+      <div class="fig"><svg viewBox="0 0 230 115" width="230" role="img" aria-label="Triangular prism with right triangle legs six and eight centimeters and unknown length"><path d="M35 85 35 25 105 85Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><path d="M95 62 95 12 165 72Z" fill="#fff" stroke="#2563EB" stroke-width="2"/><path d="M35 25 95 12M105 85l60-13M35 85l60-23" stroke="#2563EB" stroke-width="2"/><path d="M35 77h8v8" fill="none" stroke="#F97066" stroke-width="1.5"/><text x="15" y="56" font-family="Nunito" font-size="11">6</text><text x="64" y="99" font-family="Nunito" font-size="11">8</text><text x="121" y="43" font-family="Nunito" font-size="11" fill="#c2410c">length = ?</text></svg></div>
+      <textarea class="work-area" aria-label="Question 16 work" placeholder="Find the triangular base area, then use V = Bh."></textarea>
+      <input class="answer-input" aria-label="Question 16 answer" placeholder="Length with units">
+      <div class="commit-row"><span class="lock-note">The base is a triangle, not a rectangle.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="17">
+      <div class="prob-num">Problem 17 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A rectangle has length 2x + 3 and width x − 2. Its perimeter is 46. Find its area.</p>
+      <div class="fig"><svg viewBox="0 0 220 105" width="220" role="img" aria-label="Rectangle with length two x plus three and width x minus two"><rect x="38" y="22" width="145" height="64" rx="2" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><text x="82" y="18" font-family="Nunito" font-size="11">2x + 3</text><text x="187" y="58" font-family="Nunito" font-size="11">x − 2</text></svg></div>
+      <textarea class="work-area" aria-label="Question 17 work" placeholder="Write and solve the perimeter equation before finding area."></textarea>
+      <input class="answer-input" aria-label="Question 17 answer" placeholder="Area with square units">
+      <div class="commit-row"><span class="lock-note">Solve for x before substituting into both sides.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+
+    <article class="prob" data-item="18">
+      <div class="prob-num">Problem 18 <span class="lvl lvl-5">L5</span></div>
+      <p class="prob-q">A rectangular courtyard measures 18 m by 12 m. A uniform path surrounds it. The outside perimeter is 84 m. Find the area of the path.</p>
+      <div class="fig"><svg viewBox="0 0 240 135" width="240" role="img" aria-label="Rectangle eighteen by twelve surrounded by a uniform path of width w"><rect x="25" y="15" width="190" height="105" rx="3" fill="#FDF3E7" stroke="#D4A574" stroke-width="2"/><rect x="58" y="35" width="124" height="70" rx="2" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><text x="105" y="31" font-family="Nunito" font-size="11">18 m</text><text x="184" y="73" font-family="Nunito" font-size="11">12 m</text><path d="M35 25h23" stroke="#F97066" stroke-width="2"/><text x="41" y="21" font-family="Nunito" font-size="11" fill="#c2410c">w</text></svg></div>
+      <textarea class="work-area" aria-label="Question 18 work" placeholder="Use the outside perimeter to find w; then subtract the two rectangle areas."></textarea>
+      <input class="answer-input" aria-label="Question 18 answer" placeholder="Path area with square units">
+      <div class="commit-row"><span class="lock-note">The path adds 2w to each dimension.</span><button class="commit-btn" type="button">Commit answer</button></div>
+    </article>
+  </div>
+  <div class="cat-strip" style="margin-top:1rem;margin-bottom:0">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4v24M4 16h24" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2.4"/></svg>
+    <p><strong>Dimension audit:</strong> Length uses linear units, area uses square units, and volume uses cubic units. A correct number with the wrong dimension is not a finished answer.</p>
+  </div>
+  <p class="footer-note">Page 3 · Translate labels, write the formula, and check dimensions.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 7.5A4.5 4.5 0 0 1 9.5 3H16v24H9.5A4.5 4.5 0 0 0 5 31V7.5ZM27 7.5A4.5 4.5 0 0 0 22.5 3H16v24h6.5A4.5 4.5 0 0 1 27 31V7.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    <h2>Part D — Fiction Passage Set</h2><span class="range">Questions 19–24 · ~22 min</span>
+  </div>
+  <p class="instr">Read for change: What does Kai want at first? What disrupts that plan? What does Kai finally value?</p>
+  <div class="passage-box">
+    <div class="passage-title">The Wobble Pattern</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">1</span> Kai had promised the science fair judges a drawing robot that could produce a perfect circle every time. On the evening before the fair, the machine rolled across the poster paper, lowered its blue marker, and drew something closer to a seashell: round at first, then tightening into a crooked spiral.</p>
+      <p><span class="para-lbl">2</span> “Again,” Kai muttered. The robot traced a second spiral, almost identical to the first. Along the workbench, earlier attempts lay face down like mistakes too embarrassing to watch.</p>
+      <p><span class="para-lbl">3</span> Kai’s cousin Lila, who had come to help label the display, held one page toward the lamp. “These lines look printed,” she said. “Even the wobble repeats.”</p>
+      <p><span class="para-lbl">4</span> “A repeated error is still an error.” Kai reached for the screwdriver. The left wheel turned smoothly, but the right wheel resisted once during every rotation. A slightly bent axle was lifting one edge of the robot at a regular interval.</p>
+      <p><span class="para-lbl">5</span> The replacement axle was somewhere in the school supply cabinet, locked until morning. Kai pictured the judges reading the project title—<em>Precision Through Programming</em>—and then looking down at the stack of blue shells. He peeled the title card from the display board.</p>
+      <p><span class="para-lbl">6</span> Lila set three drawings side by side. The spirals were not random. Each wide curve narrowed at the same point, and each small hook leaned in the same direction. “Your code is correcting for a machine it doesn’t actually have,” she said. “What if you tell it about the machine it does have?”</p>
+      <p><span class="para-lbl">7</span> Kai opened the program. Instead of commanding the wheels to move at equal speeds, he measured the right wheel’s hesitation and changed the timing. The robot drew an oval, then a lopsided loop, then a circle that closed with only a small bump. Kai could have stopped there.</p>
+      <p><span class="para-lbl">8</span> But the face-down pages no longer looked useless. Kai entered the old timing again and changed the marker color after every wheel rotation. Blue curved into green, green into gold. The bent axle pulled each band slightly inward until the page filled with a bright whirl.</p>
+      <p><span class="para-lbl">9</span> The next morning, Kai placed the best circle on one side of the display and the colored whirl on the other. Between them, he posted a new title: <em>Learning the Machine You Built</em>.</p>
+      <p><span class="para-lbl">10</span> When the first judge asked which drawing showed the robot working correctly, Kai looked from the nearly closed circle to the bands of color. “Both,” he said, and turned the bent axle slowly so the judge could see where each pattern began.</p>
+    </div>
+  </div>
+  <div class="strategy-strip"><span class="strategy-label">Margin jobs</span><span class="strategy-chip">¶1–2 · goal + failure</span><span class="strategy-chip">¶3–6 · reinterpretation</span><span class="strategy-chip">¶7–8 · turning point</span><span class="strategy-chip">¶9–10 · new understanding</span></div>
+
+  <article class="mc-q passage-item" data-item="19">
+    <p class="mc-q-text"><span class="qnum">19.</span> Why does Kai initially place the earlier drawings face down? <span class="lvl lvl-2">L2</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 19">
+      <label class="mc-opt"><input type="radio" name="q19" value="A"><span class="bubble"></span><span><strong>A)</strong> Kai plans to surprise Lila with them later.</span></label>
+      <label class="mc-opt"><input type="radio" name="q19" value="B"><span class="bubble"></span><span><strong>B)</strong> Kai views anything short of a perfect circle as evidence of failure.</span></label>
+      <label class="mc-opt"><input type="radio" name="q19" value="C"><span class="bubble"></span><span><strong>C)</strong> The ink must dry without exposure to light.</span></label>
+      <label class="mc-opt"><input type="radio" name="q19" value="D"><span class="bubble"></span><span><strong>D)</strong> The drawings reveal the fair’s secret theme.</span></label>
+    </div>
+  </article>
+
+  <article class="mc-q passage-item" data-item="20">
+    <p class="mc-q-text"><span class="qnum">20.</span> Lila’s observation that “even the wobble repeats” mainly causes Kai to— <span class="lvl lvl-3">L3</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 20">
+      <label class="mc-opt"><input type="radio" name="q20" value="A"><span class="bubble"></span><span><strong>A)</strong> recognize that the flaw has a pattern that can be measured</span></label>
+      <label class="mc-opt"><input type="radio" name="q20" value="B"><span class="bubble"></span><span><strong>B)</strong> decide that Lila should present the project alone</span></label>
+      <label class="mc-opt"><input type="radio" name="q20" value="C"><span class="bubble"></span><span><strong>C)</strong> believe the robot is changing its own program</span></label>
+      <label class="mc-opt"><input type="radio" name="q20" value="D"><span class="bubble"></span><span><strong>D)</strong> conclude that the marker is causing the error</span></label>
+    </div>
+  </article>
+
+  <article class="mc-q passage-item" data-item="21">
+    <p class="mc-q-text"><span class="qnum">21.</span> What is the main purpose of paragraph 5? <span class="lvl lvl-4">L4</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 21">
+      <label class="mc-opt"><input type="radio" name="q21" value="A"><span class="bubble"></span><span><strong>A)</strong> To explain where the school stores every machine part</span></label>
+      <label class="mc-opt"><input type="radio" name="q21" value="B"><span class="bubble"></span><span><strong>B)</strong> To heighten the pressure by removing the easiest repair and exposing Kai’s fear of judgment</span></label>
+      <label class="mc-opt"><input type="radio" name="q21" value="C"><span class="bubble"></span><span><strong>C)</strong> To show that the fair has been postponed until morning</span></label>
+      <label class="mc-opt"><input type="radio" name="q21" value="D"><span class="bubble"></span><span><strong>D)</strong> To prove that Kai chose an inaccurate project title on purpose</span></label>
+    </div>
+  </article>
+  <p class="footer-note">Page 4 · Do not submit yet; continue through Question 24 and review the whole set.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 5h18v22H7z" stroke="currentColor" stroke-width="2.2"/><path d="m11 17 3 3 7-8M11 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2>Fiction Set — Evidence Review</h2><span class="range">Questions 22–24</span>
+  </div>
+
+  <article class="mc-q passage-item" data-item="22">
+    <p class="mc-q-text"><span class="qnum">22.</span> The sentence “Kai could have stopped there” at the end of paragraph 7 emphasizes that— <span class="lvl lvl-4">L4</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 22">
+      <label class="mc-opt"><input type="radio" name="q22" value="A"><span class="bubble"></span><span><strong>A)</strong> producing a nearly correct circle solves the practical problem, but Kai is beginning to see a larger possibility</span></label>
+      <label class="mc-opt"><input type="radio" name="q22" value="B"><span class="bubble"></span><span><strong>B)</strong> Kai has run out of marker colors and must end the experiment</span></label>
+      <label class="mc-opt"><input type="radio" name="q22" value="C"><span class="bubble"></span><span><strong>C)</strong> Lila is no longer interested in the project</span></label>
+      <label class="mc-opt"><input type="radio" name="q22" value="D"><span class="bubble"></span><span><strong>D)</strong> the robot has repaired its own axle</span></label>
+    </div>
+  </article>
+
+  <article class="mc-q passage-item" data-item="23">
+    <p class="mc-q-text"><span class="qnum">23.</span> Which statement best describes Kai’s change across the passage? <span class="lvl lvl-4">L4</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 23">
+      <label class="mc-opt"><input type="radio" name="q23" value="A"><span class="bubble"></span><span><strong>A)</strong> Kai moves from hiding an imperfection to studying it and using it deliberately.</span></label>
+      <label class="mc-opt"><input type="radio" name="q23" value="B"><span class="bubble"></span><span><strong>B)</strong> Kai moves from trusting Lila to refusing all help.</span></label>
+      <label class="mc-opt"><input type="radio" name="q23" value="C"><span class="bubble"></span><span><strong>C)</strong> Kai abandons programming in order to become an artist.</span></label>
+      <label class="mc-opt"><input type="radio" name="q23" value="D"><span class="bubble"></span><span><strong>D)</strong> Kai decides that precision has no value in engineering.</span></label>
+    </div>
+  </article>
+
+  <article class="mc-q passage-item" data-item="24">
+    <p class="mc-q-text"><span class="qnum">24.</span> Why is Kai’s final answer, “Both,” essential to the passage’s meaning? <span class="lvl lvl-5">L5</span></p>
+    <div class="mc-opts" role="radiogroup" aria-label="Question 24">
+      <label class="mc-opt"><input type="radio" name="q24" value="A"><span class="bubble"></span><span><strong>A)</strong> It shows that Kai can no longer tell the two drawings apart.</span></label>
+      <label class="mc-opt"><input type="radio" name="q24" value="B"><span class="bubble"></span><span><strong>B)</strong> It confirms that the judge prefers colorful work to technical work.</span></label>
+      <label class="mc-opt"><input type="radio" name="q24" value="C"><span class="bubble"></span><span><strong>C)</strong> It expresses Kai’s new view that understanding includes both correcting a flaw and learning what the flaw can produce.</span></label>
+      <label class="mc-opt"><input type="radio" name="q24" value="D"><span class="bubble"></span><span><strong>D)</strong> It suggests that the axle no longer affects the robot.</span></label>
+    </div>
+  </article>
+
+  <div class="set-panel" id="setPanel">
+    <p><strong>60-second set review:</strong> Revisit the item you marked as least certain. For each purpose or inference answer, point to one concrete action, contrast, or repeated image. Change an answer only when passage evidence defeats your first choice.</p>
+    <div class="commit-row"><span class="lock-note" id="setNote">Complete all six responses before submitting.</span><button class="commit-btn" id="commitSet" type="button">Submit passage set</button></div>
+  </div>
+  <div class="reflect-box">
+    <h3>Evidence Bridge</h3>
+    <div class="reflect-lines">
+      <label class="reflect-line">The strongest evidence for Kai’s change is <input type="text" aria-label="Evidence for Kai's change"></label>
+      <label class="reflect-line">That evidence matters because <input type="text" aria-label="Why the evidence matters"></label>
+    </div>
+  </div>
+  <p class="footer-note">Page 5 · Review uncertainty, protect evidence-based answers, then commit the set.</p>
+</section>
+
+<section class="sheet page-break">
+  <div class="page-kicker">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 5h18v22H7z" stroke="currentColor" stroke-width="2.2"/><path d="M11 10h10M11 16h10M11 22h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <h2>Part E — Error Log &amp; Transfer</h2><span class="range">Bring to Session</span>
+  </div>
+  <p class="instr">After checking with the assigned key or in session, record the first incorrect step—not only the final wrong answer.</p>
+  <div class="error-log">
+    <h3>My Highest-Value Corrections</h3>
+    <table class="error-table">
+      <thead><tr><th>#</th><th>Item</th><th>My first wrong step</th><th>Error type</th><th>Correct rule / evidence</th><th>New micro-drill</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td></tr>
+        <tr><td>2</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td></tr>
+        <tr><td>3</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td></tr>
+        <tr><td>4</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td></tr>
+      </tbody>
+    </table>
+    <div class="error-type-pills"><span class="pill pill-cg">Concept gap</span><span class="pill pill-ce">Careless execution</span><span class="pill pill-ru">Reading / UI error</span></div>
+  </div>
+
+  <div class="reflect-box">
+    <h3>Weekly CAT Reflection</h3>
+    <div class="reflect-lines">
+      <label class="reflect-line">The decision I rushed was <input type="text" aria-label="Decision rushed"></label>
+      <label class="reflect-line">The check that would have caught it was <input type="text" aria-label="Check that would catch error"></label>
+      <label class="reflect-line">When difficulty rises, my next action will be <input type="text" aria-label="Next action when difficulty rises"></label>
+      <label class="reflect-line">One skill I can now explain clearly is <input type="text" aria-label="Skill now understood"></label>
+    </div>
+  </div>
+
+  <div class="cat-strip" style="margin-top:1rem;margin-bottom:0">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m6 17 6 6L26 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <p><strong>Transfer rule:</strong> The next item’s difficulty is not a command to speed up. Treat it as a new problem: identify the skill, build one defensible model, audit, and advance.</p>
+  </div>
+  <p class="footer-note">Page 6 · An error becomes useful only after you name its cause and rehearse the correction.</p>
+</section>
+</main>
+<script>
+(function(){
+  const allRadioLabels=document.querySelectorAll('.mc-opt');
+  allRadioLabels.forEach(label=>{
+    label.addEventListener('click',()=>{
+      const q=label.closest('.mc-q');
+      if(q.classList.contains('locked')) return;
+      q.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected'));
+      label.classList.add('selected');
+      label.querySelector('input').checked=true;
+    });
+  });
+
+  document.querySelectorAll('.mc-q:not(.passage-item) .commit-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const card=btn.closest('.mc-q');
+      const selected=card.querySelector('input[type="radio"]:checked');
+      if(!selected){card.querySelector('.mc-opt').focus();alert('Choose an answer before committing.');return;}
+      lockQuestion(card,btn);
+    });
+  });
+
+  document.querySelectorAll('.prob .commit-btn,.short-q .commit-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const card=btn.closest('.prob,.short-q');
+      const answer=[...card.querySelectorAll('input:not([type="radio"])')].find(x=>x.value.trim());
+      if(!answer){const first=card.querySelector('input:not([type="radio"])');if(first)first.focus();alert('Enter a final answer before committing.');return;}
+      card.classList.add('locked-card');
+      btn.disabled=true;btn.textContent='Locked ✓';
+      const note=card.querySelector('.lock-note');if(note)note.textContent='Response committed.';
+      card.querySelectorAll('input,textarea,select').forEach(el=>el.disabled=true);
+    });
+  });
+
+  document.getElementById('commitSet').addEventListener('click',function(){
+    const items=[...document.querySelectorAll('.passage-item')];
+    const missing=items.find(card=>!card.querySelector('input[type="radio"]:checked'));
+    if(missing){missing.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('setNote').textContent='Finish every passage-set item before submitting.';return;}
+    items.forEach(card=>lockQuestion(card,null));
+    this.disabled=true;this.textContent='Set submitted ✓';document.getElementById('setNote').textContent='Passage set locked after review.';
+  });
+})();
+
+function lockQuestion(card,btn){
+  card.classList.add('locked');
+  card.querySelectorAll('input[type="radio"]').forEach(x=>x.disabled=true);
+  if(btn){btn.disabled=true;btn.textContent='Locked ✓';}
+  const note=card.querySelector('.lock-note');if(note)note.textContent='Response committed.';
+}
+
+function clearAll(){
+  if(!confirm('Clear every response, score, reflection, and lock?')) return;
+  document.querySelectorAll('input').forEach(input=>{input.checked=false;input.value='';input.disabled=false;});
+  document.querySelectorAll('textarea').forEach(t=>{t.value='';t.disabled=false;});
+  document.querySelectorAll('select').forEach(s=>{s.selectedIndex=0;s.disabled=false;});
+  document.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected'));
+  document.querySelectorAll('.mc-q,.short-q').forEach(x=>x.classList.remove('locked'));
+  document.querySelectorAll('.prob,.short-q').forEach(x=>x.classList.remove('locked-card'));
+  document.querySelectorAll('.commit-btn').forEach(btn=>{btn.disabled=false;btn.textContent=btn.id==='commitSet'?'Submit passage set':'Commit answer';});
+  document.querySelectorAll('.commit-row .lock-note').forEach(n=>n.textContent='Choose, audit, then commit.');
+  document.querySelectorAll('.prob .lock-note,.short-q .lock-note').forEach(n=>n.textContent='Model, solve, and audit.');
+  document.getElementById('setNote').textContent='Complete all six responses before submitting.';
+  document.querySelectorAll('[contenteditable="true"]').forEach(x=>x.textContent='');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<script id="passage-annotation-script">
+
+/* Passage annotation tools adapted from copy.html; original worksheet logic is unchanged. */
+(function () {
+  'use strict';
+  const ignored = '.passage-note,.note-input-wrapper,.para-lbl,.qnum,.lvl';
+  const tools = [['highlight','🖊 Highlight'],['underline','U̲ Underline'],['outline','□ Outline'],['note','📌 Note']];
+  const colors = [['#fef08a','Yellow'],['#86efac','Green'],['#93c5fd','Blue'],['#fca5a5','Pink'],['#c4b5fd','Purple']];
+  function unwrap(el) { if (el.parentNode) el.replaceWith(...el.childNodes); }
+  function setup(passages, anchor, label) {
+    let tool = 'highlight', color = '#fef08a', noteCount = 0;
+    const toolbar = document.createElement('div');
+    toolbar.className = 'annotation-toolbar no-print';
+    toolbar.setAttribute('role','group');
+    toolbar.setAttribute('aria-label',label + ' annotation tools');
+    toolbar.title = 'Choose a tool and color, then select passage text.';
+    const toolLabel = document.createElement('span');
+    toolLabel.className = 'annot-label'; toolLabel.textContent = 'Tool:';
+    toolbar.append(toolLabel);
+    tools.forEach(([name,text]) => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'annot-btn' + (name === tool ? ' active' : '');
+      btn.dataset.tool = name; btn.textContent = text;
+      btn.setAttribute('aria-pressed',String(name === tool));
+      btn.addEventListener('click',() => {
+        tool = name;
+        toolbar.querySelectorAll('.annot-btn').forEach(b => {
+          const active = b === btn;
+          b.classList.toggle('active',active); b.setAttribute('aria-pressed',String(active));
+        });
+      });
+      toolbar.append(btn);
+    });
+    const sep = document.createElement('div'); sep.className = 'annot-sep'; toolbar.append(sep);
+    const colorLabel = document.createElement('span'); colorLabel.className = 'annot-label'; colorLabel.textContent = 'Color:'; toolbar.append(colorLabel);
+    const row = document.createElement('div'); row.className = 'annot-color-row';
+    colors.forEach(([value,name]) => {
+      const swatch = document.createElement('button');
+      swatch.type = 'button'; swatch.className = 'annot-color-swatch' + (value === color ? ' active' : '');
+      swatch.style.backgroundColor = value; swatch.dataset.color = value; swatch.title = name;
+      swatch.setAttribute('aria-label',name); swatch.setAttribute('aria-pressed',String(value === color));
+      swatch.addEventListener('click',() => {
+        color = value;
+        row.querySelectorAll('button').forEach(b => {
+          b.classList.toggle('active',b === swatch); b.setAttribute('aria-pressed',String(b === swatch));
+        });
+      });
+      row.append(swatch);
+    });
+    toolbar.append(row);
+    const clear = document.createElement('button');
+    clear.type = 'button'; clear.className = 'clear-annotations-btn'; clear.textContent = '✕ Clear';
+    clear.addEventListener('click',() => {
+      passages.forEach(p => {
+        p.querySelectorAll('.note-input-wrapper,.passage-note').forEach(el => el.remove());
+        p.querySelectorAll('[data-passage-mark]').forEach(unwrap);
+        p.normalize();
+      });
+      noteCount = 0;
+    });
+    toolbar.append(clear);
+    anchor.before(toolbar);
+
+    function apply(passage, range) {
+      if (range.collapsed || !passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return;
+      const walker = document.createTreeWalker(passage,NodeFilter.SHOW_TEXT);
+      const pieces = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        if (!node.nodeValue.trim() || node.parentElement.closest(ignored) || !range.intersectsNode(node)) continue;
+        const start = node === range.startContainer ? range.startOffset : 0;
+        const end = node === range.endContainer ? range.endOffset : node.length;
+        if (end > start) pieces.push({node,start,end});
+      }
+      if (!pieces.length) return;
+      const marks = [];
+      // Wrap text runs separately so paragraph, emphasis, and column structure stay intact.
+      pieces.forEach(piece => {
+        const part = document.createRange();
+        part.setStart(piece.node,piece.start); part.setEnd(piece.node,piece.end);
+        const span = document.createElement('span'); span.dataset.passageMark = '';
+        span.className = 'passage-' + (tool === 'note' ? 'highlight passage-note-pending' : tool);
+        if (tool === 'highlight') { span.style.backgroundColor = color; span.style.color = '#1f2937'; }
+        if (tool === 'underline') span.style.textDecorationColor = color === '#fef08a' ? '#374151' : color;
+        if (tool === 'outline') span.style.outlineColor = color === '#fef08a' ? '#374151' : color;
+        if (tool === 'note') { span.style.backgroundColor = 'rgba(251,191,36,.35)'; span.style.borderBottom = '2px dashed #f59e0b'; }
+        part.surroundContents(span); marks.push(span);
+      });
+      window.getSelection().removeAllRanges();
+      if (tool !== 'note') return;
+      const last = marks[marks.length - 1];
+      const editor = document.createElement('span'); editor.className = 'note-input-wrapper';
+      const input = document.createElement('input'); input.type = 'text'; input.placeholder = 'Type note...'; input.setAttribute('aria-label','Annotation note');
+      const save = document.createElement('button'); save.type = 'button'; save.textContent = '✓'; save.setAttribute('aria-label','Save note');
+      const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'note-cancel'; cancel.textContent = '✕'; cancel.setAttribute('aria-label','Cancel note');
+      editor.append(input,save,cancel); last.after(editor);
+      let finished = false;
+      function finish(keep) {
+        if (finished || !editor.isConnected) return;
+        finished = true;
+        const text = keep ? input.value.trim() : '';
+        editor.remove();
+        if (!text) { marks.forEach(unwrap); return; }
+        marks.forEach(mark => { mark.className = 'passage-highlight'; mark.style.backgroundColor = '#fef3c7'; mark.style.borderBottom = ''; });
+        const note = document.createElement('span'); note.className = 'passage-note'; note.tabIndex = 0;
+        note.textContent = String(++noteCount); note.setAttribute('aria-label','Note ' + noteCount + ': ' + text);
+        const tooltip = document.createElement('span'); tooltip.className = 'note-tooltip'; tooltip.textContent = 'Note: ' + text;
+        note.append(tooltip); last.after(note);
+        note.addEventListener('click',() => note.focus());
+      }
+      save.addEventListener('click',() => finish(true)); cancel.addEventListener('click',() => finish(false));
+      input.addEventListener('keydown',e => {
+        if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); finish(e.key === 'Enter'); }
+      });
+      input.focus();
+    }
+    passages.forEach(passage => {
+      passage.classList.add('annotatable-passage');
+      let timer;
+      function selected(e) {
+        if (e.target instanceof Element && e.target.closest(ignored)) return;
+        const selection = window.getSelection();
+        if (!selection || !selection.rangeCount || selection.isCollapsed) return;
+        apply(passage,selection.getRangeAt(0).cloneRange());
+      }
+      passage.addEventListener('mouseup',e => { clearTimeout(timer); selected(e); });
+      passage.addEventListener('touchend',e => { clearTimeout(timer); timer = setTimeout(() => selected(e),100); });
+      passage.addEventListener('keyup',e => { if (e.key === 'Shift') selected(e); });
+    });
+  }
+  document.querySelectorAll('.passage-text').forEach(passage => {
+    setup([passage],passage.closest('.passage-box') || passage,'Passage');
+  });
+})();
+</script>
+</body>
+</html>
