@@ -20,3 +20,4 @@
 | **07** | [Connecting Info to Purpose Round 2](https://hue-bee.github.io/josephine/lessons/07) | [7 Homework](https://hue-bee.github.io/josephine/lessons/07/homework) ||
 | **07B** | [Connecting Info to Purpose](https://hue-bee.github.io/josephine/lessons/07B) | [7B Homework](https://hue-bee.github.io/josephine/lessons/07B/homework) ||
 | **08** | [Rhetorical Revising/Editing/Arithmetic Precision](https://hue-bee.github.io/josephine/lessons/08) | [8 Homework](https://hue-bee.github.io/josephine/lessons/08/homework) ||
+| **09** | [Probability & Counting, Geometry Spiral · Fiction Block](https://hue-bee.github.io/josephine/lessons/09) | [9 Homework](https://hue-bee.github.io/josephine/lessons/09/homework) ||
