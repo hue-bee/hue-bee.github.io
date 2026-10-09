@@ -1,90 +1,678 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="slides-format" content="viewport"><title>Session 5 — Rhetorical Synthesis</title><link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet"><style>
-:root{--bg:#f4f4f4;--surface:#fff;--ink:#1f1f1f;--ink-2:#4a4a4a;--ink-3:#767676;--line:rgba(201,212,228,.48);--font-display:'Chillax','Trebuchet MS',sans-serif;--font-body:'Lexend','Trebuchet MS',sans-serif;--z1:#374151;--z2:#2563EB;--z3:#D97706;--z4:#BE123C;--z5:#5B21B6;--z6:#15803D}
-*,*::before,*::after{box-sizing:border-box}html,body{background:var(--bg);margin:0}body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400}.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:all}.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem)}.nav-controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);padding:7px 18px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.32)}.nav-btn{width:34px;height:34px;border:none;background:#edf2f9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer}.nav-btn:hover{background:#dce7f7}.slide-dots{display:flex;gap:5px;max-width:290px;flex-wrap:wrap;justify-content:center}.dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.17);cursor:pointer}.dot.active{background:var(--ink);transform:scale(1.35)}.slide-counter{font-size:.72rem;color:var(--ink-3);min-width:38px;text-align:center;font-weight:600}.reveal{opacity:0;transform:translateY(16px)}
-.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;margin:0}.subtitle{font-family:var(--font-display);font-size:clamp(1rem,2.2vw,1.45rem);font-weight:500;color:var(--ink-2);margin:.6rem 0 .25rem}.meta{font-size:.78rem;color:var(--ink-3);letter-spacing:.13em;text-transform:uppercase;font-weight:500}.session-pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:6px 16px;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:.8rem}.pill-dot{width:8px;height:8px;border-radius:50%;background:#2563eb}.hero-diagram{width:min(520px,64vw);margin:0 auto .4rem;animation:float 4s ease-in-out infinite}.chip-row{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}.chip-row span{background:rgba(37,99,235,.1);color:#1d4ed8;border-radius:20px;padding:5px 13px;font-size:.75rem;font-weight:600}
-.zone-strip{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.75rem}.zone-chip{display:inline-flex;align-items:center;gap:5px;font-size:.62rem;padding:3px 9px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--ink-3);white-space:nowrap}.zone-chip .zdot{width:6px;height:6px;border-radius:50%;background:var(--dc)}.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc)}.zone-chip.on .zdot{background:#fff}.kicker{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--zc);margin-bottom:.3rem}.slide-title{font-family:var(--font-display);font-size:clamp(1.45rem,3vw,2.05rem);font-weight:600;margin:0 0 .85rem}.slide-title .tint{color:var(--zc)}
-.tl-row{display:grid;grid-template-columns:95px 14px 1fr;gap:0 .75rem}.tl-time{font-weight:700;font-size:.8rem;color:var(--rc);text-align:right;padding-top:.58rem}.tl-rail{position:relative;display:flex;justify-content:center}.tl-rail:before{content:'';position:absolute;inset:0 auto;width:2px;background:var(--line)}.tl-dot{position:relative;z-index:1;width:13px;height:13px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:.58rem}.tl-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.42rem .8rem;margin-bottom:.42rem;box-shadow:0 7px 18px rgba(201,212,228,.18)}.tl-h{font-weight:600;font-size:.88rem}.tl-b{font-size:.77rem;color:var(--ink-2);margin-top:.1rem;line-height:1.4}.tag{font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:20px;margin-left:5px}.tag.hot{background:#fadee2;color:#be123c}
-.info-card,.prob-card,.anatomy-card,.blueprint-card,.lock-card,.step-card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 24px rgba(201,212,228,.2),0 2px 6px rgba(201,212,228,.12)}.prob-card{padding:.78rem .95rem}.prob-head{display:flex;align-items:center;gap:.48rem;margin-bottom:.42rem}.prob-num{font-family:var(--font-display);font-weight:600;font-size:.82rem;background:var(--zs);border-radius:8px;padding:2px 9px}.lvl-badge{font-size:.59rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 8px;border-radius:20px}.lvl-1{background:#e8edf5;color:#3d4c63}.lvl-2{background:#dcebfb;color:#1d4ed8}.lvl-3{background:#fbebcf;color:#b45309}.lvl-4{background:#fadee2;color:#be123c}.lvl-5{background:#ede5ff;color:#5b21b6}.qtext{font-size:.84rem;color:var(--ink-2);line-height:1.44}.notes{margin:.22rem 0 .38rem;padding-left:1.15rem}.notes li{margin:.1rem 0}.notes.tight{font-size:.75rem;line-height:1.35}.goal-prompt{background:var(--zs);border-left:4px solid var(--zc);border-radius:8px;padding:.48rem .65rem;font-size:.77rem;font-weight:600;line-height:1.4;margin-top:.42rem}.mc-options{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;margin-top:.45rem}.mc-option{display:flex;gap:.45rem;padding:.34rem .52rem;border-radius:9px;border:1px solid var(--line);background:#fbfcfe;cursor:default;font-size:.72rem;line-height:1.38;color:var(--ink-2)}.opt-letter{font-weight:700;min-width:1rem;color:var(--zc)}.compact{grid-template-columns:1fr 1fr}.compact .mc-option{font-size:.7rem;padding:.28rem .42rem}.micro-prompt{font-size:.74rem;color:var(--zc);font-weight:600;margin-top:.55rem;line-height:1.4}
-.three-grid,.two-grid,.sprint-grid{display:grid;gap:.8rem}.three-grid,.sprint-grid{grid-template-columns:repeat(3,1fr)}.two-grid{grid-template-columns:1fr 1fr}.strategy-strip{border-left:5px solid var(--zc);background:#f9fbfe;border-radius:10px;padding:.62rem .85rem;margin-top:.8rem;font-size:.8rem;color:var(--ink-2);line-height:1.5}.trap-card{border:1px solid var(--line);background:#fff7f8;border-radius:12px;padding:.65rem .9rem;margin-top:.8rem}.trap-title{font-weight:700;font-size:.82rem;color:#9f1239}.trap-body{font-size:.8rem;color:var(--ink-2);margin-top:.2rem;line-height:1.5}.win-card{border:1px solid var(--line);border-left:5px solid #15803d;background:#f4fbf5;border-radius:12px;padding:.65rem .9rem;margin-top:.8rem}.win-title{font-weight:700;font-size:.82rem;color:#15803d}.prose{font-size:.9rem;color:var(--ink-2);line-height:1.6}.prose.small{font-size:.82rem;margin:.2rem 0}.card-title{font-weight:700;font-size:.9rem}.info-card{padding:.8rem 1rem}
-.anatomy-grid{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:center}.anatomy-card{padding:1rem;text-align:center;min-height:180px}.anatomy-card.focus{border:2px solid #2563eb}.anatomy-card h3{font-family:var(--font-display);margin:.3rem 0}.anatomy-card p{font-size:.8rem;color:var(--ink-2);line-height:1.5}.big-num{width:34px;height:34px;border-radius:50%;background:var(--zs);color:var(--zc);font-weight:700;display:grid;place-items:center;margin:auto}.arrow-cell svg{width:100%}.process-flow{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr;align-items:center}.process-node{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.85rem;text-align:center;min-height:135px}.process-node span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--zs);color:var(--zc);font-weight:700;margin:0 auto .45rem}.process-node b{display:block;font-size:.82rem}.process-node small{display:block;color:var(--ink-3);font-size:.68rem;margin-top:.35rem;line-height:1.35}.flow-arrow{text-align:center;color:var(--zc);font-size:1.5rem;font-weight:700}.verb-table{display:grid;grid-template-columns:190px 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}.vh{background:#edf2f9;padding:.55rem .75rem;font-size:.73rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}.vc{padding:.52rem .75rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--ink-2)}.vc:nth-child(odd){font-weight:700;color:var(--zc)}
-.filter-layout{display:grid;grid-template-columns:1fr 1.2fr 1.2fr;gap:1rem;align-items:center}.note-stack{display:grid;gap:.45rem}.note-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;font-size:.78rem;font-weight:600}.note-card.faded{opacity:.48}.funnel-wrap svg{width:100%;max-height:250px}.decision-list{display:grid;gap:.55rem}.decision{background:#fff;border:1px solid var(--line);border-left:5px solid;border-radius:10px;padding:.65rem}.decision b{display:block;font-size:.78rem}.decision span{display:block;font-size:.7rem;color:var(--ink-2);margin-top:.15rem;line-height:1.4}.decision.yes{border-left-color:#15803d}.decision.no{border-left-color:#be123c}.decision.maybe{border-left-color:#d97706}.blueprint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.blueprint-card{padding:.85rem;text-align:center}.bp-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--zc)}.bp-line{display:flex;align-items:center;justify-content:center;gap:.4rem;margin:.8rem 0}.bp-line span{background:var(--zs);border-radius:8px;padding:.35rem .5rem;font-size:.75rem;font-weight:700}.bp-line i{font-size:.68rem;color:var(--ink-3)}.blueprint-card p{font-size:.72rem;color:var(--ink-2);line-height:1.45}.locks-grid{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;max-width:750px;margin:auto}.lock-card{text-align:center;padding:.9rem 1.2rem}.lock-card svg{width:70px;height:78px}.lock-card h3{margin:.2rem 0;font-family:var(--font-display)}.lock-card p{font-size:.75rem;color:var(--ink-2);line-height:1.45}.plus-sign{text-align:center;font-size:2rem;color:var(--zc);font-weight:700}.failure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.75rem}.failure-grid span{background:#fff7f8;border:1px solid #fadee2;border-radius:9px;padding:.5rem;text-align:center;font-size:.7rem;color:#9f1239;font-weight:700}
-.section-number{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--zc);margin-bottom:.5rem}.section-sub{font-size:.95rem;color:var(--ink-2);line-height:1.6}.truth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;max-width:760px;margin:1.2rem auto 0}.truth-grid div{background:#fff;border:1px solid var(--line);border-radius:13px;padding:.8rem}.truth-grid b,.truth-grid span{display:block}.truth-grid b{color:var(--zc)}.truth-grid span{font-size:.72rem;color:var(--ink-3);margin-top:.2rem}.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.step-card{padding:.9rem}.step-card>span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--zs);color:var(--zc);font-weight:700}.step-card h3{font-family:var(--font-display);font-size:.95rem;margin:.5rem 0 .25rem}.step-card p{font-size:.76rem;color:var(--ink-2);line-height:1.5}.formula-box{background:var(--zs);border:1px solid color-mix(in srgb,var(--zc) 30%,white);border-radius:12px;padding:.58rem 1rem;text-align:center;margin-top:.8rem}.solve-frame{font-size:.9rem;color:var(--ink-2)}.walk-layout{display:grid;grid-template-columns:1.15fr 1fr;gap:1rem;align-items:center}.trade-diagram{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.5rem}.trade-diagram svg{width:100%;max-height:250px}.steps-column{display:grid;gap:.55rem}.mini-step{background:#fff;border:1px solid var(--line);border-left:5px solid var(--zc);border-radius:10px;padding:.62rem .75rem}.mini-step b,.mini-step span{display:block}.mini-step b{font-size:.78rem}.mini-step span{font-size:.7rem;color:var(--ink-2);line-height:1.4;margin-top:.15rem}.claim-scale{display:grid;grid-template-columns:1fr 140px 1fr;align-items:center;max-width:850px;margin:auto}.claim-side{display:grid;gap:.45rem}.scale-label{text-align:center;text-transform:uppercase;letter-spacing:.08em;font-size:.68rem;font-weight:700;color:var(--zc)}.claim-pill{background:#eef4ff;border:1px solid #bed3f5;border-radius:20px;padding:.5rem;text-align:center;font-size:.75rem;font-weight:600}.claim-pill.warn{background:#f3f0fe;border-color:#d9cdf8}.scale-beam svg{width:100%;height:180px}.three-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}.three-steps div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.62rem}.three-steps b,.three-steps span{display:block}.three-steps b{font-size:.75rem;color:var(--zc)}.three-steps span{font-size:.68rem;color:var(--ink-2);line-height:1.4;margin-top:.2rem}
-.switch-start{background:var(--zc);color:#fff;border-radius:14px;padding:.7rem;text-align:center;font-weight:700;max-width:340px;margin:auto}.switch-branch{height:72px;max-width:500px;margin:auto}.switch-branch svg{width:100%;height:100%}.switch-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.switch-card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--zc);border-radius:14px;padding:.9rem 1.1rem;text-align:center}.switch-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:700}.switch-card h3{font-family:var(--font-display);margin:.35rem}.switch-card p{font-size:.75rem;color:var(--ink-2);line-height:1.45}.sprint-grid .prob-card{min-height:330px}.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;margin-top:.45rem;}
-.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-body);line-height:1.5;outline:none;}
-.work-box textarea::placeholder{color:#9AA9BF;}
-.work-box textarea:focus{background:#F1F6FD;}.close-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}.close-grid div{background:#fff;border:1px solid var(--line);border-radius:13px;padding:.8rem}.close-grid span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(37,99,235,.1);color:#2563eb;font-weight:700;margin:0 auto .4rem}.close-grid b,.close-grid small{display:block}.close-grid b{font-size:.78rem}.close-grid small{font-size:.66rem;color:var(--ink-3);margin-top:.25rem}.reflection-card{margin:1rem auto 0;max-width:800px;border-left:5px solid #2563eb;background:#f9fbfe;border-radius:12px;padding:.75rem 1rem;text-align:left}.reflection-card b,.reflection-card span{display:block}.reflection-card b{font-size:.78rem;color:#2563eb}.reflection-card span{font-size:.74rem;color:var(--ink-2);margin-top:.2rem}
-.pip-toggle{position:fixed;top:18px;right:18px;z-index:110;background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:24px;padding:8px 14px;font-family:var(--font-body);font-size:.68rem;font-weight:700;color:#2563eb;cursor:pointer;box-shadow:0 8px 22px rgba(201,212,228,.3)}.pip-panel{position:fixed;top:62px;right:18px;z-index:109;width:270px;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 20px 42px rgba(45,55,72,.16);padding:.8rem;transform:translateX(310px);opacity:0;transition:.3s}.pip-panel.open{transform:translateX(0);opacity:1}.pip-panel h3{font-family:var(--font-display);margin:0 0 .45rem;font-size:1rem}.pip-item{border-left:4px solid #2563eb;background:#f9fbfe;border-radius:8px;padding:.5rem .6rem;margin-top:.45rem}.pip-item b{font-size:.7rem;display:block}.pip-item span{font-size:.66rem;color:var(--ink-2);line-height:1.4;display:block;margin-top:.15rem}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@media(max-width:850px){.slide>.content{padding:1rem 1.2rem}.mc-options{grid-template-columns:1fr}.three-grid,.sprint-grid{gap:.45rem}.qtext{font-size:.75rem}.tl-card{padding:.35rem .6rem}.process-node{padding:.6rem}.hero-diagram{width:55vw}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.2s!important}}
-</style></head><body>
-<button class="pip-toggle" onclick="togglePip()">Goal Filter</button><aside class="pip-panel" id="pipPanel"><h3>Four-Step Goal Filter</h3><div class="pip-item"><b>1. Goal</b><span>Circle the action verb and name the required relationship.</span></div><div class="pip-item"><b>2. Notes</b><span>Keep only details that perform the goal.</span></div><div class="pip-item"><b>3. Blueprint</b><span>Predict the sentence structure before choices.</span></div><div class="pip-item"><b>4. Two locks</b><span>Accurate in the notes and aligned to the task.</span></div></aside>
-<div class="deck"><div class="slide active" data-slide="1" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><canvas class="particle-canvas"></canvas><div class="content"><div style="text-align:center;">
-<div class="reveal session-pill"><span class="pill-dot"></span>Session 5 · Reading and Writing</div>
-<div class="hero-diagram reveal" aria-label="Notes pass through a goal filter to form a precise sentence">
-<svg viewBox="0 0 520 130" role="img"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2563EB"/></marker></defs>
-<g fill="#fff" stroke="#c9d4e4" stroke-width="2"><rect x="15" y="17" width="120" height="26" rx="8"/><rect x="15" y="52" width="120" height="26" rx="8"/><rect x="15" y="87" width="120" height="26" rx="8"/></g>
-<g font-family="Lexend" font-size="11" fill="#4a4a4a"><text x="75" y="34" text-anchor="middle">research note</text><text x="75" y="69" text-anchor="middle">research note</text><text x="75" y="104" text-anchor="middle">research note</text></g>
-<path d="M150 65 H215" stroke="#2563EB" stroke-width="3" marker-end="url(#ah)"/>
-<path d="M235 18 H350 L320 110 H265 Z" fill="#eef4ff" stroke="#2563EB" stroke-width="2.5"/><text x="292" y="57" text-anchor="middle" font-family="Chillax" font-weight="600" font-size="16" fill="#1f1f1f">GOAL</text><text x="292" y="79" text-anchor="middle" font-family="Lexend" font-size="11" fill="#4a4a4a">filter</text>
-<path d="M340 65 H405" stroke="#2563EB" stroke-width="3" marker-end="url(#ah)"/><rect x="420" y="39" width="85" height="52" rx="10" fill="#fff" stroke="#c9d4e4" stroke-width="2"/><text x="462" y="62" text-anchor="middle" font-family="Chillax" font-weight="600" font-size="13" fill="#1f1f1f">precise</text><text x="462" y="79" text-anchor="middle" font-family="Lexend" font-size="11" fill="#4a4a4a">sentence</text></svg>
-</div>
-<h1 class="deck-title reveal" style="font-size:clamp(2.3rem,5.7vw,4rem);">Rhetorical <span style="color:#2563EB">Synthesis</span></h1>
-<h2 class="reveal subtitle">Truth is necessary. Task fulfillment decides.</h2>
-<p class="reveal meta">Digital SAT · Advanced one-hour session</p>
-<div class="reveal chip-row"><span>Goal First</span><span>Relevant Notes</span><span>Sentence Blueprint</span><span>Two-Lock Test</span></div>
-</div></div></div><div class="slide" data-slide="2" style="--zc:#17233B;--zs:rgba(23,35,59,.10)"><div class="content"><div class="kicker reveal" style="color:var(--ink-3)">Session Roadmap</div><h2 class="slide-title reveal">Today's 60-Minute Watch List</h2><div class="reveal">
-<div class="tl-row" style="--rc:#374151"><div class="tl-time">0:00–0:07</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Transitions Retrieval</div><div class="tl-b">Name the relationship before considering a transition.</div></div></div>
-<div class="tl-row" style="--rc:#2563EB"><div class="tl-time">0:07–0:22</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Four-Step Routine</div><div class="tl-b">Goal, relevant notes, sentence blueprint, then goal-failure elimination.</div></div></div>
-<div class="tl-row" style="--rc:#D97706"><div class="tl-time">0:22–0:34</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Truth vs. Task</div><div class="tl-b">Accurate choices can still fail the writer's stated purpose.</div></div></div>
-<div class="tl-row" style="--rc:#BE123C"><div class="tl-time">0:34–0:50</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Differentiated Practice <span class="tag hot">Levels 2–5</span></div><div class="tl-b">Compare, explain, introduce findings, qualify, and frame disagreement.</div></div></div>
-<div class="tl-row" style="--rc:#15803D"><div class="tl-time">0:50–0:58</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Routine-Switch Sprint</div><div class="tl-b">Move cleanly between Transitions and Synthesis.</div></div></div>
-<div class="tl-row" style="--rc:#5B21B6"><div class="tl-time">0:58–1:00</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card" style="margin-bottom:0"><div class="tl-h">Precision Debrief</div><div class="tl-b">Name the trap, the repair, and the next recognition cue.</div></div></div></div></div></div><div class="slide" data-slide="3" style="--zc:#374151;--zs:rgba(55,65,81,.10)"><div class="content"><div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Zone 1 · Retrieval</div><h2 class="slide-title reveal">Name the <span class="tint">Relationship</span> — Then the Transition</h2><div class="three-grid">
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">T1</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="qtext">The alloy is unusually light. ______, it retains its strength at high temperatures.</div><div class="micro-prompt">What is the second sentence doing: adding, contrasting, or causing?</div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">T2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="qtext">The survey sample was small. ______, the researchers treated the pattern as preliminary.</div><div class="micro-prompt">Does sentence two oppose the first, result from it, or illustrate it?</div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">T3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="qtext">The archive lacks letters from the expedition. ______, shipping records independently confirm its route.</div><div class="micro-prompt">Is this simple contrast or a concession: “despite that limitation”?</div></div></div>
-<div class="strategy-strip reveal"><b>Retrieval rule:</b> cover the blank mentally. State the logical relationship in ordinary words before naming a transition.</div></div></div><div class="slide" data-slide="4" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Zone 2 · Anatomy</div><h2 class="slide-title reveal">A Synthesis Item Has <span class="tint">Three</span> Moving Parts</h2><div class="anatomy-grid reveal">
-<div class="anatomy-card"><div class="big-num">1</div><h3>Notes</h3><p>A small research bank. Some facts matter; some are deliberate noise.</p></div>
-<div class="arrow-cell"><svg viewBox="0 0 90 42"><defs><marker id="a1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2563EB"/></marker></defs><path d="M5 21 H80" stroke="#2563EB" stroke-width="3" marker-end="url(#a1)"/></svg></div>
-<div class="anatomy-card focus"><div class="big-num">2</div><h3>Writer's goal</h3><p>The scoring criterion. Its verb determines what the sentence must do.</p></div>
-<div class="arrow-cell"><svg viewBox="0 0 90 42"><defs><marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2563EB"/></marker></defs><path d="M5 21 H80" stroke="#2563EB" stroke-width="3" marker-end="url(#a2)"/></svg></div>
-<div class="anatomy-card"><div class="big-num">3</div><h3>Choices</h3><p>Different selections and arrangements of note content. Only one best fits.</p></div></div>
-<div class="trap-card reveal"><div class="trap-title">The common misread</div><div class="trap-body">Treating the notes as a passage to summarize. The task is selective construction, not comprehensive reporting.</div></div></div></div><div class="slide" data-slide="5" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Zone 2 · Core Routine</div><h2 class="slide-title reveal">The <span class="tint">Four-Step</span> Goal Filter</h2><div class="process-flow reveal">
-<div class="process-node"><span>1</span><b>Read the goal first</b><small>Circle the action verb.</small></div><div class="flow-arrow">&rarr;</div>
-<div class="process-node"><span>2</span><b>Select relevant notes</b><small>Ignore true but useless facts.</small></div><div class="flow-arrow">&rarr;</div>
-<div class="process-node"><span>3</span><b>Predict the structure</b><small>Build a sentence skeleton.</small></div><div class="flow-arrow">&rarr;</div>
-<div class="process-node"><span>4</span><b>Test each choice</b><small>Accuracy plus alignment.</small></div></div>
-<div class="two-grid" style="margin-top:1rem"><div class="info-card reveal"><div class="card-title">The job-description test</div><p class="prose small">The goal is a job description. A choice can be impressive and truthful yet still be the wrong hire.</p></div><div class="info-card reveal"><div class="card-title">The noise-budget test</div><p class="prose small">Every extra fact spends attention. Keep a detail only if it performs work required by the goal.</p></div></div></div></div><div class="slide" data-slide="6" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Step 1 · Goal First</div><h2 class="slide-title reveal">Translate the Verb into a <span class="tint">Blueprint</span></h2><div class="verb-table reveal"><div class="vh">Goal verb</div><div class="vh">Required sentence structure</div>
-<div class="vc">Compare</div><div class="vc">Subject A + subject B + explicit similarity or difference</div>
-<div class="vc">Emphasize</div><div class="vc">Put the target idea in the main clause or point of contrast</div>
-<div class="vc">Introduce findings</div><div class="vc">Study or researchers + method/context + central result</div>
-<div class="vc">Explain and illustrate</div><div class="vc">General idea + specific case showing how it works</div>
-<div class="vc">Qualify</div><div class="vc">Claim + boundary, limitation, or condition</div></div>
-<div class="strategy-strip reveal"><b>Fast move:</b> rewrite the goal as a blank sentence frame before you read every note.</div></div></div><div class="slide" data-slide="7" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Step 2 · Relevance</div><h2 class="slide-title reveal">Send Every Note Through One <span class="tint">Gate</span></h2><div class="filter-layout"><div class="note-stack reveal"><div class="note-card">Who or what?</div><div class="note-card">Method?</div><div class="note-card">Result?</div><div class="note-card faded">Date, biography, side detail?</div></div>
-<div class="funnel-wrap reveal"><svg viewBox="0 0 300 270" role="img" aria-label="Notes are filtered by the goal"><path d="M35 25 H265 L195 160 V240 H105 V160 Z" fill="#eef4ff" stroke="#2563EB" stroke-width="3"/><text x="150" y="80" text-anchor="middle" font-family="Chillax" font-size="20" font-weight="600" fill="#1f1f1f">Does it help</text><text x="150" y="107" text-anchor="middle" font-family="Chillax" font-size="20" font-weight="600" fill="#1f1f1f">perform the goal?</text><line x1="80" y1="135" x2="220" y2="135" stroke="#9db8e6" stroke-width="2"/><text x="150" y="190" text-anchor="middle" font-family="Lexend" font-size="15" font-weight="700" fill="#2563EB">KEEP</text></svg></div>
-<div class="decision-list reveal"><div class="decision yes"><b>Keep</b><span>required actor, relationship, result, example, or limitation</span></div><div class="decision no"><b>Discard</b><span>background facts that merely sound scholarly</span></div><div class="decision maybe"><b>Delay</b><span>context that matters only if the goal asks for an introduction</span></div></div></div>
-<div class="trap-card reveal"><div class="trap-title">High-scorer trap: interesting equals relevant</div><div class="trap-body">A vivid date or statistic often attracts attention. Relevance is functional: what role does the detail play in the requested sentence?</div></div></div></div><div class="slide" data-slide="8" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Step 3 · Prediction</div><h2 class="slide-title reveal">Build the Sentence <span class="tint">Skeleton</span> Before Choices</h2><div class="blueprint-grid reveal">
-<div class="blueprint-card"><div class="bp-label">Compare</div><div class="bp-line"><span>A</span><i>relationship</i><span>B</span></div><p>Both subjects and a named relationship are nonnegotiable.</p></div>
-<div class="blueprint-card"><div class="bp-label">Explain + illustrate</div><div class="bp-line"><span>Idea</span><i>shown by</i><span>Case</span></div><p>The example must demonstrate the general idea, not merely share its topic.</p></div>
-<div class="blueprint-card"><div class="bp-label">Introduce findings</div><div class="bp-line"><span>Study</span><i>found</i><span>Result</span></div><p>Method can orient the reader; the finding must remain the sentence's destination.</p></div></div>
-<div class="win-card reveal"><div class="win-title">Why prediction works</div><div class="prose small">Choices are designed to pull your attention toward true details. A blueprint gives you a target before the distractors begin negotiating.</div></div></div></div><div class="slide" data-slide="9" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Step 4 · Elimination</div><h2 class="slide-title reveal">Open <span class="tint">Both</span> Locks: Accurate and On-Task</h2><div class="locks-grid reveal"><div class="lock-card"><svg viewBox="0 0 100 110"><path d="M30 48 V31 C30 8 70 8 70 31 V48" fill="none" stroke="#2563EB" stroke-width="8"/><rect x="18" y="45" width="64" height="52" rx="10" fill="#eef4ff" stroke="#2563EB" stroke-width="3"/><circle cx="50" cy="70" r="6" fill="#2563EB"/></svg><h3>Lock 1: Truth</h3><p>Every claim must be supported by the notes. No strengthened causation, reversed relation, or invented judgment.</p></div>
-<div class="plus-sign">+</div><div class="lock-card"><svg viewBox="0 0 100 110"><path d="M30 48 V31 C30 8 70 8 70 31 V48" fill="none" stroke="#D97706" stroke-width="8"/><rect x="18" y="45" width="64" height="52" rx="10" fill="#fff7e8" stroke="#D97706" stroke-width="3"/><circle cx="50" cy="70" r="6" fill="#D97706"/></svg><h3>Lock 2: Task</h3><p>The sentence must perform the requested action directly, with the required subjects and relationship.</p></div></div>
-<div class="failure-grid reveal"><span>True but incomplete</span><span>Unsupported inference</span><span>Relationship reversed</span><span>Goal buried in detail</span></div></div></div><div class="slide" data-slide="10" style="--zc:#D97706;--zs:rgba(217,119,6,.10)"><canvas class="particle-canvas"></canvas><div class="content"><div style="text-align:center"><div class="reveal section-number">Zone 3</div><h1 class="deck-title reveal" style="font-size:clamp(2.2rem,5vw,3.6rem)">Truth vs. <span style="color:#D97706">Task</span></h1><p class="reveal section-sub">The SAT rewards the sentence that does the assigned job, not the sentence containing the most facts.</p><div class="truth-grid reveal"><div><b>Accurate?</b><span>Admission ticket</span></div><div><b>Relevant?</b><span>Selection criterion</span></div><div><b>Structured?</b><span>Rhetorical effect</span></div></div></div></div></div><div class="slide" data-slide="11" style="--zc:#D97706;--zs:rgba(217,119,6,.10)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Worked Problem · Findings</div><h2 class="slide-title reveal">Level 3 — Introduce a Study and Its <span class="tint">Finding</span></h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>Researchers measured afternoon temperatures on twelve city blocks.</li><li>Six blocks had extensive rooftop gardens; six did not.</li><li>The paired blocks were similar in building height and street width.</li><li>On clear summer days, blocks with rooftop gardens averaged 1.8°C cooler.</li><li>The project received funding from a regional planning council.</li></ul></div><div class="goal-prompt">The student wants to introduce the study and its main finding. Which choice most effectively uses relevant information from the notes?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>Twelve city blocks were included in a planning-council-funded project about rooftop gardens.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>After matching blocks for building height and street width, researchers found that blocks with extensive rooftop gardens averaged 1.8°C cooler on clear summer afternoons than blocks without them.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>Rooftop gardens, which regional planners funded, can reduce city temperatures in every weather condition.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Six of the twelve blocks in the study had rooftop gardens, and the other six had similar buildings.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="12" style="--zc:#D97706;--zs:rgba(217,119,6,.10)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Step-by-Step Solve · Problem 1</div><h2 class="slide-title reveal"><span class="tint">Three Moves</span>, Then Stop Before the Letter</h2><div class="steps-grid reveal"><div class="step-card"><span>1</span><h3>Translate the goal</h3><p>“Introduce the study and finding” becomes: researchers + comparison design + temperature result.</p></div><div class="step-card"><span>2</span><h3>Mark required notes</h3><p>Keep the matched groups and 1.8°C difference. The funder does not help perform this goal.</p></div><div class="step-card"><span>3</span><h3>Apply both locks</h3><p>Reject any choice that merely lists setup facts or expands “clear summer days” into every condition.</p></div></div>
-<div class="formula-box reveal"><div class="solve-frame">Study context <b>+</b> valid comparison <b>+</b> central result</div></div><div class="strategy-strip reveal"><b>Your final move:</b> select the choice that matches this frame without strengthening the evidence.</div></div></div><div class="slide" data-slide="13" style="--zc:#BE123C;--zs:rgba(190,18,60,.08)"><div class="content"><div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Differentiated Practice</div><h2 class="slide-title reveal">Level 2 — Emphasize a <span class="tint">Similarity</span></h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>Artist Lena Park creates portraits from discarded transit maps.</li><li>Artist Rafael Ortiz creates landscapes from outdated nautical charts.</li><li>Both artists preserve labels and route lines from their source materials.</li><li>Park began exhibiting in 2018; Ortiz began exhibiting in 2015.</li></ul></div><div class="goal-prompt">The student wants to emphasize a similarity between Park’s and Ortiz’s artistic methods. Which choice most effectively uses relevant information?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>Park began exhibiting three years after Ortiz did.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>Park makes portraits, whereas Ortiz makes landscapes.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>Although their subjects differ, both Park and Ortiz retain printed features from the maps they reuse.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Outdated maps can be reused by artists rather than discarded.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="14" style="--zc:#BE123C;--zs:rgba(190,18,60,.08)"><div class="content"><div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Differentiated Practice</div><h2 class="slide-title reveal">Level 3 — Explain and <span class="tint">Illustrate</span></h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>A keystone species has an unusually large effect on its ecosystem relative to its abundance.</li><li>Sea otters eat sea urchins.</li><li>Sea urchins graze on kelp.</li><li>Where sea otter numbers decline, sea urchin populations can expand and kelp forests can shrink.</li><li>Sea otters have dense fur rather than blubber.</li></ul></div><div class="goal-prompt">The student wants to explain the concept of a keystone species and illustrate it with sea otters. Which choice most effectively uses relevant information?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>Sea otters have dense fur and eat sea urchins, which graze on kelp.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>A keystone species can strongly shape an ecosystem despite not being abundant; for example, by limiting kelp-eating sea urchins, sea otters can help sustain kelp forests.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>When sea otter numbers decline, their unusually dense fur cannot protect kelp forests.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Kelp forests shrink because sea otters are less abundant than sea urchins.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="15" style="--zc:#BE123C;--zs:rgba(190,18,60,.08)"><div class="content"><div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Hard Case</div><h2 class="slide-title reveal">Level 4 — Emphasize a Methodological <span class="tint">Trade-off</span></h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>Fixed acoustic sensors record continuously at selected forest sites.</li><li>Mobile acoustic surveys record along routes traveled by researchers.</li><li>Fixed sensors can capture sounds at night without a person present.</li><li>Mobile surveys cover more locations in a single day.</li><li>Both methods can detect species that are difficult to see.</li></ul></div><div class="goal-prompt">The student wants to emphasize a trade-off between the two methods. Which choice most effectively uses relevant information?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>Both fixed sensors and mobile surveys can detect species that observers may not see.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>Fixed sensors operate at selected sites, while mobile surveys are conducted along researcher-traveled routes.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>Whereas fixed sensors provide continuous, unattended recording at particular sites, mobile surveys trade continuous coverage for access to more locations in a day.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Mobile surveys are more effective than fixed sensors because they cover more locations.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="16" style="--zc:#BE123C;--zs:rgba(190,18,60,.08)"><div class="content"><div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Step-by-Step Solve · Problem 4</div><h2 class="slide-title reveal">Make “<span class="tint">Trade-off</span>” Visible in the Grammar</h2><div class="walk-layout"><div class="trade-diagram reveal"><svg viewBox="0 0 460 220"><line x1="80" y1="110" x2="380" y2="110" stroke="#374151" stroke-width="5"/><polygon points="230,92 248,145 212,145" fill="#374151"/><rect x="35" y="40" width="150" height="64" rx="12" fill="#eef4ff" stroke="#2563EB" stroke-width="2"/><text x="110" y="67" text-anchor="middle" font-family="Chillax" font-size="16" font-weight="600" fill="#1f1f1f">Fixed sensors</text><text x="110" y="87" text-anchor="middle" font-family="Lexend" font-size="11" fill="#4a4a4a">continuous at fewer sites</text><rect x="275" y="40" width="150" height="64" rx="12" fill="#fff1f3" stroke="#BE123C" stroke-width="2"/><text x="350" y="67" text-anchor="middle" font-family="Chillax" font-size="16" font-weight="600" fill="#1f1f1f">Mobile surveys</text><text x="350" y="87" text-anchor="middle" font-family="Lexend" font-size="11" fill="#4a4a4a">more sites, less continuity</text><text x="230" y="190" text-anchor="middle" font-family="Lexend" font-size="13" font-weight="700" fill="#BE123C">GAIN ON ONE AXIS, GIVE UP ON THE OTHER</text></svg></div>
-<div class="steps-column reveal"><div class="mini-step"><b>1. Define the relation.</b><span>A trade-off requires an advantage and a corresponding limitation.</span></div><div class="mini-step"><b>2. Pair matching dimensions.</b><span>Continuity belongs with site coverage; visibility detection is shared background.</span></div><div class="mini-step"><b>3. Inspect the grammar.</b><span>Look for a structure such as “whereas” or “trades X for Y,” not two disconnected facts.</span></div></div></div>
-<div class="strategy-strip reveal"><b>Precision check:</b> “more locations” does not prove “more effective.” Preserve the notes' scope.</div></div></div><div class="slide" data-slide="17" style="--zc:#BE123C;--zs:rgba(190,18,60,.08)"><div class="content"><div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Hard Case</div><h2 class="slide-title reveal">Level 4 — Establish a <span class="tint">Chronological</span> Development</h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>In 1992, astronomers confirmed planets orbiting a pulsar.</li><li>In 1995, astronomers confirmed 51 Pegasi b, the first planet found orbiting a Sun-like star.</li><li>51 Pegasi b was detected through changes in its star's radial velocity.</li><li>The transit method later enabled large surveys to identify planets by small, periodic dips in starlight.</li><li>Different methods are sensitive to different planetary characteristics.</li></ul></div><div class="goal-prompt">The student wants to describe the chronological development of exoplanet detection. Which choice most effectively uses relevant information?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>Exoplanets can be detected by radial velocity or by periodic dips in starlight.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>After the 1992 pulsar-planet confirmation, the 1995 detection of 51 Pegasi b marked the first confirmed planet around a Sun-like star; later, transit surveys greatly expanded planet searches.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>Because different methods detect different planetary characteristics, 51 Pegasi b was the first exoplanet ever confirmed.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Transit surveys preceded the radial-velocity detection of 51 Pegasi b but followed the pulsar discoveries.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="18" style="--zc:#5B21B6;--zs:rgba(91,33,182,.08)"><div class="content"><div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Zone 5 · Advanced</div><h2 class="slide-title reveal">Level 5 — Present a Finding While <span class="tint">Qualifying</span> It</h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-5">Level 5</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>A meta-analysis combined 27 experiments on sleep and memory consolidation.</li><li>Across the studies, sleep was generally associated with better later recall than an equivalent period awake.</li><li>The size of the benefit varied substantially across experiments.</li><li>Studies used different memory tasks and sleep intervals.</li><li>Most participants were healthy adults under age 35.</li><li>The authors cautioned against assuming the same effect size for older adults or clinical populations.</li></ul></div><div class="goal-prompt">The student wants to present the overall finding while carefully qualifying its generalizability. Which choice most effectively uses relevant information?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>A meta-analysis of 27 experiments proves that sleep improves every kind of memory for people of all ages.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>Although sleep was generally associated with better later recall, variation in tasks, intervals, and participant populations limits how broadly the meta-analysis’s effect size should be generalized.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>The studies used different memory tasks because most participants were healthy adults under age 35.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Sleep and wakefulness produced different recall results in 27 experiments, all of which used comparable methods.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="19" style="--zc:#5B21B6;--zs:rgba(91,33,182,.08)"><div class="content"><div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Step-by-Step Solve · Problem 6</div><h2 class="slide-title reveal">Protect the Claim from <span class="tint">Overreach</span></h2><div class="claim-scale reveal"><div class="claim-side"><div class="scale-label">Supported center</div><div class="claim-pill">generally better recall</div><div class="claim-pill">across 27 experiments</div></div><div class="scale-beam"><svg viewBox="0 0 160 240"><line x1="80" y1="40" x2="80" y2="185" stroke="#374151" stroke-width="5"/><line x1="25" y1="80" x2="135" y2="80" stroke="#374151" stroke-width="5"/><polygon points="80,180 115,225 45,225" fill="#374151"/></svg></div><div class="claim-side"><div class="scale-label">Required boundary</div><div class="claim-pill warn">effect size varied</div><div class="claim-pill warn">tasks and samples differed</div></div></div>
-<div class="three-steps reveal"><div><b>1. Preserve the hedge.</b><span>“Generally associated” cannot become “proves” or “always.”</span></div><div><b>2. Name the boundary.</b><span>The goal requires a limitation, not merely another study detail.</span></div><div><b>3. Match limitation to claim.</b><span>Method and sample variation restrict broad generalization of effect size.</span></div></div>
-<div class="strategy-strip reveal"><b>Advanced cue:</b> when the goal says “qualify,” the best sentence often contains both a concession and a scope boundary.</div></div></div><div class="slide" data-slide="20" style="--zc:#5B21B6;--zs:rgba(91,33,182,.08)"><div class="content"><div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Zone 5 · Advanced</div><h2 class="slide-title reveal">Level 5 — Frame a Scholarly <span class="tint">Disagreement</span> Precisely</h2><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-5">Level 5</span></div><div class="qtext">A student has taken the following notes:<ul class="notes"><li>Excavations at Port Selene uncovered ninth-century glazed ceramic fragments.</li><li>Historian N. Rahman argues that their chemical match with kilns across the sea indicates regular long-distance trade.</li><li>Archaeologist I. Petrov notes that only eleven fragments have been recovered.</li><li>Petrov argues that the fragments could have arrived through occasional elite exchange rather than routine commerce.</li><li>Both researchers agree that the fragments were not made locally.</li><li>No shipping records from Port Selene survive.</li></ul></div><div class="goal-prompt">The student wants to introduce the researchers’ disagreement about what the fragments imply. Which choice most effectively uses relevant information?</div><div class="mc-options"><div class="mc-option"><span class="opt-letter">A</span><span>Rahman and Petrov agree that Port Selene regularly imported glazed ceramics from overseas kilns.</span></div><div class="mc-option"><span class="opt-letter">B</span><span>Because no shipping records survive, neither researcher can determine where the fragments were made.</span></div><div class="mc-option"><span class="opt-letter">C</span><span>While Rahman interprets the overseas chemical match as evidence of regular trade, Petrov argues that the small number of fragments is also consistent with occasional elite exchange.</span></div><div class="mc-option"><span class="opt-letter">D</span><span>Eleven ninth-century fragments were found at Port Selene, and both researchers study long-distance exchange.</span></div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div></div></div><div class="slide" data-slide="21" style="--zc:#15803D;--zs:rgba(21,128,61,.08)"><div class="content"><div class="zone-strip reveal" data-zone="6"></div><div class="kicker reveal">Zone 6 · Routine Switch</div><h2 class="slide-title reveal">First <span class="tint">Diagnose</span> the Question Type</h2><div class="switch-diagram reveal"><div class="switch-start">What appears on screen?</div><div class="switch-branch"><svg viewBox="0 0 500 100"><path d="M250 0 V28 M250 28 H120 V65 M250 28 H380 V65" fill="none" stroke="#2563EB" stroke-width="3"/><circle cx="250" cy="28" r="6" fill="#2563EB"/></svg></div><div class="switch-cards"><div class="switch-card"><div class="switch-label">Blank in a passage</div><h3>Transitions routine</h3><p>Read around the blank. Name the logical relationship. Match the transition.</p></div><div class="switch-card"><div class="switch-label">Notes plus writer's goal</div><h3>Synthesis routine</h3><p>Read the goal first. Select notes. Predict structure. Test both locks.</p></div></div></div>
-<div class="trap-card reveal"><div class="trap-title">Switching error</div><div class="trap-body">Do not apply “summarize the passage” thinking to notes, and do not hunt for a goal verb when the task is simply logical connection.</div></div></div></div><div class="slide" data-slide="22" style="--zc:#15803D;--zs:rgba(21,128,61,.08)"><div class="content"><div class="zone-strip reveal" data-zone="6"></div><div class="kicker reveal">Zone 6 · Timed Sprint</div><h2 class="slide-title reveal">Round A — Three Items, <span class="tint">Three Minutes</span></h2><div class="sprint-grid">
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S1</span><span class="lvl-badge lvl-3">Transition</span></div><div class="qtext">The manuscript was long attributed to Vela. ______, ink analysis dates it to a decade after Vela’s death.</div><div class="mc-options compact"><div class="mc-option"><span class="opt-letter">A</span>Similarly,</div><div class="mc-option"><span class="opt-letter">B</span>However,</div><div class="mc-option"><span class="opt-letter">C</span>For example,</div><div class="mc-option"><span class="opt-letter">D</span>Therefore,</div></div><div class="work-box"><textarea placeholder="Work here…" spellcheck="false"></textarea></div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S2</span><span class="lvl-badge lvl-3">Synthesis</span></div><div class="qtext"><ul class="notes tight"><li>Trial: 48 seedlings; half shaded.</li><li>Shaded seedlings grew taller stems.</li><li>Unshaded seedlings produced more leaves.</li></ul></div><div class="goal-prompt">Goal: emphasize a contrast in growth patterns.</div><div class="work-box"><textarea placeholder="Write a one-sentence blueprint, not a final response." spellcheck="false"></textarea></div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S3</span><span class="lvl-badge lvl-4">Transition</span></div><div class="qtext">The coating initially repels water. ______, after repeated heating, microscopic cracks reduce that protection.</div><div class="micro-prompt">Name the relationship and the time shift before choosing a word.</div><div class="work-box"><textarea placeholder="Relationship + likely transition family" spellcheck="false"></textarea></div></div></div></div></div><div class="slide" data-slide="23" style="--zc:#15803D;--zs:rgba(21,128,61,.08)"><div class="content"><div class="zone-strip reveal" data-zone="6"></div><div class="kicker reveal">Zone 6 · Timed Sprint</div><h2 class="slide-title reveal">Round B — Three Items, <span class="tint">Four Minutes</span></h2><div class="sprint-grid">
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S4</span><span class="lvl-badge lvl-4">Synthesis</span></div><div class="qtext"><ul class="notes tight"><li>Mara Chen mapped 73 neighborhood wells.</li><li>Older wells clustered near former market roads.</li><li>Chen argues that the pattern reveals vanished trade routes.</li><li>The map was published in 2024.</li></ul></div><div class="goal-prompt">Goal: introduce Chen’s research and conclusion.</div><div class="work-box"><textarea placeholder="Required ingredients only" spellcheck="false"></textarea></div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S5</span><span class="lvl-badge lvl-4">Transition</span></div><div class="qtext">The first model assumes constant demand. ______, the second allows demand to vary by season.</div><div class="micro-prompt">Is the relation contrast, continuation, result, or example?</div><div class="work-box"><textarea placeholder="Relationship + transition family" spellcheck="false"></textarea></div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">S6</span><span class="lvl-badge lvl-5">Synthesis</span></div><div class="qtext"><ul class="notes tight"><li>Review included 19 coastal cities.</li><li>Flood barriers reduced frequent minor flooding.</li><li>Results for rare extreme floods were inconclusive.</li><li>Maintenance quality differed widely.</li></ul></div><div class="goal-prompt">Goal: state the finding without overstating it.</div><div class="work-box"><textarea placeholder="Claim + boundary sentence frame" spellcheck="false"></textarea></div></div></div></div></div><div class="slide" data-slide="24" style="--zc:#2563EB;--zs:rgba(37,99,235,.10)"><canvas class="particle-canvas"></canvas><div class="content"><div style="text-align:center"><div class="reveal session-pill"><span class="pill-dot" style="background:#15803D"></span>Session Close</div><h1 class="deck-title reveal" style="font-size:clamp(2.2rem,5.2vw,3.7rem)">Make the Goal <span style="color:#2563EB">Visible</span></h1><p class="reveal section-sub" style="max-width:760px;margin:.8rem auto 1.2rem">Before committing to a choice, state what the sentence must accomplish and what evidence it must contain.</p><div class="close-grid reveal"><div><span>1</span><b>Name the action</b><small>compare, explain, introduce, qualify</small></div><div><span>2</span><b>Choose only useful notes</b><small>relevance beats completeness</small></div><div><span>3</span><b>Predict the sentence</b><small>structure before choices</small></div><div><span>4</span><b>Test both locks</b><small>accurate and on-task</small></div></div><div class="reflection-card reveal"><b>Exit reflection</b><span>Which trap is most likely to cost you a point: true-but-off-goal, unsupported inference, reversed relationship, or buried emphasis?</span></div></div></div></div></div><div class="nav-controls"><button class="nav-btn" aria-label="Previous slide" onclick="changeSlide(-1)">&#8249;</button><div class="slide-dots" id="dots"></div><button class="nav-btn" aria-label="Next slide" onclick="changeSlide(1)">&#8250;</button><span class="slide-counter" id="counter">1 / 24</span></div>
-<script>
-const zones=[{n:'1',t:'Retrieve',c:'#374151'},{n:'2',t:'Routine',c:'#2563EB'},{n:'3',t:'Truth / Task',c:'#D97706'},{n:'4',t:'Practice',c:'#BE123C'},{n:'5',t:'Advanced',c:'#5B21B6'},{n:'6',t:'Switch',c:'#15803D'}];
-document.querySelectorAll('.zone-strip').forEach(el=>{const a=+el.dataset.zone;el.innerHTML=zones.map((z,i)=>`<span class="zone-chip${i+1===a?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n} <span>${z.t}</span></span>`).join('')});
-let current=1;const total=document.querySelectorAll('.slide').length,dots=document.getElementById('dots'),counter=document.getElementById('counter');for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>goToSlide(i);dots.appendChild(d)}function goToSlide(n){document.querySelector('.slide.active')?.classList.remove('active');const s=document.querySelector(`.slide[data-slide="${n}"]`);if(s){s.classList.add('active');animateSlide(s)}current=n;updateNav()}function changeSlide(d){let n=current+d;if(n<1)n=total;if(n>total)n=1;goToSlide(n)}function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total}document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let sx=0;document.addEventListener('touchstart',e=>sx=e.touches[0].clientX);document.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>50)changeSlide(d>0?1:-1)});function animateSlide(s){s.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';el.offsetHeight;el.style.transition=`opacity .32s ease ${i*.06}s,transform .32s ease ${i*.06}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}function selectMC(l){l.closest('.mc-options').querySelectorAll('.mc-option').forEach(x=>x.classList.remove('selected'));l.classList.add('selected')}function togglePip(){document.getElementById('pipPanel').classList.toggle('open')}
-window.initParticles=function(c){if(!c)return;const x=c.getContext('2d');function size(){c.width=c.offsetWidth;c.height=c.offsetHeight}size();const p=Array.from({length:34},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*2+1}));function draw(){x.clearRect(0,0,c.width,c.height);for(const q of p){q.x+=q.vx;q.y+=q.vy;if(q.x<0)q.x=c.width;if(q.x>c.width)q.x=0;if(q.y<0)q.y=c.height;if(q.y>c.height)q.y=0;x.beginPath();x.arc(q.x,q.y,q.r,0,Math.PI*2);x.fillStyle='rgba(37,99,235,.14)';x.fill()}requestAnimationFrame(draw)}draw();window.addEventListener('resize',size)};document.querySelectorAll('.particle-canvas').forEach(initParticles);animateSlide(document.querySelector('.slide.active'));
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Session 5 Homework — Rhetorical Synthesis</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&amp;display=swap"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Trebuchet MS', sans-serif;
+    --ff-body: 'Lexend', 'Trebuchet MS', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+@page {size:letter; margin:.45in;}
+body {max-width: 860px; font-size:13px; line-height:1.48;}
+.toolbar {display:flex;justify-content:center;gap:12px;padding:20px 12px 0;flex-wrap:wrap;}
+.toolbar .print-btn {margin:0;font-size:14px;}
+.toolbar .clear-btn {background:var(--muted);box-shadow:none;}
+.screen-note {text-align:center;font-size:11px;color:var(--muted);margin:10px 16px 0;}
+.sheet {width:100%;min-height:1010px;display:flex;flex-direction:column;padding:34px 38px;margin:24px auto;}
+.hw-header {flex-wrap:nowrap;gap:18px;margin-bottom:16px;}
+.hw-header-left h1 {font-size:28px;line-height:1.15;font-weight:600;}
+.hw-header-left .subtitle {font-size:10px;line-height:1.6;letter-spacing:.08em;}
+.hw-meta {min-width:205px;max-width:220px;padding-top:4px;}
+.hw-meta input {width:120px;}
+input,textarea {font-family:var(--ff-body);color:var(--ink);font-size:12px;}
+input[type=text],input[type=number] {min-width:0;background:transparent;border:0;border-bottom:1.5px solid var(--border);padding:3px 5px;}
+input:focus-visible,textarea:focus-visible,[contenteditable]:focus-visible,button:focus-visible {outline:2px solid var(--blue);outline-offset:3px;}
+input[type=radio],input[type=checkbox] {accent-color:var(--blue);}
+.section-hd {margin:0 0 11px;gap:10px;}
+.section-hd h2 {font-size:20px;line-height:1.25;font-weight:600;}
+.section-hd .badge {white-space:nowrap;font-size:10px;}
+.section-hd .section-mark {font-family:var(--ff-head);font-weight:600;border-radius:9px;padding:5px 10px;background:var(--blue-lt);color:var(--blue);font-size:17px;}
+.instr {font-size:11px;font-style:normal;line-height:1.55;padding:8px 10px;margin-bottom:14px;}
+.small {font-size:11px;color:var(--muted);line-height:1.55;}
+.pretitle {font-size:10px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin-bottom:7px;font-weight:600;}
+.plan {display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px;}
+.plan div {border:1px solid var(--blue-md);border-radius:8px;padding:9px;background:var(--blue-lt);}
+.plan b {display:block;font-family:var(--ff-head);font-size:13px;color:var(--blue);}
+.plan span {font-size:10px;display:block;margin-top:3px;color:var(--slate);}
+.formula-strip {margin-bottom:12px;gap:7px;padding:9px;}
+.formula-strip .fml {font-size:12px;font-weight:500;}
+.rule-grid {display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px;}
+.rule-grid div {border:1px solid var(--border);background:var(--bg);padding:9px 11px;border-radius:8px;font-size:11px;}
+.rule-grid b {color:var(--blue);display:block;margin-bottom:2px;}
+.question {background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px;break-inside:avoid;page-break-inside:avoid;}
+.question-head {display:flex;gap:8px;align-items:center;margin-bottom:6px;}
+.question-head h3 {font-family:var(--ff-head);font-size:14px;font-weight:600;color:var(--blue);}
+.skill-tag {font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+.level {margin-left:auto;font-size:9px;font-weight:600;border-radius:15px;background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md);padding:2px 7px;}
+.level.stretch {background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd;}
+.notes-intro {font-size:11px;color:var(--slate);margin-bottom:4px;}
+.research-notes {margin:0 0 8px;padding-left:20px;font-size:12px;line-height:1.45;color:var(--slate);}
+.research-notes li {padding-left:1px;margin:2px 0;}
+.goal {background:var(--blue-lt);border-left:3px solid var(--blue);padding:8px 10px;margin:7px 0;font-size:12px;line-height:1.45;border-radius:0 6px 6px 0;}
+.goal strong {font-weight:600;}
+.mc-opts {display:grid;grid-template-columns:1fr;gap:3px;}
+.mc-opt {font-size:12px;line-height:1.45;padding:5px 7px;gap:7px;position:relative;}
+.mc-opt input[type=radio] {display:block;position:absolute;width:1px;height:1px;opacity:0;left:3px;top:7px;}
+.mc-opt:focus-within {outline:2px solid var(--blue);outline-offset:1px;}
+.mc-opt .bubble {width:19px;height:19px;min-width:19px;font-size:10px;line-height:1;flex-shrink:0;margin-top:0;background:white;}
+.mc-opt.selected {background:#e5e7eb;border-color:#374151;font-weight:400;}
+.mc-opt.selected .bubble {background:#374151;border-color:#374151;color:white;}
+.reason-label {display:block;font-size:10px;font-weight:500;color:var(--slate);margin-top:7px;}
+.work-area {min-height:43px;font-size:11px;line-height:1.5;padding:6px 8px;margin-top:4px;resize:vertical;overflow:hidden;}
+.confidence {font-size:10px;color:var(--muted);display:flex;gap:14px;align-items:center;margin-top:5px;}
+.confidence label {display:inline-flex;gap:4px;align-items:center;cursor:pointer;}
+.confidence input {margin:0;width:12px;height:12px;}
+.passage {font-size:12px;line-height:1.6;margin:2px 0 7px;}
+.transition .mc-opts {grid-template-columns:1fr 1fr;gap:3px 14px;}
+.transition .work-area {min-height:33px;}
+.mixed .question {padding:11px 13px;margin-bottom:12px;}
+.mixed .question:last-of-type {margin-bottom:0;}
+.warmup {padding:12px 15px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;}
+.warmup .research-notes {margin:6px 0 10px;}
+.warmup .task {display:block;font-size:11px;color:var(--slate);margin-top:9px;}
+.warmup .task input {width:115px;margin-left:5px;}
+.warmup .work-area {min-height:55px;}
+.footer {margin-top:auto;padding-top:15px;display:flex;justify-content:space-between;color:var(--muted);font-size:9px;border-top:1px solid var(--border);}
+.footer-gap {min-height:10px;}
+.error-log {padding:13px 15px;}
+.error-log h3 {font-size:17px;}
+.error-type-pills {font-size:10px;gap:5px;margin:6px 0 12px;}
+.pill {padding:3px 8px;}
+.error-table {font-size:10px;table-layout:fixed;}
+.error-table th {font-size:10px;padding:7px 6px;}
+.error-table td {font-size:10px;padding:6px;vertical-align:top;height:55px;word-break:break-word;}
+.error-table th:nth-child(1) {width:8%;}
+.error-table th:nth-child(2) {width:15%;}
+.error-table th:nth-child(3) {width:31%;}
+.error-table th:nth-child(4) {width:14%;}
+.error-table th:nth-child(5) {width:32%;}
+.error-table td[contenteditable] {outline-offset:-2px;}
+.reflect-box {padding:12px 14px;margin-top:14px;}
+.reflect-box h3 {font-size:16px;font-weight:600;}
+.reflect-box label {display:block;font-size:11px;margin-top:8px;color:var(--slate);}
+.reflect-box .work-area {min-height:37px;}
+.score-banner {margin:0 0 14px;padding:12px 15px;gap:8px;}
+.score-banner .title {font-size:17px;font-weight:600;}
+.score-cells {gap:7px;}
+.score-cell {min-width:86px;padding:5px 8px;}
+.score-cell input {width:34px;color:white;border-bottom:1px solid white;font-family:var(--ff-head);font-size:16px;text-align:center;padding:0;}
+.score-cell .sc-lbl {font-size:9px;}
+.source-note {font-size:9px;color:var(--muted);line-height:1.45;margin:12px 0;}
+.print-mirror {display:none;}
+.key-grid {display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:12px 0 16px;}
+.key-grid div {background:var(--blue-lt);border:1px solid var(--blue-md);padding:6px 2px;text-align:center;border-radius:6px;font-size:12px;}
+.key-item {break-inside:avoid;border:1px solid var(--border);border-radius:9px;padding:11px 13px;margin-bottom:12px;background:var(--bg);}
+.key-item h3 {font-family:var(--ff-head);font-size:15px;color:var(--blue);margin-bottom:5px;font-weight:600;}
+.key-item p {font-size:11px;line-height:1.5;margin:4px 0;}
+.key-item .rejects {color:var(--slate);}
+.key-item strong {font-weight:600;}
+@media(max-width:650px){body{font-size:12px}.sheet{min-height:0;padding:24px 18px;margin:16px 0;border-radius:0}.hw-header{flex-direction:column}.hw-meta{max-width:none;width:100%}.hw-meta input{flex:1}.hw-header-left h1{font-size:25px}.plan{grid-template-columns:1fr 1fr}.section-hd{flex-wrap:wrap}.section-hd .badge{margin-left:0}.score-banner{align-items:flex-start}.error-log{padding:9px 6px}.error-table td,.error-table th{padding:5px 3px;font-size:9px}.footer{margin-top:20px}.key-grid{grid-template-columns:repeat(6,1fr)}}
+@media print {
+  html,body{background:white!important;width:auto!important;max-width:none!important;margin:0!important;}
+  body{font-size:10pt;}
+  .sheet{width:auto!important;min-height:10in;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;break-after:page;page-break-after:always;}
+  .sheet:last-of-type{break-after:auto;page-break-after:auto;}
+  .hw-header-left h1{font-size:23pt;}
+  .section-hd{margin:0 0 8px;}
+  .section-hd h2{font-size:15pt;}
+  .question{padding:10px 12px;margin-bottom:11px;}
+  .research-notes,.mc-opt,.goal,.passage{font-size:9pt;line-height:1.4;}
+  .mc-opt{padding:4px 6px;}
+  .research-notes li{margin:2px 0;}
+  .instr{font-size:8pt;padding:7px 9px;margin-bottom:11px;}
+  .question-head h3{font-size:11pt;}
+  .reason-label,.confidence{font-size:7.5pt;}
+  .work-area{display:none!important;}
+  .print-mirror{display:block;min-height:39px;border:1px dashed var(--border);border-radius:6px;background:white;padding:5px 7px;margin-top:4px;font-size:8.5pt;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;}
+  .transition .print-mirror{min-height:28px;}
+  .warmup .print-mirror{min-height:45px;}
+  .reflect-box .print-mirror{min-height:30px;}
+  .mc-opt.selected{background:#e5e7eb!important;border-color:#374151!important;}
+  .mc-opt.selected .bubble{background:#374151!important;color:white!important;}
+  .mc-opt{transition:none;}
+  .confidence input{appearance:none;width:10px;height:10px;border:1px solid var(--border)!important;border-radius:50%;background:white!important;}
+  .confidence input:checked{box-shadow:inset 0 0 0 2px white;background:#374151!important;}
+  .error-table{font-size:8pt;}
+  .error-table td{height:51px;}
+  .score-cell input{background:transparent!important;color:white!important;}
+  .score-banner{margin-bottom:12px;}
+  .footer{font-size:7pt;padding-top:10px;}
+  .plan{margin-bottom:12px;}
+  .rule-grid{margin-bottom:12px;}
+  .key-item{padding:9px 11px;margin-bottom:10px;}
+  .key-item p{font-size:8.4pt;line-height:1.48;}
+  .key-item h3{font-size:11pt;}
+  .key-grid{margin:10px 0 12px;}
+  .source-note{font-size:7pt;}
+}
+</style></head><body><div class="toolbar no-print"><button type="button" class="print-btn" onclick="printSheet()">Print / Save as PDF</button><button type="button" class="print-btn clear-btn" onclick="clearAll()">Clear All</button></div><p class="screen-note no-print">Type or select answers below. Work is saved in this browser when storage is available. For a clean PDF, turn off browser headers and footers.</p><section class="sheet " aria-label="Page 1"><header class="hw-header"><div class="hw-header-left"><h1>Rhetorical Synthesis<br>Homework</h1><div class="subtitle">Session 5 • Digital SAT Reading and Writing</div></div><div class="hw-meta"><label class="hw-meta-row" for="student-name"><span class="label">Name</span><input type="text" id="student-name" autocomplete="name"></label><label class="hw-meta-row" for="student-date"><span class="label">Date</span><input type="text" id="student-date"></label></div></header>
+<div class="plan"><div><b>1. Rehearse</b><span>Goal filter • 5 min</span></div><div><b>2. Apply</b><span>Questions 1–12 • 25–30 min</span></div><div><b>3. Switch</b><span>Questions 13–18 • 7 min</span></div><div><b>4. Repair</b><span>Check + error log • 10–15 min</span></div></div>
+<div class="section-hd"><span class="section-mark">A</span><h2>Build the routine</h2><span class="badge badge-blue">Unscored warm-up</span></div><p class="instr">Read the goal before the notes. For Questions 1–12, select one answer and record your reasoning. For Questions 13–18, answer first under the suggested practice timing, then add explanations. Check the separate key only after finishing.</p>
+<div class="formula-strip"><span class="fs-label">Four-step filter</span><span class="fml">Goal</span><span>→</span><span class="fml">Relevant notes</span><span>→</span><span class="fml">Blueprint</span><span>→</span><span class="fml">Two locks</span></div>
+<div class="rule-grid"><div><b>Lock 1: Accuracy</b>Every claim must match the notes. Preserve comparisons, quantities, and limits.</div><div><b>Lock 2: Task</b>The choice must do the specific job. A true detail can still be off-goal.</div></div>
+<div class="warmup"><div class="pretitle">Same notes • Different goals</div><ol class="research-notes"><li>Harbor Library offers an audio program called StorySteps.</li><li>StorySteps pairs short stories with outdoor walks.</li><li>DeskTales, another library audio program, pairs short stories with seated listening activities.</li><li>Both programs are free and available through the library’s app.</li><li>The program designer lives across the street from the library.</li></ol>
+<label class="task" for="warm-a"><strong>A.</strong> Goal: emphasize a similarity in access. Which note directly supplies that similarity?<input type="text" id="warm-a" aria-label="Warm-up A note number"></label>
+<label class="task" for="warm-b"><strong>B.</strong> Goal: contrast the listening settings. Which two notes are essential?<input type="text" id="warm-b" aria-label="Warm-up B note numbers"></label>
+<label class="reason-label" for="warm-c">C. Write one sentence that fulfills goal B. Do not add biography or access details.</label><textarea class="work-area" id="warm-c" rows="2"></textarea><div class="print-mirror" data-for="warm-c" aria-hidden="true"></div><label class="reason-label" for="warm-d">D. Explain why “Both programs are free” is true but fails goal B.</label><textarea class="work-area" id="warm-d" rows="1"></textarea><div class="print-mirror" data-for="warm-d" aria-hidden="true"></div></div><p class="source-note">All names, studies, and datasets in these exercises are fictional practice scenarios. Use only the supplied information. These are independently authored activities, not official test questions. “Core” and “Stretch” are instructional labels, not official difficulty ratings. Timings are practice targets, not test rules.</p><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>1 / 10</span></footer></section><section class="sheet " aria-label="Page 2"><div class="section-hd"><span class="section-mark">B</span><h2>Select only what matters</h2><span class="badge badge-blue">Questions 1–2 • ~4 min</span></div><p class="instr">Name the requested relationship. Do not choose an accurate difference when the goal asks for a similarity—or the reverse.</p><article class="question synthesis" aria-labelledby="q1-heading"><div class="question-head"><h3 id="q1-heading">Question 1</h3><span class="skill-tag">Similarity</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Composer Imani Cole builds pieces from recordings of ordinary household sounds.</li><li>Composer Theo Lin builds pieces from recordings of mechanical sounds in workshops.</li><li>Both composers digitally alter the recordings before arranging them into musical patterns.</li><li>Cole often performs with a violinist; Lin usually performs alone.</li></ul><p class="goal">The student wants to <strong>emphasize a similarity in how Cole and Lin create their music</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 1 answer choices"><label class="mc-opt"><input type="radio" name="q1" id="q1A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Cole uses household sounds, whereas Lin uses workshop sounds as the starting point for musical compositions.</span></label><label class="mc-opt"><input type="radio" name="q1" id="q1B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Both Cole and Lin digitally transform recorded sounds before organizing them into musical patterns.</span></label><label class="mc-opt"><input type="radio" name="q1" id="q1C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Cole and Lin perform music based on recorded sounds, though only Cole collaborates with other performers.</span></label><label class="mc-opt"><input type="radio" name="q1" id="q1D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Both Cole and Lin record household sounds and arrange them into music without digitally altering them.</span></label></div><label class="reason-label" for="reason1">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason1" rows="2"></textarea><div class="print-mirror" data-for="reason1" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence1" id="confidence1Sure" value="Sure">Sure</label><label><input type="radio" name="confidence1" id="confidence1Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence1" id="confidence1Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q2-heading"><div class="question-head"><h3 id="q2-heading">Question 2</h3><span class="skill-tag">Difference</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>The North Gallery restores damaged frames with carved wooden inserts.</li><li>The South Gallery restores damaged frames with molded resin inserts.</li><li>Both galleries color the inserts to match the original frames.</li><li>The North Gallery opened in 1986; the South Gallery opened in 1994.</li></ul><p class="goal">The student wants to <strong>highlight a difference in the materials the galleries use to restore frames</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 2 answer choices"><label class="mc-opt"><input type="radio" name="q2" id="q2A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The North Gallery opened eight years before the South Gallery, and both galleries restore damaged frames.</span></label><label class="mc-opt"><input type="radio" name="q2" id="q2B" value="B"><span class="bubble" aria-hidden="true">B</span><span>To make repairs less visible, both galleries color their inserts to match the frames being restored.</span></label><label class="mc-opt"><input type="radio" name="q2" id="q2C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The galleries both repair frames with inserts, which they color to resemble the original material.</span></label><label class="mc-opt"><input type="radio" name="q2" id="q2D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The North Gallery repairs frames with wooden inserts, while the South Gallery uses resin inserts.</span></label></div><label class="reason-label" for="reason2">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason2" rows="2"></textarea><div class="print-mirror" data-for="reason2" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence2" id="confidence2Sure" value="Sure">Sure</label><label><input type="radio" name="confidence2" id="confidence2Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence2" id="confidence2Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>2 / 10</span></footer></section><section class="sheet " aria-label="Page 3"><div class="section-hd"><span class="section-mark">C</span><h2>Explain and introduce</h2><span class="badge badge-blue">Questions 3–4 • ~4 min</span></div><p class="instr">For an introduction, include the finding. For explanation plus illustration, connect the general concept to the specific case.</p><article class="question synthesis" aria-labelledby="q3-heading"><div class="question-head"><h3 id="q3-heading">Question 3</h3><span class="skill-tag">Study and finding</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Engineer Priya Sethi tested two protective packaging designs using 60 identical glass vials.</li><li>Thirty vials used folded-paper padding; thirty used molded-pulp padding.</li><li>Each packaged vial was dropped once from a height of one meter.</li><li>Four vials in folded-paper padding broke; one vial in molded-pulp padding broke.</li><li>The laboratory also tests shipping labels.</li></ul><p class="goal">The student wants to <strong>introduce Sethi’s experiment and its main finding</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 3 answer choices"><label class="mc-opt"><input type="radio" name="q3" id="q3A" value="A"><span class="bubble" aria-hidden="true">A</span><span>In Sethi’s one-meter drop test of packaged glass vials, fewer broke with molded-pulp padding than with folded-paper padding.</span></label><label class="mc-opt"><input type="radio" name="q3" id="q3B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Sethi’s laboratory tested 60 glass vials, assigning equal numbers to two packaging designs and using a one-meter drop height.</span></label><label class="mc-opt"><input type="radio" name="q3" id="q3C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Sethi’s tests established that molded-pulp padding prevents breakage in glass vials shipped over long distances.</span></label><label class="mc-opt"><input type="radio" name="q3" id="q3D" value="D"><span class="bubble" aria-hidden="true">D</span><span>In Sethi’s packaging experiment, four vials broke with molded-pulp padding, compared with one with folded-paper padding.</span></label></div><label class="reason-label" for="reason3">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason3" rows="2"></textarea><div class="print-mirror" data-for="reason3" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence3" id="confidence3Sure" value="Sure">Sure</label><label><input type="radio" name="confidence3" id="confidence3Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence3" id="confidence3Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q4-heading"><div class="question-head"><h3 id="q4-heading">Question 4</h3><span class="skill-tag">Concept and example</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Adaptive reuse means giving an existing building a new function while retaining substantial parts of its structure.</li><li>The Bell Street warehouse once stored grain.</li><li>The warehouse now houses a public theater.</li><li>The conversion retained its brick exterior walls and timber roof supports.</li><li>The theater seats 240 people.</li></ul><p class="goal">The student wants to <strong>explain adaptive reuse and illustrate the concept with the Bell Street building</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 4 answer choices"><label class="mc-opt"><input type="radio" name="q4" id="q4A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The Bell Street theater seats 240 people in a former grain warehouse whose brick walls and timber roof supports remain.</span></label><label class="mc-opt"><input type="radio" name="q4" id="q4B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Adaptive reuse gives older buildings new functions; the Bell Street warehouse once stored grain before becoming vacant.</span></label><label class="mc-opt"><input type="radio" name="q4" id="q4C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Adaptive reuse gives an existing structure a new function, as when the Bell Street grain warehouse became a theater while retaining its walls and roof supports.</span></label><label class="mc-opt"><input type="radio" name="q4" id="q4D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The Bell Street theater illustrates adaptive reuse because its builders replaced the former warehouse with a new structure of similar appearance.</span></label></div><label class="reason-label" for="reason4">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason4" rows="2"></textarea><div class="print-mirror" data-for="reason4" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence4" id="confidence4Sure" value="Sure">Sure</label><label><input type="radio" name="confidence4" id="confidence4Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence4" id="confidence4Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>3 / 10</span></footer></section><section class="sheet " aria-label="Page 4"><div class="section-hd"><span class="section-mark">D</span><h2>Sequence and trade-offs</h2><span class="badge badge-sand">Questions 5–6 • ~5 min</span></div><p class="instr">Time order must remain intact. A trade-off must show both the gain and the corresponding cost.</p><article class="question synthesis" aria-labelledby="q5-heading"><div class="question-head"><h3 id="q5-heading">Question 5</h3><span class="skill-tag">Chronological development</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>In 2008, the Alder Seed Library began distributing seeds from a cabinet at a community center.</li><li>In 2013, it added an online catalog, though seeds still had to be collected in person.</li><li>In 2019, it began mailing seeds to registered users.</li><li>In 2022, it introduced workshops on seed saving.</li><li>The library distributes both vegetable and flower seeds.</li></ul><p class="goal">The student wants to <strong>trace how access to the library’s seeds expanded from 2008 through 2019</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 5 answer choices"><label class="mc-opt"><input type="radio" name="q5" id="q5A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The Alder Seed Library distributes vegetable and flower seeds and began offering seed-saving workshops in 2022.</span></label><label class="mc-opt"><input type="radio" name="q5" id="q5B" value="B"><span class="bubble" aria-hidden="true">B</span><span>After introducing an online catalog in 2013, the library opened its first seed cabinet in 2008 and began mailing seeds in 2019.</span></label><label class="mc-opt"><input type="radio" name="q5" id="q5C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The library’s 2013 online catalog allowed users to receive seeds by mail rather than collect them at the community center.</span></label><label class="mc-opt"><input type="radio" name="q5" id="q5D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Starting with a community-center cabinet in 2008, the library added an online catalog in 2013 and mail delivery in 2019.</span></label></div><label class="reason-label" for="reason5">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason5" rows="2"></textarea><div class="print-mirror" data-for="reason5" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence5" id="confidence5Sure" value="Sure">Sure</label><label><input type="radio" name="confidence5" id="confidence5Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence5" id="confidence5Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q6-heading"><div class="question-head"><h3 id="q6-heading">Question 6</h3><span class="skill-tag">Trade-off</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A library can digitize fragile notebooks using a flatbed scanner or an overhead camera.</li><li>The scanner produces sharper images of faint pencil marks.</li><li>The scanner requires each notebook to be opened flat, putting stress on its binding.</li><li>The camera permits a notebook to remain partly closed in a cradle.</li><li>The camera’s images show less detail in faint pencil marks than the scanner’s images do.</li></ul><p class="goal">The student wants to <strong>emphasize the trade-off involved in choosing the overhead camera instead of the scanner</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 6 answer choices"><label class="mc-opt"><input type="radio" name="q6" id="q6A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Both an overhead camera and a flatbed scanner can produce digital images of the library’s fragile notebooks.</span></label><label class="mc-opt"><input type="radio" name="q6" id="q6B" value="B"><span class="bubble" aria-hidden="true">B</span><span>The overhead camera reduces stress on bindings by allowing notebooks to stay partly closed, but captures faint pencil marks in less detail.</span></label><label class="mc-opt"><input type="radio" name="q6" id="q6C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Because the scanner records faint pencil marks more sharply, it is the better choice for every fragile notebook in the collection.</span></label><label class="mc-opt"><input type="radio" name="q6" id="q6D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The overhead camera preserves the scanner’s image detail while allowing notebooks to remain partly closed in a cradle.</span></label></div><label class="reason-label" for="reason6">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason6" rows="2"></textarea><div class="print-mirror" data-for="reason6" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence6" id="confidence6Sure" value="Sure">Sure</label><label><input type="radio" name="confidence6" id="confidence6Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence6" id="confidence6Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>4 / 10</span></footer></section><section class="sheet " aria-label="Page 5"><div class="section-hd"><span class="section-mark">E</span><h2>Protect the claim</h2><span class="badge badge-purple">Questions 7–8 • ~5 min</span></div><p class="instr">Keep limits attached to the correct population. Distinguish a researcher’s interpretation from an established fact.</p><article class="question synthesis" aria-labelledby="q7-heading"><div class="question-head"><h3 id="q7-heading">Question 7</h3><span class="skill-tag">Scope limitation</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A study tested whether synchronized captions helped viewers recall details from short instructional videos.</li><li>The 84 participants were adults who were fluent readers of the caption language.</li><li>Participants were randomly assigned to watch the same videos with or without captions.</li><li>The caption group recalled more details on average.</li><li>The researchers did not test children or people still learning to read the caption language.</li></ul><p class="goal">The student wants to <strong>present the main finding while identifying a specific limit on which viewers it can be generalized to</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 7 answer choices"><label class="mc-opt"><input type="radio" name="q7" id="q7A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Because participants were randomly assigned, the study shows that captions improve video recall for viewers regardless of age or reading ability.</span></label><label class="mc-opt"><input type="radio" name="q7" id="q7B" value="B"><span class="bubble" aria-hidden="true">B</span><span>A study of 84 adults compared recall after instructional videos, using groups that watched either with or without captions.</span></label><label class="mc-opt"><input type="radio" name="q7" id="q7C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Captions improved average recall among the adult fluent readers tested, but the study did not establish the effect for children or developing readers.</span></label><label class="mc-opt"><input type="radio" name="q7" id="q7D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Although captions improved recall on average, the study did not determine whether the benefit lasted for several months.</span></label></div><label class="reason-label" for="reason7">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason7" rows="2"></textarea><div class="print-mirror" data-for="reason7" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence7" id="confidence7Sure" value="Sure">Sure</label><label><input type="radio" name="confidence7" id="confidence7Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence7" id="confidence7Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q8-heading"><div class="question-head"><h3 id="q8-heading">Question 8</h3><span class="skill-tag">Scholarly disagreement</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>An excavation at Hillmere uncovered stone slabs bearing parallel grooves.</li><li>Archaeologist Leena Das argues that wear inside the grooves indicates that the slabs were used to sharpen tools.</li><li>Historian Omar Bell argues that the regular spacing of the grooves indicates that they were primarily decorative.</li><li>Both researchers agree that people deliberately cut the grooves.</li><li>No metal tools were found beside the slabs.</li></ul><p class="goal">The student wants to <strong>identify the researchers’ disagreement about the original purpose of the grooves</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 8 answer choices"><label class="mc-opt"><input type="radio" name="q8" id="q8A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Das interprets the grooves as traces of tool sharpening, whereas Bell interprets their regular spacing as evidence of decoration.</span></label><label class="mc-opt"><input type="radio" name="q8" id="q8B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Das and Bell agree that people deliberately cut the grooves, although no metal tools were recovered beside the slabs.</span></label><label class="mc-opt"><input type="radio" name="q8" id="q8C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Das attributes the grooves to tool sharpening, whereas Bell argues that natural erosion produced their regular spacing.</span></label><label class="mc-opt"><input type="radio" name="q8" id="q8D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Because no metal tools were found, Bell has disproved Das’s claim that the grooves were used to sharpen tools.</span></label></div><label class="reason-label" for="reason8">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason8" rows="2"></textarea><div class="print-mirror" data-for="reason8" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence8" id="confidence8Sure" value="Sure">Sure</label><label><input type="radio" name="confidence8" id="confidence8Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence8" id="confidence8Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>5 / 10</span></footer></section><section class="sheet " aria-label="Page 6"><div class="section-hd"><span class="section-mark">F</span><h2>Qualify with precision</h2><span class="badge badge-purple">Questions 9–10 • ~5 min</span></div><p class="instr">Check what each number measures and which conditions apply. Do not let a true statement omit half the goal.</p><article class="question synthesis" aria-labelledby="q9-heading"><div class="question-head"><h3 id="q9-heading">Question 9</h3><span class="skill-tag">Numerical qualification</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>In March, 90 of 300 visitors to the Mercer Museum attended a free demonstration.</li><li>In April, 120 of 600 visitors attended a free demonstration.</li><li>Thus, 30% of March visitors and 20% of April visitors attended.</li><li>The museum added two evening demonstrations in April.</li><li>The demonstrations were held in the same room during both months.</li></ul><p class="goal">The student wants to <strong>show that demonstration attendance rose in number but fell as a share of all visitors</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 9 answer choices"><label class="mc-opt"><input type="radio" name="q9" id="q9A" value="A"><span class="bubble" aria-hidden="true">A</span><span>After the museum added evening demonstrations in April, demonstration attendance rose from 90 to 120 visitors.</span></label><label class="mc-opt"><input type="radio" name="q9" id="q9B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Demonstration attendance increased from 90 to 120 visitors, even as the share attending declined from 30% to 20%.</span></label><label class="mc-opt"><input type="radio" name="q9" id="q9C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Demonstration attendance rose by 30 visitors, so a larger percentage of all museum visitors attended in April than in March.</span></label><label class="mc-opt"><input type="radio" name="q9" id="q9D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Although total museum visits doubled from March to April, the number attending demonstrations fell from 120 to 90.</span></label></div><label class="reason-label" for="reason9">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason9" rows="2"></textarea><div class="print-mirror" data-for="reason9" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence9" id="confidence9Sure" value="Sure">Sure</label><label><input type="radio" name="confidence9" id="confidence9Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence9" id="confidence9Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q10-heading"><div class="question-head"><h3 id="q10-heading">Question 10</h3><span class="skill-tag">Condition and exception</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Engineers tested a reflective coating on outdoor storage boxes.</li><li>On dry, sunny days, coated boxes stayed cooler inside than uncoated boxes.</li><li>After rain, when a continuous film of water covered the boxes, the temperature difference disappeared.</li><li>Once the boxes dried, the difference returned.</li><li>The coating was applied with a roller.</li></ul><p class="goal">The student wants to <strong>emphasize the condition under which the coating’s observed cooling advantage disappeared</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 10 answer choices"><label class="mc-opt"><input type="radio" name="q10" id="q10A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The reflective coating, applied with a roller, kept storage boxes cooler inside on dry, sunny days.</span></label><label class="mc-opt"><input type="radio" name="q10" id="q10B" value="B"><span class="bubble" aria-hidden="true">B</span><span>The coating’s cooling advantage returned after the boxes dried, suggesting that rain permanently improved its performance.</span></label><label class="mc-opt"><input type="radio" name="q10" id="q10C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The coating kept boxes cooler under every tested condition, though the size of the advantage changed after rain.</span></label><label class="mc-opt"><input type="radio" name="q10" id="q10D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The coated boxes lost their cooling advantage when a continuous film of rainwater covered them; the advantage returned after drying.</span></label></div><label class="reason-label" for="reason10">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason10" rows="2"></textarea><div class="print-mirror" data-for="reason10" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence10" id="confidence10Sure" value="Sure">Sure</label><label><input type="radio" name="confidence10" id="confidence10Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence10" id="confidence10Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>6 / 10</span></footer></section><section class="sheet " aria-label="Page 7"><div class="section-hd"><span class="section-mark">G</span><h2>Connect the evidence</h2><span class="badge badge-purple">Questions 11–12 • ~5 min</span></div><p class="instr">For a mechanism, preserve the causal chain. To reconcile results, explain how both can hold under different conditions.</p><article class="question synthesis" aria-labelledby="q11-heading"><div class="question-head"><h3 id="q11-heading">Question 11</h3><span class="skill-tag">Explain a mechanism</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A prototype irrigation valve contains a strip made from two bonded materials.</li><li>As the strip warms, one material expands more than the other.</li><li>This unequal expansion bends the strip.</li><li>The bending motion opens the valve, allowing water to flow.</li><li>The prototype was displayed at a school engineering fair.</li></ul><p class="goal">The student wants to <strong>explain how warming causes the prototype valve to release water</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 11 answer choices"><label class="mc-opt"><input type="radio" name="q11" id="q11A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Warming makes the strip’s bonded materials expand unequally, bending the strip and opening the valve so water can flow.</span></label><label class="mc-opt"><input type="radio" name="q11" id="q11B" value="B"><span class="bubble" aria-hidden="true">B</span><span>The valve releases water as its strip bends; the prototype, which uses two bonded materials, appeared at an engineering fair.</span></label><label class="mc-opt"><input type="radio" name="q11" id="q11C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Water flowing through the valve heats the strip, causing its bonded materials to expand and bend apart.</span></label><label class="mc-opt"><input type="radio" name="q11" id="q11D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Warming opens the valve because both bonded materials expand equally, keeping the strip straight while water is released.</span></label></div><label class="reason-label" for="reason11">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason11" rows="2"></textarea><div class="print-mirror" data-for="reason11" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence11" id="confidence11Sure" value="Sure">Sure</label><label><input type="radio" name="confidence11" id="confidence11Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence11" id="confidence11Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q12-heading"><div class="question-head"><h3 id="q12-heading">Question 12</h3><span class="skill-tag">Reconcile findings</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Team A tested a noise-reducing curtain with speakers producing mostly high-frequency sound.</li><li>Team A recorded a large reduction in sound passing through the curtain.</li><li>Team B tested the same curtain with speakers producing mostly low-frequency sound.</li><li>Team B recorded only a small reduction.</li><li>A separate test found that the curtain absorbs high-frequency sound more effectively than low-frequency sound.</li></ul><p class="goal">The student wants to <strong>explain why the teams’ results need not conflict</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 12 answer choices"><label class="mc-opt"><input type="radio" name="q12" id="q12A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Because both teams tested the same curtain, their different results demonstrate that at least one team’s measurements were incorrect.</span></label><label class="mc-opt"><input type="radio" name="q12" id="q12B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Team A recorded a large sound reduction, while Team B recorded a small reduction using the same noise-reducing curtain.</span></label><label class="mc-opt"><input type="radio" name="q12" id="q12C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The results are consistent with the curtain’s stronger absorption of high-frequency sound, since the teams used different frequency ranges.</span></label><label class="mc-opt"><input type="radio" name="q12" id="q12D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The teams’ results differ because Team A’s curtain was designed for high-frequency sound and Team B used a different curtain.</span></label></div><label class="reason-label" for="reason12">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason12" rows="2"></textarea><div class="print-mirror" data-for="reason12" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence12" id="confidence12Sure" value="Sure">Sure</label><label><input type="radio" name="confidence12" id="confidence12Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence12" id="confidence12Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>7 / 10</span></footer></section><section class="sheet mixed" aria-label="Page 8"><div class="section-hd"><span class="section-mark">H</span><h2>Routine-switch sprint</h2><span class="badge badge-green">Questions 13–15 • 3 min</span></div><p class="instr">Diagnose the format: passage + blank → logical relationship; notes + goal → accuracy and task. Select answers during timing. Complete reasoning and confidence marks after timing; do not change your original selections before checking.</p><article class="question transition" aria-labelledby="q13-heading"><div class="question-head"><h3 id="q13-heading">Question 13</h3></div><p class="passage">The community archive initially planned to accept only handwritten diaries. ______, after residents offered home recordings, the archive expanded its collection policy to include audio as well.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 13 answer choices"><label class="mc-opt"><input type="radio" name="q13" id="q13A" value="A"><span class="bubble" aria-hidden="true">A</span><span>However,</span></label><label class="mc-opt"><input type="radio" name="q13" id="q13B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Similarly,</span></label><label class="mc-opt"><input type="radio" name="q13" id="q13C" value="C"><span class="bubble" aria-hidden="true">C</span><span>For instance,</span></label><label class="mc-opt"><input type="radio" name="q13" id="q13D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Consequently,</span></label></div><label class="reason-label" for="reason13">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason13" rows="1"></textarea><div class="print-mirror" data-for="reason13" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence13" id="confidence13Sure" value="Sure">Sure</label><label><input type="radio" name="confidence13" id="confidence13Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence13" id="confidence13Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q14-heading"><div class="question-head"><h3 id="q14-heading">Question 14</h3></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A town replaced the lamps in 40 streetlights with lower-energy models.</li><li>Over the next month, the streetlights used 25% less electricity than in the previous month.</li><li>The price charged per unit of electricity increased during the same period.</li><li>The town’s streetlight electricity bill was unchanged.</li></ul><p class="goal">The student wants to <strong>distinguish the change in electricity use from the change in electricity cost</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 14 answer choices"><label class="mc-opt"><input type="radio" name="q14" id="q14A" value="A"><span class="bubble" aria-hidden="true">A</span><span>After the town installed lower-energy lamps, both electricity use and the total streetlight electricity bill declined by 25%.</span></label><label class="mc-opt"><input type="radio" name="q14" id="q14B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Because the price per unit increased, the streetlights used more electricity even after the new lamps were installed.</span></label><label class="mc-opt"><input type="radio" name="q14" id="q14C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The new lamps were followed by a 25% decline in streetlight electricity use, but a higher unit price left the electricity bill unchanged.</span></label><label class="mc-opt"><input type="radio" name="q14" id="q14D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The streetlight electricity bill was unchanged after the town replaced the lamps in 40 streetlights with lower-energy models.</span></label></div><label class="reason-label" for="reason14">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason14" rows="1"></textarea><div class="print-mirror" data-for="reason14" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence14" id="confidence14Sure" value="Sure">Sure</label><label><input type="radio" name="confidence14" id="confidence14Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence14" id="confidence14Guessed" value="Guessed">Guessed</label></div></article><article class="question transition" aria-labelledby="q15-heading"><div class="question-head"><h3 id="q15-heading">Question 15</h3></div><p class="passage">The exhibit allows visitors to explore texture through touch. ______, one station invites them to compare a smooth ceramic tile with a ridged one.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 15 answer choices"><label class="mc-opt"><input type="radio" name="q15" id="q15A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Nevertheless,</span></label><label class="mc-opt"><input type="radio" name="q15" id="q15B" value="B"><span class="bubble" aria-hidden="true">B</span><span>As a result,</span></label><label class="mc-opt"><input type="radio" name="q15" id="q15C" value="C"><span class="bubble" aria-hidden="true">C</span><span>In contrast,</span></label><label class="mc-opt"><input type="radio" name="q15" id="q15D" value="D"><span class="bubble" aria-hidden="true">D</span><span>For example,</span></label></div><label class="reason-label" for="reason15">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason15" rows="1"></textarea><div class="print-mirror" data-for="reason15" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence15" id="confidence15Sure" value="Sure">Sure</label><label><input type="radio" name="confidence15" id="confidence15Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence15" id="confidence15Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>8 / 10</span></footer></section><section class="sheet mixed" aria-label="Page 9"><div class="section-hd"><span class="section-mark">I</span><h2>Precision sprint</h2><span class="badge badge-green">Questions 16–18 • 4 min</span></div><p class="instr">Diagnose the format: passage + blank → logical relationship; notes + goal → accuracy and task. Select answers during timing. Complete reasoning and confidence marks after timing; do not change your original selections before checking.</p><article class="question transition" aria-labelledby="q16-heading"><div class="question-head"><h3 id="q16-heading">Question 16</h3></div><p class="passage">The field recorder’s battery was completely depleted, and the crew had no replacement. ______, they postponed the remaining audio interviews until the recorder could be recharged.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 16 answer choices"><label class="mc-opt"><input type="radio" name="q16" id="q16A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Meanwhile,</span></label><label class="mc-opt"><input type="radio" name="q16" id="q16B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Therefore,</span></label><label class="mc-opt"><input type="radio" name="q16" id="q16C" value="C"><span class="bubble" aria-hidden="true">C</span><span>For instance,</span></label><label class="mc-opt"><input type="radio" name="q16" id="q16D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Nevertheless,</span></label></div><label class="reason-label" for="reason16">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason16" rows="1"></textarea><div class="print-mirror" data-for="reason16" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence16" id="confidence16Sure" value="Sure">Sure</label><label><input type="radio" name="confidence16" id="confidence16Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence16" id="confidence16Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q17-heading"><div class="question-head"><h3 id="q17-heading">Question 17</h3></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Product designer Nadia Rios created a reusable shipping sleeve called LoopWrap.</li><li>LoopWrap can be adjusted to fit parcels of several different sizes.</li><li>In a warehouse trial, a single LoopWrap size replaced three sizes of disposable mailers.</li><li>Rios previously designed reusable grocery bags.</li><li>The intended readers already know Rios’s earlier design work but have not heard of LoopWrap.</li></ul><p class="goal">The student wants to <strong>introduce LoopWrap and explain its practical significance to this audience</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 17 answer choices"><label class="mc-opt"><input type="radio" name="q17" id="q17A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Rios’s LoopWrap is an adjustable, reusable shipping sleeve that replaced three sizes of disposable mailers in a warehouse trial.</span></label><label class="mc-opt"><input type="radio" name="q17" id="q17B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Rios, who previously designed reusable grocery bags, has continued to develop products for carrying and shipping goods.</span></label><label class="mc-opt"><input type="radio" name="q17" id="q17C" value="C"><span class="bubble" aria-hidden="true">C</span><span>LoopWrap, a reusable shipping sleeve designed by Rios, eliminates the need for disposable mailers in all shipping operations.</span></label><label class="mc-opt"><input type="radio" name="q17" id="q17D" value="D"><span class="bubble" aria-hidden="true">D</span><span>A warehouse trial found that three LoopWrap sizes were needed to replace a single size of disposable mailer.</span></label></div><label class="reason-label" for="reason17">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason17" rows="1"></textarea><div class="print-mirror" data-for="reason17" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence17" id="confidence17Sure" value="Sure">Sure</label><label><input type="radio" name="confidence17" id="confidence17Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence17" id="confidence17Guessed" value="Guessed">Guessed</label></div></article><article class="question transition" aria-labelledby="q18-heading"><div class="question-head"><h3 id="q18-heading">Question 18</h3></div><p class="passage">The catalog follows a nonchronological arrangement. ______, its entries are not ordered by the dates of the events they describe.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 18 answer choices"><label class="mc-opt"><input type="radio" name="q18" id="q18A" value="A"><span class="bubble" aria-hidden="true">A</span><span>By comparison,</span></label><label class="mc-opt"><input type="radio" name="q18" id="q18B" value="B"><span class="bubble" aria-hidden="true">B</span><span>In addition,</span></label><label class="mc-opt"><input type="radio" name="q18" id="q18C" value="C"><span class="bubble" aria-hidden="true">C</span><span>In other words,</span></label><label class="mc-opt"><input type="radio" name="q18" id="q18D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Even so,</span></label></div><label class="reason-label" for="reason18">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason18" rows="1"></textarea><div class="print-mirror" data-for="reason18" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence18" id="confidence18Sure" value="Sure">Sure</label><label><input type="radio" name="confidence18" id="confidence18Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence18" id="confidence18Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>9 / 10</span></footer></section><section class="sheet " aria-label="Page 10"><div class="section-hd"><span class="section-mark">J</span><h2>Error log and reflection</h2><span class="badge badge-coral">After checking</span></div><div class="score-banner"><div><div class="title">Self-score</div><div class="sub">Original answers only • Warm-up excluded</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input type="number" min="0" max="14" id="synthesis-score" aria-label="Synthesis score"> / 14</div><div class="sc-lbl">Synthesis</div></div><div class="score-cell"><div class="sc-val"><input type="number" min="0" max="4" id="transition-score" aria-label="Transitions score"> / 4</div><div class="sc-lbl">Transitions</div></div><div class="score-cell"><div class="sc-val"><input type="number" min="0" max="18" id="total-score" aria-label="Total score"> / 18</div><div class="sc-lbl">Total</div></div></div></div><p class="instr">Review every missed or uncertain item. Log up to six that best reveal your patterns; use another copy of this page if needed. Explain the failure precisely, then write a rule you can use on the next question.</p><div class="error-log"><h3>My errors this week</h3><div class="error-type-pills"><span class="pill pill-cg">Content gap — skill not understood</span><span class="pill pill-ce">Careless error — known skill misapplied</span><span class="pill pill-ru">Rushing — key wording missed</span></div><table class="error-table"><thead><tr><th scope="col">Q#</th><th scope="col">Mine → key</th><th scope="col">What failed?</th><th scope="col">Error type</th><th scope="col">Repair / next-time cue</th></tr></thead><tbody><tr><td contenteditable="true" role="textbox" aria-label="Error log row 1, question number" id="error-0-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, my answer and correct answer" id="error-0-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, what failed" id="error-0-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, error type" id="error-0-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, repair and next-time cue" id="error-0-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 2, question number" id="error-1-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, my answer and correct answer" id="error-1-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, what failed" id="error-1-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, error type" id="error-1-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, repair and next-time cue" id="error-1-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 3, question number" id="error-2-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, my answer and correct answer" id="error-2-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, what failed" id="error-2-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, error type" id="error-2-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, repair and next-time cue" id="error-2-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 4, question number" id="error-3-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, my answer and correct answer" id="error-3-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, what failed" id="error-3-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, error type" id="error-3-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, repair and next-time cue" id="error-3-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 5, question number" id="error-4-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, my answer and correct answer" id="error-4-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, what failed" id="error-4-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, error type" id="error-4-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, repair and next-time cue" id="error-4-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 6, question number" id="error-5-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, my answer and correct answer" id="error-5-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, what failed" id="error-5-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, error type" id="error-5-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, repair and next-time cue" id="error-5-4"></td></tr></tbody></table><p class="small" style="margin-top:9px;color:#92400e">Useful diagnoses: true but off-goal • unsupported claim • reversed relationship • missing limitation • count versus percentage • wrong transition relationship.</p></div><div class="reflect-box"><h3>Turn one error into a rule</h3><label class="reason-label" for="reflect1">1. Which goal word or scope phrase did I overlook, and how did it change the task?</label><textarea class="work-area" id="reflect1" rows="2"></textarea><div class="print-mirror" data-for="reflect1" aria-hidden="true"></div><label class="reason-label" for="reflect2">2. My next-time cue: “When I see ______, I will ______ before choosing.”</label><textarea class="work-area" id="reflect2" rows="2"></textarea><div class="print-mirror" data-for="reflect2" aria-hidden="true"></div><label class="reason-label" for="reflect3">3. Which question should we revisit together, and what is still unclear?</label><textarea class="work-area" id="reflect3" rows="2"></textarea><div class="print-mirror" data-for="reflect3" aria-hidden="true"></div></div><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>10 / 10</span></footer></section><script>
+const STORAGE_KEY = 'hue-s5-rhetorical-synthesis-homework-v1';
+function syncChoices(){document.querySelectorAll('.mc-opt').forEach(label=>label.classList.toggle('selected',label.querySelector('input').checked));}
+function syncMirrors(){document.querySelectorAll('.print-mirror').forEach(m=>{m.textContent=document.getElementById(m.dataset.for).value;});}
+function resizeText(el){el.style.height='auto';el.style.height=Math.max(el.scrollHeight,el.rows===1?33:43)+'px';}
+function saveWork(){
+  const state={};
+  document.querySelectorAll('input[id],textarea[id],[contenteditable][id]').forEach(el=>{
+    state[el.id]=el.matches('[contenteditable]')?el.textContent:el.type==='radio'||el.type==='checkbox'?el.checked:el.value;
+  });
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}
+}
+function loadWork(){
+  try{
+    const state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    if(!state || typeof state!=='object')return;
+    Object.entries(state).forEach(([id,value])=>{
+      const el=document.getElementById(id);if(!el)return;
+      if(el.matches('[contenteditable]'))el.textContent=String(value);
+      else if(el.type==='radio'||el.type==='checkbox')el.checked=value===true;
+      else el.value=String(value);
+    });
+  }catch(e){}
+}
+function clearAll(){
+  if(!window.confirm('Clear all answers, notes, scores, name, date, and saved work for this sheet?'))return;
+  document.querySelectorAll('input,textarea').forEach(el=>{if(el.type==='radio'||el.type==='checkbox')el.checked=false;else el.value='';});
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent='');
+  try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  syncChoices();syncMirrors();document.querySelectorAll('textarea').forEach(resizeText);
+}
+async function printSheet(){
+  syncMirrors();
+  if(document.fonts)await Promise.race([document.fonts.ready,new Promise(resolve=>setTimeout(resolve,1800))]);
+  window.print();
+}
+document.addEventListener('input',e=>{if(e.target.matches('textarea'))resizeText(e.target);syncMirrors();saveWork();});
+document.addEventListener('change',()=>{syncChoices();saveWork();});
+window.addEventListener('beforeprint',syncMirrors);
+document.addEventListener('DOMContentLoaded',()=>{loadWork();syncChoices();syncMirrors();document.querySelectorAll('textarea').forEach(resizeText);});
 </script></body></html>
