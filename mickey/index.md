@@ -13,4 +13,4 @@
 | **02** | [Lines, Angles, Triangles & Right-Triangle Trig](https://hue-bee.github.io/mickey/lessons/02) | [2 Homework](https://hue-bee.github.io/mickey/lessons/02/homework) |[Set 1](https://hue-bee.github.io/mickey/lessons/02/sets/01)| |
 | **03** | [Circles, Measurement & Scaling](https://hue-bee.github.io/mickey/lessons/03) | [3 Homework](https://hue-bee.github.io/mickey/lessons/03/homework) | |
 | **04** | [Debrief + Transitions](https://hue-bee.github.io/mickey/lessons/04) | [4 Homework](https://hue-bee.github.io/mickey/lessons/04/homework) | |
-| **05** | [Rhetorical Synthesis](https://hue-bee.github.io/mickey/lessons/05) | [5 Homework](https://hue-bee.github.io/mickey/lessons/05/homework) |[Set 2](https://hue-bee.github.io/mickey/lessons/05/sets/02|
+| **05** | [Rhetorical Synthesis](https://hue-bee.github.io/mickey/lessons/05) | [5 Homework](https://hue-bee.github.io/mickey/lessons/05/homework) |[Set 2](https://hue-bee.github.io/mickey/lessons/05/sets/02)|
