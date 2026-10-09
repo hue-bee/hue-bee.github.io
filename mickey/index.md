@@ -12,3 +12,5 @@
 | **01** | [Baseline Audit & Error Log](https://hue-bee.github.io/mickey/lessons/01) | [1 Homework](https://hue-bee.github.io/mickey/lessons/01/homework) |[Set 1](https://hue-bee.github.io/mickey/lessons/01/sets/01) [Set 2](https://hue-bee.github.io/mickey/lessons/01/sets/02)| |
 | **02** | [Lines, Angles, Triangles & Right-Triangle Trig](https://hue-bee.github.io/mickey/lessons/02) | [2 Homework](https://hue-bee.github.io/mickey/lessons/02/homework) |[Set 1](https://hue-bee.github.io/mickey/lessons/02/sets/01)| |
 | **03** | [Circles, Measurement & Scaling](https://hue-bee.github.io/mickey/lessons/03) | [3 Homework](https://hue-bee.github.io/mickey/lessons/03/homework) | |
+| **04** | [Debrief + Transitions](https://hue-bee.github.io/mickey/lessons/04) | [4 Homework](https://hue-bee.github.io/mickey/lessons/04/homework) | |
+| **05** | [Rhetorical Synthesis](https://hue-bee.github.io/mickey/lessons/05) | [4 Homework](https://hue-bee.github.io/mickey/lessons/05/homework) | |
