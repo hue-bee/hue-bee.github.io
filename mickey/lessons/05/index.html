@@ -1,248 +1,678 @@
 <!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Session 5 Homework — Rhetorical Synthesis</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&amp;display=swap"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Trebuchet MS', sans-serif;
+    --ff-body: 'Lexend', 'Trebuchet MS', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="viewport" name="slides-format"/>
-<title>Oren — CAT Precision: Percentages &amp; Evidence</title>
-<link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&amp;display=swap" rel="stylesheet"/>
-<style>
-:root{
-  --bg:#f4f4f4;--surface:#ffffff;--ink:#1f1f1f;--ink-2:#4a4a4a;--ink-3:#767676;
-  --line:rgba(201,212,228,.48);--blue:#2563EB;--blue-soft:#DCEBFB;
-  --z1:#262626;--z1-soft:rgba(38,38,38,.10);--z2:#4d4d4d;--z2-soft:rgba(77,77,77,.10);
-  --z3:#6a6a6a;--z3-soft:rgba(106,106,106,.12);--z4:#858585;--z4-soft:rgba(133,133,133,.12);
-  --z5:#5c5c5c;--z5-soft:rgba(92,92,92,.10);--ela:#3e3e3e;--ela-soft:rgba(62,62,62,.10);
-  --font-display:'Chillax','Lexend','Trebuchet MS',sans-serif;--font-body:'Lexend','Trebuchet MS',sans-serif;
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+@page {size:letter; margin:.45in;}
+body {max-width: 860px; font-size:13px; line-height:1.48;}
+.toolbar {display:flex;justify-content:center;gap:12px;padding:20px 12px 0;flex-wrap:wrap;}
+.toolbar .print-btn {margin:0;font-size:14px;}
+.toolbar .clear-btn {background:var(--muted);box-shadow:none;}
+.screen-note {text-align:center;font-size:11px;color:var(--muted);margin:10px 16px 0;}
+.sheet {width:100%;min-height:1010px;display:flex;flex-direction:column;padding:34px 38px;margin:24px auto;}
+.hw-header {flex-wrap:nowrap;gap:18px;margin-bottom:16px;}
+.hw-header-left h1 {font-size:28px;line-height:1.15;font-weight:600;}
+.hw-header-left .subtitle {font-size:10px;line-height:1.6;letter-spacing:.08em;}
+.hw-meta {min-width:205px;max-width:220px;padding-top:4px;}
+.hw-meta input {width:120px;}
+input,textarea {font-family:var(--ff-body);color:var(--ink);font-size:12px;}
+input[type=text],input[type=number] {min-width:0;background:transparent;border:0;border-bottom:1.5px solid var(--border);padding:3px 5px;}
+input:focus-visible,textarea:focus-visible,[contenteditable]:focus-visible,button:focus-visible {outline:2px solid var(--blue);outline-offset:3px;}
+input[type=radio],input[type=checkbox] {accent-color:var(--blue);}
+.section-hd {margin:0 0 11px;gap:10px;}
+.section-hd h2 {font-size:20px;line-height:1.25;font-weight:600;}
+.section-hd .badge {white-space:nowrap;font-size:10px;}
+.section-hd .section-mark {font-family:var(--ff-head);font-weight:600;border-radius:9px;padding:5px 10px;background:var(--blue-lt);color:var(--blue);font-size:17px;}
+.instr {font-size:11px;font-style:normal;line-height:1.55;padding:8px 10px;margin-bottom:14px;}
+.small {font-size:11px;color:var(--muted);line-height:1.55;}
+.pretitle {font-size:10px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin-bottom:7px;font-weight:600;}
+.plan {display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px;}
+.plan div {border:1px solid var(--blue-md);border-radius:8px;padding:9px;background:var(--blue-lt);}
+.plan b {display:block;font-family:var(--ff-head);font-size:13px;color:var(--blue);}
+.plan span {font-size:10px;display:block;margin-top:3px;color:var(--slate);}
+.formula-strip {margin-bottom:12px;gap:7px;padding:9px;}
+.formula-strip .fml {font-size:12px;font-weight:500;}
+.rule-grid {display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px;}
+.rule-grid div {border:1px solid var(--border);background:var(--bg);padding:9px 11px;border-radius:8px;font-size:11px;}
+.rule-grid b {color:var(--blue);display:block;margin-bottom:2px;}
+.question {background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px;break-inside:avoid;page-break-inside:avoid;}
+.question-head {display:flex;gap:8px;align-items:center;margin-bottom:6px;}
+.question-head h3 {font-family:var(--ff-head);font-size:14px;font-weight:600;color:var(--blue);}
+.skill-tag {font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+.level {margin-left:auto;font-size:9px;font-weight:600;border-radius:15px;background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md);padding:2px 7px;}
+.level.stretch {background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd;}
+.notes-intro {font-size:11px;color:var(--slate);margin-bottom:4px;}
+.research-notes {margin:0 0 8px;padding-left:20px;font-size:12px;line-height:1.45;color:var(--slate);}
+.research-notes li {padding-left:1px;margin:2px 0;}
+.goal {background:var(--blue-lt);border-left:3px solid var(--blue);padding:8px 10px;margin:7px 0;font-size:12px;line-height:1.45;border-radius:0 6px 6px 0;}
+.goal strong {font-weight:600;}
+.mc-opts {display:grid;grid-template-columns:1fr;gap:3px;}
+.mc-opt {font-size:12px;line-height:1.45;padding:5px 7px;gap:7px;position:relative;}
+.mc-opt input[type=radio] {display:block;position:absolute;width:1px;height:1px;opacity:0;left:3px;top:7px;}
+.mc-opt:focus-within {outline:2px solid var(--blue);outline-offset:1px;}
+.mc-opt .bubble {width:19px;height:19px;min-width:19px;font-size:10px;line-height:1;flex-shrink:0;margin-top:0;background:white;}
+.mc-opt.selected {background:#e5e7eb;border-color:#374151;font-weight:400;}
+.mc-opt.selected .bubble {background:#374151;border-color:#374151;color:white;}
+.reason-label {display:block;font-size:10px;font-weight:500;color:var(--slate);margin-top:7px;}
+.work-area {min-height:43px;font-size:11px;line-height:1.5;padding:6px 8px;margin-top:4px;resize:vertical;overflow:hidden;}
+.confidence {font-size:10px;color:var(--muted);display:flex;gap:14px;align-items:center;margin-top:5px;}
+.confidence label {display:inline-flex;gap:4px;align-items:center;cursor:pointer;}
+.confidence input {margin:0;width:12px;height:12px;}
+.passage {font-size:12px;line-height:1.6;margin:2px 0 7px;}
+.transition .mc-opts {grid-template-columns:1fr 1fr;gap:3px 14px;}
+.transition .work-area {min-height:33px;}
+.mixed .question {padding:11px 13px;margin-bottom:12px;}
+.mixed .question:last-of-type {margin-bottom:0;}
+.warmup {padding:12px 15px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;}
+.warmup .research-notes {margin:6px 0 10px;}
+.warmup .task {display:block;font-size:11px;color:var(--slate);margin-top:9px;}
+.warmup .task input {width:115px;margin-left:5px;}
+.warmup .work-area {min-height:55px;}
+.footer {margin-top:auto;padding-top:15px;display:flex;justify-content:space-between;color:var(--muted);font-size:9px;border-top:1px solid var(--border);}
+.footer-gap {min-height:10px;}
+.error-log {padding:13px 15px;}
+.error-log h3 {font-size:17px;}
+.error-type-pills {font-size:10px;gap:5px;margin:6px 0 12px;}
+.pill {padding:3px 8px;}
+.error-table {font-size:10px;table-layout:fixed;}
+.error-table th {font-size:10px;padding:7px 6px;}
+.error-table td {font-size:10px;padding:6px;vertical-align:top;height:55px;word-break:break-word;}
+.error-table th:nth-child(1) {width:8%;}
+.error-table th:nth-child(2) {width:15%;}
+.error-table th:nth-child(3) {width:31%;}
+.error-table th:nth-child(4) {width:14%;}
+.error-table th:nth-child(5) {width:32%;}
+.error-table td[contenteditable] {outline-offset:-2px;}
+.reflect-box {padding:12px 14px;margin-top:14px;}
+.reflect-box h3 {font-size:16px;font-weight:600;}
+.reflect-box label {display:block;font-size:11px;margin-top:8px;color:var(--slate);}
+.reflect-box .work-area {min-height:37px;}
+.score-banner {margin:0 0 14px;padding:12px 15px;gap:8px;}
+.score-banner .title {font-size:17px;font-weight:600;}
+.score-cells {gap:7px;}
+.score-cell {min-width:86px;padding:5px 8px;}
+.score-cell input {width:34px;color:white;border-bottom:1px solid white;font-family:var(--ff-head);font-size:16px;text-align:center;padding:0;}
+.score-cell .sc-lbl {font-size:9px;}
+.source-note {font-size:9px;color:var(--muted);line-height:1.45;margin:12px 0;}
+.print-mirror {display:none;}
+.key-grid {display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:12px 0 16px;}
+.key-grid div {background:var(--blue-lt);border:1px solid var(--blue-md);padding:6px 2px;text-align:center;border-radius:6px;font-size:12px;}
+.key-item {break-inside:avoid;border:1px solid var(--border);border-radius:9px;padding:11px 13px;margin-bottom:12px;background:var(--bg);}
+.key-item h3 {font-family:var(--ff-head);font-size:15px;color:var(--blue);margin-bottom:5px;font-weight:600;}
+.key-item p {font-size:11px;line-height:1.5;margin:4px 0;}
+.key-item .rejects {color:var(--slate);}
+.key-item strong {font-weight:600;}
+@media(max-width:650px){body{font-size:12px}.sheet{min-height:0;padding:24px 18px;margin:16px 0;border-radius:0}.hw-header{flex-direction:column}.hw-meta{max-width:none;width:100%}.hw-meta input{flex:1}.hw-header-left h1{font-size:25px}.plan{grid-template-columns:1fr 1fr}.section-hd{flex-wrap:wrap}.section-hd .badge{margin-left:0}.score-banner{align-items:flex-start}.error-log{padding:9px 6px}.error-table td,.error-table th{padding:5px 3px;font-size:9px}.footer{margin-top:20px}.key-grid{grid-template-columns:repeat(6,1fr)}}
+@media print {
+  html,body{background:white!important;width:auto!important;max-width:none!important;margin:0!important;}
+  body{font-size:10pt;}
+  .sheet{width:auto!important;min-height:10in;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;break-after:page;page-break-after:always;}
+  .sheet:last-of-type{break-after:auto;page-break-after:auto;}
+  .hw-header-left h1{font-size:23pt;}
+  .section-hd{margin:0 0 8px;}
+  .section-hd h2{font-size:15pt;}
+  .question{padding:10px 12px;margin-bottom:11px;}
+  .research-notes,.mc-opt,.goal,.passage{font-size:9pt;line-height:1.4;}
+  .mc-opt{padding:4px 6px;}
+  .research-notes li{margin:2px 0;}
+  .instr{font-size:8pt;padding:7px 9px;margin-bottom:11px;}
+  .question-head h3{font-size:11pt;}
+  .reason-label,.confidence{font-size:7.5pt;}
+  .work-area{display:none!important;}
+  .print-mirror{display:block;min-height:39px;border:1px dashed var(--border);border-radius:6px;background:white;padding:5px 7px;margin-top:4px;font-size:8.5pt;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;}
+  .transition .print-mirror{min-height:28px;}
+  .warmup .print-mirror{min-height:45px;}
+  .reflect-box .print-mirror{min-height:30px;}
+  .mc-opt.selected{background:#e5e7eb!important;border-color:#374151!important;}
+  .mc-opt.selected .bubble{background:#374151!important;color:white!important;}
+  .mc-opt{transition:none;}
+  .confidence input{appearance:none;width:10px;height:10px;border:1px solid var(--border)!important;border-radius:50%;background:white!important;}
+  .confidence input:checked{box-shadow:inset 0 0 0 2px white;background:#374151!important;}
+  .error-table{font-size:8pt;}
+  .error-table td{height:51px;}
+  .score-cell input{background:transparent!important;color:white!important;}
+  .score-banner{margin-bottom:12px;}
+  .footer{font-size:7pt;padding-top:10px;}
+  .plan{margin-bottom:12px;}
+  .rule-grid{margin-bottom:12px;}
+  .key-item{padding:9px 11px;margin-bottom:10px;}
+  .key-item p{font-size:8.4pt;line-height:1.48;}
+  .key-item h3{font-size:11pt;}
+  .key-grid{margin:10px 0 12px;}
+  .source-note{font-size:7pt;}
 }
-*,*::before,*::after{box-sizing:border-box}html,body{background:var(--bg);margin:0}body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400}.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:all}.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem)}.reveal{opacity:0;transform:translateY(16px)}
-.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.32),0 2px 8px rgba(201,212,228,.18)}.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer}.nav-btn:hover{background:#DCE7F7}.slide-dots{display:flex;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.18);cursor:pointer;transition:.25s}.dot.active{background:var(--ink);transform:scale(1.35)}.slide-counter{font-size:.75rem;color:var(--ink-3);min-width:40px;text-align:center;font-weight:600}
-.kicker{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--zc,var(--ink-3));margin-bottom:.35rem}.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;margin:0}.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-.01em;margin:0 0 1rem;color:var(--ink)}.tint{color:var(--zc)}.prose{font-size:.92rem;color:var(--ink-2);line-height:1.58}.micro{font-size:.69rem;color:var(--ink-3);line-height:1.45}.math{font-weight:700;font-size:1.32rem;letter-spacing:.01em}.math-inline{font-weight:700}
-.card,.prob-card,.diagram-wrap,.prompt-card,.step-card,.metric-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 24px rgba(201,212,228,.20),0 2px 6px rgba(201,212,228,.14)}.card,.prompt-card,.step-card,.metric-card{padding:.82rem 1rem}.diagram-wrap{padding:.68rem;display:flex;align-items:center;justify-content:center}.prob-card{padding:.85rem 1rem}.prob-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem}.prob-num{font-family:var(--font-display);font-weight:600;font-size:.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px}.lvl-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:20px}.lvl-1{background:#E8EDF5;color:#3D4C63}.lvl-2{background:#DCEBFB;color:#1D4ED8}.lvl-3{background:#FBEBCF;color:#B45309}.lvl-4{background:#FADEE2;color:#BE123C}.tag{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}.tag.hot{background:#FADEE2;color:#BE123C}.tag.cool{background:#E8F7EC;color:#15803D}.tag.live{background:#E9E4FE;color:#5B21B6}.prompt-card{background:#F3F0FE}.prompt-title{font-weight:700;font-size:.84rem;color:#5B21B6}.prompt-body{font-size:.86rem;color:var(--ink-2);line-height:1.52;margin-top:.22rem}.trap-card{border:1px solid var(--line);background:#FFF7F8;border-radius:12px;padding:.68rem .92rem}.trap-title{font-weight:700;font-size:.84rem;color:#9F1239}.trap-body{font-size:.84rem;color:var(--ink-2);margin-top:.2rem;line-height:1.52}.win-card{border:1px solid var(--line);border-left:5px solid var(--zc,var(--z5));background:#F4FBF5;border-radius:12px;padding:.7rem .95rem}.win-title{font-weight:700;font-size:.85rem;color:#15803D}.formula-box{background:var(--zs,#EDF2F9);border:1px solid var(--line);border-radius:12px;padding:.58rem 1rem;text-align:center}.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.85rem}.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:.65rem;font-weight:500;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--ink-3);white-space:nowrap}.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4)}.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc)}.zone-chip.on .zdot{background:rgba(255,255,255,.85)}
-.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}.split-55{display:grid;grid-template-columns:1.08fr .92fr;gap:1rem;align-items:stretch}.step-row{display:grid;grid-template-columns:42px 1fr;gap:.75rem;align-items:start}.step-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--zc);color:white;font-weight:700}.step-title{font-weight:700;font-size:.88rem}.step-body{font-size:.82rem;color:var(--ink-2);line-height:1.45;margin-top:.12rem}.blank{display:inline-block;min-width:64px;border-bottom:2px solid #9AA9BF;height:1em;vertical-align:middle}.source{position:absolute;left:2.6rem;bottom:1.2rem;font-size:.56rem;color:#939393;letter-spacing:.02em}.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}.deco{position:absolute;border-radius:50%;background:#DCE7F7;opacity:.42;filter:blur(1px)}
-.tl-row{display:grid;grid-template-columns:96px 14px 1fr;gap:0 .8rem;align-items:stretch}.tl-time{font-weight:700;font-size:.82rem;color:var(--rc);text-align:right;padding-top:.68rem}.tl-rail{position:relative;display:flex;justify-content:center}.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line)}.tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:.68rem;box-shadow:0 0 0 2px color-mix(in srgb,var(--rc) 45%,white)}.tl-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.48rem .86rem;margin-bottom:.48rem;box-shadow:0 8px 20px rgba(201,212,228,.18)}.tl-h{font-weight:600;font-size:.88rem}.tl-b{font-size:.77rem;color:var(--ink-2);margin-top:.12rem;line-height:1.45}.tl-b em{color:var(--rc);font-style:normal;font-weight:600}
-.metric-value{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--zc)}.metric-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:700}.metric-note{font-size:.72rem;color:var(--ink-2);margin-top:.25rem;line-height:1.4}.evidence-card{background:#FBFCFE;border:1px solid var(--line);border-radius:11px;padding:.58rem .72rem;font-size:.78rem;line-height:1.42;color:var(--ink-2);min-height:66px}.evidence-card strong{color:var(--ink)}.click-check{display:flex;gap:.45rem;align-items:center;background:#EDF2F9;border-radius:10px;padding:.5rem .72rem;font-size:.76rem;color:var(--ink-2);font-weight:600}.click-dot{width:9px;height:9px;background:var(--blue);border-radius:50%;flex:none}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}.hero-svg{animation:float 4s ease-in-out infinite}.no-break{white-space:nowrap}
-@media(max-width:760px){.grid-4{grid-template-columns:repeat(2,1fr)}.source{display:none}.slide>.content{padding:1rem}.slide-dots{max-width:210px;overflow:hidden}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
-
-/* Answer cards and work areas. */
-.prob-card.answer-card{cursor:pointer;perspective:1400px;min-width:0;}
-.answer-card:focus-visible{outline:3px solid var(--blue);outline-offset:4px;}
-.flip-inner{display:grid;transform-style:preserve-3d;transition:transform .42s ease;}
-.flip-face{grid-area:1 / 1;min-width:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
-.flip-front{visibility:visible;}
-.flip-back{transform:rotateY(180deg);visibility:hidden;display:flex;flex-direction:column;justify-content:center;}
-.answer-card.is-flipped .flip-inner{transform:rotateY(180deg);}
-.answer-card.is-flipped .flip-front{visibility:hidden;pointer-events:none;}
-.answer-card.is-flipped .flip-back{visibility:visible;}
-.answer-value{font-size:1.12rem;font-weight:700;line-height:1.5;margin:.35rem 0 .65rem;}
-.answer-explanation{font-size:.86rem;color:var(--ink-2);line-height:1.55;}
-.work-box{border:1px dashed rgba(185,198,217,.7);border-radius:10px;background:#F9FBFE;overflow:hidden;margin-top:.6rem;cursor:text;}
-.work-box textarea{display:block;width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:.55rem .8rem;font-size:.95rem;color:var(--ink-2);font-family:var(--font-body);line-height:1.5;outline:none;}
-.work-box textarea::placeholder{color:#9AA9BF;}
-.work-box textarea:focus{background:#F1F6FD;}
-.work-box:focus-within{border-color:var(--blue);}
-.reading-panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:0 0 .8rem;padding:.55rem .8rem;}
-.reading-panel summary{font-size:.84rem;font-weight:600;cursor:pointer;}
-.reading-text{max-height:135px;overflow-y:auto;overscroll-behavior:contain;font-size:.83rem;line-height:1.58;color:var(--ink-2);margin-top:.5rem;padding-right:.5rem;}
-.reading-text p{margin:.45rem 0;}
-.slide.has-answer-cards>.content,.slide.has-reading>.content{max-height:100vh;overflow-y:auto;padding-bottom:90px;scrollbar-width:thin;}
-.slide.has-reading .source{position:static;margin-top:.65rem;}
-.choice-input{position:relative;cursor:pointer;display:block;}
-.choice-input input{margin:0 .35rem 0 0;accent-color:var(--blue);}
-.choice-input:has(input:checked){background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));color:var(--ink);}
-@media(max-width:600px){.has-answer-cards .split-55,.has-answer-cards .content>.grid-2{grid-template-columns:1fr;}}
-@media(prefers-reduced-motion:reduce){.flip-inner{transition:none!important;}}
-
-</style>
-</head>
-<body>
-<div class="deck">
-<section class="slide active" data-slide="1" style="--zc:#2563EB;--zs:#DCEBFB">
-<canvas class="particle-canvas"></canvas>
-<div class="deco" style="width:260px;height:260px;right:-60px;top:-50px"></div><div class="deco" style="width:170px;height:170px;left:-35px;bottom:-20px;opacity:.25"></div>
-<div class="content" style="text-align:center">
-<div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:6px 16px;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:.75rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>November 2026 CAT Readiness</div>
-<div class="hero-svg reveal" style="margin:0 auto .55rem;width:160px;height:92px">
-<img alt="Adaptive difficulty staircase" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZgAAADSCAYAAAB3j9brAAAZjUlEQVR4nO3dfXBV5Z0H8O/vnJuEhJfwFgRlW1ZvcuMLIrASFv5QaZeKIeiwgu10dBW6vGVhlNmxDW+TGQeif1jc8iKwgLQdZzqwrVXe1GrFVpe3yquukATGbqkUAxEIIbk3957f/pHQpZqQl3vOeU7u/X5m8g/mPr/vMA7fOec5z7kCIiIKtPD8qiypz50Fke8DGN7yx8eh+qr2vLShelV+1GS+tojpAERE1LbIjJqbHcEuACPa+JWjajv/XL3hplN+5uoIy3QAIiJqXXh+VVY75QIAIyRh7Qs/VXOfX7k6igVDRBRQUp87Czcul2sGioW3C2bW/MDrTJ3BgiEiCqrmPZeOylTgP/N/ULMS09T2LFMnsGCIiIJrePu/8hWKp/N7X9g57Mkv+7ofp3NYMEREwaVd+pTodzLs+IHIjJqIy3k6hQVDRBRcHyfx2XxH8IHJzX8WDBFRUKm+muQKRjf/WTBERAGlPS9tAHA0yWWMbf7zoCURUYC1HLT8DYA7kl1Lgd2ObX/v9Ib+l1yI1i5ewRARBdjJzXmfW4qxALYnu5YAk+xE4qBfm/+8giEi6g6mqV3Qp2a5Qn7owmq1juLRU5vz3nNhrTaxYIiIupHwjC9mishaAJlJLhUXkacrNw5c40au1rBgiIi6mcjMc+MdtX4FwaCkF1NsuOUbA0v3lEvchWh/gwVDRHQDP/nJT7Lq6urGAXgAzSfrIwAGA+iF5oOQ9QDOAqhU1WOq+l5ubu7eBQsWePoK/YIZ525Vsd4AcGfSi6m81eTY3/1sS7+LSa91HRYMEVErKioqRicSidkiMh1Abic/fhHAVgDrFy9efMj1cC0iM2p6O4JXAZS4sFyVpSg5uTnvpAtrAWDBEBH9jeXLl49S1QoRmejGeqr6poiULV68+Igb631NgDf/WTBERAB+/OMfZzc2Nj6vqqUA3D6QGBeR1bFYrKy8vLzR5bUBBHPznwVDRGnvueeei9i2vU1VO//24k5Q1aOqOm3p0qVVXqwftM1/FgwRpbWKiop7HcfZCSDPp5G1qlqyZMmS//Zi8SBt/rNgiChtrVixokhV30HzE2F+uqKq31qyZMkBLxYPyuY/C4aI0tJzzz0XsSzrQwADDEU47zjOOK9ulwVh858FQ0Rpp7y8vEdGRsZeAPeYzCEix3v06FG0cOHCBq9mmNz858suiSjtZGZmvgDD5QIAqjq8oaFhuZczqjcP2mTBmQDFF0kuFVLV1fkzatbfX66hjnyAVzBElFaWL18+CsABuP8oclclAPyDZ+dkWpjY/OcVDBGlFVWtQHDKBQBsVfX0KgYAKjffdNpS/CNceO0/RL+TYccPtPfaf17BEFHaqKioGO04zh9M52iFWpY1uqys7LDnk3zc/GfBEJGvCp+4PCCRGbsPqrcqxNcriYeGvD71puy/jPFzZkedaxyyf9fnU17zbaA690LkEUnyak4BxxJZ0Nrmf4c2aoiIkhV+6mwerNCKBKKPQ5EFAAL1bb4tDvpl1fo2r7P6ZtYW2RIvctSnzhV3ri8EsFo2/+/+6sl/7sEQkedum1l7l1ihQwL8AGguF7/lZZ1FphUzMbpDsqwo8rKSfdDLIMGsP//vhR3Dnvyy77U/YsEQkafCT53Ns5DYDWCoyRxDcs6aHN8hQ7I/Nx0hOc2b/x9GZtTcDLBgiMhrVmgFDJcLAPTLuGA6Qrv6Zwb3Fl4n3OEIdoXnV2WxYIjIM4VPXB4gwOOmcwBAbuZl0xHa1SfzkukIbhkh9bmzWDBE5JlEqOF+GNpz+aps27O3sbgm275qOoJ7RL7PgiEiz6jYYdMZrglJk+kI7QpJcB9C6IK7WDBE5BlLNNt0BjJGWTBElBbimmE6QruanGRfeBwon7BgiCgtNCSCfzHV6OSYjuAe1VdZMESUFi415ZqO0K5LseBn7KCj2vPSBhYMEaWF2mh/0xHa9WUs+Bk74H8sxUPVq/KjLBgiSgvnGm82HaFdZxtuMR0hOSpvNSVC409uzvsc4El+IkoTXzQORswJxJGcVsWcHqiJ5pmO0XWKDbd8Y8Dk67+EjG9TJqJAUuBDC/qBW+s5KrgQHfDgkOzPR7i1ppsuxAYeVrXe9usN047ibohMdO11/ZsGrqn6yn9jwRBRIFmCdyo3Dip3c81/Wb58K4CP3FzTJTqkx5kZlZsGHfF8UssXjonIJBdWq1XFo5WbBrb6hWO8RUZEaWPx4sWHVPVN0zm+SlV3Ll68+IjXcyIzanrn9zn/mkvfZlllKca19W2WAAuGiNKM4zjPAoi3+4v+iYdCoSVeDymYce5WR7AXQEnSizVv5o85uTnv5I1+jQVDRGll2bJlx0Vktekc16jqSz/60Y+OejkjMvPceIW1F8CdSS/WymZ+W7gHQ0RpJxaLlYVCoftEZKThKMdycnKWeTkgPOOLmQ5kLQTJvocmLiJPt7aZ3xZewRBR2ikvL29U1ccAnDcYo8ZxnKkLFy705nsEpqldMPOL50VkI5B0udQ6iomVGweu6cyHWDBElJaWLl1aparFAK4YGH/FsqzipUuXnvJicb8389vCgiGitLVkyZIDlmVNAFDj49haEZlYVlZ20IvFTWzmt4UFQ0Rprays7KDjOONV1dONdgBQ1cOO44xZtGjRXi/WN7WZ3xYWDBGlvaVLl1bF4/GxAFbCm0eY4wBejMfj47y6Lda8mW/9FoJBSS4VF5F/q9qcN3tPuST1d8GnyIiI0LzxD2Dh888//9N4PL6i5aS7JLmsqupOx3EWLVu27LgLMb+u5WS+S/sttY7i0VNtnMzvLBYMEdF1Ws6kFFdUVIx0HGc2gOkA+nVymVoAWwGsX7JkyRGXI/5VZEZNb0fOv6qQ5PdbmjfzS6q6uN/SGhYMEVErysrKDgOYU15eviAUCo0VkQkA7haRAlUdDKB3y6/WATgLoBLAcRF5NxaL7S8vL495ma9lM/8NuLLfIm81OfZ3k9lvaQ0LhojoBlqK4nctP4EQmXluvKPWr4Ck91uubeaXJrvf0hoWDBFRN2LyZH5nsWCIiLqDAG/mt4UFQ0QUcEHfzG8LC4aIKMAiM2pudgS/AXBHsmspsNux7e9Vbeh/yYVo7WLBEBEFVHh+VZZzFbvgQrlA8FL1pYH/jm2SSD5Zx7BgiIgCSupzZ0EwIsllYgKUVm7M2+hKqE5gwRARBZXI95Nc4bw6eLTqlbz3XcnTSSwYIqLgGp7EZ6ssRcnJV7zfzG8LC4Yo4ObPn5+VSCTGAXgAzf/gRAAMBtBLRFRV60XkrKpWisgxEXlPRPauWrUqajQ4uUG79ilvTuZ3FguGKKDmzp07WkRmJxKJ6QByW/sdVQWATFXtB+AOVX1EVZcBuFhaWroVwPo1a9Yc8i81uexjAEWd+oTgparLA3zdzG8LC4YoYEpLS0epagWAiUks01dVZwGYNW/evDcBlK1du/aIKwHJP6qvQqSjBWNsM78tLBiigHjmmWeyo9Ho86paCsB2cekHAXx77ty5qxsaGsq2bNnS6OLa5CHteWmDXO07E2j3STKjm/lt4ReOEQXA3LlzI9FodD+ABXC3XK4JicjT2dnZ+2bPnp3vwfrkgepV+VFL8RCAG33b5lG1nbHVASsXgAVDZNy8efPuFZHfI7knhjpEREaEQqF98+bNG+f1LHLHyc15n2vOxSKoLgCwH8DVlp/9UF2gOReLqjfc5Mm3ZCaLt8iIDCotLS1S1XcA9PJrpqr2B/DWnDlzvrVu3boDfs2lrqtelR8FsKrlp9vgFQyRIXPnzo2o6k74WC7X6WVZ1k7eLiMvsWCIDHjyySd7iMgvAAwwGGOgbdu/fOaZZ7INZqAUxoIhMiAnJ+cFAPeYzgFgeDQaXW46BKUmFgyRz0pLS0cBKDWd4zoL5s2bd4/pEJR6WDBEPms5ROnFo8hdZQPgVQy5jgVD5KO5c+eORnIn9L0yac6cOSNNh6DUwseUKe0UPnF5QCIzdh9Ub1WIr1cSl3TT1L7yRz9HdpRckltfDs88/5qbiyp0vJvrUffCgqG0EX7qbB6s0IoEoo9DkQUA0sWX1XaFhQR6Wed8m9dZveRckYWmInXznwX//nopgFgwlBZum1l7lyCxG8BQUxly5Y8IIbivActAA/paf8aXzjdNR6EUwT0YSnnhp87mWYbLBQD625+ZHN8h/eS06QiUQlgwlPqs0AoYLhcA6C3BvT12TXfISN0HC4ZSWuETlwcI8LjpHACQIxdMR2hXjhX8jNR9sGAopSVCDfcDzRv6pmVJvekI7cqSK6YjUAphwVBKU7HDpjNcYyNmOkK7bERNR6AUwoKhlGaJ8kWO3ZQ6CP4lH90QC4bIJwlkmo7QrrgG4m5iC4ePtHVzLBgin0S1p+kI7YoZ+WqaVkXtePYe0yEoOSwYIp/Uq8mvfumYqzrQdAQAgAI/P/GzPnykrZtjwRD55IoONh2hXVf0JtMRAOAMnPgi0yEoeXxVDJFPvnSGBesl/a24kPh70xHOOLAnnXolr8Z0EEoer2CIfHLR+QaatIfpGG2KIweX9BZT46MKbFQnPurUpv4fmwpB7uIVDFEbFPjQgn7g3noW6vTmB/vL6RFuremmyzrkMGC/7ecbphVyHiKn7Vjm+9xzST0sGKI2WIJ3KjcOKndzzX8qLd2qio/cXNMl2l9OzajcNOiI6SCUOniLjMhHa9asOQTgTdM5vkpVd65du/aI6RyUWlgwRD6zLOtZAHHTOa4TD4VCS0yHoNTDgiHy2erVq4+r6mrTOa7z0qpVq46aDkGphwVDZEBDQ0MZgMOmcwA4lpWVtcx0CEpNLBgiA7Zs2dKYSCQeA3DeYIwa27anrly5ssFgBkphLBgiQ9avX1/lOE4xABNfwnIFQPGqVatOGZhNaYIFQ2TQunXrDgCYAMC3k+siUisiE9euXXvQr5mUnlgwRIatXbv2YCKRGK+qfmy0H7Ysa8yaNWv2+jCL0hwLhigA1q9fX9XQ0DAWwEp48whzHMCLV69eHcfbYuQXnuQnCogtW7Y0Alg4f/78nyYSiRUAJgGQJJdVVd1p2/ai1atXH08+JVHHsWCIAqblTErxnDlzRlqWNRvAdAD9OrOGiNSq6lYA619++eUjHsQkahcLhiig1q1bdxjAnGnTpi0YNGjQWFWdAOBuAAUABotIbwBQ1ToAZwFUAjiuqu/W1NTs37ZtW8xYeCKwYIgCr6UoftfyQ9RtcJOfiIg8wYIhIiJPsGCIiMgTLBgiIvIEC4aIiDzBgiEiIk+wYIiIyBMsGCIi8gQPWlK7Jk2alJWRkTFOVR8AMBxABMBgAL0AKIB6/P9J8mOq+l4ikdi7e/fuqLHQRGQcC4baVFxcPFpEZovIdFXNvcGvZqL5XVl3AHhERJaFQqGLJSUlWwGs3759+yFfAhNRoLBg6GtKSkpGAagAMDGJZfoCmAVgVklJyZuJRKJs165dR1yIR0TdBAuG/mratGnZjY2NzwMoBWC7uPSDtm1/u6SkZHVdXV3Znj17Gl1cm4gCipv8BACYMmVKpLGxcT+ABXC3XK4JAXi6d+/e+yZPnpzvwfpEFDAsGEJJScm9qvp7NG/ge22EiOx7+OGHx/kwi4gMYsGkuYcffrgIwG8B5Pk4tr/jOG9Nnjx5jI8zichnLJg0NmXKlIjjODvR/Lix33qJyE7eLiNKXSyYNHX//ff3APALAAMMxhgoIr+cNm1atsEMROQRFkya6t279wuqeo/pHACGNzY2Ljcdgojcx4JJQy3nXEpN57jOgoceeuge0yGIyF0smPRUAW8eRe4q27ZtXsUQpRgWTJopLi4ejeRO6Htl0pQpU0aaDkFE7uFJfgMKn7g8IJEZuw+qtyrE1yuJxtoVU3PiVX6O7Ci5mlHwcnjm+dfcXFSh491cj4g6jgXjo/BTZ/NghVYkEH0ciiwAEKhv80XjyEqc8W1eZ2XGzxRZaCpSN/+39O+vl4i+ggXjk9tm1t4lSOwGMNRUhuymKtjaYGp8u2ynHtlNp3E1o8B0FCJyAfdgfBB+6myeZbhcACCn6YTJ8R2SE/vUdAQicgkLxg9WaAUMlwsAZDX9yXSEdvWIB/cWHhF1DgvGY4VPXB4gwOOmcwBAlvOF6Qjtykj8xXQEInIJC8ZjiVDD/UDzhr5pIeey6QjtCjmXTEcgIpewYDymYodNZ7hGnOB/z5elwc9IRB3DgvGYJcoXOXZT6qDedAai7owFk0bU6mE6QrscCVIfO6dNJyDqzlgwaSRu9TEdoV0Byhi149l7TIcg6s5YMGkkat9kOkK7YvZg0xEAAAr8/MTP+lwwnYOoO2PBpJFo6O9MR2hXNGT8uBAAnIETX2Q6BFF3x4JJIw2ZhaYjtKs+43bTEc44sCdVvzKkxnQQou6OBZNGrobCSEiO6RhtcqxeaMy81dT4qAIb1YmPOrWp/8emQhClEr7sMsAU+NCCfuDagmKjMfTNB3s2fTrCtTVd1JjxzcOA/bafb5hWyHmInLZjme9zz4XIXSyYALME71RuHFTu5pqRkpKtAD5yc02XaNbVYzMq/2vQEdNBiMgdvEWWZrZv334IwJumc7Ri565du46YDkFE7mHBpCHLsp4FEDed4zpxVV1iOgQRuYsFk4Zef/314wBWm85xnZd27Nhx1HQIInIXCyZN1dXVlQE4bDoHgGM9evRYZjoEEbmPBZOm9uzZ06iqjwE4bzBGjW3bU7dt2xbc73Emoi5jwaSxHTt2VKlqMYArBsZfAVD861//+pSB2UTkAxZMmtuxY8cBABMA+HlyvVZVJ27fvv2gjzOJyGcsGML27dsPqup4AH5stB+2bXvMjh079vowi4gMYsEQgObbZXV1dWMBrIQ3jzDHAbxYV1c3jrfFiNIDT/LTX+3Zs6cRwMLJkyf/VERWAJgEQJJcVgHstCxrUcvj0USUJlgw9DUtZ1KKp0yZMlJVZwOYDqBfJ5epFZGt8Xh8PU/oE6UnFgy16Y033jgMYM60adMWRKPRsWh+GOBuVS0AMBhA75ZfrQNwFkCliBxPJBLv5uTk7N+2bVvMTHIiCgIWDLWrpSh+1/JDRNQh3OQnIiJPsGCIiMgTLBgiIvIEC4aIiDzBgiEiIk+wYIiIyBMsGCIi8gQLhoiIPNEtDlqGw+Es27bHOY7zgIgMBxBB80nyXmh+11U9Wk6SAzhmWdZ78Xh8b3V1ddRcaiKi9BbogiksLBztOM5sANNVNVekzfcuZqL5XVl3AHjEcZxllmVdLCgo2Oo4zvrq6upDfmUmIqJmgbxFFg6HR0Uikbccx/kDgH8FkNuFZfoCmGVZ1kcFBQW78/Pz73EzIxER3VigCmbo0KHZkUjkPyzLOqCqE11c+kEROZifn79y2LBhPVxcl4iI2hCYgolEIpGcnJz9qroAgO3BiJCIPJ2Zmbnv9ttvz/dgfSIiuk4gCqagoOBeVf09gOE+jBuRSCT2FRYWjvNhFhFR2jJeMPn5+UUAfgsgz8ex/R3HeaugoGCMjzOJiNKK0YKJRCIREdmJ5seN/dYLwE7eLiMi8oaxghk2bFgPVf0FgAGmMgAYmEgkfjl06NBsgxmIiFKSsYLJysp6AcA9puZfZ3hOTs5y0yGIiFKNkYIJh8OjVLXUxOw2LOA5GSIidxkpGNu2K+DNo8hdZYsIr2KIiFzke8EUFhaOdvkQpVsmhcPhkaZDEBGlilB45vkf+jnQOTp3Ki4f9XNkR4n0HflyeOa+19xcVKHj3VyPiKi7CAn0ed+mOU3A1VO+jeu0q6eLRGNFkAz31lT3liIi6k78vUV2+RgQv+LryM6QeB1w+RPTMYiIUoK/BXOpG7w1/+JHphMQEaUEfwvmSrWv47pC6gN8C4+IqBvxtWCk8Yyf47qm8U+mExARpQR/r2Bitb6O65LYBdMJiIhSgr8Fk2jwdVyXJK6aTkBElBKMv66f2qYO6k1nICLqKn8Lxu4GLy22e5pOcB3ntOkERERd5W/BZPb3dVyXBCdj1I5n7zEdgoioq3wtGM3+Oz/HdU32N0wnAAAo8PMTP+vDJw6IqNvy9wqmZ9jXcV3S8zbTCQDgDJz4ItMhiIiS4e85mL6j/BzXJZo72nSEMw7sSdWvDKkxHYSIKBn+3iLrPRwI9fZzZOeE+gB97jA1ParARnXio05t6v+xqRBERG4JCfQF36ZZIaBXwYO4+NEI32Z2gvYqOCwSetvPVyAr5DxETtuxzPe550JEqUT8HhgOh0dZlhXEN0qqqo6qqqo6YjoIEVEq8P2gZXV19SEAb/o9twN2slyIiNxj5CS/ZVnPAoibmN2GOIAlpkMQEaUSIwVz4sSJ46q62sTs1ojIS5WVlYH8Hmciou7K2LvImpqaygAcNjX/Osfq6+uXmQ5BRJRqjBXMZ5991mjb9mMAzpvKAKDGcZypZ86c6QaveSYi6l6Mvk35008/rQJQDOCKgfFXABRXV1fzKyyJiDxg/HX9lZWVBwBMAODnyfVax3EmVlZWHvRxJhFRWjFeMABQWVl50Lbt8QD82Gg/7DjOmOrq6r0+zCIiSluBKBig+XZZLBYbC2AlvHmEOQ7gxVgsNo63xYiIvOf7Sf6OKCgoGAFgBYBJSD6jAthpWdaiEydOHE86HBERdUggC+aacDg80rbt2ao6HUC/Tn68VlW3AljPE/pERP4LdMFcc+edd2bGYrGxIjIBwN0ACgAMBnDt1cx1qnpWRCoBHAfwbkZGxv5PPvkkZigyEVHa+z+V/SDh5WWe0wAAAABJRU5ErkJggg==" style="width:160px;height:92px;max-width:100%;object-fit:contain;display:block;margin:auto"/></div>
-<h1 class="deck-title reveal" style="font-size:clamp(2.15rem,5.5vw,3.8rem)">Oren<br/><span style="color:var(--blue)">Percentages + Precise Evidence</span></h1>
-<h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1rem,2vw,1.35rem);font-weight:500;color:var(--ink-2);margin:.65rem 0 .35rem">One-hour targeted lesson · CAT decision habits</h2>
-<p class="reveal" style="font-size:.79rem;color:var(--ink-3);letter-spacing:.13em;text-transform:uppercase;font-weight:500;margin:0 0 1rem">Math base control · Reading detail · Commit-before-click accuracy</p>
-<div class="reveal" style="display:flex;gap:.48rem;justify-content:center;flex-wrap:wrap"><span style="background:var(--z1-soft);color:var(--z1);border-radius:20px;padding:6px 15px;font-size:.78rem;font-weight:600">Percent Base</span><span style="background:var(--z2-soft);color:var(--z2);border-radius:20px;padding:6px 15px;font-size:.78rem;font-weight:600">Successive Change</span><span style="background:var(--ela-soft);color:var(--ela);border-radius:20px;padding:6px 15px;font-size:.78rem;font-weight:600">Evidence Match</span><span style="background:var(--blue-soft);color:var(--blue);border-radius:20px;padding:6px 15px;font-size:.78rem;font-weight:600">Forward-Only Decisions</span></div>
-</div></section>
-<section class="slide" data-slide="2" style="--zc:#17233B"><div class="content">
-<div class="kicker reveal" style="color:var(--ink-3)">Session Roadmap</div><h2 class="slide-title reveal">Today's 60-Minute Watch List</h2>
-<div class="reveal">
-<div class="tl-row" style="--rc:var(--z1)"><div class="tl-time">0:00–0:05</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Open + test-experience check</div><div class="tl-b">Where did focus drop? Which section came first? <em>Describe the moment, not the label.</em></div></div></div>
-<div class="tl-row" style="--rc:var(--blue)"><div class="tl-time">0:05–0:10</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">CAT decision rules<span class="tag hot">New Format</span></div><div class="tl-b">Forward-only math and stand-alone ELA make the final pre-click check part of the solution.</div></div></div>
-<div class="tl-row" style="--rc:var(--z2)"><div class="tl-time">0:10–0:32</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Percentages + the base<span class="tag hot">Priority</span></div><div class="tl-b">Discount, successive growth, and reverse-percent temperature change.</div></div></div>
-<div class="tl-row" style="--rc:var(--ela)"><div class="tl-time">0:32–0:52</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Lowell passage: evidence over plausibility</div><div class="tl-b">Detail, summary, and direct-cause questions from one passage set.</div></div></div>
-<div class="tl-row" style="--rc:var(--z4)"><div class="tl-time">0:52–0:57</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Two-item independent check<span class="tag live">In Session</span></div><div class="tl-b">One fresh percent item and one fresh evidence item. No backtracking simulation.</div></div></div>
-<div class="tl-row" style="--rc:var(--z5)"><div class="tl-time">0:57–1:00</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card" style="margin-bottom:0"><div class="tl-h">Close + name the routines</div><div class="tl-b">Student states the math move, reading move, and pre-click check in his own words.</div></div></div>
-</div></div></section>
-<section class="slide" data-slide="3" style="--zc:var(--blue);--zs:var(--blue-soft)"><div class="content">
-<div class="kicker reveal">CAT Strategy · One-Way Doors</div><h2 class="slide-title reveal">The New Rule: <span class="tint">Think Before “Next”</span></h2>
-<div class="split-55">
-<div class="card reveal"><div style="font-weight:700;margin-bottom:.55rem">What changes in November 2026</div>
-<div class="grid-2" style="gap:.55rem"><div class="evidence-card"><strong>50 ELA + 50 Math</strong><br/>Same number for every student.</div><div class="evidence-card"><strong>180 minutes</strong><br/>Choose which section to begin.</div><div class="evidence-card"><strong>Adaptive difficulty</strong><br/>Performance updates the next challenge.</div><div class="evidence-card"><strong>Forward-only</strong><br/>Math and stand-alone ELA cannot be revisited.</div></div></div>
-<div class="diagram-wrap reveal"><div class="grid-3" style="width:100%;gap:.5rem"><div class="step-card"><div class="step-title">READ</div><div class="step-body">Name the exact ask.</div></div><div class="step-card"><div class="step-title">PROVE</div><div class="step-body">Show setup or evidence.</div></div><div class="step-card" style="background:#DCEBFB"><div class="step-title" style="color:#1D4ED8">NEXT</div><div class="step-body">Commit once.</div></div></div></div></div>
-<div class="prompt-card reveal" style="margin-top:.85rem"><div class="prompt-title">Before advancing, what proof should be visible?</div><div class="prompt-body">Math: the base and operation. ELA: the exact words that satisfy the question. If neither is visible, the decision is not ready.</div></div>
-<div class="source">Official format facts: NYC Public Schools SHSAT page, accessed October 2026.</div>
-</div></section>
-<section class="slide" data-slide="4" style="--zc:var(--z1);--zs:var(--z1-soft)"><div class="content">
-<div class="kicker reveal">Diagnostic Lens · Legacy 57-Item Mock</div><h2 class="slide-title reveal">What Deserves the Hour — <span class="tint">and Why</span></h2>
-<div class="grid-4 reveal"><div class="metric-card"><div class="metric-value">40.35%</div><div class="metric-label">Math overall</div><div class="metric-note">23 of 57 on this fixed-form mock.</div></div><div class="metric-card"><div class="metric-value">14.29%</div><div class="metric-label">Percent questions</div><div class="metric-note">Strongest math target for immediate repair.</div></div><div class="metric-card"><div class="metric-value">30.77%</div><div class="metric-label">ELA detail</div><div class="metric-note">Evidence matching needs deliberate practice.</div></div><div class="metric-card"><div class="metric-value">75–80%</div><div class="metric-label">Main idea / inference</div><div class="metric-note">Relative strengths to preserve.</div></div></div>
-<div class="grid-2" style="margin-top:.9rem"><div class="win-card reveal"><div class="win-title">Keep the diagnosis narrow</div><div class="prose" style="font-size:.84rem;margin-top:.2rem">The category labels point us toward questions to investigate. They do not prove why an error happened.</div></div><div class="prompt-card reveal"><div class="prompt-title">Ask, then observe</div><div class="prompt-body">Did the base change? Was the evidence merely true, or did it directly answer the question? Let the written work decide.</div></div></div>
-<div class="trap-card reveal" style="margin-top:.85rem"><div class="trap-title">CAT translation</div><div class="trap-body">This diagnostic used the older 57-item fixed form. Today we use its errors as skill evidence—not as a prediction of the new adaptive score.</div></div>
-<div class="source">Diagnostic figures from the attached BeeTutored score report.</div>
-</div></section>
-<section class="slide" data-slide="5" style="--zc:var(--z2);--zs:var(--z2-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Math Routine · Percentages</div><h2 class="slide-title reveal">Every Percent Problem Has <span class="tint">a Base</span></h2>
-<div class="grid-3">
-<div class="step-card reveal"><div class="step-row"><div class="step-num">1</div><div><div class="step-title">Name the original</div><div class="step-body">Which quantity is 100%? Circle it and label it “base.”</div></div></div></div>
-<div class="step-card reveal"><div class="step-row"><div class="step-num">2</div><div><div class="step-title">Choose a multiplier</div><div class="step-body">Increase: <span class="math-inline">1 + r</span>. Decrease: <span class="math-inline">1 − r</span>.</div></div></div></div>
-<div class="step-card reveal"><div class="step-row"><div class="step-num">3</div><div><div class="step-title">Answer the ask</div><div class="step-body">Final amount? Original amount? Size of change? These are different targets.</div></div></div></div>
-</div>
-<div class="split-55" style="margin-top:.9rem">
-<div class="diagram-wrap reveal"><div style="width:100%"><div style="font-weight:700;text-align:center;margin-bottom:.65rem">The base is the whole bar</div><div style="height:58px;border:1px solid #B9C6D9;border-radius:10px;display:grid;grid-template-columns:88fr 12fr;overflow:hidden"><div style="background:#DCEBFB;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1D4ED8">88% remains</div><div style="background:#FADEE2;display:flex;align-items:center;justify-content:center;font-weight:700;color:#9F1239">12%</div></div><div style="text-align:center;margin-top:.6rem;font-size:.82rem;font-weight:700">100% = original quantity</div></div></div>
-<div><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Warm-up</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prose">A $15,600 price is discounted 12%. Without calculating, identify the base, the change, and the percent that remains.</div></div><div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Fast trap detector</div><div class="trap-body">If the words “percent of” could be inserted, the quantity after “of” is usually the base.</div></div></div>
-</div></div></section>
-<section class="slide" data-slide="6" style="--zc:var(--z2);--zs:var(--z2-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Math · Discount</div><h2 class="slide-title reveal">One Change, One Base — <span class="tint">Keep the Whole Visible</span></h2>
-<div class="split-55"><div><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Q66</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">A car is listed at $15,600. During a sale, its price is reduced by 12%. Determine the sale price.</div><div class="click-check" style="margin-top:.65rem"><span class="click-dot"></span>Before “Next”: Is the result below $15,600 by roughly one-eighth?</div></div><div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Talk it through</div><div class="prompt-body">What does 100% represent? If 12% leaves, what percent stays? Which operation converts the picture into a price?</div></div></div>
-<div class="diagram-wrap reveal"><div style="width:100%"><div style="text-align:center;font-weight:700">$15,600 = 100%</div><div style="height:72px;margin-top:.7rem;border:1px solid #9FC5F8;border-radius:11px;display:grid;grid-template-columns:88fr 12fr;overflow:hidden"><div style="background:#DCEBFB;display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;color:#1D4ED8">88% remains</div><div style="background:#FADEE2;display:flex;align-items:center;justify-content:center;font-weight:700;color:#9F1239">12%</div></div><div class="formula-box" style="margin-top:.8rem"><span class="math">15,600 × 0.88 = ____</span></div></div></div></div>
-</div></section>
-<section class="slide" data-slide="7" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Math · Successive Change</div><h2 class="slide-title reveal">The Second Percent Uses <span class="tint">the New Total</span></h2>
-<div class="grid-2"><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Q73</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">A company starts with 200 employees, grows 25%, then grows 10% from its updated size. Find the later workforce.</div><div class="trap-card" style="margin-top:.65rem"><div class="trap-title">Why adding 35% is risky</div><div class="trap-body">The 10% is not taken from the original 200. It is taken from the post-growth amount.</div></div></div>
-<div class="diagram-wrap reveal"><div style="width:100%"><div class="grid-3" style="align-items:center"><div class="step-card" style="text-align:center"><div class="step-body">original</div><div class="math">200</div></div><div style="text-align:center;font-weight:700">× 1.25<br/><span style="color:#767676">then</span><br/>× 1.10</div><div class="step-card" style="text-align:center;background:#FADEE2"><div class="step-body">later</div><div class="math">?</div></div></div><div class="formula-box" style="margin-top:.8rem"><span class="math">200 × 1.25 × 1.10 = ____</span></div></div></div></div>
-<div class="grid-3" style="margin-top:.78rem"><div class="step-card reveal"><div class="step-title">Step 1 · Base</div><div class="step-body">Label 200 as the original workforce.</div></div><div class="step-card reveal"><div class="step-title">Step 2 · Update</div><div class="step-body">Apply 1.25 and call that result the new base.</div></div><div class="step-card reveal"><div class="step-title">Step 3 · Update again</div><div class="step-body">Apply 1.10 to the new base; then compute.</div></div></div>
-</div></section>
-<section class="slide" data-slide="8" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Math · Reverse Percent</div><h2 class="slide-title reveal">Work Backward Before <span class="tint">You Measure the Change</span></h2>
-<div class="split-55"><div><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Q92</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">Tuesday's high was 84°F, which was 5% above Monday's high. Wednesday was 10% below Monday. How much lower was Wednesday than Monday?</div></div>
-<div class="step-card reveal" style="margin-top:.65rem"><div class="step-row"><div class="step-num">1</div><div><div class="step-title">Recover Monday</div><div class="step-body">Let Monday be <span class="math-inline">m</span>. Then <span class="math-inline">1.05m = 84</span>, so <span class="math-inline">m = 84 ÷ 1.05</span>.</div></div></div></div>
-<div class="step-card reveal" style="margin-top:.55rem"><div class="step-row"><div class="step-num">2</div><div><div class="step-title">Use the correct base</div><div class="step-body">The requested decrease is <span class="math-inline">10% of Monday</span>, not 10% of Tuesday.</div></div></div></div>
-<div class="step-card reveal" style="margin-top:.55rem"><div class="step-row"><div class="step-num">3</div><div><div class="step-title">Compute only after labeling</div><div class="step-body"><span class="math-inline">0.10(84 ÷ 1.05) = <span class="blank"></span> °F</span></div></div></div></div></div>
-<div class="diagram-wrap reveal"><div style="width:100%"><div style="font-weight:700;text-align:center;margin-bottom:.75rem">Track every percent to its base</div><div class="grid-3"><div class="step-card" style="text-align:center"><div class="step-title">Monday</div><div class="math">m</div></div><div class="step-card" style="text-align:center;background:#DCEBFB"><div class="step-title">Tuesday</div><div class="math">84°F</div><div class="micro">5% above Monday</div></div><div class="step-card" style="text-align:center;background:#FADEE2"><div class="step-title">Wednesday</div><div class="math">0.90m</div></div></div><div class="trap-card" style="margin-top:.7rem"><div class="trap-title">Base check</div><div class="trap-body">The 10% decrease is taken from Monday—not Tuesday.</div></div></div></div></div>
-</div></section>
-<section class="slide" data-slide="9" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">In-Session Math Check</div><h2 class="slide-title reveal">Build the Chain — <span class="tint">Then Commit</span></h2>
-<div class="split-55"><div><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Check A</span><span class="lvl-badge lvl-3">Level 3</span><span class="tag live">Do Now</span></div><div class="prose">A $240 item is discounted 15%, then the discounted price is taxed 10%. Determine the final price.</div><div class="formula-box" style="margin-top:.72rem"><span class="math">240 × <span class="blank"></span> × <span class="blank"></span> = <span class="blank" style="min-width:90px"></span></span></div></div><div class="prompt-card reveal" style="margin-top:.7rem"><div class="prompt-title">Three questions before calculation</div><div class="prompt-body">Which arrow is a decrease? Which arrow is an increase? Why is the tax not 10% of the original $240?</div></div></div>
-<div class="diagram-wrap reveal"><div style="width:100%"><div class="grid-3"><div class="step-card" style="text-align:center"><div class="step-body">original</div><div class="math">$240</div></div><div class="step-card" style="text-align:center;background:#FADEE2"><div class="step-title">15% off</div><div class="math">× 0.85</div></div><div class="step-card" style="text-align:center;background:#E8F7EC"><div class="step-title">10% tax</div><div class="math">× 1.10</div></div></div><div class="formula-box" style="margin-top:.8rem"><span class="math">240 × 0.85 × 1.10 = ____</span></div><div class="micro" style="text-align:center;margin-top:.55rem">Each operation acts on the amount immediately before it.</div></div></div></div>
-<div class="click-check reveal" style="margin-top:.8rem"><span class="click-dot"></span>CAT check: estimate the direction first. Discount lowers $240; tax raises the discounted amount—but not back automatically.</div>
-</div></section>
-<section class="slide" data-slide="10" style="--zc:var(--ela);--zs:var(--ela-soft)"><canvas class="particle-canvas"></canvas><div class="content" style="text-align:center">
-<div class="kicker reveal">ELA Pivot · Lowell Passage Set</div><h2 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.4rem)">A True Statement Is Not Always<br/><span style="color:var(--ela)">the Best Evidence</span></h2><p class="reveal" style="max-width:760px;margin:.85rem auto 0;color:var(--ink-2);font-size:1rem;line-height:1.65">The question is a filter. Evidence must be true, direct, and complete—not merely related to the topic.</p>
-<div class="reveal" style="display:flex;justify-content:center;gap:.6rem;margin-top:1rem;flex-wrap:wrap"><span class="lvl-badge lvl-2">Detail</span><span class="lvl-badge lvl-3">Direct Cause</span><span class="lvl-badge lvl-4">Whole-Passage Summary</span></div>
-</div></section>
-<section class="slide" data-slide="11" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Passage Map · Lowell</div><h2 class="slide-title reveal">See the Whole Story Before <span class="tint">Choosing a Detail</span></h2>
-<div class="diagram-wrap reveal"><div style="width:100%"><div class="grid-4"><div class="step-card"><div class="step-title">1821</div><div class="step-body">Founded by the river for water power.</div></div><div class="step-card"><div class="step-title">1850s</div><div class="step-body">40 mills and more than 10,000 workers.</div></div><div class="step-card"><div class="step-title">Workforce shift</div><div class="step-body">Conditions worsen; protests fail; workers leave.</div></div><div class="step-card" style="background:#FADEE2"><div class="step-title">Decline</div><div class="step-body">Outdated mills lose to modern competitors.</div></div></div><div class="formula-box" style="margin-top:.7rem">Opportunity → pressure → protest → departure → replacement</div></div></div>
-<div class="grid-3" style="margin-top:.75rem"><div class="prompt-card reveal"><div class="prompt-title">For a detail question</div><div class="prompt-body">Which sentence proves the exact adjective or claim?</div></div><div class="prompt-card reveal"><div class="prompt-title">For a summary question</div><div class="prompt-body">Which choice preserves the beginning, turning point, and outcome?</div></div><div class="prompt-card reveal"><div class="prompt-title">For a cause question</div><div class="prompt-body">Which event directly produces the result—not merely accompanies it?</div></div></div>
-<div class="source">Passage content adapted from the attached public-domain National Park Service selection.</div>
-</div></section>
-<section class="slide" data-slide="12" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">ELA · Detail Evidence</div><h2 class="slide-title reveal">Measure the Word <span class="tint">“Bustling”</span></h2>
-<div class="split-55"><div><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Q11</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">Which sentence most directly supports the description of Lowell as a bustling industrial city?</div></div><div class="prompt-card reveal" style="margin-top:.7rem"><div class="prompt-title">Define before comparing</div><div class="prompt-body">If “bustling” means active and crowded with work, what evidence would show the greatest scale of industry and people?</div></div><div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Related is not direct</div><div class="trap-body">Canals and large buildings show industrial infrastructure. Do they prove activity as directly as quantities of mills and workers?</div></div></div>
-<div class="card reveal"><div style="font-weight:700;font-size:.88rem;margin-bottom:.55rem">Evidence candidates — paraphrased</div><div class="grid-2" style="gap:.5rem"><div class="evidence-card"><strong>Founding choice</strong><br/>Merchants selected the river site for water power.</div><div class="evidence-card"><strong>Infrastructure</strong><br/>Canals powered large brick mill buildings.</div><div class="evidence-card"><strong>Named landmarks</strong><br/>Several well-known mill buildings are listed.</div><div class="evidence-card"><strong>Scale</strong><br/>Dozens of mills employed more than ten thousand workers.</div></div><div style="margin-top:.62rem"><img alt="Evidence directness meter" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAABTCAYAAABTYd93AAAJ3ElEQVR4nO2da5BUxRmGn56ZZYHlJix3QSXkhxAvEaMhWBhANEJQEFcwJoKVZNk9UxSxpCRuUZWxiqCiwaTI7ECqUiEkWtxZVEADmJJwCzclFlgGhHBbJUsAF1guO0vnx9fDzi67s3OfqaGfP7PnnO6v+3S//XWf3nO6IbfIB84Bl4HbEggTT9hIvApo4PcJ2IiGxvmNOv+uFGcsEV5BCu/PYef85twuwG3O/dyc20B096OBncAO4FKyMptk3MB24CrwwxjixX1vnlgCp5ktyI3dB+QhhXK/uXY70BmoAoaYc6GCa4krwPCk5jR7aHxv+dFGzGaPsAtRdT+gB3ATIoDPkBu8BxHy/YgAtobFVcBIE/YC8BbQxlxryl32AxYjwroE7EcEGI29phgK7DNhlyGibcw3gBXAaaAGWA/cZe7pE3NfCngXaRC/NNcWA8dMPquBvwF3Rri3lriICChrCRXIVWA88DAQBEqQQngZ6IPcdA3QnfqC0MAZYA1SGVeRLgSuL6yOwEETZz8wH/FGj0dprzFdgC9NnG0mTpCGY4ROwCFjZwnwO3NPJ4CeSKVXmusVwFykpbdCGsg8E+Z9E2afKa94xggXTd6ymj8gmZwL+JDC6gt8CnwAFCEF8TENC+Iq8LSxUW5slJvjxoXzjAl/BOgQlna09hoz0YQ/CLRGvO4aGgohlObHiIALgdUmjEPkMUJ+2G83Ild8tEKoy+auAaRlAgxGxgIHkJbyT6RrGIG4zx1IqwsRRAZNIO4epDU1xc3Gxj6k0MJtxGOvu7H3BVIBVxFP01SadwNfGZuPmWv9mrEL0BbxBqeRRnESaIeIrSBCvJaoy+bBIkiF1yKVfhlYjlTKZuA5YALSirY0iqeBurC/I3HchBkAtEf6XWg4kI7F3kkTpifSsuuQim8qzU+B6dQPcl2I0MPTCW+szyBd0ufAs0hrXk0Mg8Jm0NkuhENIf9sXaYGhCt+BFHAnRCg7EkhjDXAYaYlbgX8gg9I3kT44VjYA/wW+hXRtVcC4RmHWIl3RQGAS4o36IB6uFPEgJxGv8RIwDFhgjkFEkg+MQbxEHQmS7V1DLTI4AvEEoQo/iLhUzO+hBNI4izwRLAF6IZ6mGyLAeDiFjCc+N7/fBlY1CnMGGfy+A4wCfmV+tyPdnwZeN3/fB0xD+vi3kKeGW5AxSqWxZbFYLBaLxWKxWCwWi8VisVgsFovFYrFYLBaLxWKxWCwWi8VisVgsFovFYrFYLBZLtDiOM83r9aZ6DaW4yfZvH3MB5fV6XwV+q7X2Oo7zQqYz1BRWCGlAa9077PB1r9f7k4xlphmsEFKPrqqq+imw0RwrrfUfvV7vyExmqjFWCGlg2bJlV9xu9xNa673mVJ7WernjOHdnMl/hqJaDWJJFSUlJb7fbvVVr3decqlRKfc/v9x/JaMawHiGtzJ8//wSyIEZocYtewNrS0tKbMpcrwQohzfj9/n1a63HImlBorQcopSomT57cOpP5skLIAIFA4CNk7aTQIlpDCwoKlhQVFbkjREspSRkj+Hy+Vh6PZ5zL5Xpca30P9auIHVdK7dFaV9TW1lb4fL6sXuEz3Zg5hTdCx1rrQCAQcDKRl4SFMGvWrPFKqTlEXh8Q4Aul1ItlZWUrE00zl3AcZy7wfNip6eXl5b9Jdz7iFsLSpUvdBw4ceA2IaaZMa/1GMBic4fP5ollA+0ZAOY6zCPixOdZKqUl+v/8v6cxE3GOEeEQAoJSa7vF4Xok33RwkKyac4vIIpjtYnlDCSo0rKyurSMRGLjF16tQOwWBwk1LqLnOqGniwvLz8k3SkH7MQfD5fq7y8vP3IMvNx06ZtewaPGIvLZR9cQtRcOMe6lYs4f+5rANoUtGP0E5MoaN8x5WnHXAsej2ccCYoA4GLNOaq+PJqomZyibUF7RoyeQKt8mVK4eOE8G9Ys5crl1G80E7MQlFJjk5X4qZPHkmUqZ+jUuZBhjz6J2y1TCmdPV/HhumXUBYMtxEyMePzyoGQlXn3mf8kylVP06NWXISPGoJT03Ccrj/HR+gq0Tt2DVjxC6JmsxC9dqkmWqZzjtv4DGDS4fnumY4f/zc4tGyPESIyMjtRCirdknniEUNlykOjIz4+0P9aNzeGD+9m97cNrx7f2v53vDHkoZenFM1jcnazEO3TqkixTOcVXlUfZsvFdtJZNXLr36sMDw8ek1IPGLAStdUWyEu/as2/LgW4wzp4+xd/XLaeuTjZl6dS5K8MfLcLtSe1mOzELobCwcBWyg0pCtGnbjsIefRI1k1PUXDjHhvcWX5s3aFPQjodGP3VtXiGVxCyzKVOm1M6ePXuG1npFIgnXXDg3dvCdfVcnYiOXKC4u7ujxeDZRv5ln9ZVLF4cOHzxwb6R4ySKup4aysrKVWus3Wg7ZLK/NnDnTisBQVFTUyuPxrMCIQCl1RSn15Lx589IiAkjg8TEYDM5ANqCKCa31nNra2rJ40801fD6fq1u3bn9FdngD2djrZ36/f30685HwMHT27NljtdavA/1bCHpQaz3deoKGlJaWvqmU+kXoWGv9QiAQmJvufCTleWTBggV5VVVVY82raoNo+KrabqCiS5cuq6dMmVKbjPRyBcdxptPQq5aXl5d7M5EXO7WXIRzHmQC8jemelVLLunbtOjFTb25ZIWSA0tLSB5VSH1C/le+mmpqaRxYuXJj6/zc3g30rJM14vd6BSqlVGBEopfZrrcdmUgRghZBWSkpKemut1wGhL5sqgVGBQCDj2/paIaSJ4uLiji6Xay2yGThAtdvtHpUN3z2CFUJaaGrCSGs9Pp0TRi1hhZBimpswCgQCGzKYreuwQkgxPp9Pa633h4611tPT/fGKJYtwHOd583lb1qKQF1IT+RI3GTYsGSYfOAnE+hVFa6DKxI/XRiQ8wItAqyTatKSAcCFEIt5Xa/KN/YI441tiwEXD1twa+Br4NbAS2AlMDAv/I+TtpN3ATOqnqJuyMQd4Byg2YYYB24B/AXuQJWRCjAR2AHvNte8DLxt764D1QIdk3LCleRpX4nngMXPtm8ABIA+4FThizinkS+hqru8aWgMXgKfC0ugF7DK/ALcAnyEzbDcDx4B7zTUPUunWI6SRptx2LfWfaB9FKqI18F3EExww1xYBLzVj9wrwftjxA8iM2tth5zTyscwdiCcIvR0dpF5gljTRXP9dF/a3pn6+IXzpm5beLQgP60K6hEeoXzcoxB0t2LGkgVgmlLYjU6SF5vgHSJcRDZuBgUjfD9K13GvS32zshr6pzAM6IQK8THKfRCzNEMuI/j/IIPI9pE8/jrjxaDgOPI0MIDsgQtgDPAucAJ4DFiDdQRCYBmwC/oR0U9XAw8gg1JIC/g/Tdf6gpIYgFgAAAABJRU5ErkJggg==" style="width:100%;height:105px;max-width:100%;object-fit:contain;display:block;margin:auto"/></div></div></div>
-</div></section>
-<section class="slide" data-slide="13" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">ELA · Summary</div><h2 class="slide-title reveal">A Strong Summary Keeps <span class="tint">the Turning Point</span></h2>
-<div class="grid-2"><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Q14</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">Which sentence best summarizes the mill girls' experience as Lowell's dominant workforce?</div><div class="prompt-card" style="margin-top:.68rem"><div class="prompt-title">Coverage test</div><div class="prompt-body">Does the summary include why they arrived, what changed, what they did, and why they left?</div></div></div>
-<div class="diagram-wrap reveal"><div style="width:100%"><div class="grid-4"><div class="step-card"><div class="step-title">Opportunity</div><div class="step-body">Wages and independence</div></div><div class="step-card"><div class="step-title">Pressure</div><div class="step-body">Cuts and conditions</div></div><div class="step-card" style="background:#FBEBCF"><div class="step-title">Response</div><div class="step-body">Protest and strikes</div></div><div class="step-card" style="background:#FADEE2"><div class="step-title">Outcome</div><div class="step-body">Departure</div></div></div><div class="formula-box" style="margin-top:.75rem">A summary that skips the turning point breaks the chain.</div></div></div></div>
-<div class="grid-3" style="margin-top:.78rem"><div class="step-card reveal"><div class="step-title">Step 1 · Map the arc</div><div class="step-body">Beginning, turning point, response, outcome.</div></div><div class="step-card reveal"><div class="step-title">Step 2 · Compress</div><div class="step-body">Keep causes and outcomes; remove decorative details.</div></div><div class="step-card reveal"><div class="step-title">Step 3 · Reject gaps</div><div class="step-body">If a choice jumps from work to departure, ask what it omitted.</div></div></div>
-</div></section>
-<section class="slide" data-slide="14" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content">
-<div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">ELA · Direct Cause</div><h2 class="slide-title reveal">Separate the <span class="tint">Symptom</span> from the Cause</h2>
-<div class="split-55"><div><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Q16</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">Which part of the passage best explains why Lowell lost its position as an industrial leader?</div></div><div class="prompt-card reveal" style="margin-top:.72rem"><div class="prompt-title">Run the “because” test</div><div class="prompt-body">“Lowell lost leadership because ____.” Which detail completes that sentence with the most direct competitive explanation?</div></div><div class="trap-card reveal" style="margin-top:.72rem"><div class="trap-title">A serious problem can still be the wrong answer</div><div class="trap-body">Low wages and poor conditions mattered to workers. The question, however, asks about industrial leadership.</div></div></div>
-<div class="diagram-wrap reveal"><div style="width:100%"><div class="grid-2"><div class="step-card" style="background:#FFF7F8"><div class="step-title" style="color:#9F1239">Worker conditions</div><div class="step-body">Low pay, long hours, crowded housing<br/><strong>Explains:</strong> hardship and turnover</div></div><div class="step-card" style="background:#EDF2F9"><div class="step-title">Competitive capacity</div><div class="step-body">Outdated equipment, modern rival mills<br/><strong>Explains:</strong> lost industrial status</div></div></div><div class="click-check" style="margin-top:.75rem"><span class="click-dot"></span>Match each cause to the result named in the question.</div></div></div></div>
-</div></section>
-<section class="slide" data-slide="15" style="--zc:var(--blue);--zs:var(--blue-soft)"><div class="content">
-<div class="kicker reveal">Independent Check · In Session Only</div><h2 class="slide-title reveal">Two One-Way Decisions — <span class="tint">Show the Proof</span></h2>
-<div class="grid-2"><div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Check B</span><span class="lvl-badge lvl-4">Level 4</span><span class="tag live">Math</span></div><div class="prose">A club grows from an unknown starting size to 168 members after a 20% increase. It then loses 25% of the original membership. Determine the final membership.</div><div class="formula-box" style="margin-top:.62rem"><span class="math">1.20m = 168  →  final = 168 − 0.25m</span></div><div class="click-check" style="margin-top:.62rem"><span class="click-dot"></span>Label both bases before calculating.</div></div>
-<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">Check C</span><span class="lvl-badge lvl-3">Level 3</span><span class="tag live">ELA</span></div><div class="prose">A library extends weekend hours. Visits rise, but staffing costs also rise. The director keeps the schedule because new visitors increasingly return.</div><div style="font-weight:700;font-size:.84rem;margin-top:.58rem">Which detail most directly supports the claim that the change built lasting engagement?</div><div class="grid-2" style="gap:.42rem;margin-top:.5rem"><div class="evidence-card">The library opens later.</div><div class="evidence-card">Staffing costs increase.</div><div class="evidence-card">More first-time visitors return.</div><div class="evidence-card">Weekend visits rise at first.</div></div><div class="click-check" style="margin-top:.55rem"><span class="click-dot"></span>Underline the phrase that matches “lasting.”</div></div></div>
-<div class="trap-card reveal" style="margin-top:.8rem"><div class="trap-title">No instant correction</div><div class="trap-body">State the proof first. Only then compare reasoning and revise the method if needed.</div></div>
-</div></section>
-<section class="slide" data-slide="16" style="--zc:#2563EB;--zs:#DCEBFB"><canvas class="particle-canvas"></canvas><div class="content" style="text-align:center">
-<div class="hero-svg reveal" style="width:150px;height:95px;margin:0 auto .55rem"><img alt="Three-part precision checklist" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZ4AAACECAYAAACgRk1GAAAn+ElEQVR4nO2de3xV1Zn3f8/e55IQEy7JSUgMGDA5hxiJ96GFXigWFRXUajrTt2NVkNAkk7ZYyti+M34y7/Sd137qVDQmgUisg++8baVFpK0IDA7YArZqVSCSnBMgSuSWhEvu57LX8/6RQBG57JNz2Wfvs76fT/6Bvdd6kv096zlr72evRbAos2fPtnV0dHgURXEDKCCiAmaeDCDznB8HETmZeczIaf0AAiM/3SM/XUR0CMBBZm4XQnjz8/O927ZtC8X/t5LEkpqaGltnZ6cHgJuZCwAUAJgMIJOIMpk5E4ADgBPAZ5whom5m7gbQBeAQER0UQrQLIby5ubnempoa6YzFmF3Dto5PTngUjd2CuICYCph4Mp0zzhDg4POcISDA544zxF0QyiEGH1SI2oUgb/5VE7zbasiSzpDRAUQJKiwsLFZV9fMAZjHz9QCuwfDFjgV+ImoWQryvKMoOIcQun8/XAoBj1J8k+tCSJUuKVVX9PBHFxRkAzQDeJ6IdzLyrvr5eOmMqmAofOVEM0j5PUGaB4uAMoRlM7zPEDiJll291ZgtApnfGtImnsLDQparq7cx8J4C5ALIMDqmTmTcrirJR07TNbW1tnQbHIzmP6upqVygUup2IEsYZAJsBbFRVdXNtba10JsEofOSIC6r9dhJ8JyhBnCFsZoGN4NDmtp/nmtIZUyWekpKSCcFg8G4AZQDuAGAzOKSLIQDsIqK1gUDglwcPHjxmdEDJyqJFiyY4nc67mbmMiBLaGWbeRURr7Xb7L5955hnpjEGULDo9IcjBuxlcBkrscYaBXQReGyL+5cHVOaZxxgyJR3G73XMAlAO4F4Dd2HDCRgPw30TUmJub+4p8NhR7ampqlGPHjs1RFKWcme+FSZ1h5sacnJxX5LOhOFDDivvj7jkglDNM6gwNO5M/yfVKoj8bStjEM3Xq1LGqqpYrivIPI0UBVuAjALVCiOfb2tp6jA7GapSXl4+12+3lACznjKqqz9fW1kpnoszU8hNj1ZBWDsI/YLiQxPQw8JFCqBWDyvNt/5mZkM4kXOIpKSmZGAwGlwN4FEC60fHEiB4iagyFQj/dv3//caODMTuVlZUTAVjeGQCNQoifrly5UjoTIQUPH5/oUGk5J4Mzdu2n+1dOTChnEibxuN3uLCJaDqDqnPJmq9MPoFZRlKdaWlq6jQ7GbJSXl2epqrqciKrw11JVq9MPoJaInqqrq5POhIm7/HAWC/tyMJLKGWKuVUIpT7WsyUgIZwxPPDfddJO9r6+vkpn/BcBYo+MxiFNE9KSmaSva2tr8RgeT6JSXl9ttNlslgKR2hpmftNlsK2pra6Uzl+Gmcrb3aJ2VACW3M6AnMebkirbaIkOdMTTxuN3uecz8DBEVGRlHAtHKzNU+n2+L0YEkKhUVFfOI6BkA0plhWomouq6uTjpzEdwLj89j6cy5tIKUat/qTMOcMSTxTJ8+fbzf738Sw5Vqks+yFkCl1+vtMjqQRKGiomK8oihPMrN05gIQ0dpgMFjZ2NgonRlhcsWp8U5/8EmQHGcuBIHWQg1Uehvz4u5M3BOP2+2+F0AjAFe8+zYZx4locWtr6wajAzGaioqKe4lIOnN5jjPz4oaGhqR3xr2o614GS2cuB+M4A4vbXnDF1Zm4JZ78/PzUtLS0J5n5O/Hq0yK8lJKSUrF79+5+owOJN0uXLk0dmRlLZ8KAmV9KS0ureOqpp5LOmfyyQ6mp6alPguQ4Ew4EvJQS0Cp2vzQxLs7EJfEUFRUVE9E6ANPi0Z8FaVYU5WstLS1eowOJF5WVlcUApDOjp5mIvlZXV5c0zhQ92lUMwetA0plR0qwq+FrL866YO6PEugOPx7OAiHZBDiCRUCKEeMfj8TxgdCDxoKKiYgEA6UxklDDzO5WVlUnhTOHCzgVg3iWTTkSUaALvFD56PObOxDLxkNvtfoKZ1yN5yxejSTozv+x2u39kdCAxhCoqKp4govWQzkSDdAAvV1VVWdgZpsJFnU8QYT2kM9EgnZhedi88HlNnYnKrbfbs2bbDhw/XQVatxYoX09PTy999992g0YFEi5G9cOpk1VrMeDEUCpU3NjZaxpnZNWz75OOuOlm1FivoxQw1s/zdRoq6M1FPPHl5eWPS0tLWEdHt0W5b8ileGxgYeKCjo2PQ6EAipby8fIyqqtKZ2POa0+l84Omnnza9M3nlh8ekhRzrQCydiS2vDfYMPdCxdlJUnYlq4iktLU0bGhraAGBONNuVXJQ3hRDzzbzg6LJly9IGBwc3MLN0Jj68qarqfDMvOFr64NG0Abu6gUiOM3HiTR5S5kdzwdGoJR6Px5POzJsBfC5abUp0sdNut9/e3NzcZ3Qg4bJw4cL0lJQU6Uz82Qng9vr6etM541nYmS6INwMknYkjxLTTniJub67PjoozUSkuyM/PTxVCbIAcQIxgZjAYfL20tDTN6EDCYenSpalOp1M6Ywwzmfn1ZcuWmcqZ/LJDqYKwQSad+MPEM/1+er30waNRcSbixFNSUuJITU19hYhmRx6OZJTMGhoaevmmm24yxeZVZWVljqGhIemMgRDRrIGBgZfLy8tN4UxJGTtS01NfATDb6FiSFQJmDTrUl28q54idiTTxUDAYXCUfCicEd/b29jYYHYQOyOVySWcSgzttNpsJnGEKZHSvkoUECcGdvaIrYmciSjxut/sJAA9HGoQkaixyu90/NDqIS1FZWSmdSSwWVVRUJLQzhQu7ngD4YaPjkAzDjEXuRV0ROTPq4gKPx3MPM78SSRuSmMDMXObz+X5jdCDnU1VVJZ1JTFgIUbZy5cqEc6bw0a57SDqTiDBYlPleyBmVM6O6mB6Px8PMfwaQMZrzJTGnl5ln+Hy+fUYHcoaKigoPEUlnEpdeADPq6+sTxhnPwk6PIEhnEpdeEM3wrc4K25mwb7WVlpamjSyDI2VIXNIBvJyfn59qdCDA8Ls6I8vgSGcSl3QALy9dujQhnCl98GiaANZDOpPIpIPFy/llh8J2JuzEMzQ0tAJy8caEh4iuHTNmzE+NjgMA+vv7V0A6YwauDQQCCeHMgENdIRf8NAN0bUq6M2xnwrrVNvJcZ324nUgMg4UQ97S1tf3WqABGnuusN6p/SdgwgHvq6+sNc2bkuc56o/qXhA0zcE9bk0u3M7oTj9vtzgLwIeSOfmbjmN1uv6a5uflEvDsuLy/Pstls0hnzcczv91/T1NQUd2fc5YezWLNLZ8zHMQcc1zQ3jdXljO5bbUT0DKQMZiQnFAo9ZUTHdrtdOmNOclJSUgxxhjXpjEnJCXBQtzO6Zjxut3segNdGHZLEaBjAXK/XuzVeHVZUVMwjIumMeWEimltXVxc3Z9wLj89j6YyZYQLN9TZlXdaZy854SkpKHABWRCMqiWEQgNp4LalTVlbmIKIV8ehLEjOImWvjtaROSRk7hHTG7BCDa/UsqXPZxBMIBL4DwB2VsCRGUtzT01MRj45cLpd0xhoU2+32uDgTyOj6DklnrEBxj+i8rDOXvNU2UlDQBrmlrFU44XQ6C/fs2XMyVh2MFBRIZywCEZ0QQhQ2NDTEzJmRggLpjHU44XfYCz9uGHdRZy454yGi5ZAyWIkJgUDg+7HsQFVV6YyFYOYJRBRTZ1jYpTPWYoIzELqkMxed8ZSUlEwMhUL7mXlM9OOSGEi/pmlT9+/ffzzaDVdWVk4EsB+AdMZa9Ashpq5cuTLqzhQ8fHyiXSXpjPXoF3Zt6v6VEy/ozEVnPMFgcLlMOpYkTVGUWH2DXQ45gFiRmDnjUEk6Y03SlKB6UWcuOOMpLCzMUBTlEOQ6SValJxQKTT5w4MDpaDVYXV2doWmadMa69IRCocmNjY1Rc6bwm90ZlCKkM9alR1PVyQcaJ3zGGduFjiaiJbCaDLZ0XOmejumlxZialarrzdmQbyOe37QfWsyDizsZNpttEYCfRatBIYRlnFEcY5E9eTIm5WYjO8uFLFcWsjLHIz3VCYczBU6nHQ6VoIWCCA71o7e3Byc7j+Ho0Q581LYf3gOHcMrPRv8a0SZDVdWoOkNOazjjGKOiIF9F8ZUqCieqmDheQe4EFTnphDQnIdUBpNgJ0BiBINA3KHC6T+Bot0DHMQ2tn4Sw1xfE3i622liTYQtpF3TmQjMe1ePxHGDmybGPK1Y4Me4qD64tnY7S6aUoLZ2O6cUFyEpRw2pl8LVqzFi6Gf4YRWkw7V6v92oAItKGysrK1OzsbNM6o6RMwGTPdJQUX42rC6Zgct54pKqj3/6FA6fwUfM72Ll9O95uO4GAdXJQe3Z29tU1NTURO4MyVosyug4AMJ0zqeNtmHGNHX/jseNv3HZck0mwRbpbEAM9x4PY+rYfv37Tj3dOMKyhDbX7JmVejRr6lDOfmfG43e7bzTiAKFk344Fv3okZpdNx3bXFuHKcPeJ9vS1OwbRp0+a2tLRsirSh7OxsEzqjIKv0Tsz70nUoKcxFuj16+4yRYxwKbvgqCq7/MuZ538Srv34N7xwessJAUtDV1TUXQMTOuMd23s5MJnNmmFsWZGDlF5Xoji8EZOTYcd/ddtx7xxi8s30AP94whH390ezECLig8JPjc9vOc+ZCf7vFcYooqihTbkfFkm/i7i+UYpJMOrpg5qhc62i1E18U5N34Fcwozotq0vkUZMd4z6146AfL8dDMPDgssIempmlRudaCyYTOxAeyKbjl1ivwq39Kxzcnkem3XiWhfuZaf2p8LiwsdAG4O24RSQyFmRdMmzYtM5I2qqurpTOXgRw5uOUb38W3b50Mp8lHESJaUFVVFZEzhY8ccZF05rKkuJz458cy8OCVJpcGvGDat3o+5cynEo+qqg/gIgUHEktiF0J8LZIGhBDSGT0oV8BzzxJ884ZxZv8Ga2fmiJyBapfO6ERJt+MHi8fgeofRkUSEXdj8n3LmU4lHCPH1+MYjSQAiuubSmTBQxuHGr5fh5rEmTz0ROkPM0pkwcF6Zgu9/UUV4pVGJBSufduZs4iksLHQR0RfjH5LEYGaP9nZbdXV1cjgjgug7eRxHPunAocPHcHIgOOpCAUovxbw5BYjLks+xY/Zob7cVPnLEBcDSzogQ4/RpgUPHNLR8FELrYQ3HBiIolSbCzV90wm3mB9eM2efebjs73VUU5Q7A1En14mhD6Grfh9173seeD1Mwe/k3cJ2c6J/BJoSYC+CX4Z4ohLCmMxzEqUP7sPuDPdjX6sOBji70Bc9NNSrScqZi+ozZ+OqXrkNuajgzGAXZt8yC57WD2GveOn0bgFE5A8V+B8DWcYYZnZ+EsKM5gD8fCMHboaGtU2DgAgXnY8bbcPO1Dtw/JxW3TaKwPjhqrgNfcA1g37GoRR5vbMLuP+vMucPvPGPiiTYaBo4dwN7du7F79/vYvXs39uxtw+G+0PB/O++A5/sy8ZzHPIxiEGFmizgzDAc60bJzO7b98c/48Ej/JV5w0tB/zIe3Nvjwzo7rcN+j38KXJ6fofnZDGddg+hQb9raEohO4AYxc+7CdIeZ5Zn/IBQCnDgfw2h+G8Ju3g9h3inW9DDdwMoQ3/xDCmzuGMOOudDwz344JemcxigpPLgHHzFuUL+ivzpwZfgnD32BMi/h4I56s3owDe5px4PiA1d4AjjW3YdiBcKw2vTNn4EAXPtz2e/zujXfwcW9470aGuj/Ar+t/DseyJZiZpXMUoXRcVeCC0nIk8rd3jWMUzjCBukzvzF/WncKX+wRGvTiFEPjT73rwWMY4NH1F57MbIrjGERToS3KJiMJ0G8AEECsAUFhYWAwgy+C4IkIc+ws2bX0bPpl0RsPE4uLiwnBOWLJkiemdAQ/ik7d/g2f/5V9R/+qfw046Z5vpbcb6de/gtO6BiJCZnWn2d80mLlmyJCxnCh85YX5nAPT1RpB0zsCMt14fwrtB/ac4YvW+WZxgYOLUhzsLgZHiAkVRZhkbksRoQqHQF8I5XlVVkzujwbfuSfz0xTfgPRXpLS9Gf/NOvH9Sb+IiOFLHwOTjCBRFCcsZhYTJnYku4lQQ+rdkZAz6zb+MjmrDF4CRxMPMnzM2HInRENHMME8xuTOMwd4+RO0pi9aBg4fCmGvbbFaoygjLGSYyuTNRhgG/3hkPM450C9MnHubhcUYBACK60dhwJAnADWEeL505Fw6ir1//emzCP2T6xUOJKExnWDpzLnYFk8frPDYYwvuHYhpNXFBGxhll9uzZNgDFBscjMZ5roLM0uqamRjrzGQhOh963cwROdp2wwrPIa8rKynQ5M7uGpTPnMW66E59P1XfsgDeA7b2xjSceMOEalLGqdHR0eAA4jQ5IYjipbre7SM+BnZ2d0pnzUVzIzXHoqxTmIXS0H7VC4knNycnR5UzHJyekM+egZjrxzw84kalHGKHhlU1+dJp8hgwAYKS6x3cXKYqiuI2ORZIYCCF0DSIApDPnobiuxfRcfXVqPOTDHp953x49F73OKBpLZwDAruCGWWn4jx+lY77O+r6P/tiPZ1vMX1hwBqFxkQ3AFKMDkSQGRKTLBSHEFCKTl2RFE0qB+ytfwCRdLyUzene/hb0D1hhG9DoDsLXHGUXBTTfbMen8G49EcKQQMsepmJpvw41FNkzSeXsNAI78pQ+VvwjgpDV0AQAQ8RQbgAKjA5EkBkRUoOc4RVEKmC30SYgIgnPKHbj/8/rey+HgIWz7r2YMWuTPx8wFuo5TqABWdkax4e8fSsddUbqZyAEN237fhyc2BnHMrG+MXgRiKrAByDc6EEliQKRvR0hmls6MQGNL8fWH5iBP12wnhKPbf43/PmKBpzsj6N95VuTDCmvlxBh/bwh/2DWE//gvP/5sme2vPw2DJtsAuIwORJIw6H2rXDoDgK7w4N5vfwszsvQUdjH87a9jze/3m76M+lyISJ8zTNKZyxDqCeLVzUP45a4Amk9bM+kAAIizFAAR7SYosQ5CCL0uJL0zyrjpKKsux606FwcVJ9/DL1/YhI8DMQ8t3khnooQtw46vP5CO3/xkPF5+JBWzdJW8mRDmTAWA3leYJBaHiCboPDSJnSE4cmdi4WOP4kv5+pIO9/vw6qqX8Ha3xW7WD6PLGUpqZ8KDbAqum5WGF2rG4t9mqghr1w1TQBMUAGHUWEgsjl4XktQZQlrhPFR+7xu4IdOmL+kMHsTGVauw9VDAqrdOdLnASevM6KFUGx54ZCwa77AhzULJh4BUBYC5d/OWRA0i0luTk4TOqMi8/u/wvao7UXSFzvd1Bg7g9ZUNeG3/oFWTDqD3pVBKRmeiACmYcV8GfnyLYvbVzM/CgNOGpBxEJBeCmWXiuRDkRP6XHsa37y/FeJ0re4q+Vvy24Xlsabd00gH0Jh62uDOhAJZWdWHpef+s2ghjUgiZ41VclWfD9R47vnq9He4M0l/jpyiY93dp2LKvF69ZYNkcAE6rJFGJJDZQOtzzq/GdMr1JhxHqfh+/WLEyGZKO5DJoIUZvn0D7oSC2/2kQz6zpwYJ/PImHfuWHb0h/O0qGE9/+iiVWNAcwvDq19epsJKOCiPSu45IczthcuPnvl6Lytik677Ez/B1vomlFE3YesewznfPR5wwliTM64KDAW1t68Y2fDeAvg/rPK5rhxHRrZB6/TDySszCzTDwjUMpVuLV8KR76XI7ODdsEelt+i9pn12L3CUtWr10Mfc6w9Z0Jl54DA3h8Q1D3KhZqlh2fy45tTPGARhJPGDlXYnH0umBpZ5SxJbjvu9W4r2Ssvge6HMTxt/8vnl65CQf7k2Se81d0uUAWd2a0fLRrCG/pTcmKiml55i9vY2BQAXDC6EAkCUO3noOIyLLO2HM+h289thhzJqfq3OJgAO1bV+HpNX/CMb27SVoLXc6wHGcuCA9o8Or6CwIgQuZYMn11GxN12wB0GR2IJGHQ5QIzW9AZwpgpc7FoyXxMS9f50dZOYs+6VXhx+yEMJd1E5yx6XbCgM9EhEMbSfU5HGNVwCYrC3GWDzm8sEusTxkzGYs4oGF/6AL790JeQn6LvY82Bw9ixZiVefq/bChu6jRpm1ucMcTfY7ENmDAhn+2sAQwHzr+HGoBM2Ijokl7iXAAAzf6zzUAvs/j4COZA36yF8u+w6ZNr0DYyiz4eNzz+PjW39ph8EIoWI9DkjlEOgZP9rfZax1zgxM03nwcw42cswe+kKgT+2MXO70YFIEoMwXNB7XGJDV6DozsV49I5C6FuMgBHqeg+/WvkSdiVPufQlIaJ2PccxcbvZ5ztT56RjmSuINVv9+FNX5DMPJd2Bxx5wwqX3D8Ma9h81v3VM3G6DVQYRScQw80E9xxFRu+lnyZSConu/i8pb8+DQ+cHnYBf2/qkVmHIzPh/pfpriBHzvtKAzFGE7BqPXGYWpnU0+41HHqJg914lb54zBvvf8+PWf/djSHMKxUexinjEpBY8/mob7c/SfI06H8PaR8PtKNJjpoE0I0aooZq+TAGCfhf+5/seYe7k3/SgV43Qu3pHylX/F5m0/usw3G0bfph/hvv+zC2YvalJV1avnuFAo1KqqZn+TLQW5k7J1Jx0AILsL19/1DVwfje5Du/EfH7SiM2TuwZiZdTkjmFrJ5InnDKQquObmVDxxcyr+yS+wuzmAP7YGsefjED48pOHYRVYkcKarKCmy49YZKbj/ehsmhPkROvy+H++Z/IsKAKgMry0/P997+PDhIQApRgcUEeTEuJxc5KZHb0JPqeMwMXXcZY5inB7rNH2lCYDB1tbWNj0H5ubmeo8fP25+ZySRMtjV1aXLmfyrJng/OdRlOWcUp4Lrb0zB9TeO/FoC6B8QOD3A6BlgDGiAw0mYME5BzhU06iVvOBDC/3sjiDBW2UlMCIOtPVltyrZt20JE9KHR8UgMZy+gr0CrpqYmBEA6I9m7du1aXc5sq6EQKAmcUYC0KxTkZauYVmDDjVfbcG2+irwIkg6Y4dvaj/+0wG02COzFWtIUABBCvG9wOBLj+SDM49+PRRAS88DM4TnD9H5sIrE2p1sH8NiGoCWWfmAaHmcUAFAUZaex4UgSgD+Gebx0RhKWM8xCOhMmJ1sHsKR+EF6zP0AeQQH9EQBsAMDMO4wNR2I0QoiwBhFFUXYIYfY3CiSRYLPZwnPGpuxgzRoFBjFHE3hnax+WrwugwwIFBWcQqvZHYGTG4/V6WwF0GhqRxEiOtLW17Q/nhOeee046k9wcqa2tDcsZb2OmqZ0JDDICsc6bzDi4exDL/+0k/v5layUdAEfaGnP2AyMzHgBMRFuY+X8YGJTEODaN4hzpTHIzCmeIgc4tAEzpzEdbT+Nz79owo8SOL5c6MONqG6aOi6Bo4AzM6D4Swh/e8+O3u/zYeZQtugwTnXXGds6/boRJhQAABN7AD26ehh8YHYc5eX00JwkhNhKROZ3hU3jz2e/iTaPjMC+jcoaJNpKJv6wMnQph+44Qtu8YftQ/ZryKksl2FE9ScVWmgtxMBVdOUDAuhZDqJKTYCQ4VECGGP8jo6WOc6hU40qXho+MavB+FsKc9hLZT5l8K53IQibPOnE08mqZtUhRFAyyzu6pEHyG73b5lNCfabLZNmqZJZ5KPkN/vH5Uz0IKboNgs48zASQ1vn9Twdrg1oclHyM7Os86cXbKgra2tE8B2Q0KSGAYRvdHc3DyqvVJqa2s7iUg6k3y80dTUNCpn2n6e28ksx5nkg99obhp71pnz18r5VZyjkRhPRNdcCCGdSTKIKKJrrihynEk2+Lxx5vzEsw4w/ZJjEv0EbDbb+kga0DRNOpNEEFFgaGhofUSNKEHpTHIRcMK5/tx/+FTi8Xq9XQB+F8+IJIby6mhvs52hsbFROpNcvDra22xn8DbmdYFYOpMkEOjVc2+zAZ+d8QDA83GKR2IwzByVax2tdiSmICrXmoQcZ5IFJvrMtf5M4vF6vZsAfBSXiCRGctDn822NRkM5OTnSmeTgoMvliooz3smuTSydSQYO+vInfMaZC814BIDa2McjMRIiegaIzqsDNTU10pnk4JmRax05NSQUks5YH34GNfQZZy64AxwRNQI4HfOYJEZx0mazNUWzwaGhIemMtTkJIKrOkIB0xsIQcNLhvLAzF0w8ra2tvXSB+3ISy7Cyubm5L5oNvvDCC72QzwctCxGtrK+vj6ozrS+4pDMWRoBXNtdnX9CZi+55zcw/AdAbs6gkRtEnhHg6Fg2HQiHpjDXpUxQlJs6QGpTOWJM+CO2izlw08YyUVtfFJCSJkfxsZJWKqDNSWi2dsRhE9LPa2tqYOONtzOsiZumMxSDgZ20/z72oMxdNPACgKMpTGL63K7EG3YFAICbfXM9ARNIZa9Ftt9tj6owSSnmKpDMWgrsDmu2Szlwy8bS0tHQT0f+KblASA3mivb39VCw7qKurk85YiydWrFhxKpYdtKzJ6BYM6YxFYChPtL84/tSljrlk4gGA3Nzc5wA0RysoiWF8mJeX1xiPjlwul3TGAhDRh9nZ2XFxJn9ylnTGGnyYPynzss6QnpaKiormEtHmyGOSGAQrijKnpaVlW7w6rKqqmsvM0hnzwoqizHnuuee2xavDoke754KFdMa8MBPmtK12bbvcgZed8QCAz+fbAmBNpFFJDKMpnkkHAOrq6qQzJoaZm+KZdADAtzpzCxNLZ0wKA016kg6gM/EAgKIojwE4PtqgJIZx1Ol0LjeiYyKSzpiTowAMccYWSHkMLJ0xGwQcDTjsup3RnXhaWlq6ATwMgEcRl8QYmJkX79mzx5CKobq6um5mfhjSGTPBRLS4oaHBEGda1mR0E6QzJoNZweKPG8bpdkZ34gEAr9e7kZlXhR+XxAiIqNbn8xm6/HxDQ8NGANIZ81BbV1dnqDPeF7I3gqQzpoGp1ve8Kyxnwko8ANDf3/99yOoTM/CB3+//R6ODAIBQKCSdMQHM/MHAwEBCONOvBKUz5uCDoOgN25mwE8/hw4cHVFW9D3Jxv0TmpBDi/vb29iGjAwGAxsbGAU3TpDOJzUmbzXb/iy++mBDOHG7MG9A0ls4kMAScZFXc3/7ilLCdCTvxAMC+fft8RPQtyPuwiYhg5gfb2tr2Gx3IuaxatcrHzNKZxEQw84O1tbUJ5cyBF7N9zJDOJCaCgQfbGnNG5cyoEg8AtLa2bmDmfx7t+ZLYwMyP+3y+3xsdx4VoaGjYAEA6k2AQ0eMNDQ0J6UzbC64NIDnOJByMx31NrlE7o+sF0ktRVFRUT0QVkbYjiQqrvV7vYqODuBwVFRXSmQSBmVc3NDQkvDNFizrrAUhnEgAGVrc1uSJyZtQznjNkZGR8F8BrkbYjiQxm3pCXl2eKD6amadKZBICINuTk5JjCmQw1SzqTGGzIn5QVsTMRz3gAID8/P3XMmDG/B/CVaLQnCZs3AoHAXYlSTKCHpUuXpvr9fumMQRDRG/39/XclSjGBHvLLDqWOyUj5PUtnDIEZb4RE312jKSY4n4hnPADQ0dExaLfbFwDYGY32JGGxIyUlZYGZkg4APP3004MApDMGwMw7UlNTF5gp6QBAx9pJg3YnLyAm6UycYWDHmKC2IBpJB4jSjOcMpaWlaUNDQ+sBfDWa7UouDBFtBzC/tbXVtDs4Llu2LG1gYGA9pDPxYvvQ0ND8ka3KTUnpg0fTBp3qerB0Ji4QtisC80e2Ko9Sk1Fm5LbbrwHcGe22JX+FmTcEg8G/NdtM50KM3HaTzsQYItrQ39//t2ab6VyI/LJDqakZKdKZ2LMhqPX9bbRmOmeIeuIZQS0qKqqVlUsxoyk9Pb3i3XffDRodSLQoKytTs7KypDOxoykUClU0NjZaxhmUsVqU0VULWe0WE4jQlK5kVbzbSFF3JlaJBwDgdrt/COB/x7qfJEKMvKfzU6MDiRUVFRU/JCLpTPQQRPR4XV2dZZ1xL+r6IYOlM9FDgPG47wVXzJyJ+YUqKiq6i4heAjA+1n1ZnB4AD3u93leMDiTWVFRUSGeiQw8RPVxXV2d5Z4oWdd5FwEssnYmUHmJ62PtCVkydics3hOLi4qJQKLSOiK6NR38W5AMhxP2JtgxOLFmyZEmRqqrrAEhnRgEzf2Cz2e5PtGVwYsnUh48XqSrWAXKcGSUfsCruH+0yOOEQlXLqy7Fv3z5fMBi8hYiehVx3KRwYQGNfX9/MZEo6wPDabgMDA7cAkM6EBxNRo6ZpM5Mp6QDDa7sFtf5bwHKcCRMGo7FfDc6MR9IBDLgnWlRUdDcRrQaQE+++TcZRAIu8Xm/Sv61dVVV1NzNLZy7PUSJaVFdXl/TOFC3uvBsC0pnLQMBREC/yrs6OqzNxmfGci8/n+10gEJgGoBHyW8mFYAAvKYpyrUw6w9TV1f3O4XBMIyLpzIVhZn6JiK6VSWcY3/Ou3wU12zSwHGcuAhPwkhJ0XhvvpAMYXAXidrtvBVALoNjIOBIFZt6rqmp1S0vLNqNjSVSqqqpuZWbpzF/ZqyhK9XPPPbfN6EASFfeirlsZ0pm/wnuZqLpttWubURHEfcZzLl6vd2teXl4pgCUAOo2MxWBOENH3rrzyyhtk0rk0dXV1W7Ozs0uZOamdIaITAL6XnZ19g0w6l8bblLX1yklZpURynAH4e1dOct1gZNIBEqju3ePxpAOoZOYfAhhrdDxxog9AndPp/MmePXtOGh2M2Vi4cGG60+msJKKkcoaI6oQQP2loaJDOhIlnYWe6RlRJSK5xhsB1Qw7HTz5uGJcQziRM4jlDYWGhi4iWEdESWFeMUwAaFEX595aWlm6jgzE71dXVLk3TlmF45mxZZ4ioAcC/19XVSWcipPCRIy5SbJZ3hsENtmDKv7esyUgoZxIu8ZzB4/GkM/NiANUACgwOJ1ocJKJnbTbb6ubm5j6jg7EaIzOgxURkOWeYeXV9fb10Jsp4FnamM7CYiaoBLjA6nihxkBnPOlN4dXN9dkI6k7CJ5xwUt9s9B0A5gHsAOAyOJ1wCADYT0ZrW1tZ1ADSjA7I6NTU1yrFjx+YoilIO4B5mNpUzRBQQQmwGsKarq2vd2rVrpTOxpoYV98fdc0AoZ7A5xxnGZiZe09bjWoe1lNDOmCHxnGX69Onj/X7/fABlAG4HYDc4pIuhAXiLiNaGQqFf7N+//7jRASUrFRUV44loPjOXEVFCO8PMbxHRWiHEL1auXCmdMYjJFafGp/hD8xlcBkrscYaBtwi8VtjFL/avnGgaZ0yVeM5l2rRpmZqm3UZEd2A4CRn9othRAJsAbLTb7Vuam5tPGByP5Dyqqqoymfk2AAnjDBFtYuaNfr9/S1NTk3QmwZj2rZ5MzeG/jcF3EJPhzhBwlMGbiLDRzs4tzU1jTemMaRPP+UybNs2tadpMIpoF4AYAJQBSYtTdIIBmAO8B2KGq6s59+/b5YtSXJEZUVVW5mXkmM88iorg5w8w7hBA7V61aJZ0xGdMWd7o1jWcy0SwFuIFj6QxhkHnYGQW0I6SJnQdezLaEM5ZJPBdA9Xg8hQA8AKYIIQoURZkEIEsIkUlEmRgWxgYgfeScXgAhAEPM3K0oSrcQohNAB4CDzHxQVVVva2trG+SzGssxsidQIQAPEU1h5gIAk4goC0DmyM9FnQHQPfLTycwdiqIcZOaDzOzt6upqk89qLEgZq570rkIN8BDxFBAVgGkSiLPAnAlQJgEpfJ4zBIQYGAK4G0TdENQJhTsAPshMB1WGt7U3qy3Rn9WMlv8PgFUqeg3xFmYAAAAASUVORK5CYII=" style="width:150px;height:95px;max-width:100%;object-fit:contain;display:block;margin:auto"/></div>
-<div class="kicker reveal">Session Close</div><h2 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.4rem)">Name the Move<br/><span style="color:var(--blue)">Before You Click</span></h2>
-<div class="grid-3 reveal" style="margin:1rem auto 0;max-width:900px;text-align:left"><div class="card"><div style="font-weight:700;color:var(--z1)">Math</div><div class="prose" style="font-size:.84rem">What is 100%? Which multiplier acts next? What quantity is requested?</div></div><div class="card"><div style="font-weight:700;color:var(--ela)">ELA</div><div class="prose" style="font-size:.84rem">Which exact word in the question must the evidence prove?</div></div><div class="card"><div style="font-weight:700;color:var(--blue)">CAT</div><div class="prose" style="font-size:.84rem">Is the proof visible on scrap paper before advancing?</div></div></div>
-<p class="reveal" style="font-size:.78rem;color:var(--ink-3);letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin:1rem 0 0">Accurate setup · direct evidence · deliberate commit</p>
-</div></section>
-</div>
-<div class="nav-controls"><button aria-label="Previous slide" class="nav-btn" onclick="changeSlide(-1)">‹</button><div class="slide-dots" id="dots"></div><button aria-label="Next slide" class="nav-btn" onclick="changeSlide(1)">›</button><span class="slide-counter" id="counter">1 / 16</span></div>
-<script>
-const zones=[{n:'Math Base',t:'Percent Meaning',c:'#262626'},{n:'Math Change',t:'Multi-Step',c:'#6a6a6a'},{n:'ELA Evidence',t:'Lowell',c:'#3e3e3e'}];
-document.querySelectorAll('.zone-strip').forEach(el=>{const active=+el.dataset.zone;el.innerHTML=zones.map((z,i)=>`<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span style="opacity:.75">${z.t}</span></span>`).join('')});
-let current=1;const slides=[...document.querySelectorAll('.slide')],total=slides.length,dots=document.getElementById('dots'),counter=document.getElementById('counter');
-slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>goToSlide(i+1);dots.appendChild(d)});
-function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';el.offsetHeight;el.style.transition=`opacity .35s ease ${i*.07}s, transform .35s ease ${i*.07}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}
-function goToSlide(n){document.querySelector('.slide.active')?.classList.remove('active');const next=document.querySelector(`.slide[data-slide="${n}"]`);next.classList.add('active');current=n;document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===n));counter.textContent=`${n} / ${total}`;animateSlide(next)}
-function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n)}
-document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.target.closest('input,textarea,select,button,summary,[contenteditable="true"]'))return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let sx=0,sy=0,ignoreSwipe=false;document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;ignoreSwipe=!!e.target.closest('input,textarea,select,label,.reading-panel,.answer-card')});document.addEventListener('touchend',e=>{if(ignoreSwipe)return;const d=sx-e.changedTouches[0].clientX,dy=sy-e.changedTouches[0].clientY;if(Math.abs(d)>50&&Math.abs(d)>Math.abs(dy))changeSlide(d>0?1:-1)});
-function particles(c){const x=c.getContext('2d');function size(){c.width=c.offsetWidth;c.height=c.offsetHeight}size();const ps=Array.from({length:30},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*2+1,a:Math.random()*.18+.06}));function draw(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=`rgba(37,99,235,${p.a})`;x.fill()});requestAnimationFrame(draw)}draw()}document.querySelectorAll('.particle-canvas').forEach(particles);animateSlide(document.querySelector('.slide.active'));
-</script>
-<script>
-
-(() => {
- const answers={"Warm-up": ["<strong>Base:</strong> $15,600<br><strong>Change:</strong> a 12% decrease<br><strong>Percent remaining:</strong> 88%", "The original price is 100%. Subtract the 12% discount from 100% to find what remains."], "Q66": ["$13,728", "Sale price = 15,600 × 0.88 = 13,728. The discount is $1,872."], "Q73": ["275 employees", "First: 200 × 1.25 = 250. Then: 250 × 1.10 = 275. The second increase uses 250 as its base."], "Q92": ["8°F lower", "Monday: 84 ÷ 1.05 = 80°F. Wednesday: 80 × 0.90 = 72°F. The decrease is 80 − 72 = 8°F."], "Check A": ["$224.40", "240 × 0.85 × 1.10 = 204 × 1.10 = 224.40. The tax is applied to the discounted price of $204."], "Q11": ["Scale: dozens of mills and more than ten thousand workers.", "The numbers directly show a large amount of industrial activity and a large workforce, matching “bustling.” The passage adaptation gives 40 mills and more than 10,000 workers."], "Q14": ["Drawn by wages and independence, the mill girls protested wage cuts and worsening conditions, then left when their protests failed.", "This summary includes the opportunity, the turning point, the response, and the outcome."], "Q16": ["Lowell’s outdated mills could not compete with modern rival mills.", "Outdated equipment and more modern competitors directly explain the loss of industrial leadership. Poor working conditions explain hardship and turnover, not the competitive result as directly."], "Check B": ["133 members", "Original membership: 168 ÷ 1.20 = 140. Loss: 0.25 × 140 = 35. Final membership: 168 − 35 = 133."], "Check C": ["More first-time visitors return.", "“New visitors increasingly return” directly supports lasting engagement: visitors come back, rather than making only one initial visit."]};
- const passage="<details class=\"reading-panel reveal\" open><summary>Lowell passage</summary><div class=\"reading-text\" tabindex=\"0\" aria-label=\"Lowell reading passage\"><div class=\"micro\">Adaptation assembled from this deck’s passage notes; not the original source text.</div><p><strong>[1]</strong> In 1821, merchants selected a river site for the water power needed to run mills. Canals carried water to large brick mill buildings. Lowell grew into a bustling industrial city. By the 1850s, 40 mills employed more than 10,000 workers.</p><p><strong>[2]</strong> The young women known as the mill girls became Lowell’s dominant workforce. The mills attracted them with wages and the opportunity for independence. Over time, however, wage cuts and worsening conditions put pressure on the workers. Low pay, long hours, and crowded housing made their lives difficult.</p><p><strong>[3]</strong> The mill girls responded with protests and strikes. When these efforts failed to improve conditions, workers left, and other workers replaced them.</p><p><strong>[4]</strong> Lowell eventually lost its position as an industrial leader. Its mills and equipment had become outdated, while rival mills used more modern equipment. Lowell’s older mills could not keep up with these competitors.</p></div></details>";
- [11,12,13,14].forEach(n=>{
-   const slide=document.querySelector(`.slide[data-slide="${n}"]`);
-   slide.classList.add('has-reading');
-   slide.querySelector('.slide-title').insertAdjacentHTML('afterend',passage);
- });
- document.querySelectorAll('.prob-card').forEach((card,i)=>{
-   const name=card.querySelector('.prob-num').textContent.trim();
-   const answer=answers[name];
-   if(!answer)return;
-   card.closest('.slide').classList.add('has-answer-cards');
-   card.classList.add('answer-card');card.tabIndex=0;
-   card.setAttribute('role','group');
-   card.setAttribute('aria-label',`${name}: question. Activate card to show answer.`);
-   const inner=document.createElement('div');inner.className='flip-inner';
-   const front=document.createElement('div');front.className='flip-face flip-front';
-   while(card.firstChild)front.appendChild(card.firstChild);
-   if(name==='Check C'){
-     front.querySelectorAll('.evidence-card').forEach((choice,j)=>{
-       const label=document.createElement('label');
-       label.className=choice.className+' choice-input';
-       const radio=document.createElement('input');radio.type='radio';radio.name='check-c-choice';radio.value=String(j+1);
-       label.append(radio,document.createTextNode(choice.textContent));choice.replaceWith(label);
-     });
-   }
-   const work=document.createElement('div');work.className='work-box';
-   const field=document.createElement('textarea');field.placeholder='Work here…';field.spellcheck=false;field.rows=2;
-   field.setAttribute('aria-label',`${name}: your answer and work`);
-   work.appendChild(field);front.appendChild(work);
-   const back=document.createElement('div');back.className='flip-face flip-back';back.inert=true;
-   back.setAttribute('aria-hidden','true');
-   back.innerHTML=`<div class="prob-head"><span class="prob-num">${name} · Answer</span></div><div class="answer-value">${answer[0]}</div><div class="answer-explanation">${answer[1]}</div>`;
-   inner.append(front,back);card.appendChild(inner);
-   function flip(){
-     const flipped=card.classList.toggle('is-flipped');
-     front.inert=flipped;back.inert=!flipped;
-     front.setAttribute('aria-hidden',String(flipped));back.setAttribute('aria-hidden',String(!flipped));
-     card.setAttribute('aria-label',`${name}: ${flipped?'answer. Activate card to return to question.':'question. Activate card to show answer.'}`);
-   }
-   card.addEventListener('click',e=>{
-     if(e.target.closest('input,textarea,select,button,a,label,summary,.work-box'))return;
-     if(window.getSelection()?.toString())return;
-     flip();
-   });
-   card.addEventListener('keydown',e=>{
-     if(e.target!==card)return;
-     if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();flip();}
-   });
- });
-})();
-
-</script>
-</body>
-</html>
+</style></head><body><div class="toolbar no-print"><button type="button" class="print-btn" onclick="printSheet()">Print / Save as PDF</button><button type="button" class="print-btn clear-btn" onclick="clearAll()">Clear All</button></div><p class="screen-note no-print">Type or select answers below. Work is saved in this browser when storage is available. For a clean PDF, turn off browser headers and footers.</p><section class="sheet " aria-label="Page 1"><header class="hw-header"><div class="hw-header-left"><h1>Rhetorical Synthesis<br>Homework</h1><div class="subtitle">Session 5 • Digital SAT Reading and Writing</div></div><div class="hw-meta"><label class="hw-meta-row" for="student-name"><span class="label">Name</span><input type="text" id="student-name" autocomplete="name"></label><label class="hw-meta-row" for="student-date"><span class="label">Date</span><input type="text" id="student-date"></label></div></header>
+<div class="plan"><div><b>1. Rehearse</b><span>Goal filter • 5 min</span></div><div><b>2. Apply</b><span>Questions 1–12 • 25–30 min</span></div><div><b>3. Switch</b><span>Questions 13–18 • 7 min</span></div><div><b>4. Repair</b><span>Check + error log • 10–15 min</span></div></div>
+<div class="section-hd"><span class="section-mark">A</span><h2>Build the routine</h2><span class="badge badge-blue">Unscored warm-up</span></div><p class="instr">Read the goal before the notes. For Questions 1–12, select one answer and record your reasoning. For Questions 13–18, answer first under the suggested practice timing, then add explanations. Check the separate key only after finishing.</p>
+<div class="formula-strip"><span class="fs-label">Four-step filter</span><span class="fml">Goal</span><span>→</span><span class="fml">Relevant notes</span><span>→</span><span class="fml">Blueprint</span><span>→</span><span class="fml">Two locks</span></div>
+<div class="rule-grid"><div><b>Lock 1: Accuracy</b>Every claim must match the notes. Preserve comparisons, quantities, and limits.</div><div><b>Lock 2: Task</b>The choice must do the specific job. A true detail can still be off-goal.</div></div>
+<div class="warmup"><div class="pretitle">Same notes • Different goals</div><ol class="research-notes"><li>Harbor Library offers an audio program called StorySteps.</li><li>StorySteps pairs short stories with outdoor walks.</li><li>DeskTales, another library audio program, pairs short stories with seated listening activities.</li><li>Both programs are free and available through the library’s app.</li><li>The program designer lives across the street from the library.</li></ol>
+<label class="task" for="warm-a"><strong>A.</strong> Goal: emphasize a similarity in access. Which note directly supplies that similarity?<input type="text" id="warm-a" aria-label="Warm-up A note number"></label>
+<label class="task" for="warm-b"><strong>B.</strong> Goal: contrast the listening settings. Which two notes are essential?<input type="text" id="warm-b" aria-label="Warm-up B note numbers"></label>
+<label class="reason-label" for="warm-c">C. Write one sentence that fulfills goal B. Do not add biography or access details.</label><textarea class="work-area" id="warm-c" rows="2"></textarea><div class="print-mirror" data-for="warm-c" aria-hidden="true"></div><label class="reason-label" for="warm-d">D. Explain why “Both programs are free” is true but fails goal B.</label><textarea class="work-area" id="warm-d" rows="1"></textarea><div class="print-mirror" data-for="warm-d" aria-hidden="true"></div></div><p class="source-note">All names, studies, and datasets in these exercises are fictional practice scenarios. Use only the supplied information. These are independently authored activities, not official test questions. “Core” and “Stretch” are instructional labels, not official difficulty ratings. Timings are practice targets, not test rules.</p><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>1 / 10</span></footer></section><section class="sheet " aria-label="Page 2"><div class="section-hd"><span class="section-mark">B</span><h2>Select only what matters</h2><span class="badge badge-blue">Questions 1–2 • ~4 min</span></div><p class="instr">Name the requested relationship. Do not choose an accurate difference when the goal asks for a similarity—or the reverse.</p><article class="question synthesis" aria-labelledby="q1-heading"><div class="question-head"><h3 id="q1-heading">Question 1</h3><span class="skill-tag">Similarity</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Composer Imani Cole builds pieces from recordings of ordinary household sounds.</li><li>Composer Theo Lin builds pieces from recordings of mechanical sounds in workshops.</li><li>Both composers digitally alter the recordings before arranging them into musical patterns.</li><li>Cole often performs with a violinist; Lin usually performs alone.</li></ul><p class="goal">The student wants to <strong>emphasize a similarity in how Cole and Lin create their music</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 1 answer choices"><label class="mc-opt"><input type="radio" name="q1" id="q1A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Cole uses household sounds, whereas Lin uses workshop sounds as the starting point for musical compositions.</span></label><label class="mc-opt"><input type="radio" name="q1" id="q1B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Both Cole and Lin digitally transform recorded sounds before organizing them into musical patterns.</span></label><label class="mc-opt"><input type="radio" name="q1" id="q1C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Cole and Lin perform music based on recorded sounds, though only Cole collaborates with other performers.</span></label><label class="mc-opt"><input type="radio" name="q1" id="q1D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Both Cole and Lin record household sounds and arrange them into music without digitally altering them.</span></label></div><label class="reason-label" for="reason1">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason1" rows="2"></textarea><div class="print-mirror" data-for="reason1" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence1" id="confidence1Sure" value="Sure">Sure</label><label><input type="radio" name="confidence1" id="confidence1Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence1" id="confidence1Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q2-heading"><div class="question-head"><h3 id="q2-heading">Question 2</h3><span class="skill-tag">Difference</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>The North Gallery restores damaged frames with carved wooden inserts.</li><li>The South Gallery restores damaged frames with molded resin inserts.</li><li>Both galleries color the inserts to match the original frames.</li><li>The North Gallery opened in 1986; the South Gallery opened in 1994.</li></ul><p class="goal">The student wants to <strong>highlight a difference in the materials the galleries use to restore frames</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 2 answer choices"><label class="mc-opt"><input type="radio" name="q2" id="q2A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The North Gallery opened eight years before the South Gallery, and both galleries restore damaged frames.</span></label><label class="mc-opt"><input type="radio" name="q2" id="q2B" value="B"><span class="bubble" aria-hidden="true">B</span><span>To make repairs less visible, both galleries color their inserts to match the frames being restored.</span></label><label class="mc-opt"><input type="radio" name="q2" id="q2C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The galleries both repair frames with inserts, which they color to resemble the original material.</span></label><label class="mc-opt"><input type="radio" name="q2" id="q2D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The North Gallery repairs frames with wooden inserts, while the South Gallery uses resin inserts.</span></label></div><label class="reason-label" for="reason2">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason2" rows="2"></textarea><div class="print-mirror" data-for="reason2" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence2" id="confidence2Sure" value="Sure">Sure</label><label><input type="radio" name="confidence2" id="confidence2Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence2" id="confidence2Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>2 / 10</span></footer></section><section class="sheet " aria-label="Page 3"><div class="section-hd"><span class="section-mark">C</span><h2>Explain and introduce</h2><span class="badge badge-blue">Questions 3–4 • ~4 min</span></div><p class="instr">For an introduction, include the finding. For explanation plus illustration, connect the general concept to the specific case.</p><article class="question synthesis" aria-labelledby="q3-heading"><div class="question-head"><h3 id="q3-heading">Question 3</h3><span class="skill-tag">Study and finding</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Engineer Priya Sethi tested two protective packaging designs using 60 identical glass vials.</li><li>Thirty vials used folded-paper padding; thirty used molded-pulp padding.</li><li>Each packaged vial was dropped once from a height of one meter.</li><li>Four vials in folded-paper padding broke; one vial in molded-pulp padding broke.</li><li>The laboratory also tests shipping labels.</li></ul><p class="goal">The student wants to <strong>introduce Sethi’s experiment and its main finding</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 3 answer choices"><label class="mc-opt"><input type="radio" name="q3" id="q3A" value="A"><span class="bubble" aria-hidden="true">A</span><span>In Sethi’s one-meter drop test of packaged glass vials, fewer broke with molded-pulp padding than with folded-paper padding.</span></label><label class="mc-opt"><input type="radio" name="q3" id="q3B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Sethi’s laboratory tested 60 glass vials, assigning equal numbers to two packaging designs and using a one-meter drop height.</span></label><label class="mc-opt"><input type="radio" name="q3" id="q3C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Sethi’s tests established that molded-pulp padding prevents breakage in glass vials shipped over long distances.</span></label><label class="mc-opt"><input type="radio" name="q3" id="q3D" value="D"><span class="bubble" aria-hidden="true">D</span><span>In Sethi’s packaging experiment, four vials broke with molded-pulp padding, compared with one with folded-paper padding.</span></label></div><label class="reason-label" for="reason3">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason3" rows="2"></textarea><div class="print-mirror" data-for="reason3" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence3" id="confidence3Sure" value="Sure">Sure</label><label><input type="radio" name="confidence3" id="confidence3Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence3" id="confidence3Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q4-heading"><div class="question-head"><h3 id="q4-heading">Question 4</h3><span class="skill-tag">Concept and example</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Adaptive reuse means giving an existing building a new function while retaining substantial parts of its structure.</li><li>The Bell Street warehouse once stored grain.</li><li>The warehouse now houses a public theater.</li><li>The conversion retained its brick exterior walls and timber roof supports.</li><li>The theater seats 240 people.</li></ul><p class="goal">The student wants to <strong>explain adaptive reuse and illustrate the concept with the Bell Street building</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 4 answer choices"><label class="mc-opt"><input type="radio" name="q4" id="q4A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The Bell Street theater seats 240 people in a former grain warehouse whose brick walls and timber roof supports remain.</span></label><label class="mc-opt"><input type="radio" name="q4" id="q4B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Adaptive reuse gives older buildings new functions; the Bell Street warehouse once stored grain before becoming vacant.</span></label><label class="mc-opt"><input type="radio" name="q4" id="q4C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Adaptive reuse gives an existing structure a new function, as when the Bell Street grain warehouse became a theater while retaining its walls and roof supports.</span></label><label class="mc-opt"><input type="radio" name="q4" id="q4D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The Bell Street theater illustrates adaptive reuse because its builders replaced the former warehouse with a new structure of similar appearance.</span></label></div><label class="reason-label" for="reason4">Goal → essential notes → sentence blueprint. Why does one tempting choice fail?</label><textarea class="work-area" id="reason4" rows="2"></textarea><div class="print-mirror" data-for="reason4" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence4" id="confidence4Sure" value="Sure">Sure</label><label><input type="radio" name="confidence4" id="confidence4Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence4" id="confidence4Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>3 / 10</span></footer></section><section class="sheet " aria-label="Page 4"><div class="section-hd"><span class="section-mark">D</span><h2>Sequence and trade-offs</h2><span class="badge badge-sand">Questions 5–6 • ~5 min</span></div><p class="instr">Time order must remain intact. A trade-off must show both the gain and the corresponding cost.</p><article class="question synthesis" aria-labelledby="q5-heading"><div class="question-head"><h3 id="q5-heading">Question 5</h3><span class="skill-tag">Chronological development</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>In 2008, the Alder Seed Library began distributing seeds from a cabinet at a community center.</li><li>In 2013, it added an online catalog, though seeds still had to be collected in person.</li><li>In 2019, it began mailing seeds to registered users.</li><li>In 2022, it introduced workshops on seed saving.</li><li>The library distributes both vegetable and flower seeds.</li></ul><p class="goal">The student wants to <strong>trace how access to the library’s seeds expanded from 2008 through 2019</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 5 answer choices"><label class="mc-opt"><input type="radio" name="q5" id="q5A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The Alder Seed Library distributes vegetable and flower seeds and began offering seed-saving workshops in 2022.</span></label><label class="mc-opt"><input type="radio" name="q5" id="q5B" value="B"><span class="bubble" aria-hidden="true">B</span><span>After introducing an online catalog in 2013, the library opened its first seed cabinet in 2008 and began mailing seeds in 2019.</span></label><label class="mc-opt"><input type="radio" name="q5" id="q5C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The library’s 2013 online catalog allowed users to receive seeds by mail rather than collect them at the community center.</span></label><label class="mc-opt"><input type="radio" name="q5" id="q5D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Starting with a community-center cabinet in 2008, the library added an online catalog in 2013 and mail delivery in 2019.</span></label></div><label class="reason-label" for="reason5">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason5" rows="2"></textarea><div class="print-mirror" data-for="reason5" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence5" id="confidence5Sure" value="Sure">Sure</label><label><input type="radio" name="confidence5" id="confidence5Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence5" id="confidence5Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q6-heading"><div class="question-head"><h3 id="q6-heading">Question 6</h3><span class="skill-tag">Trade-off</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A library can digitize fragile notebooks using a flatbed scanner or an overhead camera.</li><li>The scanner produces sharper images of faint pencil marks.</li><li>The scanner requires each notebook to be opened flat, putting stress on its binding.</li><li>The camera permits a notebook to remain partly closed in a cradle.</li><li>The camera’s images show less detail in faint pencil marks than the scanner’s images do.</li></ul><p class="goal">The student wants to <strong>emphasize the trade-off involved in choosing the overhead camera instead of the scanner</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 6 answer choices"><label class="mc-opt"><input type="radio" name="q6" id="q6A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Both an overhead camera and a flatbed scanner can produce digital images of the library’s fragile notebooks.</span></label><label class="mc-opt"><input type="radio" name="q6" id="q6B" value="B"><span class="bubble" aria-hidden="true">B</span><span>The overhead camera reduces stress on bindings by allowing notebooks to stay partly closed, but captures faint pencil marks in less detail.</span></label><label class="mc-opt"><input type="radio" name="q6" id="q6C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Because the scanner records faint pencil marks more sharply, it is the better choice for every fragile notebook in the collection.</span></label><label class="mc-opt"><input type="radio" name="q6" id="q6D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The overhead camera preserves the scanner’s image detail while allowing notebooks to remain partly closed in a cradle.</span></label></div><label class="reason-label" for="reason6">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason6" rows="2"></textarea><div class="print-mirror" data-for="reason6" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence6" id="confidence6Sure" value="Sure">Sure</label><label><input type="radio" name="confidence6" id="confidence6Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence6" id="confidence6Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>4 / 10</span></footer></section><section class="sheet " aria-label="Page 5"><div class="section-hd"><span class="section-mark">E</span><h2>Protect the claim</h2><span class="badge badge-purple">Questions 7–8 • ~5 min</span></div><p class="instr">Keep limits attached to the correct population. Distinguish a researcher’s interpretation from an established fact.</p><article class="question synthesis" aria-labelledby="q7-heading"><div class="question-head"><h3 id="q7-heading">Question 7</h3><span class="skill-tag">Scope limitation</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A study tested whether synchronized captions helped viewers recall details from short instructional videos.</li><li>The 84 participants were adults who were fluent readers of the caption language.</li><li>Participants were randomly assigned to watch the same videos with or without captions.</li><li>The caption group recalled more details on average.</li><li>The researchers did not test children or people still learning to read the caption language.</li></ul><p class="goal">The student wants to <strong>present the main finding while identifying a specific limit on which viewers it can be generalized to</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 7 answer choices"><label class="mc-opt"><input type="radio" name="q7" id="q7A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Because participants were randomly assigned, the study shows that captions improve video recall for viewers regardless of age or reading ability.</span></label><label class="mc-opt"><input type="radio" name="q7" id="q7B" value="B"><span class="bubble" aria-hidden="true">B</span><span>A study of 84 adults compared recall after instructional videos, using groups that watched either with or without captions.</span></label><label class="mc-opt"><input type="radio" name="q7" id="q7C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Captions improved average recall among the adult fluent readers tested, but the study did not establish the effect for children or developing readers.</span></label><label class="mc-opt"><input type="radio" name="q7" id="q7D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Although captions improved recall on average, the study did not determine whether the benefit lasted for several months.</span></label></div><label class="reason-label" for="reason7">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason7" rows="2"></textarea><div class="print-mirror" data-for="reason7" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence7" id="confidence7Sure" value="Sure">Sure</label><label><input type="radio" name="confidence7" id="confidence7Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence7" id="confidence7Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q8-heading"><div class="question-head"><h3 id="q8-heading">Question 8</h3><span class="skill-tag">Scholarly disagreement</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>An excavation at Hillmere uncovered stone slabs bearing parallel grooves.</li><li>Archaeologist Leena Das argues that wear inside the grooves indicates that the slabs were used to sharpen tools.</li><li>Historian Omar Bell argues that the regular spacing of the grooves indicates that they were primarily decorative.</li><li>Both researchers agree that people deliberately cut the grooves.</li><li>No metal tools were found beside the slabs.</li></ul><p class="goal">The student wants to <strong>identify the researchers’ disagreement about the original purpose of the grooves</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 8 answer choices"><label class="mc-opt"><input type="radio" name="q8" id="q8A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Das interprets the grooves as traces of tool sharpening, whereas Bell interprets their regular spacing as evidence of decoration.</span></label><label class="mc-opt"><input type="radio" name="q8" id="q8B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Das and Bell agree that people deliberately cut the grooves, although no metal tools were recovered beside the slabs.</span></label><label class="mc-opt"><input type="radio" name="q8" id="q8C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Das attributes the grooves to tool sharpening, whereas Bell argues that natural erosion produced their regular spacing.</span></label><label class="mc-opt"><input type="radio" name="q8" id="q8D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Because no metal tools were found, Bell has disproved Das’s claim that the grooves were used to sharpen tools.</span></label></div><label class="reason-label" for="reason8">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason8" rows="2"></textarea><div class="print-mirror" data-for="reason8" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence8" id="confidence8Sure" value="Sure">Sure</label><label><input type="radio" name="confidence8" id="confidence8Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence8" id="confidence8Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>5 / 10</span></footer></section><section class="sheet " aria-label="Page 6"><div class="section-hd"><span class="section-mark">F</span><h2>Qualify with precision</h2><span class="badge badge-purple">Questions 9–10 • ~5 min</span></div><p class="instr">Check what each number measures and which conditions apply. Do not let a true statement omit half the goal.</p><article class="question synthesis" aria-labelledby="q9-heading"><div class="question-head"><h3 id="q9-heading">Question 9</h3><span class="skill-tag">Numerical qualification</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>In March, 90 of 300 visitors to the Mercer Museum attended a free demonstration.</li><li>In April, 120 of 600 visitors attended a free demonstration.</li><li>Thus, 30% of March visitors and 20% of April visitors attended.</li><li>The museum added two evening demonstrations in April.</li><li>The demonstrations were held in the same room during both months.</li></ul><p class="goal">The student wants to <strong>show that demonstration attendance rose in number but fell as a share of all visitors</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 9 answer choices"><label class="mc-opt"><input type="radio" name="q9" id="q9A" value="A"><span class="bubble" aria-hidden="true">A</span><span>After the museum added evening demonstrations in April, demonstration attendance rose from 90 to 120 visitors.</span></label><label class="mc-opt"><input type="radio" name="q9" id="q9B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Demonstration attendance increased from 90 to 120 visitors, even as the share attending declined from 30% to 20%.</span></label><label class="mc-opt"><input type="radio" name="q9" id="q9C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Demonstration attendance rose by 30 visitors, so a larger percentage of all museum visitors attended in April than in March.</span></label><label class="mc-opt"><input type="radio" name="q9" id="q9D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Although total museum visits doubled from March to April, the number attending demonstrations fell from 120 to 90.</span></label></div><label class="reason-label" for="reason9">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason9" rows="2"></textarea><div class="print-mirror" data-for="reason9" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence9" id="confidence9Sure" value="Sure">Sure</label><label><input type="radio" name="confidence9" id="confidence9Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence9" id="confidence9Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q10-heading"><div class="question-head"><h3 id="q10-heading">Question 10</h3><span class="skill-tag">Condition and exception</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Engineers tested a reflective coating on outdoor storage boxes.</li><li>On dry, sunny days, coated boxes stayed cooler inside than uncoated boxes.</li><li>After rain, when a continuous film of water covered the boxes, the temperature difference disappeared.</li><li>Once the boxes dried, the difference returned.</li><li>The coating was applied with a roller.</li></ul><p class="goal">The student wants to <strong>emphasize the condition under which the coating’s observed cooling advantage disappeared</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 10 answer choices"><label class="mc-opt"><input type="radio" name="q10" id="q10A" value="A"><span class="bubble" aria-hidden="true">A</span><span>The reflective coating, applied with a roller, kept storage boxes cooler inside on dry, sunny days.</span></label><label class="mc-opt"><input type="radio" name="q10" id="q10B" value="B"><span class="bubble" aria-hidden="true">B</span><span>The coating’s cooling advantage returned after the boxes dried, suggesting that rain permanently improved its performance.</span></label><label class="mc-opt"><input type="radio" name="q10" id="q10C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The coating kept boxes cooler under every tested condition, though the size of the advantage changed after rain.</span></label><label class="mc-opt"><input type="radio" name="q10" id="q10D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The coated boxes lost their cooling advantage when a continuous film of rainwater covered them; the advantage returned after drying.</span></label></div><label class="reason-label" for="reason10">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason10" rows="2"></textarea><div class="print-mirror" data-for="reason10" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence10" id="confidence10Sure" value="Sure">Sure</label><label><input type="radio" name="confidence10" id="confidence10Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence10" id="confidence10Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>6 / 10</span></footer></section><section class="sheet " aria-label="Page 7"><div class="section-hd"><span class="section-mark">G</span><h2>Connect the evidence</h2><span class="badge badge-purple">Questions 11–12 • ~5 min</span></div><p class="instr">For a mechanism, preserve the causal chain. To reconcile results, explain how both can hold under different conditions.</p><article class="question synthesis" aria-labelledby="q11-heading"><div class="question-head"><h3 id="q11-heading">Question 11</h3><span class="skill-tag">Explain a mechanism</span><span class="level ">Core</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A prototype irrigation valve contains a strip made from two bonded materials.</li><li>As the strip warms, one material expands more than the other.</li><li>This unequal expansion bends the strip.</li><li>The bending motion opens the valve, allowing water to flow.</li><li>The prototype was displayed at a school engineering fair.</li></ul><p class="goal">The student wants to <strong>explain how warming causes the prototype valve to release water</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 11 answer choices"><label class="mc-opt"><input type="radio" name="q11" id="q11A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Warming makes the strip’s bonded materials expand unequally, bending the strip and opening the valve so water can flow.</span></label><label class="mc-opt"><input type="radio" name="q11" id="q11B" value="B"><span class="bubble" aria-hidden="true">B</span><span>The valve releases water as its strip bends; the prototype, which uses two bonded materials, appeared at an engineering fair.</span></label><label class="mc-opt"><input type="radio" name="q11" id="q11C" value="C"><span class="bubble" aria-hidden="true">C</span><span>Water flowing through the valve heats the strip, causing its bonded materials to expand and bend apart.</span></label><label class="mc-opt"><input type="radio" name="q11" id="q11D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Warming opens the valve because both bonded materials expand equally, keeping the strip straight while water is released.</span></label></div><label class="reason-label" for="reason11">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason11" rows="2"></textarea><div class="print-mirror" data-for="reason11" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence11" id="confidence11Sure" value="Sure">Sure</label><label><input type="radio" name="confidence11" id="confidence11Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence11" id="confidence11Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q12-heading"><div class="question-head"><h3 id="q12-heading">Question 12</h3><span class="skill-tag">Reconcile findings</span><span class="level stretch">Stretch</span></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Team A tested a noise-reducing curtain with speakers producing mostly high-frequency sound.</li><li>Team A recorded a large reduction in sound passing through the curtain.</li><li>Team B tested the same curtain with speakers producing mostly low-frequency sound.</li><li>Team B recorded only a small reduction.</li><li>A separate test found that the curtain absorbs high-frequency sound more effectively than low-frequency sound.</li></ul><p class="goal">The student wants to <strong>explain why the teams’ results need not conflict</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 12 answer choices"><label class="mc-opt"><input type="radio" name="q12" id="q12A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Because both teams tested the same curtain, their different results demonstrate that at least one team’s measurements were incorrect.</span></label><label class="mc-opt"><input type="radio" name="q12" id="q12B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Team A recorded a large sound reduction, while Team B recorded a small reduction using the same noise-reducing curtain.</span></label><label class="mc-opt"><input type="radio" name="q12" id="q12C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The results are consistent with the curtain’s stronger absorption of high-frequency sound, since the teams used different frequency ranges.</span></label><label class="mc-opt"><input type="radio" name="q12" id="q12D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The teams’ results differ because Team A’s curtain was designed for high-frequency sound and Team B used a different curtain.</span></label></div><label class="reason-label" for="reason12">Justify your choice with the notes; identify the precise flaw in one distractor.</label><textarea class="work-area" id="reason12" rows="2"></textarea><div class="print-mirror" data-for="reason12" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence12" id="confidence12Sure" value="Sure">Sure</label><label><input type="radio" name="confidence12" id="confidence12Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence12" id="confidence12Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>7 / 10</span></footer></section><section class="sheet mixed" aria-label="Page 8"><div class="section-hd"><span class="section-mark">H</span><h2>Routine-switch sprint</h2><span class="badge badge-green">Questions 13–15 • 3 min</span></div><p class="instr">Diagnose the format: passage + blank → logical relationship; notes + goal → accuracy and task. Select answers during timing. Complete reasoning and confidence marks after timing; do not change your original selections before checking.</p><article class="question transition" aria-labelledby="q13-heading"><div class="question-head"><h3 id="q13-heading">Question 13</h3></div><p class="passage">The community archive initially planned to accept only handwritten diaries. ______, after residents offered home recordings, the archive expanded its collection policy to include audio as well.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 13 answer choices"><label class="mc-opt"><input type="radio" name="q13" id="q13A" value="A"><span class="bubble" aria-hidden="true">A</span><span>However,</span></label><label class="mc-opt"><input type="radio" name="q13" id="q13B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Similarly,</span></label><label class="mc-opt"><input type="radio" name="q13" id="q13C" value="C"><span class="bubble" aria-hidden="true">C</span><span>For instance,</span></label><label class="mc-opt"><input type="radio" name="q13" id="q13D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Consequently,</span></label></div><label class="reason-label" for="reason13">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason13" rows="1"></textarea><div class="print-mirror" data-for="reason13" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence13" id="confidence13Sure" value="Sure">Sure</label><label><input type="radio" name="confidence13" id="confidence13Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence13" id="confidence13Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q14-heading"><div class="question-head"><h3 id="q14-heading">Question 14</h3></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>A town replaced the lamps in 40 streetlights with lower-energy models.</li><li>Over the next month, the streetlights used 25% less electricity than in the previous month.</li><li>The price charged per unit of electricity increased during the same period.</li><li>The town’s streetlight electricity bill was unchanged.</li></ul><p class="goal">The student wants to <strong>distinguish the change in electricity use from the change in electricity cost</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 14 answer choices"><label class="mc-opt"><input type="radio" name="q14" id="q14A" value="A"><span class="bubble" aria-hidden="true">A</span><span>After the town installed lower-energy lamps, both electricity use and the total streetlight electricity bill declined by 25%.</span></label><label class="mc-opt"><input type="radio" name="q14" id="q14B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Because the price per unit increased, the streetlights used more electricity even after the new lamps were installed.</span></label><label class="mc-opt"><input type="radio" name="q14" id="q14C" value="C"><span class="bubble" aria-hidden="true">C</span><span>The new lamps were followed by a 25% decline in streetlight electricity use, but a higher unit price left the electricity bill unchanged.</span></label><label class="mc-opt"><input type="radio" name="q14" id="q14D" value="D"><span class="bubble" aria-hidden="true">D</span><span>The streetlight electricity bill was unchanged after the town replaced the lamps in 40 streetlights with lower-energy models.</span></label></div><label class="reason-label" for="reason14">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason14" rows="1"></textarea><div class="print-mirror" data-for="reason14" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence14" id="confidence14Sure" value="Sure">Sure</label><label><input type="radio" name="confidence14" id="confidence14Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence14" id="confidence14Guessed" value="Guessed">Guessed</label></div></article><article class="question transition" aria-labelledby="q15-heading"><div class="question-head"><h3 id="q15-heading">Question 15</h3></div><p class="passage">The exhibit allows visitors to explore texture through touch. ______, one station invites them to compare a smooth ceramic tile with a ridged one.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 15 answer choices"><label class="mc-opt"><input type="radio" name="q15" id="q15A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Nevertheless,</span></label><label class="mc-opt"><input type="radio" name="q15" id="q15B" value="B"><span class="bubble" aria-hidden="true">B</span><span>As a result,</span></label><label class="mc-opt"><input type="radio" name="q15" id="q15C" value="C"><span class="bubble" aria-hidden="true">C</span><span>In contrast,</span></label><label class="mc-opt"><input type="radio" name="q15" id="q15D" value="D"><span class="bubble" aria-hidden="true">D</span><span>For example,</span></label></div><label class="reason-label" for="reason15">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason15" rows="1"></textarea><div class="print-mirror" data-for="reason15" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence15" id="confidence15Sure" value="Sure">Sure</label><label><input type="radio" name="confidence15" id="confidence15Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence15" id="confidence15Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>8 / 10</span></footer></section><section class="sheet mixed" aria-label="Page 9"><div class="section-hd"><span class="section-mark">I</span><h2>Precision sprint</h2><span class="badge badge-green">Questions 16–18 • 4 min</span></div><p class="instr">Diagnose the format: passage + blank → logical relationship; notes + goal → accuracy and task. Select answers during timing. Complete reasoning and confidence marks after timing; do not change your original selections before checking.</p><article class="question transition" aria-labelledby="q16-heading"><div class="question-head"><h3 id="q16-heading">Question 16</h3></div><p class="passage">The field recorder’s battery was completely depleted, and the crew had no replacement. ______, they postponed the remaining audio interviews until the recorder could be recharged.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 16 answer choices"><label class="mc-opt"><input type="radio" name="q16" id="q16A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Meanwhile,</span></label><label class="mc-opt"><input type="radio" name="q16" id="q16B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Therefore,</span></label><label class="mc-opt"><input type="radio" name="q16" id="q16C" value="C"><span class="bubble" aria-hidden="true">C</span><span>For instance,</span></label><label class="mc-opt"><input type="radio" name="q16" id="q16D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Nevertheless,</span></label></div><label class="reason-label" for="reason16">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason16" rows="1"></textarea><div class="print-mirror" data-for="reason16" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence16" id="confidence16Sure" value="Sure">Sure</label><label><input type="radio" name="confidence16" id="confidence16Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence16" id="confidence16Guessed" value="Guessed">Guessed</label></div></article><article class="question synthesis" aria-labelledby="q17-heading"><div class="question-head"><h3 id="q17-heading">Question 17</h3></div><p class="notes-intro">While researching a topic, a student has taken the following notes:</p><ul class="research-notes"><li>Product designer Nadia Rios created a reusable shipping sleeve called LoopWrap.</li><li>LoopWrap can be adjusted to fit parcels of several different sizes.</li><li>In a warehouse trial, a single LoopWrap size replaced three sizes of disposable mailers.</li><li>Rios previously designed reusable grocery bags.</li><li>The intended readers already know Rios’s earlier design work but have not heard of LoopWrap.</li></ul><p class="goal">The student wants to <strong>introduce LoopWrap and explain its practical significance to this audience</strong>. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="group" aria-label="Question 17 answer choices"><label class="mc-opt"><input type="radio" name="q17" id="q17A" value="A"><span class="bubble" aria-hidden="true">A</span><span>Rios’s LoopWrap is an adjustable, reusable shipping sleeve that replaced three sizes of disposable mailers in a warehouse trial.</span></label><label class="mc-opt"><input type="radio" name="q17" id="q17B" value="B"><span class="bubble" aria-hidden="true">B</span><span>Rios, who previously designed reusable grocery bags, has continued to develop products for carrying and shipping goods.</span></label><label class="mc-opt"><input type="radio" name="q17" id="q17C" value="C"><span class="bubble" aria-hidden="true">C</span><span>LoopWrap, a reusable shipping sleeve designed by Rios, eliminates the need for disposable mailers in all shipping operations.</span></label><label class="mc-opt"><input type="radio" name="q17" id="q17D" value="D"><span class="bubble" aria-hidden="true">D</span><span>A warehouse trial found that three LoopWrap sizes were needed to replace a single size of disposable mailer.</span></label></div><label class="reason-label" for="reason17">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason17" rows="1"></textarea><div class="print-mirror" data-for="reason17" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence17" id="confidence17Sure" value="Sure">Sure</label><label><input type="radio" name="confidence17" id="confidence17Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence17" id="confidence17Guessed" value="Guessed">Guessed</label></div></article><article class="question transition" aria-labelledby="q18-heading"><div class="question-head"><h3 id="q18-heading">Question 18</h3></div><p class="passage">The catalog follows a nonchronological arrangement. ______, its entries are not ordered by the dates of the events they describe.</p><p class="goal">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="group" aria-label="Question 18 answer choices"><label class="mc-opt"><input type="radio" name="q18" id="q18A" value="A"><span class="bubble" aria-hidden="true">A</span><span>By comparison,</span></label><label class="mc-opt"><input type="radio" name="q18" id="q18B" value="B"><span class="bubble" aria-hidden="true">B</span><span>In addition,</span></label><label class="mc-opt"><input type="radio" name="q18" id="q18C" value="C"><span class="bubble" aria-hidden="true">C</span><span>In other words,</span></label><label class="mc-opt"><input type="radio" name="q18" id="q18D" value="D"><span class="bubble" aria-hidden="true">D</span><span>Even so,</span></label></div><label class="reason-label" for="reason18">After timing: name the relationship or goal, then explain one elimination.</label><textarea class="work-area" id="reason18" rows="1"></textarea><div class="print-mirror" data-for="reason18" aria-hidden="true"></div><div class="confidence"><span>Confidence:</span><label><input type="radio" name="confidence18" id="confidence18Sure" value="Sure">Sure</label><label><input type="radio" name="confidence18" id="confidence18Unsure" value="Unsure">Unsure</label><label><input type="radio" name="confidence18" id="confidence18Guessed" value="Guessed">Guessed</label></div></article><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>9 / 10</span></footer></section><section class="sheet " aria-label="Page 10"><div class="section-hd"><span class="section-mark">J</span><h2>Error log and reflection</h2><span class="badge badge-coral">After checking</span></div><div class="score-banner"><div><div class="title">Self-score</div><div class="sub">Original answers only • Warm-up excluded</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input type="number" min="0" max="14" id="synthesis-score" aria-label="Synthesis score"> / 14</div><div class="sc-lbl">Synthesis</div></div><div class="score-cell"><div class="sc-val"><input type="number" min="0" max="4" id="transition-score" aria-label="Transitions score"> / 4</div><div class="sc-lbl">Transitions</div></div><div class="score-cell"><div class="sc-val"><input type="number" min="0" max="18" id="total-score" aria-label="Total score"> / 18</div><div class="sc-lbl">Total</div></div></div></div><p class="instr">Review every missed or uncertain item. Log up to six that best reveal your patterns; use another copy of this page if needed. Explain the failure precisely, then write a rule you can use on the next question.</p><div class="error-log"><h3>My errors this week</h3><div class="error-type-pills"><span class="pill pill-cg">Content gap — skill not understood</span><span class="pill pill-ce">Careless error — known skill misapplied</span><span class="pill pill-ru">Rushing — key wording missed</span></div><table class="error-table"><thead><tr><th scope="col">Q#</th><th scope="col">Mine → key</th><th scope="col">What failed?</th><th scope="col">Error type</th><th scope="col">Repair / next-time cue</th></tr></thead><tbody><tr><td contenteditable="true" role="textbox" aria-label="Error log row 1, question number" id="error-0-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, my answer and correct answer" id="error-0-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, what failed" id="error-0-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, error type" id="error-0-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 1, repair and next-time cue" id="error-0-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 2, question number" id="error-1-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, my answer and correct answer" id="error-1-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, what failed" id="error-1-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, error type" id="error-1-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 2, repair and next-time cue" id="error-1-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 3, question number" id="error-2-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, my answer and correct answer" id="error-2-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, what failed" id="error-2-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, error type" id="error-2-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 3, repair and next-time cue" id="error-2-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 4, question number" id="error-3-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, my answer and correct answer" id="error-3-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, what failed" id="error-3-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, error type" id="error-3-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 4, repair and next-time cue" id="error-3-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 5, question number" id="error-4-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, my answer and correct answer" id="error-4-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, what failed" id="error-4-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, error type" id="error-4-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 5, repair and next-time cue" id="error-4-4"></td></tr><tr><td contenteditable="true" role="textbox" aria-label="Error log row 6, question number" id="error-5-0"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, my answer and correct answer" id="error-5-1"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, what failed" id="error-5-2"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, error type" id="error-5-3"></td><td contenteditable="true" role="textbox" aria-label="Error log row 6, repair and next-time cue" id="error-5-4"></td></tr></tbody></table><p class="small" style="margin-top:9px;color:#92400e">Useful diagnoses: true but off-goal • unsupported claim • reversed relationship • missing limitation • count versus percentage • wrong transition relationship.</p></div><div class="reflect-box"><h3>Turn one error into a rule</h3><label class="reason-label" for="reflect1">1. Which goal word or scope phrase did I overlook, and how did it change the task?</label><textarea class="work-area" id="reflect1" rows="2"></textarea><div class="print-mirror" data-for="reflect1" aria-hidden="true"></div><label class="reason-label" for="reflect2">2. My next-time cue: “When I see ______, I will ______ before choosing.”</label><textarea class="work-area" id="reflect2" rows="2"></textarea><div class="print-mirror" data-for="reflect2" aria-hidden="true"></div><label class="reason-label" for="reflect3">3. Which question should we revisit together, and what is still unclear?</label><textarea class="work-area" id="reflect3" rows="2"></textarea><div class="print-mirror" data-for="reflect3" aria-hidden="true"></div></div><div class="footer-gap"></div><footer class="footer"><span>Independent practice • Bring your reasoning to the next session</span><span>10 / 10</span></footer></section><script>
+const STORAGE_KEY = 'hue-s5-rhetorical-synthesis-homework-v1';
+function syncChoices(){document.querySelectorAll('.mc-opt').forEach(label=>label.classList.toggle('selected',label.querySelector('input').checked));}
+function syncMirrors(){document.querySelectorAll('.print-mirror').forEach(m=>{m.textContent=document.getElementById(m.dataset.for).value;});}
+function resizeText(el){el.style.height='auto';el.style.height=Math.max(el.scrollHeight,el.rows===1?33:43)+'px';}
+function saveWork(){
+  const state={};
+  document.querySelectorAll('input[id],textarea[id],[contenteditable][id]').forEach(el=>{
+    state[el.id]=el.matches('[contenteditable]')?el.textContent:el.type==='radio'||el.type==='checkbox'?el.checked:el.value;
+  });
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}
+}
+function loadWork(){
+  try{
+    const state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    if(!state || typeof state!=='object')return;
+    Object.entries(state).forEach(([id,value])=>{
+      const el=document.getElementById(id);if(!el)return;
+      if(el.matches('[contenteditable]'))el.textContent=String(value);
+      else if(el.type==='radio'||el.type==='checkbox')el.checked=value===true;
+      else el.value=String(value);
+    });
+  }catch(e){}
+}
+function clearAll(){
+  if(!window.confirm('Clear all answers, notes, scores, name, date, and saved work for this sheet?'))return;
+  document.querySelectorAll('input,textarea').forEach(el=>{if(el.type==='radio'||el.type==='checkbox')el.checked=false;else el.value='';});
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.textContent='');
+  try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  syncChoices();syncMirrors();document.querySelectorAll('textarea').forEach(resizeText);
+}
+async function printSheet(){
+  syncMirrors();
+  if(document.fonts)await Promise.race([document.fonts.ready,new Promise(resolve=>setTimeout(resolve,1800))]);
+  window.print();
+}
+document.addEventListener('input',e=>{if(e.target.matches('textarea'))resizeText(e.target);syncMirrors();saveWork();});
+document.addEventListener('change',()=>{syncChoices();saveWork();});
+window.addEventListener('beforeprint',syncMirrors);
+document.addEventListener('DOMContentLoaded',()=>{loadWork();syncChoices();syncMirrors();document.querySelectorAll('textarea').forEach(resizeText);});
+</script></body></html>
