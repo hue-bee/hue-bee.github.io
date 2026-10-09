@@ -13,3 +13,4 @@
 | **02** | [Math — Fractions & decimals, ELA — Modifiers](https://hue-bee.github.io/oren/lesson/02/) | [02 Homework](https://hue-bee.github.io/oren/lesson/02/homework) ||
 | **03** | [Math — Factors, multiples, exponents](https://hue-bee.github.io/oren/lesson/03/) | [03 Homework](https://hue-bee.github.io/oren/lesson/03/homework) ||
 | **04** | [Digital SHSAT Diagnostic](https://hue-bee.github.io/oren/lesson/04/) | [04 Homework](https://hue-bee.github.io/oren/lesson/04/homework) ||
+| **05** | [Percentages + Precise Evidence](https://hue-bee.github.io/oren/lesson/05/) | [05 Homework](https://hue-bee.github.io/oren/lesson/05/homework) ||
