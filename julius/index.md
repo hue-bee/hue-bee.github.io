@@ -31,3 +31,5 @@
 | **03B** | [Arithmetic Speed & Accuracy Audit](https://hue-bee.github.io/julius/lesson03B) | [3B Homework](https://hue-bee.github.io/julius/lesson03B/homework) | |
 | **04A** | [Ratios Under Complexity](https://hue-bee.github.io/julius/lesson04A) | [4A Homework](https://hue-bee.github.io/julius/lesson04A/homework) | |
 | **04B** | [Arithmetic Speed & Accuracy Mental Math Toolkit](https://hue-bee.github.io/julius/lesson04B) | [4B Homework](https://hue-bee.github.io/julius/lesson04B/homework) | |
+| **05A** | [Level 5 SHSAT Math](https://hue-bee.github.io/julius/lesson05A) | [5A Homework](https://hue-bee.github.io/julius/lesson05A/homework) | |
+
