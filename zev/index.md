@@ -9,4 +9,4 @@
 
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
-| **01** | [Expression and Equations](https://hue-bee.github.io/zev/lessons/01) | [1 Homework](https://hue-bee.github.io/zev/lessons/01/homework) ||
+| **01** | [Expression & Equations](https://hue-bee.github.io/zev/lessons/01) | [1 Homework](https://hue-bee.github.io/zev/lessons/01/homework) ||
