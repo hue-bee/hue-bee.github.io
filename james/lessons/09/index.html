@@ -1,1 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Week 7 — Probability II and Counting — Session 7A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;--surface:#ffffff;--ink:#1f1f1f;--ink-2:#4a4a4a;--ink-3:#767676;--line:rgba(201,212,228,.48);
+  --z1:#262626;--z1-soft:rgba(38,38,38,.10);--z2:#4d4d4d;--z2-soft:rgba(77,77,77,.10);
+  --z3:#6a6a6a;--z3-soft:rgba(106,106,106,.12);--z4:#858585;--z4-soft:rgba(133,133,133,.12);
+  --z5:#5c5c5c;--z5-soft:rgba(92,92,92,.10);--blue:#2563EB;--blue-soft:#DCEBFB;
+  --font-display:'Baloo 2','Nunito',sans-serif;--font-body:'Nunito',sans-serif;--font-math:'Nunito',sans-serif;
+  --color-glass-bg:rgba(255,255,255,.94);--color-glass-border:rgba(201,212,228,.48);
+}
+*,*::before,*::after{box-sizing:border-box}html,body{background:var(--bg);margin:0}body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400}.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:all}.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem)}
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.32),0 2px 8px rgba(201,212,228,.18)}.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}.nav-btn:hover{background:#DCE7F7}.slide-dots{display:flex;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.18);cursor:pointer;transition:.3s}.dot.active{background:var(--ink);transform:scale(1.35)}.slide-counter{font-size:.75rem;color:var(--ink-3);min-width:36px;text-align:center;font-weight:600}.reveal{opacity:0;transform:translateY(16px)}
+.gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}.blob{position:absolute;border-radius:50%;filter:blur(80px);animation:drift 14s ease-in-out infinite}.blob:nth-child(2){animation-delay:-7s}@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-22px) scale(1.08)}}.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}.deco-shape{position:absolute;z-index:1;pointer-events:none;opacity:.28;transition:transform .2s ease}
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.8rem}.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:.67rem;font-weight:500;padding:4px 11px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--ink-3);white-space:nowrap}.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4)}.zone-chip.on{color:#fff;font-weight:600;background:var(--dc);border-color:var(--dc)}.zone-chip.on .zdot{background:rgba(255,255,255,.85)}.zone-chip .zt{opacity:.75}.zone-chip.on .zt{opacity:.9}
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;margin:0}h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-.01em;margin:0 0 .85rem;color:var(--ink)}h2.slide-title .tint{color:var(--zc)}.kicker{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--zc,var(--ink-3));margin-bottom:.3rem}.prose{font-size:.93rem;color:var(--ink-2);line-height:1.55}.math{font-family:var(--font-math);font-weight:700;font-size:1.45rem;color:var(--ink);font-variant-numeric:lining-nums}.math-inline{font-family:var(--font-math);font-weight:700;font-size:1.05em}.small{font-size:.78rem;color:var(--ink-3);line-height:1.45}
+.prob-card,.info-card,.diagram-wrap,.step-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 24px rgba(201,212,228,.20),0 2px 6px rgba(201,212,228,.14)}.prob-card,.info-card,.step-card{padding:.78rem .95rem}.prob-card{transition:transform .2s,box-shadow .2s}.prob-card:hover,.info-card:hover,.step-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(157,177,207,.28)}.prob-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}.prob-num{font-family:var(--font-display);font-weight:600;font-size:.85rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 10px}.lvl-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:20px}.lvl-1{background:#E8EDF5;color:#3D4C63}.lvl-2{background:#DCEBFB;color:#1D4ED8}.lvl-3{background:#FBEBCF;color:#B45309}.lvl-4{background:#E2E2E2;color:#3D3D3D}.prompt-card{border:1px solid var(--line);background:#EFEFEF;border-radius:12px;padding:.66rem .9rem}.prompt-title{font-weight:700;font-size:.83rem;color:#2E2E2E}.prompt-body{font-size:.86rem;color:var(--ink-2);margin-top:.22rem;line-height:1.5}.trap-card{border:1px solid var(--line);background:#F6F6F6;border-radius:12px;padding:.65rem .9rem}.trap-title{font-weight:700;font-size:.84rem;color:#3D3D3D}.trap-body{font-size:.83rem;color:var(--ink-2);margin-top:.2rem;line-height:1.48}.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb,var(--zc,var(--ink-3)) 35%,white);border-radius:12px;padding:.5rem .85rem;text-align:center}.diagram-wrap{padding:.65rem;display:flex;align-items:center;justify-content:center}.diagram-wrap svg text{font-family:var(--font-math)}
+.work-box{border:1px dashed rgba(185,198,217,.75);border-radius:10px;background:#F9FBFE;overflow:hidden;margin-top:.48rem}.work-box textarea{width:100%;min-height:2.65rem;border:none;background:transparent;resize:none;padding:.48rem .7rem;font-size:.85rem;color:var(--ink-2);font-family:var(--font-math);outline:none}.work-box textarea::placeholder{color:#9AA9BF}.mc-options{display:flex;flex-direction:column;gap:.25rem;margin-top:.42rem}.mc-option{display:flex;align-items:flex-start;gap:.5rem;padding:.33rem .55rem;border-radius:9px;border:1px solid var(--line);background:#FBFCFE;cursor:pointer;font-size:.81rem;line-height:1.35;color:var(--ink-2)}.mc-option:hover,.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:600;color:var(--ink)}.mc-option input{display:none}.opt-letter{font-weight:700;min-width:1.1rem;color:var(--zc,var(--ink-3))}
+.tl-row{display:grid;grid-template-columns:90px 14px 1fr;gap:0 .75rem;align-items:stretch}.tl-time{font-family:var(--font-math);font-weight:700;font-size:.82rem;color:var(--rc);text-align:right;padding-top:.62rem}.tl-rail{position:relative;display:flex;justify-content:center}.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line)}.tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:.62rem}.tl-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.5rem .85rem;margin-bottom:.48rem;box-shadow:0 8px 20px rgba(201,212,228,.18)}.tl-h{font-weight:600;font-size:.9rem}.tl-b{font-size:.79rem;color:var(--ink-2);margin-top:.12rem;line-height:1.42}.tag{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:20px;margin-left:6px}.tag.hot{background:#E2E2E2;color:#3D3D3D}.tag.cool{background:#E8F7EC;color:#15803D}.step-num{width:28px;height:28px;border-radius:50%;background:var(--zc);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:800;margin-right:8px}.slot{width:52px;height:52px;border:2px solid #B9C6D9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;background:#fff}.slot-arrow{font-weight:800;color:var(--ink-3)}
+@keyframes floatHero{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.hero-graphic{animation:floatHero 3.5s ease-in-out infinite;margin:0 auto .7rem}.hero-path{stroke-dasharray:8 8;animation:dash 6s linear infinite}@keyframes dash{to{stroke-dashoffset:-64}}
+@media(max-width:780px){.slide>.content{padding:1rem}.nav-controls{bottom:10px}.hide-mobile{display:none!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
+</style>
+</head>
+<body>
+<div class="deck">
 
+<!-- 1 -->
+<section class="slide active" data-slide="1" style="--zc:#2563EB;">
+  <div class="gradient-mesh"><div class="blob" style="width:420px;height:420px;right:-120px;top:-120px;background:#BFDBFE;opacity:.30"></div><div class="blob" style="width:320px;height:320px;left:-100px;bottom:-120px;background:#DDEAFE;opacity:.45"></div></div>
+  <canvas class="particle-canvas"></canvas>
+  <div class="content" style="text-align:center">
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:6px 16px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:.7rem"><span style="width:8px;height:8px;border-radius:50%;background:#262626"></span>Session 7A · Week 7</div>
+    <div class="hero-graphic reveal" aria-label="Animated probability tree diagram">
+      <svg width="250" height="132" viewBox="0 0 250 132" role="img">
+        <defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#2563EB"/><stop offset="1" stop-color="#B45309"/></linearGradient></defs>
+        <path class="hero-path" d="M30 66 C80 66 80 25 130 25 M30 66 C80 66 80 107 130 107 M130 25 C170 25 170 8 220 8 M130 25 C170 25 170 42 220 42 M130 107 C170 107 170 90 220 90 M130 107 C170 107 170 124 220 124" fill="none" stroke="url(#g1)" stroke-width="3"/>
+        <circle cx="30" cy="66" r="11" fill="#262626"/><circle cx="130" cy="25" r="10" fill="#2563EB"/><circle cx="130" cy="107" r="10" fill="#6A6A6A"/><circle cx="220" cy="8" r="7" fill="#B45309"/><circle cx="220" cy="42" r="7" fill="#B45309"/><circle cx="220" cy="90" r="7" fill="#B45309"/><circle cx="220" cy="124" r="7" fill="#B45309"/>
+      </svg>
+    </div>
+    <h1 class="deck-title reveal" style="font-size:clamp(2rem,5.2vw,3.55rem)">Probability II <span style="color:#2563EB">and Counting</span></h1>
+    <p class="reveal" style="font-family:var(--font-display);font-size:clamp(1rem,2vw,1.35rem);font-weight:500;color:var(--ink-2);margin:.25rem 0">Update the world. Branch the cases. Multiply the choices.</p>
+    <p class="reveal small" style="letter-spacing:.12em;text-transform:uppercase">New digital SHSAT · Math only · 60 minutes</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-slide="2" style="--zc:#262626">
+  <div class="gradient-mesh"><div class="blob" style="width:330px;height:330px;right:-100px;top:-100px;background:#CBD5E1;opacity:.2"></div><div class="blob" style="width:260px;height:260px;left:-90px;bottom:-90px;background:#DBEAFE;opacity:.25"></div></div>
+  <div class="content">
+    <div class="kicker reveal">Session roadmap</div><h2 class="slide-title reveal">Today’s <span class="tint">60-Minute Watch List</span></h2>
+    <div class="tl-row reveal" style="--rc:#262626"><div class="tl-time">0:00–0:08</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Ratio-to-count sprint</div><div class="tl-b">Turn parts into objects before probability enters.</div></div></div>
+    <div class="tl-row reveal" style="--rc:#4D4D4D"><div class="tl-time">0:08–0:22</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Conditional probability after removal</div><div class="tl-b">Cross out what leaves; recount what remains.</div></div></div>
+    <div class="tl-row reveal" style="--rc:#6A6A6A"><div class="tl-time">0:22–0:40</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Two-stage transfers</div><div class="tl-b">Branch by what moved; weight each branch.</div></div></div>
+    <div class="tl-row reveal" style="--rc:#858585"><div class="tl-time">0:40–0:52</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Counting principle</div><div class="tl-b">Use slots when one choice follows another.</div></div></div>
+    <div class="tl-row reveal" style="--rc:#2563EB"><div class="tl-time">0:52–1:00</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Digital mixed set and exit</div><div class="tl-b">Commit once; run the final-line check.</div></div></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-slide="3" style="--zc:#2563EB;--zs:#DCEBFB">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;right:-120px;top:-90px;background:#BFDBFE;opacity:.22"></div><div class="blob" style="width:240px;height:240px;left:-60px;bottom:-100px;background:#E2E8F0;opacity:.28"></div></div>
+  <div class="deco-shape" data-speed=".03" style="right:7%;top:13%;width:70px;height:70px;border:2px solid #2563EB;border-radius:16px;transform:rotate(12deg)"></div>
+  <div class="content">
+    <div class="kicker reveal">Digital-first habit</div><h2 class="slide-title reveal">One Screen. One Commitment. <span class="tint">One Final Check.</span></h2>
+    <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:1rem;align-items:center">
+      <div>
+        <div class="prompt-card reveal"><div class="prompt-title">Before touching the choices</div><div class="prompt-body">What changed in the situation? Which counts are still physically present? What noun must the last line name?</div></div>
+        <div class="info-card reveal" style="margin-top:.7rem"><b>Forward-only discipline</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">Math items lock after you advance. Spend ten seconds checking the updated total, the target color or object, and whether the prompt asks for a probability or a number of outcomes.</div></div>
+        <div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Trap: Old World / New Question</div><div class="trap-body">Using the original total after an object moved or was removed means the calculation describes a world that no longer exists.</div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="330" height="220" viewBox="0 0 330 220" role="img" aria-label="Three-step final check diagram">
+          <rect x="15" y="25" width="90" height="58" rx="12" fill="#EDF2F9" stroke="#B9C6D9"/><rect x="120" y="25" width="90" height="58" rx="12" fill="#DCEBFB" stroke="#93C5FD"/><rect x="225" y="25" width="90" height="58" rx="12" fill="#E8F7EC" stroke="#86C99A"/>
+          <text x="60" y="49" text-anchor="middle" font-size="13" font-weight="700" fill="#1F1F1F">UPDATE</text><text x="60" y="68" text-anchor="middle" font-size="11" fill="#4A4A4A">what changed?</text>
+          <text x="165" y="49" text-anchor="middle" font-size="13" font-weight="700" fill="#1D4ED8">RECOUNT</text><text x="165" y="68" text-anchor="middle" font-size="11" fill="#4A4A4A">what remains?</text>
+          <text x="270" y="49" text-anchor="middle" font-size="13" font-weight="700" fill="#15803D">TARGET</text><text x="270" y="68" text-anchor="middle" font-size="11" fill="#4A4A4A">what is asked?</text>
+          <path d="M105 54 H119 M210 54 H224" stroke="#767676" stroke-width="2" marker-end="url(#a)"/><defs><marker id="a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#767676"/></marker></defs>
+          <line x1="40" y1="125" x2="290" y2="125" stroke="#B9C6D9" stroke-width="3"/><circle cx="95" cy="125" r="17" fill="#fff" stroke="#2563EB" stroke-width="3"/><circle cx="235" cy="125" r="17" fill="#2563EB"/><text x="95" y="131" text-anchor="middle" font-size="17" font-weight="800" fill="#2563EB">?</text><text x="235" y="131" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">✓</text>
+          <text x="165" y="177" text-anchor="middle" font-size="14" font-weight="700" fill="#1F1F1F">Pause before “Next”</text>
+        </svg>
+      </div>
+    </div>
+    <div class="small reveal" style="margin-top:.45rem">Format note: Fall 2026 has 50 Math items, computer-adaptive delivery, and no return to a Math item after advancing. Source: NYC Public Schools.</div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-slide="4" style="--zc:#262626;--zs:var(--z1-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:300px;height:300px;right:-100px;bottom:-120px;background:#CBD5E1;opacity:.2"></div><div class="blob" style="width:220px;height:220px;left:-80px;top:-70px;background:#DBEAFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="1"></div><div class="kicker reveal">Zone 1 · 8-minute sprint</div><h2 class="slide-title reveal">Ratios Become <span class="tint">Counts</span></h2>
+    <div class="prompt-card reveal" style="margin-bottom:.7rem"><div class="prompt-title">Rule of objects</div><div class="prompt-body">A ratio gives parts, not actual objects. First find the size of one part. Then rebuild every count.</div></div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.72rem">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prose">A box has 24 clips in a blue:red ratio of <span class="math-inline">1:3</span>. How many clips are blue?</div><div class="work-box"><textarea placeholder="One part = …"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">Thirty beads are split green:yellow:purple in a <span class="math-inline">2:5:3</span> ratio. Find each count.</div><div class="work-box"><textarea placeholder="Total parts → one part → counts"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">The ratio of red to non-red tiles is <span class="math-inline">3:7</span>. There are 42 non-red tiles. How many tiles are there altogether?</div><div class="work-box"><textarea placeholder="Match 7 parts to 42 first"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">A jar’s black:white:gray ratio is <span class="math-inline">4:3:5</span>. After 6 gray counters are removed, 54 remain. Reconstruct the original counts.</div><div class="work-box"><textarea placeholder="Undo the removal before scaling"></textarea></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-slide="5" style="--zc:#4D4D4D;--zs:var(--z2-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:330px;height:330px;right:-100px;top:-90px;background:#D1D5DB;opacity:.18"></div><div class="blob" style="width:240px;height:240px;left:-80px;bottom:-80px;background:#DBEAFE;opacity:.25"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Zone 2 · Conditional probability</div><h2 class="slide-title reveal">Removal Changes <span class="tint">Both Parts of the Fraction</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:1rem;align-items:center">
+      <div>
+        <div class="prompt-card reveal"><div class="prompt-title">Think first</div><div class="prompt-body">If one blue, one red, and one yellow clip leave the box, why can neither the favorable count nor the total stay the same?</div></div>
+        <div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.12rem">P(target next) = target remaining / total remaining</div></div>
+        <div class="info-card reveal" style="margin-top:.7rem"><b>The movie-frame method</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">Freeze the story after every action. Cross out what left. The next probability must be computed from the newest frame, never the opening frame.</div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="430" height="245" viewBox="0 0 430 245" role="img" aria-label="Before and after removal diagram">
+          <text x="105" y="24" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">BEFORE</text><text x="325" y="24" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">AFTER</text>
+          <rect x="20" y="40" width="170" height="150" rx="20" fill="#F9FBFE" stroke="#B9C6D9" stroke-width="2"/><rect x="240" y="40" width="170" height="150" rx="20" fill="#F9FBFE" stroke="#B9C6D9" stroke-width="2"/>
+          <g fill="#2563EB"><circle cx="55" cy="78" r="12"/><circle cx="90" cy="78" r="12"/><circle cx="125" cy="78" r="12"/><circle cx="160" cy="78" r="12"/></g><g fill="#B45309"><circle cx="55" cy="118" r="12"/><circle cx="90" cy="118" r="12"/><circle cx="125" cy="118" r="12"/></g><g fill="#6A6A6A"><circle cx="55" cy="158" r="12"/><circle cx="90" cy="158" r="12"/><circle cx="125" cy="158" r="12"/><circle cx="160" cy="158" r="12"/></g>
+          <g fill="#2563EB"><circle cx="275" cy="78" r="12"/><circle cx="310" cy="78" r="12"/><circle cx="345" cy="78" r="12"/></g><g fill="#B45309"><circle cx="275" cy="118" r="12"/><circle cx="310" cy="118" r="12"/></g><g fill="#6A6A6A"><circle cx="275" cy="158" r="12"/><circle cx="310" cy="158" r="12"/><circle cx="345" cy="158" r="12"/></g>
+          <path d="M195 115 H228" stroke="#4D4D4D" stroke-width="3" marker-end="url(#arr)"/><defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#4D4D4D"/></marker></defs>
+          <text x="215" y="98" text-anchor="middle" font-size="11" fill="#4A4A4A">remove</text>
+          <g><circle cx="177" cy="215" r="8" fill="#2563EB"/><circle cx="207" cy="215" r="8" fill="#B45309"/><circle cx="237" cy="215" r="8" fill="#6A6A6A"/><line x1="165" y1="203" x2="249" y2="227" stroke="#9B1C1C" stroke-width="3"/><line x1="249" y1="203" x2="165" y2="227" stroke="#9B1C1C" stroke-width="3"/></g>
+        </svg>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Trap: Shrinking Only the Denominator</div><div class="trap-body">If a favorable object leaves, the numerator shrinks too. Ask: “Did the target color lose an object?” before writing the fraction.</div></div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-slide="6" style="--zc:#4D4D4D;--zs:var(--z2-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:290px;height:290px;right:-70px;bottom:-110px;background:#D1D5DB;opacity:.18"></div><div class="blob" style="width:220px;height:220px;left:-90px;top:-70px;background:#DBEAFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Zone 2 · Practice</div><h2 class="slide-title reveal">After Removal — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prose">A bag has 5 red and 7 blue chips. One red chip is removed. What is the probability that the next chip is blue?</div><div class="work-box"><textarea placeholder="New red | new blue | new total"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">A box has 8 green, 6 yellow, and 4 black markers. One of each color is removed. Find the probability the next marker is not yellow.</div><div class="work-box"><textarea placeholder="Use complement or count non-yellow directly"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">Forty counters are in a red:blue:white ratio of <span class="math-inline">2:3:5</span>. Two blue and three white counters are removed. Find the probability of red next.</div><div class="work-box"><textarea placeholder="Ratio → counts → removals → probability"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">A jar contains twice as many gold beads as silver beads and 5 more black beads than silver beads. After one of each color is removed, 29 remain. Find the probability of black next.</div><div class="work-box"><textarea placeholder="Let silver = s; build the original total"></textarea></div></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.65rem"><div class="trap-title">Precision check</div><div class="trap-body">“Not yellow” means every remaining color except yellow. Decide whether direct counting or the complement is shorter before calculating.</div></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-slide="7" style="--zc:#4D4D4D;--zs:var(--z2-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:320px;height:320px;right:-100px;top:-100px;background:#DBEAFE;opacity:.25"></div><div class="blob" style="width:230px;height:230px;left:-70px;bottom:-90px;background:#D1D5DB;opacity:.2"></div></div>
+  <div class="content">
+    <div class="kicker reveal">Guided walkthrough 1 · finish the last line</div><h2 class="slide-title reveal">A Hard Removal Problem in <span class="tint">Three Frames</span></h2>
+    <div class="info-card reveal" style="margin-bottom:.7rem"><b>Problem</b><div class="prose" style="font-size:.86rem">A bag holds 36 tokens in a red:blue:green ratio of <span class="math-inline">2:3:4</span>. Two red, one blue, and three green tokens are removed. Determine the probability that the next token is blue.</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem">
+      <div class="step-card reveal"><div><span class="step-num">1</span><b>Build the opening frame</b></div><div class="prose" style="font-size:.82rem;margin-top:.45rem">Total ratio parts: <span class="math-inline">2+3+4</span>. One part: <span class="math-inline">36 ÷ (2+3+4)</span>. Multiply by 2, 3, and 4.</div></div>
+      <div class="step-card reveal"><div><span class="step-num">2</span><b>Apply every change</b></div><div class="prose" style="font-size:.82rem;margin-top:.45rem">New red: <span class="math-inline">R−2</span><br>New blue: <span class="math-inline">B−1</span><br>New green: <span class="math-inline">G−3</span></div></div>
+      <div class="step-card reveal"><div><span class="step-num">3</span><b>Write the new-world fraction</b></div><div class="prose" style="font-size:.82rem;margin-top:.45rem"><span class="math-inline">P(blue)= blue remaining / total remaining</span><br>Evaluate and simplify independently.</div><div class="work-box"><textarea placeholder="Complete the fraction; do not use an old count"></textarea></div></div>
+    </div>
+    <div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Explain before computing</div><div class="prompt-body">Why is subtracting 6 only from the denominator incomplete reasoning?</div></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-slide="8" style="--zc:#6A6A6A;--zs:var(--z3-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:420px;height:420px;right:-140px;top:-130px;background:#CBD5E1;opacity:.23"></div><div class="blob" style="width:280px;height:280px;left:-100px;bottom:-110px;background:#BFDBFE;opacity:.28"></div></div><canvas class="particle-canvas-ambient"></canvas>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Zone 3 · Two-stage transfers</div><h2 class="slide-title reveal">A Transfer Creates <span class="tint">Different Possible Worlds</span></h2>
+    <div style="display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem;align-items:center">
+      <div>
+        <div class="prompt-card reveal"><div class="prompt-title">Think first</div><div class="prompt-body">If the transferred ball’s color is unknown, can Box A have one fixed composition afterward? What must we branch on?</div></div>
+        <div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.05rem">P(final event) = sum of (branch probability × within-branch probability)</div></div>
+        <div class="info-card reveal" style="margin-top:.7rem"><b>Name the branch</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">“Red moved” and “blue moved” are not decorations. Each label tells you exactly how to redraw the destination box before the second draw.</div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="460" height="250" viewBox="0 0 460 250" role="img" aria-label="Ball transfer between two boxes">
+          <text x="95" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">BOX B</text><text x="365" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">BOX A</text>
+          <rect x="20" y="40" width="150" height="165" rx="20" fill="#F9FBFE" stroke="#B9C6D9" stroke-width="2"/><rect x="290" y="40" width="150" height="165" rx="20" fill="#F9FBFE" stroke="#B9C6D9" stroke-width="2"/>
+          <g fill="#B45309"><circle cx="55" cy="80" r="12"/><circle cx="90" cy="80" r="12"/><circle cx="125" cy="80" r="12"/></g><g fill="#2563EB"><circle cx="55" cy="120" r="12"/><circle cx="90" cy="120" r="12"/><circle cx="125" cy="120" r="12"/><circle cx="90" cy="160" r="12"/></g>
+          <g fill="#B45309"><circle cx="325" cy="80" r="12"/><circle cx="360" cy="80" r="12"/></g><g fill="#2563EB"><circle cx="395" cy="80" r="12"/><circle cx="325" cy="120" r="12"/><circle cx="360" cy="120" r="12"/></g>
+          <path d="M175 106 C220 65 245 65 285 106" fill="none" stroke="#6A6A6A" stroke-width="4" marker-end="url(#arr2)"/><defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#6A6A6A"/></marker></defs>
+          <circle cx="225" cy="74" r="13" fill="#fff" stroke="#6A6A6A" stroke-width="2"/><text x="225" y="80" text-anchor="middle" font-size="18" font-weight="800" fill="#6A6A6A">?</text>
+          <text x="230" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#4A4A4A">COLOR UNKNOWN</text><text x="230" y="169" text-anchor="middle" font-size="11" fill="#767676">so Box A must branch</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-slide="9" style="--zc:#6A6A6A;--zs:var(--z3-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:330px;height:330px;right:-100px;bottom:-120px;background:#CBD5E1;opacity:.22"></div><div class="blob" style="width:220px;height:220px;left:-80px;top:-70px;background:#DBEAFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Zone 3 · Case-tree anatomy</div><h2 class="slide-title reveal">Branch, Update, Weight, <span class="tint">Combine</span></h2>
+    <div class="diagram-wrap reveal">
+      <svg width="900" height="310" viewBox="0 0 900 310" role="img" aria-label="Two-stage probability case tree">
+        <defs><marker id="ta" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#76869E"/></marker></defs>
+        <rect x="18" y="120" width="120" height="70" rx="14" fill="#262626"/><text x="78" y="150" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">START</text><text x="78" y="171" text-anchor="middle" font-size="11" fill="#fff">draw from B</text>
+        <path d="M138 145 C225 145 230 65 315 65" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#ta)"/><path d="M138 165 C225 165 230 245 315 245" fill="none" stroke="#B45309" stroke-width="3" marker-end="url(#ta)"/>
+        <rect x="320" y="30" width="190" height="76" rx="14" fill="#DCEBFB" stroke="#93C5FD"/><text x="415" y="59" text-anchor="middle" font-size="14" font-weight="800" fill="#1D4ED8">BLUE MOVED</text><text x="415" y="82" text-anchor="middle" font-size="12" fill="#4A4A4A">redraw A with +1 blue</text>
+        <rect x="320" y="205" width="190" height="76" rx="14" fill="#FBEBCF" stroke="#E9BC76"/><text x="415" y="234" text-anchor="middle" font-size="14" font-weight="800" fill="#B45309">RED MOVED</text><text x="415" y="257" text-anchor="middle" font-size="12" fill="#4A4A4A">redraw A with +1 red</text>
+        <path d="M510 67 H630" stroke="#2563EB" stroke-width="3" marker-end="url(#ta)"/><path d="M510 243 H630" stroke="#B45309" stroke-width="3" marker-end="url(#ta)"/>
+        <rect x="635" y="30" width="245" height="76" rx="14" fill="#fff" stroke="#B9C6D9"/><text x="757" y="57" text-anchor="middle" font-size="13" font-weight="800" fill="#1F1F1F">WEIGHT THIS PATH</text><text x="757" y="82" text-anchor="middle" font-size="12" fill="#4A4A4A">P(blue moved) × P(target | blue)</text>
+        <rect x="635" y="205" width="245" height="76" rx="14" fill="#fff" stroke="#B9C6D9"/><text x="757" y="232" text-anchor="middle" font-size="13" font-weight="800" fill="#1F1F1F">WEIGHT THIS PATH</text><text x="757" y="257" text-anchor="middle" font-size="12" fill="#4A4A4A">P(red moved) × P(target | red)</text>
+        <text x="594" y="159" text-anchor="middle" font-size="14" font-weight="800" fill="#6A6A6A">THEN ADD THE PATHS</text><line x1="525" y1="168" x2="663" y2="168" stroke="#6A6A6A" stroke-width="2"/>
+      </svg>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.7rem">
+      <div class="info-card reveal"><b>1. Branch</b><div class="prose" style="font-size:.81rem">What could have moved?</div></div><div class="info-card reveal"><b>2. Update</b><div class="prose" style="font-size:.81rem">What does A contain now?</div></div><div class="info-card reveal"><b>3. Weight</b><div class="prose" style="font-size:.81rem">How likely is the path and its target?</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-slide="10" style="--zc:#6A6A6A;--zs:var(--z3-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:300px;height:300px;right:-80px;top:-100px;background:#D1D5DB;opacity:.2"></div><div class="blob" style="width:240px;height:240px;left:-90px;bottom:-90px;background:#DBEAFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Zone 3 · Practice</div><h2 class="slide-title reveal">Transfers — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prose">Box B has 2 red and 3 blue balls. One ball moves to Box A. List the possible colors that could move and each branch probability.</div><div class="work-box"><textarea placeholder="Branch labels and weights"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">Box A begins with 4 red and 5 blue balls. Complete A’s new composition after a red transfer and after a blue transfer.</div><div class="work-box"><textarea placeholder="Red branch | Blue branch"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">Box B has 1 red and 3 blue balls. Box A has 2 red and 4 blue balls. Transfer one from B to A, then draw from A. Find the probability of red.</div><div class="work-box"><textarea placeholder="Two weighted paths"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">Box B has 2 green, 3 gold, and 5 black balls. Box A has 4 green, 2 gold, and 4 black balls. Transfer one, then draw from A. Find the probability of not black.</div><div class="work-box"><textarea placeholder="Three branches; direct count or complement?"></textarea></div></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.65rem"><div class="trap-title">Trap: Unweighted Averaging</div><div class="trap-body">Do not average the within-branch probabilities unless the branches are equally likely. The source box decides each branch’s weight.</div></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-slide="11" style="--zc:#6A6A6A;--zs:var(--z3-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:320px;height:320px;right:-90px;bottom:-120px;background:#CBD5E1;opacity:.2"></div><div class="blob" style="width:250px;height:250px;left:-90px;top:-80px;background:#BFDBFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="kicker reveal">Guided walkthrough 2 · finish the arithmetic</div><h2 class="slide-title reveal">A Transfer Problem in <span class="tint">Three Weighted Steps</span></h2>
+    <div class="info-card reveal" style="margin-bottom:.7rem"><b>Problem</b><div class="prose" style="font-size:.85rem">Box B has 2 red and 4 blue balls. Box A has 3 red and 5 blue balls. A random ball moves from B to A; then a random ball is drawn from A. Determine the probability that the drawn ball is red.</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.78rem">
+      <div class="step-card reveal"><div><span class="step-num">1</span><b>Weight the transfer</b></div><div class="prose" style="font-size:.81rem;margin-top:.45rem">Red branch: <span class="math-inline">2/(2+4)</span><br>Blue branch: <span class="math-inline">4/(2+4)</span></div></div>
+      <div class="step-card reveal"><div><span class="step-num">2</span><b>Redraw Box A</b></div><div class="prose" style="font-size:.81rem;margin-top:.45rem">If red moved: <span class="math-inline">4R, 5B</span><br>If blue moved: <span class="math-inline">3R, 6B</span></div></div>
+      <div class="step-card reveal"><div><span class="step-num">3</span><b>Multiply, then combine</b></div><div class="prose" style="font-size:.79rem;margin-top:.4rem"><span class="math-inline">[2/6 × 4/9] + [4/6 × 3/9]</span></div><div class="work-box"><textarea placeholder="Evaluate and simplify the combined expression"></textarea></div></div>
+    </div>
+    <div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Reasonableness test</div><div class="prompt-body">Before calculating, should the final probability be closer to Box A’s original red fraction or to 1? What feature of the setup supports your prediction?</div></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-slide="12" style="--zc:#858585;--zs:var(--z4-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:350px;height:350px;right:-120px;top:-100px;background:#CBD5E1;opacity:.2"></div><div class="blob" style="width:240px;height:240px;left:-80px;bottom:-90px;background:#DBEAFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Counting principle</div><h2 class="slide-title reveal">One Choice per Slot? <span class="tint">Multiply.</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center">
+      <div>
+        <div class="prompt-card reveal"><div class="prompt-title">Think first</div><div class="prompt-body">A toy has 3 paintable parts and each part may use any of 3 colors. Why does adding <span class="math-inline">3+3+3</span> miss combinations?</div></div>
+        <div class="formula-box reveal" style="margin-top:.7rem"><div class="math" style="font-size:1.15rem">total outcomes = choices for slot 1 × slot 2 × slot 3</div></div>
+        <div class="info-card reveal" style="margin-top:.7rem"><b>The sentence-to-slots test</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">Whenever you hear “and then,” draw another slot. Each slot records one independent stage of the outcome.</div></div>
+      </div>
+      <div class="diagram-wrap reveal" style="flex-direction:column;gap:.75rem">
+        <div style="display:flex;align-items:center;gap:12px"><div class="slot" style="border-color:#2563EB">3</div><div class="slot-arrow">×</div><div class="slot" style="border-color:#B45309">3</div><div class="slot-arrow">×</div><div class="slot" style="border-color:#6A6A6A">3</div></div>
+        <svg width="380" height="120" viewBox="0 0 380 120" role="img" aria-label="Three parts each with three color choices">
+          <rect x="28" y="35" width="76" height="50" rx="10" fill="#DCEBFB" stroke="#2563EB"/><rect x="152" y="35" width="76" height="50" rx="10" fill="#FBEBCF" stroke="#B45309"/><rect x="276" y="35" width="76" height="50" rx="10" fill="#E8EDF5" stroke="#6A6A6A"/>
+          <text x="66" y="55" text-anchor="middle" font-size="11" fill="#4A4A4A">BODY</text><text x="66" y="74" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">3 colors</text><text x="190" y="55" text-anchor="middle" font-size="11" fill="#4A4A4A">WHEELS</text><text x="190" y="74" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">3 colors</text><text x="314" y="55" text-anchor="middle" font-size="11" fill="#4A4A4A">STRIPE</text><text x="314" y="74" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">3 colors</text>
+          <path d="M104 60 H145 M228 60 H269" stroke="#767676" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.7rem"><div class="trap-title">Trap: Adding Independent Stages</div><div class="trap-body">Add alternatives within one slot; multiply stages across slots. “Red or blue” suggests addition. “Shirt and pants” suggests multiplication.</div></div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-slide="13" style="--zc:#858585;--zs:var(--z4-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:300px;height:300px;right:-90px;bottom:-100px;background:#D1D5DB;opacity:.2"></div><div class="blob" style="width:230px;height:230px;left:-80px;top:-80px;background:#DBEAFE;opacity:.24"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Restrictions</div><h2 class="slide-title reveal">Restrictions <span class="tint">Change a Slot</span></h2>
+    <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:center">
+      <div>
+        <div class="info-card reveal"><b>Unrestricted</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">Each slot keeps its full number of choices. Multiply the slot counts.</div></div>
+        <div class="info-card reveal" style="margin-top:.65rem"><b>No repetition</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">After a choice is used, later slots have fewer choices. The slots descend.</div></div>
+        <div class="info-card reveal" style="margin-top:.65rem"><b>Must include / cannot include</b><div class="prose" style="font-size:.84rem;margin-top:.2rem">Place the restriction first, or count all outcomes and subtract the forbidden group.</div></div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <svg width="400" height="255" viewBox="0 0 400 255" role="img" aria-label="Counting slots with no repetition">
+          <text x="200" y="26" text-anchor="middle" font-size="14" font-weight="800" fill="#1F1F1F">3-LETTER CODE FROM A, B, C, D</text>
+          <rect x="35" y="58" width="85" height="75" rx="14" fill="#DCEBFB" stroke="#2563EB"/><rect x="157" y="58" width="85" height="75" rx="14" fill="#FBEBCF" stroke="#B45309"/><rect x="279" y="58" width="85" height="75" rx="14" fill="#E8EDF5" stroke="#6A6A6A"/>
+          <text x="77" y="87" text-anchor="middle" font-size="13" fill="#4A4A4A">slot 1</text><text x="77" y="115" text-anchor="middle" font-size="25" font-weight="800" fill="#1F1F1F">4</text><text x="199" y="87" text-anchor="middle" font-size="13" fill="#4A4A4A">slot 2</text><text x="199" y="115" text-anchor="middle" font-size="25" font-weight="800" fill="#1F1F1F">3</text><text x="321" y="87" text-anchor="middle" font-size="13" fill="#4A4A4A">slot 3</text><text x="321" y="115" text-anchor="middle" font-size="25" font-weight="800" fill="#1F1F1F">2</text>
+          <text x="200" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#4A4A4A">Every used letter disappears from later slots.</text>
+          <line x1="60" y1="205" x2="340" y2="205" stroke="#B9C6D9" stroke-width="2"/><text x="200" y="230" text-anchor="middle" font-size="12" fill="#767676">Restriction first → cleaner counting</text>
+        </svg>
+      </div>
+    </div>
+    <div class="prompt-card reveal" style="margin-top:.7rem"><div class="prompt-title">Decision question</div><div class="prompt-body">Does the rule remove choices from later slots, force a particular slot, or create a forbidden group that is easier to subtract?</div></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-slide="14" style="--zc:#858585;--zs:var(--z4-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:300px;height:300px;right:-100px;top:-90px;background:#CBD5E1;opacity:.2"></div><div class="blob" style="width:220px;height:220px;left:-80px;bottom:-80px;background:#DBEAFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="4"></div><div class="kicker reveal">Zone 4 · Practice</div><h2 class="slide-title reveal">Counting — <span class="tint">Easy to Hard</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prose">A lunch has 3 sandwiches and 4 drinks. How many sandwich-and-drink lunches are possible?</div><div class="work-box"><textarea placeholder="Draw two slots"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">A password contains one letter from {A,B,C,D}, followed by one digit from {1,2,3,4,5}, followed by one symbol from {@,#}. Count the passwords.</div><div class="work-box"><textarea placeholder="Choices per stage"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">How many 3-letter codes can be made from A, B, C, D, E if no letter repeats?</div><div class="work-box"><textarea placeholder="Descending slots"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">How many 4-digit codes use digits 0–5, allow repetition, and contain at least one 0?</div><div class="work-box"><textarea placeholder="Count all − count none with 0"></textarea></div></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.65rem"><div class="trap-title">Trap: Treating “At Least One” Directly</div><div class="trap-body">“At least one 0” can appear in many overlapping positions. Count every code, then subtract codes with no 0.</div></div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="slide" data-slide="15" style="--zc:#858585;--zs:var(--z4-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:320px;height:320px;right:-100px;bottom:-110px;background:#D1D5DB;opacity:.2"></div><div class="blob" style="width:230px;height:230px;left:-80px;top:-70px;background:#BFDBFE;opacity:.22"></div></div>
+  <div class="content">
+    <div class="kicker reveal">Guided walkthrough 3 · leave the expression unevaluated</div><h2 class="slide-title reveal">A Restricted Count in <span class="tint">Three Moves</span></h2>
+    <div class="info-card reveal" style="margin-bottom:.7rem"><b>Problem</b><div class="prose" style="font-size:.85rem">A 4-digit code uses digits 0 through 6. Repetition is allowed. Determine how many codes contain at least one 5.</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.78rem">
+      <div class="step-card reveal"><div><span class="step-num">1</span><b>Count the whole universe</b></div><div class="prose" style="font-size:.82rem;margin-top:.45rem">There are 7 choices in each of 4 slots:<br><span class="math-inline">7 × 7 × 7 × 7</span></div></div>
+      <div class="step-card reveal"><div><span class="step-num">2</span><b>Count the forbidden group</b></div><div class="prose" style="font-size:.82rem;margin-top:.45rem">If 5 is forbidden, each slot has 6 choices:<br><span class="math-inline">6 × 6 × 6 × 6</span></div></div>
+      <div class="step-card reveal"><div><span class="step-num">3</span><b>Subtract the complement</b></div><div class="prose" style="font-size:.82rem;margin-top:.45rem"><span class="math-inline">all codes − codes with no 5</span></div><div class="work-box"><textarea placeholder="Write and evaluate the final expression"></textarea></div></div>
+    </div>
+    <div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Why subtraction wins</div><div class="prompt-body">If you counted codes with exactly one 5, what valid codes would still be missing?</div></div>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="slide" data-slide="16" style="--zc:#2563EB;--zs:#DCEBFB">
+  <div class="gradient-mesh"><div class="blob" style="width:320px;height:320px;right:-100px;top:-100px;background:#BFDBFE;opacity:.26"></div><div class="blob" style="width:230px;height:230px;left:-80px;bottom:-90px;background:#CBD5E1;opacity:.2"></div></div>
+  <div class="content">
+    <div class="kicker reveal">Digital simulation · 6 minutes</div><h2 class="slide-title reveal">Select Every Statement That <span class="tint">Must Be True</span></h2>
+    <div class="info-card reveal"><div class="prose" style="font-size:.9rem">A box contains red and blue tiles. One random tile is moved into a second box, and then one tile is drawn from the second box.</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:.75rem">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="mc-options">
+        <label class="mc-option"><input type="checkbox"><span class="opt-letter">A</span><span>The color moved determines the second box’s new composition.</span></label>
+        <label class="mc-option"><input type="checkbox"><span class="opt-letter">B</span><span>The two transfer-color branches must always be equally likely.</span></label>
+        <label class="mc-option"><input type="checkbox"><span class="opt-letter">C</span><span>Each path probability multiplies the chance of entering that path by the chance of the target within it.</span></label>
+        <label class="mc-option"><input type="checkbox"><span class="opt-letter">D</span><span>The second draw can be computed from the second box’s original total.</span></label>
+      </div></div>
+      <div class="diagram-wrap reveal">
+        <svg width="430" height="250" viewBox="0 0 430 250" role="img" aria-label="Checklist before submitting a technology enhanced item">
+          <rect x="28" y="28" width="374" height="194" rx="18" fill="#F9FBFE" stroke="#B9C6D9" stroke-width="2"/>
+          <text x="215" y="60" text-anchor="middle" font-size="15" font-weight="800" fill="#1F1F1F">BEFORE YOU SUBMIT</text>
+          <rect x="60" y="82" width="24" height="24" rx="5" fill="#fff" stroke="#2563EB" stroke-width="2"/><text x="100" y="100" font-size="13" fill="#4A4A4A">Check every choice independently.</text>
+          <rect x="60" y="122" width="24" height="24" rx="5" fill="#fff" stroke="#2563EB" stroke-width="2"/><text x="100" y="140" font-size="13" fill="#4A4A4A">Do not stop after finding one true claim.</text>
+          <rect x="60" y="162" width="24" height="24" rx="5" fill="#fff" stroke="#2563EB" stroke-width="2"/><text x="100" y="180" font-size="13" fill="#4A4A4A">Re-read “must,” “could,” “not,” and “all.”</text>
+        </svg>
+      </div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.65rem"><div class="trap-title">TEI discipline</div><div class="trap-body">For multi-select, one missed true statement or one extra false statement loses the item. Treat each option as its own true/false claim.</div></div>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="slide" data-slide="17" style="--zc:#5C5C5C;--zs:var(--z5-soft)">
+  <div class="gradient-mesh"><div class="blob" style="width:330px;height:330px;right:-100px;bottom:-110px;background:#CBD5E1;opacity:.2"></div><div class="blob" style="width:230px;height:230px;left:-80px;top:-80px;background:#DBEAFE;opacity:.24"></div></div>
+  <div class="content">
+    <div class="zone-strip reveal" data-zone="5"></div><div class="kicker reveal">Zone 5 · One-look mixed set</div><h2 class="slide-title reveal">Choose the Structure <span class="tint">Before the Numbers</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem">
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">A bag contains 12 orange and 8 purple chips. Two orange chips are removed. Find the probability of purple next.</div><div class="small">Structure: update counts</div><div class="work-box"><textarea placeholder="Set up and simplify"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">One ball transfers from a 3-red, 2-blue box into a 4-red, 6-blue box. Then draw from the destination. Find the probability of blue.</div><div class="small">Structure: weighted case tree</div><div class="work-box"><textarea placeholder="Branch, update, multiply, add"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">A meal uses 4 entrées, 3 sides, and 2 drinks. How many meals use exactly one choice from each category?</div><div class="small">Structure: multiplication principle</div><div class="work-box"><textarea placeholder="Three slots"></textarea></div></div>
+      <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">21</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">How many 5-character strings use A, B, C, D with repetition and contain at least one A?</div><div class="small">Structure: total minus none</div><div class="work-box"><textarea placeholder="Complement count"></textarea></div></div>
+    </div>
+    <div class="prompt-card reveal" style="margin-top:.65rem"><div class="prompt-title">Two-minute cap</div><div class="prompt-body">If the structure is still unclear after 30 seconds, sketch objects, a tree, or slots. If arithmetic stalls near two minutes, make the best supported selection and protect the next item.</div></div>
+  </div>
+</section>
+
+<!-- 18 -->
+<section class="slide" data-slide="18" style="--zc:#2563EB;--zs:#DCEBFB">
+  <div class="gradient-mesh"><div class="blob" style="width:420px;height:420px;right:-130px;top:-130px;background:#BFDBFE;opacity:.3"></div><div class="blob" style="width:300px;height:300px;left:-100px;bottom:-110px;background:#CBD5E1;opacity:.25"></div><div class="blob" style="width:190px;height:190px;left:38%;top:16%;background:#FBEBCF;opacity:.28"></div></div><canvas class="particle-canvas"></canvas>
+  <div class="content">
+    <div class="kicker reveal">Final 2 minutes · exit ticket</div><h2 class="slide-title reveal" style="text-align:center">Three Decisions to <span class="tint">Lock In</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem">
+      <div class="step-card reveal"><div><span class="step-num">1</span><b>Removal</b></div><div class="prose" style="font-size:.83rem;margin-top:.4rem">What exact question proves that both the target count and total have been updated?</div><div class="work-box"><textarea placeholder="Write the check in your own words"></textarea></div></div>
+      <div class="step-card reveal"><div><span class="step-num">2</span><b>Transfer</b></div><div class="prose" style="font-size:.83rem;margin-top:.4rem">What are the branch labels, and what event supplies each branch weight?</div><div class="work-box"><textarea placeholder="Branch → update → weight"></textarea></div></div>
+      <div class="step-card reveal"><div><span class="step-num">3</span><b>Counting</b></div><div class="prose" style="font-size:.83rem;margin-top:.4rem">Does the problem call for direct slots, descending slots, or total minus forbidden?</div><div class="work-box"><textarea placeholder="Name the structure and why"></textarea></div></div>
+    </div>
+    <div class="trap-card reveal" style="margin-top:.8rem;text-align:center"><div class="trap-title" style="font-size:1rem">Error-log labels</div><div class="trap-body">Old total · Wrong branch weight · Destination not updated · Added stages · Ignored restriction · Right math, wrong target</div></div>
+    <div class="reveal" style="text-align:center;margin-top:.65rem;font-family:var(--font-display);font-weight:600;color:var(--ink-2)">Update the world. Name the cases. Count the slots.</div>
+  </div>
+</section>
+
+</div>
+<div class="nav-controls" aria-label="Slide navigation"><button class="nav-btn" onclick="changeSlide(-1)" aria-label="Previous slide">&#8249;</button><div class="slide-dots" id="dots"></div><button class="nav-btn" onclick="changeSlide(1)" aria-label="Next slide">&#8250;</button><span class="slide-counter" id="counter">1 / 18</span></div>
+<script>
+const zones=[['Ratio Sprint','0:00–0:08','#262626'],['After Removal','0:08–0:22','#4D4D4D'],['Transfers','0:22–0:40','#6A6A6A'],['Counting','0:40–0:52','#858585'],['Mixed + Exit','0:52–1:00','#5C5C5C']];
+document.querySelectorAll('.zone-strip').forEach(strip=>{const active=Number(strip.dataset.zone);zones.forEach((z,i)=>{const chip=document.createElement('div');chip.className='zone-chip'+(i+1===active?' on':'');chip.style.setProperty('--dc',z[2]);chip.innerHTML=`<span class="zdot"></span><span>${z[0]}</span><span class="zt">${z[1]}</span>`;strip.appendChild(chip)})});
+document.querySelectorAll('.mc-option').forEach(o=>o.addEventListener('click',()=>o.classList.toggle('selected')));
+let current=1;const slides=[...document.querySelectorAll('.slide')],total=slides.length,dots=document.getElementById('dots'),counter=document.getElementById('counter');for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>goToSlide(i);dots.appendChild(d)}
+function animateSlide(s){s.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';el.offsetHeight;el.style.transition=`opacity .35s ease ${i*.055}s,transform .35s ease ${i*.055}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}
+function goToSlide(n){document.querySelector('.slide.active')?.classList.remove('active');const next=document.querySelector(`.slide[data-slide="${n}"]`);next.classList.add('active');current=n;document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=`${current} / ${total}`;animateSlide(next)}function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n)}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let sx=0;document.addEventListener('touchstart',e=>sx=e.touches[0].clientX);document.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>50)changeSlide(d>0?1:-1)});
+document.addEventListener('mousemove',e=>{const ox=(e.clientX-innerWidth/2)/(innerWidth/2),oy=(e.clientY-innerHeight/2)/(innerHeight/2);document.querySelectorAll('.slide.active .deco-shape').forEach(s=>{const sp=+s.dataset.speed||.03;s.style.transform=`translate(${ox*sp*100}px,${oy*sp*100}px) rotate(12deg)`})});
+function particles(c,count,interactive){if(!c)return;const x=c.getContext('2d');function size(){c.width=c.offsetWidth;c.height=c.offsetHeight}size();const ps=Array.from({length:count},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*2+1}));let mx=-999,my=-999;if(interactive){c.onmousemove=e=>{const b=c.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top};c.onmouseleave=()=>{mx=my=-999}};(function loop(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{if(interactive){const dx=p.x-mx,dy=p.y-my,dist=Math.hypot(dx,dy);if(dist<100&&dist>0){p.vx+=dx/dist*.02;p.vy+=dy/dist*.02}}p.vx*=.99;p.vy*=.99;p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle='rgba(37,99,235,.16)';x.fill()});requestAnimationFrame(loop)})()}
+document.querySelectorAll('.particle-canvas').forEach(c=>particles(c,45,true));document.querySelectorAll('.particle-canvas-ambient').forEach(c=>particles(c,18,false));animateSlide(document.querySelector('.slide.active'));
+</script>
+</body>
+</html>
