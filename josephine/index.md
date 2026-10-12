@@ -22,4 +22,4 @@
 | **08** | [Rhetorical Revising/Editing/Arithmetic Precision](https://hue-bee.github.io/josephine/lessons/08) | [8 Homework](https://hue-bee.github.io/josephine/lessons/08/homework) ||
 | **09** | [Probability & Counting, Geometry Spiral · Fiction Block](https://hue-bee.github.io/josephine/lessons/09) | [9 Homework](https://hue-bee.github.io/josephine/lessons/09/homework) ||
 | **10** | [Timed Integration ELA Warm-Up · TEI / Grid-In](https://hue-bee.github.io/josephine/lessons/10) | [10 Homework](https://hue-bee.github.io/josephine/lessons/10/homework) ||
-| **11** | [Mock #1 Review and Targeted Reteach](https://hue-bee.github.io/josephine/lessons/11) | [11 Homework](https://hue-bee.github.io/josephine/lessons/11/homework) ||
+| **11** | [Mock Review and Targeted Reteach](https://hue-bee.github.io/josephine/lessons/11) | [11 Homework](https://hue-bee.github.io/josephine/lessons/11/homework) ||
