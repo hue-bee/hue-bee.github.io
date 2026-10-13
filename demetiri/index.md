@@ -8,3 +8,4 @@
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [SHSAT + TACHS Launch](https://hue-bee.github.io/demetiri/lessons/01) | [1 Homework](https://hue-bee.github.io/demetiri/lessons/01/homework) ||
 | **02** | [Arithmetic Foundations + Paper Folding](https://hue-bee.github.io/demetiri/lessons/02) | [2 Homework](https://hue-bee.github.io/demetiri/lessons/02/homework) ||
+| **03** | [Geometry, Measurement & Data Figure Classification](https://hue-bee.github.io/demetiri/lessons/03) | [3 Homework](https://hue-bee.github.io/demetiri/lessons/03/homework) ||
