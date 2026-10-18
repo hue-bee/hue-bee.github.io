@@ -12,4 +12,4 @@
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **00** | [Diagnostic](https://hue-bee.github.io/alina+mae/diagnostic) | ||
-| **01** | [Diagnostic Debrief & Error Autopsy](https://hue-bee.github.io/alina+mae/lessons/01) | [1 Homework](https://hue-bee.github.io/alina+mae/lessons/01/homework) ||
+| **01** | [Think Like the Digital SHSAT](https://hue-bee.github.io/alina+mae/lessons/01) | [1 Homework](https://hue-bee.github.io/alina+mae/lessons/01/homework) ||
