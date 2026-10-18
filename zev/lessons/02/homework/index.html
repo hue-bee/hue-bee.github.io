@@ -1,1 +1,840 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SHSAT CAT Homework — Inference & Supporting Ideas</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* CAT activity additions */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.toolbar .print-btn{margin:0;min-height:44px}.toolbar .secondary{background:var(--muted)}
+.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue)}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.lvl-1{background:#eee;color:#1f2937}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.4rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800;cursor:pointer}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.sent-num{background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-weight:800;color:#374151;font-size:.72rem}
+.graph-audit{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .55rem;margin-top:.5rem}.graph-audit label{font-size:.7rem;font-weight:800;color:var(--muted)}.graph-audit select,.graph-audit input{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.22rem .35rem;font-size:.75rem;margin-top:.12rem;min-height:34px}.number-line{display:block;width:100%;height:42px;margin:.2rem 0;color:#64748b}.domain-note{font-size:.7rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.25rem .4rem;margin-top:.35rem}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.score-input{width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.6);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}
+.section-icon{width:24px;color:var(--blue);flex:0 0 auto}.hw-header-left h1{font-weight:800}.prob select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem;font-size:.78rem}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.mc-opts,.prob-grid{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.95);padding:.55rem;margin:0;z-index:10;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.graph-audit{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}}
+@media print{.commit-row{display:none!important}}
+
+
+/* Inference homework additions */
+.evidence-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem}.evidence-step{background:white;border:1px solid var(--blue-md);border-radius:7px;padding:.42rem .55rem}.evidence-step b{display:block;color:var(--blue);font-family:var(--ff-head);font-size:.75rem}.evidence-step span{font-size:.7rem;color:var(--slate)}
+.proof-prompt{margin-top:.45rem;padding:.45rem .55rem;background:white;border:1px dashed var(--border);border-radius:6px}.proof-prompt label{display:block;font-size:.69rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.2rem}.proof-input{width:100%;border:0;border-bottom:1.5px solid var(--border);font:inherit;font-size:.77rem;padding:.15rem .2rem;background:transparent;outline:none}.proof-input:focus{border-color:var(--blue)}
+.passage-text{column-count:1;font-size:.84rem}.passage-text p{margin-bottom:.8rem}.sentence{transition:background .15s;border-radius:3px}.sentence:hover{background:var(--blue-lt)}
+.mc-q.locked .proof-input{pointer-events:none;color:var(--muted)}.set-actions{display:flex;justify-content:flex-end;align-items:center;gap:.55rem;margin:.7rem 0 1.2rem}.set-actions .commit-btn{min-height:40px;padding:.35rem 1.05rem}.set-note{font-size:.7rem;color:var(--muted);font-weight:700}
+.set-block.locked .mc-opt:not(.selected){opacity:.58}.set-block.locked .proof-input{pointer-events:none;color:var(--muted)}
+.te-item{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.75rem .85rem;margin-bottom:1rem}.te-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem}.te-title{font-size:.83rem;font-weight:800}.evidence-choice{display:flex;gap:.4rem;align-items:flex-start;background:white;border:1.5px solid var(--border);border-radius:6px;padding:.42rem .5rem;margin:.28rem 0;cursor:pointer;font-size:.78rem;color:var(--slate)}.evidence-choice input{margin-top:.18rem;accent-color:var(--blue)}.evidence-choice:has(input:checked){background:#e5e7eb;border-color:#374151;font-weight:700}.select-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem}.select-row label{font-size:.7rem;font-weight:800;color:var(--muted)}.select-row select{width:100%;margin-top:.2rem;min-height:40px;border:1.5px solid var(--border);border-radius:6px;background:white;padding:.3rem .4rem;font-size:.78rem}
+.audit-card{background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.75rem .9rem;margin:.8rem 0}.audit-card h3{font-family:var(--ff-head);color:#92400e;font-size:.95rem;margin-bottom:.3rem}.audit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.35rem .8rem}.audit-grid label{font-size:.76rem;color:var(--slate);display:flex;gap:.35rem;align-items:flex-start}.audit-grid input{accent-color:#92400e;margin-top:.16rem}
+
+.reflection-box{border:1.5px solid var(--border);border-radius:10px;background:var(--bg);padding:.85rem;margin-top:.9rem}.reflection-box h3{font-family:var(--ff-head);font-size:.95rem}.reflection-box label{display:block;font-size:.75rem;font-weight:800;color:var(--slate);margin-top:.55rem}.reflection-box textarea{width:100%;min-height:48px;border:1px dashed var(--border);border-radius:6px;background:white;margin-top:.25rem;padding:.4rem;font:inherit;font-size:.77rem}
+@media(max-width:680px){.evidence-strip,.select-row,.audit-grid{grid-template-columns:1fr}.passage-box{padding:.8rem}}
+@media print{.set-actions,.commit-row{display:none!important}.proof-input{border-bottom-color:#94a3b8!important}.passage-box,.mc-q,.te-item,.error-log{break-inside:avoid}}
+</style>
+<style id="passage-annotation-styles">
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+
+.annotation-toolbar .annot-color-swatch { padding:0; flex-shrink:0; }
+.annotatable-passage .passage-highlight,
+.annotatable-passage .passage-outline { -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+.annotatable-passage .passage-note:focus .note-tooltip { display:block; }
+.annotatable-passage .passage-note,
+.annotatable-passage .note-input-wrapper { user-select:none; }
+@media print { .annotation-toolbar,.note-input-wrapper { display:none!important; } }
+</style>
+</head><body><a class="skip-link" href="#main">Skip to homework</a><div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" onclick="clearAll()">Clear All</button></div><main id="main"><section class="sheet"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" role="img" aria-label="Evidence bridge logo"><path d="M6 32h36M10 32V19m28 13V19M10 19c7-8 21-8 28 0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="17" r="2.5" fill="currentColor"/><circle cx="24" cy="14" r="2.5" fill="currentColor"/><circle cx="32" cy="17" r="2.5" fill="currentColor"/></svg><div class="hw-header-left"><h1>SHSAT CAT Homework</h1><div class="subtitle">Inference & Supporting Ideas · November 2026</div></div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" aria-label="Student name"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" aria-label="Date"></label></div></header>
+<div class="score-banner"><div><div class="title">Evidence Lab Score</div><div class="sub">Score only after finishing every first-pass decision.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="16"> / 16</div><div class="sc-lbl">Correct</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="16"> / 16</div><div class="sc-lbl">Evidence</div></div></div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0112 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> A stand-alone response locks after you advance. Inside a passage set, review the set before submitting it. Accuracy now matters more than a rushed finish.</p></div>
+<div class="section-hd"><span class="icon">⌕</span><h2>Part A — Stand-Alone Evidence Decisions</h2><span class="badge badge-blue">6 Questions · ~10 min</span></div><p class="instr">Apply Lens → Lock → Trial: identify the question lens, predict what the answer must prove, then test every word of the choice.</p><div class="evidence-strip"><div class="evidence-step"><b>1 · Lens</b><span>What exactly must be inferred?</span></div><div class="evidence-step"><b>2 · Lock</b><span>Where is the direct textual fact?</span></div><div class="evidence-step"><b>3 · Trial</b><span>Does every part of the choice follow?</span></div></div>
+<article class="mc-q" data-item="1"><p class="mc-q-text"><span class="qnum">1.</span>Mina arrived at the community garden before sunrise. Although rain had soaked the paths, she carried the seed trays inside, checked the labels twice, and remained until the first volunteers appeared. Which inference is best supported? <span class="lvl lvl-1">L1</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 1"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble"></span><span><strong>A)</strong> Mina dislikes working with volunteers.</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble"></span><span><strong>B)</strong> Mina takes responsibility for the garden project.</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble"></span><span><strong>C)</strong> Mina expected the rain to ruin every seed.</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble"></span><span><strong>D)</strong> Mina had never visited the garden before.</span></label></div><div class="proof-prompt"><label for="proof1">Evidence lock</label><input id="proof1" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div><div class="commit-row"><span class="lock-note">Choose, prove, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="2"><p class="mc-q-text"><span class="qnum">2.</span>A town library extended its evening hours in September. By November, weekday attendance had risen, especially among students whose buses arrived after the former closing time. Which conclusion is most reasonable? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 2"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble"></span><span><strong>A)</strong> The later hours made the library more accessible to some students.</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble"></span><span><strong>B)</strong> Most students prefer studying at home.</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble"></span><span><strong>C)</strong> The library added evening hours because weekend attendance fell.</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble"></span><span><strong>D)</strong> Bus schedules changed in November.</span></label></div><div class="proof-prompt"><label for="proof2">Evidence lock</label><input id="proof2" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div><div class="commit-row"><span class="lock-note">Choose, prove, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="3"><p class="mc-q-text"><span class="qnum">3.</span>“Ravi folded the rejection letter into a neat square, placed it beneath his sketchbook, and opened a fresh page.” The sentence most strongly suggests that Ravi will— <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 3"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble"></span><span><strong>A)</strong> hide all evidence of his work</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble"></span><span><strong>B)</strong> abandon drawing permanently</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble"></span><span><strong>C)</strong> continue creating despite disappointment</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble"></span><span><strong>D)</strong> send the same application again immediately</span></label></div><div class="proof-prompt"><label for="proof3">Evidence lock</label><input id="proof3" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div><div class="commit-row"><span class="lock-note">Choose, prove, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="4"><p class="mc-q-text"><span class="qnum">4.</span>The curator removed one photograph from the exhibit. Without it, visitors could still see the factory’s opening and closing, but not the years when workers organized for safer conditions. The removed photograph primarily supported the idea that— <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 4"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble"></span><span><strong>A)</strong> the factory produced photographs</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble"></span><span><strong>B)</strong> the exhibit room was too small</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble"></span><span><strong>C)</strong> workers helped change conditions at the factory</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble"></span><span><strong>D)</strong> the factory closed soon after it opened</span></label></div><div class="proof-prompt"><label for="proof4">Evidence lock</label><input id="proof4" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div><div class="commit-row"><span class="lock-note">Choose, prove, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="5"><p class="mc-q-text"><span class="qnum">5.</span>“The committee approved the mural only after the students replaced the proposed slogan with images of neighborhood landmarks.” Which inference is best supported? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 5"><label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble"></span><span><strong>A)</strong> The committee opposed all student artwork.</span></label><label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble"></span><span><strong>B)</strong> The committee preferred a design tied more closely to the community.</span></label><label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble"></span><span><strong>C)</strong> The students refused to revise their mural.</span></label><label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble"></span><span><strong>D)</strong> Neighborhood residents selected every landmark.</span></label></div><div class="proof-prompt"><label for="proof5">Evidence lock</label><input id="proof5" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div><div class="commit-row"><span class="lock-note">Choose, prove, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q" data-item="6"><p class="mc-q-text"><span class="qnum">6.</span>In a report, a scientist writes that the new filter removed 92 percent of one pollutant in a laboratory tank but has not yet been tested in rivers. Which claim is supported without overreaching? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 6"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble"></span><span><strong>A)</strong> The filter will clean every polluted river.</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble"></span><span><strong>B)</strong> The filter is useless outside a laboratory.</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble"></span><span><strong>C)</strong> The laboratory result is promising, but field performance remains uncertain.</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble"></span><span><strong>D)</strong> The filter removes 92 percent of all pollutants.</span></label></div><div class="proof-prompt"><label for="proof6">Evidence lock</label><input id="proof6" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div><div class="commit-row"><span class="lock-note">Choose, prove, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<div class="footer-note">Page 1 of 4 · Name and date appear only on this opening page.</div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" role="img" aria-label="Evidence bridge logo"><path d="M6 32h36M10 32V19m28 13V19M10 19c7-8 21-8 28 0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="17" r="2.5" fill="currentColor"/><circle cx="24" cy="14" r="2.5" fill="currentColor"/><circle cx="32" cy="17" r="2.5" fill="currentColor"/></svg><div class="hw-header-left"><h1>ELA Passage Set</h1><div class="subtitle">Fiction · Set 1 of 2</div></div></div></header>
+<div class="section-hd"><span class="icon">▤</span><h2>Part B — Inference Set</h2><span class="badge badge-coral">5 Questions · ~11 min</span></div><p class="instr">You may change responses within this set. Before submitting, verify one line of evidence for every answer.</p><div class="passage-box"><div class="passage-title">The Bell Above the Door</div><div class="passage-text"><p><span class="para-lbl">1</span> On Saturday morning, Elena’s grandfather handed her the key to his repair shop and stayed on the sidewalk. “You know where everything is,” he said. Until then, Elena had swept floors, sorted screws, and watched him coax clocks back into rhythm. She had never opened the shop alone.</p><p><span class="para-lbl">2</span> Inside, the silence seemed louder than the ticking clocks. Elena raised the shades and arranged three repaired radios on the counter. When the bell above the door rang, Mr. Han entered carrying a lamp whose switch had jammed.</p><p><span class="para-lbl">3</span> Elena almost called her grandfather. Instead, she asked Mr. Han what had happened, unplugged the lamp, and tested the cord. The switch contained a bent metal tab—small enough to straighten, but easy to snap. She remembered her grandfather’s warning: “Force hides the problem; patience shows it.”</p><p><span class="para-lbl">4</span> Working slowly, Elena adjusted the tab. The lamp glowed. Mr. Han smiled and paid, but Elena was already writing the repair in the shop ledger. Through the window, her grandfather lifted one hand in greeting and continued toward the corner café.</p></div></div><div class="set-block" data-set="1">
+<article class="mc-q" data-item="7"><p class="mc-q-text"><span class="qnum">7.</span>What can most reasonably be inferred about why Elena’s grandfather remains outside at the beginning? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 7"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble"></span><span><strong>A)</strong> He has forgotten the shop key.</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble"></span><span><strong>B)</strong> He wants Elena to practice managing the shop independently.</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble"></span><span><strong>C)</strong> He is unwilling to speak with Mr. Han.</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble"></span><span><strong>D)</strong> He plans to close the shop permanently.</span></label></div><div class="proof-prompt"><label for="proof7">Evidence lock</label><input id="proof7" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="8"><p class="mc-q-text"><span class="qnum">8.</span>The description “the silence seemed louder than the ticking clocks” mainly reveals that Elena— <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 8"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble"></span><span><strong>A)</strong> is irritated by the clocks</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble"></span><span><strong>B)</strong> feels unusually aware of the responsibility she has been given</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble"></span><span><strong>C)</strong> believes the shop is too crowded</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble"></span><span><strong>D)</strong> cannot hear what her grandfather says</span></label></div><div class="proof-prompt"><label for="proof8">Evidence lock</label><input id="proof8" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="9"><p class="mc-q-text"><span class="qnum">9.</span>Which detail best supports the inference that Elena has learned from observing her grandfather? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 9"><label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble"></span><span><strong>A)</strong> She raises the shades.</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble"></span><span><strong>B)</strong> She arranges radios on the counter.</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble"></span><span><strong>C)</strong> She recalls his warning while deciding how to handle the switch.</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble"></span><span><strong>D)</strong> She writes Mr. Han’s name in the ledger.</span></label></div><div class="proof-prompt"><label for="proof9">Evidence lock</label><input id="proof9" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="10"><p class="mc-q-text"><span class="qnum">10.</span>Why is the detail that Elena writes the repair in the ledger important? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 10"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble"></span><span><strong>A)</strong> It shows she understands that running the shop includes duties beyond fixing objects.</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble"></span><span><strong>B)</strong> It proves she charges more than her grandfather does.</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble"></span><span><strong>C)</strong> It explains why Mr. Han brought in a lamp.</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble"></span><span><strong>D)</strong> It suggests she plans to replace the shop’s clocks.</span></label></div><div class="proof-prompt"><label for="proof10">Evidence lock</label><input id="proof10" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="11"><p class="mc-q-text"><span class="qnum">11.</span>The grandfather’s final action most strongly suggests that he— <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 11"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble"></span><span><strong>A)</strong> does not notice whether the lamp is repaired</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble"></span><span><strong>B)</strong> trusts Elena enough to let her continue without his help</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble"></span><span><strong>C)</strong> is disappointed that Elena accepted payment</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble"></span><span><strong>D)</strong> expects Elena to meet him at the café immediately.</span></label></div><div class="proof-prompt"><label for="proof11">Evidence lock</label><input id="proof11" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<div class="set-actions"><span class="set-note">Review all five responses; submission locks the set.</span><button class="commit-btn submit-set" type="button">Submit passage set</button></div></div><div class="footer-note">Page 2 of 4 · Passage-set simulation: review, then submit once.</div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" role="img" aria-label="Evidence bridge logo"><path d="M6 32h36M10 32V19m28 13V19M10 19c7-8 21-8 28 0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="17" r="2.5" fill="currentColor"/><circle cx="24" cy="14" r="2.5" fill="currentColor"/><circle cx="32" cy="17" r="2.5" fill="currentColor"/></svg><div class="hw-header-left"><h1>Evidence Under Pressure</h1><div class="subtitle">Informational Text · Set 2 of 2</div></div></div></header>
+<div class="section-hd"><span class="icon">⌁</span><h2>Part C — Supporting Ideas & TEI</h2><span class="badge badge-purple">5 Questions · ~12 min</span></div><p class="instr">Use the removal test for supporting details: if a detail vanished, which idea would become harder to prove?</p><div class="passage-box"><div class="passage-title">When Sidewalks Became Test Sites</div><div class="passage-text"><p><span class="para-lbl">1</span> City planners once treated storm drains mainly as pipes that moved rainwater away from streets. During intense storms, however, water often reached the drains faster than underground systems could carry it. Some cities have begun testing “sponge blocks”: streets redesigned to hold water briefly where it falls.</p><p><span class="para-lbl">2</span> A sponge block may combine tree beds, shallow planted channels, and pavement that lets water seep through. None of these features stores an entire storm. Together, though, they slow runoff, giving drains more time to work and reducing the sudden surge that can flood intersections.</p><p><span class="para-lbl">3</span> The approach also creates questions. Planted channels require maintenance, and permeable pavement can clog with dirt. Results differ by soil, slope, and rainfall pattern. For that reason, engineers monitor each test block rather than assuming one design will work everywhere.</p><p><span class="para-lbl">4</span> Even an imperfect pilot can be useful. A block that absorbs less water than expected may reveal where sediment gathers or which plants survive road salt. In this way, the street becomes not only part of the solution but also a place where the next solution is measured.</p></div></div><div class="set-block" data-set="2">
+<article class="mc-q" data-item="12"><p class="mc-q-text"><span class="qnum">12.</span>What is the central idea of the passage? <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 12"><label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble"></span><span><strong>A)</strong> Storm drains should be removed from all city streets.</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble"></span><span><strong>B)</strong> Sponge blocks use several features to slow runoff while also providing evidence for improved designs.</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble"></span><span><strong>C)</strong> Permeable pavement is the only reliable way to prevent floods.</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble"></span><span><strong>D)</strong> Pilot projects succeed only when they absorb an entire storm.</span></label></div><div class="proof-prompt"><label for="proof12">Evidence lock</label><input id="proof12" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="13"><p class="mc-q-text"><span class="qnum">13.</span>The details in paragraph 2 mainly support the idea that sponge blocks— <span class="lvl lvl-2">L2</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 13"><label class="mc-opt"><input type="radio" name="q13" value="A"><span class="bubble"></span><span><strong>A)</strong> depend on several features working together</span></label><label class="mc-opt"><input type="radio" name="q13" value="B"><span class="bubble"></span><span><strong>B)</strong> move all rainwater underground immediately</span></label><label class="mc-opt"><input type="radio" name="q13" value="C"><span class="bubble"></span><span><strong>C)</strong> require no connection to storm drains</span></label><label class="mc-opt"><input type="radio" name="q13" value="D"><span class="bubble"></span><span><strong>D)</strong> are designed mainly to provide shade.</span></label></div><div class="proof-prompt"><label for="proof13">Evidence lock</label><input id="proof13" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="14"><p class="mc-q-text"><span class="qnum">14.</span>Why does the author mention soil, slope, and rainfall pattern in paragraph 3? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 14"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble"></span><span><strong>A)</strong> To argue that engineers cannot measure rainfall</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble"></span><span><strong>B)</strong> To show why a design must be tested in its local conditions</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble"></span><span><strong>C)</strong> To prove that planted channels always fail</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble"></span><span><strong>D)</strong> To explain why streets should be built without slopes.</span></label></div><div class="proof-prompt"><label for="proof14">Evidence lock</label><input id="proof14" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="15"><p class="mc-q-text"><span class="qnum">15.</span>Which inference about the author’s view of unsuccessful pilot results is best supported? <span class="lvl lvl-3">L3</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 15"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble"></span><span><strong>A)</strong> They should be hidden from the public.</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble"></span><span><strong>B)</strong> They can still provide information that improves later designs.</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble"></span><span><strong>C)</strong> They prove sponge blocks should be abandoned.</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble"></span><span><strong>D)</strong> They matter only when pavement clogs.</span></label></div><div class="proof-prompt"><label for="proof15">Evidence lock</label><input id="proof15" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<article class="mc-q" data-item="16"><p class="mc-q-text"><span class="qnum">16.</span>Which sentence best states the relationship between paragraphs 3 and 4? <span class="lvl lvl-4">L4</span></p><div class="mc-opts" role="radiogroup" aria-label="Question 16"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble"></span><span><strong>A)</strong> Paragraph 3 identifies limitations; paragraph 4 explains how studying those limitations can still be valuable.</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble"></span><span><strong>B)</strong> Paragraph 3 gives a history; paragraph 4 lists unrelated inventions.</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble"></span><span><strong>C)</strong> Paragraph 3 argues against testing; paragraph 4 repeats that argument.</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble"></span><span><strong>D)</strong> Paragraph 3 describes a flood; paragraph 4 explains its cause.</span></label></div><div class="proof-prompt"><label for="proof16">Evidence lock</label><input id="proof16" class="proof-input" type="text" placeholder="Copy the shortest phrase or sentence that proves your answer."></div></article>
+<div class="te-item"><div class="te-head"><span class="qnum">TEI.</span><div class="te-title">Select the two details that best support the inference in Question 15.</div><span class="lvl lvl-4">L4</span></div><label class="evidence-choice"><input type="checkbox" name="tei"><span>“Some cities have begun testing ‘sponge blocks.’”</span></label><label class="evidence-choice"><input type="checkbox" name="tei"><span>“Results differ by soil, slope, and rainfall pattern.”</span></label><label class="evidence-choice"><input type="checkbox" name="tei"><span>“A block that absorbs less water than expected may reveal where sediment gathers.”</span></label><label class="evidence-choice"><input type="checkbox" name="tei"><span>“The street becomes ... a place where the next solution is measured.”</span></label></div>
+<div class="set-actions"><span class="set-note">Check both halves of every answer before submitting.</span><button class="commit-btn submit-set" type="button">Submit passage set</button></div></div>
+<div class="audit-card"><h3>45-Second Reasoning Audit</h3><div class="audit-grid"><label><input type="checkbox"> I named the question lens.</label><label><input type="checkbox"> I predicted before choosing.</label><label><input type="checkbox"> I found direct evidence.</label><label><input type="checkbox"> I proved every part of the choice.</label></div></div><div class="footer-note">Page 3 of 4 · Do not reward a choice merely because it sounds reasonable.</div></section><section class="sheet page-break"><header class="hw-header"><div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" role="img" aria-label="Evidence bridge logo"><path d="M6 32h36M10 32V19m28 13V19M10 19c7-8 21-8 28 0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="17" r="2.5" fill="currentColor"/><circle cx="24" cy="14" r="2.5" fill="currentColor"/><circle cx="32" cy="17" r="2.5" fill="currentColor"/></svg><div class="hw-header-left"><h1>Review the Reasoning</h1><div class="subtitle">Error Analysis · Complete after scoring</div></div></div></header>
+<div class="section-hd"><span class="icon">▤</span><h2>Part D — Error Log</h2><span class="badge badge-sand">~8 min</span></div><p class="instr">Check your work with the assigned key or in session. Record the first incorrect step—not merely the final wrong answer.</p><div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Rule / fix for next time</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table><div class="error-type-pills"><span class="pill pill-cg">CG · Careless / Graph</span><span class="pill pill-ce">CE · Concept / Evidence</span><span class="pill pill-ru">RU · Rule / Understanding</span></div></div>
+<div class="reflection-box"><h3>CAT Reflection</h3><label>Which distractor trap caught me most often?</label><textarea placeholder="Be specific: true but irrelevant, too broad, too narrow, reversed, or unsupported..."></textarea><label>Where did I commit before my evidence was complete?</label><textarea placeholder="Name the item and the missing reasoning step..."></textarea><label>Write one rule you will use on your next passage set.</label><textarea placeholder="Example: I will not choose an inference until I can point to a direct fact and explain the bridge."></textarea></div>
+<div class="audit-card"><h3>Final Submission Audit</h3><div class="audit-grid"><label><input type="checkbox"> I completed all 16 questions.</label><label><input type="checkbox"> I recorded evidence for each item.</label><label><input type="checkbox"> I logged misses and guesses.</label><label><input type="checkbox"> I wrote a next-session rule.</label></div></div><div class="footer-note">Page 4 of 4 · Evidence is the standard, not confidence.</div></section></main><script>
+(function(){
+  const all='input, textarea, select';
+  document.querySelectorAll('.mc-opt input').forEach(input=>input.addEventListener('change',()=>{
+    const group=input.closest('.mc-opts'); group.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected')); input.closest('.mc-opt').classList.add('selected');
+  }));
+  document.querySelectorAll('.commit-row .commit-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    const card=btn.closest('.mc-q'), chosen=card.querySelector('input[type=radio]:checked');
+    if(!chosen){alert('Choose an answer before committing.');return}
+    card.classList.add('locked'); card.querySelectorAll('input').forEach(x=>x.disabled=true); btn.disabled=true; btn.previousElementSibling.textContent='Answer committed — locked.';
+  }));
+  document.querySelectorAll('.submit-set').forEach(btn=>btn.addEventListener('click',()=>{
+    const set=btn.closest('.set-block'), qs=[...set.querySelectorAll('.mc-q')];
+    if(qs.some(q=>!q.querySelector('input[type=radio]:checked'))){alert('Answer every question in this passage set before submitting.');return}
+    if(!confirm('Submit this passage set? You will not be able to change these answers.'))return;
+    set.classList.add('locked'); set.querySelectorAll('input,textarea,select,button').forEach(x=>x.disabled=true); btn.previousElementSibling.textContent='Passage set submitted — locked.';
+  }));
+  window.clearAll=function(){if(!confirm('Clear every response on this homework sheet?'))return; document.querySelectorAll('.error-log [contenteditable]').forEach(el=>el.innerHTML='&nbsp;'); document.querySelectorAll(all).forEach(el=>{el.disabled=false;if(el.type==='radio'||el.type==='checkbox')el.checked=false;else el.value=''}); document.querySelectorAll('.selected,.locked').forEach(el=>el.classList.remove('selected','locked'));document.querySelectorAll('.commit-btn').forEach(b=>b.disabled=false);document.querySelectorAll('.commit-row .lock-note').forEach(n=>n.textContent='Choose, prove, then commit.');document.querySelectorAll('.set-note').forEach(n=>n.textContent=n.closest('[data-set="1"]')?'Review all five responses; submission locks the set.':'Check both halves of every answer before submitting.');};
+})();
+</script>
+<script id="passage-annotation-script">
+
+(function () {
+  'use strict';
+  const toolbarHTML = "<div class=\"annotation-toolbar\" role=\"group\" aria-label=\"Passage annotation tools\">\n  <span class=\"annot-label\">Tool:</span>\n  <button type=\"button\" class=\"annot-btn active\" data-tool=\"highlight\">&#x1F58A; Highlight</button>\n  <button type=\"button\" class=\"annot-btn\" data-tool=\"underline\">U&#x332; Underline</button>\n  <button type=\"button\" class=\"annot-btn\" data-tool=\"outline\">&#9634; Outline</button>\n  <button type=\"button\" class=\"annot-btn\" data-tool=\"note\">&#128204; Note</button>\n  <div class=\"annot-sep\"></div>\n  <span class=\"annot-label\">Color:</span>\n  <div class=\"annot-color-row\">\n    <button type=\"button\" class=\"annot-color-swatch active\" style=\"background:#fef08a;\" data-color=\"#fef08a\" title=\"Yellow\"></button>\n    <button type=\"button\" class=\"annot-color-swatch\" style=\"background:#86efac;\" data-color=\"#86efac\" title=\"Green\"></button>\n    <button type=\"button\" class=\"annot-color-swatch\" style=\"background:#93c5fd;\" data-color=\"#93c5fd\" title=\"Blue\"></button>\n    <button type=\"button\" class=\"annot-color-swatch\" style=\"background:#fca5a5;\" data-color=\"#fca5a5\" title=\"Pink\"></button>\n    <button type=\"button\" class=\"annot-color-swatch\" style=\"background:#c4b5fd;\" data-color=\"#c4b5fd\" title=\"Purple\"></button>\n  </div>\n  <button type=\"button\" class=\"clear-annotations-btn\">&#10005; Clear</button>\n</div>";
+  document.querySelectorAll('.passage-text').forEach(function (passage) {
+    const host = document.createElement('div');
+    host.innerHTML = toolbarHTML;
+    const toolbar = host.firstElementChild;
+    const box = passage.closest('.passage-box');
+    box.before(toolbar);
+    passage.classList.add('annotatable-passage');
+    const state = {tool:'highlight', color:'#fef08a', noteCount:0};
+    let cancelPending = null;
+    function setPressed(selector, current) {
+      toolbar.querySelectorAll(selector).forEach(function (button) {
+        const active = button === current;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+    toolbar.querySelectorAll('.annot-btn').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+      button.addEventListener('click', function () {
+        state.tool = button.dataset.tool;
+        setPressed('.annot-btn', button);
+      });
+    });
+    toolbar.querySelectorAll('.annot-color-swatch').forEach(function (button) {
+      button.setAttribute('aria-label', button.title);
+      button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+      button.addEventListener('click', function () {
+        state.color = button.dataset.color;
+        setPressed('.annot-color-swatch', button);
+      });
+    });
+    function unwrap(span) {
+      if (span.parentNode) span.replaceWith(...span.childNodes);
+    }
+    toolbar.querySelector('.clear-annotations-btn').addEventListener('click', function () {
+      if (cancelPending) cancelPending();
+      passage.querySelectorAll('.passage-note,.note-input-wrapper').forEach(el => el.remove());
+      passage.querySelectorAll('.passage-highlight,.passage-underline,.passage-outline').forEach(unwrap);
+      passage.normalize();
+      state.noteCount = 0;
+    });
+    function selectedRange() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || selection.isCollapsed) return null;
+      const range = selection.getRangeAt(0);
+      if (!passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return null;
+      return range;
+    }
+    function wrapSelection(range) {
+      const pieces = [];
+      const walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.parentElement.closest('.para-lbl,.passage-note,.note-input-wrapper')) continue;
+        if (!range.intersectsNode(node)) continue;
+        const start = node === range.startContainer ? range.startOffset : 0;
+        const end = node === range.endContainer ? range.endOffset : node.length;
+        if (end > start && node.data.slice(start,end).trim()) pieces.push({node,start,end});
+      }
+      return pieces.map(function (piece) {
+        const part = document.createRange();
+        part.setStart(piece.node,piece.start);
+        part.setEnd(piece.node,piece.end);
+        const span = document.createElement('span');
+        if (state.tool === 'note') {
+          span.className = 'passage-highlight passage-note-pending';
+          span.style.backgroundColor = 'rgba(251,191,36,0.35)';
+          span.style.borderBottom = '2px dashed #f59e0b';
+        } else if (state.tool === 'highlight') {
+          span.className = 'passage-highlight';
+          span.style.backgroundColor = state.color;
+          span.style.color = '#1f2937';
+        } else if (state.tool === 'underline') {
+          span.className = 'passage-underline';
+          span.style.textDecorationColor = state.color === '#fef08a' ? '#374151' : state.color;
+        } else {
+          span.className = 'passage-outline';
+          span.style.outlineColor = state.color === '#fef08a' ? '#374151' : state.color;
+        }
+        part.surroundContents(span);
+        return span;
+      });
+    }
+    function addNote(spans) {
+      const last = spans[spans.length-1];
+      const wrapper = document.createElement('span');
+      wrapper.className = 'note-input-wrapper';
+      wrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Type note...';
+      input.setAttribute('aria-label','Passage note');
+      input.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+      const save = document.createElement('button');
+      save.type = 'button';
+      save.textContent = '✓';
+      save.setAttribute('aria-label','Save note');
+      save.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+      const cancel = document.createElement('button');
+      cancel.type = 'button';
+      cancel.textContent = '✕';
+      cancel.setAttribute('aria-label','Cancel note');
+      cancel.style.cssText = save.style.cssText + 'background:#e5e7eb;color:#374151;';
+      wrapper.append(input,save,cancel);
+      last.after(wrapper);
+      let finished = false;
+      function finish(keep) {
+        if (finished) return;
+        finished = true;
+        const text = input.value.trim();
+        wrapper.remove();
+        cancelPending = null;
+        if (!keep || !text) { spans.forEach(unwrap); return; }
+        spans.forEach(function (span) {
+          span.className = 'passage-highlight';
+          span.style.backgroundColor = '#fef3c7';
+          span.style.borderBottom = '';
+        });
+        const note = document.createElement('span');
+        note.className = 'passage-note';
+        note.textContent = String(++state.noteCount);
+        note.tabIndex = 0;
+        note.setAttribute('aria-label','Note '+state.noteCount+': '+text);
+        const tooltip = document.createElement('span');
+        tooltip.className = 'note-tooltip';
+        tooltip.textContent = 'Note: '+text;
+        note.append(tooltip);
+        last.after(note);
+      }
+      cancelPending = () => finish(false);
+      save.addEventListener('click', () => finish(true));
+      cancel.addEventListener('click', () => finish(false));
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === 'Escape') {
+          event.preventDefault();
+          finish(event.key === 'Enter');
+        }
+      });
+      input.focus();
+    }
+    function applySelection() {
+      if (cancelPending) return;
+      const range = selectedRange();
+      if (!range) return;
+      const spans = wrapSelection(range);
+      if (!spans.length) return;
+      window.getSelection().removeAllRanges();
+      if (state.tool === 'note') addNote(spans);
+    }
+    passage.addEventListener('mouseup', function (event) {
+      if (!event.target.closest('.passage-note,.note-input-wrapper')) applySelection();
+    });
+    passage.addEventListener('touchend', function (event) {
+      if (!event.target.closest('.passage-note,.note-input-wrapper')) setTimeout(applySelection,100);
+    });
+    passage.addEventListener('keyup', function (event) {
+      if (event.key === 'Shift') applySelection();
+    });
+  });
+})();
+</script>
+</body></html>
