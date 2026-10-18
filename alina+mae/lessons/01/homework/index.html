@@ -1,1 +1,604 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Digital SHSAT Foundations Practice</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet"><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* CAT activity additions */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:white;padding:.6rem 1rem;z-index:20}.skip-link:focus{left:1rem;top:1rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.toolbar{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap}.toolbar .print-btn{margin:0;min-height:44px}.toolbar .secondary{background:var(--muted)}
+.brand{display:flex;gap:.65rem;align-items:center}.brand-mark{width:42px;height:42px;color:var(--blue)}
+.cat-strip{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:center;background:var(--sand-lt);border:1.5px solid #fcd34d;border-radius:10px;padding:.7rem .9rem;margin-bottom:1.2rem}.cat-strip svg{width:32px;color:#92400e}.cat-strip strong{font-family:var(--ff-head);color:#92400e}.cat-strip p{font-size:.79rem;color:var(--slate)}
+.strategy-strip{display:flex;gap:.5rem;flex-wrap:wrap;background:var(--blue-lt);border:1.5px solid var(--blue-md);border-radius:10px;padding:.6rem .9rem;margin-bottom:.9rem;align-items:center}.strategy-label{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.05em}.strategy-chip{background:white;border:1.5px solid var(--blue-md);border-radius:7px;padding:.2rem .55rem;font-size:.75rem;font-weight:800;color:#1e3a8a}
+.lvl-1{background:#eee;color:#1f2937}.mc-q.locked{background:#f1f5f9;border-color:#94a3b8}.mc-q.locked .mc-opt:not(.selected){opacity:.58}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.4rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.25rem .8rem;background:var(--blue);color:white;font-size:.7rem;font-weight:800;cursor:pointer}.commit-btn:disabled{background:var(--muted);cursor:not-allowed}.lock-note{font-size:.68rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}
+.sent-num{background:rgba(100,116,139,.15);border-radius:3px;padding:0 4px;font-weight:800;color:#374151;font-size:.72rem}
+.graph-audit{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .55rem;margin-top:.5rem}.graph-audit label{font-size:.7rem;font-weight:800;color:var(--muted)}.graph-audit select,.graph-audit input{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.22rem .35rem;font-size:.75rem;margin-top:.12rem;min-height:34px}.number-line{display:block;width:100%;height:42px;margin:.2rem 0;color:#64748b}.domain-note{font-size:.7rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.25rem .4rem;margin-top:.35rem}
+.footer-note{text-align:center;color:var(--muted);font-size:.7rem;margin-top:1.2rem}.line-input{flex:1;border:none;border-bottom:1.5px solid var(--border);font-size:.82rem;background:transparent;outline:none;padding:1px 4px;min-width:0}.score-input{width:2.2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.6);color:white;font-family:var(--ff-head);font-weight:700;text-align:center;outline:none}
+.section-icon{width:24px;color:var(--blue);flex:0 0 auto}.hw-header-left h1{font-weight:800}.prob select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem;font-size:.78rem}
+@media(max-width:680px){body{background:white}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.mc-opts,.prob-grid{grid-template-columns:1fr}.passage-text{column-count:1}.badge{margin-left:0}.section-hd{align-items:flex-start;flex-wrap:wrap}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.95);padding:.55rem;margin:0;z-index:10;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.graph-audit{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}}
+@media print{.commit-row{display:none!important}}
+
+  .lvl-1 { background:#eeeeee; color:#374151; }
+  .continuation { display:flex; justify-content:space-between; align-items:center; gap:.75rem; padding-bottom:.65rem; margin-bottom:.8rem; border-bottom:2px solid var(--blue-md); color:var(--muted); font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .continuation strong { color:var(--blue); }
+  .response-grid { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+  .short-card { background:var(--bg); border:1.5px solid var(--border); border-radius:10px; padding:.75rem .9rem; }
+  .short-card h3 { font-family:var(--ff-head); font-size:.88rem; color:var(--ink); margin-bottom:.25rem; }
+  .short-card p { font-size:.8rem; color:var(--slate); line-height:1.5; }
+  .line-input { flex:1; min-width:0; border:none; border-bottom:1.5px solid var(--border); background:transparent; font:inherit; outline:none; padding:1px 4px; }
+  .nmdv { display:grid; grid-template-columns:repeat(4,1fr); gap:.45rem; margin:.65rem 0 .9rem; }
+  .nmdv div { background:var(--blue-lt); border:1px solid var(--blue-md); border-radius:8px; padding:.45rem .55rem; font-size:.74rem; color:var(--slate); }
+  .nmdv strong { display:block; color:var(--blue); font-family:var(--ff-head); font-size:.82rem; }
+  .evidence-grid { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; margin-top:.5rem; }
+  .evidence-grid label { font-size:.75rem; font-weight:700; color:var(--slate); }
+  .evidence-grid textarea { min-height:48px; }
+  .source-note { font-size:.7rem; color:var(--muted); margin-top:.35rem; font-style:italic; }
+  .check-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.45rem .8rem; margin-top:.5rem; }
+  .check-grid label { font-size:.76rem; color:var(--slate); display:flex; gap:.35rem; align-items:flex-start; }
+  .check-grid input { margin-top:.15rem; accent-color:var(--blue); }
+  .mini-table { width:100%; border-collapse:collapse; font-size:.78rem; margin:.5rem 0; }
+  .mini-table th { color:white; background:var(--blue); padding:.35rem .5rem; text-align:left; }
+  .mini-table td { border:1px solid var(--border); padding:.38rem .5rem; background:white; }
+  .mini-table input { width:100%; border:none; border-bottom:1px solid var(--border); outline:none; font:inherit; }
+  .mc-opt:focus-within { outline:2px solid var(--blue); outline-offset:1px; }
+  .mc-q.locked { opacity:.82; }
+  .mc-q.locked .commit-btn { background:#64748b; }
+  .passage-text.one-col { column-count:1; }
+  .passage-text p { max-width:none; }
+  .prob-grid.three { grid-template-columns:repeat(3,1fr); }
+  .prob-grid.three .prob { padding:.7rem .8rem; }
+  .proof-row { display:grid; grid-template-columns:1fr 1fr; gap:.45rem; margin-top:.45rem; }
+  .proof-row label { font-size:.72rem; font-weight:700; color:var(--slate); }
+  .proof-row input { width:100%; border:none; border-bottom:1.5px solid var(--border); background:white; padding:.15rem .25rem; font:inherit; }
+  @media (max-width:700px){ .response-grid,.prob-grid,.prob-grid.three,.evidence-grid{grid-template-columns:1fr}.nmdv{grid-template-columns:1fr 1fr}.sheet{margin:.75rem;padding:1.2rem}.mc-opts{grid-template-columns:1fr}.passage-text{column-count:1}.toolbar{position:static!important;justify-content:center} }
+  @media print { .prob-grid.three{grid-template-columns:repeat(3,1fr)} .short-card,.prob,.mc-q,.passage-box{break-inside:avoid} }
+</style></head><body><a class="skip-link" href="#main">Skip to homework</a><div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" onclick="clearAll()">Clear All</button></div><main id="main"><section class="sheet">
+<header class="hw-header"><div class="hw-header-left"><h1>Digital SHSAT Foundations Practice</h1><div class="subtitle">NMDV transfer · CAT digital format · November 2026</div></div><div class="hw-meta"><div class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" aria-label="Student name"></div><div class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text" aria-label="Date"></div></div></header>
+<div class="score-banner"><div><div class="title">Independent Transfer Check</div><div class="sub">Complete without notes first. Review only after every response is committed.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="8"> / 8</div><div class="sc-lbl">Page 1</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="24"> / 24</div><div class="sc-lbl">Total</div></div></div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> Solve the item in front of you. Perceived difficulty is not score information. Commit only after one visible proof check.</p></div>
+<div class="section-hd"><span class="icon">◎</span><h2>Part A — CAT Mindset &amp; Process</h2><span class="badge badge-blue">8 questions · ~12 min</span></div>
+<p class="instr">For each scenario, choose the response that protects accuracy and attention on a forward-only adaptive test.</p>
+<div class="nmdv"><div><strong>N · Notice</strong>State the exact target and limits.</div><div><strong>M · Model</strong>Make structure visible.</div><div><strong>D · Decide</strong>Take the smallest logical move.</div><div><strong>V · Verify</strong>Prove the response fits.</div></div>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">1.</span>An item feels much easier than the previous one. What is the strongest response? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q1" value="A"><span class="bubble">A</span><span>Guess quickly because an easy item must be low-value.</span></label><label class="mc-opt"><input type="radio" name="q1" value="B"><span class="bubble">B</span><span>Re-read the task, identify the evidence needed, and solve normally.</span></label><label class="mc-opt"><input type="radio" name="q1" value="C"><span class="bubble">C</span><span>Spend extra time predicting why the item feels easy.</span></label><label class="mc-opt"><input type="radio" name="q1" value="D"><span class="bubble">D</span><span>Change the answer so the route becomes harder.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">2.</span>After 30 seconds, a student has clicked tools but created no new information. What should happen next? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q2" value="A"><span class="bubble">A</span><span>Keep highlighting until most of the text is marked.</span></label><label class="mc-opt"><input type="radio" name="q2" value="B"><span class="bubble">B</span><span>Write every sentence on the notepad.</span></label><label class="mc-opt"><input type="radio" name="q2" value="C"><span class="bubble">C</span><span>Pause controls, restate the task, and choose one concrete next move.</span></label><label class="mc-opt"><input type="radio" name="q2" value="D"><span class="bubble">D</span><span>Assume the preceding response was incorrect.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">3.</span>Which action does <em>not</em> fit the NMDV loop? <span class="lvl lvl-1">L1</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q3" value="A"><span class="bubble">A</span><span>Notice the requested quantity and units.</span></label><label class="mc-opt"><input type="radio" name="q3" value="B"><span class="bubble">B</span><span>Model the relationships among the quantities.</span></label><label class="mc-opt"><input type="radio" name="q3" value="C"><span class="bubble">C</span><span>Decide by calculating every visible number immediately.</span></label><label class="mc-opt"><input type="radio" name="q3" value="D"><span class="bubble">D</span><span>Verify the result against the original conditions.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">4.</span>Which sentence reveals tool misuse? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q4" value="A"><span class="bubble">A</span><span>“I am using this tool to mark the condition that controls the answer.”</span></label><label class="mc-opt"><input type="radio" name="q4" value="B"><span class="bubble">B</span><span>“I am using this tool because digital tests provide it.”</span></label><label class="mc-opt"><input type="radio" name="q4" value="C"><span class="bubble">C</span><span>“I am using this tool to cross out an option after naming its flaw.”</span></label><label class="mc-opt"><input type="radio" name="q4" value="D"><span class="bubble">D</span><span>“I am using this tool to store a short equation while I compare choices.”</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">5.</span>A question coordinates several familiar constraints. What strategy best matches a Level 4 item? <span class="lvl lvl-3">L3</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q5" value="A"><span class="bubble">A</span><span>Stop once the work becomes uncomfortable.</span></label><label class="mc-opt"><input type="radio" name="q5" value="B"><span class="bubble">B</span><span>Treat it as a fresh item and organize all conditions before calculating.</span></label><label class="mc-opt"><input type="radio" name="q5" value="C"><span class="bubble">C</span><span>Infer that every later item will be even harder.</span></label><label class="mc-opt"><input type="radio" name="q5" value="D"><span class="bubble">D</span><span>Rush to preserve average time per question.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">6.</span>In ELA, what counts as evidence? <span class="lvl lvl-1">L1</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q6" value="A"><span class="bubble">A</span><span>An answer choice related to the topic.</span></label><label class="mc-opt"><input type="radio" name="q6" value="B"><span class="bubble">B</span><span>A detail, pattern, contrast, or change that proves the claim.</span></label><label class="mc-opt"><input type="radio" name="q6" value="C"><span class="bubble">C</span><span>A fact that is generally true outside the passage.</span></label><label class="mc-opt"><input type="radio" name="q6" value="D"><span class="bubble">D</span><span>The longest sentence in the paragraph.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">7.</span>Which pacing decision is most defensible? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q7" value="A"><span class="bubble">A</span><span>Use the average as a strict time limit for every item.</span></label><label class="mc-opt"><input type="radio" name="q7" value="B"><span class="bubble">B</span><span>Spend less on clear items and use the saved time for productive struggle.</span></label><label class="mc-opt"><input type="radio" name="q7" value="C"><span class="bubble">C</span><span>Give equal time to all items, even after progress stops.</span></label><label class="mc-opt"><input type="radio" name="q7" value="D"><span class="bubble">D</span><span>Begin with the section that a classmate prefers.</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">8.</span>Which sequence correctly represents one clean loop? <span class="lvl lvl-1">L1</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q8" value="A"><span class="bubble">A</span><span>Answer → Model → Notice → Verify</span></label><label class="mc-opt"><input type="radio" name="q8" value="B"><span class="bubble">B</span><span>Notice → Model → Decide → Verify</span></label><label class="mc-opt"><input type="radio" name="q8" value="C"><span class="bubble">C</span><span>Model → Verify → Notice → Decide</span></label><label class="mc-opt"><input type="radio" name="q8" value="D"><span class="bubble">D</span><span>Notice → Decide → Model → Verify</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<div class="footer-note">Page 1 · A stable process matters more than guessing the route.</div></section><section class="sheet page-break">
+<div class="continuation"><span>Continue from page 1</span><strong>Questions 9–14</strong></div>
+<div class="section-hd"><span class="icon">▤</span><h2>Part B — Read, Map, Prove</h2><span class="badge badge-coral">6 questions · ~18 min</span></div>
+<p class="instr">First read: track the problem, test, result, and complication. Second read: prove each choice with exact passage evidence.</p>
+<div class="strategy-strip"><span class="strategy-label">Margin map</span><span class="strategy-chip">P1 · problem + proposal</span><span class="strategy-chip">P2 · two tests</span><span class="strategy-chip">P3 · result + caution</span></div>
+<article class="passage-box"><div class="passage-title">The Library’s Quiet Experiment</div><div class="passage-text one-col"><p><span class="para-lbl">1</span> When Harborview Library extended its evening hours, staff members expected more visitors but did not expect the study room to become so noisy. Closing the room would have defeated the purpose of keeping the building open later, so librarian Nia Patel proposed a two-week test.</p><p><span class="para-lbl">2</span> During the first week, the library posted signs asking visitors to silence notifications. During the second, it rearranged the room so collaborative tables stood near the entrance and individual desks faced the back wall. Staff recorded the number of noise complaints each night, but Patel also interviewed visitors. She wanted to know whether a quieter room actually helped them concentrate.</p><p><span class="para-lbl">3</span> Complaints fell in both weeks, though they fell more after the furniture was rearranged. The interviews added a caution: several visitors liked the quieter back area but had trouble finding open group tables. Patel recommended keeping the new layout while adding a reservation system. The experiment did not produce a perfect room; it produced a better question about how the room should serve different kinds of work.</p></div><div class="source-note">Original passage written for this activity.</div></article>
+<article class="mc-q passage-item"><div class="mc-q-text"><span class="qnum">9.</span>What is the main function of paragraph 1? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q9" value="A"><span class="bubble">A</span><span>To argue that signs are always ineffective</span></label><label class="mc-opt"><input type="radio" name="q9" value="B"><span class="bubble">B</span><span>To explain why the library tested a solution instead of closing the room</span></label><label class="mc-opt"><input type="radio" name="q9" value="C"><span class="bubble">C</span><span>To show that evening visitors behaved irresponsibly</span></label><label class="mc-opt"><input type="radio" name="q9" value="D"><span class="bubble">D</span><span>To compare Harborview Library with other libraries</span></label></div></article>
+<article class="mc-q passage-item"><div class="mc-q-text"><span class="qnum">10.</span>What can be inferred about Patel’s approach to evidence? <span class="lvl lvl-3">L3</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q10" value="A"><span class="bubble">A</span><span>She relies only on complaint totals.</span></label><label class="mc-opt"><input type="radio" name="q10" value="B"><span class="bubble">B</span><span>She rejects numerical evidence in favor of opinions.</span></label><label class="mc-opt"><input type="radio" name="q10" value="C"><span class="bubble">C</span><span>She combines recorded outcomes with visitor experience.</span></label><label class="mc-opt"><input type="radio" name="q10" value="D"><span class="bubble">D</span><span>She changes the goal after seeing the results.</span></label></div></article>
+<article class="mc-q passage-item"><div class="mc-q-text"><span class="qnum">11.</span>Which statement is directly supported by the passage? <span class="lvl lvl-1">L1</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q11" value="A"><span class="bubble">A</span><span>The library needed fewer staff members during the test.</span></label><label class="mc-opt"><input type="radio" name="q11" value="B"><span class="bubble">B</span><span>The rearranged furniture reduced complaints more than the signs did.</span></label><label class="mc-opt"><input type="radio" name="q11" value="C"><span class="bubble">C</span><span>Most visitors preferred collaborative tables near the entrance.</span></label><label class="mc-opt"><input type="radio" name="q11" value="D"><span class="bubble">D</span><span>The reservation system immediately solved the seating problem.</span></label></div></article>
+<article class="mc-q passage-item"><div class="mc-q-text"><span class="qnum">12.</span>Which idea is best developed by the final paragraph? <span class="lvl lvl-4">L4</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q12" value="A"><span class="bubble">A</span><span>The test failed because it did not eliminate every complaint.</span></label><label class="mc-opt"><input type="radio" name="q12" value="B"><span class="bubble">B</span><span>A solution can improve one condition while creating or revealing another need.</span></label><label class="mc-opt"><input type="radio" name="q12" value="C"><span class="bubble">C</span><span>Libraries should prioritize individual work over group work.</span></label><label class="mc-opt"><input type="radio" name="q12" value="D"><span class="bubble">D</span><span>Visitor interviews are more reliable than recorded data.</span></label></div></article>
+<article class="mc-q passage-item"><div class="mc-q-text"><span class="qnum">13.</span>How does the sentence beginning “The interviews added a caution” function in paragraph 3? <span class="lvl lvl-3">L3</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q13" value="A"><span class="bubble">A</span><span>It introduces the original problem.</span></label><label class="mc-opt"><input type="radio" name="q13" value="B"><span class="bubble">B</span><span>It lists the exact interview questions.</span></label><label class="mc-opt"><input type="radio" name="q13" value="C"><span class="bubble">C</span><span>It reports a result and then qualifies that result.</span></label><label class="mc-opt"><input type="radio" name="q13" value="D"><span class="bubble">D</span><span>It proves the signs caused the furniture problem.</span></label></div></article>
+<article class="mc-q passage-item"><div class="mc-q-text"><span class="qnum">14.</span>As used in the last sentence, “a better question” most nearly refers to: <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q14" value="A"><span class="bubble">A</span><span>A final answer that requires no further testing</span></label><label class="mc-opt"><input type="radio" name="q14" value="B"><span class="bubble">B</span><span>A policy that removes collaborative work</span></label><label class="mc-opt"><input type="radio" name="q14" value="C"><span class="bubble">C</span><span>A refined problem revealed by imperfect results</span></label><label class="mc-opt"><input type="radio" name="q14" value="D"><span class="bubble">D</span><span>A complaint that staff members had overlooked</span></label></div></article>
+<div class="commit-row"><span class="lock-note" id="setNote">Review all six evidence links before leaving this passage set.</span><button class="commit-btn" id="commitSet" type="button">Submit passage set</button></div>
+<div class="evidence-grid"><label>12-word passage summary<textarea class="work-area" aria-label="Passage summary" placeholder="Preserve both the improvement and the complication..."></textarea></label><label>Strongest evidence pair<textarea class="work-area" aria-label="Strongest evidence pair" placeholder="Question # + two exact details..."></textarea></label></div>
+<div class="footer-note">Page 2 · Combine details without inventing beyond the text.</div></section><section class="sheet page-break">
+<div class="continuation"><span>Continue from page 2</span><strong>Questions 15–24</strong></div>
+<div class="section-hd"><span class="icon">◇</span><h2>Part C — Select the Model</h2><span class="badge badge-green">4 questions · ~8 min</span></div>
+<p class="instr">Name the fixed amount, repeating amount, whole, or constraint before selecting an equation.</p>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">15.</span>A bike shop charges a $18 setup fee plus $4.50 per hour. A customer pays $45. Which equation models the number of hours, b? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q15" value="A"><span class="bubble">A</span><span>18 + 4.5b = 45</span></label><label class="mc-opt"><input type="radio" name="q15" value="B"><span class="bubble">B</span><span>4.5 + 18b = 45</span></label><label class="mc-opt"><input type="radio" name="q15" value="C"><span class="bubble">C</span><span>18b + 4.5 = 45</span></label><label class="mc-opt"><input type="radio" name="q15" value="D"><span class="bubble">D</span><span>18(4.5b) = 45</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">16.</span>A rectangle has length 3x and width x − 5. Its perimeter is 46. Which equation models the situation? <span class="lvl lvl-3">L3</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q16" value="A"><span class="bubble">A</span><span>3x + 2(x − 5) = 46</span></label><label class="mc-opt"><input type="radio" name="q16" value="B"><span class="bubble">B</span><span>3x + 2x − 5 = 46</span></label><label class="mc-opt"><input type="radio" name="q16" value="C"><span class="bubble">C</span><span>2(3x) + 2(x − 5) = 46</span></label><label class="mc-opt"><input type="radio" name="q16" value="D"><span class="bubble">D</span><span>3x(x − 5) = 46</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">17.</span>A container was 7/12 full. After 15 liters were removed, it was 1/3 full. Which equation models its capacity, C? <span class="lvl lvl-4">L4</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q17" value="A"><span class="bubble">A</span><span>(7/12)C − (1/3)C = 15</span></label><label class="mc-opt"><input type="radio" name="q17" value="B"><span class="bubble">B</span><span>(7/12)C + (1/3)C = 15</span></label><label class="mc-opt"><input type="radio" name="q17" value="C"><span class="bubble">C</span><span>(7/12 − 1/3) = 15C</span></label><label class="mc-opt"><input type="radio" name="q17" value="D"><span class="bubble">D</span><span>C − 7/12 − 1/3 = 15</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<article class="mc-q "><div class="mc-q-text"><span class="qnum">18.</span>A club already has $20 and earns $6 per poster sold. Which inequality represents earning at least $100 total? <span class="lvl lvl-2">L2</span></div><div class="mc-opts"><label class="mc-opt"><input type="radio" name="q18" value="A"><span class="bubble">A</span><span>6p − 20 ≥ 100</span></label><label class="mc-opt"><input type="radio" name="q18" value="B"><span class="bubble">B</span><span>20 + 6p ≥ 100</span></label><label class="mc-opt"><input type="radio" name="q18" value="C"><span class="bubble">C</span><span>20p + 6 ≥ 100</span></label><label class="mc-opt"><input type="radio" name="q18" value="D"><span class="bubble">D</span><span>6(p + 20) ≥ 100</span></label></div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>
+<div class="section-hd"><span class="icon">✎</span><h2>Part D — Build, Solve, Verify</h2><span class="badge badge-purple">6 problems · ~22 min</span></div>
+<div class="strategy-strip"><span class="strategy-label">Required proof</span><span class="strategy-chip">model</span><span class="strategy-chip">solve</span><span class="strategy-chip">units</span><span class="strategy-chip">original-condition check</span></div>
+<div class="prob-grid three">
+<article class="prob"><div class="prob-num">Problem 19 <span class="lvl lvl-2">L2</span></div><p class="prob-q">Five museum tickets and a $7 processing fee cost $67. Find the ticket price.</p><textarea class="work-area" aria-label="Work for problem 19" placeholder="Define a variable, model, solve..."></textarea><div class="answer-box"><label for="ans19">Answer:</label><input class="line-input" id="ans19" type="text"></div><div class="proof-row"><label>Estimate / evidence check<input type="text" aria-label="Estimate or evidence check for 19"></label><label>What proves it fits?<input type="text" aria-label="Verification for 19"></label></div></article>
+<article class="prob"><div class="prob-num">Problem 20 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A recipe uses 2/3 cup of rice for 5 servings. How much rice is needed for 18 servings?</p><textarea class="work-area" aria-label="Work for problem 20" placeholder="Use a unit rate or proportion..."></textarea><div class="answer-box"><label for="ans20">Answer:</label><input class="line-input" id="ans20" type="text"></div><div class="proof-row"><label>Estimate / evidence check<input type="text" aria-label="Estimate or evidence check for 20"></label><label>What proves it fits?<input type="text" aria-label="Verification for 20"></label></div></article>
+<article class="prob"><div class="prob-num">Problem 21 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A rectangle’s length is 4 feet less than three times its width. Its perimeter is 64 feet. Find both dimensions.</p><textarea class="work-area" aria-label="Work for problem 21" placeholder="Draw or write both constraints..."></textarea><div class="answer-box"><label for="ans21">Answer:</label><input class="line-input" id="ans21" type="text"></div><div class="proof-row"><label>Estimate / evidence check<input type="text" aria-label="Estimate or evidence check for 21"></label><label>What proves it fits?<input type="text" aria-label="Verification for 21"></label></div></article>
+<article class="prob"><div class="prob-num">Problem 22 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A tank is 2/5 full. After 21 gallons are added, it is 3/4 full. Find the capacity.</p><textarea class="work-area" aria-label="Work for problem 22" placeholder="Represent the fractional change..."></textarea><div class="answer-box"><label for="ans22">Answer:</label><input class="line-input" id="ans22" type="text"></div><div class="proof-row"><label>Estimate / evidence check<input type="text" aria-label="Estimate or evidence check for 22"></label><label>What proves it fits?<input type="text" aria-label="Verification for 22"></label></div></article>
+<article class="prob"><div class="prob-num">Problem 23 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A shuttle charges $11 plus $2.75 per mile. With at most $33, how many whole miles can a rider travel?</p><textarea class="work-area" aria-label="Work for problem 23" placeholder="Build and solve an inequality..."></textarea><div class="answer-box"><label for="ans23">Answer:</label><input class="line-input" id="ans23" type="text"></div><div class="proof-row"><label>Estimate / evidence check<input type="text" aria-label="Estimate or evidence check for 23"></label><label>What proves it fits?<input type="text" aria-label="Verification for 23"></label></div></article>
+<article class="prob"><div class="prob-num">Problem 24 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A 120-page book is read over three days. Day 2 has 8 more pages than Day 1; Day 3 has twice Day 1. How many pages are read each day?</p><textarea class="work-area" aria-label="Work for problem 24" placeholder="Coordinate all three expressions..."></textarea><div class="answer-box"><label for="ans24">Answer:</label><input class="line-input" id="ans24" type="text"></div><div class="proof-row"><label>Estimate / evidence check<input type="text" aria-label="Estimate or evidence check for 24"></label><label>What proves it fits?<input type="text" aria-label="Verification for 24"></label></div></article>
+</div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>Recovery rule:</strong> If work stops producing information, change the representation—not your confidence. A diagram, table, equation, or unit check should have a specific job.</p></div>
+<div class="footer-note">Page 3 · Accurate arithmetic cannot rescue an inaccurate model.</div></section><section class="sheet page-break">
+<div class="continuation"><span>Continue from page 3</span><strong>Bring to session</strong></div>
+<div class="section-hd"><span class="icon">▤</span><h2>Part E — Evidence-Based Error Log</h2><span class="badge badge-coral">~12 min</span></div>
+<p class="instr">Use the assigned key or review in session. Enter no more than five items; choose the corrections with the greatest transfer value.</p>
+<div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>#</th><th>Item</th><th>My first wrong step or decision</th><th>Rule / fix for next time</th></tr></thead><tbody><tr><td>1</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>2</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>3</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>4</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr><tr><td>5</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td><td contenteditable="true">&nbsp;</td></tr></tbody></table><div class="error-type-pills"><span class="pill pill-cg">CG · Careless / Workflow</span><span class="pill pill-ce">CE · Concept / Evidence</span><span class="pill pill-ru">RU · Rule / Understanding</span></div></div>
+<div class="section-hd"><span class="icon">✓</span><h2>Part F — Digital Workflow Audit</h2><span class="badge badge-sand">4 checks</span></div>
+<div class="response-grid"><div class="short-card"><h3>Tool with a job</h3><p>One time a digital tool helped because I used it to…</p><textarea class="work-area" aria-label="Tool reflection"></textarea></div><div class="short-card"><h3>Progress check</h3><p>When I stopped creating new information, I changed…</p><textarea class="work-area" aria-label="Progress reflection"></textarea></div><div class="short-card"><h3>Evidence boundary</h3><p>An ELA answer became too strong when it claimed…</p><textarea class="work-area" aria-label="ELA boundary reflection"></textarea></div><div class="short-card"><h3>Model repair</h3><p>A math representation protected me from…</p><textarea class="work-area" aria-label="Math model reflection"></textarea></div></div>
+<div class="reflect-box"><h3>Next-Test Commitment</h3><div class="reflect-lines"><label class="reflect-line">Before I calculate, I will <input type="text"></label><label class="reflect-line">Before I choose an ELA option, I will <input type="text"></label><label class="reflect-line">When an item feels unusually easy or hard, I will <input type="text"></label><label class="reflect-line">My ten-second reset will be <input type="text"></label></div></div>
+<div class="check-grid"><label><input type="checkbox"> I completed all first-pass responses before checking.</label><label><input type="checkbox"> I verified units or evidence on every constructed response.</label><label><input type="checkbox"> I recorded the first wrong decision for each logged item.</label><label><input type="checkbox"> I can explain one NMDV move without reading my notes.</label></div>
+<div class="footer-note">Page 4 · Bring this completed sheet and your highest-value questions.</div></section></main><script>
+function selectOption(label){const card=label.closest('.mc-q');if(card.classList.contains('locked'))return;card.querySelectorAll('.mc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('.bubble').textContent=o.querySelector('input').value});label.classList.add('selected');label.querySelector('.bubble').textContent='✓';label.querySelector('input').checked=true}
+function lockCard(card){if(!card.querySelector('input:checked')){alert('Choose an answer before committing.');return}card.classList.add('locked');card.querySelectorAll('input,button').forEach(e=>e.disabled=true);const n=card.querySelector('.lock-note');if(n)n.textContent='Locked — response committed.'}
+function clearAll(){if(!confirm('Clear every answer, work box, and committed response?'))return;document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio'||e.type==='checkbox')e.checked=false;else e.value='';e.disabled=false});document.querySelectorAll('select').forEach(e=>{e.selectedIndex=0;e.disabled=false});document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');e.querySelector('.bubble').textContent=e.querySelector('input').value});document.querySelectorAll('.mc-q').forEach(e=>e.classList.remove('locked'));document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);document.querySelectorAll('.lock-note').forEach(e=>e.textContent=e.id==='setNote'?'Review all six evidence links before leaving this passage set.':'Choose, audit, then commit.');document.querySelectorAll('[contenteditable]').forEach(e=>e.innerHTML='&nbsp;')}
+document.querySelectorAll('.mc-opt').forEach(l=>{l.addEventListener('click',()=>selectOption(l));l.querySelector('input').addEventListener('change',()=>selectOption(l))});
+document.querySelectorAll('.mc-q:not(.passage-item) .commit-btn').forEach(b=>b.addEventListener('click',()=>lockCard(b.closest('.mc-q'))));
+const setBtn=document.getElementById('commitSet');if(setBtn)setBtn.addEventListener('click',()=>{const a=[...document.querySelectorAll('.passage-item')];if(a.some(x=>!x.querySelector('input:checked'))){alert('Answer all six questions in this passage set before submitting it.');return}a.forEach(c=>{c.classList.add('locked');c.querySelectorAll('input').forEach(e=>e.disabled=true)});setBtn.disabled=true;document.getElementById('setNote').textContent='Passage set locked — responses committed.'});
+</script></body></html>
