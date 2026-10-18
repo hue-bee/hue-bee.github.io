@@ -1,1 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Digital SHSAT Foundations — Mae & Alina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;--surface:#ffffff;--ink:#1f1f1f;--ink-2:#4a4a4a;--ink-3:#767676;
+  --line:rgba(201,212,228,.55);--blue:#2563EB;--blue-soft:#DCEBFB;--navy:#17233B;
+  --green:#15803D;--green-soft:#E8F7EC;--amber:#B45309;--amber-soft:#FBEBCF;
+  --gray:#3D3D3D;--gray-soft:#E2E2E2;--red:#9C1C1C;--red-soft:#FCE8E8;
+  --font-display:'Baloo 2','Nunito',sans-serif;--font-body:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;background:var(--bg)}
+body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400}
+.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:auto}.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.55rem)}
+.slide::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-190px;top:-190px;background:radial-gradient(circle,#DCEBFB 0%,rgba(220,235,251,0) 72%);opacity:.9}.slide::after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;left:-170px;bottom:-170px;background:radial-gradient(circle,#E8EDF5 0%,rgba(232,237,245,0) 72%);opacity:.75}
+.reveal{opacity:0;transform:translateY(16px)}
+.nav-controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:13px;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);padding:7px 18px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.32),0 2px 8px rgba(201,212,228,.18)}.nav-btn{width:34px;height:34px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer}.nav-btn:hover{background:#DCE7F7}.slide-dots{display:flex;gap:6px}.dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.18);cursor:pointer;transition:.2s}.dot.active{background:var(--ink);transform:scale(1.4)}.slide-counter{font-size:.72rem;color:var(--ink-3);min-width:38px;text-align:center;font-weight:700}
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.8rem}.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:600;padding:4px 10px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--ink-3);white-space:nowrap}.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4)}.zone-chip.on{color:#fff;background:var(--dc);border-color:var(--dc)}.zone-chip.on .zdot{background:#fff}
+.kicker{font-size:.69rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--zc,var(--ink-3));margin-bottom:.28rem}h1,h2,h3,h4,p{margin-top:0}h1.deck-title{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;margin:0}h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:650;letter-spacing:-.015em;margin:0 0 .85rem;color:var(--ink)}h2.slide-title .tint{color:var(--zc,var(--blue))}.prose{font-size:.93rem;color:var(--ink-2);line-height:1.55}.small{font-size:.78rem;color:var(--ink-3);line-height:1.45}.micro{font-size:.67rem;color:var(--ink-3);line-height:1.35}.math{font-weight:800;font-size:1.35rem;letter-spacing:.01em;font-variant-numeric:lining-nums}.math-inline{font-weight:800}.big{font-family:var(--font-display);font-size:clamp(2.4rem,7vw,5.8rem);font-weight:800;line-height:.9}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}.stack{display:grid;gap:.72rem}.card,.info-card,.prob-card,.diagram-wrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 24px rgba(201,212,228,.20),0 2px 6px rgba(201,212,228,.14)}.card,.info-card{padding:.82rem .95rem}.prob-card{padding:.73rem .88rem}.diagram-wrap{padding:.65rem;display:flex;align-items:center;justify-content:center}.card h3,.info-card h3{font-family:var(--font-display);font-size:1.02rem;margin:0 0 .25rem}.prob-head{display:flex;align-items:center;gap:.45rem;margin-bottom:.32rem}.prob-num{font-family:var(--font-display);font-weight:700;font-size:.82rem;background:#EDF2F9;border-radius:8px;padding:2px 9px}.lvl-badge{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:20px}.lvl-1{background:#E8EDF5;color:#3D4C63}.lvl-2{background:#DCEBFB;color:#1D4ED8}.lvl-3{background:#FBEBCF;color:#B45309}.lvl-4{background:#E2E2E2;color:#3D3D3D}.tag{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;background:#EDF2F9;color:#3D4C63;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.formula-box{background:#EDF2F9;border:1px solid #C9D4E4;border-radius:12px;padding:.55rem .75rem;text-align:center}.prompt-box{border:1px solid #B9C6D9;border-left:5px solid var(--blue);background:#F9FBFE;border-radius:12px;padding:.7rem .9rem}.trap-card{border:1px solid var(--line);background:#F6F6F6;border-radius:12px;padding:.63rem .85rem}.trap-title{font-weight:800;font-size:.8rem;color:#3D3D3D}.trap-body{font-size:.79rem;color:var(--ink-2);margin-top:.18rem;line-height:1.42}.win-card{border:1px solid var(--line);border-left:5px solid var(--green);background:#F4FBF5;border-radius:12px;padding:.66rem .9rem}.win-title{font-weight:800;font-size:.82rem;color:var(--green)}
+.timeline{position:relative;display:grid;gap:.55rem}.timeline::before{content:"";position:absolute;left:54px;top:10px;bottom:10px;width:2px;background:#C9D4E4}.tl-row{display:grid;grid-template-columns:44px 1fr;gap:22px;align-items:center;position:relative}.tl-time{font-size:.68rem;font-weight:800;color:var(--ink-3);text-align:right}.tl-row::after{content:"";position:absolute;left:49px;width:11px;height:11px;border-radius:50%;background:var(--c,var(--blue));box-shadow:0 0 0 4px var(--bg)}.tl-card{padding:.53rem .75rem;background:#fff;border:1px solid var(--line);border-radius:11px}.tl-card strong{font-size:.83rem}.tl-card span{font-size:.73rem;color:var(--ink-2);margin-left:.3rem}
+.step-list{display:grid;gap:.48rem}.step{display:grid;grid-template-columns:34px 1fr;gap:.62rem;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.58rem .7rem;cursor:pointer;transition:.18s}.step:hover,.step.focused{transform:translateX(5px);border-color:#9AA9BF;background:#F9FBFE}.step-n{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--step,#EDF2F9);color:var(--ink);font-weight:900}.step strong{display:block;font-size:.82rem}.step span{display:block;font-size:.76rem;color:var(--ink-2);line-height:1.38}.question{font-size:.86rem;line-height:1.43;color:var(--ink-2)}.question strong{color:var(--ink)}
+.mc-options{display:grid;gap:.32rem}.mc-option{display:flex;gap:.45rem;align-items:flex-start;padding:.38rem .55rem;border-radius:9px;border:1px solid var(--line);background:#FBFCFE;cursor:pointer;font-size:.76rem;line-height:1.35;color:var(--ink-2);transition:.15s}.mc-option:hover{background:#F1F6FD}.mc-option.selected{background:#DCEBFB;border-color:#9AA9BF}.mc-option.eliminated{opacity:.42;text-decoration:line-through}.opt-letter{flex:none;width:20px;height:20px;border-radius:50%;background:#EDF2F9;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;color:var(--ink)}
+.role-card{position:relative;overflow:hidden}.role-card::after{content:"";position:absolute;right:-25px;bottom:-25px;width:90px;height:90px;border-radius:50%;background:var(--role-soft,#EDF2F9)}.role-card .role{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:var(--role,#3D4C63)}
+.passage{font-family:Georgia,'Times New Roman',serif;font-size:.78rem;line-height:1.52;color:#303740;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.78rem .9rem}.passage .pno{font-family:var(--font-body);font-size:.62rem;color:var(--ink-3);font-weight:800;margin-right:.38rem}.evidence-line{display:grid;grid-template-columns:1fr 52px 1fr;align-items:center;gap:.5rem}.bridge{height:3px;background:linear-gradient(90deg,var(--blue),#9AA9BF);position:relative}.bridge::after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid #9AA9BF;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.pacing{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;height:48px;border-radius:12px;overflow:hidden}.pace-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.76rem}.pace-1{background:#17233B}.pace-2{background:#3D4C63}.pace-3{background:#767676}
+.check-row{display:flex;gap:.45rem;align-items:flex-start;font-size:.8rem;color:var(--ink-2)}.box{width:18px;height:18px;border:2px solid #9AA9BF;border-radius:4px;flex:none;margin-top:1px;cursor:pointer}.box.checked{background:var(--blue);border-color:var(--blue);position:relative}.box.checked::after{content:"✓";color:#fff;font-size:.75rem;position:absolute;left:2px;top:-1px}
+svg{max-width:100%;height:auto}.svg-label{font-family:var(--font-body);fill:#4a4a4a;font-size:13px}.svg-small{font-family:var(--font-body);fill:#767676;font-size:11px}.svg-strong{font-family:var(--font-body);fill:#1f1f1f;font-size:14px;font-weight:800}.title-mark{width:110px;height:110px;margin:0 auto .5rem;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.click-note{font-size:.64rem;color:var(--ink-3);text-align:right;margin-top:.28rem}.teacher-cue{background:#17233B;color:#fff;border-radius:11px;padding:.52rem .7rem;font-size:.75rem;line-height:1.4}.teacher-cue strong{color:#DCEBFB}.section-band{height:6px;border-radius:6px;background:linear-gradient(90deg,#17233B,#2563EB,#9AA9BF);margin-bottom:.8rem}.center{text-align:center}.mt{margin-top:.7rem}.mb{margin-bottom:.65rem}.no-margin{margin:0}
+@media(max-width:850px){.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr}.slide>.content{padding:1rem}.nav-controls{bottom:8px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.1s!important}}
 
+.work-box{border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;overflow:hidden;}
+.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-body);line-height:1.5;outline:none;}
+.work-box textarea::placeholder{color:#9AA9BF;}
+.work-box textarea:focus{background:#F1F6FD;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<section class="slide active" data-slide="1">
+<div class="content center">
+  <div class="title-mark reveal">
+    <svg viewBox="0 0 120 120" role="img" aria-label="A computer screen with branching paths">
+      <rect x="15" y="15" width="90" height="66" rx="10" fill="#fff" stroke="#17233B" stroke-width="4"/>
+      <path d="M60 82v14M42 99h36" stroke="#17233B" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="37" cy="48" r="8" fill="#DCEBFB" stroke="#2563EB" stroke-width="3"/>
+      <circle cx="82" cy="35" r="7" fill="#FBEBCF" stroke="#B45309" stroke-width="3"/>
+      <circle cx="82" cy="62" r="7" fill="#E2E2E2" stroke="#3D3D3D" stroke-width="3"/>
+      <path d="M45 48h15M60 48l15-13M60 48l15 14" fill="none" stroke="#17233B" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="kicker reveal" style="--zc:#2563EB">Session 1 · Mae & Alina · Grade 7</div>
+  <h1 class="deck-title reveal" style="font-size:clamp(2.4rem,6vw,4.7rem);line-height:.98">Think Like the<br><span style="color:#2563EB">Digital SHSAT</span></h1>
+  <p class="reveal" style="font-size:1.05rem;color:#4a4a4a;margin:.65rem 0 .9rem">A first-look lesson for the computer-adaptive format · Fall 2026 and beyond</p>
+  <div class="reveal" style="display:flex;justify-content:center;gap:.45rem;flex-wrap:wrap"><span class="tag">Notice</span><span class="tag">Model</span><span class="tag">Eliminate</span><span class="tag">Verify</span></div>
+</div>
+</section>
+
+<section class="slide" data-slide="2">
+<div class="content">
+  <div class="kicker reveal">Session Roadmap</div><h2 class="slide-title reveal">Today's <span class="tint">60-Minute</span> Plan</h2>
+  <div class="timeline reveal">
+    <div class="tl-row" style="--c:#17233B"><div class="tl-time">0:00–0:05</div><div class="tl-card"><strong>Reset after the diagnostic</strong><span>No scores, no item review—only habits.</span></div></div>
+    <div class="tl-row" style="--c:#2563EB"><div class="tl-time">0:05–0:12</div><div class="tl-card"><strong>Understand the adaptive test</strong><span>What changes, what stays fixed.</span></div></div>
+    <div class="tl-row" style="--c:#3D4C63"><div class="tl-time">0:12–0:20</div><div class="tl-card"><strong>Build one universal process</strong><span>Read → represent → decide → verify.</span></div></div>
+    <div class="tl-row" style="--c:#B45309"><div class="tl-time">0:20–0:37</div><div class="tl-card"><strong>Math strategy lab</strong><span>Level 1–4 modeling and two guided solutions.</span></div></div>
+    <div class="tl-row" style="--c:#15803D"><div class="tl-time">0:37–0:53</div><div class="tl-card"><strong>ELA strategy lab</strong><span>Level 1–4 reading and one guided solution.</span></div></div>
+    <div class="tl-row" style="--c:#767676"><div class="tl-time">0:53–1:00</div><div class="tl-card"><strong>Digital workflow + exit ticket</strong><span>Choose one habit for next time.</span></div></div>
+  </div>
+</div>
+</section>
+
+<section class="slide" data-slide="3">
+<div class="content">
+  <div class="kicker reveal">Opening · Diagnostic Reset</div><h2 class="slide-title reveal">Today Is About <span class="tint">Process, Not Performance</span></h2>
+  <div class="grid2">
+    <div class="info-card reveal"><h3>Leave outside the room</h3><div class="stack small"><div class="check-row"><span class="box"></span><span>Trying to guess a score</span></div><div class="check-row"><span class="box"></span><span>Replaying a question you remember</span></div><div class="check-row"><span class="box"></span><span>Comparing who felt faster</span></div></div></div>
+    <div class="info-card reveal"><h3>Bring into the room</h3><div class="stack small"><div class="check-row"><span class="box"></span><span>One moment that felt clear</span></div><div class="check-row"><span class="box"></span><span>One moment that felt uncertain</span></div><div class="check-row"><span class="box"></span><span>One digital habit you noticed</span></div></div></div>
+  </div>
+  <div class="prompt-box reveal mt"><strong>Silent think, 20 seconds:</strong> When uncertainty appeared, what did you do next—reread, represent, eliminate, estimate, or guess?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-1" aria-label="Silent think, 20 seconds: When uncertainty appeared, what did you do next—reread, represent, eliminate, estimate, or guess?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+  <div class="teacher-cue reveal mt"><strong>Partner move:</strong> Mae speaks for 30 seconds while Alina listens for the action verb; then switch. Do not discuss a specific diagnostic item.</div>
+</div>
+</section>
+
+<section class="slide" data-slide="4">
+<div class="content">
+  <div class="kicker reveal">Digital Format · Mental Model</div><h2 class="slide-title reveal">Adaptive Means the <span class="tint">Route Changes</span>, Not the Destination</h2>
+  <div class="grid2">
+    <div class="diagram-wrap reveal">
+      <svg viewBox="0 0 460 280" role="img" aria-label="Adaptive test path diagram">
+        <rect x="158" y="12" width="145" height="48" rx="12" fill="#fff" stroke="#17233B" stroke-width="2"/><text x="230" y="33" text-anchor="middle" class="svg-strong">Average start</text><text x="230" y="49" text-anchor="middle" class="svg-small">item or passage set</text>
+        <path d="M230 61v28M230 89L110 126M230 89l120 37" stroke="#9AA9BF" stroke-width="3" fill="none"/>
+        <rect x="38" y="126" width="145" height="54" rx="12" fill="#DCEBFB" stroke="#2563EB" stroke-width="2"/><text x="110" y="149" text-anchor="middle" class="svg-strong">Estimate rises</text><text x="110" y="166" text-anchor="middle" class="svg-small">more challenge may follow</text>
+        <rect x="278" y="126" width="145" height="54" rx="12" fill="#E2E2E2" stroke="#3D3D3D" stroke-width="2"/><text x="350" y="149" text-anchor="middle" class="svg-strong">Estimate falls</text><text x="350" y="166" text-anchor="middle" class="svg-small">less challenge may follow</text>
+        <path d="M110 181v36M350 181v36" stroke="#9AA9BF" stroke-width="3"/><rect x="42" y="217" width="376" height="48" rx="12" fill="#fff" stroke="#C9D4E4" stroke-width="2"/><text x="230" y="238" text-anchor="middle" class="svg-strong">Same standards · same number of questions</text><text x="230" y="255" text-anchor="middle" class="svg-small">Your path is recalculated throughout the section</text>
+      </svg>
+    </div>
+    <div class="stack">
+      <div class="card reveal"><span class="tag">Fixed</span><h3>What everyone shares</h3><p class="small no-margin">50 ELA questions, 50 Math questions, grade-level standards, and 180 total minutes.</p></div>
+      <div class="card reveal"><span class="tag">Adaptive</span><h3>What can change</h3><p class="small no-margin">The difficulty of a later item can respond to the pattern of earlier responses.</p></div>
+      <div class="win-card reveal"><div class="win-title">Best response</div><div class="small">Treat the item in front of you as the only item that matters. Difficulty guessing spends attention without earning evidence.</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="slide" data-slide="5">
+<div class="content">
+  <div class="kicker reveal">Adaptive Thinking</div><h2 class="slide-title reveal">Three Myths to <span class="tint">Replace</span></h2>
+  <div class="grid3">
+    <div class="card reveal"><span class="lvl-badge lvl-1">Myth</span><h3>“This feels easy, so I am doing badly.”</h3><p class="small">Feeling is not measurement. Topic familiarity, wording, and fatigue all change perceived difficulty.</p><div class="formula-box small"><strong>Replace with:</strong> “What does this item ask me to prove?”</div></div>
+    <div class="card reveal"><span class="lvl-badge lvl-3">Myth</span><h3>“One miss ruins the route.”</h3><p class="small">The estimate is updated from the response pattern, not from a single dramatic moment.</p><div class="formula-box small"><strong>Replace with:</strong> “Reset before the next item.”</div></div>
+    <div class="card reveal"><span class="lvl-badge lvl-4">Myth</span><h3>“Harder must mean slower.”</h3><p class="small">Some difficult items collapse quickly when represented well; some simple items punish careless reading.</p><div class="formula-box small"><strong>Replace with:</strong> “Spend time where progress is possible.”</div></div>
+  </div>
+  <div class="prompt-box reveal mt"><strong>Discuss:</strong> Which replacement thought would save you the most attention during a long test? Defend the choice with a reason.<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-2" aria-label="Discuss: Which replacement thought would save you the most attention during a long test? Defend the choice with a reason." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="6">
+<div class="content">
+  <div class="kicker reveal">Universal Process</div><h2 class="slide-title reveal">The <span class="tint">N–M–D–V</span> Loop</h2>
+  <div class="grid2">
+    <div class="diagram-wrap reveal">
+      <svg viewBox="0 0 430 300" role="img" aria-label="Four-step problem solving loop">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9AA9BF"/></marker></defs>
+        <circle cx="215" cy="150" r="48" fill="#17233B"/><text x="215" y="144" text-anchor="middle" fill="#fff" style="font-family:Nunito;font-weight:800;font-size:18px">One item</text><text x="215" y="165" text-anchor="middle" fill="#DCEBFB" style="font-family:Nunito;font-size:13px">one clean loop</text>
+        <circle cx="215" cy="42" r="35" fill="#DCEBFB" stroke="#2563EB" stroke-width="2"/><text x="215" y="39" text-anchor="middle" class="svg-strong">NOTICE</text><text x="215" y="55" text-anchor="middle" class="svg-small">facts + task</text>
+        <circle cx="350" cy="150" r="35" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/><text x="350" y="147" text-anchor="middle" class="svg-strong">MODEL</text><text x="350" y="163" text-anchor="middle" class="svg-small">show structure</text>
+        <circle cx="215" cy="258" r="35" fill="#E2E2E2" stroke="#3D3D3D" stroke-width="2"/><text x="215" y="255" text-anchor="middle" class="svg-strong">DECIDE</text><text x="215" y="271" text-anchor="middle" class="svg-small">execute</text>
+        <circle cx="80" cy="150" r="35" fill="#E8F7EC" stroke="#15803D" stroke-width="2"/><text x="80" y="147" text-anchor="middle" class="svg-strong">VERIFY</text><text x="80" y="163" text-anchor="middle" class="svg-small">prove fit</text>
+        <path d="M245 58Q321 75 337 116M333 181Q307 231 251 248M180 248Q118 230 96 183M94 117Q111 72 181 55" fill="none" stroke="#9AA9BF" stroke-width="3" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+    <div class="step-list">
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#DCEBFB">N</div><div><strong>Notice</strong><span>Underline the exact task. Circle units, comparison words, and limits.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#FBEBCF">M</div><div><strong>Model</strong><span>Use an equation, diagram, table, sentence map, or evidence link.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E2E2E2">D</div><div><strong>Decide</strong><span>Carry out the smallest logical move; do not calculate before structure is clear.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E8F7EC">V</div><div><strong>Verify</strong><span>Check the original question, units, sign, scale, and textual evidence.</span></div></div>
+    </div>
+  </div>
+  <div class="click-note reveal">Click any step to focus the class discussion.</div>
+</div>
+</section>
+
+<section class="slide" data-slide="7">
+<div class="content">
+  <div class="kicker reveal">Difficulty Ladder</div><h2 class="slide-title reveal">Level Changes Mean <span class="tint">More Connections</span></h2>
+  <div class="grid4">
+    <div class="card reveal"><span class="lvl-badge lvl-1">Level 1</span><h3>One visible move</h3><p class="small">The needed operation or detail is stated directly.</p><div class="micro"><strong>Ask:</strong> What fact is already waiting for me?</div></div>
+    <div class="card reveal"><span class="lvl-badge lvl-2">Level 2</span><h3>Two linked moves</h3><p class="small">A familiar idea must be translated before it is used.</p><div class="micro"><strong>Ask:</strong> What should I represent first?</div></div>
+    <div class="card reveal"><span class="lvl-badge lvl-3">Level 3</span><h3>Choose the pathway</h3><p class="small">Several methods look possible; one is cleaner or safer.</p><div class="micro"><strong>Ask:</strong> Which structure reduces the work?</div></div>
+    <div class="card reveal"><span class="lvl-badge lvl-4">Level 4</span><h3>Coordinate constraints</h3><p class="small">Multiple conditions, tempting traps, or evidence layers interact.</p><div class="micro"><strong>Ask:</strong> What must be true at the same time?</div></div>
+  </div>
+  <div class="trap-card reveal mt"><div class="trap-title">Important distinction</div><div class="trap-body">A Level 4 item is not necessarily “advanced math” or “hard vocabulary.” It often uses grade-level ideas but requires tighter organization.</div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="8">
+<div class="content">
+  <div class="kicker reveal">Math Lens · Representation</div><h2 class="slide-title reveal">Translate Before You <span class="tint">Calculate</span></h2>
+  <div class="grid2">
+    <div class="info-card reveal">
+      <h3>Sentence</h3><p class="prose">“The length is 6 feet more than twice the width.”</p>
+      <div class="formula-box"><span class="math">L = 2w + 6</span></div>
+      <div class="prompt-box mt small"><strong>Probe:</strong> Which part of the sentence creates multiplication? Which part creates addition? Why is <span class="math-inline">2(w + 6)</span> a different story?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-3" aria-label="Probe: Which part of the sentence creates multiplication? Which part creates addition? Why is 2(w + 6) a different story?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    </div>
+    <div class="diagram-wrap reveal">
+      <svg viewBox="0 0 440 250" role="img" aria-label="Bar model showing length equals twice width plus six">
+        <text x="35" y="40" class="svg-strong">Width</text><rect x="115" y="22" width="110" height="30" rx="4" fill="#DCEBFB" stroke="#2563EB"/><text x="170" y="42" text-anchor="middle" class="svg-label">w</text>
+        <text x="35" y="105" class="svg-strong">Length</text><rect x="115" y="82" width="110" height="38" rx="4" fill="#DCEBFB" stroke="#2563EB"/><rect x="225" y="82" width="110" height="38" rx="4" fill="#DCEBFB" stroke="#2563EB"/><rect x="335" y="82" width="70" height="38" rx="4" fill="#FBEBCF" stroke="#B45309"/><text x="170" y="106" text-anchor="middle" class="svg-label">w</text><text x="280" y="106" text-anchor="middle" class="svg-label">w</text><text x="370" y="106" text-anchor="middle" class="svg-label">6</text>
+        <path d="M115 145v16h290v-16" fill="none" stroke="#3D4C63" stroke-width="2"/><text x="260" y="184" text-anchor="middle" class="svg-strong">2w + 6</text>
+        <text x="220" y="224" text-anchor="middle" class="svg-small">The diagram prevents an order-of-operations translation error.</text>
+      </svg>
+    </div>
+  </div>
+  <div class="teacher-cue reveal mt"><strong>Turn-and-test:</strong> Change “6 feet more than twice” to “twice the sum of the width and 6.” What must change in both the equation and diagram?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-4" aria-label="Turn-and-test: Change “6 feet more than twice” to “twice the sum of the width and 6.” What must change in both the equation and diagram?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="9">
+<div class="content">
+  <div class="kicker reveal">Math Practice · Easy to Hard</div><h2 class="slide-title reveal">One Habit, <span class="tint">Four Levels</span></h2>
+  <div class="grid2">
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="question">Four identical tickets cost $28. What is the cost of one ticket? <strong>What unit rate is requested?</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-5" aria-label="1 Level 1 Four identical tickets cost $28. What is the cost of one ticket? What unit rate is requested?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="question">A recipe uses <span class="math-inline">3/4</span> cup of oats for 6 bars. How many cups are needed for 14 bars? <strong>Would a table or unit rate be cleaner?</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-6" aria-label="2 Level 2 A recipe uses 3/4 cup of oats for 6 bars. How many cups are needed for 14 bars? Would a table or unit rate be cleaner?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="question">A rectangle’s length is 6 feet more than twice its width. Its perimeter is 48 feet. Find its dimensions. <strong>Where does each side appear in the perimeter?</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-7" aria-label="3 Level 3 A rectangle’s length is 6 feet more than twice its width. Its perimeter is 48 feet. Find its dimensions. Where does each side appear in the perimeter?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="question">A tank is <span class="math-inline">3/5</span> full. After 18 gallons are added, it is <span class="math-inline">3/4</span> full. Find the tank’s capacity. <strong>What quantity stays unchanged?</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-8" aria-label="4 Level 4 A tank is 3/5 full. After 18 gallons are added, it is 3/4 full. Find the tank’s capacity. What quantity stays unchanged?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+  </div>
+  <div class="trap-card reveal mt"><div class="trap-title">Digital habit</div><div class="trap-body">Before opening a calculator or typing, build a representation. A clean model protects you from doing accurate arithmetic on the wrong quantities.</div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="10">
+<div class="content">
+  <div class="kicker reveal">Guided Model · Level 3</div><h2 class="slide-title reveal">Rectangle: Turn Words into <span class="tint">Constraints</span></h2>
+  <div class="grid2">
+    <div class="diagram-wrap reveal">
+      <svg viewBox="0 0 430 290" role="img" aria-label="Rectangle with width w and length 2w plus 6">
+        <rect x="90" y="55" width="255" height="145" fill="#F9FBFE" stroke="#17233B" stroke-width="4"/>
+        <text x="218" y="42" text-anchor="middle" class="svg-strong">L = 2w + 6</text><text x="218" y="226" text-anchor="middle" class="svg-strong">L = 2w + 6</text>
+        <text x="65" y="132" text-anchor="middle" class="svg-strong">w</text><text x="370" y="132" text-anchor="middle" class="svg-strong">w</text>
+        <path d="M90 247h255" stroke="#9AA9BF" stroke-width="2"/><path d="M90 239v16M345 239v16" stroke="#9AA9BF" stroke-width="2"/><text x="218" y="276" text-anchor="middle" class="svg-small">Perimeter counts all four sides</text>
+      </svg>
+    </div>
+    <div class="step-list">
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#DCEBFB">1</div><div><strong>Notice the target and total</strong><span>Unknown dimensions; perimeter is 48 feet.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#FBEBCF">2</div><div><strong>Model both relationships</strong><span><span class="math-inline">L = 2w + 6</span> and <span class="math-inline">2L + 2w = 48</span>.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E2E2E2">3</div><div><strong>Substitute, then simplify</strong><span><span class="math-inline">2(2w + 6) + 2w = 48 → 6w + 12 = 48 → w = 6</span>.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E8F7EC">4</div><div><strong>Return and verify</strong><span><span class="math-inline">L = 2(6) + 6 = 18</span>; check <span class="math-inline">2(18) + 2(6) = 48</span>.</span></div></div>
+    </div>
+  </div>
+  <div class="win-card reveal mt"><div class="win-title">Why this is Level 3</div><div class="small">The arithmetic is routine. The challenge is coordinating a verbal relationship with the perimeter formula and knowing where to substitute.</div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="11">
+<div class="content">
+  <div class="kicker reveal">Guided Model · Level 4</div><h2 class="slide-title reveal">Tank Capacity: Make the <span class="tint">Difference Visible</span></h2>
+  <div class="grid2">
+    <div class="diagram-wrap reveal">
+      <svg viewBox="0 0 450 300" role="img" aria-label="Two tanks showing three fifths and three fourths full">
+        <text x="117" y="28" text-anchor="middle" class="svg-strong">Before</text><rect x="55" y="45" width="125" height="205" rx="8" fill="#fff" stroke="#17233B" stroke-width="3"/><rect x="58" y="127" width="119" height="120" fill="#DCEBFB"/><line x1="55" y1="127" x2="180" y2="127" stroke="#2563EB" stroke-width="3"/><text x="117" y="190" text-anchor="middle" class="svg-strong">3/5 C</text>
+        <text x="332" y="28" text-anchor="middle" class="svg-strong">After +18 gal</text><rect x="270" y="45" width="125" height="205" rx="8" fill="#fff" stroke="#17233B" stroke-width="3"/><rect x="273" y="96" width="119" height="151" fill="#FBEBCF"/><line x1="270" y1="96" x2="395" y2="96" stroke="#B45309" stroke-width="3"/><text x="332" y="175" text-anchor="middle" class="svg-strong">3/4 C</text>
+        <path d="M188 112h72" stroke="#3D4C63" stroke-width="3"/><path d="M252 105l10 7-10 7" fill="#3D4C63"/><text x="224" y="97" text-anchor="middle" class="svg-small">18 gallons</text><text x="225" y="282" text-anchor="middle" class="svg-small">Same tank, same capacity C; only the filled fraction changes.</text>
+      </svg>
+    </div>
+    <div class="step-list">
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#DCEBFB">1</div><div><strong>Name the whole</strong><span>Let <span class="math-inline">C</span> be the tank’s total capacity.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#FBEBCF">2</div><div><strong>Represent the change</strong><span><span class="math-inline">(3/4)C − (3/5)C = 18</span>.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E2E2E2">3</div><div><strong>Find the fractional gap</strong><span><span class="math-inline">15/20 − 12/20 = 3/20</span>, so <span class="math-inline">(3/20)C = 18</span>.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E8F7EC">4</div><div><strong>Solve and test the story</strong><span><span class="math-inline">C = 120</span>; the two amounts are 72 and 90 gallons, a difference of 18.</span></div></div>
+    </div>
+  </div>
+  <div class="prompt-box reveal mt"><strong>Deeper question:</strong> Why would adding <span class="math-inline">3/5 + 3/4</span> be structurally wrong even if the fraction arithmetic were perfect?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-9" aria-label="Deeper question: Why would adding 3/5 + 3/4 be structurally wrong even if the fraction arithmetic were perfect?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="12">
+<div class="content">
+  <div class="kicker reveal">Math Trap Lab</div><h2 class="slide-title reveal">Diagnose the <span class="tint">Representation Error</span></h2>
+  <div class="grid2">
+    <div class="prob-card reveal">
+      <div class="prob-head"><span class="prob-num">Challenge</span><span class="lvl-badge lvl-4">Level 4</span></div>
+      <p class="question">A streaming plan charges $12 per month plus $3 per movie. A customer paid $39. Which equation models the number of movies <span class="math-inline">m</span>?</p>
+      <div class="mc-options">
+        <div class="mc-option" onclick="toggleOption(this,event)"><span class="opt-letter">A</span><span><span class="math-inline">12m + 3 = 39</span></span></div>
+        <div class="mc-option" onclick="toggleOption(this,event)"><span class="opt-letter">B</span><span><span class="math-inline">3(m + 12) = 39</span></span></div>
+        <div class="mc-option" onclick="toggleOption(this,event)"><span class="opt-letter">C</span><span><span class="math-inline">12 + 3m = 39</span></span></div>
+        <div class="mc-option" onclick="toggleOption(this,event)"><span class="opt-letter">D</span><span><span class="math-inline">12 + 39m = 3</span></span></div>
+      </div>
+      <div class="click-note">Click once to select; shift-click to eliminate.</div>
+    <div class="work-box" style="margin-top:0.6rem;"><textarea id="response-10" aria-label="Challenge Level 4 A streaming plan charges $12 per month plus $3 per movie. A customer paid $39. Which equation models the number of movies m ? A 12m + 3 = 39 B 3(m + 12) = 39 C 12 + 3m = 39 D 12 + 39m = 3 Click once to select; shift-click to eliminate." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="stack">
+      <div class="card reveal"><h3>Interrogate each term</h3><p class="small">Which number is fixed? Which amount repeats? What does the variable count? Which expression should carry the variable?</p><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-11" aria-label="Interrogate each term Which number is fixed? Which amount repeats? What does the variable count? Which expression should carry the variable?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      <div class="card reveal"><h3>Use the “one movie” test</h3><p class="small">If <span class="math-inline">m = 1</span>, which expression produces one monthly fee plus one movie fee?</p><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-12" aria-label="Use the “one movie” test If m = 1 , which expression produces one monthly fee plus one movie fee?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      <div class="teacher-cue reveal"><strong>Partner roles:</strong> The Solver defends one model. The Skeptic attacks only the placement of the variable. Switch after 45 seconds.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="slide" data-slide="13">
+<div class="content">
+  <div class="kicker reveal">ELA Lens · Evidence</div><h2 class="slide-title reveal">Build a Bridge from <span class="tint">Claim to Text</span></h2>
+  <div class="evidence-line reveal">
+    <div class="card"><span class="tag">Question</span><h3>What must be proved?</h3><p class="small no-margin">Restate the task as a claim with a blank.</p></div>
+    <div class="bridge"></div>
+    <div class="card"><span class="tag">Evidence</span><h3>Which words do the proving?</h3><p class="small no-margin">Point to a specific detail, pattern, contrast, or change.</p></div>
+  </div>
+  <div class="grid3 mt">
+    <div class="card reveal"><h3>Literal</h3><p class="small">The text states the idea directly.</p><div class="micro"><strong>Move:</strong> locate and match.</div></div>
+    <div class="card reveal"><h3>Inferential</h3><p class="small">Two or more details support an unstated conclusion.</p><div class="micro"><strong>Move:</strong> combine without inventing.</div></div>
+    <div class="card reveal"><h3>Structural</h3><p class="small">Placement and organization reveal purpose.</p><div class="micro"><strong>Move:</strong> ask why this part is here.</div></div>
+  </div>
+  <div class="trap-card reveal mt"><div class="trap-title">ELA trap</div><div class="trap-body">An option can be true in real life, related to the topic, and still unsupported by this text. Relevance is not evidence.</div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="14">
+<div class="content">
+  <div class="kicker reveal">ELA Text · Read with Purpose</div><h2 class="slide-title reveal">The Rooftop Weather Station</h2>
+  <div class="grid2">
+    <div class="passage reveal">
+      <p><span class="pno">1</span>When the science club installed a weather station on the school roof, the first week of data looked disappointingly ordinary. The temperature rose by day and fell at night; the wind shifted without any obvious pattern. Several students wondered whether the project had been worth the effort.</p>
+      <p><span class="pno">2</span>Mara noticed, however, that the roof stayed warmer than the nearby park after sunset. Instead of announcing a conclusion, she asked the club to compare clear nights with cloudy ones and to check whether the station’s dark platform affected the readings.</p>
+      <p><span class="pno">3</span>Over the next month, the students moved a spare sensor among grass, pavement, and a shaded wall. Their measurements did not produce one simple rule. They did reveal that surfaces released stored heat at different rates—and that the placement of a sensor could shape the story the numbers seemed to tell.</p>
+    </div>
+    <div class="stack">
+      <div class="prompt-box reveal"><strong>First read:</strong> What changes between paragraph 1 and paragraph 3?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-13" aria-label="First read: What changes between paragraph 1 and paragraph 3?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      <div class="card reveal"><h3>Margin map</h3><p class="small no-margin"><strong>P1:</strong> ordinary data → doubt<br><strong>P2:</strong> pattern noticed → question refined<br><strong>P3:</strong> comparison tested → nuanced insight</p></div>
+      <div class="card reveal"><h3>Compression sentence</h3><p class="small no-margin">Write one sentence using <strong>although</strong> or <strong>but</strong> to capture the passage’s main movement.</p><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-25" aria-label="Compression sentence Write one sentence using although or but to capture the passage’s main movement." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      <div class="teacher-cue reveal"><strong>Read aloud:</strong> Each partner proposes a 12-word summary. Keep the version that preserves both the investigation and its caution.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="slide" data-slide="15">
+<div class="content">
+  <div class="kicker reveal">ELA Practice · Easy to Hard</div><h2 class="slide-title reveal">One Passage, <span class="tint">Four Levels</span></h2>
+  <div class="grid2">
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="question">What did Mara notice about the roof after sunset? <strong>Which paragraph contains the direct detail?</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-14" aria-label="1 Level 1 What did Mara notice about the roof after sunset? Which paragraph contains the direct detail?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="question">As used in paragraph 3, what does “shape the story” suggest about sensor placement? <strong>Which nearby words narrow the meaning?</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-15" aria-label="2 Level 2 As used in paragraph 3, what does “shape the story” suggest about sensor placement? Which nearby words narrow the meaning?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="question">What can be inferred about Mara’s approach to evidence? <strong>Combine one action from paragraph 2 with one from paragraph 3.</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-16" aria-label="3 Level 3 What can be inferred about Mara’s approach to evidence? Combine one action from paragraph 2 with one from paragraph 3." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+    <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="question">How does paragraph 3 develop the central idea? <strong>Describe both what the investigation found and what it complicated.</strong></div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-17" aria-label="4 Level 4 How does paragraph 3 develop the central idea? Describe both what the investigation found and what it complicated." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+  </div>
+  <div class="win-card reveal mt"><div class="win-title">Level-up signal</div><div class="small">The question moves from locating one fact to explaining how multiple details work together. Your evidence must become more connected, not merely longer.</div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="16">
+<div class="content">
+  <div class="kicker reveal">Guided Model · Level 3</div><h2 class="slide-title reveal">Inference: Combine Without <span class="tint">Inventing</span></h2>
+  <div class="grid2">
+    <div class="stack">
+      <div class="card reveal"><span class="tag">Detail 1</span><p class="small no-margin">Mara notices a pattern but does not immediately announce a conclusion.</p></div>
+      <div class="card reveal"><span class="tag">Detail 2</span><p class="small no-margin">She asks for comparisons and checks whether the platform affects the readings.</p></div>
+      <div class="card reveal"><span class="tag">Inference</span><p class="small no-margin">Mara treats an initial pattern as a hypothesis to test, not as proof.</p></div>
+    </div>
+    <div class="step-list">
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#DCEBFB">1</div><div><strong>Restate the task</strong><span>Describe Mara’s approach—not the weather result.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#FBEBCF">2</div><div><strong>Collect two actions</strong><span>She delays a conclusion and requests controlled comparisons.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E2E2E2">3</div><div><strong>Name the shared quality</strong><span>Careful, skeptical, evidence-testing.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E8F7EC">4</div><div><strong>Check the boundary</strong><span>Do not claim she distrusts all data; the text supports caution, not rejection.</span></div></div>
+    </div>
+  </div>
+  <div class="prompt-box reveal mt"><strong>Precision check:</strong> Which single word in the inference would become too strong if changed to “proves”?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-18" aria-label="Precision check: Which single word in the inference would become too strong if changed to “proves”?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="17">
+<div class="content">
+  <div class="kicker reveal">Guided Model · Level 4</div><h2 class="slide-title reveal">Development: Track <span class="tint">Finding + Complication</span></h2>
+  <div class="grid2">
+    <div class="diagram-wrap reveal">
+      <svg viewBox="0 0 450 285" role="img" aria-label="Paragraph development flow">
+        <rect x="20" y="96" width="118" height="82" rx="12" fill="#DCEBFB" stroke="#2563EB" stroke-width="2"/><text x="79" y="123" text-anchor="middle" class="svg-strong">Method</text><text x="79" y="143" text-anchor="middle" class="svg-small">move sensor</text><text x="79" y="160" text-anchor="middle" class="svg-small">compare surfaces</text>
+        <path d="M142 137h43" stroke="#9AA9BF" stroke-width="3"/><path d="M178 130l10 7-10 7" fill="#9AA9BF"/>
+        <rect x="188" y="62" width="118" height="70" rx="12" fill="#E8F7EC" stroke="#15803D" stroke-width="2"/><text x="247" y="89" text-anchor="middle" class="svg-strong">Finding</text><text x="247" y="109" text-anchor="middle" class="svg-small">surfaces release</text><text x="247" y="124" text-anchor="middle" class="svg-small">heat differently</text>
+        <rect x="188" y="155" width="118" height="70" rx="12" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/><text x="247" y="182" text-anchor="middle" class="svg-strong">Complication</text><text x="247" y="202" text-anchor="middle" class="svg-small">placement changes</text><text x="247" y="217" text-anchor="middle" class="svg-small">the apparent story</text>
+        <path d="M310 97h42M310 190h42M352 97v93" stroke="#9AA9BF" stroke-width="3" fill="none"/><path d="M345 183l7 10 7-10" fill="#9AA9BF"/>
+        <rect x="352" y="108" width="82" height="74" rx="12" fill="#E2E2E2" stroke="#3D3D3D" stroke-width="2"/><text x="393" y="135" text-anchor="middle" class="svg-strong">Central</text><text x="393" y="153" text-anchor="middle" class="svg-strong">idea</text><text x="393" y="171" text-anchor="middle" class="svg-small">data need context</text>
+      </svg>
+    </div>
+    <div class="step-list">
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#DCEBFB">1</div><div><strong>Name the paragraph’s job</strong><span>It reports the expanded investigation and interprets what changed.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#FBEBCF">2</div><div><strong>Capture the finding</strong><span>Different surfaces release stored heat at different rates.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E2E2E2">3</div><div><strong>Capture the complication</strong><span>Sensor placement influences what the data appear to show.</span></div></div>
+      <div class="step reveal" onclick="focusStep(this)"><div class="step-n" style="--step:#E8F7EC">4</div><div><strong>Connect both to the whole</strong><span>The paragraph deepens the central idea: evidence is useful only when collection conditions are considered.</span></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="slide" data-slide="18">
+<div class="content">
+  <div class="kicker reveal">Digital Tools · Strategic Use</div><h2 class="slide-title reveal">A Tool Helps Only When It Has a <span class="tint">Job</span></h2>
+  <div class="grid4">
+    <div class="card reveal"><h3>Highlight</h3><p class="small">Mark the task, constraint, or evidence—not entire paragraphs.</p><div class="micro"><strong>Use when:</strong> wording controls the solution.</div></div>
+    <div class="card reveal"><h3>Eliminate</h3><p class="small">Cross out an option only after naming its flaw.</p><div class="micro"><strong>Use when:</strong> two choices remain plausible.</div></div>
+    <div class="card reveal"><h3>Notepad</h3><p class="small">Store a model, unit, short equation, or paragraph map.</p><div class="micro"><strong>Use when:</strong> working memory is crowded.</div></div>
+    <div class="card reveal"><h3>Bookmark</h3><p class="small">Mark uncertainty only if the interface permits a return and time remains.</p><div class="micro"><strong>Use when:</strong> progress has stopped.</div></div>
+  </div>
+  <div class="grid2 mt">
+    <div class="trap-card reveal"><div class="trap-title">Tool misuse</div><div class="trap-body">Highlighting everything, writing full sentences of scratch work, or repeatedly toggling choices creates activity without adding structure.</div></div>
+    <div class="win-card reveal"><div class="win-title">Tool test</div><div class="small">Before clicking, finish this sentence: “I am using this tool to ______.” If the blank is unclear, keep reading or modeling.</div><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-26" aria-label="Tool test Before clicking, finish this sentence: “I am using this tool to ______.” If the blank is unclear, keep reading or modeling." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+  </div>
+</div>
+</section>
+
+<section class="slide" data-slide="19">
+<div class="content">
+  <div class="kicker reveal">Time Management</div><h2 class="slide-title reveal">Use Checkpoints, Not a <span class="tint">Rigid Split</span></h2>
+  <div class="grid2">
+    <div class="info-card reveal">
+      <h3>One possible 180-minute plan</h3>
+      <div class="pacing"><div class="pace-seg pace-1">Section 1 · 82 min</div><div class="pace-seg pace-2">Section 2 · 88 min</div><div class="pace-seg pace-3">Buffer · 10 min</div></div>
+      <p class="small mt">The official test allows either section first and flexible time allocation. A personal plan should reflect accuracy, stamina, and interface rules.</p>
+    </div>
+    <div class="stack">
+      <div class="card reveal"><h3>10-second reset</h3><p class="small no-margin">Hands off controls → one breath → restate the task → choose the next concrete move.</p></div>
+      <div class="card reveal"><h3>Progress question</h3><p class="small no-margin">“In the last 30 seconds, did I create new information?” If not, change representation or move strategically.</p></div>
+      <div class="card reveal"><h3>Pacing principle</h3><p class="small no-margin">Average time is a budget, not a command. Spend less on clear items to create room for productive struggle.</p></div>
+    </div>
+  </div>
+  <div class="prompt-box reveal mt"><strong>Choose and defend:</strong> Would you rather begin with the section that builds confidence or the section that needs your freshest attention?<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-19" aria-label="Choose and defend: Would you rather begin with the section that builds confidence or the section that needs your freshest attention?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+</div>
+</section>
+
+<section class="slide" data-slide="20">
+<div class="content">
+  <div class="kicker reveal">Partner Simulation · 4 Minutes</div><h2 class="slide-title reveal">Solver and Skeptic</h2>
+  <div class="grid2">
+    <div class="card role-card reveal" style="--role:#2563EB;--role-soft:#DCEBFB"><div class="role">Round 1 · Solver</div><h3>Mae models; Alina questions</h3><p class="small">Mae chooses one unsolved Level 2–4 item from today and explains only the N–M–D–V process.</p></div>
+    <div class="card role-card reveal" style="--role:#B45309;--role-soft:#FBEBCF"><div class="role">Round 2 · Switch</div><h3>Alina models; Mae questions</h3><p class="small">Alina chooses a different item. Mae may ask for evidence, units, constraints, or a verification step.</p></div>
+  </div>
+  <div class="grid4 mt">
+    <div class="info-card reveal center"><span class="tag">0:00–0:30</span><h3>Notice</h3><p class="micro no-margin">State the target and givens.</p></div>
+    <div class="info-card reveal center"><span class="tag">0:30–1:00</span><h3>Model</h3><p class="micro no-margin">Draw or write structure.</p></div>
+    <div class="info-card reveal center"><span class="tag">1:00–1:30</span><h3>Challenge</h3><p class="micro no-margin">Ask one precise question.</p></div>
+    <div class="info-card reveal center"><span class="tag">1:30–2:00</span><h3>Verify</h3><p class="micro no-margin">Name the proof check.</p></div>
+  </div>
+  <div class="teacher-cue reveal mt"><strong>Allowed questions:</strong> “What does that term represent?” “Which words support that?” “What must be true at the same time?” “How would you know the result fits?”</div>
+</div>
+</section>
+
+<section class="slide" data-slide="21">
+<div class="content">
+  <div class="kicker reveal">Exit Ticket · Final 3 Minutes</div><h2 class="slide-title reveal">Choose the Habit You Will <span class="tint">Repeat</span></h2>
+  <div class="grid2">
+    <div class="info-card reveal">
+      <h3>Complete all three stems</h3>
+      <div class="stack small">
+        <div class="prompt-box">Before I calculate, I will...<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-20" aria-label="Before I calculate, I will..." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+        <div class="prompt-box">Before I choose an ELA option, I will...<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-21" aria-label="Before I choose an ELA option, I will..." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+        <div class="prompt-box">When an item feels unusually hard or easy, I will...<div class="work-box" style="margin-top:0.6rem;"><textarea id="response-22" aria-label="When an item feels unusually hard or easy, I will..." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card reveal"><span class="lvl-badge lvl-2">Transfer</span><h3>Explain one connection</h3><p class="small no-margin">How is a math diagram similar to an ELA evidence map?</p><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-23" aria-label="Transfer Explain one connection How is a math diagram similar to an ELA evidence map?" placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      <div class="card reveal"><span class="lvl-badge lvl-3">Commitment</span><h3>Select one visible action</h3><p class="small no-margin">Circle units, write a model, map paragraphs, name an option’s flaw, or perform a proof check.</p><div class="work-box" style="margin-top:0.6rem;"><textarea id="response-24" aria-label="Commitment Select one visible action Circle units, write a model, map paragraphs, name an option’s flaw, or perform a proof check." placeholder="Work here…" spellcheck="false"></textarea></div></div>
+      <div class="win-card reveal"><div class="win-title">Today’s win</div><div class="small">You leave with a repeatable process that works even when the topic, difficulty, and digital route change.</div></div>
+    </div>
+  </div>
+  <div class="center reveal" style="margin-top:.8rem;font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:#17233B">Clear thinking is trainable.</div>
+</div>
+</section>
+
+</div>
+<div class="nav-controls" aria-label="Slide navigation"><button class="nav-btn" aria-label="Previous slide" onclick="changeSlide(-1)">&#8249;</button><div class="slide-dots" id="dots"></div><button class="nav-btn" aria-label="Next slide" onclick="changeSlide(1)">&#8250;</button><span class="slide-counter" id="counter">1 / 21</span></div>
+<script>
+let current=1;const slides=[...document.querySelectorAll('.slide')],total=slides.length,dots=document.getElementById('dots'),counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>goToSlide(i);dots.appendChild(d)}
+function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';el.offsetHeight;el.style.transition=`opacity .36s ease ${i*.055}s,transform .36s ease ${i*.055}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}
+function goToSlide(n){if(n<1)n=total;if(n>total)n=1;document.querySelector('.slide.active')?.classList.remove('active');const next=document.querySelector(`.slide[data-slide="${n}"]`);next.classList.add('active');current=n;document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===n));counter.textContent=`${n} / ${total}`;animateSlide(next)}
+function changeSlide(dir){goToSlide(current+dir)}document.addEventListener('keydown',e=>{if(e.target.closest('textarea,input,select,[contenteditable="true"]'))return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let sx=0;document.addEventListener('touchstart',e=>{sx=e.target.closest('textarea,input,select,[contenteditable="true"]')?null:e.touches[0].clientX});document.addEventListener('touchend',e=>{if(sx===null)return;const dx=sx-e.changedTouches[0].clientX;if(Math.abs(dx)>50)changeSlide(dx>0?1:-1)});
+function focusStep(el){el.parentElement.querySelectorAll('.step').forEach(s=>s.classList.remove('focused'));el.classList.add('focused')}
+function toggleOption(el,event){if(event.shiftKey){el.classList.toggle('eliminated');el.classList.remove('selected')}else{el.parentElement.querySelectorAll('.mc-option').forEach(o=>o.classList.remove('selected'));el.classList.toggle('selected')}}
+document.querySelectorAll('.box').forEach(b=>b.onclick=()=>b.classList.toggle('checked'));animateSlide(document.querySelector('.slide.active'));
+</script>
+</body>
+</html>
