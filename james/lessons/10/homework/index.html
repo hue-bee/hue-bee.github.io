@@ -1,1 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHSAT CAT Geometry Homework — November 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16a34a;--green-lt:#DCFCE7;--purple:#7c3aed;--purple-lt:#EDE9FE;
+  --ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;
+  --bg:#F8FAFF;--white:#FFFFFF;
+  --ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif;--ff-math:'Nunito',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{background:#e2e8f0;scroll-behavior:smooth}body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}.skip-link{position:fixed;left:.5rem;top:-5rem;background:var(--ink);color:white;padding:.6rem 1rem;z-index:100}.skip-link:focus{top:.5rem}.toolbar{display:flex;justify-content:flex-end;gap:.55rem;padding:1rem 0}.print-btn{border:0;border-radius:22px;padding:.58rem 1rem;background:var(--blue);color:white;font:800 .78rem var(--ff-body);cursor:pointer;min-height:44px}.print-btn.secondary{background:white;color:var(--blue);border:1.5px solid var(--blue)}.print-btn:hover{filter:brightness(.94)}.print-btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,label.mc-opt:focus-within{outline:3px solid var(--blue-md);outline-offset:2px}.sheet{background:white;margin:0 auto 2rem;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.1rem;gap:1rem;flex-wrap:wrap}.brand{display:flex;gap:.75rem;align-items:center}.brand-mark{width:46px;height:46px;color:var(--blue);flex:none}.hw-header-left h1{font:800 1.75rem/1.05 var(--ff-head);color:var(--blue)}.subtitle{font-size:.84rem;color:var(--muted);font-weight:700;margin-top:.22rem;text-transform:uppercase;letter-spacing:.05em}.hw-meta{display:flex;flex-direction:column;gap:.4rem;min-width:220px}.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:700}.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:2px 7px;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}.line-input{flex:1;border:0;border-bottom:1.5px solid var(--border);font:600 .82rem var(--ff-body);background:transparent;min-width:0;padding:2px 4px}.score-banner{background:var(--blue);color:white;border-radius:10px;padding:.7rem .9rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.8rem}.score-banner .title{font:800 .92rem var(--ff-head)}.score-banner .sub{font-size:.7rem;opacity:.88}.score-cells{display:flex;gap:.7rem}.score-cell{text-align:center;min-width:52px}.sc-val{font:800 .82rem var(--ff-head)}.sc-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;opacity:.85}.score-input{width:2.1rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.65);color:white;font:800 .85rem var(--ff-head);text-align:center}.cat-strip{display:flex;gap:.65rem;align-items:center;border:1px solid var(--blue-md);background:var(--blue-lt);border-radius:9px;padding:.6rem .75rem;margin-bottom:.9rem}.cat-strip svg{width:28px;height:28px;color:var(--blue);flex:none}.cat-strip p{font-size:.76rem;line-height:1.45;color:var(--slate)}.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.35rem 0 .7rem}.section-icon{width:23px;color:var(--blue);flex:none}.section-hd h2{font:800 1.14rem var(--ff-head)}.badge{font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:20px;margin-left:auto;white-space:nowrap}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86efac}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}.instr{font-size:.79rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;padding:.38rem .72rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}.strategy-strip{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}.strategy-label{font-size:.69rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.strategy-chip{font-size:.68rem;font-weight:800;color:var(--slate);background:#f1f5f9;border-radius:20px;padding:3px 8px}.mc-q,.free-q{margin-bottom:.8rem;padding:.72rem .85rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;break-inside:avoid}.mc-q-text,.free-q-text{font-size:.82rem;font-weight:700;line-height:1.5;margin-bottom:.48rem}.qnum{font:800 .9rem var(--ff-head);color:var(--blue);margin-right:.25rem}.lvl{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.05em;padding:1px 7px;border-radius:20px;margin-left:.25rem;vertical-align:middle}.lvl-1{background:#e5e7eb;color:#374151}.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:white}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.24rem .85rem}.mc-opt{font-size:.78rem;color:var(--slate);display:flex;align-items:flex-start;gap:.32rem;line-height:1.42;cursor:pointer;padding:.28rem .4rem;border-radius:5px;border:1.5px solid transparent;min-height:36px}.mc-opt:hover{background:#f0f0f0}.mc-opt input{position:absolute;opacity:0}.bubble{width:15px;height:15px;min-width:15px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:grid;place-items:center;font-size:8px;font-weight:800}.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:white}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.42rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.28rem .82rem;background:var(--blue);color:white;font:800 .69rem var(--ff-body);cursor:pointer}.lock-note{font-size:.67rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}.locked .mc-opt:not(.selected){opacity:.58}.work-area{width:100%;resize:vertical;min-height:65px;border:1.5px dashed var(--border);border-radius:6px;background:white;padding:.4rem .55rem;font:600 .78rem/1.45 var(--ff-math);color:var(--ink);margin-top:.28rem}.answer-row{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.35rem}.answer-row label,.audit-grid label{font-size:.67rem;font-weight:800;color:var(--muted)}.answer-row input,.audit-grid input,.audit-grid select{width:100%;border:1px solid var(--border);border-radius:5px;background:white;padding:.3rem .38rem;font-size:.76rem;margin-top:.15rem;min-height:35px}.fig{display:flex;justify-content:center;margin:.35rem 0}.fig svg{max-width:100%;height:auto;font-family:var(--ff-math)}.audit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.45rem;margin-top:.45rem}.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1rem;margin-bottom:.8rem}.passage-title{font:800 .98rem var(--ff-head);margin-bottom:.45rem}.passage-text{font-size:.8rem;line-height:1.65;color:var(--slate)}.error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font:800 1rem var(--ff-head);color:#c2410c;margin-bottom:.5rem}.error-table{width:100%;border-collapse:collapse;font-size:.75rem}.error-table th{background:var(--coral);color:white;padding:.42rem;border:1px solid #fca5a5;text-align:left}.error-table td{border:1px solid #fca5a5;padding:.3rem;background:white;height:46px}.error-table input,.error-table textarea{width:100%;height:100%;min-height:34px;border:0;background:transparent;resize:vertical;font:.73rem var(--ff-body)}.reflection{display:grid;gap:.55rem;margin-top:.8rem}.reflection label{font-size:.76rem;font-weight:700;color:var(--slate)}.reflection input{width:100%;border:0;border-bottom:1.5px solid var(--border);padding:.2rem;font:600 .77rem var(--ff-body)}.footer-note{text-align:center;color:var(--muted);font-size:.69rem;margin-top:1.05rem}.page-kicker{font:800 .72rem var(--ff-head);color:var(--blue);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--blue-md);padding-bottom:.35rem;margin-bottom:.8rem}.timer-note{font-size:.69rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.3rem .45rem;margin-top:.4rem}.mini-table{width:100%;border-collapse:collapse;font-size:.72rem;margin:.35rem 0 .65rem}.mini-table th,.mini-table td{border:1px solid var(--border);padding:.35rem;text-align:center}.mini-table th{background:var(--blue-lt);color:var(--blue)}
+@media(max-width:680px){body{background:white}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.96);padding:.55rem;z-index:10;border-bottom:1px solid var(--border)}.sheet{margin:0;padding:1.1rem 1rem;border-radius:0;box-shadow:none}.mc-opts,.answer-row,.audit-grid{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}.hw-meta{width:100%}.section-hd{align-items:flex-start;flex-wrap:wrap}.badge{margin-left:0}.score-banner{align-items:flex-start;flex-direction:column}.score-cells{width:100%;justify-content:space-between}.error-log{overflow-x:auto}.error-table{min-width:650px}}
+@media print{@page{size:letter;margin:0}.no-print{display:none!important}html,body{background:white;max-width:100%}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.05cm 1.25cm!important;min-height:10in}.page-break{break-before:page;page-break-before:always}.commit-row{display:none!important}.mc-q,.free-q,.passage-box,.error-log{break-inside:avoid}input,textarea,select{border-color:#cbd5e1!important;background:white!important}textarea{resize:none}.footer-note{margin-top:.7rem}}
 
+.section-timer{appearance:none;border:0;border-radius:12px;padding:2px 6px;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;font-variant-numeric:tabular-nums;cursor:pointer;min-width:4.5em;text-align:center;vertical-align:baseline}
+.section-timer.is-running{background:#15803d;color:#fff}
+.section-timer.is-expired{background:#b91c1c;color:#fff;cursor:default;opacity:1}
+.section-timer:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" type="button" id="clearAll">Clear All</button></div>
+<main id="main">
+<section class="sheet">
+<header class="hw-header">
+  <div class="brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-label="Forward-only geometry mark" role="img"><rect x="6" y="7" width="25" height="25" rx="4" stroke="currentColor" stroke-width="3"/><circle cx="31" cy="30" r="10" fill="white" stroke="currentColor" stroke-width="3"/><path d="M12 38h28m-7-6 7 6-7 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="hw-header-left"><h1>SHSAT CAT Geometry Homework</h1><div class="subtitle">Measure, Map &amp; Decompose · November 2026</div></div></div>
+  <div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" autocomplete="name"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text"></label></div>
+</header>
+<div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Complete every first-pass decision before checking work.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="20"> / 20</div><div class="sc-lbl">Items</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="4"> / 4</div><div class="sc-lbl">Audit</div></div></div></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> Each item is one-way. Read the requested quantity, solve, perform a five-second audit, and commit. Once committed, the response locks.</p></div>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M7 17 12 4l5 13H7Z" stroke="currentColor" stroke-width="2"/></svg><h2>Part A — Measurement Decisions</h2><span class="badge badge-blue">6 Questions · <button class="section-timer" type="button" data-seconds="600" aria-label="Section countdown timer" aria-pressed="false">10:00</button></span></div>
+<p class="instr">Do not copy a formula until you have labeled what is given and what is requested.</p>
+<div class="strategy-strip"><span class="strategy-label">Five-second audit</span><span class="strategy-chip">1 · Label</span><span class="strategy-chip">2 · Units</span><span class="strategy-chip">3 · Bounds</span><span class="strategy-chip">4 · Commit</span></div>
+<div id="partA"></div>
+<div class="footer-note">Page 1 · Measurement first: identify the dimension before computing.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="page-kicker">Part B · Coordinates &amp; Angles</div>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 7h16M8 16l4-4 3 2 4-6" stroke="currentColor" stroke-width="2"/></svg><h2>Coordinate Geometry</h2><span class="badge badge-purple">5 Questions · <button class="section-timer" type="button" data-seconds="660" aria-label="Section countdown timer" aria-pressed="false">11:00</button></span></div>
+<p class="instr">Keep the x-column and y-column separate. For slope, write vertical change over horizontal change.</p>
+<div id="partB"></div>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none"><path d="M4 18 12 5l8 13H4Zm4-6h8" stroke="currentColor" stroke-width="2"/></svg><h2>Angle Relationships</h2><span class="badge badge-sand">4 Questions · <button class="section-timer" type="button" data-seconds="480" aria-label="Section countdown timer" aria-pressed="false">08:00</button></span></div>
+<p class="instr">Name the relationship before writing an equation: vertical, linear pair, triangle sum, or exterior angle.</p>
+<div id="partC"></div>
+<div class="footer-note">Page 2 · Separate coordinates; name angle structure before algebra.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="page-kicker">Part C · Composite Geometry</div>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none"><path d="M4 4h11v6h5v10H4V4Z" stroke="currentColor" stroke-width="2"/></svg><h2>Build or Subtract</h2><span class="badge badge-green">5 Problems · <button class="section-timer" type="button" data-seconds="1080" aria-label="Section countdown timer" aria-pressed="false">18:00</button></span></div>
+<p class="instr">Show a decomposition. Your pieces may touch, but added pieces must not overlap.</p>
+<div class="passage-box"><div class="passage-title">Forward-Only Work Protocol</div><div class="passage-text">For each problem: sketch or label the figure, choose <strong>add clean pieces</strong> or <strong>whole minus cutout</strong>, write units on the final value, then record one reasonableness check. Stop after two minutes if you cannot name the needed relationship; make the best supported choice and continue.</div></div>
+<div id="partD"></div>
+<div class="cat-strip"><svg viewBox="0 0 32 32" fill="none"><path d="M16 4v24M4 16h24" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT recovery rule:</strong> Difficulty is not feedback about your score. Reset your posture, identify the new item’s first move, and treat it as independent evidence.</p></div>
+<div class="footer-note">Page 3 · Decompose once, calculate once, audit once.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="page-kicker">Review the Process</div>
+<div class="section-hd"><svg class="section-icon" viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6V3Zm9 0v5h5M9 12h7M9 16h7" stroke="currentColor" stroke-width="2"/></svg><h2>Part D — Error Log</h2><span class="badge badge-coral"><button class="section-timer" type="button" data-seconds="600" aria-label="Section countdown timer" aria-pressed="false">10:00</button></span></div>
+<p class="instr">Check with the assigned key or in session. Record the first incorrect step—not only the final answer.</p>
+<div class="error-log">
+<h3>My Highest-Value Geometry Corrections</h3>
+<table class="error-table"><thead><tr><th>Item</th><th>My first wrong step or decision</th><th>Trap code</th><th>Rule fix for next time</th></tr></thead><tbody>
+<tr><td><input aria-label="Error item 1"></td><td><textarea aria-label="First wrong step 1"></textarea></td><td><input aria-label="Trap code 1"></td><td><textarea aria-label="Rule fix 1"></textarea></td></tr>
+<tr><td><input aria-label="Error item 2"></td><td><textarea aria-label="First wrong step 2"></textarea></td><td><input aria-label="Trap code 2"></td><td><textarea aria-label="Rule fix 2"></textarea></td></tr>
+<tr><td><input aria-label="Error item 3"></td><td><textarea aria-label="First wrong step 3"></textarea></td><td><input aria-label="Trap code 3"></td><td><textarea aria-label="Rule fix 3"></textarea></td></tr>
+<tr><td><input aria-label="Error item 4"></td><td><textarea aria-label="First wrong step 4"></textarea></td><td><input aria-label="Trap code 4"></td><td><textarea aria-label="Rule fix 4"></textarea></td></tr>
+</tbody></table>
+<table class="mini-table"><tr><th>DL</th><th>UN</th><th>DC</th><th>CR</th><th>AR</th></tr><tr><td>Dimension / label</td><td>Units</td><td>Double-count</td><td>Coordinate reversal</td><td>Angle relationship</td></tr></table>
+</div>
+<div class="section-hd"><h2>Weekly CAT Reflection</h2><span class="badge badge-blue">Bring to session</span></div>
+<div class="reflection"><label>The geometry label I need to identify faster is <input></label><label>The unit or dimension check I most often skip is <input></label><label>Before I click Next, my five-second proof will be <input></label><label>One difficult item I handled calmly was <input></label><label>My first move on a composite figure will be <input></label></div>
+<div class="footer-note">Page 4 · Bring this completed sheet and your questions to the next session.</div>
+</section>
+</main>
+<script>
+const A=[
+['A cube has volume 1,331 cubic inches. What is the area, in square inches, of one face?',['11','121','242','726'],'L2'],
+['A rectangular storage box is 12 inches long, 5 inches wide, and 7 inches high. What is its total surface area?',['239 in²','298 in²','358 in²','420 in²'],'L2'],
+['A cylindrical garden has a circular base with diameter 18 feet. Which expression gives the exact area of the base?',['18π','36π','81π','324π'],'L1'],
+['A square tabletop has side length 16 inches. The largest possible circle is cut from it. What area remains, in square inches?',['256 − 16π','256 − 64π','256 − 128π','256 − 256π'],'L3'],
+['A 14-foot by 9-foot floor is covered with square tiles whose side length is 1.5 feet. Tiles may be cut along the edges. What is the minimum number of tile positions needed?',['54','60','63','84'],'L4'],
+['A prism has volume 504 cm³, length 12 cm, and width 7 cm. What is its total surface area?',['210 cm²','300 cm²','396 cm²','504 cm²'],'L3']
+];
+const B=[
+['Points A(−7, 4) and B(5, 4) are endpoints of a horizontal segment. What is its length?',['2','9','12','14'],'L1'],
+['What is the midpoint of P(−8, 6) and Q(4, −2)?',['(−6, 2)','(−2, 2)','(2, −2)','(6, 4)'],'L2'],
+['A line passes through (−3, 7) and (5, −1). What is its slope?',['−1','−1/4','1/4','1'],'L3'],
+['The midpoint of R(6, −5) and S is (1, 3). What are the coordinates of S?',['(−4, 11)','(−5, 8)','(7, −2)','(8, 1)'],'L4'],
+['A square has vertices (−2, 1), (4, 1), (4, 7), and (−2, 7). A circle is inscribed. What is the circle’s exact area?',['3π','6π','9π','36π'],'L3']
+];
+const C=[
+['Two vertical angles measure (7x − 13)° and (5x + 19)°. What is x?',['8','12','16','24'],'L2'],
+['A linear pair measures (3y + 8)° and (5y − 12)°. What is y?',['18','23','27','32'],'L2'],
+['An isosceles triangle has a vertex angle of 44°. What is the measure of each base angle?',['44°','68°','72°','136°'],'L2'],
+['An exterior angle is (9z − 4)°. Its remote interior angles are (4z + 10)° and (3z + 18)°. What is z?',['8','12','16','21'],'L3']
+];
+const D=[
+['An L-shaped patio fits inside an 18 m by 13 m rectangle. A 7 m by 5 m corner is removed. Find the patio’s area.','Choose add/subtract; show the whole, cutout, or nonoverlapping pieces.'],
+['A rectangular wall is 15 ft by 10 ft. Two nonoverlapping windows, each 4 ft by 3 ft, will not be painted. Find the area that will be painted.','Include both equal cutouts exactly once.'],
+['A running track region consists of a 24 m by 10 m rectangle with a semicircle of diameter 10 m attached to each short end. Find the exact total area.','Recognize that the two semicircles form one full circle.'],
+['A 20 in by 14 in poster has a uniform border 2 in wide around a rectangular photograph. Find only the border’s area.','Write the photograph’s dimensions before subtracting.'],
+['A square courtyard has side length 18 m. Four congruent square planting beds, each with side 4 m, occupy the corners. The remaining region is paved. Find the paved area.','State a lower and upper bound for your result.']
+];
+let q=0;
+function mc(item,part){q++;const [text,opts,lvl]=item;return `<article class="mc-q" data-item="${q}"><p class="mc-q-text"><span class="qnum">${q}.</span>${text} <span class="lvl ${lvl.toLowerCase().replace('l','lvl-')}">${lvl}</span></p><div class="mc-opts" role="radiogroup" aria-label="Question ${q}">${opts.map((o,i)=>`<label class="mc-opt"><input type="radio" name="q${q}" value="${'ABCD'[i]}"><span class="bubble"></span><span><strong>${'ABCD'[i]})</strong> ${o}</span></label>`).join('')}</div><div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>`}
+function free(item,i){q++;return `<article class="free-q"><p class="free-q-text"><span class="qnum">${q}.</span>${item[0]} <span class="lvl lvl-${Math.min(4,i+2)}">L${Math.min(4,i+2)}</span></p>${i===2?`<div class="fig"><svg viewBox="0 0 330 95" width="330" role="img" aria-label="Stadium shape with a rectangle and two semicircular ends"><path d="M70 15h190a35 35 0 0 1 0 70H70a35 35 0 0 1 0-70Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><path d="M70 15v70M260 15v70" stroke="#94a3b8" stroke-dasharray="5 4"/><text x="150" y="50" font-size="12" fill="#334155">24 m</text><text x="269" y="53" font-size="12" fill="#334155">10 m</text></svg></div>`:''}<div class="timer-note">Audit target: ${item[1]}</div><textarea class="work-area" aria-label="Work for problem ${q}" placeholder="Diagram labels, equation, computation, and unit check…"></textarea><div class="audit-grid"><label>Decomposition<select><option value="">Choose</option><option>Add pieces</option><option>Whole minus cutout</option></select></label><label>Final answer<input aria-label="Final answer ${q}"></label><label>Reasonableness check<input aria-label="Reasonableness check ${q}"></label></div></article>`}
+document.getElementById('partA').innerHTML=A.map(x=>mc(x,'A')).join('');
+document.getElementById('partB').innerHTML=B.map(x=>mc(x,'B')).join('');
+document.getElementById('partC').innerHTML=C.map(x=>mc(x,'C')).join('');
+document.getElementById('partD').innerHTML=D.map(free).join('');
+document.addEventListener('change',e=>{if(e.target.matches('.mc-opt input')){const box=e.target.closest('.mc-q');if(box.classList.contains('locked'))return;box.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected'));e.target.closest('.mc-opt').classList.add('selected');}});
+document.addEventListener('click',e=>{if(!e.target.matches('.commit-btn'))return;const box=e.target.closest('.mc-q');const choice=box.querySelector('input:checked');const note=box.querySelector('.lock-note');if(!choice){note.textContent='Select one response first.';return}box.classList.add('locked');box.querySelectorAll('input').forEach(x=>x.disabled=true);e.target.disabled=true;e.target.textContent='Locked';note.textContent=`Committed: ${choice.value}`;});
+document.getElementById('clearAll').addEventListener('click',()=>{if(!confirm('Clear every response and unlock all committed items?'))return;document.querySelectorAll('input').forEach(x=>{x.disabled=false;if(x.type==='radio'||x.type==='checkbox')x.checked=false;else x.value=''});document.querySelectorAll('textarea').forEach(x=>x.value='');document.querySelectorAll('select').forEach(x=>x.selectedIndex=0);document.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected'));document.querySelectorAll('.mc-q').forEach(x=>{x.classList.remove('locked');const b=x.querySelector('.commit-btn'),n=x.querySelector('.lock-note');b.disabled=false;b.textContent='Commit answer';n.textContent='Choose, audit, then commit.'});});
+</script>
+
+<script>
+document.querySelectorAll('.section-timer').forEach(timer=>{
+  let remaining=Number(timer.dataset.seconds)*1000;
+  let deadline=0;
+  let interval=null;
+  let running=false;
+  const heading=timer.closest('.section-hd').querySelector('h2').textContent;
+  timer.setAttribute('aria-label',heading+' countdown timer');
+  function render(){
+    const seconds=Math.ceil(remaining/1000);
+    timer.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+    timer.classList.toggle('is-running',running);
+    timer.classList.toggle('is-expired',remaining===0);
+    timer.setAttribute('aria-pressed',String(running));
+    timer.disabled=remaining===0;
+  }
+  function tick(){
+    remaining=Math.max(0,deadline-performance.now());
+    if(remaining===0){
+      running=false;
+      clearInterval(interval);
+      interval=null;
+    }
+    render();
+  }
+  timer.addEventListener('click',()=>{
+    if(running){
+      remaining=Math.max(0,deadline-performance.now());
+      running=false;
+      clearInterval(interval);
+      interval=null;
+    }else if(remaining>0){
+      deadline=performance.now()+remaining;
+      running=true;
+      interval=setInterval(tick,100);
+    }
+    render();
+  });
+  document.addEventListener('visibilitychange',()=>{if(running)tick();});
+  render();
+});
+</script>
+</body>
+</html>
