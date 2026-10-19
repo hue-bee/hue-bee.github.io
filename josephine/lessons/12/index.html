@@ -1,1 +1,589 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="viewport" name="slides-format"/>
+<title>Session 12 — Targeted Repair</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;family=Nunito:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#F0F7FF;--surface:#fff;--ink:#1f1f1f;--ink2:#4a4a4a;--ink3:#767676;--line:rgba(201,212,228,.52);--blue:#2563EB;--purple:#7C3AED;--gold:#B45309;--green:#15803D;--navy:#17233B;--soft:#EDF2F9;--font-display:'Baloo 2','Trebuchet MS',sans-serif;--font-body:'Nunito','Calibri',sans-serif}
+*,*::before,*::after{box-sizing:border-box}html,body{background:var(--bg);margin:0}body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw}.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:auto}.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.5rem);padding-bottom:76px}.reveal{opacity:0;transform:translateY(16px)}
+.nav-controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:13px;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);padding:8px 18px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.34)}.nav-btn{width:36px;height:36px;border:0;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer}.slide-dots{display:flex;gap:5px}.dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.18);cursor:pointer;transition:.2s}.dot.active{background:var(--ink);transform:scale(1.35)}.slide-counter{font-size:.72rem;color:var(--ink3);min-width:42px;text-align:center;font-weight:700}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}.mesh{position:absolute;inset:0;z-index:0;overflow:hidden}.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.09;animation:drift 12s ease-in-out infinite}.blob:nth-child(2){animation-duration:16s;animation-direction:reverse}@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(45px,-30px) scale(1.12)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.8rem}.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:500;padding:4px 10px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--ink3)}.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4)}.zone-chip.on{color:#fff;font-weight:700;background:var(--dc);border-color:var(--dc)}.zone-chip.on .zdot{background:rgba(255,255,255,.9)}
+.kicker{font-size:.69rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--zc,var(--ink3));margin-bottom:.28rem}.slide-title{font-family:var(--font-display);font-size:clamp(1.55rem,3.2vw,2.2rem);line-height:1.05;font-weight:650;letter-spacing:-.01em;margin:0 0 .8rem}.deck-title{font-family:var(--font-display);font-weight:650;line-height:1.02;letter-spacing:-.015em;margin:0}.subtitle{color:var(--ink2);font-size:clamp(.9rem,1.7vw,1.13rem);line-height:1.5}.prose{font-size:.93rem;color:var(--ink2);line-height:1.55}.small{font-size:.79rem;color:var(--ink2);line-height:1.45}.math{font-weight:800;font-size:1.32rem;font-variant-numeric:lining-nums}.math-sm{font-weight:800;font-size:1.02rem}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card,.prob-card,.diagram-wrap,.passage{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 24px rgba(201,212,228,.20),0 2px 6px rgba(201,212,228,.14)}.card{padding:.82rem 1rem}.prob-card{padding:.75rem .9rem}.diagram-wrap{padding:.65rem;display:flex;align-items:center;justify-content:center}.passage{padding:.85rem 1rem}.prob-head{display:flex;align-items:center;gap:.45rem;margin-bottom:.36rem}.prob-num{font-family:var(--font-display);font-weight:700;font-size:.82rem;background:var(--soft);border-radius:8px;padding:2px 9px}.lvl-badge{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:20px}.lvl-1{background:#E8EDF5;color:#3D4C63}.lvl-2{background:#DCEBFB;color:#1D4ED8}.lvl-3{background:#FBEBCF;color:#B45309}.lvl-4{background:#E2E2E2;color:#3D3D3D}.prompt{border:1px solid var(--line);background:#EFEFEF;border-radius:12px;padding:.65rem .85rem}.prompt-title{font-size:.82rem;font-weight:800;color:#2E2E2E}.prompt-body{font-size:.84rem;color:var(--ink2);line-height:1.48;margin-top:.16rem}.trap{border:1px solid var(--line);border-left:5px solid #555;background:#F6F6F6;border-radius:12px;padding:.63rem .82rem}.trap strong{font-size:.82rem}.work{margin-top:.45rem;border:1px dashed #B9C6D9;border-radius:10px;background:#F9FBFE;min-height:36px;padding:.45rem .7rem;color:#9AA9BF;font-size:.76rem}.step{display:grid;grid-template-columns:34px 1fr;gap:.65rem;align-items:start}.step+.step{margin-top:.55rem}.step-num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--zc,var(--blue));color:white;font-weight:800;font-size:.82rem}.step h3{margin:0;font-size:.9rem}.step p{margin:.12rem 0 0;font-size:.82rem;line-height:1.42;color:var(--ink2)}.time-pill{display:inline-block;border-radius:18px;padding:4px 10px;background:var(--soft);font-size:.65rem;font-weight:800;color:var(--ink2)}.quote{font-family:Georgia,serif;font-size:.91rem;line-height:1.48;color:#303030}.poem{font-family:Georgia,serif;font-size:.92rem;line-height:1.54;color:#303030;white-space:pre-line}.choice{display:flex;gap:.42rem;border:1px solid var(--line);border-radius:9px;padding:.34rem .52rem;margin-top:.28rem;background:#FBFCFE;color:var(--ink2);font-size:.78rem}.choice b{color:var(--zc,var(--blue))}.divider{text-align:center}.divider .ring{width:128px;height:128px;border-radius:50%;display:grid;place-items:center;margin:0 auto .8rem;background:white;border:2px solid color-mix(in srgb,var(--zc) 30%,white);box-shadow:0 18px 38px rgba(201,212,228,.34);animation:float 3.5s ease-in-out infinite}.divider .ring svg{width:92px;height:92px}.meter{height:12px;border-radius:8px;background:linear-gradient(90deg,#1D4ED8,#94A3B8,#B45309);position:relative;margin:12px 4px 24px}.meter span{position:absolute;top:18px;font-size:.67rem;color:var(--ink3)}.micro{font-size:.7rem;color:var(--ink3)}.hl{color:var(--zc,var(--blue));font-weight:800}.timeline{display:grid;grid-template-columns:78px 1fr;gap:10px}.timeline .t{font-weight:800;color:var(--zc);font-size:.82rem;text-align:right;padding-top:.55rem}.timeline .event{border-left:3px solid var(--zc);padding:.5rem .8rem;background:white;border-radius:0 12px 12px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.timeline .event b{font-size:.86rem}.timeline .event div{font-size:.76rem;color:var(--ink2);margin-top:.1rem}.section-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--ink3)}
+@media(max-width:800px){.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.slide>.content{padding:.8rem 1rem 72px}.slide-title{font-size:1.45rem}.prose,.quote,.poem{font-size:.78rem}.card,.prob-card,.passage{padding:.55rem .65rem}.nav-controls{max-width:94vw}.slide-dots{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.15s!important}}
+
+/* Text-entry controls matching input.html. */
+.work{padding:0;overflow:hidden;}
+.work textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink2);font-family:var(--font-body);line-height:1.5;outline:none;}
+.work textarea::placeholder{color:#9AA9BF;}
+.work textarea:focus{background:#F1F6FD;}
+</style>
+
+<style id="passage-annotation-styles">
+
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+  
+.annotation-toolbar { font-family:var(--font-body); white-space:normal; }
+.annotation-toolbar .annot-color-swatch { padding:0; flex-shrink:0; }
+.annotatable-passage .passage-note, .annotatable-passage .note-input-wrapper { user-select:none; }
+.passage-note:focus .note-tooltip, .passage-note.note-open .note-tooltip { display:block; }
+.note-tooltip { font-family:var(--font-body); font-weight:400; line-height:1.4; }
+@media print { .annotation-toolbar, .note-input-wrapper { display:none !important; } }
+</style>
+</head>
+<body>
+<div class="deck">
+<div class="slide active" data-slide="1" style="--zc:#2563EB">
+<div class="mesh"><div class="blob" style="width:420px;height:420px;right:-80px;top:-90px;background:#2563EB"></div><div class="blob" style="width:320px;height:320px;left:-60px;bottom:-90px;background:#7C3AED"></div></div><canvas class="particle-canvas"></canvas>
+<div class="content" style="text-align:center">
+<div class="reveal time-pill" style="margin-bottom:1rem">SESSION 12 · 60 MINUTES · NOVEMBER 2026 DIGITAL SHSAT</div>
+<div class="reveal" style="width:150px;height:105px;margin:0 auto .6rem;animation:float 3.5s ease-in-out infinite">
+<img alt="Poetry and inequality symbols" src="data:image/png;base64,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" style="width:100.0px;height:100.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/>
+</div>
+<h1 class="deck-title reveal" style="font-size:clamp(2.2rem,5.5vw,3.75rem)">Targeted Repair</h1>
+<h2 class="reveal" style="font-family:var(--font-display);font-size:clamp(1.1rem,2.3vw,1.55rem);font-weight:600;margin:.25rem 0;color:var(--blue)">Poetry &amp; Tone-Heavy Prose · Inequalities Retention</h2>
+<p class="subtitle reveal" style="max-width:760px;margin:.65rem auto 0">Read attitude beneath the literal meaning. Preserve order when algebra crosses zero. Commit accurately in a locked digital format.</p>
+</div>
+</div>
+<div class="slide" data-slide="2" style="--zc:#2563EB">
+<div class="content">
+<div class="kicker reveal">Why these targets</div><h2 class="slide-title reveal">Repair the leak, not the whole pipe</h2>
+<div class="grid3">
+<div class="card reveal"><div class="section-label">ELA pattern</div><div class="math" style="color:#7C3AED">3/7 · 2/6</div><div class="prose">The weakest blocks were a poem and tone-heavy early prose. Literal-information passages were usually strong.</div></div>
+<div class="card reveal"><div class="section-label">Endgame pattern</div><div class="math" style="color:#B45309">7 points</div><div class="prose">Four blanks plus the last three misses on Test B point to pacing and block closure, not a broad editing gap.</div></div>
+<div class="card reveal"><div class="section-label">Math pattern</div><div class="math" style="color:#2563EB">41 → 47</div><div class="prose">Math rose sharply, but a two-step inequality number-line item confirms that sign, endpoint, and direction still need retention.</div></div>
+</div>
+<div class="prompt reveal" style="margin-top:.8rem"><div class="prompt-title">Opening question</div><div class="prompt-body">Which costs more points today: not knowing the skill, or failing to execute the skill before the screen locks?</div></div>
+</div></div>
+<div class="slide" data-slide="3" style="--zc:#17233B">
+<div class="content"><div class="kicker reveal">Session roadmap</div><h2 class="slide-title reveal">One hour, three repairs</h2>
+<div class="timeline reveal">
+<div class="t">0–5</div><div class="event"><b>Cold-start calibration</b><div>Retrieve tone, inequality language, and endpoint rules without notes.</div></div>
+<div class="t">5–30</div><div class="event"><b>Poetry and tone-heavy prose</b><div>Model image → attitude → purpose; then complete one locked block.</div></div>
+<div class="t">30–50</div><div class="event"><b>Inequalities retention</b><div>Translate, solve, flip, graph, and complete a multi-select.</div></div>
+<div class="t">50–60</div><div class="event"><b>Math cluster transfer</b><div>Use inclusion–exclusion and a literal-equation sequence under time.</div></div>
+</div>
+</div></div>
+<div class="slide" data-slide="4" style="--zc:#17233B">
+<div class="content"><div class="kicker reveal">0–5 minutes</div><h2 class="slide-title reveal">Cold-start: explain before calculating</h2>
+<div class="grid3">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">A</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="prose">If a speaker calls a silent street “watchful,” what human attitude is being projected onto the street?</div><div class="work"><textarea placeholder="State the attitude in one precise word." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">B</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">Translate: “The number of attempts is no more than 6.” Which part tells you whether 6 is included?</div><div class="work"><textarea placeholder="Write a variable statement." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">C</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">A graph has an open circle at −2 and shades left. Describe the solution in words before writing symbols.</div><div class="work"><textarea placeholder="Use “strictly” or “included.”" spellcheck="false"></textarea></div></div>
+</div>
+<div class="trap reveal" style="margin-top:.75rem"><strong>Do not rush the first screen.</strong><div class="small">Use the first five minutes to make the method visible. A correct explanation is evidence that the habit survived.</div></div>
+</div></div>
+<div class="slide" data-slide="5" style="--zc:#7C3AED">
+<div class="mesh"><div class="blob" style="width:390px;height:390px;right:-40px;top:-100px;background:#7C3AED"></div><div class="blob" style="width:270px;height:270px;left:-60px;bottom:-70px;background:#2563EB"></div></div><canvas class="particle-canvas"></canvas>
+<div class="content divider"><div class="ring reveal"><img alt="Instructional diagram" src="data:image/png;base64,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" style="width:100.0px;height:100.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/></div><div class="kicker reveal">5–30 minutes · ELA repair</div><h2 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.35rem)">Read the attitude,<br/><span style="color:#7C3AED">not just the event</span></h2><p class="subtitle reveal" style="max-width:720px;margin:.6rem auto">Tone is the speaker’s stance toward the subject. Imagery is the evidence. Purpose is the job that evidence performs.</p></div></div>
+<div class="slide" data-slide="6" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">The interpretation ladder</div><h2 class="slide-title reveal">Image → implication → attitude → purpose</h2>
+<div class="diagram-wrap reveal">
+<img alt="Four-step interpretation ladder" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iMTgwIiB2aWV3Qm94PSIwIDAgOTAwIDE4MCIgcm9sZT0iaW1nIj48dGl0bGU+Rm91ci1zdGVwIGludGVycHJldGF0aW9uIGxhZGRlcjwvdGl0bGU+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJvcHRpbWl6ZUxlZ2liaWxpdHkiPjxyZWN0IHg9IjguMCIgeT0iMTQiIHdpZHRoPSIyMDAuMCIgaGVpZ2h0PSIxNTIiIHJ4PSIxMiIgZmlsbD0iI0Y4RkFGRCIgc3Ryb2tlPSIjREVFNkYxIiBzdHJva2Utd2lkdGg9IjEiLz48cmVjdCB4PSIyNC4wIiB5PSIzMCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iOSIgZmlsbD0iIzI1NjNFQiIvPjx0ZXh0IHg9IjM5LjAiIHk9IjUxIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRkZGRkZGIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4xPC90ZXh0Pjx0ZXh0IHg9IjY0LjAiIHk9IjUxIiBmb250LXNpemU9IjE1LjUiIGZpbGw9IiMxNzIzM0IiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJzdGFydCI+SU1BR0U8L3RleHQ+PGxpbmUgeDE9IjI0LjAiIHkxPSI3NSIgeDI9IjE5Mi4wIiB5Mj0iNzUiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PHRleHQgeD0iMTA4LjAiIHk9IjEwMC4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPldoYXQgZG8gSSBzZWUsIGhlYXIsPC90ZXh0Pjx0ZXh0IHg9IjEwOC4wIiB5PSIxMjEuMCIgZm9udC1zaXplPSIxNC41IiBmaWxsPSIjNTI2MTc2IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5vciBmZWVsPzwvdGV4dD48bGluZSB4MT0iMjE0LjAiIHkxPSI5MC4wIiB4Mj0iMjMwLjAiIHkyPSI5MC4wIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PHBhdGggZD0iTSAyMjYuMCA4Ni4wIEwgMjMwLjAgOTAuMCBMIDIyNi4wIDk0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSIyMzYuMCIgeT0iMTQiIHdpZHRoPSIyMDAuMCIgaGVpZ2h0PSIxNTIiIHJ4PSIxMiIgZmlsbD0iI0Y4RkFGRCIgc3Ryb2tlPSIjREVFNkYxIiBzdHJva2Utd2lkdGg9IjEiLz48cmVjdCB4PSIyNTIuMCIgeT0iMzAiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjkiIGZpbGw9IiM3QzNBRUQiLz48dGV4dCB4PSIyNjcuMCIgeT0iNTEiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiNGRkZGRkYiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjI8L3RleHQ+PHRleHQgeD0iMjkyLjAiIHk9IjUxIiBmb250LXNpemU9IjE1LjUiIGZpbGw9IiMxNzIzM0IiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJzdGFydCI+SU1QTElDQVRJT048L3RleHQ+PGxpbmUgeDE9IjI1Mi4wIiB5MT0iNzUiIHgyPSI0MjAuMCIgeTI9Ijc1IiBzdHJva2U9IiNERUU2RjEiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjx0ZXh0IHg9IjMzNi4wIiB5PSIxMDAuMCIgZm9udC1zaXplPSIxNC41IiBmaWxsPSIjNTI2MTc2IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5XaGF0IGRvZXMgdGhhdCBkZXRhaWw8L3RleHQ+PHRleHQgeD0iMzM2LjAiIHk9IjEyMS4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnN1Z2dlc3Q/PC90ZXh0PjxsaW5lIHgxPSI0NDIuMCIgeTE9IjkwLjAiIHgyPSI0NTguMCIgeTI9IjkwLjAiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48cGF0aCBkPSJNIDQ1NC4wIDg2LjAgTCA0NTguMCA5MC4wIEwgNDU0LjAgOTQuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjQ2NC4wIiB5PSIxNCIgd2lkdGg9IjIwMC4wIiBoZWlnaHQ9IjE1MiIgcng9IjEyIiBmaWxsPSIjRjhGQUZEIiBzdHJva2U9IiNERUU2RjEiIHN0cm9rZS13aWR0aD0iMSIvPjxyZWN0IHg9IjQ4MC4wIiB5PSIzMCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iOSIgZmlsbD0iIzI1NjNFQiIvPjx0ZXh0IHg9IjQ5NS4wIiB5PSI1MSIgZm9udC1zaXplPSIxNiIgZmlsbD0iI0ZGRkZGRiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MzwvdGV4dD48dGV4dCB4PSI1MjAuMCIgeT0iNTEiIGZvbnQtc2l6ZT0iMTUuNSIgZmlsbD0iIzE3MjMzQiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9InN0YXJ0Ij5BVFRJVFVERTwvdGV4dD48bGluZSB4MT0iNDgwLjAiIHkxPSI3NSIgeDI9IjY0OC4wIiB5Mj0iNzUiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PHRleHQgeD0iNTY0LjAiIHk9IjEwMC4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvdyBkb2VzIHRoZSBzcGVha2VyPC90ZXh0Pjx0ZXh0IHg9IjU2NC4wIiB5PSIxMjEuMCIgZm9udC1zaXplPSIxNC41IiBmaWxsPSIjNTI2MTc2IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5mZWVsIGFib3V0IGl0PzwvdGV4dD48bGluZSB4MT0iNjcwLjAiIHkxPSI5MC4wIiB4Mj0iNjg2LjAiIHkyPSI5MC4wIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PHBhdGggZD0iTSA2ODIuMCA4Ni4wIEwgNjg2LjAgOTAuMCBMIDY4Mi4wIDk0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSI2OTIuMCIgeT0iMTQiIHdpZHRoPSIyMDAuMCIgaGVpZ2h0PSIxNTIiIHJ4PSIxMiIgZmlsbD0iI0Y4RkFGRCIgc3Ryb2tlPSIjREVFNkYxIiBzdHJva2Utd2lkdGg9IjEiLz48cmVjdCB4PSI3MDguMCIgeT0iMzAiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjkiIGZpbGw9IiM3QzNBRUQiLz48dGV4dCB4PSI3MjMuMCIgeT0iNTEiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiNGRkZGRkYiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjQ8L3RleHQ+PHRleHQgeD0iNzQ4LjAiIHk9IjUxIiBmb250LXNpemU9IjE1LjUiIGZpbGw9IiMxNzIzM0IiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJzdGFydCI+UFVSUE9TRTwvdGV4dD48bGluZSB4MT0iNzA4LjAiIHkxPSI3NSIgeDI9Ijg3Ni4wIiB5Mj0iNzUiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PHRleHQgeD0iNzkyLjAiIHk9IjEwMC4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPldoeSBwbGFjZSB0aGlzIGRldGFpbDwvdGV4dD48dGV4dCB4PSI3OTIuMCIgeT0iMTIxLjAiIGZvbnQtc2l6ZT0iMTQuNSIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+aGVyZT88L3RleHQ+PC9nPjwvc3ZnPg==" style="width:900.0px;height:180.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/>
+</div>
+<div class="prompt reveal" style="margin-top:.7rem"><div class="prompt-title">Precision check</div><div class="prompt-body">“Sad” names a mood. What sharper word would distinguish disappointment, nostalgia, resignation, and dread?</div></div>
+</div></div>
+<div class="slide" data-slide="7" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">Tutor model · original poem</div><h2 class="slide-title reveal">“After the Ferry”</h2>
+<div class="grid2">
+<div class="passage reveal"><div class="poem">The pier keeps one lamp after dawn,
+its pale coin pressed against the rain.
+Across the river, windows kindle—
+small promises I cannot claim.
+
+The ferry’s wake unthreads the gray;
+its silver seam is gone too soon.
+I turn before the bell has faded,
+carrying the unfinished tune.</div><div class="micro" style="margin-top:.45rem">Original instructional text</div></div>
+<div>
+<div class="prompt reveal"><div class="prompt-title">First read: literal floor</div><div class="prompt-body">What physically happens? Keep the answer plain; interpretation comes after the scene is stable.</div></div>
+<div class="prompt reveal" style="margin-top:.55rem"><div class="prompt-title">Second read: charged images</div><div class="prompt-body">Why “one lamp,” “cannot claim,” “gone too soon,” and “unfinished”? What emotional direction do these choices share?</div></div>
+<div class="prompt reveal" style="margin-top:.55rem"><div class="prompt-title">Third read: shift</div><div class="prompt-body">Does the speaker move toward acceptance, away from hope, or between both? Point to the turn.</div></div>
+</div>
+</div>
+</div></div>
+<div class="slide" data-slide="8" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">Worked model 1</div><h2 class="slide-title reveal">From one image to a defensible reading</h2>
+<div class="grid2">
+<div class="passage reveal"><div class="quote">“The ferry’s wake unthreads the gray;<br/>its silver seam is gone too soon.”</div><div class="meter"><span style="left:0">hopeful</span><span style="left:44%">mixed</span><span style="right:0">regretful</span></div><div class="small">The strongest interpretation must explain both <b>silver</b> and <b>gone too soon</b>.</div></div>
+<div class="card reveal">
+<div class="step"><div class="step-num">1</div><div><h3>Name the image</h3><p>A bright line briefly appears in a gray river, then dissolves.</p></div></div>
+<div class="step"><div class="step-num">2</div><div><h3>Infer the tension</h3><p>The brightness suggests possibility; its quick disappearance makes that possibility temporary.</p></div></div>
+<div class="step"><div class="step-num">3</div><div><h3>State the job</h3><p>The image develops a mixed attitude: the speaker recognizes hope but expects to lose it.</p></div></div>
+</div>
+</div>
+<div class="trap reveal" style="margin-top:.7rem"><strong>Trap: mood-only reading.</strong><div class="small">“The poem is sad” ignores the silver brightness. A strong answer preserves the tension instead of flattening it.</div></div>
+</div></div>
+<div class="slide" data-slide="9" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">Guided practice · same poem</div><h2 class="slide-title reveal">Questions rise from evidence to function</h2>
+<div class="grid2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="small">Which phrase most clearly signals that the speaker feels excluded from what lies across the river?</div><div class="work"><textarea placeholder="Quote first; explain second." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="small">How does “windows kindle” affect the tone: does it create threat, possibility, distance, or certainty? Defend the best label.</div><div class="work"><textarea placeholder="Use the surrounding line." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="small">What shift occurs between the first stanza and the final two lines? Identify the emotional before-and-after.</div><div class="work"><textarea placeholder="Write “from ___ to ___.”" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="small">How do the “silver seam” and “unfinished tune” work together to develop a central idea about departure?</div><div class="work"><textarea placeholder="Connect both images; avoid summary." spellcheck="false"></textarea></div></div>
+</div>
+</div></div>
+<div class="slide" data-slide="10" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">Digital locked-block routine</div><h2 class="slide-title reveal">Read once, answer deliberately, review once</h2>
+<div class="diagram-wrap reveal">
+<img alt="Locked passage block workflow" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MzAiIGhlaWdodD0iMjEwIiB2aWV3Qm94PSIwIDAgOTMwIDIxMCIgcm9sZT0iaW1nIj48dGl0bGU+TG9ja2VkIHBhc3NhZ2UgYmxvY2sgd29ya2Zsb3c8L3RpdGxlPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiB0ZXh0LXJlbmRlcmluZz0ib3B0aW1pemVMZWdpYmlsaXR5Ij48cmVjdCB4PSI4LjAiIHk9IjE0IiB3aWR0aD0iMjA3LjUiIGhlaWdodD0iMTgyIiByeD0iMTIiIGZpbGw9IiNGOEZBRkQiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iMjQuMCIgeT0iMzAiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjkiIGZpbGw9IiMyNTYzRUIiLz48dGV4dCB4PSIzOS4wIiB5PSI1MSIgZm9udC1zaXplPSIxNiIgZmlsbD0iI0ZGRkZGRiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MTwvdGV4dD48dGV4dCB4PSI2NC4wIiB5PSI1MSIgZm9udC1zaXplPSIxNS41IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPk1BUDwvdGV4dD48bGluZSB4MT0iMjQuMCIgeTE9Ijc1IiB4Mj0iMTk5LjUiIHkyPSI3NSIgc3Ryb2tlPSIjREVFNkYxIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48dGV4dCB4PSIxMTEuNzUiIHk9IjEwOS4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkxhYmVsIGVhY2ggc3RhbnphIG9yPC90ZXh0Pjx0ZXh0IHg9IjExMS43NSIgeT0iMTMwLjAiIGZvbnQtc2l6ZT0iMTQuNSIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+cGFyYWdyYXBo4oCZcyBqb2IuPC90ZXh0PjxsaW5lIHgxPSIyMjEuNSIgeTE9IjEwNS4wIiB4Mj0iMjM3LjUiIHkyPSIxMDUuMCIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxwYXRoIGQ9Ik0gMjMzLjUgMTAxLjAgTCAyMzcuNSAxMDUuMCBMIDIzMy41IDEwOS4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iMjQzLjUiIHk9IjE0IiB3aWR0aD0iMjA3LjUiIGhlaWdodD0iMTgyIiByeD0iMTIiIGZpbGw9IiNGOEZBRkQiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iMjU5LjUiIHk9IjMwIiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHJ4PSI5IiBmaWxsPSIjN0MzQUVEIi8+PHRleHQgeD0iMjc0LjUiIHk9IjUxIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRkZGRkZGIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4yPC90ZXh0Pjx0ZXh0IHg9IjI5OS41IiB5PSI1MSIgZm9udC1zaXplPSIxNS41IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPlBSRURJQ1Q8L3RleHQ+PGxpbmUgeDE9IjI1OS41IiB5MT0iNzUiIHgyPSI0MzUuMCIgeTI9Ijc1IiBzdHJva2U9IiNERUU2RjEiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjx0ZXh0IHg9IjM0Ny4yNSIgeT0iMTA5LjAiIGZvbnQtc2l6ZT0iMTQuNSIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QW5zd2VyIGluIHBsYWluIHdvcmRzPC90ZXh0Pjx0ZXh0IHg9IjM0Ny4yNSIgeT0iMTMwLjAiIGZvbnQtc2l6ZT0iMTQuNSIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+YmVmb3JlIGNob2ljZXMuPC90ZXh0PjxsaW5lIHgxPSI0NTcuMCIgeTE9IjEwNS4wIiB4Mj0iNDczLjAiIHkyPSIxMDUuMCIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxwYXRoIGQ9Ik0gNDY5LjAgMTAxLjAgTCA0NzMuMCAxMDUuMCBMIDQ2OS4wIDEwOS4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iNDc5LjAiIHk9IjE0IiB3aWR0aD0iMjA3LjUiIGhlaWdodD0iMTgyIiByeD0iMTIiIGZpbGw9IiNGOEZBRkQiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iNDk1LjAiIHk9IjMwIiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHJ4PSI5IiBmaWxsPSIjMjU2M0VCIi8+PHRleHQgeD0iNTEwLjAiIHk9IjUxIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRkZGRkZGIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4zPC90ZXh0Pjx0ZXh0IHg9IjUzNS4wIiB5PSI1MSIgZm9udC1zaXplPSIxNS41IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPlBST1ZFPC90ZXh0PjxsaW5lIHgxPSI0OTUuMCIgeTE9Ijc1IiB4Mj0iNjcwLjUiIHkyPSI3NSIgc3Ryb2tlPSIjREVFNkYxIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48dGV4dCB4PSI1ODIuNzUiIHk9IjEwOS4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1hdGNoIGV2ZXJ5IGNsYWltIHRvPC90ZXh0Pjx0ZXh0IHg9IjU4Mi43NSIgeT0iMTMwLjAiIGZvbnQtc2l6ZT0iMTQuNSIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+c3BlY2lmaWMgbGFuZ3VhZ2UuPC90ZXh0PjxsaW5lIHgxPSI2OTIuNSIgeTE9IjEwNS4wIiB4Mj0iNzA4LjUiIHkyPSIxMDUuMCIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxwYXRoIGQ9Ik0gNzA0LjUgMTAxLjAgTCA3MDguNSAxMDUuMCBMIDcwNC41IDEwOS4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iNzE0LjUiIHk9IjE0IiB3aWR0aD0iMjA3LjUiIGhlaWdodD0iMTgyIiByeD0iMTIiIGZpbGw9IiNGOEZBRkQiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iNzMwLjUiIHk9IjMwIiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHJ4PSI5IiBmaWxsPSIjN0MzQUVEIi8+PHRleHQgeD0iNzQ1LjUiIHk9IjUxIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRkZGRkZGIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj40PC90ZXh0Pjx0ZXh0IHg9Ijc3MC41IiB5PSI1MSIgZm9udC1zaXplPSIxNS41IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNMT1NFPC90ZXh0PjxsaW5lIHgxPSI3MzAuNSIgeTE9Ijc1IiB4Mj0iOTA2LjAiIHkyPSI3NSIgc3Ryb2tlPSIjREVFNkYxIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48dGV4dCB4PSI4MTguMjUiIHk9IjEwOS4wIiBmb250LXNpemU9IjE0LjUiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjYwLXNlY29uZCByZXZpZXcsPC90ZXh0Pjx0ZXh0IHg9IjgxOC4yNSIgeT0iMTMwLjAiIGZvbnQtc2l6ZT0iMTQuNSIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dGhlbiBzdWJtaXQuPC90ZXh0PjwvZz48L3N2Zz4=" style="width:930.0px;height:210.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/>
+</div>
+<div class="prompt reveal" style="margin-top:.7rem"><div class="prompt-title">Decision rule</div><div class="prompt-body">Change an answer only when you can name the exact word or relationship your first choice failed to explain.</div></div>
+</div></div>
+<div class="slide" data-slide="11" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">Independent locked block · original prose</div><h2 class="slide-title reveal">The Observatory Key</h2>
+<div class="passage reveal"><div class="quote">By the time Mara reached the observatory, the caretaker had already turned the brass key in the outer door. He did not remove it. Instead, he rested two fingers on its worn bow, as if the building might change its mind and admit her after all.<br/><br/>“The clouds have settled in,” he said. Above them, the dome looked less like a window onto the heavens than a gray, unblinking eye.<br/><br/>Mara held up the notebook her father had left unfinished. “Clouds move.”<br/><br/>The caretaker’s smile was slight and strangely formal. For thirty years he had opened the dome whenever her father arrived, even on evenings when the forecast promised nothing. Now he studied Mara with the courteous patience one gives a child who has asked to purchase the moon.<br/><br/>Then the wind shifted. A thin break appeared in the west, no wider than a ribbon. The caretaker glanced at the key. Mara said nothing.</div><div class="micro" style="margin-top:.35rem">Original instructional text · Suggested block time: 7 minutes plus 60-second review</div></div>
+</div></div>
+<div class="slide" data-slide="12" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">Locked-block questions</div><h2 class="slide-title reveal">Commit to evidence, not atmosphere</h2>
+<div class="grid2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="small">Which detail most directly shows that the caretaker doubts Mara will use the observatory that night?</div><div class="work"><textarea placeholder="Locate the clearest behavior or comparison." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="small">What does the comparison of the dome to “a gray, unblinking eye” contribute to the setting and tone?</div><div class="work"><textarea placeholder="Name both effect and attitude." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="small">The caretaker’s “courteous patience” is best understood as respectful, amused, skeptical, or fearful. Explain what makes two labels tempting.</div><div class="work"><textarea placeholder="Use contrast within the sentence." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-4">Level 4 · Multi-select</span></div><div class="small">Select two details that together reveal a shift in the caretaker’s attitude near the end.</div><div class="choice"><b>A</b> the brass key’s worn bow</div><div class="choice"><b>B</b> the forecast promises nothing</div><div class="choice"><b>C</b> the break in the western clouds</div><div class="choice"><b>D</b> his glance toward the key</div><div class="choice"><b>E</b> Mara’s unfinished notebook</div></div>
+</div>
+</div></div>
+<div class="slide" data-slide="13" style="--zc:#7C3AED">
+<div class="content"><div class="kicker reveal">60-second block review</div><h2 class="slide-title reveal">Review the reasoning, not every word</h2>
+<div class="grid3">
+<div class="card reveal"><div class="section-label">20 seconds</div><div class="math-sm">Question stem</div><div class="small">Did you answer tone, function, inference, or detail—not a nearby skill?</div></div>
+<div class="card reveal"><div class="section-label">20 seconds</div><div class="math-sm">Evidence match</div><div class="small">Can the choice explain all key words, including contrast and shift?</div></div>
+<div class="card reveal"><div class="section-label">20 seconds</div><div class="math-sm">Format check</div><div class="small">For multi-select, did you choose the requested number and prove each independently?</div></div>
+</div>
+<div class="prompt reveal" style="margin-top:.75rem"><div class="prompt-title">Close the block</div><div class="prompt-body">Name one answer you considered changing. What exact evidence would justify a change? If you cannot name it, preserve your first evidence-based choice.</div></div>
+</div></div>
+<div class="slide" data-slide="14" style="--zc:#2563EB">
+<div class="mesh"><div class="blob" style="width:390px;height:390px;right:-40px;top:-100px;background:#2563EB"></div><div class="blob" style="width:280px;height:280px;left:-60px;bottom:-60px;background:#B45309"></div></div><canvas class="particle-canvas"></canvas>
+<div class="content divider"><div class="ring reveal"><img alt="Instructional diagram" src="data:image/png;base64,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" style="width:100.0px;height:100.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/></div><div class="kicker reveal">30–50 minutes · inequalities</div><h2 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.35rem)">Translate · Isolate ·<br/><span style="color:#2563EB">Flip · Graph · Test</span></h2><p class="subtitle reveal" style="max-width:720px;margin:.6rem auto">A sign is not decoration. It records order. Every move must preserve which values make the original statement true.</p></div></div>
+<div class="slide" data-slide="15" style="--zc:#2563EB">
+<div class="content"><div class="kicker reveal">Language map</div><h2 class="slide-title reveal">Boundary words decide the circle</h2>
+<div class="grid4">
+<div class="card reveal" style="text-align:center"><div class="section-label">At least</div><div class="math">x ≥ a</div><div class="small">Boundary included</div></div>
+<div class="card reveal" style="text-align:center"><div class="section-label">No more than</div><div class="math">x ≤ a</div><div class="small">Boundary included</div></div>
+<div class="card reveal" style="text-align:center"><div class="section-label">More than</div><div class="math">x &gt; a</div><div class="small">Boundary excluded</div></div>
+<div class="card reveal" style="text-align:center"><div class="section-label">Fewer than</div><div class="math">x &lt; a</div><div class="small">Boundary excluded</div></div>
+</div>
+<div class="diagram-wrap reveal" style="margin-top:.75rem">
+<img alt="Open and closed endpoint number lines" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMTEyIiB2aWV3Qm94PSIwIDAgODYwIDExMiIgcm9sZT0iaW1nIj48dGl0bGU+T3BlbiBhbmQgY2xvc2VkIGVuZHBvaW50IG51bWJlciBsaW5lczwvdGl0bGU+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJvcHRpbWl6ZUxlZ2liaWxpdHkiPjxyZWN0IHg9IjgiIHk9IjYiIHdpZHRoPSI0MTAiIGhlaWdodD0iMTAwIiByeD0iMTIiIGZpbGw9IiNGOEZBRkQiIHN0cm9rZT0iI0RFRTZGMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PGxpbmUgeDE9IjM4IiB5MT0iNDEiIHgyPSIzODgiIHkyPSI0MSIgc3Ryb2tlPSIjQThCNUM3IiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxwYXRoIGQ9Ik0gNDIgMzcgTCAzOCA0MSBMIDQyIDQ1IiBmaWxsPSJub25lIiBzdHJva2U9IiNBOEI1QzciIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTSAzODQgMzcgTCAzODggNDEgTCAzODQgNDUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0E4QjVDNyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48bGluZSB4MT0iMjEzIiB5MT0iNDEiIHgyPSIzODYiIHkyPSI0MSIgc3Ryb2tlPSIjMjU2M0VCIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48cGF0aCBkPSJNIDM4MSAzNiBMIDM4NiA0MSBMIDM4MSA0NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjU2M0VCIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxMyIgY3k9IjQxIiByPSI2IiBmaWxsPSIjMjU2M0VCIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMi41Ii8+PHRleHQgeD0iMjEzIiB5PSI4NiIgZm9udC1zaXplPSIxNyIgZmlsbD0iIzE3MjMzQiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW5jbHVkZWQ6IOKJpCBvciDiiaU8L3RleHQ+PHJlY3QgeD0iNDQyIiB5PSI2IiB3aWR0aD0iNDEwIiBoZWlnaHQ9IjEwMCIgcng9IjEyIiBmaWxsPSIjRjhGQUZEIiBzdHJva2U9IiNERUU2RjEiIHN0cm9rZS13aWR0aD0iMSIvPjxsaW5lIHgxPSI0NzIiIHkxPSI0MSIgeDI9IjgyMiIgeTI9IjQxIiBzdHJva2U9IiNBOEI1QzciIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PHBhdGggZD0iTSA0NzYgMzcgTCA0NzIgNDEgTCA0NzYgNDUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0E4QjVDNyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDgxOCAzNyBMIDgyMiA0MSBMIDgxOCA0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQThCNUM3IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxsaW5lIHgxPSI0NzQiIHkxPSI0MSIgeDI9IjY0NyIgeTI9IjQxIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxwYXRoIGQ9Ik0gNDc5IDM2IEwgNDc0IDQxIEwgNDc5IDQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iNjQ3IiBjeT0iNDEiIHI9IjYiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48dGV4dCB4PSI2NDciIHk9Ijg2IiBmb250LXNpemU9IjE3IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FeGNsdWRlZDogJmx0OyBvciAmZ3Q7PC90ZXh0PjwvZz48L3N2Zz4=" style="width:860.0px;height:112.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/>
+</div>
+</div></div>
+<div class="slide" data-slide="16" style="--zc:#2563EB">
+<div class="content"><div class="kicker reveal">Why the sign flips</div><h2 class="slide-title reveal">Negative multiplication mirrors the number line</h2>
+<div class="grid2">
+<div class="diagram-wrap reveal"><img alt="Number line reflection across zero" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iMjQ1IiB2aWV3Qm94PSIwIDAgNTAwIDI0NSIgcm9sZT0iaW1nIj48dGl0bGU+TnVtYmVyIGxpbmUgcmVmbGVjdGlvbiBhY3Jvc3MgemVybzwvdGl0bGU+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJvcHRpbWl6ZUxlZ2liaWxpdHkiPjxsaW5lIHgxPSIzNSIgeTE9IjU4IiB4Mj0iNDY1IiB5Mj0iNTgiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48cGF0aCBkPSJNIDM5IDU0IEwgMzUgNTggTCAzOSA2MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gNDYxIDU0IEwgNDY1IDU4IEwgNDYxIDYyIiBmaWxsPSJub25lIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGxpbmUgeDE9Ijc1IiB5MT0iNTQiIHgyPSI3NSIgeTI9IjYyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjExMCIgeTE9IjU0IiB4Mj0iMTEwIiB5Mj0iNjIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMTQ1IiB5MT0iNTQiIHgyPSIxNDUiIHkyPSI2MiIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIxODAiIHkxPSI1NCIgeDI9IjE4MCIgeTI9IjYyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjIxNSIgeTE9IjU0IiB4Mj0iMjE1IiB5Mj0iNjIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMjUwIiB5MT0iNTQiIHgyPSIyNTAiIHkyPSI2MiIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIyODUiIHkxPSI1NCIgeDI9IjI4NSIgeTI9IjYyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjMyMCIgeTE9IjU0IiB4Mj0iMzIwIiB5Mj0iNjIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMzU1IiB5MT0iNTQiIHgyPSIzNTUiIHkyPSI2MiIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIzOTAiIHkxPSI1NCIgeDI9IjM5MCIgeTI9IjYyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjQyNSIgeTE9IjU0IiB4Mj0iNDI1IiB5Mj0iNjIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMzUiIHkxPSIxODgiIHgyPSI0NjUiIHkyPSIxODgiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48cGF0aCBkPSJNIDM5IDE4NCBMIDM1IDE4OCBMIDM5IDE5MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gNDYxIDE4NCBMIDQ2NSAxODggTCA0NjEgMTkyIiBmaWxsPSJub25lIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGxpbmUgeDE9Ijc1IiB5MT0iMTg0IiB4Mj0iNzUiIHkyPSIxOTIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMTEwIiB5MT0iMTg0IiB4Mj0iMTEwIiB5Mj0iMTkyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjE0NSIgeTE9IjE4NCIgeDI9IjE0NSIgeTI9IjE5MiIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIxODAiIHkxPSIxODQiIHgyPSIxODAiIHkyPSIxOTIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMjE1IiB5MT0iMTg0IiB4Mj0iMjE1IiB5Mj0iMTkyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjI1MCIgeTE9IjE4NCIgeDI9IjI1MCIgeTI9IjE5MiIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIyODUiIHkxPSIxODQiIHgyPSIyODUiIHkyPSIxOTIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMzIwIiB5MT0iMTg0IiB4Mj0iMzIwIiB5Mj0iMTkyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjM1NSIgeTE9IjE4NCIgeDI9IjM1NSIgeTI9IjE5MiIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIzOTAiIHkxPSIxODQiIHgyPSIzOTAiIHkyPSIxOTIiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iNDI1IiB5MT0iMTg0IiB4Mj0iNDI1IiB5Mj0iMTkyIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjI1MCIgeTE9Ijg3IiB4Mj0iMjUwIiB5Mj0iMTY0IiBzdHJva2U9IiNFMkU4RjAiIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNSIvPjxwYXRoIGQ9Ik0gNDI1IDcxIEMgNDI1IDExNSwgNzUgMTM0LCA3NSAxNzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI2Ii8+PHBhdGggZD0iTSA0MjUgNzEgQyA0MjUgMTE1LCA3NSAxMzQsIDc1IDE3NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN0MzQUVEIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTSA3MSAxNjkgTCA3NSAxNzUgTCA3OSAxNjkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdDM0FFRCIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMzIwIDcxIEMgMzIwIDExNSwgMTgwIDEzNCwgMTgwIDE3NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNIDMyMCA3MSBDIDMyMCAxMTUsIDE4MCAxMzQsIDE4MCAxNzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTc2IDE2OSBMIDE4MCAxNzUgTCAxODQgMTY5IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSIxODIiIHk9IjExMiIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIyOCIgcng9IjE0IiBmaWxsPSIjRkZGRkZGIiBzdHJva2U9IiNFMkU4RjAiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjI1MCIgeT0iMTMxIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NdWx0aXBseSBieSDiiJIxPC90ZXh0PjxjaXJjbGUgY3g9IjMyMCIgY3k9IjU4IiByPSI1LjUiIGZpbGw9IiMyNTYzRUIiIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48dGV4dCB4PSIzMjAiIHk9IjMzIiBmb250LXNpemU9IjE4IiBmaWxsPSIjMjU2M0VCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4yPC90ZXh0PjxjaXJjbGUgY3g9IjQyNSIgY3k9IjU4IiByPSI1LjUiIGZpbGw9IiM3QzNBRUQiIHN0cm9rZT0iIzdDM0FFRCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48dGV4dCB4PSI0MjUiIHk9IjMzIiBmb250LXNpemU9IjE4IiBmaWxsPSIjN0MzQUVEIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj41PC90ZXh0PjxjaXJjbGUgY3g9Ijc1IiBjeT0iMTg4IiByPSI1LjUiIGZpbGw9IiM3QzNBRUQiIHN0cm9rZT0iIzdDM0FFRCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48dGV4dCB4PSI3NSIgeT0iMjIyIiBmb250LXNpemU9IjE4IiBmaWxsPSIjN0MzQUVEIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7iiJI1PC90ZXh0PjxjaXJjbGUgY3g9IjE4MCIgY3k9IjE4OCIgcj0iNS41IiBmaWxsPSIjMjU2M0VCIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMi41Ii8+PHRleHQgeD0iMTgwIiB5PSIyMjIiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiMyNTYzRUIiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPuKIkjI8L3RleHQ+PHRleHQgeD0iNzUiIHk9IjgzIiBmb250LXNpemU9IjEzIiBmaWxsPSIjNTI2MTc2IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7iiJI1PC90ZXh0Pjx0ZXh0IHg9IjI1MCIgeT0iODMiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjA8L3RleHQ+PHRleHQgeD0iMjUwIiB5PSIyMTUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjA8L3RleHQ+PHRleHQgeD0iNDI1IiB5PSIyMTUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1MjYxNzYiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjU8L3RleHQ+PC9nPjwvc3ZnPg==" style="width:500.0px;height:245.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/></div>
+<div>
+<div class="prompt reveal"><div class="prompt-title">Start with a true order</div><div class="prompt-body"><span class="math-sm">2 &lt; 5</span>. Which point is farther right?</div></div>
+<div class="prompt reveal" style="margin-top:.55rem"><div class="prompt-title">Reflect both points</div><div class="prompt-body">Multiplying by −1 sends each value to the opposite side of zero.</div></div>
+<div class="prompt reveal" style="margin-top:.55rem"><div class="prompt-title">Preserve truth</div><div class="prompt-body"><span class="math-sm">−2 &gt; −5</span>. The sign reverses because the spatial order reverses.</div></div>
+</div>
+</div>
+</div></div>
+<div class="slide" data-slide="17" style="--zc:#2563EB">
+<div class="content"><div class="kicker reveal">Worked model 2</div><h2 class="slide-title reveal">Compound inequality: flip all three parts</h2>
+<div class="grid2">
+<div class="card reveal"><div class="section-label">Problem</div><div class="math" style="margin:.35rem 0">−8 &lt; 2 − 2x ≤ 10</div><div class="small">Solve and represent the result on a number line.</div><div class="trap" style="margin-top:.7rem"><strong>Prediction:</strong><div class="small">The final division is by a negative. Both inequality symbols must reverse.</div></div></div>
+<div class="card reveal">
+<div class="step"><div class="step-num">1</div><div><h3>Subtract 2 everywhere</h3><p><span class="math-sm">−10 &lt; −2x ≤ 8</span></p></div></div>
+<div class="step"><div class="step-num">2</div><div><h3>Divide all three parts by −2</h3><p>Reverse both signs: <span class="math-sm">5 &gt; x ≥ −4</span>.</p></div></div>
+<div class="step"><div class="step-num">3</div><div><h3>Rewrite left to right</h3><p><span class="math-sm">−4 ≤ x &lt; 5</span>. Close −4, open 5, shade between.</p></div></div>
+</div>
+</div>
+<div class="diagram-wrap reveal" style="margin-top:.65rem;padding:.35rem"><img alt="Instructional diagram" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NjAiIGhlaWdodD0iODIiIHZpZXdCb3g9IjAgMCA3NjAgODIiIHJvbGU9ImltZyI+PHRpdGxlPlNvbHV0aW9uIGludGVydmFsOiDiiJI0IOKJpCB4ICZsdDsgNTwvdGl0bGU+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJvcHRpbWl6ZUxlZ2liaWxpdHkiPjxsaW5lIHgxPSI2NSIgeTE9IjMwIiB4Mj0iNjk1IiB5Mj0iMzAiIHN0cm9rZT0iIzk0QTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48cGF0aCBkPSJNIDY5IDI2IEwgNjUgMzAgTCA2OSAzNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRBM0I4IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gNjkxIDI2IEwgNjk1IDMwIEwgNjkxIDM0IiBmaWxsPSJub25lIiBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGxpbmUgeDE9IjgwIiB5MT0iMjYiIHgyPSI4MCIgeTI9IjM0IiBzdHJva2U9IiNDQkQ1RTEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjEyMCIgeTE9IjI2IiB4Mj0iMTIwIiB5Mj0iMzQiIHN0cm9rZT0iI0NCRDVFMSIgc3Ryb2tlLXdpZHRoPSIxLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMTYwIiB5MT0iMjYiIHgyPSIxNjAiIHkyPSIzNCIgc3Ryb2tlPSIjQ0JENUUxIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIyMDAiIHkxPSIyNiIgeDI9IjIwMCIgeTI9IjM0IiBzdHJva2U9IiNDQkQ1RTEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjI0MCIgeTE9IjI2IiB4Mj0iMjQwIiB5Mj0iMzQiIHN0cm9rZT0iI0NCRDVFMSIgc3Ryb2tlLXdpZHRoPSIxLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iMjgwIiB5MT0iMjYiIHgyPSIyODAiIHkyPSIzNCIgc3Ryb2tlPSIjQ0JENUUxIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSIzMjAiIHkxPSIyNiIgeDI9IjMyMCIgeTI9IjM0IiBzdHJva2U9IiNDQkQ1RTEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjM2MCIgeTE9IjI2IiB4Mj0iMzYwIiB5Mj0iMzQiIHN0cm9rZT0iI0NCRDVFMSIgc3Ryb2tlLXdpZHRoPSIxLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iNDAwIiB5MT0iMjYiIHgyPSI0MDAiIHkyPSIzNCIgc3Ryb2tlPSIjQ0JENUUxIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSI0NDAiIHkxPSIyNiIgeDI9IjQ0MCIgeTI9IjM0IiBzdHJva2U9IiNDQkQ1RTEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjQ4MCIgeTE9IjI2IiB4Mj0iNDgwIiB5Mj0iMzQiIHN0cm9rZT0iI0NCRDVFMSIgc3Ryb2tlLXdpZHRoPSIxLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iNTIwIiB5MT0iMjYiIHgyPSI1MjAiIHkyPSIzNCIgc3Ryb2tlPSIjQ0JENUUxIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSI1NjAiIHkxPSIyNiIgeDI9IjU2MCIgeTI9IjM0IiBzdHJva2U9IiNDQkQ1RTEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjYwMCIgeTE9IjI2IiB4Mj0iNjAwIiB5Mj0iMzQiIHN0cm9rZT0iI0NCRDVFMSIgc3Ryb2tlLXdpZHRoPSIxLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48bGluZSB4MT0iNjQwIiB5MT0iMjYiIHgyPSI2NDAiIHkyPSIzNCIgc3Ryb2tlPSIjQ0JENUUxIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjxsaW5lIHgxPSI2ODAiIHkxPSIyNiIgeDI9IjY4MCIgeTI9IjM0IiBzdHJva2U9IiNDQkQ1RTEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+PGxpbmUgeDE9IjIwMCIgeTE9IjMwIiB4Mj0iNTYwIiB5Mj0iMzAiIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSI0LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIzMCIgcj0iNiIgZmlsbD0iIzI1NjNFQiIgc3Ryb2tlPSIjMjU2M0VCIiBzdHJva2Utd2lkdGg9IjIuNSIvPjxjaXJjbGUgY3g9IjU2MCIgY3k9IjMwIiByPSI2IiBmaWxsPSIjRkZGRkZGIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMi41Ii8+PHRleHQgeD0iMjAwIiB5PSI2NiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzE3MjMzQiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+4oiSNDwvdGV4dD48dGV4dCB4PSI1NjAiIHk9IjY2IiBmb250LXNpemU9IjE4IiBmaWxsPSIjMTcyMzNCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj41PC90ZXh0PjwvZz48L3N2Zz4=" style="width:760.0px;height:82.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/></div>
+</div></div>
+<div class="slide" data-slide="18" style="--zc:#2563EB">
+<div class="content"><div class="kicker reveal">Graphing check</div><h2 class="slide-title reveal">Endpoint, direction, test point</h2>
+<div class="grid3">
+<div class="card reveal"><div class="section-label">1 · Endpoint</div><div class="math-sm">Where is equality?</div><div class="small">Solve for the boundary value before drawing anything.</div></div>
+<div class="card reveal"><div class="section-label">2 · Circle</div><div class="math-sm">Included or excluded?</div><div class="small">Use a closed circle for ≤ or ≥; open for &lt; or &gt;.</div></div>
+<div class="card reveal"><div class="section-label">3 · Direction</div><div class="math-sm">Which side works?</div><div class="small">Test one easy value from a side; do not trust the symbol’s visual direction alone.</div></div>
+</div>
+<div class="prompt reveal" style="margin-top:.75rem"><div class="prompt-title">Fast proof</div><div class="prompt-body">If your result is <span class="math-sm">x ≥ 1</span>, test 2 in the original inequality. Then test 0. One should work and one should fail.</div></div>
+</div></div>
+<div class="slide" data-slide="19" style="--zc:#2563EB">
+<div class="content"><div class="kicker reveal">Retention practice</div><h2 class="slide-title reveal">Easy to hard: preserve the truth set</h2>
+<div class="grid2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="small">Translate and graph: “A temperature <i>t</i> is at least −3 degrees.” Explain the circle type.</div><div class="work"><textarea placeholder="Translation + graph description" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="small">Solve and graph: <span class="math-sm">−3x + 4 &gt; 19</span>. At which step must the sign decision occur?</div><div class="work"><textarea placeholder="Show each legal move." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="small">Solve: <span class="math-sm">4(2 − x) ≤ 3x + 15</span>. Can you arrange the variables so the final coefficient is positive?</div><div class="work"><textarea placeholder="Try two routes; compare error risk." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="small">Solve and graph: <span class="math-sm">−7 ≤ 3 − 2x &lt; 13</span>. Which parts reverse, and how will you reorder the final statement?</div><div class="work"><textarea placeholder="Use all three checkpoints." spellcheck="false"></textarea></div></div>
+</div>
+</div></div>
+<div class="slide" data-slide="20" style="--zc:#2563EB">
+<div class="content"><div class="kicker reveal">Digital TEI · multi-select</div><h2 class="slide-title reveal">Select every value that satisfies the original</h2>
+<div class="grid2">
+<div class="card reveal"><div class="section-label">Prompt</div><div class="prose">For the inequality <span class="math-sm">−2(3x − 1) ≥ 14</span>, select <b>all</b> values of <i>x</i> that satisfy the inequality.</div><div class="grid2" style="gap:7px;margin-top:.65rem"><div class="choice"><b>A</b> −5</div><div class="choice"><b>B</b> −2</div><div class="choice"><b>C</b> 0</div><div class="choice"><b>D</b> 2</div><div class="choice"><b>E</b> 5</div><div class="choice"><b>F</b> 8</div></div></div>
+<div>
+<div class="prompt reveal"><div class="prompt-title">Route 1 · Solve first</div><div class="prompt-body">Find the entire solution set, then compare each listed value to the boundary.</div></div>
+<div class="prompt reveal" style="margin-top:.55rem"><div class="prompt-title">Route 2 · Substitute strategically</div><div class="prompt-body">Use the boundary to eliminate a side, then test any uncertain endpoint.</div></div>
+<div class="trap reveal" style="margin-top:.55rem"><strong>Format trap:</strong><div class="small">A multi-select can require more than two responses. Each selection needs its own proof.</div></div>
+</div>
+</div>
+</div></div>
+<div class="slide" data-slide="21" style="--zc:#B45309">
+<div class="mesh"><div class="blob" style="width:390px;height:390px;right:-40px;top:-100px;background:#B45309"></div><div class="blob" style="width:280px;height:280px;left:-60px;bottom:-60px;background:#2563EB"></div></div><canvas class="particle-canvas"></canvas>
+<div class="content divider"><div class="ring reveal"><img alt="Instructional diagram" src="data:image/png;base64,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" style="width:100.0px;height:100.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/></div><div class="kicker reveal">50–60 minutes · cluster transfer</div><h2 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.35rem)">Number theory:<br/><span style="color:#B45309">count without overlap</span></h2><p class="subtitle reveal" style="max-width:720px;margin:.6rem auto">When a problem says “neither,” count the union first. The overlap must be subtracted once.</p></div></div>
+<div class="slide" data-slide="22" style="--zc:#B45309">
+<div class="content"><div class="kicker reveal">Inclusion–exclusion</div><h2 class="slide-title reveal">Two groups overlap in the LCM</h2>
+<div class="grid2">
+<div class="diagram-wrap reveal"><img alt="Venn diagram for multiples of 2 and 3" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NzAiIGhlaWdodD0iMjcwIiB2aWV3Qm94PSIwIDAgNDcwIDI3MCIgcm9sZT0iaW1nIj48dGl0bGU+VmVubiBkaWFncmFtIGZvciBtdWx0aXBsZXMgb2YgMiBhbmQgMzwvdGl0bGU+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJvcHRpbWl6ZUxlZ2liaWxpdHkiPjxkZWZzPjxjbGlwUGF0aCBpZD0ib3ZlcmxhcCI+PGNpcmNsZSBjeD0iMTc1IiBjeT0iMTMwIiByPSI5OCIvPjwvY2xpcFBhdGg+PC9kZWZzPjxjaXJjbGUgY3g9IjE3NSIgY3k9IjEzMCIgcj0iOTgiIGZpbGw9IiNFRkY2RkYiLz48Y2lyY2xlIGN4PSIyOTUiIGN5PSIxMzAiIHI9Ijk4IiBmaWxsPSIjRjVGM0ZGIi8+PGNpcmNsZSBjeD0iMjk1IiBjeT0iMTMwIiByPSI5OCIgZmlsbD0iI0RERDZGRSIgY2xpcC1wYXRoPSJ1cmwoI292ZXJsYXApIi8+PGNpcmNsZSBjeD0iMTc1IiBjeT0iMTMwIiByPSI5OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjU2M0VCIiBzdHJva2Utd2lkdGg9IjIuMiIvPjxjaXJjbGUgY3g9IjI5NSIgY3k9IjEzMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdDM0FFRCIgc3Ryb2tlLXdpZHRoPSIyLjIiLz48dGV4dCB4PSIxMzQiIHk9IjEyMiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzI1NjNFQiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TXVsdGlwbGVzPC90ZXh0Pjx0ZXh0IHg9IjEzNCIgeT0iMTQ3IiBmb250LXNpemU9IjE4IiBmaWxsPSIjMjU2M0VCIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5vZiAyPC90ZXh0Pjx0ZXh0IHg9IjIzNSIgeT0iMTIyIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNUIyMUI2IiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NdWx0aXBsZXM8L3RleHQ+PHRleHQgeD0iMjM1IiB5PSIxNDciIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM1QjIxQjYiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPm9mIDY8L3RleHQ+PHRleHQgeD0iMzM2IiB5PSIxMjIiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM3QzNBRUQiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk11bHRpcGxlczwvdGV4dD48dGV4dCB4PSIzMzYiIHk9IjE0NyIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzdDM0FFRCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+b2YgMzwvdGV4dD48dGV4dCB4PSIyMzUiIHk9IjI1OCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzUyNjE3NiIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+T3V0c2lkZSBib3RoIGNpcmNsZXMgPSBtdWx0aXBsZXMgb2YgbmVpdGhlcjwvdGV4dD48L2c+PC9zdmc+" style="width:470.0px;height:270.0px;max-width:100%;object-fit:contain;display:block;margin:auto;"/></div>
+<div>
+<div class="card reveal"><div class="math-sm">Count(A or B)</div><div class="prose">Count(A) + Count(B) − Count(A and B)</div></div>
+<div class="card reveal" style="margin-top:.55rem"><div class="math-sm">Count(neither)</div><div class="prose">Total − Count(A or B)</div></div>
+<div class="prompt reveal" style="margin-top:.55rem"><div class="prompt-title">Why subtract the overlap?</div><div class="prompt-body">Which numbers were counted once as multiples of 2 and again as multiples of 3?</div></div>
+</div>
+</div>
+</div></div>
+<div class="slide" data-slide="23" style="--zc:#B45309">
+<div class="content"><div class="kicker reveal">Worked model 3</div><h2 class="slide-title reveal">How many integers from 1 to 60 are neither?</h2>
+<div class="grid2">
+<div class="card reveal"><div class="section-label">Problem</div><div class="prose">Count the integers from 1 through 60 that are divisible by neither 2 nor 3.</div><div class="prompt" style="margin-top:.7rem"><div class="prompt-title">Before calculating</div><div class="prompt-body">Why is “subtract the multiples of 2, then subtract the multiples of 3” incomplete?</div></div></div>
+<div class="card reveal">
+<div class="step"><div class="step-num">1</div><div><h3>Count each group</h3><p>Multiples of 2: 30. Multiples of 3: 20. Multiples of 6: 10.</p></div></div>
+<div class="step"><div class="step-num">2</div><div><h3>Count the union once</h3><p><span class="math-sm">30 + 20 − 10 = 40</span> integers are divisible by 2 or 3.</p></div></div>
+<div class="step"><div class="step-num">3</div><div><h3>Take the complement</h3><p><span class="math-sm">60 − 40 = 20</span> integers are divisible by neither.</p></div></div>
+</div>
+</div>
+</div></div>
+<div class="slide" data-slide="24" style="--zc:#B45309">
+<div class="content"><div class="kicker reveal">Cluster practice</div><h2 class="slide-title reveal">Number theory: easy to hard</h2>
+<div class="grid2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-1">Level 1</span></div><div class="small">How many odd integers are in the inclusive interval from 17 to 63? Name a counting method before listing.</div><div class="work"><textarea placeholder="Method + count" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="small">Two lights flash every 18 seconds and 30 seconds. If they flash together now, when do they next flash together?</div><div class="work"><textarea placeholder="Explain why this is LCM, not GCF." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="small">From 1 through 90, how many integers are divisible by 4 or 6? Identify the overlap divisor.</div><div class="work"><textarea placeholder="Use inclusion–exclusion." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="small">From 1 through 120, how many integers are divisible by neither 4 nor 5? Build the complement carefully.</div><div class="work"><textarea placeholder="Group counts → overlap → union → neither" spellcheck="false"></textarea></div></div>
+</div>
+</div></div>
+<div class="slide" data-slide="25" style="--zc:#B45309">
+<div class="content"><div class="kicker reveal">Literal-equation transfer</div><h2 class="slide-title reveal">Drag the solving steps into a legal order</h2>
+<div class="grid2">
+<div class="card reveal"><div class="section-label">Target</div><div class="math" style="margin:.45rem 0">P = 2L + 2W</div><div class="prose">Solve for <i>W</i> in terms of <i>P</i> and <i>L</i>. Arrange the action cards; then write the resulting expression.</div></div>
+<div class="grid2 reveal" style="gap:9px">
+<div class="choice"><b>A</b> Divide both sides by 2.</div>
+<div class="choice"><b>B</b> Subtract 2L from both sides.</div>
+<div class="choice"><b>C</b> Factor 2 from the right side.</div>
+<div class="choice"><b>D</b> Subtract L from both sides.</div>
+<div class="choice"><b>E</b> Identify the term containing W.</div>
+<div class="choice"><b>F</b> Check by substitution into the original.</div>
+</div>
+</div>
+<div class="prompt reveal" style="margin-top:.7rem"><div class="prompt-title">Legality test</div><div class="prompt-body">At each step, what operation keeps both sides equal while moving you closer to a coefficient of 1 on <i>W</i>?</div></div>
+</div></div>
+<div class="slide" data-slide="26" style="--zc:#17233B">
+<div class="mesh"><div class="blob" style="width:420px;height:420px;right:-90px;top:-100px;background:#2563EB"></div><div class="blob" style="width:320px;height:320px;left:-80px;bottom:-90px;background:#7C3AED"></div><div class="blob" style="width:220px;height:220px;left:43%;top:20%;background:#B45309;opacity:.06"></div></div><canvas class="particle-canvas"></canvas>
+<div class="content"><div class="kicker reveal">Final 90-second check</div><h2 class="slide-title reveal" style="text-align:center;font-size:clamp(2rem,4.5vw,3rem)">Can you name the decision point?</h2>
+<div class="grid3">
+<div class="card reveal"><div class="section-label">ELA</div><div class="math-sm">Image → attitude</div><div class="small">Name one image from today and the precise attitude it develops.</div></div>
+<div class="card reveal"><div class="section-label">Inequality</div><div class="math-sm">Negative → reverse</div><div class="small">State exactly when a sign flips and how you verify the graph.</div></div>
+<div class="card reveal"><div class="section-label">Counting</div><div class="math-sm">Overlap → subtract once</div><div class="small">Explain why the LCM controls the intersection.</div></div>
+</div>
+<div class="prompt reveal" style="margin-top:.8rem;text-align:center"><div class="prompt-title">Commitment statement</div><div class="prompt-body">On the digital test, I will slow down at the decision point, prove the choice, and submit without carrying the previous question forward.</div></div>
+</div></div>
+</div>
+<div class="nav-controls"><button aria-label="Previous slide" class="nav-btn" onclick="changeSlide(-1)">‹</button><div class="slide-dots" id="dots"></div><button aria-label="Next slide" class="nav-btn" onclick="changeSlide(1)">›</button><span class="slide-counter" id="counter">1 / 26</span></div>
+<script>
+let current=1;const slides=[...document.querySelectorAll('.slide')],total=slides.length,dots=document.getElementById('dots'),counter=document.getElementById('counter');for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>goToSlide(i);dots.appendChild(d)}
+function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';el.offsetHeight;el.style.transition=`opacity .34s ease ${i*.055}s, transform .34s ease ${i*.055}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}
+function goToSlide(n){document.querySelector('.slide.active')?.classList.remove('active');const next=document.querySelector(`.slide[data-slide="${n}"]`);next.classList.add('active');current=n;document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=`${current} / ${total}`;animateSlide(next)}function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n)}document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let sx=0;document.addEventListener('touchstart',e=>sx=e.touches[0].clientX);document.addEventListener('touchend',e=>{const dx=sx-e.changedTouches[0].clientX;if(Math.abs(dx)>50)changeSlide(dx>0?1:-1)});
+function particles(canvas){const ctx=canvas.getContext('2d'),resize=()=>{canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight};resize();window.addEventListener('resize',resize);const pts=Array.from({length:36},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:.8+Math.random()*1.6,a:.08+Math.random()*.18}));function tick(){ctx.clearRect(0,0,canvas.width,canvas.height);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(37,99,235,${p.a})`;ctx.fill()}requestAnimationFrame(tick)}tick()}document.querySelectorAll('.particle-canvas').forEach(particles);animateSlide(document.querySelector('.slide.active'));
+</script>
+
+<script id="passage-annotation-script">
+
+(function () {
+  'use strict';
+  document.querySelectorAll('.passage .quote, .passage .poem').forEach(function (passage) {
+    passage.classList.add('annotatable-passage');
+    var holder = document.createElement('div');
+    holder.innerHTML = "<div aria-label=\"Passage annotation tools\" class=\"annotation-toolbar\" role=\"toolbar\">\n<span class=\"annot-label\">Tool:</span>\n<button class=\"annot-btn active\" data-tool=\"highlight\" type=\"button\">🖊 Highlight</button>\n<button class=\"annot-btn\" data-tool=\"underline\" type=\"button\">U̲ Underline</button>\n<button class=\"annot-btn\" data-tool=\"outline\" type=\"button\">▢ Outline</button>\n<button class=\"annot-btn\" data-tool=\"note\" type=\"button\">📌 Note</button>\n<div class=\"annot-sep\"></div>\n<span class=\"annot-label\">Color:</span>\n<div class=\"annot-color-row\">\n<button aria-label=\"Yellow\" class=\"annot-color-swatch active\" data-color=\"#fef08a\" style=\"background:#fef08a;\" title=\"Yellow\" type=\"button\"></button>\n<button aria-label=\"Green\" class=\"annot-color-swatch\" data-color=\"#86efac\" style=\"background:#86efac;\" title=\"Green\" type=\"button\"></button>\n<button aria-label=\"Blue\" class=\"annot-color-swatch\" data-color=\"#93c5fd\" style=\"background:#93c5fd;\" title=\"Blue\" type=\"button\"></button>\n<button aria-label=\"Pink\" class=\"annot-color-swatch\" data-color=\"#fca5a5\" style=\"background:#fca5a5;\" title=\"Pink\" type=\"button\"></button>\n<button aria-label=\"Purple\" class=\"annot-color-swatch\" data-color=\"#c4b5fd\" style=\"background:#c4b5fd;\" title=\"Purple\" type=\"button\"></button>\n</div>\n<button class=\"clear-annotations-btn\" type=\"button\">✕ Clear</button>\n</div>";
+    var toolbar = holder.firstElementChild;
+    passage.before(toolbar);
+    
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  toolbar.querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  toolbar.querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passage.normalize();
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note...';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '\u2713';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '\u2715';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      var noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.tabIndex = 0;
+      noteEl.setAttribute('aria-label', 'Note ' + noteNum + ': ' + noteText);
+      noteEl.addEventListener('click', function(){ noteEl.classList.toggle('note-open'); });
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') {
+        span2.className = 'passage-highlight';
+        span2.style.backgroundColor = color;
+        span2.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span2.className = 'passage-underline';
+        span2.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span2.className = 'passage-outline';
+        span2.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+
+    toolbar.querySelectorAll('[data-tool]').forEach(function(btn) {
+      btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
+      btn.addEventListener('click', function() {
+        setPassageTool(btn.dataset.tool, btn);
+        toolbar.querySelectorAll('[data-tool]').forEach(function(b) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+      });
+    });
+    toolbar.querySelectorAll('[data-color]').forEach(function(btn) {
+      btn.addEventListener('click', function() { setPassageColor(btn.dataset.color, btn); });
+    });
+    toolbar.querySelector('.clear-annotations-btn').addEventListener('click', clearPassageAnnotations);
+    function annotateSelection(event) {
+      if (event && event.target.closest('.note-input-wrapper, .passage-note')) return;
+      var sel = window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+      var range = sel.getRangeAt(0);
+      if (!passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return;
+      var start = range.startContainer.nodeType === 1 ? range.startContainer : range.startContainer.parentElement;
+      var end = range.endContainer.nodeType === 1 ? range.endContainer : range.endContainer.parentElement;
+      if (start.closest('.note-input-wrapper, .passage-note') || end.closest('.note-input-wrapper, .passage-note')) return;
+      if (!range.toString().trim()) return;
+      applyPassageAnnotation(range.cloneRange());
+    }
+    passage.addEventListener('mouseup', annotateSelection);
+    passage.addEventListener('keyup', function(e) { if (e.key === 'Shift') annotateSelection(e); });
+    passage.addEventListener('touchend', function(e) {
+      if (!e.target.closest('.note-input-wrapper, .passage-note')) setTimeout(function(){ annotateSelection(e); }, 100);
+    });
+    // Keep passage selection gestures and note typing out of slide navigation.
+    [passage, toolbar].forEach(function(el) {
+      el.addEventListener('touchstart', function(e) { e.stopPropagation(); }, {passive:true});
+      el.addEventListener('touchend', function(e) { e.stopPropagation(); }, {passive:true});
+      el.addEventListener('keydown', function(e) { e.stopPropagation(); });
+    });
+  });
+})();
+</script>
+</body></html>
