@@ -1,1 +1,702 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>Session 6 — Digital SAT Homework</title><link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&amp;display=swap" rel="stylesheet"/><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Chillax', 'Lexend', sans-serif;
+    --ff-body: 'Lexend', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+:root{--ff-math:'Lexend',sans-serif}
+body{max-width:860px;font-weight:400;line-height:1.5}
+.toolbar{display:flex;justify-content:center;gap:12px;padding:22px 16px 0;flex-wrap:wrap}
+.toolbar button{margin:0;font-size:14px;padding:10px 23px}
+.toolbar .clear{background:white;color:var(--slate);box-shadow:none;border:1.5px solid var(--border)}
+.save-status{text-align:center;color:var(--muted);font-size:11px;margin:8px 15px 0;min-height:17px}
+.sheet{padding:30px 34px;margin:22px auto;position:relative}
+.hw-header{flex-wrap:nowrap;gap:18px;margin-bottom:14px;padding-bottom:13px}
+.hw-header-left h1{font-weight:600;font-size:27px;line-height:1.18}
+.hw-header-left .subtitle{font-size:10px;line-height:1.5;letter-spacing:.06em;margin-top:7px}
+.hw-meta{min-width:205px;max-width:240px;padding-top:4px}
+.hw-meta-row{font-size:12px}.hw-meta-row .label{min-width:48px;font-size:10px}
+.meta-input{border:0;border-bottom:1.5px solid var(--border);width:145px;min-width:0;background:transparent;padding:5px;font:inherit;color:var(--ink)}
+.score-banner{margin-bottom:12px;padding:12px 15px;gap:10px;flex-wrap:nowrap}
+.score-banner .title{font-size:15px}.score-banner .sub{font-size:10px;line-height:1.6}
+.score-cell{min-width:64px;padding:4px 8px}.score-cells{gap:6px;flex-wrap:nowrap}.score-cell .sc-val{font-size:15px}
+.score-cell input{width:27px;background:transparent;color:white;border:0;border-bottom:1px solid #ffffff88;font:inherit;text-align:center;padding:0}
+.score-cell .sc-lbl{font-size:9px}
+.section-hd{margin:0 0 12px;gap:10px}.section-hd h2{font-size:18px;font-weight:600;line-height:1.3}
+.section-hd .badge{font-size:10px;white-space:nowrap}.section-letter{font-family:var(--ff-head);font-size:15px;font-weight:600;border:1px solid var(--blue-md);background:var(--blue-lt);color:var(--blue);width:29px;height:29px;display:grid;place-items:center;border-radius:8px;flex-shrink:0}
+.instr{font-size:11px;font-style:normal;line-height:1.6;margin-bottom:13px;padding:8px 11px}
+.overview{font-size:11px;line-height:1.65;margin:8px 0 13px;color:var(--slate)}
+.prob-grid{gap:14px;align-items:stretch}.prob{padding:13px 14px;display:flex;flex-direction:column;break-inside:avoid}
+.prob-num{font-size:11px;font-weight:600;display:flex;align-items:center;gap:6px;margin-bottom:7px;color:var(--blue)}
+.format-tag{margin-left:auto;font-family:var(--ff-body);font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:9px}
+.prob-q{font-size:12px;line-height:1.65;font-weight:400;margin-bottom:8px}.prob-q p+p{margin-top:8px}
+.math{font-family:var(--ff-math);font-weight:500;white-space:nowrap}.equation{display:block;text-align:center;padding:7px 0;font-size:15px}
+.mc-opts{grid-template-columns:1fr;gap:3px;margin:1px 0 6px}.mc-opts.numeric{grid-template-columns:1fr 1fr;gap:5px 8px}
+.mc-opt{font-size:11.5px;padding:4px 6px;line-height:1.5;gap:7px;align-items:flex-start;position:relative}
+.mc-opt input[type=radio]{display:block;appearance:auto;accent-color:var(--blue);width:13px;height:13px;min-width:13px;margin-top:2px}
+.mc-opt:hover{background:var(--blue-lt)}.mc-opt.selected{background:var(--blue-lt);border-color:var(--blue-md);font-weight:400}.mc-opt.selected .letter{color:var(--blue)}
+.mc-opt .letter{font-weight:600;margin-right:5px}.mc-opt:focus-within{outline:2px solid var(--blue);outline-offset:2px}
+.workspace{margin-top:auto}.work-label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:8px}
+.work-area{font-size:11px;line-height:1.6;min-height:56px;resize:none;margin-top:4px;display:block;overflow:hidden;font-weight:400}
+.work-area::placeholder{font-size:10px}.answer-box{font-size:11px;margin-top:8px;gap:7px}.answer-input{min-width:0;flex:1;width:90px;background:white;border:1.5px solid var(--border);border-radius:5px;padding:5px 8px;font:inherit;color:var(--ink);height:29px}
+.review-row{display:flex;gap:10px;align-items:center;font-size:9px;color:var(--muted);margin-top:8px;flex-wrap:wrap}.review-row input[type=checkbox]{accent-color:var(--purple);vertical-align:middle;margin-right:3px}
+.review-row select{font:inherit;background:white;color:var(--slate);border:1px solid var(--border);border-radius:4px;padding:2px 3px;width:104px}
+.fig{margin:0 0 5px}.fig svg{width:100%;height:85px;font-family:var(--ff-body)}.fig-note{font-size:8px;color:var(--muted);text-align:center;margin:-2px 0 6px}
+.page-foot{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:8px;margin-top:17px;font-size:9px;color:var(--muted)}
+.pacing-line{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;margin:12px 0;color:var(--slate)}
+.small-input{width:57px;border:0;border-bottom:1px solid var(--border);background:transparent;color:var(--ink);font:inherit;padding:3px}
+.rw-card{margin-bottom:16px;display:block;padding:16px 18px}.rw-card .prob-q{font-size:12px;line-height:1.7}.rw-card .mc-opt{font-size:11.5px;padding:5px 7px}.rw-card .work-area{min-height:43px}
+.notes{margin:5px 0 11px;padding-left:20px;font-size:11.5px;line-height:1.65}.notes li{margin:3px 0}.stem{font-weight:500;margin:9px 0 5px;font-size:12px;line-height:1.65}
+.drill-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.drill{border:1px solid var(--blue-md);background:var(--blue-lt);border-radius:10px;padding:15px}.drill h3{font-family:var(--ff-head);font-size:15px;color:var(--blue);margin-bottom:8px}.drill p{font-size:11px;line-height:1.7;margin-bottom:7px}.checkline{display:block;font-size:11px;margin:7px 0;color:var(--slate)}.checkline input{accent-color:var(--blue);margin-right:6px}
+.transfer{border:1px solid #c4b5fd;background:var(--purple-lt);border-radius:10px;padding:14px 17px;margin-top:14px}.transfer h3{font-family:var(--ff-head);color:var(--purple);font-size:15px;margin-bottom:6px}.transfer p{font-size:11px;line-height:1.7}.transfer .work-area{min-height:58px}
+.error-log{padding:14px 16px}.error-log h3{font-size:16px}.error-type-pills{gap:5px;font-size:10px;line-height:1.6;margin-top:5px}.pill{padding:3px 9px}
+.error-table{font-size:10px;table-layout:fixed;margin-top:12px}.error-table th{font-size:10px;padding:8px 6px}.error-table td{padding:5px 6px;vertical-align:top}.error-table th:nth-child(1){width:5%}.error-table th:nth-child(2){width:12%}.error-table th:nth-child(3){width:31%}.error-table th:nth-child(4){width:15%}.error-table th:nth-child(5){width:37%}
+.error-table td textarea{font:inherit;width:100%;display:block;min-height:45px;resize:none;border:0;color:var(--slate);background:transparent;line-height:1.5;overflow:hidden;padding:2px}.error-table select{font:inherit;width:100%;border:0;background:transparent;color:var(--slate);padding:2px 0}.error-table tr{break-inside:avoid}
+.reflect-box{padding:13px 16px;margin-top:14px}.reflect-box h3{font-size:15px}.reflect-box p{font-size:11px;line-height:1.65}.reflect-box .work-area{min-height:52px}.reflect-box label{font-size:11px;display:block;margin-top:8px}
+.print-value{display:none}.fineprint{font-size:9px;color:var(--muted);line-height:1.7;margin-top:10px}.fineprint a{color:var(--blue)}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@page{size:Letter;margin:11mm 12mm}
+@media screen and (max-width:650px){.sheet{padding:24px 18px;border-radius:0;margin:18px 0}.hw-header{flex-wrap:wrap}.hw-meta{max-width:none;width:100%;flex-direction:row;flex-wrap:wrap}.score-banner{flex-wrap:wrap}.prob-grid,.drill-grid{grid-template-columns:1fr}.section-hd{flex-wrap:wrap}.section-hd .badge{margin-left:0}.error-log{padding:10px 7px}.error-table th,.error-table td{padding:5px 3px}.error-table,.error-table th{font-size:9px}}
+@media print{
+html,body{background:white;max-width:none;width:auto;margin:0;font-size:11px}
+.sheet{padding:0!important;margin:0!important;box-shadow:none;border-radius:0;break-after:page;page-break-after:always}
+.sheet:last-of-type{break-after:auto;page-break-after:auto}.no-print{display:none!important}
+.hw-header{margin-bottom:11px}.score-banner{margin-bottom:10px}.section-hd{margin-bottom:10px}.section-hd h2{font-size:17px}
+.prob-grid{gap:12px}.prob{padding:11px 12px}.prob-q{font-size:11.5px;line-height:1.6}.mc-opt{font-size:11px;padding:3px 5px}.rw-card .prob-q{font-size:11.5px}.rw-card .mc-opt{font-size:11px}.rw-card{padding:13px 15px;margin-bottom:13px}
+textarea,input:not([type=radio]):not([type=checkbox]),select{display:none!important}.print-value{display:block!important;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--ff-body);font-weight:400;line-height:1.6}
+.print-value.textarea-value{border:1px dashed var(--border);background:white;border-radius:5px;padding:5px 7px;min-height:56px;font-size:10.5px;margin-top:4px}
+.print-value.inline-value{display:inline-block!important;border-bottom:1px solid var(--border);min-width:50px;min-height:17px;vertical-align:bottom;font-size:inherit;padding:0 3px}
+.hw-meta .print-value{min-width:125px}.answer-box .print-value{flex:1;min-height:25px;border:1px solid var(--border);border-radius:4px;background:white;padding:3px 7px}
+.score-cell .print-value{color:white;border-bottom-color:#ffffff88;min-width:23px}.review-row .print-value{min-width:70px;font-size:9px}
+.error-table .print-value.textarea-value{margin:0;padding:1px;border:0;min-height:45px;font-size:9.5px}.error-table .print-value.inline-value{min-width:0;border:0;font-size:9px}
+.rw-card .print-value.textarea-value{min-height:43px}.transfer .print-value.textarea-value{min-height:58px}.reflect-box .print-value.textarea-value{min-height:52px}
+.mc-opt.selected{background:var(--blue-lt)!important;border-color:var(--blue)!important}input[type=radio],input[type=checkbox]{print-color-adjust:exact;accent-color:var(--blue)!important}
+.prob,.drill,.transfer,.reflect-box{break-inside:avoid}.page-foot{margin-top:13px}.fineprint{font-size:8.5px}
+a{text-decoration:none}
+}
+</style>
+<style>
+.section-timer{appearance:none;border:0;border-radius:12px;padding:2px 5px;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;min-width:4.5em;text-align:center}
+.section-timer.running{background:#92400e;color:#fff}
+.section-timer.expired{background:#b91c1c;color:#fff;cursor:default}
+</style>
+</head><body><div class="toolbar no-print"><button type="button" class="print-btn" id="print-save">Print / Save as PDF</button><button type="button" class="print-btn clear" id="clear-all">Clear All</button></div><p class="save-status no-print" id="save-status" role="status" aria-live="polite"></p><noscript><p class="instr no-print">JavaScript is disabled. Complete this worksheet on paper using your browser’s Print command; saving and clearing controls require JavaScript.</p></noscript><main><section class="sheet" aria-label="Page 1"><header class="hw-header"><div class="hw-header-left"><h1>Hard-Module Mixed Math</h1><p class="subtitle">Digital SAT · Session 6 Homework<br>Precision, transfer &amp; targeted writing repair</p></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input type="text" id="student-name" name="student-name" class="meta-input" aria-label="Student name" autocomplete="off" ></label><label class="hw-meta-row"><span class="label">Date</span><input type="text" id="student-date" name="student-date" class="meta-input" aria-label="Date" autocomplete="off" ></label></div></header><div class="score-banner"><div><div class="title">Self-score after review</div><div class="sub">Keep your first answers; explain corrections in the log.<br>Raw counts only — not an SAT scaled-score estimate.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input type="text" id="score-math" name="score-math" class="small-input" aria-label="Math" autocomplete="off" inputmode="numeric" maxlength="2"> / 16</div><div class="sc-lbl">Math</div></div><div class="score-cell"><div class="sc-val"><input type="text" id="score-rw" name="score-rw" class="small-input" aria-label="R&amp;amp;W" autocomplete="off" inputmode="numeric" maxlength="2"> / 4</div><div class="sc-lbl">R&amp;W</div></div><div class="score-cell"><div class="sc-val"><input type="text" id="score-total" name="score-total" class="small-input" aria-label="Total" autocomplete="off" inputmode="numeric" maxlength="2"> / 20</div><div class="sc-lbl">Total</div></div></div></div><p class="overview"><b>Plan:</b> 8 min repair → 20 min mixed math → 6 min R&amp;W → two 3-min checks → 8 min transfer → 12 min review. About 60 minutes; split into two sittings if needed.</p><p class="instr">Use a calculator or Desmos for math when useful. For numeric answers, enter a number, fraction, or decimal — no units, π, radicals, commas, or percent signs. Keep exact values during work. Confidence: 1 = uncertain, 2 = partial, 3 = secure. This is targeted practice, not a full adaptive module.</p><div class="section-hd"><span class="section-letter" aria-hidden="true">A</span><h2>Repair the setup</h2><span class="badge badge-blue">4 questions · <button type="button" class="section-timer" data-seconds="480" data-timer-group="a" aria-label="Section timer" aria-pressed="false">08:00</button></span></div><div class="prob-grid"><article class="prob" aria-labelledby="A1-label"><div class="prob-num" id="A1-label">A1<span class="format-tag">Multiple choice</span></div><div class="prob-q">A shipment contains <span class="math">s</span> small cartons and <span class="math">l</span> large cartons. Each small carton weighs 8 kilograms, and each large carton weighs 14 kilograms. The equation <span class="math">8s + 14l = 266</span> represents the total mass. What does <span class="math">14l</span> represent?</div><div class="mc-opts" role="radiogroup" aria-label="A1 answer choices"><label class="mc-opt"><input type="radio" name="A1-answer" id="A1-A" value="A"><span><span class="letter">A.</span>The number of large cartons</span></label><label class="mc-opt"><input type="radio" name="A1-answer" id="A1-B" value="B"><span><span class="letter">B.</span>The total mass, in kilograms, of the small cartons</span></label><label class="mc-opt"><input type="radio" name="A1-answer" id="A1-C" value="C"><span><span class="letter">C.</span>The total mass, in kilograms, of the large cartons</span></label><label class="mc-opt"><input type="radio" name="A1-answer" id="A1-D" value="D"><span><span class="letter">D.</span>The mass, in kilograms, of one large carton</span></label></div><div class="workspace"><label class="work-label" for="A1-work">Setup / work / check</label><textarea id="A1-work" name="A1-work" class="work-area" rows="2" aria-label="A1 work"></textarea><div class="review-row"><label>Confidence <select name="A1-confidence" id="A1-confidence" aria-label="A1 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="A1-flag" id="A1-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="A2-label"><div class="prob-num" id="A2-label">A2<span class="format-tag">Multiple choice</span></div><div class="prob-q">A machine covers 2.4 square yards of fabric with dye per minute. At this rate, how many square feet does it cover per hour? (1 yard = 3 feet.)</div><div class="mc-opts numeric" role="radiogroup" aria-label="A2 answer choices"><label class="mc-opt"><input type="radio" name="A2-answer" id="A2-A" value="A"><span><span class="letter">A.</span>43.2</span></label><label class="mc-opt"><input type="radio" name="A2-answer" id="A2-B" value="B"><span><span class="letter">B.</span>432</span></label><label class="mc-opt"><input type="radio" name="A2-answer" id="A2-C" value="C"><span><span class="letter">C.</span>1,296</span></label><label class="mc-opt"><input type="radio" name="A2-answer" id="A2-D" value="D"><span><span class="letter">D.</span>3,888</span></label></div><div class="workspace"><label class="work-label" for="A2-work">Setup / work / check</label><textarea id="A2-work" name="A2-work" class="work-area" rows="2" aria-label="A2 work"></textarea><div class="review-row"><label>Confidence <select name="A2-confidence" id="A2-confidence" aria-label="A2 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="A2-flag" id="A2-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="A3-label"><div class="prob-num" id="A3-label">A3<span class="format-tag">Multiple choice</span></div><div class="prob-q">The function <span class="math">g(t) = 6(3)<sup>t − 1</sup> + 4</span> models a quantity. What is the value of <span class="math">g(3)</span>?</div><div class="mc-opts numeric" role="radiogroup" aria-label="A3 answer choices"><label class="mc-opt"><input type="radio" name="A3-answer" id="A3-A" value="A"><span><span class="letter">A.</span>40</span></label><label class="mc-opt"><input type="radio" name="A3-answer" id="A3-B" value="B"><span><span class="letter">B.</span>58</span></label><label class="mc-opt"><input type="radio" name="A3-answer" id="A3-C" value="C"><span><span class="letter">C.</span>66</span></label><label class="mc-opt"><input type="radio" name="A3-answer" id="A3-D" value="D"><span><span class="letter">D.</span>166</span></label></div><div class="workspace"><label class="work-label" for="A3-work">Setup / work / check</label><textarea id="A3-work" name="A3-work" class="work-area" rows="2" aria-label="A3 work"></textarea><div class="review-row"><label>Confidence <select name="A3-confidence" id="A3-confidence" aria-label="A3 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="A3-flag" id="A3-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="A4-label"><div class="prob-num" id="A4-label">A4<span class="format-tag">Student-produced response</span></div><div class="prob-q">In a right triangle, <span class="math">θ</span> is an acute angle and <span class="math">sin θ = 7/25</span>. What is the value of <span class="math">cos θ</span>?</div><div class="answer-box"><label for="A4-answer">Answer</label><input type="text" id="A4-answer" name="A4-answer" class="answer-input" aria-label="A4 numeric answer" autocomplete="off" maxlength="6" spellcheck="false"></div><div class="workspace"><label class="work-label" for="A4-work">Setup / work / check</label><textarea id="A4-work" name="A4-work" class="work-area" rows="2" aria-label="A4 work"></textarea><div class="review-row"><label>Confidence <select name="A4-confidence" id="A4-confidence" aria-label="A4 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="A4-flag" id="A4-flag">Revisit</label></div></div></article></div><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>1 / 8</span></footer></section><section class="sheet" aria-label="Page 2"><div class="section-hd"><span class="section-letter" aria-hidden="true">B</span><h2>Independent mixed set</h2><span class="badge badge-purple">M1–M4 · one <button type="button" class="section-timer" data-seconds="1200" data-timer-group="b" aria-label="Section timer" aria-pressed="false">20:00</button> block</span></div><p class="instr">Start one 20-minute timer for M1–M12 across pages 2–4. Choose a method without a topic cue. If stuck, record a useful next step, flag, and move. Use the final minute to check coverage and entries. Do not open the key yet.</p><div class="prob-grid"><article class="prob" aria-labelledby="M1-label"><div class="prob-num" id="M1-label">M1<span class="format-tag">Multiple choice</span></div><div class="prob-q">Triangle ABC is right at C. The altitude from C meets hypotenuse AB at D. If <span class="math">AD = 8</span> and <span class="math">DB = 18</span>, what is the length of CD?</div><div class="fig"><svg viewBox="0 0 270 100" role="img" aria-label="Triangle ABC is right at C; altitude CD meets AB at D. AD is 8 and DB is 18."><path d="M25 82 L93 12 L245 82 Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><path d="M93 12 V82 M93 72 H103 V82" fill="none" stroke="#64748b" stroke-width="1.5"/><g fill="#334155" font-size="11"><text x="14" y="93">A</text><text x="88" y="10">C</text><text x="247" y="93">B</text><text x="87" y="96">D</text><text x="52" y="95">8</text><text x="162" y="95">18</text></g></svg></div><div class="fig-note">Figure not drawn to scale.</div><div class="mc-opts numeric" role="radiogroup" aria-label="M1 answer choices"><label class="mc-opt"><input type="radio" name="M1-answer" id="M1-A" value="A"><span><span class="letter">A.</span>√26</span></label><label class="mc-opt"><input type="radio" name="M1-answer" id="M1-B" value="B"><span><span class="letter">B.</span>12</span></label><label class="mc-opt"><input type="radio" name="M1-answer" id="M1-C" value="C"><span><span class="letter">C.</span>26</span></label><label class="mc-opt"><input type="radio" name="M1-answer" id="M1-D" value="D"><span><span class="letter">D.</span>144</span></label></div><div class="workspace"><label class="work-label" for="M1-work">Setup / work / check</label><textarea id="M1-work" name="M1-work" class="work-area" rows="2" aria-label="M1 work"></textarea><div class="review-row"><label>Confidence <select name="M1-confidence" id="M1-confidence" aria-label="M1 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M1-flag" id="M1-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M2-label"><div class="prob-num" id="M2-label">M2<span class="format-tag">Student-produced response</span></div><div class="prob-q">The equation <span class="math">x² − 14x + k = 0</span> has two real solutions that differ by 4. What is the value of <span class="math">k</span>?</div><div class="answer-box"><label for="M2-answer">Answer</label><input type="text" id="M2-answer" name="M2-answer" class="answer-input" aria-label="M2 numeric answer" autocomplete="off" maxlength="6" spellcheck="false"></div><div class="workspace"><label class="work-label" for="M2-work">Setup / work / check</label><textarea id="M2-work" name="M2-work" class="work-area" rows="2" aria-label="M2 work"></textarea><div class="review-row"><label>Confidence <select name="M2-confidence" id="M2-confidence" aria-label="M2 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M2-flag" id="M2-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M3-label"><div class="prob-num" id="M3-label">M3<span class="format-tag">Multiple choice</span></div><div class="prob-q">A circle in the xy-plane has equation <span class="math equation">x² + y² + 10x − 4y = 20.</span> What is its circumference?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M3 answer choices"><label class="mc-opt"><input type="radio" name="M3-answer" id="M3-A" value="A"><span><span class="letter">A.</span>7π</span></label><label class="mc-opt"><input type="radio" name="M3-answer" id="M3-B" value="B"><span><span class="letter">B.</span>10π</span></label><label class="mc-opt"><input type="radio" name="M3-answer" id="M3-C" value="C"><span><span class="letter">C.</span>14π</span></label><label class="mc-opt"><input type="radio" name="M3-answer" id="M3-D" value="D"><span><span class="letter">D.</span>49π</span></label></div><div class="workspace"><label class="work-label" for="M3-work">Setup / work / check</label><textarea id="M3-work" name="M3-work" class="work-area" rows="2" aria-label="M3 work"></textarea><div class="review-row"><label>Confidence <select name="M3-confidence" id="M3-confidence" aria-label="M3 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M3-flag" id="M3-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M4-label"><div class="prob-num" id="M4-label">M4<span class="format-tag">Multiple choice</span></div><div class="prob-q">The function <span class="math">P(t) = ab<sup>t</sup></span>, where <span class="math">a &gt; 0</span> and <span class="math">b &gt; 1</span>, satisfies <span class="math">P(1) = 80</span> and <span class="math">P(4) = 270</span>. What is <span class="math">P(7)</span>?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M4 answer choices"><label class="mc-opt"><input type="radio" name="M4-answer" id="M4-A" value="A"><span><span class="letter">A.</span>460</span></label><label class="mc-opt"><input type="radio" name="M4-answer" id="M4-B" value="B"><span><span class="letter">B.</span>810</span></label><label class="mc-opt"><input type="radio" name="M4-answer" id="M4-C" value="C"><span><span class="letter">C.</span>911.25</span></label><label class="mc-opt"><input type="radio" name="M4-answer" id="M4-D" value="D"><span><span class="letter">D.</span>2,733.75</span></label></div><div class="workspace"><label class="work-label" for="M4-work">Setup / work / check</label><textarea id="M4-work" name="M4-work" class="work-area" rows="2" aria-label="M4 work"></textarea><div class="review-row"><label>Confidence <select name="M4-confidence" id="M4-confidence" aria-label="M4 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M4-flag" id="M4-flag">Revisit</label></div></div></article></div><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>2 / 8</span></footer></section><section class="sheet" aria-label="Page 3"><div class="section-hd"><span class="section-letter" aria-hidden="true">B</span><h2>Mixed set · continued</h2><span class="badge badge-purple">M5–M8 · one <button type="button" class="section-timer" data-seconds="1200" data-timer-group="b" aria-label="Section timer" aria-pressed="false">20:00</button> block</span></div><p class="instr">Continue the same timer. A flag should have a reason and a next step. Show enough work to make your setup auditable; record confidence before reviewing.</p><div class="prob-grid"><article class="prob" aria-labelledby="M5-label"><div class="prob-num" id="M5-label">M5<span class="format-tag">Multiple choice</span></div><div class="prob-q">Two solid pyramids are similar. Their volumes, smaller to larger, are in the ratio <span class="math">64 : 343</span>. The total surface area of the smaller pyramid is 96 square centimeters. What is the total surface area, in square centimeters, of the larger pyramid?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M5 answer choices"><label class="mc-opt"><input type="radio" name="M5-answer" id="M5-A" value="A"><span><span class="letter">A.</span>168</span></label><label class="mc-opt"><input type="radio" name="M5-answer" id="M5-B" value="B"><span><span class="letter">B.</span>294</span></label><label class="mc-opt"><input type="radio" name="M5-answer" id="M5-C" value="C"><span><span class="letter">C.</span>514.5</span></label><label class="mc-opt"><input type="radio" name="M5-answer" id="M5-D" value="D"><span><span class="letter">D.</span>1,029</span></label></div><div class="workspace"><label class="work-label" for="M5-work">Setup / work / check</label><textarea id="M5-work" name="M5-work" class="work-area" rows="2" aria-label="M5 work"></textarea><div class="review-row"><label>Confidence <select name="M5-confidence" id="M5-confidence" aria-label="M5 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M5-flag" id="M5-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M6-label"><div class="prob-num" id="M6-label">M6<span class="format-tag">Multiple choice</span></div><div class="prob-q">A sector of a circle has arc length <span class="math">6π</span> centimeters and area <span class="math">45π</span> square centimeters. What is the circumference, in centimeters, of the full circle?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M6 answer choices"><label class="mc-opt"><input type="radio" name="M6-answer" id="M6-A" value="A"><span><span class="letter">A.</span>15π</span></label><label class="mc-opt"><input type="radio" name="M6-answer" id="M6-B" value="B"><span><span class="letter">B.</span>30π</span></label><label class="mc-opt"><input type="radio" name="M6-answer" id="M6-C" value="C"><span><span class="letter">C.</span>45π</span></label><label class="mc-opt"><input type="radio" name="M6-answer" id="M6-D" value="D"><span><span class="letter">D.</span>90π</span></label></div><div class="workspace"><label class="work-label" for="M6-work">Setup / work / check</label><textarea id="M6-work" name="M6-work" class="work-area" rows="2" aria-label="M6 work"></textarea><div class="review-row"><label>Confidence <select name="M6-confidence" id="M6-confidence" aria-label="M6 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M6-flag" id="M6-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M7-label"><div class="prob-num" id="M7-label">M7<span class="format-tag">Student-produced response</span></div><div class="prob-q">The line <span class="math">y = mx + 2</span> intersects the parabola <span class="math">y = x² + 4x + 11</span> at exactly one point. If <span class="math">m &gt; 0</span>, what is the value of <span class="math">m</span>?</div><div class="answer-box"><label for="M7-answer">Answer</label><input type="text" id="M7-answer" name="M7-answer" class="answer-input" aria-label="M7 numeric answer" autocomplete="off" maxlength="6" spellcheck="false"></div><div class="workspace"><label class="work-label" for="M7-work">Setup / work / check</label><textarea id="M7-work" name="M7-work" class="work-area" rows="2" aria-label="M7 work"></textarea><div class="review-row"><label>Confidence <select name="M7-confidence" id="M7-confidence" aria-label="M7 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M7-flag" id="M7-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M8-label"><div class="prob-num" id="M8-label">M8<span class="format-tag">Multiple choice</span></div><div class="prob-q">A scale drawing uses 1 inch to represent 15 feet. A rectangular floor has an area of 2.4 square inches in the drawing. What is the area, in square feet, of the actual floor?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M8 answer choices"><label class="mc-opt"><input type="radio" name="M8-answer" id="M8-A" value="A"><span><span class="letter">A.</span>36</span></label><label class="mc-opt"><input type="radio" name="M8-answer" id="M8-B" value="B"><span><span class="letter">B.</span>81</span></label><label class="mc-opt"><input type="radio" name="M8-answer" id="M8-C" value="C"><span><span class="letter">C.</span>540</span></label><label class="mc-opt"><input type="radio" name="M8-answer" id="M8-D" value="D"><span><span class="letter">D.</span>8,100</span></label></div><div class="workspace"><label class="work-label" for="M8-work">Setup / work / check</label><textarea id="M8-work" name="M8-work" class="work-area" rows="2" aria-label="M8 work"></textarea><div class="review-row"><label>Confidence <select name="M8-confidence" id="M8-confidence" aria-label="M8 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M8-flag" id="M8-flag">Revisit</label></div></div></article></div><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>3 / 8</span></footer></section><section class="sheet" aria-label="Page 4"><div class="section-hd"><span class="section-letter" aria-hidden="true">B</span><h2>Mixed set · continued</h2><span class="badge badge-purple">M9–M12 · one <button type="button" class="section-timer" data-seconds="1200" data-timer-group="b" aria-label="Section timer" aria-pressed="false">20:00</button> block</span></div><p class="instr">Continue the same timer. A flag should have a reason and a next step. Show enough work to make your setup auditable; record confidence before reviewing.</p><div class="prob-grid"><article class="prob" aria-labelledby="M9-label"><div class="prob-num" id="M9-label">M9<span class="format-tag">Multiple choice</span></div><div class="prob-q">In a right triangle, an acute angle θ satisfies <span class="math">tan θ = 3/4</span>. The hypotenuse has length 20. What is the length of the altitude to the hypotenuse?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M9 answer choices"><label class="mc-opt"><input type="radio" name="M9-answer" id="M9-A" value="A"><span><span class="letter">A.</span>7.2</span></label><label class="mc-opt"><input type="radio" name="M9-answer" id="M9-B" value="B"><span><span class="letter">B.</span>9.6</span></label><label class="mc-opt"><input type="radio" name="M9-answer" id="M9-C" value="C"><span><span class="letter">C.</span>12</span></label><label class="mc-opt"><input type="radio" name="M9-answer" id="M9-D" value="D"><span><span class="letter">D.</span>16</span></label></div><div class="workspace"><label class="work-label" for="M9-work">Setup / work / check</label><textarea id="M9-work" name="M9-work" class="work-area" rows="2" aria-label="M9 work"></textarea><div class="review-row"><label>Confidence <select name="M9-confidence" id="M9-confidence" aria-label="M9 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M9-flag" id="M9-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M10-label"><div class="prob-num" id="M10-label">M10<span class="format-tag">Student-produced response</span></div><div class="prob-q">For how many integers <span class="math">k</span> with <span class="math">−8 ≤ k ≤ 1</span> does the equation <span class="math equation">√(3x + k) = x − 1</span> have exactly one real solution?</div><div class="answer-box"><label for="M10-answer">Answer</label><input type="text" id="M10-answer" name="M10-answer" class="answer-input" aria-label="M10 numeric answer" autocomplete="off" maxlength="6" spellcheck="false"></div><div class="workspace"><label class="work-label" for="M10-work">Setup / work / check</label><textarea id="M10-work" name="M10-work" class="work-area" rows="2" aria-label="M10 work"></textarea><div class="review-row"><label>Confidence <select name="M10-confidence" id="M10-confidence" aria-label="M10 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M10-flag" id="M10-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M11-label"><div class="prob-num" id="M11-label">M11<span class="format-tag">Multiple choice</span></div><div class="prob-q">In triangle ABC, D lies on AB and E lies on AC, with DE parallel to BC. If <span class="math">AD = 9</span>, <span class="math">DB = 6</span>, and the area of triangle ADE is 54, what is the area of trapezoid DBCE?</div><div class="fig"><svg viewBox="0 0 270 100" role="img" aria-label="Triangle ABC with D on AB and E on AC; DE parallel to BC. AD is 9, DB is 6; triangle ADE area is 54."><path d="M126 8 L30 88 H244 Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><path d="M68 56 H197 L244 88 H30 Z" fill="#BFDBFE" stroke="#2563EB" stroke-width="1.5"/><g fill="#334155" font-size="11"><text x="121" y="7">A</text><text x="16" y="94">B</text><text x="248" y="94">C</text><text x="54" y="57">D</text><text x="201" y="57">E</text><text x="84" y="29">9</text><text x="39" y="73">6</text><text x="119" y="46">54</text></g></svg></div><div class="fig-note">Figure not drawn to scale.</div><div class="mc-opts numeric" role="radiogroup" aria-label="M11 answer choices"><label class="mc-opt"><input type="radio" name="M11-answer" id="M11-A" value="A"><span><span class="letter">A.</span>36</span></label><label class="mc-opt"><input type="radio" name="M11-answer" id="M11-B" value="B"><span><span class="letter">B.</span>90</span></label><label class="mc-opt"><input type="radio" name="M11-answer" id="M11-C" value="C"><span><span class="letter">C.</span>96</span></label><label class="mc-opt"><input type="radio" name="M11-answer" id="M11-D" value="D"><span><span class="letter">D.</span>150</span></label></div><div class="workspace"><label class="work-label" for="M11-work">Setup / work / check</label><textarea id="M11-work" name="M11-work" class="work-area" rows="2" aria-label="M11 work"></textarea><div class="review-row"><label>Confidence <select name="M11-confidence" id="M11-confidence" aria-label="M11 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M11-flag" id="M11-flag">Revisit</label></div></div></article><article class="prob" aria-labelledby="M12-label"><div class="prob-num" id="M12-label">M12<span class="format-tag">Multiple choice</span></div><div class="prob-q">A circle has center <span class="math">(r, 0)</span>, where <span class="math">r &gt; 0</span>. It is tangent to the y-axis and to the line <span class="math">3x + 4y = 24</span>. What is the radius of the circle?</div><div class="mc-opts numeric" role="radiogroup" aria-label="M12 answer choices"><label class="mc-opt"><input type="radio" name="M12-answer" id="M12-A" value="A"><span><span class="letter">A.</span>3</span></label><label class="mc-opt"><input type="radio" name="M12-answer" id="M12-B" value="B"><span><span class="letter">B.</span>6</span></label><label class="mc-opt"><input type="radio" name="M12-answer" id="M12-C" value="C"><span><span class="letter">C.</span>8</span></label><label class="mc-opt"><input type="radio" name="M12-answer" id="M12-D" value="D"><span><span class="letter">D.</span>12</span></label></div><div class="workspace"><label class="work-label" for="M12-work">Setup / work / check</label><textarea id="M12-work" name="M12-work" class="work-area" rows="2" aria-label="M12 work"></textarea><div class="review-row"><label>Confidence <select name="M12-confidence" id="M12-confidence" aria-label="M12 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="M12-flag" id="M12-flag">Revisit</label></div></div></article></div><div class="pacing-line"><label>Elapsed time <input type="text" id="mixed-elapsed" name="mixed-elapsed" class="small-input" aria-label="Mixed set elapsed time" autocomplete="off" ></label><label>Unanswered at stop <input type="text" id="mixed-unanswered" name="mixed-unanswered" class="small-input" aria-label="Mixed set unanswered count" autocomplete="off" ></label><label>Priority flags <input type="text" id="mixed-flags" name="mixed-flags" class="small-input" aria-label="Mixed set priority flags" autocomplete="off" ></label></div><p class="fineprint">The 20-minute block is a homework target, not official module timing. An SAT Math module contains 22 questions in 35 minutes.</p><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>4 / 8</span></footer></section><section class="sheet" aria-label="Page 5"><div class="section-hd"><span class="section-letter" aria-hidden="true">C</span><h2>Reading and Writing</h2><span class="badge badge-blue">R1–R2 · <button type="button" class="section-timer" data-seconds="180" data-timer-group="c1" aria-label="Section timer" aria-pressed="false">03:00</button></span></div><p class="instr">Use one short text or notes set per question. Select the answer first, then add brief reasoning after the six-minute R&amp;W block. All passages and scenarios are original practice material.</p><article class="prob rw-card" aria-labelledby="R1-label"><div class="prob-num" id="R1-label">R1<span class="format-tag">Choose one answer</span></div><div class="prob-q">Two editions of a novel can share a title while differing in their wording. A library’s revised catalog assigns a separate identifier to each edition. _____, a reader can now request a particular edition without confusing it with another version.</div><p class="stem">Which choice completes the text with the most logical transition?</p><div class="mc-opts" role="radiogroup" aria-label="R1 answer choices"><label class="mc-opt"><input type="radio" name="R1-answer" id="R1-A" value="A"><span><span class="letter">A.</span>Nevertheless</span></label><label class="mc-opt"><input type="radio" name="R1-answer" id="R1-B" value="B"><span><span class="letter">B.</span>For example</span></label><label class="mc-opt"><input type="radio" name="R1-answer" id="R1-C" value="C"><span><span class="letter">C.</span>Similarly</span></label><label class="mc-opt"><input type="radio" name="R1-answer" id="R1-D" value="D"><span><span class="letter">D.</span>Consequently</span></label></div><label class="work-label" for="R1-work">Name the relationship; connect the two relevant claims.</label><textarea id="R1-work" name="R1-work" class="work-area" rows="2" aria-label="R1 evidence and reasoning"></textarea><div class="review-row"><label>Confidence <select name="R1-confidence" id="R1-confidence" aria-label="R1 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="R1-flag" id="R1-flag">Revisit</label></div></article><article class="prob rw-card" aria-labelledby="R2-label"><div class="prob-num" id="R2-label">R2<span class="format-tag">Choose one answer</span></div><div class="prob-q">While researching a topic, a student has taken the following notes:<ul class="notes"><li>In a classroom demonstration, a ceramic artist prepared a clay bowl.</li><li>The artist first pressed a woven mat against the soft clay.</li><li>The artist removed the mat, leaving its pattern in the clay.</li><li>The artist then fired the bowl in a kiln, hardening the patterned surface.</li><li>The mat was not placed in the kiln.</li></ul></div><p class="stem">The student wants to describe the sequence by which the bowl’s patterned surface was produced. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="radiogroup" aria-label="R2 answer choices"><label class="mc-opt"><input type="radio" name="R2-answer" id="R2-A" value="A"><span><span class="letter">A.</span>The artist pressed a mat into soft clay, removed the mat, and then fired the bowl to harden its patterned surface.</span></label><label class="mc-opt"><input type="radio" name="R2-answer" id="R2-B" value="B"><span><span class="letter">B.</span>The artist fired a clay bowl and then pressed a woven mat into the hardened surface.</span></label><label class="mc-opt"><input type="radio" name="R2-answer" id="R2-C" value="C"><span><span class="letter">C.</span>The woven mat used by the artist was not placed in the kiln.</span></label><label class="mc-opt"><input type="radio" name="R2-answer" id="R2-D" value="D"><span><span class="letter">D.</span>The artist prepared a clay bowl in a classroom demonstration that involved a woven mat and a kiln.</span></label></div><label class="work-label" for="R2-work">Identify the action order; explain why one true option misses the goal.</label><textarea id="R2-work" name="R2-work" class="work-area" rows="2" aria-label="R2 evidence and reasoning"></textarea><div class="review-row"><label>Confidence <select name="R2-confidence" id="R2-confidence" aria-label="R2 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="R2-flag" id="R2-flag">Revisit</label></div></article><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>5 / 8</span></footer></section><section class="sheet" aria-label="Page 6"><div class="section-hd"><span class="section-letter" aria-hidden="true">C</span><h2>Reading and Writing · continued</h2><span class="badge badge-blue">R3–R4 · <button type="button" class="section-timer" data-seconds="180" data-timer-group="c2" aria-label="Section timer" aria-pressed="false">03:00</button></span></div><p class="instr">Match the exact rhetorical goal. For inference, distinguish what the text supports from what merely could be true. Stop after six total minutes, then add your brief explanations.</p><article class="prob rw-card" aria-labelledby="R3-label"><div class="prob-num" id="R3-label">R3<span class="format-tag">Choose one answer</span></div><div class="prob-q">While researching a topic, a student has taken the following notes:<ul class="notes"><li>A design class tested two pigments, Luma and Vela.</li><li>Luma was extracted from a naturally occurring mineral.</li><li>Vela was manufactured by combining chemicals in a laboratory.</li><li>Both pigments produced the same shade of blue.</li><li>Both pigments were used in the class’s final exhibition.</li></ul></div><p class="stem">The student wants to emphasize a difference in the sources of the two pigments. Which choice most effectively uses relevant information from the notes to accomplish this goal?</p><div class="mc-opts" role="radiogroup" aria-label="R3 answer choices"><label class="mc-opt"><input type="radio" name="R3-answer" id="R3-A" value="A"><span><span class="letter">A.</span>The final exhibition included two pigments, Luma and Vela, which produced the same shade of blue.</span></label><label class="mc-opt"><input type="radio" name="R3-answer" id="R3-B" value="B"><span><span class="letter">B.</span>Luma came from a naturally occurring mineral, whereas Vela was manufactured by combining chemicals in a laboratory.</span></label><label class="mc-opt"><input type="radio" name="R3-answer" id="R3-C" value="C"><span><span class="letter">C.</span>The class used Vela, a pigment manufactured in a laboratory, in its final exhibition.</span></label><label class="mc-opt"><input type="radio" name="R3-answer" id="R3-D" value="D"><span><span class="letter">D.</span>Although both pigments produced blue, Luma was used more often than Vela in the class’s exhibition.</span></label></div><label class="work-label" for="R3-work">State the requested feature; identify an unsupported or incomplete alternative.</label><textarea id="R3-work" name="R3-work" class="work-area" rows="2" aria-label="R3 evidence and reasoning"></textarea><div class="review-row"><label>Confidence <select name="R3-confidence" id="R3-confidence" aria-label="R3 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="R3-flag" id="R3-flag">Revisit</label></div></article><article class="prob rw-card" aria-labelledby="R4-label"><div class="prob-num" id="R4-label">R4<span class="format-tag">Choose one answer</span></div><div class="prob-q">A historian examined surviving account books from several workshops in one town. Most of the books came from the largest workshops, whose owners had the resources to preserve their records. The historian found that these workshops bought expensive imported dyes. She cautioned, however, that records from small workshops were scarce and that those workshops may have purchased different materials.</div><p class="stem">Which statement is most strongly supported by the text?</p><div class="mc-opts" role="radiogroup" aria-label="R4 answer choices"><label class="mc-opt"><input type="radio" name="R4-answer" id="R4-A" value="A"><span><span class="letter">A.</span>Small workshops in the town never purchased imported dyes.</span></label><label class="mc-opt"><input type="radio" name="R4-answer" id="R4-B" value="B"><span><span class="letter">B.</span>The largest workshops bought imported dyes because their owners wanted to preserve account books.</span></label><label class="mc-opt"><input type="radio" name="R4-answer" id="R4-C" value="C"><span><span class="letter">C.</span>The surviving account books do not establish that imported dyes were typical of all workshops in the town.</span></label><label class="mc-opt"><input type="radio" name="R4-answer" id="R4-D" value="D"><span><span class="letter">D.</span>The surviving records show that most workshops in the town were large.</span></label></div><label class="work-label" for="R4-work">Cite the limiting evidence; identify the overreach in one rejected option.</label><textarea id="R4-work" name="R4-work" class="work-area" rows="2" aria-label="R4 evidence and reasoning"></textarea><div class="review-row"><label>Confidence <select name="R4-confidence" id="R4-confidence" aria-label="R4 confidence"><option value="">—</option><option value="1">1 · uncertain</option><option value="2">2 · partial</option><option value="3">3 · secure</option></select></label><label><input type="checkbox" name="R4-flag" id="R4-flag">Revisit</label></div></article><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>6 / 8</span></footer></section><section class="sheet" aria-label="Page 7"><div class="section-hd"><span class="section-letter" aria-hidden="true">D</span><h2>Verify before you score</h2><span class="badge badge-green"><button type="button" class="section-timer" data-seconds="360" data-timer-group="d1" aria-label="Section timer" aria-pressed="false">06:00</button> + <button type="button" class="section-timer" data-seconds="480" data-timer-group="d2" aria-label="Section timer" aria-pressed="false">08:00</button></span></div><p class="instr">Keep the answer key closed. Run both checking sweeps on the same work. If you change an answer, record the original and corrected responses below instead of erasing the evidence.</p><div class="drill-grid"><div class="drill"><h3>Sweep 1 · Coverage &amp; meaning</h3><p><b>Minute 1:</b> Find blanks. Return only if you can name the next useful step.</p><p><b>Minute 2:</b> Check units, requested quantity, and part-versus-whole relationships.</p><p><b>Minute 3:</b> Compare each final entry with the last line of your work.</p><label class="checkline"><input type="checkbox" name="sweep1-0" id="sweep1-0">Every item has a response</label><label class="checkline"><input type="checkbox" name="sweep1-1" id="sweep1-1">Units and requested quantity checked</label><label class="checkline"><input type="checkbox" name="sweep1-2" id="sweep1-2">Signs and entries checked</label></div><div class="drill"><h3>Sweep 2 · Challenge the result</h3><p><b>Minute 1:</b> Test restrictions in M10 and M12 against the original equations.</p><p><b>Minute 2:</b> Independently verify one flagged item: substitution, graph, or a second area expression.</p><p><b>Minute 3:</b> Recheck R2–R4 for goal mismatch or unsupported claims.</p><label class="checkline"><input type="checkbox" name="sweep2-0" id="sweep2-0">Original constraints checked</label><label class="checkline"><input type="checkbox" name="sweep2-1" id="sweep2-1">One independent check completed</label><label class="checkline"><input type="checkbox" name="sweep2-2" id="sweep2-2">R&amp;W evidence checked</label></div></div><label class="work-label" for="sweep-notes">What each sweep caught: item ID, original answer → revision, and the evidence</label><textarea id="sweep-notes" name="sweep-notes" class="work-area" rows="3" aria-label="Checking sweep findings"></textarea><div class="transfer"><h3>T1 · Transfer the dimension</h3><p>Two similar solids have a surface-area ratio of 25 : 64, smaller to larger. Without choosing example dimensions, determine their volume ratio and explain why multiplying an area by a linear scale factor would not answer this question.</p><textarea id="transfer1" name="transfer1" class="work-area" rows="3" aria-label="Dimension transfer explanation"></textarea></div><div class="transfer"><h3>T2 · Audit a squared equation</h3><p>A student solves <span class="math">√(x + 11) = x − 1</span> by squaring and obtains candidates <span class="math">x = 5</span> and <span class="math">x = −2</span>. The student accepts both because both satisfy the squared equation. Evaluate that reasoning and verify each candidate in the original equation.</p><textarea id="transfer2" name="transfer2" class="work-area" rows="3" aria-label="Domain transfer explanation"></textarea></div><p class="fineprint">T1 and T2 are explanation activities, not SAT-format scored questions. Record them separately from the /20 question score.</p><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>7 / 8</span></footer></section><section class="sheet" aria-label="Page 8"><div class="section-hd"><span class="section-letter" aria-hidden="true">E</span><h2>Error log &amp; next steps</h2><span class="badge badge-coral"><button type="button" class="section-timer" data-seconds="720" data-timer-group="e" aria-label="Section timer" aria-pressed="false">12:00</button> · after checking</span></div><p class="instr">Now use the separate answer key. Log misses, guesses, and low-confidence correct answers. Name the first incorrect step and a specific preventive action. Use another copy of this page if you need more rows.</p><div class="error-log"><h3>My errors this week</h3><div class="error-type-pills"><span class="pill pill-cg">Content Gap · I did not know the method</span><span class="pill pill-ce">Careless Error · I knew it but slipped</span><span class="pill pill-ru">Rushing · I skipped a needed check</span></div><table class="error-table"><thead><tr><th>#</th><th>Item</th><th>First incorrect step / uncertainty</th><th>Error type</th><th>Correction + prevention rule</th></tr></thead><tbody><tr><td>1</td><td><textarea name="log-1-item" id="log-1-item" rows="2" aria-label="Error log row 1: Item ID"></textarea></td><td><textarea name="log-1-mistake" id="log-1-mistake" rows="2" aria-label="Error log row 1: First incorrect step"></textarea></td><td><select name="log-1-type" id="log-1-type" aria-label="Error log row 1: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-1-repair" id="log-1-repair" rows="2" aria-label="Error log row 1: correction and prevention rule"></textarea></td></tr><tr><td>2</td><td><textarea name="log-2-item" id="log-2-item" rows="2" aria-label="Error log row 2: Item ID"></textarea></td><td><textarea name="log-2-mistake" id="log-2-mistake" rows="2" aria-label="Error log row 2: First incorrect step"></textarea></td><td><select name="log-2-type" id="log-2-type" aria-label="Error log row 2: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-2-repair" id="log-2-repair" rows="2" aria-label="Error log row 2: correction and prevention rule"></textarea></td></tr><tr><td>3</td><td><textarea name="log-3-item" id="log-3-item" rows="2" aria-label="Error log row 3: Item ID"></textarea></td><td><textarea name="log-3-mistake" id="log-3-mistake" rows="2" aria-label="Error log row 3: First incorrect step"></textarea></td><td><select name="log-3-type" id="log-3-type" aria-label="Error log row 3: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-3-repair" id="log-3-repair" rows="2" aria-label="Error log row 3: correction and prevention rule"></textarea></td></tr><tr><td>4</td><td><textarea name="log-4-item" id="log-4-item" rows="2" aria-label="Error log row 4: Item ID"></textarea></td><td><textarea name="log-4-mistake" id="log-4-mistake" rows="2" aria-label="Error log row 4: First incorrect step"></textarea></td><td><select name="log-4-type" id="log-4-type" aria-label="Error log row 4: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-4-repair" id="log-4-repair" rows="2" aria-label="Error log row 4: correction and prevention rule"></textarea></td></tr><tr><td>5</td><td><textarea name="log-5-item" id="log-5-item" rows="2" aria-label="Error log row 5: Item ID"></textarea></td><td><textarea name="log-5-mistake" id="log-5-mistake" rows="2" aria-label="Error log row 5: First incorrect step"></textarea></td><td><select name="log-5-type" id="log-5-type" aria-label="Error log row 5: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-5-repair" id="log-5-repair" rows="2" aria-label="Error log row 5: correction and prevention rule"></textarea></td></tr><tr><td>6</td><td><textarea name="log-6-item" id="log-6-item" rows="2" aria-label="Error log row 6: Item ID"></textarea></td><td><textarea name="log-6-mistake" id="log-6-mistake" rows="2" aria-label="Error log row 6: First incorrect step"></textarea></td><td><select name="log-6-type" id="log-6-type" aria-label="Error log row 6: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-6-repair" id="log-6-repair" rows="2" aria-label="Error log row 6: correction and prevention rule"></textarea></td></tr><tr><td>7</td><td><textarea name="log-7-item" id="log-7-item" rows="2" aria-label="Error log row 7: Item ID"></textarea></td><td><textarea name="log-7-mistake" id="log-7-mistake" rows="2" aria-label="Error log row 7: First incorrect step"></textarea></td><td><select name="log-7-type" id="log-7-type" aria-label="Error log row 7: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-7-repair" id="log-7-repair" rows="2" aria-label="Error log row 7: correction and prevention rule"></textarea></td></tr><tr><td>8</td><td><textarea name="log-8-item" id="log-8-item" rows="2" aria-label="Error log row 8: Item ID"></textarea></td><td><textarea name="log-8-mistake" id="log-8-mistake" rows="2" aria-label="Error log row 8: First incorrect step"></textarea></td><td><select name="log-8-type" id="log-8-type" aria-label="Error log row 8: error type"><option value="">—</option><option>Content Gap</option><option>Careless</option><option>Rushing</option></select></td><td><textarea name="log-8-repair" id="log-8-repair" rows="2" aria-label="Error log row 8: correction and prevention rule"></textarea></td></tr></tbody></table></div><div class="reflect-box"><h3>Turn one correction into a habit</h3><label for="reflect-rule">When I see ______, I will ______, because ______.</label><textarea id="reflect-rule" name="reflect-rule" class="work-area" rows="2" aria-label="Recognition and response rule"></textarea><label for="reflect-pacing">My next pacing checkpoint is ______. If I am behind, I will ______.</label><textarea id="reflect-pacing" name="reflect-pacing" class="work-area" rows="2" aria-label="Next pacing checkpoint"></textarea></div><p class="fineprint">Review rule: correct + secure = maintain; correct + uncertain = revisit; incorrect = diagnose and redo without looking at the key. Bring one unresolved item and your first-step explanation to the next session.</p><p class="fineprint">Format reference: <a href="https://satsuite.collegeboard.org/sat/whats-on-the-test/structure">College Board: SAT structure</a> · <a href="https://satsuite.collegeboard.org/sat/whats-on-the-test/math/student-produced">Student-produced responses</a>. Lesson alignment: supplied index.html; visual design and error-log palette: supplied homework.html.</p><footer class="page-foot"><span>Original practice · Not an official SAT test</span><span>8 / 8</span></footer></section></main><script>
+(() => {
+  'use strict';
+  const KEY = 'digital-sat-session6-original-homework-v1';
+  const status = document.getElementById('save-status');
+  const fields = Array.from(document.querySelectorAll('input, textarea, select'));
+  let storageOK = true;
+  function resize(el) {
+    if (el.tagName !== 'TEXTAREA') return;
+    el.style.height = 'auto';
+    el.style.height = Math.max(el.scrollHeight, 45) + 'px';
+  }
+  function syncChoices() {
+    document.querySelectorAll('.mc-opt').forEach(label => {
+      label.classList.toggle('selected', label.querySelector('input').checked);
+    });
+  }
+  function persist() {
+    const data = {};
+    fields.forEach(el => { data[el.id] = (el.type === 'radio' || el.type === 'checkbox') ? el.checked : el.value; });
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      storageOK = true;
+      status.textContent = 'Responses saved in this browser. Print / Save creates a paper or PDF copy.';
+    } catch (_) {
+      storageOK = false;
+      status.textContent = 'Browser storage is unavailable. Use Print / Save to keep your responses before closing.';
+    }
+  }
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    fields.forEach(el => {
+      if (!Object.prototype.hasOwnProperty.call(saved, el.id)) return;
+      if (el.type === 'radio' || el.type === 'checkbox') el.checked = saved[el.id] === true;
+      else el.value = String(saved[el.id]);
+    });
+    status.textContent = 'Responses save in this browser when available. External font loading requires internet.';
+  } catch (_) {
+    storageOK = false;
+    status.textContent = 'Browser storage is unavailable. Use Print / Save to preserve your work.';
+  }
+  fields.forEach(el => {
+    resize(el);
+    el.addEventListener('input', () => { resize(el); syncChoices(); persist(); });
+    el.addEventListener('change', () => { syncChoices(); persist(); });
+  });
+  syncChoices();
+  function preparePrint() {
+    document.querySelectorAll('.print-value').forEach(el => el.remove());
+    fields.forEach(el => {
+      if (el.type === 'radio' || el.type === 'checkbox') return;
+      const mirror = document.createElement(el.tagName === 'TEXTAREA' ? 'div' : 'span');
+      mirror.className = 'print-value ' + (el.tagName === 'TEXTAREA' ? 'textarea-value' : 'inline-value');
+      mirror.setAttribute('aria-hidden', 'true');
+      mirror.textContent = el.tagName === 'SELECT' ? (el.value ? el.options[el.selectedIndex].textContent : '') : el.value;
+      if (el.tagName === 'TEXTAREA') mirror.style.minHeight = Math.max(el.offsetHeight, 45) + 'px';
+      el.insertAdjacentElement('afterend', mirror);
+    });
+  }
+  window.addEventListener('beforeprint', preparePrint);
+  document.getElementById('print-save').addEventListener('click', async () => {
+    if (document.fonts) {
+      await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 2000))]);
+    }
+    preparePrint();
+    window.print();
+  });
+  document.getElementById('clear-all').addEventListener('click', () => {
+    if (!window.confirm('Clear all responses, name, date, scores, flags, and error-log entries? This cannot be undone.')) return;
+    fields.forEach(el => {
+      if (el.type === 'radio' || el.type === 'checkbox') el.checked = false;
+      else el.value = '';
+      resize(el);
+    });
+    document.querySelectorAll('.print-value').forEach(el => el.remove());
+    syncChoices();
+    try { localStorage.removeItem(KEY); } catch (_) { storageOK = false; }
+    status.textContent = storageOK ? 'All responses cleared.' : 'All current responses cleared. Browser storage is unavailable.';
+  });
+})();
+</script>
+<script>
+(() => {
+  'use strict';
+  const groups = new Map();
+  document.querySelectorAll('.section-timer').forEach(timer => {
+    const key = timer.dataset.timerGroup;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(timer);
+  });
+  groups.forEach(timers => {
+    let remaining = Number(timers[0].dataset.seconds) * 1000;
+    let deadline = 0;
+    let interval = null;
+    const render = () => {
+      const seconds = Math.ceil(remaining / 1000);
+      const text = String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
+      timers.forEach(timer => {
+        timer.textContent = text;
+        timer.classList.toggle('running', interval !== null);
+        timer.classList.toggle('expired', remaining === 0);
+        timer.setAttribute('aria-pressed', String(interval !== null));
+        timer.setAttribute('aria-label', 'Section timer, time remaining ' + text);
+        timer.disabled = remaining === 0;
+      });
+    };
+    const tick = () => {
+      remaining = Math.max(0, deadline - performance.now());
+      if (remaining === 0) {
+        clearInterval(interval);
+        interval = null;
+      }
+      render();
+    };
+    timers.forEach(timer => timer.addEventListener('click', () => {
+      if (remaining <= 0) return;
+      if (interval !== null) {
+        tick();
+        clearInterval(interval);
+        interval = null;
+      } else {
+        deadline = performance.now() + remaining;
+        interval = setInterval(tick, 100);
+      }
+      render();
+    }));
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && interval !== null) tick();
+    });
+    render();
+  });
+})();
+</script>
+</body></html>
