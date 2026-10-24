@@ -34,4 +34,4 @@
 | **05A** | [Level 5 SHSAT Math](https://hue-bee.github.io/julius/lesson05A) | [5A Homework](https://hue-bee.github.io/julius/lesson05A/homework) | |
 | **05B** | [Full-Length Practice Test #1 Diagnostic Debrief](https://hue-bee.github.io/julius/lesson05B) | [5B Homework](https://hue-bee.github.io/julius/lesson05B/homework) | [Set 1](https://hue-bee.github.io/julius/lesson05B/sets/01) [Set 2](https://hue-bee.github.io/julius/lesson05B/sets/02)|
 | **06A** | [Targeted Math Repair](https://hue-bee.github.io/julius/lesson06A) | [6A Homework](https://hue-bee.github.io/julius/lesson06A/homework) | |
-| **06B** | [Targeted Math Repair](https://hue-bee.github.io/julius/lesson06B) | [6B Homework](https://hue-bee.github.io/julius/lesson06B/homework) | |
+| **06B** | [Targeted Repair ELA: Precision Before Selection](https://hue-bee.github.io/julius/lesson06B) | [6B Homework](https://hue-bee.github.io/julius/lesson06B/homework) | |
