@@ -11,3 +11,4 @@
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Expression & Equations](https://hue-bee.github.io/zev/lessons/01) | [1 Homework](https://hue-bee.github.io/zev/lessons/01/homework) ||
 | **02** | [ELA: Inference & Supporting Ideas](https://hue-bee.github.io/zev/lessons/02) | [2 Homework](https://hue-bee.github.io/zev/lessons/02/homework) |[Set 1](https://hue-bee.github.io/zev/lessons/02/sets/01) |
+| **03** | [Geometry, Angles & Percents](https://hue-bee.github.io/zev/lessons/03) | [3 Homework](https://hue-bee.github.io/zev/lessons/03/homework) ||
