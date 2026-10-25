@@ -1,1 +1,727 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Session 3 Homework — Geometry, Angles &amp; Percents</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;family=Nunito:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* Section timers from timerh.html */
+.section-timer{appearance:none;border:0;border-radius:12px;padding:2px 5px;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;min-width:4.5em;text-align:center}
+.section-timer.running{background:#92400e;color:#fff}
+.section-timer.expired{background:#b91c1c;color:#fff;cursor:default}
+</style>
+<style>
+@page { size: Letter; margin: .35in; }
+body { line-height:1.45; }
+.hw-header-left h1 { font-size:1.8rem; }
+.hw-header { flex-wrap:nowrap; }
+.hw-meta { min-width:190px; width:205px; }
+.hw-meta input { min-width:0; width:100%; }
+.score-banner { gap:.7rem; }
+.score-cell { min-width:92px; }
+.score-cell .sc-lbl { font-size:.62rem; }
+.score-banner .sub { max-width:240px; }
+.section-hd h2 { line-height:1.2; }
+.section-hd .badge { white-space:nowrap; }
+.sheet > .section-hd:first-child { margin-top:0; }
+.prob-grid { gap:1rem; align-items:stretch; }
+.prob { display:flex; flex-direction:column; break-inside:avoid; }
+.prob-q { font-size:.88rem; line-height:1.5; }
+.prob-num { display:flex; align-items:center; gap:.3rem; }
+.item-type { margin-left:auto; text-transform:none; font:600 .65rem var(--ff-body); letter-spacing:0; }
+.lvl-1 { background:#eeeeee; color:#334155; }
+.work-area { min-height:84px; line-height:1.5; margin-top:.5rem; }
+.work-label { font-size:.69rem; font-weight:700; color:var(--muted); margin-top:.4rem; }
+.answer-box { margin-top:auto; padding-top:.6rem; }
+.answer-input { flex:1; min-width:0; width:70px; border:0; border-bottom:1.5px solid var(--border); font:700 .84rem var(--ff-body); background:transparent; padding:2px 5px; color:var(--ink); }
+.mc-opts { grid-template-columns:1fr; gap:.15rem; }
+.mc-opt { font-size:.82rem; align-items:flex-start; position:relative; }
+.mc-opt input[type=radio],.mc-opt input[type=checkbox] { display:block; position:absolute; width:1px; height:1px; opacity:0; }
+.mc-opt .bubble { width:16px; height:16px; min-width:16px; margin-top:2px; }
+.mc-opt input[type=checkbox] + .bubble { border-radius:3px; }
+.mc-opt:focus-within { outline:2px solid var(--blue); outline-offset:1px; }
+.mc-opt.selected .bubble { color:white; }
+.fig { margin:.35rem 0; min-height:130px; }
+.fig svg { width:100%; max-width:280px; height:140px; }
+.fig svg text { font-family:var(--ff-body); fill:var(--slate); font-weight:700; font-size:12px; }
+.fig svg .dim { font-size:11px; }
+.fig svg .shape { fill:var(--blue-lt); stroke:var(--blue); stroke-width:2; }
+.fig svg .line { fill:none; stroke:var(--slate); stroke-width:2; }
+.fig svg .dash { fill:none; stroke:var(--muted); stroke-width:1.5; stroke-dasharray:4 3; }
+.fig svg .mark { fill:none; stroke:var(--blue); stroke-width:1.5; }
+.coach-note { font-size:.77rem; line-height:1.5; color:var(--slate); background:var(--sand-lt); border:1px solid var(--sand); border-radius:8px; padding:.65rem .8rem; margin:.8rem 0; }
+.coach-note strong { color:#92400e; }
+.micro { font-size:.7rem; color:var(--muted); line-height:1.5; margin:.5rem 0; }
+.page-footer { display:flex; justify-content:space-between; gap:1rem; border-top:1px solid var(--border); padding-top:.55rem; margin-top:1rem; font-size:.69rem; color:var(--muted); }
+.error-table td { height:52px; vertical-align:top; overflow-wrap:anywhere; }
+.error-table { table-layout:fixed; }
+.error-table th:nth-child(1){width:5%;} .error-table th:nth-child(2){width:15%;} .error-table th:nth-child(3){width:62%;}
+.reflect-line { flex-wrap:wrap; }
+.reflect-line input[type=text] { min-width:160px; }
+.explain-card { margin-top:.9rem; }
+.explain-card .work-area { min-height:72px; }
+.print-field { display:none; }
+a { color:var(--blue); }
+:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
+@media(max-width:650px){
+ .sheet { margin:1rem .5rem; padding:1.2rem; }
+ .hw-header { flex-wrap:wrap; } .hw-meta{width:100%;}
+ .prob-grid { grid-template-columns:1fr; }
+ .section-hd { flex-wrap:wrap; } .section-hd .badge{margin-left:0;}
+ .score-cells { width:100%; } .score-cell { flex:1; }
+ .error-log { padding:.7rem; } .error-table th,.error-table td{padding:.3rem;font-size:.7rem;}
+}
+@media print {
+ body { width:auto; font-size:10pt; background:white; }
+ .sheet { padding:.12in .18in !important; break-after:page; }
+ .sheet:last-of-type { break-after:auto; }
+ .page-break { break-before:page; }
+ .hw-header { margin-bottom:.7rem; padding-bottom:.65rem; }
+ .hw-header-left h1 { font-size:20pt; }
+ .hw-header-left .subtitle { font-size:8pt; }
+ .score-banner { margin-bottom:.65rem; padding:.55rem .8rem; }
+ .section-hd { margin:.8rem 0 .5rem; }
+ .section-hd h2 { font-size:13pt; }
+ .instr { margin-bottom:.65rem; }
+ .coach-note { margin:.6rem 0; }
+ .prob-grid { grid-template-columns:1fr 1fr; gap:.14in; }
+ .prob { padding:.12in; }
+ .prob-num { font-size:8pt; }
+ .prob-q { font-size:10pt; line-height:1.4; }
+ .mc-opt { font-size:9pt; line-height:1.35; }
+ .fig { min-height:115px; }
+ .fig svg { height:120px; }
+ .work-label { margin-top:.35rem; }
+ .screen-field { display:none !important; }
+ .print-field { display:inline-block; white-space:pre-wrap; overflow-wrap:anywhere; min-height:1.2em; }
+ .print-answer { flex:1; min-width:35px; border-bottom:1px solid var(--border); font-weight:700; padding:1px 5px; }
+ .print-work { display:block; width:100%; min-height:79px; border:1px dashed var(--border); border-radius:6px; background:white; padding:.3rem; margin-top:.4rem; font-size:9pt; }
+ .score-cell .print-field { min-width:1.5rem; border-color:rgba(255,255,255,.6); }
+ .page-footer { margin-top:.7rem; }
+ .prob,.error-log,.reflect-box,.explain-card { break-inside:avoid; }
+ .error-table td { height:48px; }
+ .section-timer { cursor:default; background:transparent !important; color:inherit !important; }
+}
+</style></head><body><div class="no-print top-actions" style="display:flex;gap:0.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;"><button type="button" class="print-btn" onclick="preparePrint(); window.print()" style="margin:0;">🖨️ Print / Save as PDF</button><button type="button" class="print-btn" onclick="clearAll()" style="margin:0;background:#64748b;">🗑️ Clear All</button></div><main><section class="sheet"><div class="hw-header">
+<div class="hw-header-left">
+<h1>Session 3 Homework</h1>
+<div class="subtitle">Geometry, Angles &amp; Percents · November 2026 SHSAT</div>
+</div>
+<div class="hw-meta">
+<div class="hw-meta-row"><span class="label">Name</span><input aria-label="Student name" placeholder="" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" type="text"/></div>
+<div class="hw-meta-row"><span class="label">Date</span><input aria-label="Date" placeholder="" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" type="text"/></div>
+</div>
+</div><div class="score-banner">
+<div>
+<div class="title">Self-Score Before Session</div>
+<div class="sub">Fill in after checking your work — bring to Zoom!</div>
+</div>
+<div class="score-cells">
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Geometry &amp; Angles self-score" max="12" min="0" placeholder="__" step="1" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" type="number"/> / 12</div>
+<div class="sc-lbl">Geometry &amp; Angles</div>
+</div>
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Algebra &amp; Percents self-score" max="12" min="0" placeholder="__" step="1" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" type="number"/> / 12</div>
+<div class="sc-lbl">Algebra &amp; Percents</div>
+</div>
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Total self-score" max="24" min="0" placeholder="__" step="1" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" type="number"/> / 24</div>
+<div class="sc-lbl">Total</div>
+</div>
+</div>
+</div><p class="micro">Self-score after tutor review: Q5–16 = Geometry &amp; Angles / 12; Q1–4 and Q17–24 = Algebra &amp; Percents / 12. One point per fully correct problem. This practice tally is not an SHSAT scaled score.</p><div class="coach-note"><strong>CAT practice routine.</strong> On the November 2026 SHSAT, Math requires a response before advancing and does not allow a return to earlier questions. Here, finish and check each item before moving to the next; keep earlier responses unchanged until review. This is a fixed homework set, not an adaptive test engine.</div><p class="micro">No calculator. Use scratch paper for sketches. Mixed response formats rehearse selecting one choice, selecting all applicable choices, and entering an answer. Section times are practice targets, not official limits. Click a timer to start, pause, or resume; Clear All resets every timer and response.</p><div class="section-hd"><span class="icon" aria-hidden="true">✎</span><h2>Part A — Algebra Reset</h2><span class="badge badge-blue">4 Problems · <button type="button" class="section-timer" data-seconds="420" aria-pressed="false" aria-label="Part A — Algebra Reset timer. Click to start or pause.">07:00</button></span></div><p class="instr">Show the algebra, not just the result. Check signs, combine only like terms, and substitute when useful.</p><div class="prob-grid"><article class="prob" id="q1" aria-labelledby="q1-label"><div class="prob-num" id="q1-label">Problem 1<span class="lvl lvl-2">L2</span><span class="item-type">Choose one</span></div><p class="prob-q">Which expression is equivalent to <strong>3(2y − 5) − (y + 4)</strong>?</p><div class="mc-opts" role="group" aria-label="Problem 1 choices"><label class="mc-opt"><input type="radio" name="q1" value="A" aria-label="A. 5y − 11"><span class="bubble" aria-hidden="true"></span><span>A) 5y − 11</span></label><label class="mc-opt"><input type="radio" name="q1" value="B" aria-label="B. 7y − 19"><span class="bubble" aria-hidden="true"></span><span>B) 7y − 19</span></label><label class="mc-opt"><input type="radio" name="q1" value="C" aria-label="C. 5y − 19"><span class="bubble" aria-hidden="true"></span><span>C) 5y − 19</span></label><label class="mc-opt"><input type="radio" name="q1" value="D" aria-label="D. 7y − 11"><span class="bubble" aria-hidden="true"></span><span>D) 7y − 11</span></label></div><label class="work-label" for="work-1">Show your setup and reasoning</label><textarea id="work-1" class="work-area" aria-label="Problem 1 work"></textarea></article><article class="prob" id="q2" aria-labelledby="q2-label"><div class="prob-num" id="q2-label">Problem 2<span class="lvl lvl-2">L2</span><span class="item-type">Enter a response</span></div><p class="prob-q">Solve for <strong>x</strong>:<br><span class="math">(3/4)x − 5 = (1/2)x + 2</span></p><label class="work-label" for="work-2">Show your setup and reasoning</label><textarea id="work-2" class="work-area" aria-label="Problem 2 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-2" aria-label="Problem 2 answer"> <span></span></label></article><article class="prob" id="q3" aria-labelledby="q3-label"><div class="prob-num" id="q3-label">Problem 3<span class="lvl lvl-3">L3</span><span class="item-type">Choose one</span></div><p class="prob-q">A trapezoid’s area is given by <strong>A = ½(b₁ + b₂)h</strong>, where h &gt; 0. Which equation isolates b₂?</p><div class="mc-opts" role="group" aria-label="Problem 3 choices"><label class="mc-opt"><input type="radio" name="q3" value="A" aria-label="A. b₂ = (2A − b₁) / h"><span class="bubble" aria-hidden="true"></span><span>A) b₂ = (2A − b₁) / h</span></label><label class="mc-opt"><input type="radio" name="q3" value="B" aria-label="B. b₂ = 2A / h − b₁"><span class="bubble" aria-hidden="true"></span><span>B) b₂ = 2A / h − b₁</span></label><label class="mc-opt"><input type="radio" name="q3" value="C" aria-label="C. b₂ = A / (2h) − b₁"><span class="bubble" aria-hidden="true"></span><span>C) b₂ = A / (2h) − b₁</span></label><label class="mc-opt"><input type="radio" name="q3" value="D" aria-label="D. b₂ = 2A / (b₁h)"><span class="bubble" aria-hidden="true"></span><span>D) b₂ = 2A / (b₁h)</span></label></div><label class="work-label" for="work-3">Show your setup and reasoning</label><textarea id="work-3" class="work-area" aria-label="Problem 3 work"></textarea></article><article class="prob" id="q4" aria-labelledby="q4-label"><div class="prob-num" id="q4-label">Problem 4<span class="lvl lvl-2">L2</span><span class="item-type">Choose one</span></div><p class="prob-q">A rental company charges a <strong>$6 setup fee plus $3 per hour for each scooter</strong>. Four scooters are each rented for h hours. Which expression gives the total cost in dollars?</p><div class="mc-opts" role="group" aria-label="Problem 4 choices"><label class="mc-opt"><input type="radio" name="q4" value="A" aria-label="A. 6 + 12h"><span class="bubble" aria-hidden="true"></span><span>A) 6 + 12h</span></label><label class="mc-opt"><input type="radio" name="q4" value="B" aria-label="B. 24 + 3h"><span class="bubble" aria-hidden="true"></span><span>B) 24 + 3h</span></label><label class="mc-opt"><input type="radio" name="q4" value="C" aria-label="C. 4(6 + h)"><span class="bubble" aria-hidden="true"></span><span>C) 4(6 + h)</span></label><label class="mc-opt"><input type="radio" name="q4" value="D" aria-label="D. 24 + 12h"><span class="bubble" aria-hidden="true"></span><span>D) 24 + 12h</span></label></div><label class="work-label" for="work-4">Show your setup and reasoning</label><textarea id="work-4" class="work-area" aria-label="Problem 4 work"></textarea></article></div><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>1 / 7</span></div></section><section class="sheet page-break"><div class="section-hd"><span class="icon" aria-hidden="true">▱</span><h2>Part B — Geometry Foundations</h2><span class="badge badge-blue">4 Problems · <button type="button" class="section-timer" data-seconds="540" aria-pressed="false" aria-label="Part B — Geometry Foundations timer. Click to start or pause.">09:00</button></span></div><p class="instr">Use the labels, not the drawing’s appearance. Identify perpendicular height; distinguish boundary length from covered area.</p><p class="micro">All geometry diagrams are not necessarily drawn to scale. Right-angle, equal-side, and parallel markings are intentional.</p><div class="prob-grid"><article class="prob" id="q5" aria-labelledby="q5-label"><div class="prob-num" id="q5-label">Problem 5<span class="lvl lvl-2">L2</span><span class="item-type">Enter a response</span></div><p class="prob-q">An <strong>11 m by 7 m</strong> rectangular garden needs fencing along its boundary except for one <strong>3 m gate opening</strong>. How many meters of fencing are needed?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Rectangle 11 meters by 7 meters, with a 3 meter gate opening in the lower side."><path class="shape" d="M45 30H235V110H170M115 110H45Z"/><path class="dash" d="M115 110H170"/><text x="140" y="21" text-anchor="middle" class="">11 m</text><text x="20" y="75" text-anchor="middle" class="">7 m</text><text x="143" y="132" text-anchor="middle" class="">gate: 3 m</text></svg></div><label class="work-label" for="work-5">Show your setup and reasoning</label><textarea id="work-5" class="work-area" aria-label="Problem 5 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-5" aria-label="Problem 5 answer"> <span>m</span></label></article><article class="prob" id="q6" aria-labelledby="q6-label"><div class="prob-num" id="q6-label">Problem 6<span class="lvl lvl-2">L2</span><span class="item-type">Choose one</span></div><p class="prob-q">A triangular sign has the side lengths shown. The two marked perpendicular sides meet at a right angle. What is the <strong>area</strong> of the sign?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Right triangle with perpendicular legs 15 centimeters and 8 centimeters; hypotenuse 17 centimeters."><path class="shape" d="M50 115V30L240 115Z"/><path class="mark" d="M50 103H62V115"/><text x="27" y="78" text-anchor="middle" class="">8 cm</text><text x="145" y="137" text-anchor="middle" class="">15 cm</text><text x="157" y="63" text-anchor="middle" class="">17 cm</text></svg></div><div class="mc-opts" role="group" aria-label="Problem 6 choices"><label class="mc-opt"><input type="radio" name="q6" value="A" aria-label="A. 60 cm²"><span class="bubble" aria-hidden="true"></span><span>A) 60 cm²</span></label><label class="mc-opt"><input type="radio" name="q6" value="B" aria-label="B. 68 cm²"><span class="bubble" aria-hidden="true"></span><span>B) 68 cm²</span></label><label class="mc-opt"><input type="radio" name="q6" value="C" aria-label="C. 120 cm²"><span class="bubble" aria-hidden="true"></span><span>C) 120 cm²</span></label><label class="mc-opt"><input type="radio" name="q6" value="D" aria-label="D. 127.5 cm²"><span class="bubble" aria-hidden="true"></span><span>D) 127.5 cm²</span></label></div><label class="work-label" for="work-6">Show your setup and reasoning</label><textarea id="work-6" class="work-area" aria-label="Problem 6 work"></textarea></article><article class="prob" id="q7" aria-labelledby="q7-label"><div class="prob-num" id="q7-label">Problem 7<span class="lvl lvl-3">L3</span><span class="item-type">Choose one</span></div><p class="prob-q">A parallelogram has area <strong>84 cm²</strong>, base 12 cm, and sloping side 10 cm. Which pair gives its <strong>height h and perimeter P</strong>?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Parallelogram with base 12 centimeters, sloping side 10 centimeters, and perpendicular height h."><path class="shape" d="M35 110L95 25H245L185 110Z"/><path class="dash" d="M95 25V110"/><path class="mark" d="M95 98H107V110"/><text x="125" y="132" text-anchor="middle" class="">12 cm</text><text x="47" y="59" text-anchor="middle" class="">10 cm</text><text x="108" y="75" text-anchor="middle" class="">h</text></svg></div><div class="mc-opts" role="group" aria-label="Problem 7 choices"><label class="mc-opt"><input type="radio" name="q7" value="A" aria-label="A. h = 7 cm; P = 38 cm"><span class="bubble" aria-hidden="true"></span><span>A) h = 7 cm; P = 38 cm</span></label><label class="mc-opt"><input type="radio" name="q7" value="B" aria-label="B. h = 10 cm; P = 44 cm"><span class="bubble" aria-hidden="true"></span><span>B) h = 10 cm; P = 44 cm</span></label><label class="mc-opt"><input type="radio" name="q7" value="C" aria-label="C. h = 7 cm; P = 44 cm"><span class="bubble" aria-hidden="true"></span><span>C) h = 7 cm; P = 44 cm</span></label><label class="mc-opt"><input type="radio" name="q7" value="D" aria-label="D. h = 12 cm; P = 40 cm"><span class="bubble" aria-hidden="true"></span><span>D) h = 12 cm; P = 40 cm</span></label></div><label class="work-label" for="work-7">Show your setup and reasoning</label><textarea id="work-7" class="work-area" aria-label="Problem 7 work"></textarea></article><article class="prob" id="q8" aria-labelledby="q8-label"><div class="prob-num" id="q8-label">Problem 8<span class="lvl lvl-3">L3</span><span class="item-type">Enter a response</span></div><p class="prob-q">The parallel bases of this trapezoid are <strong>6 cm and 16 cm</strong>. Its area is <strong>121 cm²</strong>. What is the perpendicular height h?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Trapezoid with parallel bases 6 centimeters and 16 centimeters and perpendicular height h."><path class="shape" d="M35 110L105 30H175L245 110Z"/><path class="dash" d="M105 30V110"/><path class="mark" d="M105 98H117V110"/><text x="140" y="22" text-anchor="middle" class="">6 cm</text><text x="140" y="132" text-anchor="middle" class="">16 cm</text><text x="119" y="77" text-anchor="middle" class="">h</text><path class="mark" d="M135 26L141 30L135 34M135 106L141 110L135 114"/></svg></div><label class="work-label" for="work-8">Show your setup and reasoning</label><textarea id="work-8" class="work-area" aria-label="Problem 8 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-8" aria-label="Problem 8 answer"> <span>cm</span></label></article></div><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>2 / 7</span></div></section><section class="sheet page-break"><div class="section-hd"><span class="icon" aria-hidden="true">▧</span><h2>Part B Continued — Composite Shapes</h2><span class="badge badge-purple">4 Problems · <button type="button" class="section-timer" data-seconds="660" aria-pressed="false" aria-label="Part B Continued — Composite Shapes timer. Click to start or pause.">11:00</button></span></div><p class="instr">Draw or label before calculating. Trace the entire remaining boundary. Convert all lengths to one unit before finding area.</p><p class="micro">For a select-all item, a fully correct response includes every true choice and no false choices.</p><div class="prob-grid"><article class="prob" id="q9" aria-labelledby="q9-label"><div class="prob-num" id="q9-label">Problem 9<span class="lvl lvl-4">L4</span><span class="item-type">Select all that apply</span></div><p class="prob-q">A <strong>6 cm × 4 cm notch</strong> is cut from the middle of the top edge of a 20 cm × 13 cm rectangular board. All corners are right angles. <strong>Select every true statement</strong> about the remaining board.</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Board 20 centimeters wide and 13 centimeters tall; centered rectangular notch 6 centimeters wide and 4 centimeters deep removed from the top."><path class="shape" d="M35 30H105V66H165V30H235V115H35Z"/><path class="dash" d="M105 30H165"/><text x="135" y="20" text-anchor="middle" class="">6 cm</text><text x="186" y="56" text-anchor="middle" class="">4 cm</text><text x="140" y="136" text-anchor="middle" class="">20 cm</text><text x="16" y="83" text-anchor="middle" class="">13 cm</text><path class="mark" d="M35 103H47V115M223 115V103H235"/></svg></div><div class="mc-opts" role="group" aria-label="Problem 9 choices"><label class="mc-opt"><input type="checkbox" name="q9" value="A" aria-label="A. Its area is 236 cm²."><span class="bubble" aria-hidden="true"></span><span>A) Its area is 236 cm².</span></label><label class="mc-opt"><input type="checkbox" name="q9" value="B" aria-label="B. Its area is 254 cm²."><span class="bubble" aria-hidden="true"></span><span>B) Its area is 254 cm².</span></label><label class="mc-opt"><input type="checkbox" name="q9" value="C" aria-label="C. Its perimeter is 66 cm."><span class="bubble" aria-hidden="true"></span><span>C) Its perimeter is 66 cm.</span></label><label class="mc-opt"><input type="checkbox" name="q9" value="D" aria-label="D. Its perimeter is 74 cm."><span class="bubble" aria-hidden="true"></span><span>D) Its perimeter is 74 cm.</span></label></div><label class="work-label" for="work-9">Show your setup and reasoning</label><textarea id="work-9" class="work-area" aria-label="Problem 9 work"></textarea></article><article class="prob" id="q10" aria-labelledby="q10-label"><div class="prob-num" id="q10-label">Problem 10<span class="lvl lvl-3">L3</span><span class="item-type">Choose one</span></div><p class="prob-q">A circular opening with <strong>circumference 12π cm</strong> is cut entirely inside a square tile with side length <strong>15 cm</strong>. Which expression is the remaining tile’s area?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Square tile 15 centimeters on a side with a circular opening entirely inside it; circle circumference is 12 pi centimeters."><rect class="shape" x="85" y="15" width="110" height="110"/><circle cx="140" cy="70" r="36" fill="white" stroke="#334155" stroke-width="2"/><text x="140" y="74" text-anchor="middle" class="">C = 12π</text><text x="140" y="141" text-anchor="middle" class="">15 cm</text></svg></div><div class="mc-opts" role="group" aria-label="Problem 10 choices"><label class="mc-opt"><input type="radio" name="q10" value="A" aria-label="A. 225 − 12π cm²"><span class="bubble" aria-hidden="true"></span><span>A) 225 − 12π cm²</span></label><label class="mc-opt"><input type="radio" name="q10" value="B" aria-label="B. 225 − 36π cm²"><span class="bubble" aria-hidden="true"></span><span>B) 225 − 36π cm²</span></label><label class="mc-opt"><input type="radio" name="q10" value="C" aria-label="C. 225 − 144π cm²"><span class="bubble" aria-hidden="true"></span><span>C) 225 − 144π cm²</span></label><label class="mc-opt"><input type="radio" name="q10" value="D" aria-label="D. 30 − 12π cm²"><span class="bubble" aria-hidden="true"></span><span>D) 30 − 12π cm²</span></label></div><label class="work-label" for="work-10">Show your setup and reasoning</label><textarea id="work-10" class="work-area" aria-label="Problem 10 work"></textarea></article><article class="prob" id="q11" aria-labelledby="q11-label"><div class="prob-num" id="q11-label">Problem 11<span class="lvl lvl-3">L3</span><span class="item-type">Enter a response</span></div><p class="prob-q">A banner is <strong>2.4 m long and 45 cm wide</strong>. A strip 25 cm long, extending across the full width, is trimmed from one end. What is the remaining area <strong>in cm²</strong>?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Banner 2.4 meters long and 45 centimeters wide with a strip 25 centimeters long cut from one end."><rect class="shape" x="35" y="40" width="210" height="65"/><rect x="215" y="40" width="30" height="65" fill="#FFF1F0" stroke="#F97066"/><path class="dash" d="M215 35V110"/><text x="140" y="25" text-anchor="middle" class="">2.4 m</text><text x="17" y="78" text-anchor="middle" class="">45 cm</text><text x="226" y="131" text-anchor="middle" class="">25 cm</text></svg></div><label class="work-label" for="work-11">Show your setup and reasoning</label><textarea id="work-11" class="work-area" aria-label="Problem 11 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-11" aria-label="Problem 11 answer"> <span>cm²</span></label></article><article class="prob" id="q12" aria-labelledby="q12-label"><div class="prob-num" id="q12-label">Problem 12<span class="lvl lvl-3">L3</span><span class="item-type">Enter a response</span></div><p class="prob-q">Garden R measures <strong>14 m by 6 m</strong>. Garden S will be a square with the <strong>same perimeter</strong> as R. How many more square meters of planting area will S have than R?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Rectangular garden R measures 14 by 6 meters; proposed square garden S has unknown side s."><rect class="shape" x="27" y="44" width="126" height="54"/><rect class="shape" x="184" y="26" width="78" height="78"/><text x="90" y="35" text-anchor="middle" class="">14 m</text><text x="90" y="119" text-anchor="middle" class="">R</text><text x="13" y="76" text-anchor="middle" class="">6 m</text><text x="224" y="120" text-anchor="middle" class="">S</text><text x="224" y="18" text-anchor="middle" class="">s</text></svg></div><label class="work-label" for="work-12">Show your setup and reasoning</label><textarea id="work-12" class="work-area" aria-label="Problem 12 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-12" aria-label="Problem 12 answer"> <span>m²</span></label></article></div><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>3 / 7</span></div></section><section class="sheet page-break"><div class="section-hd"><span class="icon" aria-hidden="true">∠</span><h2>Part C — Angle Relationships</h2><span class="badge badge-sand">4 Problems · <button type="button" class="section-timer" data-seconds="600" aria-pressed="false" aria-label="Part C — Angle Relationships timer. Click to start or pause.">10:00</button></span></div><p class="instr">State the angle relationship in your work, then write an equation. Give the requested angle, not just the variable.</p><p class="micro">Check that each interior angle is between 0° and 180°. Use only marked or stated relationships.</p><div class="prob-grid"><article class="prob" id="q13" aria-labelledby="q13-label"><div class="prob-num" id="q13-label">Problem 13<span class="lvl lvl-3">L3</span><span class="item-type">Enter a response</span></div><p class="prob-q">Two straight lines intersect. The labeled algebraic angles are vertical angles. What is the value of the <strong>adjacent angle y</strong>?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Intersecting lines with opposite angles labeled 5x plus 6 degrees and 8x minus 30 degrees; y is adjacent on a straight line."><path class="line" d="M30 110L250 35M30 35L250 110"/><text x="140" y="30" text-anchor="middle" class="">(5x + 6)°</text><text x="140" y="132" text-anchor="middle" class="">(8x − 30)°</text><text x="231" y="77" text-anchor="middle" class="">y°</text></svg></div><label class="work-label" for="work-13">Show your setup and reasoning</label><textarea id="work-13" class="work-area" aria-label="Problem 13 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-13" aria-label="Problem 13 answer"> <span>degrees</span></label></article><article class="prob" id="q14" aria-labelledby="q14-label"><div class="prob-num" id="q14-label">Problem 14<span class="lvl lvl-3">L3</span><span class="item-type">Choose one</span></div><p class="prob-q">In triangle ABC, <strong>AB = AC</strong>. The labeled angles are in degrees. BC is extended past C. What is the measure of exterior angle e?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Triangle ABC with AB equal to AC, apex angle 4t plus 14 degrees, base angle at B 3t plus 8 degrees, and exterior angle e at C."><path class="shape" d="M45 113L140 20L235 113Z"/><path class="line" d="M235 113H275"/><path class="mark" d="M85 61L95 71M185 71L195 61"/><text x="140" y="14" text-anchor="middle" class="">A</text><text x="35" y="131" text-anchor="middle" class="">B</text><text x="235" y="131" text-anchor="middle" class="">C</text><text x="140" y="61" text-anchor="middle" class="">(4t + 14)°</text><text x="91" y="102" text-anchor="middle" class="">(3t + 8)°</text><text x="254" y="101" text-anchor="middle" class="">e°</text></svg></div><div class="mc-opts" role="group" aria-label="Problem 14 choices"><label class="mc-opt"><input type="radio" name="q14" value="A" aria-label="A. 53°"><span class="bubble" aria-hidden="true"></span><span>A) 53°</span></label><label class="mc-opt"><input type="radio" name="q14" value="B" aria-label="B. 74°"><span class="bubble" aria-hidden="true"></span><span>B) 74°</span></label><label class="mc-opt"><input type="radio" name="q14" value="C" aria-label="C. 106°"><span class="bubble" aria-hidden="true"></span><span>C) 106°</span></label><label class="mc-opt"><input type="radio" name="q14" value="D" aria-label="D. 127°"><span class="bubble" aria-hidden="true"></span><span>D) 127°</span></label></div><label class="work-label" for="work-14">Show your setup and reasoning</label><textarea id="work-14" class="work-area" aria-label="Problem 14 work"></textarea></article><article class="prob" id="q15" aria-labelledby="q15-label"><div class="prob-num" id="q15-label">Problem 15<span class="lvl lvl-3">L3</span><span class="item-type">Enter a response</span></div><p class="prob-q">Lines <strong>ℓ and m are parallel</strong>. The labeled angles lie inside the parallel lines on the same side of the transversal. What is the measure of the <strong>smaller labeled angle</strong>?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Parallel horizontal lines cut by a transversal, with same-side interior angles 3x plus 15 degrees and 5x minus 11 degrees."><path class="line" d="M20 35H265M20 112H265M65 138L162 10"/><path class="mark" d="M228 30L236 35L228 40M238 30L246 35L238 40M228 107L236 112L228 117M238 107L246 112L238 117"/><text x="190" y="59" text-anchor="middle" class="">(3x + 15)°</text><text x="156" y="100" text-anchor="middle" class="">(5x − 11)°</text><text x="25" y="24" text-anchor="middle" class="">ℓ</text><text x="25" y="132" text-anchor="middle" class="">m</text></svg></div><label class="work-label" for="work-15">Show your setup and reasoning</label><textarea id="work-15" class="work-area" aria-label="Problem 15 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-15" aria-label="Problem 15 answer"> <span>degrees</span></label></article><article class="prob" id="q16" aria-labelledby="q16-label"><div class="prob-num" id="q16-label">Problem 16<span class="lvl lvl-4">L4</span><span class="item-type">Choose one</span></div><p class="prob-q">The triangle’s base is extended in a straight line. The two remote interior angles and the exterior angle are labeled. What is the measure of the <strong>interior angle adjacent to the exterior angle</strong>?</p><div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 145" role="img" aria-label="Triangle with remote interior angles 2n plus 17 degrees and 3n plus 9 degrees; right exterior angle 7n minus 8 degrees."><path class="shape" d="M30 113L108 20L215 113Z"/><path class="line" d="M215 113H278"/><text x="109" y="61" text-anchor="middle" class="">(3n + 9)°</text><text x="80" y="102" text-anchor="middle" class="">(2n + 17)°</text><text x="234" y="86" text-anchor="middle" class="">(7n − 8)°</text></svg></div><div class="mc-opts" role="group" aria-label="Problem 16 choices"><label class="mc-opt"><input type="radio" name="q16" value="A" aria-label="A. 51°"><span class="bubble" aria-hidden="true"></span><span>A) 51°</span></label><label class="mc-opt"><input type="radio" name="q16" value="B" aria-label="B. 60°"><span class="bubble" aria-hidden="true"></span><span>B) 60°</span></label><label class="mc-opt"><input type="radio" name="q16" value="C" aria-label="C. 69°"><span class="bubble" aria-hidden="true"></span><span>C) 69°</span></label><label class="mc-opt"><input type="radio" name="q16" value="D" aria-label="D. 111°"><span class="bubble" aria-hidden="true"></span><span>D) 111°</span></label></div><label class="work-label" for="work-16">Show your setup and reasoning</label><textarea id="work-16" class="work-area" aria-label="Problem 16 work"></textarea></article></div><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>4 / 7</span></div></section><section class="sheet page-break"><div class="section-hd"><span class="icon" aria-hidden="true">%</span><h2>Part D — Percent Foundations</h2><span class="badge badge-green">4 Problems · <button type="button" class="section-timer" data-seconds="480" aria-pressed="false" aria-label="Part D — Percent Foundations timer. Click to start or pause.">08:00</button></span></div><p class="instr">In every work box, first name the quantity that represents 100%. For a reverse percent, identify what fraction of the original remains.</p><div class="prob-grid"><article class="prob" id="q17" aria-labelledby="q17-label"><div class="prob-num" id="q17-label">Problem 17<span class="lvl lvl-2">L2</span><span class="item-type">Enter a response</span></div><p class="prob-q">A box contains <strong>144 pencils</strong>. Exactly <strong>37.5%</strong> are blue. How many blue pencils are in the box?</p><label class="work-label" for="work-17">Show your setup and reasoning</label><textarea id="work-17" class="work-area" aria-label="Problem 17 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-17" aria-label="Problem 17 answer"> <span>pencils</span></label></article><article class="prob" id="q18" aria-labelledby="q18-label"><div class="prob-num" id="q18-label">Problem 18<span class="lvl lvl-2">L2</span><span class="item-type">Choose one</span></div><p class="prob-q">Of the <strong>90 seats</strong> in a theater, <strong>27 are reserved</strong>. Which pair correctly gives the percent reserved and the quantity that represents 100%?</p><div class="mc-opts" role="group" aria-label="Problem 18 choices"><label class="mc-opt"><input type="radio" name="q18" value="A" aria-label="A. 27%; 90 seats"><span class="bubble" aria-hidden="true"></span><span>A) 27%; 90 seats</span></label><label class="mc-opt"><input type="radio" name="q18" value="B" aria-label="B. 30%; 90 seats"><span class="bubble" aria-hidden="true"></span><span>B) 30%; 90 seats</span></label><label class="mc-opt"><input type="radio" name="q18" value="C" aria-label="C. 30%; 27 seats"><span class="bubble" aria-hidden="true"></span><span>C) 30%; 27 seats</span></label><label class="mc-opt"><input type="radio" name="q18" value="D" aria-label="D. 70%; 90 seats"><span class="bubble" aria-hidden="true"></span><span>D) 70%; 90 seats</span></label></div><label class="work-label" for="work-18">Show your setup and reasoning</label><textarea id="work-18" class="work-area" aria-label="Problem 18 work"></textarea></article><article class="prob" id="q19" aria-labelledby="q19-label"><div class="prob-num" id="q19-label">Problem 19<span class="lvl lvl-3">L3</span><span class="item-type">Select all that apply</span></div><p class="prob-q">A ticket price changes from <strong>$48 to $60</strong>. <strong>Select every true statement.</strong></p><div class="mc-opts" role="group" aria-label="Problem 19 choices"><label class="mc-opt"><input type="checkbox" name="q19" value="A" aria-label="A. The increase is 25% of the original price."><span class="bubble" aria-hidden="true"></span><span>A) The increase is 25% of the original price.</span></label><label class="mc-opt"><input type="checkbox" name="q19" value="B" aria-label="B. A 25% decrease from $60 restores the $48 price."><span class="bubble" aria-hidden="true"></span><span>B) A 25% decrease from $60 restores the $48 price.</span></label><label class="mc-opt"><input type="checkbox" name="q19" value="C" aria-label="C. A 20% decrease from $60 restores the $48 price."><span class="bubble" aria-hidden="true"></span><span>C) A 20% decrease from $60 restores the $48 price.</span></label><label class="mc-opt"><input type="checkbox" name="q19" value="D" aria-label="D. The increase is 12% because the price rises by $12."><span class="bubble" aria-hidden="true"></span><span>D) The increase is 12% because the price rises by $12.</span></label></div><label class="work-label" for="work-19">Show your setup and reasoning</label><textarea id="work-19" class="work-area" aria-label="Problem 19 work"></textarea></article><article class="prob" id="q20" aria-labelledby="q20-label"><div class="prob-num" id="q20-label">Problem 20<span class="lvl lvl-3">L3</span><span class="item-type">Enter a response</span></div><p class="prob-q">A backpack sells for <strong>$63 after a 30% discount</strong>. There is no tax. What was its original price?</p><label class="work-label" for="work-20">Show your setup and reasoning</label><textarea id="work-20" class="work-area" aria-label="Problem 20 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-20" aria-label="Problem 20 answer"> <span>dollars</span></label></article></div><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>5 / 7</span></div></section><section class="sheet page-break"><div class="section-hd"><span class="icon" aria-hidden="true">%</span><h2>Part D Continued — Changing Bases</h2><span class="badge badge-purple">4 Problems · <button type="button" class="section-timer" data-seconds="720" aria-pressed="false" aria-label="Part D Continued — Changing Bases timer. Click to start or pause.">12:00</button></span></div><p class="instr">Track each new whole. Show equations for changing totals and multiply successive change factors. Verify reverse-percent answers forward.</p><div class="prob-grid"><article class="prob" id="q21" aria-labelledby="q21-label"><div class="prob-num" id="q21-label">Problem 21<span class="lvl lvl-3">L3</span><span class="item-type">Choose one</span></div><p class="prob-q">A workshop has <strong>200 registrations</strong>. The count increases by <strong>10%</strong>, then decreases by <strong>10% of the increased count</strong>. Which pair gives the final count and the net change from the original count?</p><div class="mc-opts" role="group" aria-label="Problem 21 choices"><label class="mc-opt"><input type="radio" name="q21" value="A" aria-label="A. 200; no change"><span class="bubble" aria-hidden="true"></span><span>A) 200; no change</span></label><label class="mc-opt"><input type="radio" name="q21" value="B" aria-label="B. 198; a 2% decrease"><span class="bubble" aria-hidden="true"></span><span>B) 198; a 2% decrease</span></label><label class="mc-opt"><input type="radio" name="q21" value="C" aria-label="C. 202; a 1% increase"><span class="bubble" aria-hidden="true"></span><span>C) 202; a 1% increase</span></label><label class="mc-opt"><input type="radio" name="q21" value="D" aria-label="D. 198; a 1% decrease"><span class="bubble" aria-hidden="true"></span><span>D) 198; a 1% decrease</span></label></div><label class="work-label" for="work-21">Show your setup and reasoning</label><textarea id="work-21" class="work-area" aria-label="Problem 21 work"></textarea></article><article class="prob" id="q22" aria-labelledby="q22-label"><div class="prob-num" id="q22-label">Problem 22<span class="lvl lvl-4">L4</span><span class="item-type">Enter a response</span></div><p class="prob-q">A device is discounted <strong>20%</strong>. A <strong>5% sales tax</strong> is then applied to the discounted price. The final cost is <strong>$100.80</strong>. What was the price before the discount and tax?</p><label class="work-label" for="work-22">Show your setup and reasoning</label><textarea id="work-22" class="work-area" aria-label="Problem 22 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-22" aria-label="Problem 22 answer"> <span>dollars</span></label></article><article class="prob" id="q23" aria-labelledby="q23-label"><div class="prob-num" id="q23-label">Problem 23<span class="lvl lvl-4">L4</span><span class="item-type">Enter a response</span></div><p class="prob-q">A classroom library has <strong>300 books</strong>, and <strong>40% are fiction</strong>. Only nonfiction books are removed. After removal, fiction books make up <strong>50%</strong> of the remaining books. How many books were removed?</p><label class="work-label" for="work-23">Show your setup and reasoning</label><textarea id="work-23" class="work-area" aria-label="Problem 23 work"></textarea><label class="answer-box">Answer: <input class="answer-input" type="text" name="answer-23" aria-label="Problem 23 answer"> <span>books</span></label></article><article class="prob" id="q24" aria-labelledby="q24-label"><div class="prob-num" id="q24-label">Problem 24<span class="lvl lvl-4">L4</span><span class="item-type">Choose one</span></div><p class="prob-q">A rectangular display’s length increases by <strong>25%</strong>, while its width decreases by <strong>10%</strong>. By what percent does its area change?</p><div class="mc-opts" role="group" aria-label="Problem 24 choices"><label class="mc-opt"><input type="radio" name="q24" value="A" aria-label="A. It increases by 15%."><span class="bubble" aria-hidden="true"></span><span>A) It increases by 15%.</span></label><label class="mc-opt"><input type="radio" name="q24" value="B" aria-label="B. It increases by 12.5%."><span class="bubble" aria-hidden="true"></span><span>B) It increases by 12.5%.</span></label><label class="mc-opt"><input type="radio" name="q24" value="C" aria-label="C. It decreases by 2.5%."><span class="bubble" aria-hidden="true"></span><span>C) It decreases by 2.5%.</span></label><label class="mc-opt"><input type="radio" name="q24" value="D" aria-label="D. It increases by 35%."><span class="bubble" aria-hidden="true"></span><span>D) It increases by 35%.</span></label></div><label class="work-label" for="work-24">Show your setup and reasoning</label><textarea id="work-24" class="work-area" aria-label="Problem 24 work"></textarea></article></div><div class="coach-note"><strong>After the timed work:</strong> preserve your original answers. Review with your tutor, complete the self-score on page 1, and record the first wrong move in the error log. Treat uncertainty as something to discuss, not as proof that an answer is wrong.</div><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>6 / 7</span></div></section><section class="sheet page-break"><div class="section-hd"><span class="icon">🔎</span><h2>Part E — Error Log</h2><span class="badge badge-coral">Required · Every Missed Problem</span></div><p class="instr">After tutor review, log every missed problem. Identify the first incorrect step, not just “wrong answer.” For more than five errors, continue the same four columns on separate paper.</p><div class="error-log">
+<h3>📋 My Errors This Week</h3>
+<div class="error-type-pills">
+<span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+<span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+<span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+<span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+</div>
+<table class="error-table" style="margin-top:0.7rem;">
+<thead>
+<tr>
+<th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1</td><td aria-label="Error log row 1: Problem number" contenteditable="true" role="textbox" style="outline:none;min-width:60px;"> </td><td aria-label="Error log row 1: What I did wrong" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 1: Error type" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>2</td><td aria-label="Error log row 2: Problem number" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 2: What I did wrong" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 2: Error type" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>3</td><td aria-label="Error log row 3: Problem number" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 3: What I did wrong" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 3: Error type" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>4</td><td aria-label="Error log row 4: Problem number" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 4: What I did wrong" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 4: Error type" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>5</td><td aria-label="Error log row 5: Problem number" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 5: What I did wrong" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error log row 5: Error type" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+</tbody>
+</table>
+</div><div class="reflect-box">
+<h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+<p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+<div class="reflect-lines">
+<div class="reflect-line">My biggest Math mistake this week was <input aria-label="My biggest Math mistake this week was" placeholder="…" type="text"/></div>
+<div class="reflect-line">I made this error because it was a <input aria-label="I made this error because it was a (Content Gap / Careless / Rushing)" placeholder="…" type="text"/> (Content Gap / Careless / Rushing)</div>
+<div class="reflect-line">The formula or percent base I need to review is <input aria-label="The formula or percent base I need to review is" placeholder="…" type="text"/></div>
+<div class="reflect-line">One thing I want to ask my tutor about in session: <input aria-label="One thing I want to ask my tutor about in session:" placeholder="…" type="text"/></div>
+</div>
+</div><div class="explain-card"><div class="section-hd"><span class="icon">✎</span><h2>Explain Back</h2><span class="badge badge-green">Unscored</span></div><p class="prob-q">Choose one of your own solutions. Explain why its height, angle relationship, or percent base is valid. Then write a repair rule: “When I see ___, I will ___ before calculating.”</p><textarea class="work-area" aria-label="Explain back and repair rule"></textarea></div><p class="micro">Format reference: <a href="https://www.schools.nyc.gov/learning/testing/specialized-high-school-admissions-test" target="_blank" rel="noopener">NYC Public Schools: SHSAT content, item types, and navigation</a>. Original practice questions based on the supplied Session 3 lesson. Level labels are instructional estimates, not calibrated CAT difficulty parameters.</p><div class="page-footer"><span>Read → Set up → Solve → Check → Move on</span><span>7 / 7</span></div></section></main><script>
+'use strict';
+const timerResets = [];
+document.querySelectorAll('.section-timer').forEach(timer => {
+  const initial = Number(timer.dataset.seconds) * 1000;
+  const label = timer.closest('.section-hd').querySelector('h2').textContent;
+  let remaining = initial, deadline = 0, interval = null;
+  const render = () => {
+    const seconds = Math.ceil(remaining / 1000);
+    const text = String(Math.floor(seconds / 60)).padStart(2,'0') + ':' + String(seconds % 60).padStart(2,'0');
+    timer.textContent = text;
+    timer.setAttribute('aria-label', label + ' timer: ' + text + (remaining === 0 ? ', time is up.' : interval !== null ? ', running. Click to pause.' : ', paused. Click to start or resume.'));
+  };
+  const tick = () => {
+    remaining = Math.max(0, deadline - performance.now());
+    if (remaining === 0) {
+      clearInterval(interval); interval = null;
+      timer.classList.remove('running'); timer.classList.add('expired');
+      timer.setAttribute('aria-pressed','false'); timer.disabled = true;
+    }
+    render();
+  };
+  timer.addEventListener('click', () => {
+    if (remaining <= 0) return;
+    if (interval !== null) {
+      tick(); clearInterval(interval); interval = null;
+      timer.classList.remove('running'); timer.setAttribute('aria-pressed','false'); render();
+    } else {
+      deadline = performance.now() + remaining;
+      timer.classList.add('running'); timer.setAttribute('aria-pressed','true');
+      interval = setInterval(tick,100); tick();
+    }
+  });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && interval !== null) tick(); });
+  timerResets.push(() => {
+    clearInterval(interval); interval = null; remaining = initial;
+    timer.disabled = false; timer.classList.remove('running','expired');
+    timer.setAttribute('aria-pressed','false'); render();
+  });
+  render();
+});
+function syncChoices() {
+  document.querySelectorAll('.mc-opt').forEach(label => {
+    const selected = label.querySelector('input').checked;
+    label.classList.toggle('selected',selected);
+    label.querySelector('.bubble').textContent = selected ? '✓' : '';
+  });
+}
+document.addEventListener('change', e => { if(e.target.matches('.mc-opt input')) syncChoices(); });
+function resizeField(el) { el.style.height = 'auto'; el.style.height = Math.max(84,el.scrollHeight + 3) + 'px'; }
+document.querySelectorAll('textarea').forEach(el => el.addEventListener('input', () => resizeField(el)));
+const printPairs = [];
+document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(field => {
+  const mirror = document.createElement(field.tagName === 'TEXTAREA' ? 'div' : 'span');
+  mirror.className = 'print-field ' + (field.tagName === 'TEXTAREA' ? 'print-work' : 'print-answer');
+  mirror.setAttribute('aria-hidden','true');
+  field.classList.add('screen-field'); field.after(mirror);
+  printPairs.push([field,mirror]);
+});
+function preparePrint() {
+  printPairs.forEach(([field,mirror]) => { mirror.textContent = field.value || '\u00a0'; });
+  syncChoices();
+}
+window.addEventListener('beforeprint',preparePrint);
+function clearAll() {
+  if (!window.confirm('Clear all responses, self-scores, notes, and error-log entries, and reset every timer?')) return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => { el.value = ''; if(el.tagName === 'TEXTAREA') el.style.height=''; });
+  document.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(el => { el.checked = false; });
+  document.querySelectorAll('[contenteditable]').forEach(el => { el.textContent = '\u00a0'; });
+  timerResets.forEach(reset => reset()); syncChoices(); preparePrint();
+}
+syncChoices();
+</script></body></html>
