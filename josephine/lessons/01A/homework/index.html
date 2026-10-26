@@ -1,1 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHSAT CAT Strategy & Stamina Homework — November 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;--blue-md:#BFDBFE;
+  --coral:#F97066;--coral-lt:#FFF1F0;--sand:#D4A574;--sand-lt:#FDF3E7;
+  --green:#16a34a;--green-lt:#DCFCE7;--purple:#7c3aed;--purple-lt:#EDE9FE;
+  --ink:#0f172a;--slate:#334155;--muted:#64748b;--border:#CBD5E1;
+  --bg:#F8FAFF;--white:#FFFFFF;
+  --ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif;--ff-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:#e2e8f0;scroll-behavior:smooth}
+body{font-family:var(--ff-body);color:var(--ink);background:var(--bg);max-width:860px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+button,input,textarea,select{font:inherit}.skip-link{position:fixed;left:.5rem;top:-5rem;background:var(--ink);color:#fff;padding:.6rem 1rem;z-index:100}.skip-link:focus{top:.5rem}
+.toolbar{display:flex;justify-content:flex-end;gap:.55rem;padding:1rem 0}.print-btn{border:0;border-radius:22px;padding:.58rem 1rem;background:var(--blue);color:#fff;font:800 .78rem var(--ff-body);cursor:pointer;min-height:44px}.print-btn.secondary{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}.print-btn:hover{filter:brightness(.94)}
+.print-btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,label.mc-opt:focus-within,.section-timer:focus-visible,.question-countdown:focus-visible{outline:3px solid var(--blue-md);outline-offset:2px}
+.sheet{background:#fff;margin:0 auto 2rem;padding:2.2rem 2.4rem;box-shadow:0 4px 24px rgba(37,99,235,.10);border-radius:16px}.hw-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1rem;border-bottom:3px solid var(--blue);margin-bottom:1.1rem;gap:1rem;flex-wrap:wrap}.brand{display:flex;gap:.75rem;align-items:center}.brand-mark{width:46px;height:46px;color:var(--blue);flex:none}.hw-header-left h1{font:800 1.75rem/1.05 var(--ff-head);color:var(--blue)}.subtitle{font-size:.84rem;color:var(--muted);font-weight:700;margin-top:.22rem;text-transform:uppercase;letter-spacing:.05em}.hw-meta{display:flex;flex-direction:column;gap:.4rem;min-width:220px}.hw-meta-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--slate);font-weight:700}.hw-meta-row .label{background:var(--blue-lt);color:var(--blue);border-radius:4px;padding:2px 7px;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;min-width:65px;text-align:center}.line-input{flex:1;border:0;border-bottom:1.5px solid var(--border);font:600 .82rem var(--ff-body);background:transparent;min-width:0;padding:2px 4px}
+.score-banner{background:var(--blue);color:#fff;border-radius:10px;padding:.7rem .9rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.8rem}.score-banner .title{font:800 .92rem var(--ff-head)}.score-banner .sub{font-size:.7rem;opacity:.88}.score-cells{display:flex;gap:.7rem}.score-cell{text-align:center;min-width:52px}.sc-val{font:800 .82rem var(--ff-head)}.sc-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;opacity:.85}.score-input{width:2.1rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.65);color:#fff;font:800 .85rem var(--ff-head);text-align:center}
+.cat-strip{display:flex;gap:.65rem;align-items:center;border:1px solid var(--blue-md);background:var(--blue-lt);border-radius:9px;padding:.6rem .75rem;margin-bottom:.9rem}.cat-strip svg{width:28px;height:28px;color:var(--blue);flex:none}.cat-strip p{font-size:.76rem;line-height:1.45;color:var(--slate)}
+.page-kicker{font:800 .72rem var(--ff-head);color:var(--blue);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--blue-md);padding-bottom:.35rem;margin-bottom:.8rem}.section-hd{display:flex;align-items:center;gap:.55rem;margin:1.2rem 0 .7rem}.section-icon{width:23px;color:var(--blue);flex:none}.section-hd h2{font:800 1.14rem var(--ff-head)}.badge{font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:20px;margin-left:auto;white-space:nowrap}.badge-blue{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md)}.badge-coral{background:var(--coral-lt);color:#c2410c;border:1px solid #fca5a5}.badge-green{background:var(--green-lt);color:var(--green);border:1px solid #86efac}.badge-purple{background:var(--purple-lt);color:var(--purple);border:1px solid #c4b5fd}.badge-sand{background:var(--sand-lt);color:#92400e;border:1px solid #fcd34d}.instr{font-size:.79rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;padding:.38rem .72rem;background:var(--blue-lt);border-left:3px solid var(--blue);border-radius:0 6px 6px 0}.strategy-strip{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}.strategy-label{font-size:.69rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.strategy-chip{font-size:.68rem;font-weight:800;color:var(--slate);background:#f1f5f9;border-radius:20px;padding:3px 8px}
+.section-timer,.question-countdown{border:0;background:transparent;color:inherit;font:800 .68rem var(--ff-math);font-variant-numeric:tabular-nums;cursor:pointer;padding:0}.section-timer.is-running,.question-countdown.is-running{color:var(--blue)}.section-timer.is-expired,.question-countdown.is-expired{color:#b45309}.question-countdown{margin-left:auto;min-width:3.5rem;padding:2px 8px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--slate);font-size:.72rem;text-align:center}.question-countdown:hover{background:var(--blue-lt)}
+.passage-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1rem;margin-bottom:.8rem}.passage-title{font:800 .98rem var(--ff-head);margin-bottom:.45rem}.passage-text{font-size:.78rem;line-height:1.58;color:var(--slate)}.passage-text p{margin:.45rem 0}.para-num{font:800 .73rem var(--ff-head);color:var(--blue);margin-right:.3rem}.purpose-prompt{background:var(--sand-lt);border:1px solid #fcd34d;border-radius:8px;padding:.55rem .7rem;margin:.7rem 0;font-size:.76rem;color:#78350f}.purpose-prompt label{font-weight:800}.purpose-prompt input{width:100%;border:0;border-bottom:1.5px solid #d4a574;background:transparent;padding:.25rem .15rem;margin-top:.2rem;color:var(--ink)}
+.mc-q{margin-bottom:.72rem;padding:.72rem .85rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;break-inside:avoid}.prob-head{display:flex;align-items:center;gap:.4rem;margin-bottom:.38rem}.qnum{font:800 .9rem var(--ff-head);color:var(--blue)}.lvl{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.05em;padding:1px 7px;border-radius:20px}.lvl-1{background:#e5e7eb;color:#374151}.lvl-2{background:#d9d9d9;color:#1f2937}.lvl-3{background:#bdbdbd;color:#111827}.lvl-4{background:#6b7280;color:#fff}.mc-q-text{font-size:.82rem;font-weight:700;line-height:1.5;margin-bottom:.45rem}.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:.24rem .85rem}.mc-opt{font-size:.78rem;color:var(--slate);display:flex;align-items:flex-start;gap:.32rem;line-height:1.42;cursor:pointer;padding:.3rem .42rem;border-radius:7px;border:1.5px solid transparent;min-height:38px}.mc-opt:hover{background:#f0f0f0}.mc-opt input{position:absolute;opacity:0;pointer-events:none}.bubble{width:16px;height:16px;min-width:16px;border:1.5px solid var(--border);border-radius:50%;margin-top:1px;display:grid;place-items:center;font-size:8px;font-weight:800}.multi .bubble{border-radius:4px}.mc-opt.selected{background:#e5e7eb;border-color:#374151;font-weight:700}.mc-opt.selected .bubble{background:#374151;border-color:#374151;color:#fff}.mc-opt.selected .bubble::after{content:'✓'}.commit-row{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-top:.42rem}.commit-btn{min-height:36px;border:0;border-radius:20px;padding:.28rem .82rem;background:var(--blue);color:#fff;font:800 .69rem var(--ff-body);cursor:pointer}.commit-btn:disabled{background:#94a3b8;cursor:not-allowed}.lock-note{font-size:.67rem;color:var(--muted);font-weight:700}.locked .lock-note{color:var(--green)}.locked .mc-opt:not(.selected){opacity:.58}.work-box{border:1px dashed var(--border);border-radius:7px;background:#fff;overflow:hidden;margin-top:.38rem}.work-box textarea{width:100%;min-height:48px;border:0;background:transparent;resize:vertical;padding:.42rem .55rem;font:600 .76rem/1.45 var(--ff-math);color:var(--ink);outline:none}.work-box textarea:focus{background:var(--blue-lt)}
+.midpoint{display:grid;grid-template-columns:repeat(6,1fr);gap:.3rem;background:var(--purple-lt);border:1px solid #c4b5fd;border-radius:10px;padding:.65rem;margin:.75rem 0}.reset-node{text-align:center;background:#fff;border:1px solid #c4b5fd;border-radius:8px;padding:.38rem .2rem;font-size:.66rem;color:var(--slate);font-weight:800}.reset-node b{display:block;color:var(--purple);font-size:.85rem}.timer-note{font-size:.69rem;color:#92400e;background:var(--sand-lt);border-radius:5px;padding:.3rem .45rem;margin:.4rem 0}.footer-note{text-align:center;color:var(--muted);font-size:.69rem;margin-top:1.05rem}
+.error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+  .matched-error-log .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .matched-error-log .section-hd .icon { font-size: 1.25rem; }
+  .matched-error-log .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .matched-error-log .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .matched-error-log .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .matched-error-log .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .matched-error-log .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .matched-error-log .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .matched-error-log .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
 
+  /* ── Instruction strip ───────────────────────── */
+  .matched-error-log .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+
+.matched-error-log{--ff-head:'Fredoka',sans-serif}
+.reflection{display:grid;gap:.55rem;margin-top:.8rem}.reflection label{font-size:.76rem;font-weight:700;color:var(--slate)}.reflection input{width:100%;border:0;border-bottom:1.5px solid var(--border);padding:.2rem;font:600 .77rem var(--ff-body)}
+@media(max-width:680px){body{background:#fff}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.96);padding:.55rem;z-index:10;border-bottom:1px solid var(--border)}.sheet{margin:0;padding:1.1rem 1rem;border-radius:0;box-shadow:none}.mc-opts{grid-template-columns:1fr}.mc-opt{min-height:44px;align-items:center}.hw-meta{width:100%}.section-hd{align-items:flex-start;flex-wrap:wrap}.badge{margin-left:0}.score-banner{align-items:flex-start;flex-direction:column}.score-cells{width:100%;justify-content:space-between}.midpoint{grid-template-columns:repeat(3,1fr)}.error-log{overflow-x:auto}.error-table{min-width:650px}}
+@media print{@page{size:letter;margin:0}.no-print{display:none!important}html,body{background:#fff;max-width:100%}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:1.05cm 1.25cm!important;min-height:10in}.page-break{break-before:page;page-break-before:always}.commit-row{display:none!important}.mc-q,.passage-box,.error-log{break-inside:avoid}.question-countdown,.section-timer{border:0!important}.work-box textarea{min-height:42px}.footer-note{margin-top:.65rem}}
+</style>
+
+<style>
+/* Passage annotation controls from copy.html */
+
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+  
+@media print{.annotation-toolbar,.note-input-wrapper{display:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to homework</a>
+<div class="toolbar no-print"><button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button><button class="print-btn secondary" id="clearAll" type="button">Clear All</button></div>
+<main id="main">
+<section class="sheet">
+<header class="hw-header">
+  <div class="brand">
+    <svg class="brand-mark" role="img" aria-label="Forward-only stamina mark" fill="none" viewBox="0 0 48 48"><path d="M8 34V12h24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="m25 6 7 6-7 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 27h23" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="m29 21 7 6-7 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="38" r="4" fill="white" stroke="currentColor" stroke-width="3"/></svg>
+    <div class="hw-header-left"><h1>SHSAT CAT Strategy &amp; Stamina Homework</h1><div class="subtitle">Plan, Reset &amp; Commit · November 2026</div></div>
+  </div>
+  <div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input class="line-input" type="text" autocomplete="name"></label><label class="hw-meta-row"><span class="label">Date</span><input class="line-input" type="text"></label></div>
+</header>
+<div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Complete every first-pass decision before checking work.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="20"> / 20</div><div class="sc-lbl">Items</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="4"> / 4</div><div class="sc-lbl">Audit</div></div></div></div>
+<div class="cat-strip"><svg fill="none" viewBox="0 0 32 32"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> Each response is one-way. Read the ask, choose the cleanest path, perform a five-second audit, and commit. Once committed, the response locks.</p></div>
+<div class="section-hd"><svg class="section-icon" fill="none" viewBox="0 0 24 24"><path d="M4 18 9 13l4 3 7-10M16 6h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><h2>Part A — Clock &amp; Decision Lab</h2><span class="badge badge-blue">4 Questions · <button class="section-timer" type="button" data-seconds="300">05:00</button></span></div>
+<p class="instr">Use the evidence in each situation. Protect the section or item most vulnerable to fatigue—not the one that feels friendliest.</p>
+<div class="strategy-strip"><span class="strategy-label">Calm-plan sequence</span><span class="strategy-chip">1 · Read data</span><span class="strategy-chip">2 · Name risk</span><span class="strategy-chip">3 · Choose action</span><span class="strategy-chip">4 · Commit</span></div>
+<div id="strategyQuestions"></div>
+<div class="footer-note">Page 1 · Make the plan while calm so fatigue cannot renegotiate it.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="page-kicker">Part B · ELA Pre-Load &amp; Locked Block</div>
+<div class="section-hd"><svg class="section-icon" fill="none" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5V4Zm3 5h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="2"/></svg><h2>Purpose Before Choices</h2><span class="badge badge-purple">4 Questions · <button class="section-timer" type="button" data-seconds="600">10:00</button></span></div>
+<p class="instr">Write one paragraph-job verb in the margin mentally. State the central purpose before opening the choices.</p>
+<div class="passage-box">
+  <div class="passage-title">Original Nonfiction Passage · The Useful Life of a Borrowed Tool</div>
+  <div class="annotation-toolbar" id="toolbar-passage">
+  <span class="annot-label">Tool:</span>
+  <button class="annot-btn active" data-tool="highlight" onclick="setPassageTool('highlight',this)">&#x1F58A; Highlight</button>
+  <button class="annot-btn" data-tool="underline" onclick="setPassageTool('underline',this)">U&#x332; Underline</button>
+  <button class="annot-btn" data-tool="outline" onclick="setPassageTool('outline',this)">&#9634; Outline</button>
+  <button class="annot-btn" data-tool="note" onclick="setPassageTool('note',this)">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color:</span>
+  <div class="annot-color-row" id="colors-passage">
+    <div class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" onclick="setPassageColor('#fef08a',this)" title="Yellow"></div>
+    <div class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" onclick="setPassageColor('#86efac',this)" title="Green"></div>
+    <div class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" onclick="setPassageColor('#93c5fd',this)" title="Blue"></div>
+    <div class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" onclick="setPassageColor('#fca5a5',this)" title="Pink"></div>
+    <div class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" onclick="setPassageColor('#c4b5fd',this)" title="Purple"></div>
+  </div>
+  <button class="clear-annotations-btn" onclick="clearPassageAnnotations()">&#10005; Clear</button>
+</div>
+  <div class="passage-text annotatable-passage" id="passage-main">
+    <p><span class="para-num">1</span>Libraries are usually associated with objects that carry stories or information. Yet a growing number of neighborhood libraries lend drills, sewing machines, garden tools, and repair kits. The idea is practical: many households need a specialized tool for one afternoon but do not need to own it for ten years. Shared collections can lower costs and reduce the number of rarely used objects stored in closets.</p>
+    <p><span class="para-num">2</span>Running a tool library, however, requires more than arranging equipment on shelves. Staff members inspect each item when it returns, record damaged parts, and retire tools that no longer meet safety standards. Borrowers may receive a short demonstration before checkout. These routines make one drill's condition comparable from week to week and help staff distinguish ordinary wear from a problem that needs immediate attention.</p>
+    <p><span class="para-num">3</span>Checkout records can also reveal needs that a simple inventory cannot. If every tile cutter is reserved for three Saturdays while several sanders remain untouched, the pattern may guide future purchases. But the number of checkouts is not a complete measure of value. A pipe wrench borrowed once to stop a leak may matter more to one family than a frequently borrowed party tent matters to many.</p>
+    <p><span class="para-num">4</span>For that reason, some programs pair circulation data with brief borrower notes. Patrons might explain what they repaired, whether instructions were clear, or what prevented them from completing a project. A low-use item may turn out to be difficult to find in the catalog rather than unnecessary. A popular item may need a workshop because borrowers repeatedly return it with the same avoidable damage.</p>
+    <p><span class="para-num">5</span>Shared tools do not eliminate the need for stores, professional tradespeople, or personal ownership. Nor does every object belong in a lending collection. Equipment that is fragile, highly specialized, or costly to inspect may be a poor candidate. The strongest programs treat lending as one option within a larger local repair network.</p>
+    <p><span class="para-num">6</span>Seen this way, the collection is not merely a room full of objects. It is a source of evidence about what residents are trying to build, maintain, and learn. Careful records keep the program safe; local explanations help the numbers become useful decisions.</p>
+  </div>
+  <div class="purpose-prompt"><label for="purposeLine">Before the questions: Which sentence best states the passage's central purpose?</label><input id="purposeLine" type="text" placeholder="The author explains… in order to…"></div>
+</div>
+<div id="elaQuestions"></div>
+<div class="cat-strip"><svg fill="none" viewBox="0 0 32 32"><path d="M16 5v22M5 16h22" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>Immediate transition:</strong> Do not score the block now. Take one breath, release the passage, and begin the math stem in front of you.</p></div>
+<div class="footer-note">Page 2 · Content first, then function; commit the block without reopening it.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="page-kicker">Part C · Back-Half Math Stamina</div>
+<div class="section-hd"><svg class="section-icon" fill="none" viewBox="0 0 24 24"><path d="M4 5h16v14H4V5Zm4 4h2m4 0h2M8 13h2m4 0h2M8 17h8" stroke="currentColor" stroke-width="2"/></svg><h2>Controlled Work Under Fatigue</h2><span class="badge badge-green">12 Questions · <button class="section-timer" type="button" data-seconds="1320">22:00</button></span></div>
+<p class="instr">Move in order. At 2:30 without a clean path, eliminate, estimate, commit, and protect the next item.</p>
+<div class="strategy-strip"><span class="strategy-label">Per-item proof</span><span class="strategy-chip">Ask</span><span class="strategy-chip">Equation / diagram</span><span class="strategy-chip">Estimate</span><span class="strategy-chip">Units</span><span class="strategy-chip">Commit</span></div>
+<div id="mathFirst"></div>
+<div class="midpoint" aria-label="Midpoint reset"><div class="reset-node"><b>1</b>Answer</div><div class="reset-node"><b>2</b>One breath</div><div class="reset-node"><b>3</b>Read twice</div><div class="reset-node"><b>4</b>Underline ask</div><div class="reset-node"><b>5</b>Solve + estimate</div><div class="reset-node"><b>6</b>Commit</div></div>
+<div class="timer-note"><strong>Midpoint reset:</strong> The next question has no memory. Your nervous system does. Use the breath to separate them.</div>
+<div id="mathSecond"></div>
+<div class="footer-note">Page 3 · The finish line is controlled decisions—not a perfect feeling.</div>
+</section>
+
+<section class="sheet page-break">
+<div class="page-kicker">Review the Process</div>
+<div class="matched-error-log">
+  <div class="section-hd">
+    <span class="icon">🔎</span>
+    <h2>Part D — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you got wrong, fill in a row. Be honest — this helps us target the right fixes in session!</p>
+
+  <div class="error-log">
+    <h3>📋 My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+      <span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table" style="margin-top:0.7rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" style="outline:none;min-width:60px;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td><td contenteditable="true" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="section-hd"><svg class="section-icon" fill="none" viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-4 12.75V20h8v-4.25A7 7 0 0 0 12 3Zm-3 17h6M10 23h4" stroke="currentColor" stroke-width="2"/></svg><h2>Weekly CAT Reflection</h2></div>
+<div class="reflection">
+  <label>The first item where my process quality changed was <input aria-label="First process change item"></label>
+  <label>The observable action that disappeared was <input aria-label="Action that disappeared"></label>
+  <label>At my next checkpoint, the clock should show <input aria-label="Next checkpoint clock"></label>
+  <label>My 2:30 bail-out sentence will be <input aria-label="Bail-out sentence"></label>
+  <label>After a difficult item, my six-step reset begins with <input aria-label="Reset beginning"></label>
+  <label>One decision I handled calmly was <input aria-label="Calm decision"></label>
+</div>
+<div class="cat-strip" style="margin-top:1rem"><svg fill="none" viewBox="0 0 32 32"><path d="m7 17 6 6L26 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Bring to session:</strong> This completed sheet, your process-break item, and one question about a rule—not only a score.</p></div>
+<div class="footer-note">Page 4 · Protect the next decision.</div>
+</section>
+</main>
+<script>
+const strategy=[
+ {q:'A student’s recent timed data show ELA accuracy of 91% in the first half and 74% in the second half. Math accuracy is 84% in the first half and 85% in the second. Which section should the student most reasonably place first?',o:['ELA, because its larger fatigue drop needs fresh attention','Math, because 85% is the highest score','Math, because calculations always belong first','Either section, because performance data should not affect order'],l:2,t:60},
+ {q:'At the planned Math Q25 checkpoint, 43 minutes have been used; the plan allowed about 45 minutes. What is the best response?',o:['Review every locked item from Q1–25','Slow down dramatically because two minutes remain','Take one breath and continue with the same controlled process','Skip the next three items to create a larger cushion'],l:2,t:60},
+ {q:'A student reaches 2:30 on one item and still cannot name a complete solution path. Which action best protects the rest of a one-way section?',o:['Remain until the answer is certain','Eliminate impossible choices, estimate, commit, and reset','Leave the item unanswered and plan to return','Assume the item is experimental and click randomly'],l:2,t:60},
+ {q:'A very difficult item is followed by a much easier-looking item. Which thought best matches an adaptive CAT mindset?',o:['The easier item proves the previous response was wrong','The test is signaling a final score','The new item is independent evidence; reread and solve it cleanly','The easier item should be answered faster than usual'],l:3,t:60}
+];
+const ela=[
+ {q:'Which statement most accurately captures the author’s main claim about neighborhood tool libraries?',o:['Tool libraries should replace stores and professional repair services','Shared tool collections are useful when careful records and local context guide safe decisions','The most frequently borrowed tool is always the most valuable one','Libraries should lend only objects that require no inspection'],l:1,t:60},
+ {q:'Why does paragraph 2 describe inspections, damage records, safety standards, and demonstrations?',o:['To show that reliable tool lending depends on consistent safety routines','To argue that borrowers usually damage every item','To explain why personal ownership is less expensive','To prove that checkout totals measure community value'],l:2,t:100},
+ {q:'The pipe wrench and party tent in paragraph 3 mainly illustrate that',o:['repair tools are safer than recreational equipment','rarely borrowed objects should be removed immediately','frequency alone may not capture the importance of a loan','families prefer plumbing projects to celebrations'],l:3,t:100},
+ {q:'How does paragraph 5 refine the author’s discussion?',o:['It rejects all data collected by lending programs','It concedes limits and places tool lending within a broader repair system','It introduces the claim that every object belongs in a library','It argues that fragile equipment is always the most useful'],l:4,t:140}
+];
+const math=[
+ {q:'A theater has sold 40% of its 275 available seats. How many seats have been sold?',o:['95','100','110','165'],l:1,t:60},
+ {q:'The ratio of seventh graders to eighth graders in a club is 7:5. If 288 students are in the club, how many are seventh graders?',o:['120','144','168','196'],l:2,t:100},
+ {q:'A line passes through (−4, 9) and (2, −3). What is its slope?',o:['−2','−1/2','1/2','2'],l:2,t:100},
+ {q:'Five test scores are 74, 88, 91, k, and 82. If their mean is 84, what is k?',o:['81','83','85','87'],l:2,t:100},
+ {q:'Solve 5(2x − 1) − 7 = 3x + 16.',o:['2','4','6','8'],l:3,t:140},
+ {q:'A jacket’s price is increased by 18% and then the new price is reduced by 10%. Compared with the original price, the final price is',o:['6.2% greater','6.2% less','8% greater','8% less'],l:3,t:140},
+ {q:'A bag contains 5 red, 4 blue, and 3 green tokens. Two tokens are drawn without replacement. What is the probability that both are blue?',o:['1/12','1/11','2/11','1/3'],l:3,t:140},
+ {q:'Fifteen students have a mean score of 76. Five different students join them, and the mean for all 20 students becomes 81. What is the mean score of the 5 new students?',o:['86','91','94','96'],l:4,t:180},
+ {q:'Select all statements that must be true when every edge length of a cube is doubled.',o:['Its surface area becomes 4 times as large','Its volume becomes 8 times as large','Its volume increases by 700%','Its surface area increases by 200%'],l:4,t:180,m:true},
+ {q:'Seven distinct books are arranged on a shelf. Two particular science books must remain next to each other. How many arrangements are possible?',o:['720','1,080','1,440','5,040'],l:4,t:180},
+ {q:'A segment has endpoints (−6, −1) and (3, 11). What is the length of the segment?',o:['12','15','18','21'],l:4,t:180},
+ {q:'A 1,200-liter tank is 35% full. Water enters at 24 liters per minute while 8 liters per minute leaks out. How many minutes will it take to fill the tank?',o:['32.5','48.75','52.5','65'],l:4,t:180}
+];
+let itemNo=0;
+function renderQuestion(item,includeWork=false){
+  itemNo++;
+  const type=item.m?'checkbox':'radio';
+  const options=item.o.map((text,i)=>`<label class="mc-opt"><input type="${type}" name="q${itemNo}" value="${'ABCD'[i]}"><span class="bubble"></span><span><strong>${'ABCD'[i]})</strong> ${text}</span></label>`).join('');
+  return `<article class="mc-q${item.m?' multi':''}" data-item="${itemNo}"><div class="prob-head"><span class="qnum">${itemNo}.</span><span class="lvl lvl-${item.l}">L${item.l}</span></div><p class="mc-q-text">${item.q}</p><div class="mc-opts" role="${item.m?'group':'radiogroup'}" aria-label="Question ${itemNo}">${options}</div>${includeWork?'<div class="work-box"><textarea aria-label="Work for question '+itemNo+'" placeholder="Equation, diagram, estimate, and unit check…"></textarea></div>':''}<div class="commit-row"><span class="lock-note">Choose, audit, then commit.</span><button class="commit-btn" type="button">Commit answer</button></div></article>`;
+}
+document.getElementById('strategyQuestions').innerHTML=strategy.map(x=>renderQuestion(x)).join('');
+document.getElementById('elaQuestions').innerHTML=ela.map(x=>renderQuestion(x)).join('');
+document.getElementById('mathFirst').innerHTML=math.slice(0,6).map(x=>renderQuestion(x,true)).join('');
+document.getElementById('mathSecond').innerHTML=math.slice(6).map(x=>renderQuestion(x,true)).join('');
+
+function formatTime(seconds){return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}
+function setupTimer(timer){
+  const initial=Number(timer.dataset.seconds);let remaining=initial*1000,deadline=0,interval=null,running=false;
+  timer._reset=()=>{running=false;clearInterval(interval);interval=null;remaining=initial*1000;render()};
+  function render(){const seconds=Math.ceil(remaining/1000);timer.textContent=formatTime(seconds);timer.classList.toggle('is-running',running);timer.classList.toggle('is-expired',remaining===0);timer.setAttribute('aria-pressed',String(running));timer.disabled=remaining===0}
+  function tick(){remaining=Math.max(0,deadline-performance.now());if(remaining===0){running=false;clearInterval(interval);interval=null}render()}
+  timer.addEventListener('click',()=>{if(running){remaining=Math.max(0,deadline-performance.now());running=false;clearInterval(interval);interval=null}else if(remaining>0){deadline=performance.now()+remaining;running=true;interval=setInterval(tick,100)}render()});
+  document.addEventListener('visibilitychange',()=>{if(running)tick()});render();
+}
+document.querySelectorAll('.section-timer,.question-countdown').forEach(setupTimer);
+
+document.addEventListener('change',e=>{
+  if(!e.target.matches('.mc-opt input'))return;
+  const box=e.target.closest('.mc-q');if(box.classList.contains('locked'))return;
+  if(e.target.type==='radio')box.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected'));
+  e.target.closest('.mc-opt').classList.toggle('selected',e.target.checked);
+});
+document.addEventListener('click',e=>{
+  if(!e.target.matches('.commit-btn'))return;
+  const box=e.target.closest('.mc-q'),chosen=[...box.querySelectorAll('input:checked')],note=box.querySelector('.lock-note');
+  if(!chosen.length){note.textContent=box.classList.contains('multi')?'Select at least one response first.':'Select one response first.';return}
+  box.classList.add('locked');box.querySelectorAll('input').forEach(x=>x.disabled=true);e.target.disabled=true;e.target.textContent='Locked';note.textContent='Committed: '+chosen.map(x=>x.value).join(', ');
+});
+document.getElementById('clearAll').addEventListener('click',()=>{
+  if(!confirm('Clear every response, reset all timers, and unlock all committed items?'))return;
+  document.querySelectorAll('input').forEach(x=>{x.disabled=false;if(x.type==='radio'||x.type==='checkbox')x.checked=false;else x.value=''});
+  document.querySelectorAll('textarea').forEach(x=>x.value='');document.querySelectorAll('select').forEach(x=>x.selectedIndex=0);document.querySelectorAll('.mc-opt').forEach(x=>x.classList.remove('selected'));
+  document.querySelectorAll('.mc-q').forEach(x=>{x.classList.remove('locked');const b=x.querySelector('.commit-btn'),n=x.querySelector('.lock-note');b.disabled=false;b.textContent='Commit answer';n.textContent='Choose, audit, then commit.'});
+  document.querySelectorAll('.error-log [contenteditable]').forEach(x=>x.textContent='\u00a0');
+  document.querySelectorAll('.section-timer,.question-countdown').forEach(x=>x._reset&&x._reset());
+});
+</script>
+
+<script>
+/* Passage annotation behavior from copy.html */
+
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  document.getElementById('toolbar-passage').querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  document.getElementById('colors-passage').querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Type note...';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '\u2713';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '\u2715';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      var noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note';
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') {
+        span2.className = 'passage-highlight';
+        span2.style.backgroundColor = color;
+        span2.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span2.className = 'passage-underline';
+        span2.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span2.className = 'passage-outline';
+        span2.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+(function(){
+  var passage = document.getElementById('passage-main');
+  if (!passage) return;
+  passage.addEventListener('mouseup', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range);
+  });
+  passage.addEventListener('touchend', function() {
+    var sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    if (!passage.contains(range.commonAncestorContainer)) return;
+    setTimeout(function(){ applyPassageAnnotation(range); }, 100);
+  });
+})();
+
+
+</script>
+</body>
+</html>
