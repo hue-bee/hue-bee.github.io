@@ -1,1 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Session 1A — Strategy, Section Order, and Back-Half Stamina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;--surface:#fff;--ink:#1f1f1f;--ink-2:#4a4a4a;--ink-3:#767676;--line:rgba(201,212,228,.52);
+  --z1:#262626;--z1-soft:rgba(38,38,38,.10);--z2:#4d4d4d;--z2-soft:rgba(77,77,77,.10);
+  --z3:#6a6a6a;--z3-soft:rgba(106,106,106,.12);--z4:#858585;--z4-soft:rgba(133,133,133,.12);
+  --z5:#5c5c5c;--z5-soft:rgba(92,92,92,.10);--ela:#3e3e3e;--ela-soft:rgba(62,62,62,.10);
+  --blue:#2563EB;--blue-soft:#DCEBFB;--amber:#B45309;--amber-soft:#FBEBCF;--green:#15803D;--green-soft:#E8F7EC;
+  --font-display:'Baloo 2','Nunito',sans-serif;--font-body:'Nunito',sans-serif;--font-math:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}html,body{background:var(--bg);margin:0}body{font-family:var(--font-body);color:var(--ink);overflow:hidden;height:100vh;width:100vw;font-weight:400}.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:all}.slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1rem,3vw,2.6rem)}.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);padding:8px 20px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.32),0 2px 8px rgba(201,212,228,.18)}.nav-btn{width:36px;height:36px;border:none;background:#EDF2F9;color:var(--ink);border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}.nav-btn:hover{background:#DCE7F7}.slide-dots{display:flex;gap:5px;max-width:330px;flex-wrap:wrap;justify-content:center}.slide-dots .dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.18);cursor:pointer;transition:background .3s,transform .3s}.slide-dots .dot.active{background:var(--ink);transform:scale(1.35)}.slide-counter{font-size:.75rem;color:var(--ink-3);min-width:42px;text-align:center;font-weight:600}.reveal{opacity:0;transform:translateY(16px)}
+h1.deck-title{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;margin:0}h2.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-.01em;margin:0 0 .8rem;color:var(--ink)}h2.slide-title .tint{color:var(--zc)}.kicker{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--zc,var(--ink-3));margin-bottom:.3rem}.prose{font-size:.94rem;color:var(--ink-2);line-height:1.58}.math{font-family:var(--font-math);font-weight:750;color:var(--ink);font-variant-numeric:lining-nums tabular-nums}.math-lg{font-size:1.28rem}.small{font-size:.79rem;color:var(--ink-3);line-height:1.45}.tiny{font-size:.69rem;color:var(--ink-3);line-height:1.35}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}.card,.prob-card,.diagram-wrap,.passage,.data-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 24px rgba(201,212,228,.20),0 2px 6px rgba(201,212,228,.14)}.card,.data-card{padding:.8rem .95rem}.prob-card{padding:.78rem .95rem}.diagram-wrap{padding:.65rem;display:flex;align-items:center;justify-content:center}.passage{padding:.85rem 1rem}.passage p{font-size:.82rem;line-height:1.5;color:var(--ink-2);margin:.25rem 0}.prob-head{display:flex;align-items:center;gap:.45rem;margin-bottom:.38rem}.prob-num{font-family:var(--font-display);font-weight:600;font-size:.83rem;color:var(--ink);background:var(--zs,#EDF2F9);border-radius:8px;padding:2px 9px}.lvl-badge,.pill{font-size:.61rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:20px}.lvl-1{background:#E8EDF5;color:#3D4C63}.lvl-2{background:#DCEBFB;color:#1D4ED8}.lvl-3{background:#FBEBCF;color:#B45309}.lvl-4{background:#E2E2E2;color:#3D3D3D}.prompt-card{border:1px solid var(--line);background:#EFEFEF;border-radius:12px;padding:.68rem .9rem}.prompt-title{font-weight:750;font-size:.83rem;color:#2E2E2E}.prompt-body{font-size:.86rem;color:var(--ink-2);margin-top:.2rem;line-height:1.52}.trap-card{border:1px solid var(--line);background:#F6F6F6;border-radius:12px;padding:.68rem .9rem}.trap-title{font-weight:750;font-size:.83rem;color:#3D3D3D}.trap-body{font-size:.83rem;color:var(--ink-2);margin-top:.2rem;line-height:1.5}.win-card{border:1px solid var(--line);border-left:5px solid var(--green);background:#F4FBF5;border-radius:12px;padding:.68rem .9rem}.win-title{font-weight:750;font-size:.83rem;color:var(--green)}.formula-box{background:var(--zs,#EDF2F9);border:1px solid color-mix(in srgb,var(--zc,var(--ink-3)) 35%,white);border-radius:12px;padding:.52rem .8rem;text-align:center}.mc-options{display:grid;grid-template-columns:1fr 1fr;gap:.32rem;margin-top:.42rem}.mc-option{display:flex;align-items:flex-start;gap:.45rem;padding:.36rem .55rem;border-radius:9px;border:1px solid var(--line);background:#FBFCFE;cursor:pointer;font-size:.79rem;line-height:1.38;color:var(--ink-2);transition:background .15s,border-color .15s;user-select:none}.mc-option:hover{background:#F1F6FD;border-color:#B9C6D9}.mc-option.selected{background:var(--zs,#EDF2F9);border-color:var(--zc,var(--ink));font-weight:700;color:var(--ink)}.opt-letter{font-family:var(--font-math);font-weight:800;min-width:1rem;color:var(--zc,var(--ink-3))}.check-options{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin-top:.4rem}.work-box{border:1px dashed rgba(185,198,217,.8);border-radius:10px;background:#F9FBFE;overflow:hidden;margin-top:.42rem}.work-box textarea{width:100%;min-height:3.4rem;border:none;background:transparent;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink-2);font-family:var(--font-math);line-height:1.5;outline:none;}.work-box textarea::placeholder{color:#9AA9BF}.work-box textarea:focus{background:#F1F6FD}.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.72rem}.zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:.65rem;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--ink-3);white-space:nowrap}.zone-chip .zdot{width:7px;height:7px;border-radius:50%;background:var(--dc,#C9D4E4)}.zone-chip.on{color:#fff;background:var(--dc);border-color:var(--dc)}.zone-chip.on .zdot{background:rgba(255,255,255,.85)}.zone-chip .zt{opacity:.75;font-weight:400}.tl-row{display:grid;grid-template-columns:92px 14px 1fr;gap:0 .75rem;align-items:stretch}.tl-time{font-family:var(--font-math);font-weight:750;font-size:.82rem;color:var(--rc);text-align:right;padding-top:.62rem}.tl-rail{position:relative;display:flex;justify-content:center}.tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line)}.tl-dot{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:var(--rc);border:3px solid var(--bg);margin-top:.62rem;box-shadow:0 0 0 2px color-mix(in srgb,var(--rc) 45%,white)}.tl-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.48rem .8rem;margin-bottom:.46rem;box-shadow:0 8px 20px rgba(201,212,228,.18)}.tl-h{font-weight:700;font-size:.88rem}.tl-b{font-size:.78rem;color:var(--ink-2);margin-top:.1rem;line-height:1.4}.metric{font-family:var(--font-display);font-size:1.7rem;font-weight:700;color:var(--zc,var(--ink))}.metric-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:700}.timer-panel{display:flex;gap:.6rem;align-items:center;justify-content:center;margin-top:.7rem}.timer{font-family:var(--font-math);font-size:2rem;font-weight:800;font-variant-numeric:tabular-nums;min-width:118px;text-align:center}.timer-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:.48rem .75rem;font:700 .76rem var(--font-body);cursor:pointer;color:var(--ink)}.timer-btn:hover{background:#EDF2F9}.step-list{display:grid;gap:.46rem}.step{display:grid;grid-template-columns:30px 1fr;gap:.6rem;align-items:start}.step-n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--zc,#262626);color:#fff;font-weight:800;font-size:.8rem}.step-b{font-size:.86rem;line-height:1.46;color:var(--ink-2);padding-top:.18rem}.reset-track{display:grid;grid-template-columns:repeat(6,1fr);gap:.32rem}.reset-node{text-align:center;background:#fff;border:1px solid var(--line);border-radius:11px;padding:.5rem .3rem;font-size:.72rem;color:var(--ink-2);font-weight:700}.reset-node b{display:block;font-size:1rem;color:var(--zc);margin-bottom:.12rem}.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}.hero-mark{width:155px;height:155px;margin:0 auto .5rem;animation:float 4s ease-in-out infinite}.progress-curve{width:100%;height:190px}.section-choice{cursor:pointer;transition:transform .18s,box-shadow .18s}.section-choice:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(140,160,190,.24)}.section-choice.chosen{outline:3px solid var(--blue);background:#F8FBFF}.rule{height:1px;background:var(--line);margin:.65rem 0}.no-answer{font-size:.67rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;font-weight:700}.answer-line{display:inline-block;min-width:88px;border-bottom:2px solid #9AA9BF;height:1em;vertical-align:baseline}@keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}@media(max-width:760px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.slide>.content{max-height:90vh;overflow:auto;padding-bottom:90px}.nav-controls{bottom:8px;max-width:95vw}.slide-dots{display:none}.passage p{font-size:.78rem}.reset-track{grid-template-columns:repeat(3,1fr)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 
+<!-- Passage annotation styles -->
+<style id="passage-annotation-styles">
+
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+  
+.annot-color-swatch { padding:0; flex-shrink:0; }
+.annot-btn:focus-visible, .annot-color-swatch:focus-visible, .clear-annotations-btn:focus-visible, .passage-note:focus-visible { outline:2px solid #2563eb; outline-offset:3px; }
+.passage-note:focus .note-tooltip, .passage-note.note-open .note-tooltip { display:block; }
+.passage-note, .note-input-wrapper { user-select:none; }
+.passage-highlight, .passage-outline { -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+.note-input-wrapper { display:inline-flex; align-items:center; gap:4px; background:white; border:1.5px solid #374151; border-radius:8px; padding:2px 6px; margin-left:4px; box-shadow:0 2px 8px rgba(0,0,0,.15); vertical-align:middle; font-style:normal; }
+.note-input-wrapper input { border:none; outline:none; font-size:.72rem; width:130px; color:#374151; background:transparent; font-family:inherit; }
+.note-input-wrapper button { border:none; background:#374151; color:white; border-radius:4px; width:22px; height:22px; font-size:.7rem; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; flex-shrink:0; }
+.note-input-wrapper button:last-child { background:#e5e7eb; color:#374151; }
+@media print { .annotation-toolbar, .note-input-wrapper { display:none !important; } .passage-highlight { -webkit-print-color-adjust:exact; print-color-adjust:exact; } }
+
+</style>
+<style id="question-countdown-styles">
+.question-countdown{margin-left:auto;flex-shrink:0;min-width:3.6rem;padding:2px 9px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:750 .83rem var(--font-math);font-variant-numeric:tabular-nums;line-height:1.5;text-align:center;cursor:pointer;user-select:none;touch-action:manipulation}
+.question-countdown:hover{background:#EDF2F9}
+.question-countdown:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.question-countdown[aria-pressed="true"]{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.question-countdown[data-expired="true"]{border-color:var(--amber);color:var(--amber);background:var(--amber-soft)}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<div class="slide active" data-slide="1" style="--zc:#2563EB"><canvas class="particle-canvas"></canvas><div class="content" style="text-align:center">
+  <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:6px 16px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:.5rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Session 1A · Final Seven Sessions</div>
+  <svg class="hero-mark reveal" viewBox="0 0 180 180" role="img" aria-label="Clock and compass symbol for pacing strategy"><circle cx="90" cy="90" r="70" fill="#fff" stroke="#C9D4E4" stroke-width="4"/><circle cx="90" cy="90" r="54" fill="#EDF5FF" stroke="#2563EB" stroke-width="3"/><path d="M90 40v50l34 18" fill="none" stroke="#262626" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M90 18l10 18H80z" fill="#2563EB"/><circle cx="90" cy="90" r="7" fill="#2563EB"/><path d="M39 123c13 21 33 34 51 37 23-4 43-17 54-38" fill="none" stroke="#B45309" stroke-width="5" stroke-linecap="round"/></svg>
+  <h1 class="deck-title reveal" style="font-size:clamp(2rem,5vw,3.55rem)">Strategy, Section Order,<br><span style="color:var(--blue)">and Back-Half Stamina</span></h1>
+  <p class="reveal" style="font-size:.86rem;color:var(--ink-3);letter-spacing:.13em;text-transform:uppercase;font-weight:600;margin:.45rem 0 1rem">Digital SHSAT · November 2026 · One-way decisions under fatigue</p>
+  <div class="reveal" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap"><span class="pill lvl-1">Choose the order</span><span class="pill lvl-2">Build the clock plan</span><span class="pill lvl-3">Survive the midpoint</span><span class="pill lvl-4">Commit without return</span></div>
+</div></div>
+
+<div class="slide" data-slide="2" style="--zc:#17233B"><div class="content"><div class="kicker reveal">Session Roadmap</div><h2 class="slide-title reveal">Today's 60-Minute Watch List</h2><div class="reveal">
+  <div class="tl-row" style="--rc:var(--z1)"><div class="tl-time">0:00–0:05</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Admin check</div><div class="tl-b">Confirm registration, November 18 school-day ticket, and a quiet morning window for the next full practice.</div></div></div>
+  <div class="tl-row" style="--rc:var(--blue)"><div class="tl-time">0:05–0:12</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Section order + clock plan</div><div class="tl-b">Put the fatigue-sensitive section first; lock one checkpoint for each section.</div></div></div>
+  <div class="tl-row" style="--rc:var(--ela)"><div class="tl-time">0:12–0:22</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">ELA pre-load · locked nonfiction block</div><div class="tl-b">One original passage, careful first read, purpose sentence before questions, then commit.</div></div></div>
+  <div class="tl-row" style="--rc:var(--amber)"><div class="tl-time">0:22–0:52</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">20-item back-half stamina set</div><div class="tl-b">Harder mixed math in order. The clock is intentionally too tight; the finish line is clean decisions, not question 20.</div></div></div>
+  <div class="tl-row" style="--rc:var(--green)"><div class="tl-time">0:52–1:00</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-card"><div class="tl-h">Debrief + adaptive mindset</div><div class="tl-b">Locate the first accuracy break; classify it as concept, careless reading, or time pressure.</div></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="3" style="--zc:var(--blue);--zs:var(--blue-soft)"><div class="content"><div class="kicker reveal">Data Before Opinion</div><h2 class="slide-title reveal">Where Does Performance <span class="tint">Actually Bend?</span></h2><div class="grid-2">
+  <div class="card reveal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem"><div><div class="metric">92%</div><div class="metric-label">Sept. math Q1–25</div></div><div><div class="metric" style="color:var(--amber)">72%</div><div class="metric-label">Sept. math Q26–50</div></div></div><div class="rule"></div><div class="prose">A 20-point back-half slide is a fatigue signal until the error log proves a single content cluster caused it.</div></div>
+  <div class="card reveal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem"><div><div class="metric">47/50</div><div class="metric-label">Oct. 10 math</div></div><div><div class="metric" style="color:var(--amber)">5</div><div class="metric-label">ELA misses in sets 3 & 7</div></div></div><div class="rule"></div><div class="prose">The newer result is stronger, but the locations of misses still matter: Math Q27 and Q32 sit just after the midpoint.</div></div>
+</div><div class="prompt-card reveal" style="margin-top:.85rem"><div class="prompt-title">Interrogate the pattern</div><div class="prompt-body">If a student knows the content but accuracy falls after a predictable point, which intervention changes the outcome more: another formula, or a checkpoint plus reset? What evidence would change your answer?</div></div></div></div>
+
+<div class="slide" data-slide="4" style="--zc:var(--blue);--zs:var(--blue-soft)"><div class="content"><div class="kicker reveal">Decision Lab</div><h2 class="slide-title reveal">Which Section Deserves <span class="tint">Fresh Attention?</span></h2><div class="grid-2">
+  <div class="card reveal section-choice" onclick="chooseSection(this,'ela')"><div class="prob-head"><span class="pill lvl-2">ELA first</span></div><div class="math math-lg">Choose this if…</div><div class="prose">The first three passage sets still trail the later sets by more than 15 points, while the math-half gap has mostly closed.</div><div class="small" style="margin-top:.45rem">Freshness protects the careful passage-1 routine.</div></div>
+  <div class="card reveal section-choice" onclick="chooseSection(this,'math')"><div class="prob-head"><span class="pill lvl-3">Math first</span></div><div class="math math-lg">Choose this if…</div><div class="prose">The Q26–50 slide persists regardless of prior section order, or late-item pace rises above roughly 2 minutes.</div><div class="small" style="margin-top:.45rem">Freshness protects calculation precision and estimation.</div></div>
+</div><div class="trap-card reveal" style="margin-top:.85rem"><div class="trap-title">The wrong reason</div><div class="trap-body">“I like this section better” is not evidence. The order should protect the section most damaged by fatigue, not the section that feels friendliest.</div></div></div></div>
+
+<div class="slide" data-slide="5" style="--zc:var(--z2);--zs:var(--z2-soft)"><div class="content"><div class="kicker reveal">Clock Architecture</div><h2 class="slide-title reveal">A Checkpoint Is a <span class="tint">Diagnostic, Not a Deadline</span></h2><div class="grid-2">
+  <div class="diagram-wrap reveal"><svg viewBox="0 0 460 190" width="100%" height="190" role="img" aria-label="ELA time map"><text x="20" y="28" font-size="18" font-weight="800" fill="#1f1f1f">ELA · about 90 minutes</text><line x1="40" y1="105" x2="420" y2="105" stroke="#C9D4E4" stroke-width="8" stroke-linecap="round"/><line x1="40" y1="105" x2="250" y2="105" stroke="#3e3e3e" stroke-width="8" stroke-linecap="round"/><circle cx="40" cy="105" r="10" fill="#3e3e3e"/><circle cx="250" cy="105" r="12" fill="#2563EB"/><circle cx="420" cy="105" r="10" fill="#858585"/><text x="40" text-anchor="middle" y="145" font-size="13" fill="#4a4a4a">Start</text><text x="250" text-anchor="middle" y="145" font-size="13" font-weight="800" fill="#2563EB">After block 4</text><text x="250" text-anchor="middle" y="164" font-size="13" fill="#4a4a4a">about 50 min used</text><text x="420" text-anchor="middle" y="145" font-size="13" fill="#4a4a4a">Commit</text><path d="M250 72v-28" stroke="#2563EB" stroke-width="3"/><path d="M243 51l7-12 7 12z" fill="#2563EB"/></svg></div>
+  <div class="diagram-wrap reveal"><svg viewBox="0 0 460 190" width="100%" height="190" role="img" aria-label="Math time map"><text x="20" y="28" font-size="18" font-weight="800" fill="#1f1f1f">Math · about 90 minutes</text><line x1="40" y1="105" x2="420" y2="105" stroke="#C9D4E4" stroke-width="8" stroke-linecap="round"/><line x1="40" y1="105" x2="230" y2="105" stroke="#B45309" stroke-width="8" stroke-linecap="round"/><circle cx="40" cy="105" r="10" fill="#B45309"/><circle cx="230" cy="105" r="12" fill="#2563EB"/><circle cx="420" cy="105" r="10" fill="#858585"/><text x="40" text-anchor="middle" y="145" font-size="13" fill="#4a4a4a">Q1</text><text x="230" text-anchor="middle" y="145" font-size="13" font-weight="800" fill="#2563EB">Q25 reset</text><text x="230" text-anchor="middle" y="164" font-size="13" fill="#4a4a4a">45 min or less</text><text x="420" text-anchor="middle" y="145" font-size="13" fill="#4a4a4a">Q50</text><path d="M230 72v-28" stroke="#2563EB" stroke-width="3"/><path d="M223 51l7-12 7 12z" fill="#2563EB"/></svg></div>
+</div><div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Read the clock backward</div><div class="prompt-body">At Math Q25, the screen shows 39 minutes used. Are you behind, on pace, or ahead? What dangerous behavior might “ahead” tempt you to do?</div></div></div></div>
+
+<div class="slide" data-slide="6" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content"><div class="kicker reveal">The Index Card</div><h2 class="slide-title reveal">Turn Strategy Into <span class="tint">Six Executable Lines</span></h2><div class="card reveal" style="max-width:780px;margin:auto;background:#FFFDF6;border-color:#E6D9B9;transform:rotate(-.4deg)"><div class="reset-track">
+  <div class="reset-node"><b>1</b>Section order</div><div class="reset-node"><b>2</b>ELA block 4: 50</div><div class="reset-node"><b>3</b>Math Q25: 45</div><div class="reset-node"><b>4</b>2.5-min bail-out</div><div class="reset-node"><b>5</b>Estimate, then commit</div><div class="reset-node"><b>6</b>One breath, next stem</div>
+</div><div class="work-box" style="margin-top:.7rem"><textarea aria-label="Write your section order and reason" placeholder="Write: ______ first because the data show ______________________________." spellcheck="false"></textarea></div></div><div class="small reveal" style="text-align:center;margin-top:.7rem">The card stores decisions made while calm so fatigue cannot renegotiate them.</div></div></div>
+
+<div class="slide" data-slide="7" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">ELA Pre-Load · 10 Minutes</div><h2 class="slide-title reveal">Warm the Brain Without <span class="tint">Burning the Clock</span></h2><div class="grid-3">
+ <div class="card reveal"><div class="metric">1</div><div class="math">Paragraph jobs</div><div class="small">Write one verb per paragraph: introduces, contrasts, explains, qualifies.</div></div>
+ <div class="card reveal"><div class="metric">2</div><div class="math">Purpose sentence</div><div class="small">Before opening questions: “The author explains ___ in order to ___.”</div></div>
+ <div class="card reveal"><div class="metric">3</div><div class="math">Locked review</div><div class="small">Use the last 60 seconds to revisit only the least-certain choice.</div></div>
+</div><div class="timer-panel reveal"><div class="timer" id="timer10">10:00</div><button class="timer-btn" onclick="startTimer('timer10',600)">Start</button><button class="timer-btn" onclick="resetTimer('timer10',600)">Reset</button></div></div></div>
+
+<div class="slide" data-slide="8" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Original Nonfiction Passage · Part 1</div><h2 class="slide-title reveal">When a City Listens to Its <span class="tint">Own Heat</span></h2><div class="passage reveal">
+<p><b>[1]</b> On a July afternoon, two nearby blocks can feel like different climates. One may be shaded by mature trees; the other may be bordered by dark roofs and wide asphalt lots. Citywide weather stations rarely capture such small differences because their sensors are spaced far apart. To reveal heat at street level, several cities have begun inviting residents to collect temperature readings themselves.</p>
+<p><b>[2]</b> The method looks simple: volunteers mount calibrated sensors on bicycles or cars and travel assigned routes at the same times of day. Yet coordination matters. If one group measures at noon and another after a thunderstorm, the readings cannot be compared fairly. Organizers therefore standardize routes, times, sensor height, and travel speed. They also repeat measurements, preventing a single idling bus or patch of shade from distorting the map.</p>
+<p><b>[3]</b> Community mapping produces more than a colorful picture. A city may discover that two neighborhoods with similar air temperatures have very different exposure patterns. In one, residents can reach shaded parks; in another, people waiting for buses stand beside six lanes of sun-heated pavement. Such details can guide choices about tree planting, reflective roofs, cooling centers, and bus shelters.</p>
+</div><div class="work-box reveal"><textarea aria-label="Paragraph jobs and purpose" placeholder="P1 job: ____  P2 job: ____  P3 job: ____  Purpose: The author explains ____ in order to ____." spellcheck="false"></textarea></div></div></div>
+
+<div class="slide" data-slide="9" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Original Nonfiction Passage · Part 2</div><h2 class="slide-title reveal">Data Need Both <span class="tint">Precision and Trust</span></h2><div class="passage reveal">
+<p><b>[4]</b> The approach has limits. Volunteers may unintentionally skip streets, and handheld sensors cannot replace long-term scientific stations. More importantly, a heat map alone cannot decide which project should receive funding. It can, however, expose a question that an average temperature hides: who experiences the hottest conditions, for how long, and with what protection nearby?</p>
+<p><b>[5]</b> The strongest projects treat residents not merely as data collectors but as interpreters. After routes are completed, participants examine the map alongside transit schedules, tree inventories, and local knowledge. A red patch on a map might mark a warehouse district with few pedestrians, while a slightly cooler patch might surround a crowded playground. Numbers identify patterns; people explain their significance.</p>
+<p><b>[6]</b> That partnership changes how evidence moves through a city. Instead of arriving as a report produced elsewhere, the findings begin with observations residents helped gather and test. The result is not automatically better policy. It is a clearer conversation about where protection is needed—and why.</p>
+</div><div class="prompt-card reveal"><div class="prompt-title">Before the questions</div><div class="prompt-body">Which sentence best states the passage’s central purpose? Say it without using any answer-choice language.</div></div></div></div>
+
+<div class="slide" data-slide="10" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Locked Block · Questions 1–2</div><h2 class="slide-title reveal">Content First, Then <span class="tint">Function</span></h2><div class="grid-2">
+ <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">ELA 1</span><span class="lvl-badge lvl-1">Level 1</span><button type="button" class="question-countdown" data-duration="480" data-timer-label="Reading passage questions 1 through 4" aria-label="Reading passage questions 1 through 4 timer, 8:00. Click to begin." aria-pressed="false">8:00</button></div><div class="prose">Which choice best states the passage’s central idea?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>Street sensors should replace weather stations.</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>Resident-collected heat data can reveal local patterns and improve public discussion.</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>Tree planting is the only reliable response to urban heat.</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>Volunteers usually collect more precise data than scientists.</div></div></div>
+ <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">ELA 2</span><span class="lvl-badge lvl-2">Level 2</span></div><div class="prose">Why does paragraph 2 describe standardized routes, times, height, and speed?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>To show why the project requires comparable measurements</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>To criticize residents who travel too slowly</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>To prove maps are more useful than stations</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>To list the costs of organizing volunteers</div></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="11" style="--zc:var(--ela);--zs:var(--ela-soft)"><div class="content"><div class="zone-strip reveal" data-zone="2"></div><div class="kicker reveal">Locked Block · Questions 3–4</div><h2 class="slide-title reveal">Name the Detail’s <span class="tint">Job</span></h2><div class="grid-2">
+ <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">ELA 3</span><span class="lvl-badge lvl-3">Level 3</span></div><div class="prose">The warehouse district and crowded playground in paragraph 5 mainly serve to—</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>show that the hottest place always deserves funding</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>illustrate why local context changes the meaning of a temperature pattern</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>argue that playgrounds should be moved indoors</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>contrast volunteers with professional scientists</div></div></div>
+ <div class="prob-card reveal"><div class="prob-head"><span class="prob-num">ELA 4</span><span class="lvl-badge lvl-4">Level 4</span></div><div class="prose">How does paragraph 4 refine the author’s claim?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>It concedes limits while defining what the maps can still reveal.</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>It abandons mapping in favor of long-term stations.</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>It introduces a new claim about thunderstorms.</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>It proves funding choices should be automatic.</div></div></div>
+</div><div class="no-answer reveal" style="text-align:center;margin-top:.65rem">Commit the block. No return after this point.</div></div></div>
+
+<div class="slide" data-slide="12" style="--zc:var(--amber);--zs:var(--amber-soft)"><canvas class="particle-canvas"></canvas><div class="content" style="text-align:center"><svg class="hero-mark reveal" viewBox="0 0 180 180" role="img" aria-label="Midpoint reset path"><path d="M25 90h48" stroke="#858585" stroke-width="10" stroke-linecap="round"/><path d="M107 90h48" stroke="#858585" stroke-width="10" stroke-linecap="round"/><circle cx="90" cy="90" r="31" fill="#fff" stroke="#B45309" stroke-width="5"/><path d="M90 68v23l16 10" fill="none" stroke="#262626" stroke-width="6" stroke-linecap="round"/><path d="M77 29c-22 7-40 24-48 46" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/><path d="M28 62l-3 18 17-7" fill="#2563EB"/></svg><div class="kicker reveal">Immediate Transition</div><h2 class="slide-title reveal" style="font-size:clamp(2rem,4vw,3rem)">No Score Discussion. <span class="tint">Reset and Move.</span></h2><p class="prose reveal" style="max-width:680px;margin:auto">The pre-load has done its job: attention is no longer fresh. That is exactly the state this set is designed to test.</p></div></div>
+
+<div class="slide" data-slide="13" style="--zc:var(--amber);--zs:var(--amber-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Math Stamina Protocol · 30 Minutes</div><h2 class="slide-title reveal">The Set Is Longer Than <span class="tint">the Clock</span></h2><div class="grid-3">
+ <div class="card reveal"><div class="metric">20</div><div class="metric-label">Questions provided</div><div class="small">Move in order. Do not hunt for favorites.</div></div><div class="card reveal"><div class="metric">2:30</div><div class="metric-label">Hard stop per item</div><div class="small">Choose the best remaining path, estimate, commit.</div></div><div class="card reveal"><div class="metric">Q10</div><div class="metric-label">Midpoint reset</div><div class="small">This stands in for Q25 on the full section.</div></div>
+</div><div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Success criterion</div><div class="prompt-body">Finishing all 20 is not the target. The target is identifying the first item where process quality drops—and preventing one hard item from damaging the next three.</div></div><div class="timer-panel reveal"><div class="timer" id="timer30">30:00</div><button class="timer-btn" onclick="startTimer('timer30',1800)">Start</button><button class="timer-btn" onclick="resetTimer('timer30',1800)">Reset</button></div></div></div>
+
+<!-- Math 1-2 -->
+<div class="slide" data-slide="14" style="--zc:var(--z1);--zs:var(--z1-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 1–2</div><h2 class="slide-title reveal">Establish a <span class="tint">Clean Rhythm</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">1</span><span class="lvl-badge lvl-1">Level 1</span><button type="button" class="question-countdown" data-duration="60" data-timer-label="Question 1" aria-label="Question 1 timer, 1:00. Click to begin." aria-pressed="false">1:00</button></div><div class="prose">A school club collected 35% of its 240-book goal. How many books did it collect?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>72</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>84</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>96</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>105</div></div><div class="work-box"><textarea placeholder="Estimate first: 1/3 of 240 is about…" spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">2</span><span class="lvl-badge lvl-1">Level 1</span><button type="button" class="question-countdown" data-duration="60" data-timer-label="Question 2" aria-label="Question 2 timer, 1:00. Click to begin." aria-pressed="false">1:00</button></div><div class="prose">The ratio of fiction to nonfiction books is 5:3. If there are 192 books, how many are fiction?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>72</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>96</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>120</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>128</div></div><div class="work-box"><textarea placeholder="Total parts = ____; one part = ____." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="15" style="--zc:var(--z2);--zs:var(--z2-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 3–4</div><h2 class="slide-title reveal">Read the <span class="tint">Representation</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">3</span><span class="lvl-badge lvl-2">Level 2</span><button type="button" class="question-countdown" data-duration="100" data-timer-label="Question 3" aria-label="Question 3 timer, 1:40. Click to begin." aria-pressed="false">1:40</button></div><div class="prose">A line passes through (−2, 5) and (4, −7). What is its slope?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>−2</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>−1/2</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>1/2</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>2</div></div><div class="work-box"><textarea placeholder="Write Δy over Δx with matching point order." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">4</span><span class="lvl-badge lvl-2">Level 2</span><button type="button" class="question-countdown" data-duration="100" data-timer-label="Question 4" aria-label="Question 4 timer, 1:40. Click to begin." aria-pressed="false">1:40</button></div><div class="prose">The table shows four quiz scores. If the mean is 84, what is k?</div><div class="diagram-wrap" style="box-shadow:none;margin:.35rem 0"><table style="border-collapse:collapse;font-size:.82rem;text-align:center"><tr><th style="padding:5px 12px;border:1px solid #C9D4E4">Quiz</th><th style="padding:5px 12px;border:1px solid #C9D4E4">1</th><th style="padding:5px 12px;border:1px solid #C9D4E4">2</th><th style="padding:5px 12px;border:1px solid #C9D4E4">3</th><th style="padding:5px 12px;border:1px solid #C9D4E4">4</th></tr><tr><td style="padding:5px 12px;border:1px solid #C9D4E4">Score</td><td style="padding:5px 12px;border:1px solid #C9D4E4">78</td><td style="padding:5px 12px;border:1px solid #C9D4E4">86</td><td style="padding:5px 12px;border:1px solid #C9D4E4">91</td><td style="padding:5px 12px;border:1px solid #C9D4E4">k</td></tr></table></div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>79</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>81</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>83</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>85</div></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="16" style="--zc:var(--z2);--zs:var(--z2-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 5–6</div><h2 class="slide-title reveal">Protect the <span class="tint">Base and the Sign</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">5</span><span class="lvl-badge lvl-2">Level 2</span><button type="button" class="question-countdown" data-duration="100" data-timer-label="Question 5" aria-label="Question 5 timer, 1:40. Click to begin." aria-pressed="false">1:40</button></div><div class="prose">Solve: <span class="math">4(2x − 3) = 5x + 9</span></div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>5</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>7</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>9</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>11</div></div><div class="work-box"><textarea placeholder="Distribute before moving terms." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">6</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 6" aria-label="Question 6 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div class="prose">A price increases 20% and then decreases 15%. Compared with the original price, the final price is—</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>2% greater</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>2% less</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>5% greater</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>5% less</div></div><div class="work-box"><textarea placeholder="Use multipliers: original × ____ × ____." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="17" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 7–8</div><h2 class="slide-title reveal">Diagram the <span class="tint">Given, Not the Habit</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">7</span><span class="lvl-badge lvl-2">Level 2</span><button type="button" class="question-countdown" data-duration="100" data-timer-label="Question 7" aria-label="Question 7 timer, 1:40. Click to begin." aria-pressed="false">1:40</button></div><div style="display:grid;grid-template-columns:1fr 120px;gap:.5rem;align-items:center"><div><div class="prose">A cylinder has diameter 6 cm and height 8 cm. What is its volume in cubic centimeters?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>24π</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>48π</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>72π</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>288π</div></div></div><svg viewBox="0 0 130 150" width="120" height="145" role="img" aria-label="Cylinder diameter 6 and height 8" style="display:block;max-width:100%;flex-shrink:0">
+<path d="M20 32V122A38 13 0 0 0 96 122V32Z" fill="#EDF5FF" stroke="#4d4d4d" stroke-width="2"/>
+<path d="M20 122A38 13 0 0 1 96 122" fill="none" stroke="#4d4d4d" stroke-width="1.5" stroke-dasharray="4 3"/>
+<ellipse cx="58" cy="32" rx="38" ry="13" fill="#EDF5FF" stroke="#4d4d4d" stroke-width="2"/>
+<path d="M20 29V13M96 29V13M20 16H96" fill="none" stroke="#B45309" stroke-width="1.5"/>
+<text x="58" y="10" text-anchor="middle" font-size="12">6</text>
+<path d="M102 32H112M102 122H112M107 32V122" fill="none" stroke="#2563EB" stroke-width="1.5"/>
+<text x="119" y="81" text-anchor="middle" font-size="12">8</text></svg></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">8</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 8" aria-label="Question 8 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div class="prose">A bag has 4 red, 3 blue, and 3 green tiles. Two tiles are drawn without replacement. What is the probability both are red?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>2/15</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>4/25</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>1/5</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>4/15</div></div><div class="work-box"><textarea placeholder="Second draw: what changed in numerator and denominator?" spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="18" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 9–10</div><h2 class="slide-title reveal">Finish the Item. Then <span class="tint">Reset.</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">9</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 9" aria-label="Question 9 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div class="prose">A data set is summarized below. What is its median?</div><table style="width:100%;border-collapse:collapse;text-align:center;font-size:.8rem;margin:.35rem 0"><tr><th style="border:1px solid #C9D4E4;padding:4px">Value</th><th style="border:1px solid #C9D4E4;padding:4px">12</th><th style="border:1px solid #C9D4E4;padding:4px">15</th><th style="border:1px solid #C9D4E4;padding:4px">18</th><th style="border:1px solid #C9D4E4;padding:4px">21</th></tr><tr><td style="border:1px solid #C9D4E4;padding:4px">Frequency</td><td style="border:1px solid #C9D4E4;padding:4px">2</td><td style="border:1px solid #C9D4E4;padding:4px">3</td><td style="border:1px solid #C9D4E4;padding:4px">4</td><td style="border:1px solid #C9D4E4;padding:4px">1</td></tr></table><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>15</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>16.5</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>18</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>19.5</div></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">10</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 10" aria-label="Question 10 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div class="prose">A cyclist travels 7.5 miles in 30 minutes at a constant rate. At that rate, how many feet does the cyclist travel in 12 minutes? Use 1 mile = 5,280 feet.</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>7,920</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>11,880</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>15,840</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>19,800</div></div><div class="work-box"><textarea placeholder="Write units in every factor." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="19" style="--zc:var(--blue);--zs:var(--blue-soft)"><div class="content"><div class="kicker reveal">Midpoint Reset · Q10 Stands In for Q25</div><h2 class="slide-title reveal">Six Moves. <span class="tint">Ten Seconds.</span></h2><div class="reset-track reveal"><div class="reset-node"><b>1</b>Answer</div><div class="reset-node"><b>2</b>One breath</div><div class="reset-node"><b>3</b>Read stem twice</div><div class="reset-node"><b>4</b>Underline ask</div><div class="reset-node"><b>5</b>Solve + estimate</div><div class="reset-node"><b>6</b>Commit</div></div><div class="grid-2" style="margin-top:.8rem"><div class="prompt-card reveal"><div class="prompt-title">Why not review Q1–10?</div><div class="prompt-body">There is no return. The reset must protect the next item, not conduct an autopsy on a locked one.</div></div><div class="win-card reveal"><div class="win-title">The recovery skill</div><div class="prose" style="font-size:.84rem;margin-top:.15rem">The next question has no memory. Your nervous system does. The breath separates them.</div></div></div></div></div>
+
+<div class="slide" data-slide="20" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 11–12</div><h2 class="slide-title reveal">Restart With the <span class="tint">Question Asked</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">11</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 11" aria-label="Question 11 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div style="display:grid;grid-template-columns:1fr 155px;gap:.4rem;align-items:center"><div><div class="prose">The trapezoid has area 96 square units. What is its height h?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>6</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>8</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>10</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>12</div></div></div><svg viewBox="0 0 180 130" width="155" height="120" role="img" aria-label="Trapezoid bases 10 and 14, height h" style="display:block;max-width:100%;flex-shrink:0">
+<polygon points="20,100 160,100 140,35 40,35" fill="#EDF5FF" stroke="#4d4d4d" stroke-width="3" stroke-linejoin="round"/>
+<text x="90" y="25" text-anchor="middle" font-size="14">10</text><text x="90" y="120" text-anchor="middle" font-size="14">14</text>
+<line x1="50" y1="35" x2="50" y2="100" stroke="#B45309" stroke-width="2" stroke-dasharray="5 4"/>
+<path d="M50 91h9v9" fill="none" stroke="#B45309" stroke-width="2"/><text x="64" y="72" text-anchor="middle" font-size="14">h</text></svg></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">12</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 12" aria-label="Question 12 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div class="prose">At a performance, student tickets cost $8 and adult tickets cost $13. A total of 74 tickets brought in $737. How many adult tickets were sold?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>24</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>27</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>29</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>31</div></div><div class="work-box"><textarea placeholder="Let a = adults; students = 74 − a." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="21" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 13–14</div><h2 class="slide-title reveal">Evaluate Each Claim <span class="tint">Independently</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">13</span><span class="lvl-badge lvl-4">Level 4 · Multi-select</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 13" aria-label="Question 13 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">Select all values of x that satisfy <span class="math">−3 &lt; 2x + 1 ≤ 9</span>.</div><div class="check-options"><div class="mc-option" onclick="toggleChoice(this)">−3</div><div class="mc-option" onclick="toggleChoice(this)">−2</div><div class="mc-option" onclick="toggleChoice(this)">0</div><div class="mc-option" onclick="toggleChoice(this)">4</div><div class="mc-option" onclick="toggleChoice(this)">5</div><div class="mc-option" onclick="toggleChoice(this)">6</div></div><div class="work-box"><textarea placeholder="Solve the compound inequality, then mark T/F for each value." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">14</span><span class="lvl-badge lvl-4">Level 4</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 14" aria-label="Question 14 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">Twelve students have a mean score of 78. Eight different students join them. The mean for all 20 students is 84. What is the mean score of the 8 new students?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>87</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>90</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>93</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>96</div></div><div class="work-box"><textarea placeholder="Convert each mean into a total before comparing groups." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="22" style="--zc:var(--z3);--zs:var(--z3-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 15–16</div><h2 class="slide-title reveal">Scale Factors Change <span class="tint">Different Quantities Differently</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">15</span><span class="lvl-badge lvl-3">Level 3</span><button type="button" class="question-countdown" data-duration="140" data-timer-label="Question 15" aria-label="Question 15 timer, 2:20. Click to begin." aria-pressed="false">2:20</button></div><div class="prose">On a map, 2.5 cm represents 18 km. Two towns are 7 cm apart on the map. What is their actual distance?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>42.0 km</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>45.5 km</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>50.4 km</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>63.0 km</div></div><div class="work-box"><textarea placeholder="Write km/cm, then multiply by 7 cm." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">16</span><span class="lvl-badge lvl-4">Level 4</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 16" aria-label="Question 16 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">A square’s side length is increased by 30%. By what percent does its area increase?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>30%</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>60%</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>69%</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>90%</div></div><div class="work-box"><textarea placeholder="If side = s, new area = (____s)²." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="23" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 17–18</div><h2 class="slide-title reveal">Bundle Constraints; <span class="tint">Draw Coordinates</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">17</span><span class="lvl-badge lvl-4">Level 4</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 17" aria-label="Question 17 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">Six distinct books are arranged on a shelf. Two particular math books must remain together. How many arrangements are possible?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>120</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>240</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>360</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>720</div></div><div class="work-box"><textarea placeholder="Treat the pair as one object; then account for order inside it." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">18</span><span class="lvl-badge lvl-4">Level 4</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 18" aria-label="Question 18 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">A segment has endpoints (−5, 2) and (7, 10). What is the distance between the endpoints?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>4√13</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>4√10</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>10√2</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>20</div></div><div class="work-box"><textarea placeholder="Horizontal change = ____; vertical change = ____." spellcheck="false"></textarea></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="24" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content"><div class="zone-strip reveal" data-zone="3"></div><div class="kicker reveal">Back-Half Set · Items 19–20</div><h2 class="slide-title reveal">The Last Trap Is <span class="tint">Usually the Base</span></h2><div class="grid-2">
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">19</span><span class="lvl-badge lvl-4">Level 4</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 19" aria-label="Question 19 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">After a 12% commission is deducted, an artist receives $1,056. What was the sale price?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>$1,176</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>$1,188</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>$1,200</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>$1,320</div></div><div class="work-box"><textarea placeholder="Received = ____% of original. Write a one-line equation." spellcheck="false"></textarea></div></div>
+<div class="prob-card reveal"><div class="prob-head"><span class="prob-num">20</span><span class="lvl-badge lvl-4">Level 4</span><button type="button" class="question-countdown" data-duration="180" data-timer-label="Question 20" aria-label="Question 20 timer, 3:00. Click to begin." aria-pressed="false">3:00</button></div><div class="prose">A 900-liter tank is 30% full. Water enters at 18 L/min while 6 L/min leaks out. How many minutes until the tank is full?</div><div class="mc-options"><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">A</span>35</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">B</span>45</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">C</span>52.5</div><div class="mc-option" onclick="selectMC(this)"><span class="opt-letter">D</span>75</div></div><div class="work-box"><textarea placeholder="Find liters missing, then divide by the net rate." spellcheck="false"></textarea></div></div>
+</div><div class="no-answer reveal" style="text-align:center;margin-top:.55rem">Stop when the timer ends—even if items remain.</div></div></div>
+
+<div class="slide" data-slide="25" style="--zc:var(--green);--zs:var(--green-soft)"><div class="content"><div class="kicker reveal">Debrief · Locate the Break</div><h2 class="slide-title reveal">Accuracy Usually Falls <span class="tint">Before Speed Feels Bad</span></h2><div class="grid-2">
+<div class="diagram-wrap reveal"><svg class="progress-curve" viewBox="0 0 500 220" role="img" aria-label="Blank stamina tracking graph"><line x1="55" y1="180" x2="470" y2="180" stroke="#4a4a4a" stroke-width="2"/><line x1="55" y1="180" x2="55" y2="25" stroke="#4a4a4a" stroke-width="2"/><g fill="#767676" font-size="12"><text x="55" y="202" text-anchor="middle">1</text><text x="142.37" y="202" text-anchor="middle">5</text><text x="251.58" y="202" text-anchor="middle">10</text><text x="360.79" y="202" text-anchor="middle">15</text><text x="470" y="202" text-anchor="middle">20</text><text x="46" y="35" text-anchor="end">clean</text><text x="46" y="178" text-anchor="end">foggy</text></g><line x1="55" y1="100" x2="470" y2="100" stroke="#C9D4E4" stroke-width="2" stroke-dasharray="7 6"/><text x="70" y="54" font-size="13" font-weight="700" fill="#2563EB">Plot one dot per item:</text><text x="70" y="74" font-size="12" fill="#4a4a4a">high = controlled process; low = rushed or unclear</text></svg></div>
+<div><div class="card reveal"><div class="math">First item where process changed</div><div class="work-box"><textarea placeholder="Item #____. I noticed ______________________________." spellcheck="false"></textarea></div></div><div class="card reveal" style="margin-top:.65rem"><div class="math">First item above 2:30</div><div class="work-box"><textarea placeholder="Item #____. I stayed because ________________________." spellcheck="false"></textarea></div></div></div>
+</div></div></div>
+
+<div class="slide" data-slide="26" style="--zc:var(--green);--zs:var(--green-soft)"><div class="content"><div class="kicker reveal">Tag Every Miss</div><h2 class="slide-title reveal">The Same Wrong Choice Can Need <span class="tint">Three Different Fixes</span></h2><div class="grid-3">
+<div class="card reveal"><div class="pill lvl-2">Concept</div><div class="math" style="margin-top:.45rem">“I did not know the move.”</div><div class="small">Fix: relearn one rule, then apply it to a near-transfer item.</div></div>
+<div class="card reveal"><div class="pill lvl-3">Careless / misread</div><div class="math" style="margin-top:.45rem">“I knew it, but solved the wrong ask.”</div><div class="small">Fix: underline the unit, base, form, and exact quantity requested.</div></div>
+<div class="card reveal"><div class="pill lvl-4">Time pressure</div><div class="math" style="margin-top:.45rem">“My process collapsed after staying too long.”</div><div class="small">Fix: apply the 2.5-minute bail-out before the next item pays the cost.</div></div>
+</div><div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Be precise</div><div class="prompt-body">“I rushed” is not a diagnosis. What observable action disappeared: diagram, equation, estimate, units, or reread?</div></div></div></div>
+
+<div class="slide" data-slide="27" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content"><div class="kicker reveal">Solution Clinic · Item 14</div><h2 class="slide-title reveal">Weighted Mean: Turn Every Average <span class="tint">Into a Total</span></h2><div class="grid-2"><div class="step-list">
+<div class="step reveal"><div class="step-n">1</div><div class="step-b">Old group total: <span class="math">12 × 78</span>. Combined total: <span class="math">20 × 84</span>.</div></div>
+<div class="step reveal"><div class="step-n">2</div><div class="step-b">Let m be the new group’s mean. Its total is <span class="math">8m</span>. Write <span class="math">12(78) + 8m = 20(84)</span>.</div></div>
+<div class="step reveal"><div class="step-n">3</div><div class="step-b">Isolate the new group total first: <span class="math">8m = 20(84) − 12(78)</span>. Now divide by 8 and select the matching choice.</div></div>
+</div><div><div class="diagram-wrap reveal"><svg viewBox="0 20 380 185" width="100%" height="195" role="img" aria-label="Weighted average balance diagram" style="display:block;max-width:100%">
+<rect x="25" y="35" width="135" height="70" rx="12" fill="#DCEBFB" stroke="#2563EB" stroke-width="2"/>
+<text x="92.5" y="61" text-anchor="middle" font-size="14" font-weight="700">12 students</text><text x="92.5" y="88" text-anchor="middle" font-size="20" font-weight="800">mean 78</text>
+<rect x="220" y="35" width="135" height="70" rx="12" fill="#FBEBCF" stroke="#B45309" stroke-width="2"/>
+<text x="287.5" y="61" text-anchor="middle" font-size="14" font-weight="700">8 students</text><text x="287.5" y="88" text-anchor="middle" font-size="20" font-weight="800">mean m</text>
+<path d="M92.5 106V123H287.5V106M190 123V140" fill="none" stroke="#4a4a4a" stroke-width="2.5" stroke-linejoin="round"/><path d="M184 135l6 9 6-9z" fill="#4a4a4a"/>
+<rect x="70" y="145" width="240" height="45" rx="12" fill="#E8F7EC" stroke="#15803D" stroke-width="2"/><text x="190" y="173" text-anchor="middle" font-size="18" font-weight="800">20 students · mean 84</text></svg></div><div class="no-answer reveal" style="text-align:center;margin-top:.4rem">Finish the arithmetic yourself; the deck does not reveal the final answer.</div></div></div></div></div>
+
+<div class="slide" data-slide="28" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content"><div class="kicker reveal">Solution Clinic · Item 17</div><h2 class="slide-title reveal">Counting With a Constraint: <span class="tint">Build a Bundle</span></h2><div class="grid-2"><div class="step-list">
+<div class="step reveal"><div class="step-n">1</div><div class="step-b">Temporarily tape the two math books together. The shelf now holds one bundle plus four other books: five objects.</div></div>
+<div class="step reveal"><div class="step-n">2</div><div class="step-b">Arrange those five objects in <span class="math">5!</span> ways.</div></div>
+<div class="step reveal"><div class="step-n">3</div><div class="step-b">Inside the bundle, the two books can switch order in <span class="math">2!</span> ways. Evaluate <span class="math">5! × 2!</span> and choose the match.</div></div>
+</div><div><div class="diagram-wrap reveal"><svg viewBox="0 35 390 145" width="100%" height="170" aria-label="Books bundled as five objects"><g transform="translate(25,55)"><rect x="0" y="0" width="55" height="105" rx="5" fill="#DCEBFB" stroke="#2563EB" stroke-width="2"/><text x="27.5" text-anchor="middle" y="60" font-size="18" font-weight="800">A</text><rect x="62" y="0" width="55" height="105" rx="5" fill="#DCEBFB" stroke="#2563EB" stroke-width="2"/><text x="89.5" text-anchor="middle" y="60" font-size="18" font-weight="800">B</text><rect x="135" y="0" width="70" height="105" rx="8" fill="#FBEBCF" stroke="#B45309" stroke-width="3"/><line x1="170" y1="0" x2="170" y2="105" stroke="#B45309" stroke-width="2"/><text x="152.5" text-anchor="middle" y="60" font-size="17" font-weight="800">M</text><text x="187.5" text-anchor="middle" y="60" font-size="17" font-weight="800">M</text><rect x="223" y="0" width="55" height="105" rx="5" fill="#E8EDF5" stroke="#6a6a6a" stroke-width="2"/><text x="250.5" text-anchor="middle" y="60" font-size="18" font-weight="800">C</text><rect x="285" y="0" width="55" height="105" rx="5" fill="#E8EDF5" stroke="#6a6a6a" stroke-width="2"/><text x="312.5" text-anchor="middle" y="60" font-size="18" font-weight="800">D</text></g></svg></div><div class="no-answer reveal" style="text-align:center;margin-top:.4rem">The setup is the explanation; you complete the value.</div></div></div></div></div>
+
+<div class="slide" data-slide="29" style="--zc:var(--z4);--zs:var(--z4-soft)"><div class="content"><div class="kicker reveal">Solution Clinic · Item 20</div><h2 class="slide-title reveal">Tank Problems: Separate <span class="tint">Amount From Rate</span></h2><div class="grid-2"><div class="step-list">
+<div class="step reveal"><div class="step-n">1</div><div class="step-b">Starting amount: <span class="math">0.30(900)</span>. Missing amount: <span class="math">900 − 0.30(900)</span>.</div></div>
+<div class="step reveal"><div class="step-n">2</div><div class="step-b">Net filling rate: <span class="math">18 − 6</span> liters per minute. The leak subtracts every minute.</div></div>
+<div class="step reveal"><div class="step-n">3</div><div class="step-b">Time equals missing amount divided by net rate: <span class="math">[900 − 0.30(900)] ÷ (18 − 6)</span>. Estimate, compute, and select.</div></div>
+</div><div><div class="diagram-wrap reveal"><svg viewBox="0 20 400 185" width="100%" height="195" aria-label="Tank at thirty percent with inflow and leak"><defs><clipPath id="tankClip"><rect x="105" y="35" width="180" height="155" rx="18"/></clipPath></defs><rect x="105" y="35" width="180" height="155" rx="18" fill="#fff"/><rect x="105" y="143" width="180" height="47" fill="#DCEBFB" clip-path="url(#tankClip)"/><line x1="105" y1="143" x2="285" y2="143" stroke="#2563EB" stroke-width="3"/><rect x="105" y="35" width="180" height="155" rx="18" fill="none" stroke="#4d4d4d" stroke-width="4"/><text x="195" y="171" text-anchor="middle" font-size="18" font-weight="800">30% full</text><path d="M35 65h70" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/><path d="M90 52l18 13-18 13z" fill="#2563EB"/><text x="12" y="46" font-size="14" font-weight="700">18 L/min in</text><path d="M285 172h70" stroke="#B45309" stroke-width="6" stroke-linecap="round"/><path d="M342 161l18 11-18 11z" fill="#B45309"/><text x="388" y="151" text-anchor="end" font-size="14" font-weight="700">6 L/min out</text></svg></div><div class="no-answer reveal" style="text-align:center;margin-top:.4rem">Do not combine liters with liters per minute until the equation is clear.</div></div></div></div></div>
+
+<div class="slide" data-slide="30" style="--zc:var(--blue);--zs:var(--blue-soft)"><canvas class="particle-canvas"></canvas><div class="content"><div class="kicker reveal">Adaptive Mindset</div><h2 class="slide-title reveal">Difficulty Is Information, <span class="tint">Not a Verdict</span></h2><div class="grid-3">
+<div class="card reveal"><div class="metric">Harder</div><div class="math">Often a good sign</div><div class="small">The system may be responding to prior success. Slow down enough to preserve process.</div></div>
+<div class="card reveal"><div class="metric">Easier</div><div class="math">Normal after a miss</div><div class="small">Do not waste attention guessing what the test “thinks.” Solve the item in front of you.</div></div>
+<div class="card reveal"><div class="metric">Next</div><div class="math">The only controllable item</div><div class="small">One breath. Read twice. Underline the ask. Estimate. Commit.</div></div>
+</div><div class="prompt-card reveal" style="margin-top:.75rem"><div class="prompt-title">Say the recovery script aloud</div><div class="prompt-body">“Hard can mean I am doing well. Easy after a miss is recoverable. This question starts at zero.”</div></div></div></div>
+
+<div class="slide" data-slide="31" style="--zc:var(--green);--zs:var(--green-soft)"><div class="content"><div class="kicker reveal">Exit Check · Explain, Do Not Recite</div><h2 class="slide-title reveal">Can You Defend the <span class="tint">Plan?</span></h2><div class="grid-2">
+<div class="prompt-card reveal"><div class="prompt-title">Section order</div><div class="prompt-body">Which section goes first, and what two data points justify that choice?</div></div>
+<div class="prompt-card reveal"><div class="prompt-title">Checkpoints</div><div class="prompt-body">What should the clock show after ELA block 4 and at Math Q25? What action follows each check?</div></div>
+<div class="prompt-card reveal"><div class="prompt-title">Bail-out</div><div class="prompt-body">At 2:30 with no clean path, what do you do before committing?</div></div>
+<div class="prompt-card reveal"><div class="prompt-title">Reset</div><div class="prompt-body">Give the six-step reset without looking at the index card.</div></div>
+</div><div class="work-box reveal" style="margin-top:.75rem"><textarea placeholder="My first warning sign today was ____________. On the next full practice, I will ____________." spellcheck="false"></textarea></div></div></div>
+
+<div class="slide" data-slide="32" style="--zc:var(--green);--zs:var(--green-soft)"><canvas class="particle-canvas"></canvas><div class="content" style="text-align:center"><svg class="hero-mark reveal" viewBox="0 0 180 180" role="img" aria-label="Completed strategy card"><rect x="32" y="28" width="116" height="128" rx="16" fill="#fff" stroke="#C9D4E4" stroke-width="4"/><path d="M55 63l9 9 18-21" fill="none" stroke="#15803D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="92" y1="63" x2="129" y2="63" stroke="#6a6a6a" stroke-width="4" stroke-linecap="round"/><path d="M55 96l9 9 18-21" fill="none" stroke="#15803D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="92" y1="96" x2="129" y2="96" stroke="#6a6a6a" stroke-width="4" stroke-linecap="round"/><path d="M55 129l9 9 18-21" fill="none" stroke="#15803D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="92" y1="129" x2="129" y2="129" stroke="#6a6a6a" stroke-width="4" stroke-linecap="round"/></svg><div class="kicker reveal">Session 1A Complete</div><h2 class="slide-title reveal" style="font-size:clamp(2rem,4.5vw,3.3rem)">Protect the Next Decision.</h2><p class="prose reveal" style="max-width:680px;margin:auto">A strong digital test is not one perfect run. It is a chain of controlled commitments, especially after the midpoint.</p><div class="reveal" style="margin-top:.8rem"><span class="pill lvl-2">Order locked</span> <span class="pill lvl-3">Checkpoints visible</span> <span class="pill lvl-4">Reset automatic</span></div></div></div>
+
+</div>
+<div class="nav-controls" aria-label="Slide navigation"><button class="nav-btn" onclick="changeSlide(-1)" aria-label="Previous slide">&#8249;</button><div class="slide-dots" id="dots"></div><button class="nav-btn" onclick="changeSlide(1)" aria-label="Next slide">&#8250;</button><span class="slide-counter" id="counter">1 / 32</span></div>
+<script>
+const ZONES=[{n:'Strategy',t:'0:05',c:'var(--blue)'},{n:'ELA pre-load',t:'0:12',c:'var(--ela)'},{n:'Stamina set',t:'0:22',c:'var(--amber)'},{n:'Reset',t:'Q10',c:'var(--z3)'},{n:'Debrief',t:'0:52',c:'var(--green)'}];
+document.querySelectorAll('.zone-strip').forEach(strip=>{const active=parseInt(strip.dataset.zone,10);strip.innerHTML=ZONES.map((z,i)=>`<span class="zone-chip${i+1===active?' on':''}" style="--dc:${z.c}"><span class="zdot"></span>${z.n}&nbsp;<span class="zt">${z.t}</span></span>`).join('')});
+let current=1;const slides=[...document.querySelectorAll('.deck>.slide')],total=slides.length,dotsContainer=document.getElementById('dots'),counter=document.getElementById('counter');for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot)}
+function goToSlide(n){const prev=document.querySelector('.slide.active'),next=document.querySelector(`.slide[data-slide="${n}"]`);if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next)}current=n;updateNav()}
+function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n)}function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total}
+document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let touchStartX=0;document.addEventListener('touchstart',e=>touchStartX=e.touches[0].clientX);document.addEventListener('touchend',e=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1)});
+function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)';el.offsetHeight;const delay=i*.055;el.style.transition=`opacity .32s ease ${delay}s,transform .32s ease ${delay}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}try{animateSlide(document.querySelector('.slide.active'))}catch(e){}
+function selectMC(el){const group=el.closest('.mc-options');group.querySelectorAll('.mc-option').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}function toggleChoice(el){el.classList.toggle('selected')}function chooseSection(el){document.querySelectorAll('.section-choice').forEach(x=>x.classList.remove('chosen'));el.classList.add('chosen')}
+const timerState={};function renderTime(id,s){document.getElementById(id).textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}function startTimer(id,seconds){if(timerState[id]?.handle)return;const state=timerState[id]||{remaining:seconds};state.handle=setInterval(()=>{state.remaining--;renderTime(id,state.remaining);if(state.remaining<=0){clearInterval(state.handle);state.handle=null;document.getElementById(id).style.color='#B45309'}},1000);timerState[id]=state}function resetTimer(id,seconds){if(timerState[id]?.handle)clearInterval(timerState[id].handle);timerState[id]={remaining:seconds,handle:null};document.getElementById(id).style.color='';renderTime(id,seconds)}
+window.initParticles=function(canvas,opts){if(!canvas)return;const ctx=canvas.getContext('2d'),count=opts.count||40;let mx=-1000,my=-1000,particles=[];function seed(){const w=canvas.offsetWidth||innerWidth,h=canvas.offsetHeight||innerHeight;canvas.width=w;canvas.height=h;particles=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*2.2+.7,alpha:Math.random()*.28+.08}))}seed();requestAnimationFrame(seed);addEventListener('resize',seed);canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});const own=canvas.closest('.slide');(function draw(){if(!own||own.classList.contains('active')){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120&&dist>0){const f=(120-dist)/120*1.5;p.vx+=(dx/dist)*f*.1;p.vy+=(dy/dist)*f*.1}p.vx*=.98;p.vy*=.98;p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(37,99,235,${p.alpha})`;ctx.fill()})}requestAnimationFrame(draw)})()};document.querySelectorAll('.particle-canvas').forEach(c=>initParticles(c,{count:55}));
+</script>
+
+<script id="passage-annotation-script">
+
+/* Passage annotation tools adapted from copy.html; existing deck code is unchanged. */
+(function () {
+  'use strict';
+  const toolbarHTML = "<div aria-label=\"Passage annotation tools\" class=\"annotation-toolbar\" role=\"group\" title=\"Choose a tool and color, then select passage text. Use Note to add a comment.\">\n<span class=\"annot-label\">Tool:</span>\n<button aria-pressed=\"true\" class=\"annot-btn active\" data-tool=\"highlight\" type=\"button\">\ud83d\udd8a Highlight</button>\n<button aria-pressed=\"false\" class=\"annot-btn\" data-tool=\"underline\" type=\"button\">U\u0332 Underline</button>\n<button aria-pressed=\"false\" class=\"annot-btn\" data-tool=\"outline\" type=\"button\">\u25a2 Outline</button>\n<button aria-pressed=\"false\" class=\"annot-btn\" data-tool=\"note\" type=\"button\">\ud83d\udccc Note</button>\n<div class=\"annot-sep\"></div>\n<span class=\"annot-label\">Color:</span>\n<div class=\"annot-color-row\">\n<button aria-label=\"Yellow\" aria-pressed=\"true\" class=\"annot-color-swatch active\" data-color=\"#fef08a\" style=\"background:#fef08a;\" title=\"Yellow\" type=\"button\"></button>\n<button aria-label=\"Green\" aria-pressed=\"false\" class=\"annot-color-swatch\" data-color=\"#86efac\" style=\"background:#86efac;\" title=\"Green\" type=\"button\"></button>\n<button aria-label=\"Blue\" aria-pressed=\"false\" class=\"annot-color-swatch\" data-color=\"#93c5fd\" style=\"background:#93c5fd;\" title=\"Blue\" type=\"button\"></button>\n<button aria-label=\"Pink\" aria-pressed=\"false\" class=\"annot-color-swatch\" data-color=\"#fca5a5\" style=\"background:#fca5a5;\" title=\"Pink\" type=\"button\"></button>\n<button aria-label=\"Purple\" aria-pressed=\"false\" class=\"annot-color-swatch\" data-color=\"#c4b5fd\" style=\"background:#c4b5fd;\" title=\"Purple\" type=\"button\"></button>\n</div>\n<button class=\"clear-annotations-btn\" type=\"button\">\u2715 Clear</button>\n</div>";
+  document.querySelectorAll('.passage').forEach(function (passage) {
+    const holder = document.createElement('div');
+    holder.innerHTML = toolbarHTML;
+    const toolbar = holder.firstElementChild;
+    passage.before(toolbar);
+    passage.classList.add('annotatable-passage');
+    const state = { tool: 'highlight', color: '#fef08a', noteCount: 0, pending: null };
+
+    // Keep text selection and note editing separate from slide keyboard/swipe navigation.
+    [toolbar, passage].forEach(function (element) {
+      element.addEventListener('touchstart', function (event) { event.stopPropagation(); }, { passive: true });
+      element.addEventListener('touchend', function (event) { event.stopPropagation(); }, { passive: true });
+    });
+    toolbar.addEventListener('keydown', function (event) { event.stopPropagation(); });
+    passage.addEventListener('keydown', function (event) {
+      if (event.target.closest('.note-input-wrapper, .passage-note')) event.stopPropagation();
+    });
+    toolbar.addEventListener('mousedown', function (event) { event.preventDefault(); });
+
+    function unwrap(element) {
+      if (!element.parentNode) return;
+      element.replaceWith(...element.childNodes);
+    }
+    function selectedRange() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || selection.isCollapsed) return null;
+      const range = selection.getRangeAt(0);
+      if (!passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return null;
+      return range.cloneRange();
+    }
+    function clearSelection() {
+      const selection = window.getSelection();
+      if (selection) selection.removeAllRanges();
+    }
+    function setActive(selector, selected) {
+      toolbar.querySelectorAll(selector).forEach(function (button) {
+        const active = button === selected;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+    toolbar.addEventListener('click', function (event) {
+      const button = event.target.closest('button');
+      if (!button) return;
+      if (button.dataset.tool) {
+        state.tool = button.dataset.tool;
+        setActive('[data-tool]', button);
+        applyAnnotation(selectedRange());
+      } else if (button.dataset.color) {
+        state.color = button.dataset.color;
+        setActive('[data-color]', button);
+      } else if (button.classList.contains('clear-annotations-btn')) {
+        if (state.pending) state.pending();
+        passage.querySelectorAll('.passage-note, .note-input-wrapper').forEach(function (element) { element.remove(); });
+        passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(unwrap);
+        passage.normalize();
+        state.noteCount = 0;
+        clearSelection();
+      }
+    });
+
+    function applyAnnotation(range) {
+      if (!range || range.collapsed || state.pending) return;
+      const tool = state.tool;
+      const color = state.color;
+      const pieces = [];
+      const walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (!node.textContent || node.parentElement.closest('.passage-note, .note-input-wrapper')) continue;
+        if (!range.intersectsNode(node)) continue;
+        const start = node === range.startContainer ? range.startOffset : 0;
+        const end = node === range.endContainer ? range.endOffset : node.length;
+        if (end > start) pieces.push({ node: node, start: start, end: end });
+      }
+      if (!pieces.length) return;
+      const spans = pieces.map(function (piece) {
+        const fragmentRange = document.createRange();
+        fragmentRange.setStart(piece.node, piece.start);
+        fragmentRange.setEnd(piece.node, piece.end);
+        const span = document.createElement('span');
+        if (tool === 'highlight') {
+          span.className = 'passage-highlight';
+          span.style.backgroundColor = color;
+          span.style.color = '#1f2937';
+        } else if (tool === 'underline') {
+          span.className = 'passage-underline';
+          span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+        } else if (tool === 'outline') {
+          span.className = 'passage-outline';
+          span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+        } else {
+          span.className = 'passage-highlight passage-note-pending';
+          span.style.backgroundColor = 'rgba(251,191,36,.35)';
+          span.style.borderBottom = '2px dashed #f59e0b';
+        }
+        fragmentRange.surroundContents(span);
+        return span;
+      });
+      clearSelection();
+      if (tool === 'note') addNote(spans);
+    }
+
+    function addNote(spans) {
+      const wrapper = document.createElement('span');
+      wrapper.className = 'note-input-wrapper';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Type note...';
+      input.setAttribute('aria-label', 'Annotation note');
+      const save = document.createElement('button');
+      save.type = 'button';
+      save.textContent = '✓';
+      save.setAttribute('aria-label', 'Save note');
+      const cancel = document.createElement('button');
+      cancel.type = 'button';
+      cancel.textContent = '✕';
+      cancel.setAttribute('aria-label', 'Cancel note');
+      wrapper.append(input, save, cancel);
+      spans[spans.length - 1].after(wrapper);
+      let finished = false;
+      function finish(keep) {
+        if (finished) return;
+        finished = true;
+        state.pending = null;
+        const text = keep ? input.value.trim() : '';
+        wrapper.remove();
+        if (!text) { spans.forEach(unwrap); return; }
+        spans.forEach(function (span) {
+          span.className = 'passage-highlight';
+          span.style.backgroundColor = '#fef3c7';
+          span.style.borderBottom = '';
+        });
+        const marker = document.createElement('span');
+        marker.className = 'passage-note';
+        marker.textContent = String(++state.noteCount);
+        marker.tabIndex = 0;
+        marker.setAttribute('role', 'button');
+        marker.setAttribute('aria-label', 'Note ' + state.noteCount + ': ' + text);
+        marker.setAttribute('aria-expanded', 'false');
+        const tooltip = document.createElement('span');
+        tooltip.className = 'note-tooltip';
+        tooltip.textContent = 'Note: ' + text;
+        marker.append(tooltip);
+        function toggle() {
+          marker.classList.toggle('note-open');
+          marker.setAttribute('aria-expanded', String(marker.classList.contains('note-open')));
+        }
+        marker.addEventListener('click', toggle);
+        marker.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); }
+          if (event.key === 'Escape') { marker.classList.remove('note-open'); marker.setAttribute('aria-expanded', 'false'); }
+        });
+        spans[spans.length - 1].after(marker);
+      }
+      state.pending = function () { finish(false); };
+      save.addEventListener('click', function () { finish(true); });
+      cancel.addEventListener('click', function () { finish(false); });
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') { event.preventDefault(); finish(true); }
+        if (event.key === 'Escape') { event.preventDefault(); finish(false); }
+      });
+      input.focus();
+    }
+
+    function annotateSelection(event) {
+      if (event.target.closest('.note-input-wrapper, .passage-note')) return;
+      applyAnnotation(selectedRange());
+    }
+    passage.addEventListener('mouseup', annotateSelection);
+    passage.addEventListener('touchend', function (event) {
+      if (event.target.closest('.note-input-wrapper, .passage-note')) return;
+      window.setTimeout(function () { applyAnnotation(selectedRange()); }, 100);
+    }, { passive: true });
+  });
+})();
+
+</script>
+<script id="question-countdown-script">
+(function () {
+  'use strict';
+  document.querySelectorAll('.question-countdown').forEach(function (button) {
+    const duration = Number(button.dataset.duration) * 1000;
+    let remaining = duration;
+    let deadline = 0;
+    let interval = null;
+    let running = false;
+    function render() {
+      const seconds = Math.max(0, Math.ceil(remaining / 1000));
+      const display = Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+      button.textContent = display;
+      button.setAttribute('aria-pressed', String(running));
+      button.dataset.expired = String(remaining === 0);
+      const action = running ? 'Click to pause.' : remaining === 0 ? 'Click to restart.' : remaining < duration ? 'Click to resume.' : 'Click to begin.';
+      button.setAttribute('aria-label', button.dataset.timerLabel + ' timer, ' + display + '. ' + action);
+    }
+    function tick() {
+      if (!running) return;
+      remaining = Math.max(0, deadline - Date.now());
+      if (remaining === 0) {
+        running = false;
+        clearInterval(interval);
+        interval = null;
+      }
+      render();
+    }
+    button.addEventListener('click', function (event) {
+      event.stopPropagation();
+      if (running) {
+        remaining = Math.max(0, deadline - Date.now());
+        running = false;
+        clearInterval(interval);
+        interval = null;
+      } else {
+        if (remaining <= 0) remaining = duration;
+        deadline = Date.now() + remaining;
+        running = true;
+        interval = setInterval(tick, 100);
+      }
+      render();
+    });
+    button.addEventListener('keydown', function (event) {
+      if (event.key === ' ' || event.key === 'Enter') event.stopPropagation();
+    });
+    document.addEventListener('visibilitychange', tick);
+    window.addEventListener('pageshow', tick);
+    render();
+  });
+})();
+</script>
+</body></html>
