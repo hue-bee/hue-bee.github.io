@@ -24,6 +24,11 @@ button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}.s
 .error-log{border:2px solid var(--coral);border-radius:10px;padding:.9rem 1.1rem;background:var(--coral-lt);margin-top:.5rem}.error-log h3{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:#c2410c;margin-bottom:.55rem}.error-table{width:100%;border-collapse:collapse;font-size:.78rem}.error-table th{background:var(--coral);color:#fff;font-family:var(--ff-head);font-weight:600;padding:.35rem .6rem;text-align:left;font-size:.75rem}.error-table th:first-child{border-radius:6px 0 0}.error-table th:last-child{border-radius:0 6px 0 0}.error-table td{padding:.45rem .6rem;border-bottom:1px solid #fca5a5;color:var(--slate);background:#fff;font-weight:500}.error-table td:first-child{font-weight:700;color:var(--ink);width:7%;text-align:center}.error-table tr:last-child td{border-bottom:0}.cell-input{width:100%;min-height:28px;border:0;border-bottom:1px solid var(--border);background:transparent;outline:0}.error-type-pills{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.73rem;margin-top:.55rem}.pill{padding:2px 10px;border-radius:20px;font-weight:700;border:1.5px solid}.pill-cg{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}.pill-ce{background:#fef9c3;color:#92400e;border-color:#fde68a}.pill-ru{background:var(--purple-lt);color:var(--purple);border-color:#c4b5fd}.reflect-box{background:var(--green-lt);border:1.5px solid #86efac;border-radius:10px;padding:.8rem 1rem;margin-top:1rem}.reflect-box h3{font-family:var(--ff-head);font-size:.9rem;font-weight:700;color:var(--green);margin-bottom:.45rem}.reflect-lines{display:flex;flex-direction:column;gap:.6rem}.reflect-line{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--slate);font-weight:600}.reflect-line input{flex:1;min-width:80px;border:0;border-bottom:1.5px solid var(--border);background:transparent;outline:0;padding:1px 6px}.page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid var(--border);margin-top:1.25rem;padding-top:.55rem;font-size:.68rem;color:var(--muted);font-weight:700}.footer-callout{color:var(--blue)}
 @media(max-width:680px){body{background:#fff}.sheet{margin:0;padding:1.2rem 1rem;border-radius:0;box-shadow:none}.toolbar{position:sticky;top:0;background:rgba(255,255,255,.96);padding:.55rem;margin:0;z-index:20;border-bottom:1px solid var(--border)}.hw-meta{width:100%}.mc-opts,.work-toggle,.entry-wrap,.entry-wrap.triple{grid-template-columns:1fr}.section-hd{align-items:flex-start;flex-wrap:wrap}.badge{margin-left:0}.mc-opt{min-height:44px;align-items:center}.error-log{overflow-x:auto}.error-table{min-width:680px}.reflect-line{align-items:flex-start;flex-direction:column;width:100%}.reflect-line input{width:100%}}
 @media print{@page{size:letter;margin:.35in}html{background:#fff}body{max-width:100%;background:#fff}.no-print{display:none!important}.page-break{break-before:page;page-break-before:always}.sheet{box-shadow:none!important;margin:0!important;border-radius:0!important;padding:.32in .45in!important;min-height:9.95in}.mc-q,.entry-q,.error-log,.reflect-box{break-inside:avoid}.work-area{resize:none}.commit-row{display:none}.mc-opt:hover{background:transparent}.page-footer{margin-top:.7rem}input,textarea,select{border-color:#cbd5e1!important;background:#fff!important;color:#0f172a!important}}
+
+.section-timer{appearance:none;border:0;border-radius:12px;padding:2px 6px;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;font-variant-numeric:tabular-nums;cursor:pointer;min-width:4.5em;text-align:center;vertical-align:baseline}
+.section-timer.is-running{background:#15803d;color:#fff}
+.section-timer.is-expired{background:#b91c1c;color:#fff;cursor:default;opacity:1}
+.section-timer:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -43,7 +48,7 @@ button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}.s
 </header>
 <div class="score-banner"><div><div class="title">Self-Score Before Session</div><div class="sub">Score only after every first-pass decision is complete.</div></div><div class="score-cells"><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="20"> / 20</div><div class="sc-lbl">Accuracy</div></div><div class="score-cell"><div class="sc-val"><input class="score-input" type="number" min="0" max="5"> / 5</div><div class="sc-lbl">Verification</div></div></div></div>
 <div class="cat-strip"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="13" width="20" height="15" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M10 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.4"/></svg><p><strong>CAT rule:</strong> Each stand-alone Math response locks when committed. A harder next item is not feedback about your last answer; treat it as a fresh decision.</p></div>
-<div class="section-hd"><span class="icon" aria-hidden="true">∑</span><h2>Part A — Data &amp; Statistics</h2><span class="badge badge-blue">5 Questions · ~14 min</span></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">∑</span><h2>Part A — Data &amp; Statistics</h2><span class="badge badge-blue">5 Questions · <button class="section-timer" type="button" data-seconds="840" aria-label="Section countdown timer" aria-pressed="false">14:00</button></span></div>
 <p class="instr">Reconstruct totals before comparing means. For each item, state what the answer must represent before computing.</p>
 <div class="strategy-strip"><span class="strategy-label">Decode routine</span><span class="strategy-chip">1 · Ask</span><span class="strategy-chip">2 · Invariant</span><span class="strategy-chip">3 · Model</span><span class="strategy-chip">4 · Disprove</span></div>
 
@@ -61,7 +66,7 @@ button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}.s
 
 <section class="sheet page-break">
 <div class="page-kicker"><span>Level 5 Math Homework · Continued</span><span class="page-no">Page 2</span></div>
-<div class="section-hd"><span class="icon" aria-hidden="true">↔</span><h2>Part B — Measurement &amp; Rates</h2><span class="badge badge-green">5 Questions · ~14 min</span></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">↔</span><h2>Part B — Measurement &amp; Rates</h2><span class="badge badge-green">5 Questions · <button class="section-timer" type="button" data-seconds="840" aria-label="Section countdown timer" aria-pressed="false">14:00</button></span></div>
 <p class="instr">Write units beside every quantity. Split multi-leg motion into separate distances; never average unequal-time rates.</p>
 <div class="formula-strip"><span class="fs-label">Unit checks</span><span class="fml">rate × time = distance</span><span class="fml">minutes ÷ 60 = hours</span><span class="fml">total rate = total quantity ÷ total time</span></div>
 
@@ -80,7 +85,7 @@ button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}.s
 
 <section class="sheet page-break">
 <div class="page-kicker"><span>Level 5 Math Homework · Continued</span><span class="page-no">Page 3</span></div>
-<div class="section-hd"><span class="icon" aria-hidden="true">%</span><h2>Part C — Percents &amp; Ratios</h2><span class="badge badge-purple">5 Questions · ~15 min</span></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">%</span><h2>Part C — Percents &amp; Ratios</h2><span class="badge badge-purple">5 Questions · <button class="section-timer" type="button" data-seconds="900" aria-label="Section countdown timer" aria-pressed="false">15:00</button></span></div>
 <p class="instr">Use multipliers for successive changes. For linked ratios, make the shared category represent the same amount before combining.</p>
 <div class="strategy-strip"><span class="strategy-label">Two invariants</span><span class="strategy-chip">Percent: changing base</span><span class="strategy-chip">Ratio: shared category</span></div>
 
@@ -98,7 +103,7 @@ button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}.s
 
 <section class="sheet page-break">
 <div class="page-kicker"><span>Level 5 Math Homework · Continued</span><span class="page-no">Page 4</span></div>
-<div class="section-hd"><span class="icon" aria-hidden="true">≤</span><h2>Part D — Constraints &amp; Mixed Sprint</h2><span class="badge badge-coral">5 Questions · ~15 min</span></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">≤</span><h2>Part D — Constraints &amp; Mixed Sprint</h2><span class="badge badge-coral">5 Questions · <button class="section-timer" type="button" data-seconds="900" aria-label="Section countdown timer" aria-pressed="false">15:00</button></span></div>
 <p class="instr">Translate every condition, find the overlap, and test legal endpoints in the original situation. Commit without reopening earlier items.</p>
 <div class="formula-strip"><span class="fs-label">Boundary language</span><span class="fml">at least → included, up</span><span class="fml">at most → included, down</span><span class="fml">more/fewer → open</span></div>
 
@@ -117,7 +122,7 @@ button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}.s
 
 <section class="sheet page-break">
 <div class="page-kicker"><span>Level 5 Math Homework · Process Review</span><span class="page-no">Page 5</span></div>
-<div class="section-hd"><span class="icon" aria-hidden="true">↺</span><h2>Part E — Error Log</h2><span class="badge badge-coral">~10 min after checking</span></div>
+<div class="section-hd"><span class="icon" aria-hidden="true">↺</span><h2>Part E — Error Log</h2><span class="badge badge-coral"><button class="section-timer" type="button" data-seconds="600" aria-label="Section countdown timer" aria-pressed="false">10:00</button> after checking</span></div>
 <p class="instr">Use the assigned key or review in session. Record the first incorrect decision—not merely the final wrong answer.</p>
 <div class="error-log"><h3>My Highest-Value Corrections</h3><table class="error-table"><thead><tr><th>Item</th><th>My first wrong step or decision</th><th>Rule fix for next time</th><th>Type</th></tr></thead><tbody>
 <tr><td>1</td><td><input class="cell-input" type="text" aria-label="First wrong step row 1"></td><td><input class="cell-input" type="text" aria-label="Rule fix row 1"></td><td><input class="cell-input" type="text" aria-label="Type row 1"></td></tr>
@@ -144,6 +149,49 @@ function selectOption(label){const card=label.closest('.mc-q');if(card.classList
 function lockCard(card){if(card.classList.contains('mc-q')&&!card.querySelector('input[type="radio"]:checked')){alert('Choose an answer before committing.');return}if(card.classList.contains('entry-q')){const required=[...card.querySelectorAll('.required-entry')];if(required.some(e=>e.value.trim()==='')){alert('Complete every required answer field before committing.');return}}card.classList.add('locked');card.querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=true);const note=card.querySelector('.lock-note');if(note)note.textContent='Locked — response committed.'}
 function clearAll(){if(!confirm('Clear every answer, work box, score, and committed response?'))return;document.querySelectorAll('input,textarea').forEach(e=>{if(e.type==='radio'||e.type==='checkbox')e.checked=false;else e.value='';e.disabled=false});document.querySelectorAll('select').forEach(e=>{e.selectedIndex=0;e.disabled=false});document.querySelectorAll('.mc-opt').forEach(e=>{e.classList.remove('selected');e.querySelector('.bubble').textContent=''});document.querySelectorAll('.mc-q,.entry-q').forEach(e=>e.classList.remove('locked'));document.querySelectorAll('.commit-btn').forEach(e=>e.disabled=false);document.querySelectorAll('.lock-note').forEach(e=>e.textContent=e.closest('.entry-q')?'Enter, verify, then commit.':'Choose, verify, then commit.')}
 document.querySelectorAll('.mc-opt').forEach(label=>{label.addEventListener('click',()=>selectOption(label));label.querySelector('input').addEventListener('change',()=>selectOption(label))});document.querySelectorAll('.commit-btn').forEach(button=>button.addEventListener('click',()=>lockCard(button.closest('.mc-q,.entry-q'))));document.querySelectorAll('textarea').forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}));
+</script>
+
+<script>
+document.querySelectorAll('.section-timer').forEach(timer=>{
+  let remaining=Number(timer.dataset.seconds)*1000;
+  let deadline=0;
+  let interval=null;
+  let running=false;
+  const heading=timer.closest('.section-hd').querySelector('h2').textContent;
+  timer.setAttribute('aria-label',heading+' countdown timer');
+  function render(){
+    const seconds=Math.ceil(remaining/1000);
+    timer.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+    timer.classList.toggle('is-running',running);
+    timer.classList.toggle('is-expired',remaining===0);
+    timer.setAttribute('aria-pressed',String(running));
+    timer.disabled=remaining===0;
+  }
+  function tick(){
+    remaining=Math.max(0,deadline-performance.now());
+    if(remaining===0){
+      running=false;
+      clearInterval(interval);
+      interval=null;
+    }
+    render();
+  }
+  timer.addEventListener('click',()=>{
+    if(running){
+      remaining=Math.max(0,deadline-performance.now());
+      running=false;
+      clearInterval(interval);
+      interval=null;
+    }else if(remaining>0){
+      deadline=performance.now()+remaining;
+      running=true;
+      interval=setInterval(tick,100);
+    }
+    render();
+  });
+  document.addEventListener('visibilitychange',()=>{if(running)tick();});
+  render();
+});
 </script>
 </body>
 </html>
