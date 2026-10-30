@@ -25,3 +25,4 @@
 | **11** | [Mock Review and Targeted Reteach](https://hue-bee.github.io/josephine/lessons/11) | [11 Homework](https://hue-bee.github.io/josephine/lessons/11/homework) ||
 | **12** | [Targeted Repair](https://hue-bee.github.io/josephine/lessons/12) | [12 Homework](https://hue-bee.github.io/josephine/lessons/12/homework) |[Set 1](https://hue-bee.github.io/josephine/lessons/12/sets/01)|
 | **01A** | [Strategy, Section Order andd the Back-Half Stamina Set](https://hue-bee.github.io/josephine/lessons/01A) | [01A Homework](https://hue-bee.github.io/josephine/lessons/01A/homework) |[Set 1](https://hue-bee.github.io/josephine/lessons/01A/sets/01)|
+| **01B** | [Targeted Repair II](https://hue-bee.github.io/josephine/lessons/01B) | [01B Homework](https://hue-bee.github.io/josephine/lessons/01B/homework) ||
