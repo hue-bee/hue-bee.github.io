@@ -15,3 +15,4 @@
 | **04** | [Debrief + Transitions](https://hue-bee.github.io/mickey/lessons/04) | [4 Homework](https://hue-bee.github.io/mickey/lessons/04/homework) | |
 | **05** | [Rhetorical Synthesis](https://hue-bee.github.io/mickey/lessons/05) | [5 Homework](https://hue-bee.github.io/mickey/lessons/05/homework) |[Set 2](https://hue-bee.github.io/mickey/lessons/05/sets/02)| [Solns. 6, 7](https://hue-bee.github.io/mickey/lessons/05/solutions/02) |
 | **06** | [Hard-Module Mixed Math](https://hue-bee.github.io/mickey/lessons/06) | [6 Homework](https://hue-bee.github.io/mickey/lessons/06/homework) |[Set 1](https://hue-bee.github.io/mickey/lessons/06/sets/01) [Set 2](https://hue-bee.github.io/mickey/lessons/06/sets/02)| [Solns. 11, 12](https://hue-bee.github.io/mickey/lessons/06/solutions/01) |
+| **07** | [Routing-Module Precision](https://hue-bee.github.io/mickey/lessons/07) | [7 Homework](https://hue-bee.github.io/mickey/lessons/07/homework) |||
