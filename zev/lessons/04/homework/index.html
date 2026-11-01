@@ -1,1 +1,648 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Original SHSAT CAT homework for November 2026: mock audit, 12 Math problems, 12 ELA questions, commitment rehearsal, timers, and error log. No answer key."><title>Mock Debrief Homework — SHSAT CAT November 2026</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2','Nunito',sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* Section timers from timerh.html */
+.section-timer{appearance:none;border:0;border-radius:12px;padding:2px 5px;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;min-width:4.5em;text-align:center}
+.section-timer.running{background:#92400e;color:#fff}
+.section-timer.expired{background:#b91c1c;color:#fff;cursor:default}
+
+
+/* Art direction: supplied homework palette and worksheet layout;
+   Baloo 2 headings + Nunito body from the lesson. Fixed repair practice, not CAT scoring. */
+:root{--font-display:var(--ff-head);--font-body:var(--ff-body);--text-xs:clamp(.75rem,.72rem + .12vw,.8rem);--text-sm:clamp(.875rem,.84rem + .12vw,.93rem);--text-base:clamp(.95rem,.9rem + .16vw,1rem);--text-lg:clamp(1.125rem,1rem + .4vw,1.35rem);--text-xl:clamp(1.65rem,1.4rem + .7vw,2rem);--space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--radius-sm:6px;--radius-md:10px;--radius-lg:16px}
+html{scroll-behavior:smooth} body{font-size:var(--text-base);line-height:1.5} button,input,textarea,select{font:inherit} button{touch-action:manipulation} button:disabled{cursor:default} :focus-visible{outline:3px solid var(--blue);outline-offset:3px} button:active:not(:disabled){transform:translateY(1px)}
+.skip-link{position:absolute;left:-10000px}.skip-link:focus{left:12px;top:12px;background:white;padding:12px;z-index:100}
+.top-actions{display:flex;gap:var(--space-3);justify-content:center;padding:var(--space-4);flex-wrap:wrap}.top-actions .print-btn{margin:0;min-height:44px}.top-actions .secondary{background:var(--muted)}
+.hw-header-left h1{font-size:var(--text-xl)}.hw-header-left .subtitle{font-size:var(--text-xs)}.hw-meta-row{font-size:var(--text-sm)}.hw-meta-row .label{font-size:var(--text-xs)}.hw-meta input{width:140px;min-width:0;flex:1;border:0;border-bottom:1.5px solid var(--border);padding:4px;background:transparent}
+.section-hd{align-items:flex-start;margin-top:var(--space-3)}.section-hd h2{font-size:var(--text-lg);line-height:1.25}.section-hd .badge{font-size:var(--text-xs);white-space:nowrap}.section-timer{min-height:32px;min-width:5em}.section-timer:focus-visible{outline-offset:1px}
+.instr{font-size:var(--text-sm);font-style:normal;line-height:1.5}.micro-note,.source-note,.page-foot{font-size:var(--text-xs);color:var(--muted);line-height:1.5}.source-note a{color:var(--blue)}.page-foot{margin-top:var(--space-4);padding-top:var(--space-2);border-top:1px solid var(--border);text-align:right}.source-note{margin-top:var(--space-3)}
+.score-banner .title{font-size:var(--text-lg)}.score-banner .sub{font-size:var(--text-xs)}.score-cell .sc-lbl{font-size:var(--text-xs)}.score-cell{min-width:100px}.score-cell input{width:2.4rem;background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center}.score-cell input::placeholder{color:#e2e8f0;opacity:1}
+.prob-grid{align-items:stretch}.prob{padding:var(--space-3);display:flex;flex-direction:column;break-inside:avoid}.prob-num{font-size:var(--text-xs);line-height:1.4}.lvl{font-size:var(--text-xs)}.lvl-1{background:#eee;color:#334155}.prob-q{font-size:var(--text-sm);font-weight:600;line-height:1.55;margin:var(--space-2) 0}.work-area{font-size:var(--text-sm);line-height:1.45;min-height:64px;resize:vertical}.math-work{margin-top:auto}.answer-box{font-size:var(--text-sm);align-items:center;flex-wrap:wrap}.answer-input{min-width:0;width:100%;flex:1 1 80px;background:white;border:1px solid var(--border);border-radius:6px;padding:5px 7px;min-height:34px}.work-caption{font-size:var(--text-xs);font-weight:700;color:var(--slate);display:block;margin-top:var(--space-2)}
+.commit-row{display:flex;justify-content:space-between;gap:var(--space-2);align-items:center;margin-top:var(--space-2)}.soft-btn{border:1px solid var(--border);background:white;color:var(--slate);border-radius:8px;padding:7px 10px;font-size:var(--text-xs);font-weight:800;min-height:38px}.soft-btn:hover:not(:disabled){background:var(--blue-lt);border-color:var(--blue)}.soft-btn:disabled{opacity:.75}.commit-status{font-size:var(--text-xs);line-height:1.35;color:var(--muted);text-align:right}.commit-status.invalid{color:#b91c1c}.committed input,.committed textarea{color:var(--slate);background:#f1f5f9}.committed .commit-status{font-weight:800;color:var(--slate)}.committed{border-color:#94a3b8}
+.audit-grid,.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}.audit-card,.info-card{border:1.5px solid var(--border);background:var(--bg);border-radius:10px;padding:var(--space-3)}.audit-card h3,.info-card h3{font-family:var(--ff-head);font-size:var(--text-base);margin-bottom:var(--space-2)}.field{display:block;font-size:var(--text-sm);font-weight:700;color:var(--slate);margin-top:var(--space-2)}.field input,.field textarea{display:block;width:100%;border:1px solid var(--border);border-radius:6px;background:white;padding:6px;min-width:0;font-size:var(--text-sm);font-weight:400}.field textarea{min-height:56px;resize:vertical}.checklist{padding-left:1.2rem;font-size:var(--text-sm);color:var(--slate)}.checklist li{margin-bottom:6px}.route-strip{background:var(--sand-lt);border:1.5px solid var(--sand);border-radius:10px;padding:var(--space-3);margin-bottom:var(--space-4);font-size:var(--text-sm)}.route-strip strong{color:#92400e}.route-strip p+p{margin-top:var(--space-2)}.rule-grid{margin-bottom:var(--space-4)}
+.passage-box{padding:var(--space-4)}.passage-title{font-size:var(--text-lg);line-height:1.3}.passage-text{font-size:var(--text-sm);line-height:1.65;column-gap:var(--space-5)}.para-lbl{font-size:var(--text-xs)}.passage-box .micro-note{margin-bottom:var(--space-3)}.mc-q{break-inside:avoid;margin-bottom:var(--space-3);padding:var(--space-3)}.mc-q-text{font-size:var(--text-sm)}.mc-opts{grid-template-columns:1fr;gap:2px}.mc-opt{font-size:var(--text-sm);line-height:1.45;min-height:34px;align-items:flex-start;padding:5px 6px}.mc-opt .bubble{margin-top:3px;width:16px;height:16px;min-width:16px;font-size:11px}.mc-opt input[type=radio]{display:block;position:absolute;width:1px;height:1px;opacity:0}.mc-opt:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}.mc-opt:has(input:disabled){cursor:default}.mc-opt.selected{background:#e5e7eb;border-color:#374151}.passage-set.committed .mc-opt:not(.selected){opacity:.85}
+.set-commit{border:1.5px solid var(--border);border-radius:12px;background:#f1f5f9;padding:var(--space-4);margin-top:var(--space-4)}.set-commit h3{font-family:var(--ff-head);font-size:var(--text-base);margin-bottom:var(--space-2)}.set-commit .commit-row{align-items:flex-start;flex-direction:column}.set-commit .commit-status{text-align:left}.set-commit .soft-btn{min-height:44px}.evidence-note{min-height:62px}.print-copy{display:none}.print-commit-box{display:none}.completion-note{font-size:var(--text-sm);margin-top:var(--space-3);color:var(--slate)}
+.error-log h3{font-size:var(--text-lg)}.error-type-pills,.pill{font-size:var(--text-xs)}.error-table{table-layout:fixed}.error-table th,.error-table td{font-size:var(--text-xs);overflow-wrap:anywhere}.error-table td{height:57px;vertical-align:top}.error-table td[contenteditable]{outline:none}.error-table td[contenteditable]:focus{outline:2px solid var(--blue);outline-offset:-2px}.error-table th:nth-child(1){width:5%}.error-table th:nth-child(2){width:15%}.error-table th:nth-child(3){width:60%}.error-table th:nth-child(4){width:20%}.reflect-box h3{font-size:var(--text-base)}.reflect-line{font-size:var(--text-sm)}
+@media(max-width:650px){html{background:var(--bg)}body{width:100%}.sheet{margin:var(--space-3) var(--space-2);padding:var(--space-4);border-radius:10px}.hw-header{display:block}.hw-meta{margin-top:var(--space-4);min-width:0;max-width:100%}.hw-meta-row input{width:100%}.score-banner{padding:var(--space-3)}.score-cells{display:grid;grid-template-columns:repeat(3,1fr);width:100%;gap:var(--space-1)}.score-cell{min-width:0;padding:var(--space-2) var(--space-1)}.score-cell .sc-lbl{font-size:.75rem}.prob-grid,.audit-grid,.grid2{grid-template-columns:1fr}.section-hd{flex-wrap:wrap;gap:var(--space-2)}.section-hd .badge{margin-left:0}.passage-text{column-count:1}.mc-opt{min-height:44px}.soft-btn{min-height:44px}.error-log{padding:var(--space-3) var(--space-2)}.error-table th,.error-table td{padding:6px 4px}.error-table th:nth-child(2){width:18%}.error-table th:nth-child(3){width:52%}.error-table th:nth-child(4){width:25%}.reflect-line{flex-wrap:wrap}.reflect-line input{width:100%;flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+@page{size:letter;margin:.45in}
+@media print{
+ html,body{background:white!important;width:auto!important;max-width:none!important;font-size:10pt}body{line-height:1.4}.sheet{padding:.08in .13in!important;margin:0!important;box-shadow:none!important;border-radius:0!important}.sheet+.sheet,.page-break{break-before:page}.section-hd{margin-top:0;margin-bottom:7px}.section-hd h2{font-size:14pt}.section-hd .badge,.instr,.prob-q,.mc-q-text,.mc-opt,.field,.work-area,.answer-box,.checklist,.route-strip,.completion-note{font-size:10pt}.hw-header-left h1{font-size:22pt}.hw-header{margin-bottom:12px;padding-bottom:10px}.score-banner{padding:9px 12px;margin-bottom:13px}.score-banner .title{font-size:14pt}.score-banner .sub,.score-cell .sc-lbl,.micro-note,.source-note,.page-foot,.prob-num,.lvl,.work-caption{font-size:8.5pt}.score-cell .sc-val{font-size:13pt}.score-cell .print-copy{color:white!important}.score-cells{gap:8px}.score-cell{min-width:90px}.score-banner .sc-val input{display:none!important}.section-timer{border:0!important;padding:0!important;min-height:0!important;background:transparent!important;color:inherit!important}.section-timer::after{content:' budget'}.prob-grid{gap:10px;grid-template-columns:1fr 1fr}.prob{padding:9px}.prob-q{line-height:1.45;margin:6px 0}.work-area{min-height:53px;padding:5px 7px;margin-top:4px}.math-work .work-area{min-height:55px}.answer-input{min-height:26px;padding:3px 6px}.answer-box{margin-top:5px}.commit-row{margin-top:5px}.commit-row .soft-btn,.commit-row .commit-status{display:none}.print-commit-box{display:block;font-size:8pt;color:var(--muted);margin-top:5px}.instr{padding:5px 8px;margin-bottom:10px}.prob,.mc-q,.audit-card,.info-card,.reflect-box,.set-commit,.error-log{break-inside:avoid}.passage-text{font-size:10pt;line-height:1.5;column-count:2;column-gap:16px}.passage-box{padding:10px 12px;margin-bottom:10px}.passage-title{font-size:13pt;margin-bottom:6px}.passage-box .micro-note{margin-bottom:6px}.passage-text p{margin-bottom:7px}.mc-q{padding:8px 10px;margin-bottom:9px}.mc-q-text{margin-bottom:4px;line-height:1.4}.mc-opt{padding:2px 5px;min-height:0;line-height:1.35}.mc-opts{gap:1px}.mc-opt .bubble{width:13px;height:13px;min-width:13px;margin-top:2px;font-size:9px}.mc-opt input{display:none!important}.set-commit{margin-top:12px;padding:10px}.set-commit h3,.audit-card h3,.info-card h3{font-size:11pt}.grid2,.audit-grid{grid-template-columns:1fr 1fr;gap:10px}.route-strip{padding:10px;margin-bottom:12px}.rule-grid{margin-bottom:12px}.audit-card,.info-card{padding:10px}.field{margin-top:7px}.field textarea{min-height:38px}.error-log{padding:10px 12px}.error-log h3{font-size:13pt}.error-table th,.error-table td,.pill{font-size:8.5pt}.error-table td{height:48px}.error-type-pills{gap:4px}.reflect-box{padding:10px 12px;margin-top:10px}.reflect-box h3{font-size:11pt}.page-foot{margin-top:9px;padding-top:6px}.printable-field{display:none!important}.print-copy{display:inline-block;white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.2em;border-bottom:1px solid var(--border);max-width:100%;vertical-align:bottom}.print-copy.block{display:block;min-height:45px;border:1px dashed var(--border);border-radius:6px;background:white;color:var(--ink);padding:5px 7px;margin-top:4px}.answer-box .print-copy{flex:1;min-width:70px;min-height:24px}.field .print-copy{display:block;padding:5px 6px;background:white;border:1px solid var(--border);border-radius:5px;min-height:25px}.field .print-copy.block{min-height:45px}.hw-meta-row .print-copy{flex:1;min-width:100px}.error-table [contenteditable]{border-bottom:1px solid #fca5a5}.committed input,.committed textarea{background:white!important}.committed{border-color:var(--border)}
+}
+
+@media print{
+ @page{size:letter;margin:.35in}
+ .sheet{padding:.06in .1in!important}
+ .prob-q,.mc-q-text,.mc-opt,.field,.answer-box,.checklist,.route-strip,.completion-note,.instr{font-size:9.5pt}
+ .prob-q{line-height:1.4}.prob{padding:8px}.prob-grid{gap:8px}.math-work .print-copy.block{min-height:46px}
+ .math-section .completion-note{margin-top:7px}.math-section .page-foot{margin-top:6px}
+ .passage-text{font-size:9.5pt;line-height:1.4}.passage-text p{margin-bottom:6px}
+ .passage-box{padding:9px 10px}.mc-opts{grid-template-columns:1fr 1fr;gap:2px 10px}.mc-opt{line-height:1.3;padding:2px 4px}.mc-q-text{line-height:1.35}.mc-q{padding:7px 9px;margin-bottom:8px}
+ .instr{line-height:1.4;padding:4px 7px;margin-bottom:8px}
+ .set-commit{padding:8px;margin-top:9px}.set-commit .micro-note{line-height:1.4}.checklist li{margin-bottom:3px}.set-commit .checklist{line-height:1.4}
+ .error-table td{height:42px}.error-log{padding:8px 10px}.error-log h3{margin-bottom:5px}.reflect-box{padding:8px 10px}.field{line-height:1.35;margin-top:5px}.field .print-copy{min-height:22px;padding:4px 5px}.field .print-copy.block{min-height:36px}.reflect-box .grid2{gap:8px}
+ .section-timer{font-size:0!important}.section-timer::after{font-size:8.5pt;content:attr(data-budget) ' budget'}
+ .print-commit-box{line-height:1.3}.page-foot{font-size:8pt}
+}
+</style></head><body><a class="skip-link no-print" href="#homework">Skip to homework</a><div class="top-actions no-print"><button type="button" class="print-btn" id="print-save">Print / Save as PDF</button><button type="button" class="print-btn secondary" id="clear-all">Clear All</button></div><main id="homework"><section class="sheet" aria-label="Opening audit"><header class="hw-header"><div class="hw-header-left"><h1>Mock Debrief Homework</h1><div class="subtitle">Find the cause · Rebuild the method · SHSAT CAT · November 2026</div></div><div class="hw-meta"><label class="hw-meta-row"><span class="label">Name</span><input type="text" class="printable-field" aria-label="Student name"></label><label class="hw-meta-row"><span class="label">Date</span><input type="text" class="printable-field" aria-label="Date completed"></label></div></header><div class="score-banner">
+<div>
+<div class="title">Self-Score Before Session</div>
+<div class="sub">Fill in after tutor-verified checking — bring to Zoom!</div>
+</div>
+<div class="score-cells">
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Math problems correct" class="printable-field" max="12" min="0" placeholder="__" type="number"/> / 12</div>
+<div class="sc-lbl">Math Problems</div>
+</div>
+<div class="score-cell">
+<div class="sc-val"><input aria-label="ELA questions correct" class="printable-field" max="12" min="0" placeholder="__" type="number"/> / 12</div>
+<div class="sc-lbl">ELA Questions</div>
+</div>
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Total correct" class="printable-field" max="24" min="0" placeholder="__" type="number"/> / 24</div>
+<div class="sc-lbl">Total</div>
+</div>
+</div>
+</div>
+<div class="route-strip"><p><strong>24 new questions · about 80 minutes across two sittings.</strong> Complete 12 Math problems and two ELA sets of 6. The audit, evidence notes, and reflection are unscored. L1–L4 describe instructional demand, not official CAT difficulty.</p><p><strong>Digital workflow:</strong> click a section time to start or pause. An expired timer stops at 00:00; it never submits answers. Math: check and commit one response at a time. ELA: review within the current set, then commit all six together. Clear All unlocks and resets everything.</p><p><strong>Keep your work:</strong> entries remain in this open tab only. Print / Save as PDF preserves them; refreshing or closing the tab clears them. This fixed worksheet rehearses commitment, not adaptive item selection or scoring.</p></div>
+<div class="section-hd"><h2>Part A — Audit Before Repair</h2><span class="badge badge-sand">Unscored · <button type="button" class="section-timer" data-seconds="360" aria-label="Part A — Audit Before Repair timer; click to start or pause" aria-pressed="false">06:00</button></span></div><p class="instr">Use an actual completed mock. If a result or timestamp is unavailable, write “not available.” Do not substitute an older score or invent timing evidence.</p>
+<div class="audit-grid"><div class="audit-card"><h3>Keep the baseline honest</h3><label class="field">Mock / version and completion date<input class="printable-field " type="text" aria-label="Mock / version and completion date" ></label><label class="field">ELA correct / actual denominator<input class="printable-field " type="text" aria-label="ELA correct / actual denominator" ></label><label class="field">Math correct / actual denominator<input class="printable-field " type="text" aria-label="Math correct / actual denominator" ></label></div><div class="audit-card"><h3>Separate stalls from rushes</h3><label class="field">Actual Math time / actual ELA time<input class="printable-field " type="text" aria-label="Actual Math time / actual ELA time" ></label><label class="field">One stall: item + where progress stopped<input class="printable-field " type="text" aria-label="One stall: item + where progress stopped" ></label><label class="field">One rush: item + missing check<input class="printable-field " type="text" aria-label="One rush: item + missing check" ></label></div></div>
+<div class="grid2 rule-grid" style="margin-top:1rem"><article class="info-card"><h3>Math submission rehearsal</h3><p class="micro-note">Requested quantity → matching unit or expression → independent check → entry matches work. At 2:30 on one item, ask whether you have a specific next step; this is a strategy cue, not an official item limit.</p></article><article class="info-card"><h3>November 2026 navigation</h3><p class="micro-note">On the actual SHSAT, Math and stand-alone ELA responses cannot be revisited after advancing. Passage-set ELA responses can be revised within the current set before submission. The standard exam has 50 items per subject and 180 minutes total.</p></article></div>
+<p class="source-note">Format reference: <a href="https://www.schools.nyc.gov/learning/testing/specialized-high-school-admissions-test" target="_blank" rel="noopener noreferrer">NYCPS fall 2026 SHSAT functionality and scoring</a>. Worksheet timers are practice budgets; raw homework counts do not predict a scaled CAT score.</p><div class="page-foot">Audit → repair → transfer · 1 / 8</div></section>
+<section class="sheet page-break math-section" aria-label="Part B — Algebra, Inequalities &amp; Angles"><div class="section-hd"><h2>Part B — Algebra, Inequalities & Angles</h2><span class="badge badge-blue">6 Problems · <button type="button" class="section-timer" data-seconds="960" aria-label="Part B — Algebra, Inequalities &amp; Angles timer; click to start or pause" aria-pressed="false">16:00</button></span></div><p class="instr">Work in numerical order. Show the model and a check. Enter the requested quantity, then commit; the committed answer and work lock until Clear All. For inequalities, you may type &lt;= or &gt;=.</p><div class="prob-grid"><article class="prob math-item" id="m1" aria-labelledby="m1-label"><div class="prob-num" id="m1-label">M1 <span class="lvl lvl-1">L1</span></div><p class="prob-q">The relationship <strong>(3x + 2y) / 4 = 5y</strong> holds. Express <strong>x in terms of y</strong>.</p><div class="math-work"><label class="work-caption" for="m1-work">Method + independent check</label><textarea id="m1-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M1 work and check"></textarea><label class="answer-box" for="m1-answer">x =<input id="m1-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M1 final response" placeholder="Write an equivalent expression."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m2" aria-labelledby="m2-label"><div class="prob-num" id="m2-label">M2 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A workshop charges <strong>$18 for the first 4 boards</strong> cut and <strong>$3 for each additional board</strong>. For a whole number <strong>n ≥ 4</strong>, write an expression for the total charge in dollars.</p><div class="math-work"><label class="work-caption" for="m2-work">Method + independent check</label><textarea id="m2-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M2 work and check"></textarea><label class="answer-box" for="m2-answer">Charge =<input id="m2-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M2 final response" placeholder="Use n; do not include a dollar sign."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m3" aria-labelledby="m3-label"><div class="prob-num" id="m3-label">M3 <span class="lvl lvl-2">L2</span></div><p class="prob-q">Determine <strong>all real values of x</strong> satisfying <strong>4x − 7 ≤ 2x + 9</strong>. Enter an inequality, including whether its boundary is included.</p><div class="math-work"><label class="work-caption" for="m3-work">Method + independent check</label><textarea id="m3-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M3 work and check"></textarea><label class="answer-box" for="m3-answer">Solution:<input id="m3-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M3 final response" placeholder="For example, x < a (not the answer)."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m4" aria-labelledby="m4-label"><div class="prob-num" id="m4-label">M4 <span class="lvl lvl-3">L3</span></div><p class="prob-q">What is the <strong>greatest integer x</strong> that satisfies <strong>−3(2x − 5) > 27</strong>?</p><div class="math-work"><label class="work-caption" for="m4-work">Method + independent check</label><textarea id="m4-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M4 work and check"></textarea><label class="answer-box" for="m4-answer">x =<input id="m4-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M4 final response" placeholder="Enter one integer."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m5" aria-labelledby="m5-label"><div class="prob-num" id="m5-label">M5 <span class="lvl lvl-3">L3</span></div><p class="prob-q">The acute angles of a right triangle measure <strong>(3x + 4)°</strong> and <strong>(2x + 11)°</strong>. What is the measure, in degrees, of the <strong>smaller acute angle</strong>?</p><div class="math-work"><label class="work-caption" for="m5-work">Method + independent check</label><textarea id="m5-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M5 work and check"></textarea><label class="answer-box" for="m5-answer">Degrees:<input id="m5-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M5 final response" placeholder="Enter the angle, not x."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m6" aria-labelledby="m6-label"><div class="prob-num" id="m6-label">M6 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A triangle has interior angles measuring <strong>(4x + 8)°</strong>, <strong>(3x + 1)°</strong>, and <strong>(2x + 9)°</strong>. What is the measure, in degrees, of its <strong>largest angle</strong>?</p><div class="math-work"><label class="work-caption" for="m6-work">Method + independent check</label><textarea id="m6-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M6 work and check"></textarea><label class="answer-box" for="m6-answer">Degrees:<input id="m6-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M6 final response" placeholder="Enter the angle, not x."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article></div><p class="completion-note"><strong>After the section:</strong> mark one item whose time cost or checking routine deserves a closer look in the error log. Do not infer correctness from how difficult an item felt.</p><div class="page-foot">12 Math problems total · no calculator for this practice · 2 / 8</div></section>
+<section class="sheet page-break math-section" aria-label="Part C — Volume, Percent &amp; Constraints"><div class="section-hd"><h2>Part C — Volume, Percent & Constraints</h2><span class="badge badge-blue">6 Problems · <button type="button" class="section-timer" data-seconds="1200" aria-label="Part C — Volume, Percent &amp; Constraints timer; click to start or pause" aria-pressed="false">20:00</button></span></div><p class="instr">Work in numerical order. Show the model and a check. Enter the requested quantity, then commit; the committed answer and work lock until Clear All. For inequalities, you may type &lt;= or &gt;=.</p><div class="prob-grid"><article class="prob math-item" id="m7" aria-labelledby="m7-label"><div class="prob-num" id="m7-label">M7 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A solid rectangular block measures <strong>14 cm × 10 cm × 8 cm</strong>. A straight rectangular tunnel with a <strong>3 cm × 2 cm opening</strong> runs through the full <strong>14 cm length</strong>. What volume of material remains?</p><div class="math-work"><label class="work-caption" for="m7-work">Method + independent check</label><textarea id="m7-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M7 work and check"></textarea><label class="answer-box" for="m7-answer">cm³:<input id="m7-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M7 final response" placeholder="Enter the remaining volume."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m8" aria-labelledby="m8-label"><div class="prob-num" id="m8-label">M8 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A solid <strong>18 cm × 12 cm × 10 cm</strong> block has two straight tunnels removed. One has a <strong>2 cm × 2 cm</strong> opening and runs through 18 cm; the other has a <strong>3 cm × 3 cm</strong> opening and runs through 10 cm. Their overlap is exactly a <strong>3 cm × 2 cm × 2 cm prism</strong>. What volume remains?</p><div class="math-work"><label class="work-caption" for="m8-work">Method + independent check</label><textarea id="m8-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M8 work and check"></textarea><label class="answer-box" for="m8-answer">cm³:<input id="m8-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M8 final response" placeholder="Enter the remaining volume."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m9" aria-labelledby="m9-label"><div class="prob-num" id="m9-label">M9 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A camera listed at <strong>$640</strong> is discounted by <strong>25%</strong>. A <strong>6.25% sales tax</strong> is applied to the discounted price. The buyer then pays <strong>$150</strong> toward the bill. With no other fees, how much remains unpaid?</p><div class="math-work"><label class="work-caption" for="m9-work">Method + independent check</label><textarea id="m9-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M9 work and check"></textarea><label class="answer-box" for="m9-answer">Dollars:<input id="m9-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M9 final response" placeholder="Enter the unpaid balance."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m10" aria-labelledby="m10-label"><div class="prob-num" id="m10-label">M10 <span class="lvl lvl-1">L1</span></div><p class="prob-q">The total price, including only sales tax, is modeled by <strong>1.0725p</strong>, where p is the price before tax. What is the <strong>sales-tax rate as a percent</strong>?</p><div class="math-work"><label class="work-caption" for="m10-work">Method + independent check</label><textarea id="m10-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M10 work and check"></textarea><label class="answer-box" for="m10-answer">Percent:<input id="m10-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M10 final response" placeholder="Enter the percent number."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m11" aria-labelledby="m11-label"><div class="prob-num" id="m11-label">M11 <span class="lvl lvl-3">L3</span></div><p class="prob-q">An <strong>84 cm × 126 cm</strong> rectangular panel is cut into congruent squares. The squares tile the panel in straight rows and columns, their sides parallel to the panel edges, with no waste. What is the <strong>fewest number of squares</strong> possible?</p><div class="math-work"><label class="work-caption" for="m11-work">Method + independent check</label><textarea id="m11-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M11 work and check"></textarea><label class="answer-box" for="m11-answer">Squares:<input id="m11-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M11 final response" placeholder="Enter the number, not the side length."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article><article class="prob math-item" id="m12" aria-labelledby="m12-label"><div class="prob-num" id="m12-label">M12 <span class="lvl lvl-4">L4</span></div><p class="prob-q">Plan A costs <strong>$36 for the first 4 visits</strong>, then <strong>$3 per additional visit</strong>. Plan B costs <strong>$12 for the first 2 visits</strong>, then <strong>$5 per additional visit</strong>. For a whole number of visits n ≥ 4, what is the <strong>smallest n</strong> for which Plan A is strictly cheaper?</p><div class="math-work"><label class="work-caption" for="m12-work">Method + independent check</label><textarea id="m12-work" class="work-area printable-field" placeholder="Show the relationship, work, and a check." aria-label="M12 work and check"></textarea><label class="answer-box" for="m12-answer">Visits:<input id="m12-answer" class="answer-input printable-field response" type="text" autocomplete="off" aria-label="M12 final response" placeholder="Enter one whole number."></label><div class="commit-row"><button class="soft-btn commit-item" type="button">Commit response</button><span class="commit-status" role="status">Not committed</span></div><div class="print-commit-box">Final check complete: □</div></div></article></div><p class="completion-note"><strong>After the section:</strong> mark one item whose time cost or checking routine deserves a closer look in the error log. Do not infer correctness from how difficult an item felt.</p><div class="page-foot">12 Math problems total · no calculator for this practice · 3 / 8</div></section>
+<section class="passage-set" id="ela-set-1" aria-label="ELA passage set 1"><div class="sheet page-break"><div class="section-hd"><h2>Part D1 — Study Design & Evidence</h2><span class="badge badge-blue">6 Questions · <button type="button" class="section-timer" data-seconds="840" aria-label="Part D1 — Study Design &amp; Evidence timer; click to start or pause" aria-pressed="false">14:00</button></span></div><p class="instr">Read for the passage’s argument or development. Answer E1–E6; all six remain editable until the set-level commitment on the next page. Evidence notes are unscored.</p><article class="passage-box"><h3 class="passage-title">When a Map Stops Helping</h3><p class="micro-note">Original informational practice passage. The study is fictional and is not a report of scientific findings.</p><div class="passage-text"><p><span class="para-lbl">[¶1]</span> Knowing where a place is does not always mean knowing how to reach it when the usual road is closed. A map may support both tasks, yet a person who remembers isolated landmarks may still struggle to connect them. A community-center team wondered whether reconstructing a map from memory would help people use those connections, rather than merely recognize familiar locations.</p><p><span class="para-lbl">[¶2]</span> In an imagined study, adult volunteers who had never seen a tabletop model town were randomly assigned to two groups. Everyone studied the same labeled map for the same amount of time. The maps were then removed. One group drew the town from memory; the other traced a faint street outline. Neither group could see place labels during this activity. Both groups worked for an equal period and received the same instructions about the later tests.</p><p><span class="para-lbl">[¶3]</span> Immediately after the activity, one test asked volunteers to place named landmarks on an unlabelled map. A second presented a blocked road and asked them to choose the shortest available route between two sites. The first task assessed remembered locations; the second required using relationships among streets. The examiners who scored the responses did not know which activity each volunteer had completed.</p><p><span class="para-lbl">[¶4]</span> The memory-drawing group performed better on the blocked-road task, while the groups differed little on the landmark-placement task. When volunteers took new versions of both tests a month later, the route-choice advantage was still present but smaller. The team did not treat these patterns as interchangeable: remembering names and positions was not the same outcome as finding an alternative path.</p><p><span class="para-lbl">[¶5]</span> The team also cautioned that the volunteers came from one adult community-center population, and a tabletop town is not a crowded city. Children, experienced drivers, and people navigating under pressure had not been tested. Nor had the researchers measured brain activity. Random assignment strengthened the comparison between the two activities; it did not make the participants representative of every possible map user.</p><p><span class="para-lbl">[¶6]</span> The result therefore supported a limited proposal: under these study conditions, reconstructing a map appeared useful for a task requiring flexible route choices. It did not establish that everyone should abandon printed maps, or that drawing improves every kind of memory. A useful conclusion, the team argued, should be no wider than the evidence carrying it.</p></div></article><article class="mc-q" id="e1" aria-labelledby="e1-text"><div class="mc-q-text" id="e1-text"><span class="qnum">E1.</span> Which task in the study most directly required volunteers to use street relationships rather than recall landmark locations? <span class="lvl lvl-1">L1</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e1-text"><label class="mc-opt"><input type="radio" name="e1" value="A" aria-label="E1 option A"><span class="bubble" aria-hidden="true"></span><span>A) Identifying the activity performed by another volunteer.</span></label><label class="mc-opt"><input type="radio" name="e1" value="B" aria-label="E1 option B"><span class="bubble" aria-hidden="true"></span><span>B) Studying the labeled map before it was removed.</span></label><label class="mc-opt"><input type="radio" name="e1" value="C" aria-label="E1 option C"><span class="bubble" aria-hidden="true"></span><span>C) Choosing a shortest available route after a road was blocked.</span></label><label class="mc-opt"><input type="radio" name="e1" value="D" aria-label="E1 option D"><span class="bubble" aria-hidden="true"></span><span>D) Placing named landmarks on an unlabelled map.</span></label></div></article><article class="mc-q" id="e2" aria-labelledby="e2-text"><div class="mc-q-text" id="e2-text"><span class="qnum">E2.</span> What is the main function of the distinction in paragraph 1 between knowing a location and reaching it after a road closes? <span class="lvl lvl-2">L2</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e2-text"><label class="mc-opt"><input type="radio" name="e2" value="A" aria-label="E2 option A"><span class="bubble" aria-hidden="true"></span><span>A) It introduces two abilities that the study later measures separately.</span></label><label class="mc-opt"><input type="radio" name="e2" value="B" aria-label="E2 option B"><span class="bubble" aria-hidden="true"></span><span>B) It establishes that map users usually forget place names.</span></label><label class="mc-opt"><input type="radio" name="e2" value="C" aria-label="E2 option C"><span class="bubble" aria-hidden="true"></span><span>C) It explains why the team avoided testing route choices.</span></label><label class="mc-opt"><input type="radio" name="e2" value="D" aria-label="E2 option D"><span class="bubble" aria-hidden="true"></span><span>D) It argues that printed maps are less accurate than drawings.</span></label></div></article><div class="page-foot">When a Map Stops Helping · set continues · 4 / 8</div></div>
+<div class="sheet page-break"><div class="section-hd"><h2>Part D1 Continued — E3–E6</h2><span class="badge badge-blue">Same passage set</span></div><p class="instr">Refer to the passage on the preceding page. You may revise any of this set’s six choices before committing the whole set below.</p><article class="mc-q" id="e3" aria-labelledby="e3-text"><div class="mc-q-text" id="e3-text"><span class="qnum">E3.</span> Which finding most directly supports the claim that memory-drawing helped with flexible use of the map, not merely landmark recall? <span class="lvl lvl-3">L3</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e3-text"><label class="mc-opt"><input type="radio" name="e3" value="A" aria-label="E3 option A"><span class="bubble" aria-hidden="true"></span><span>A) Both groups received the same instructions about the tests.</span></label><label class="mc-opt"><input type="radio" name="e3" value="B" aria-label="E3 option B"><span class="bubble" aria-hidden="true"></span><span>B) The volunteers were assigned to groups at random.</span></label><label class="mc-opt"><input type="radio" name="e3" value="C" aria-label="E3 option C"><span class="bubble" aria-hidden="true"></span><span>C) Examiners did not know which activity a volunteer had completed.</span></label><label class="mc-opt"><input type="radio" name="e3" value="D" aria-label="E3 option D"><span class="bubble" aria-hidden="true"></span><span>D) The drawing group did better on routes but differed little on landmark placement.</span></label></div></article><article class="mc-q" id="e4" aria-labelledby="e4-text"><div class="mc-q-text" id="e4-text"><span class="qnum">E4.</span> Which conclusion is best supported by the limitations in paragraph 5? <span class="lvl lvl-4">L4</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e4-text"><label class="mc-opt"><input type="radio" name="e4" value="A" aria-label="E4 option A"><span class="bubble" aria-hidden="true"></span><span>A) Random assignment shows that the result applies equally to children and adults.</span></label><label class="mc-opt"><input type="radio" name="e4" value="B" aria-label="E4 option B"><span class="bubble" aria-hidden="true"></span><span>B) The study leaves open whether the same benefit would occur for children in a real city.</span></label><label class="mc-opt"><input type="radio" name="e4" value="C" aria-label="E4 option C"><span class="bubble" aria-hidden="true"></span><span>C) The absence of brain measurements proves that drawing had no effect.</span></label><label class="mc-opt"><input type="radio" name="e4" value="D" aria-label="E4 option D"><span class="bubble" aria-hidden="true"></span><span>D) The adult volunteers’ results show that drawing is unsafe under pressure.</span></label></div></article><article class="mc-q" id="e5" aria-labelledby="e5-text"><div class="mc-q-text" id="e5-text"><span class="qnum">E5.</span> Which sentence best summarizes the study’s procedure without reporting its results? <span class="lvl lvl-3">L3</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e5-text"><label class="mc-opt"><input type="radio" name="e5" value="A" aria-label="E5 option A"><span class="bubble" aria-hidden="true"></span><span>A) Adults at a community center drew maps and demonstrated that memory-drawing improves route choice for everyone.</span></label><label class="mc-opt"><input type="radio" name="e5" value="B" aria-label="E5 option B"><span class="bubble" aria-hidden="true"></span><span>B) Volunteers chose either drawing or tracing and then explained the brain processes involved in learning a town.</span></label><label class="mc-opt"><input type="radio" name="e5" value="C" aria-label="E5 option C"><span class="bubble" aria-hidden="true"></span><span>C) Randomly assigned adults studied one map, drew or traced its streets, and completed location and route tests immediately and a month later.</span></label><label class="mc-opt"><input type="radio" name="e5" value="D" aria-label="E5 option D"><span class="bubble" aria-hidden="true"></span><span>D) Examiners taught adults different towns and compared how quickly each group could reproduce labeled maps.</span></label></div></article><article class="mc-q" id="e6" aria-labelledby="e6-text"><div class="mc-q-text" id="e6-text"><span class="qnum">E6.</span> How does the month-later finding affect the interpretation of the route-choice advantage? <span class="lvl lvl-4">L4</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e6-text"><label class="mc-opt"><input type="radio" name="e6" value="A" aria-label="E6 option A"><span class="bubble" aria-hidden="true"></span><span>A) It suggests that some advantage lasted, but it does not show that the advantage remained equally large.</span></label><label class="mc-opt"><input type="radio" name="e6" value="B" aria-label="E6 option B"><span class="bubble" aria-hidden="true"></span><span>B) It establishes that the groups had identical route-choice scores after a month.</span></label><label class="mc-opt"><input type="radio" name="e6" value="C" aria-label="E6 option C"><span class="bubble" aria-hidden="true"></span><span>C) It proves that memory-drawing permanently improves all navigation skills.</span></label><label class="mc-opt"><input type="radio" name="e6" value="D" aria-label="E6 option D"><span class="bubble" aria-hidden="true"></span><span>D) It shows that the initial difference was actually a difference in landmark recall.</span></label></div></article><label class="work-caption" for="evidence-1">Evidence check: one choice, its paragraph, and why a tempting alternative fails (unscored)</label><textarea class="work-area evidence-note printable-field" id="evidence-1" aria-label="Set 1 evidence check" placeholder="Question → paragraph/detail → why this evidence answers the exact question."></textarea><div class="set-commit"><div class="grid2"><div><h3>ELA set submission rehearsal</h3><ul class="checklist"><li>Does each response answer its question type?</li><li>Can I locate the evidence, and have I limited the claim to that evidence?</li><li>Have I reviewed all six responses in this set?</li></ul></div><div><h3>One last check, then commit</h3><p class="micro-note">You may revise E1–E6 until you commit this whole set. Commitment locks responses and notes, without checking correctness.</p><div class="commit-row"><button type="button" class="soft-btn commit-set">Commit E1–E6 set</button><span class="commit-status" role="status">Set not committed</span></div><div class="print-commit-box">All six responses reviewed and committed: □</div></div></div></div><div class="page-foot">When a Map Stops Helping · six responses, one commitment · 5 / 8</div></div></section>
+<section class="passage-set" id="ela-set-2" aria-label="ELA passage set 2"><div class="sheet page-break"><div class="section-hd"><h2>Part D2 — Literary Inference & Structure</h2><span class="badge badge-blue">6 Questions · <button type="button" class="section-timer" data-seconds="840" aria-label="Part D2 — Literary Inference &amp; Structure timer; click to start or pause" aria-pressed="false">14:00</button></span></div><p class="instr">Read for the passage’s argument or development. Answer E7–E12; all six remain editable until the set-level commitment on the next page. Evidence notes are unscored.</p><article class="passage-box"><h3 class="passage-title">The Window Has a Vote</h3><p class="micro-note">Original literary practice passage. Type: the individual letters arranged for printing. Proof: a trial print used to check an arrangement.</p><div class="passage-text"><p><span class="para-lbl">[¶1]</span> The first poster I set in my aunt’s print shop looked splendid from the stool. I had crowded the neighborhood fair’s name with every broad letter I could find. Stars filled the corners, and a border marched around the edge. When I reached the final line, however, the words had nowhere to stand. I pushed the letters closer, as if a crowd could be persuaded to shrink by being asked politely.</p><p><span class="para-lbl">[¶2]</span> Aunt Inez lifted the proof but did not move a single letter. “Where will they read it?” she asked. I pointed toward the window. She handed it back. “Then the window ought to have a vote.” I carried the sheet outside, embarrassed by what seemed an unnecessary errand. From the opposite curb, my splendid heading became a dark bar, and the fair’s date disappeared into the border.</p><p><span class="para-lbl">[¶3]</span> Back inside, I replaced the broad letters with narrow ones. Now every word fitted, but the poster looked tired and timid. I waited for my aunt to repair it. Instead, she slid a strip of scrap paper across the table and set the worn metal ruler beside it. “You can test one line without spending a whole sheet,” she said. She returned to the press, leaving the decision, but not the tools, with me.</p><p><span class="para-lbl">[¶4]</span> I tried the date on the strip. I spread the letters, then spread them too far. On the third attempt, I left a little room around the line instead of decorating it. Outside, I could read it without leaning forward. For the first time that afternoon, I was not asking whether I had filled the paper. I was asking whether a stranger could use it.</p><p><span class="para-lbl">[¶5]</span> My aunt placed a fresh sheet on the table—the good paper, not the practice stock. “Your arrangement,” she said. I removed two stars and most of the border. The blank spaces had a job now. They held the date apart from the address and gave each line somewhere to begin. I had expected to feel that I had made less of a poster; instead, I felt that I had finally made one.</p><p><span class="para-lbl">[¶6]</span> The last border still leaned. My aunt laid the ruler along it, and I reset the type myself. She had not stopped noticing mistakes, and I had not stopped making them. But when the poster went into the window, I watched a passerby pause, read the date, and point it out to a friend. I looked back toward the press. My aunt was already working, though she had left the door open.</p></div></article><article class="mc-q" id="e7" aria-labelledby="e7-text"><div class="mc-q-text" id="e7-text"><span class="qnum">E7.</span> What did the narrator observe from the opposite curb on the first trip outside? <span class="lvl lvl-1">L1</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e7-text"><label class="mc-opt"><input type="radio" name="e7" value="A" aria-label="E7 option A"><span class="bubble" aria-hidden="true"></span><span>A) The narrow letters had become too faint to print.</span></label><label class="mc-opt"><input type="radio" name="e7" value="B" aria-label="E7 option B"><span class="bubble" aria-hidden="true"></span><span>B) The heading formed a dark bar, and the border obscured the date.</span></label><label class="mc-opt"><input type="radio" name="e7" value="C" aria-label="E7 option C"><span class="bubble" aria-hidden="true"></span><span>C) The stars made the address easier for strangers to identify.</span></label><label class="mc-opt"><input type="radio" name="e7" value="D" aria-label="E7 option D"><span class="bubble" aria-hidden="true"></span><span>D) The last border leaned even though the date was clear.</span></label></div></article><article class="mc-q" id="e8" aria-labelledby="e8-text"><div class="mc-q-text" id="e8-text"><span class="qnum">E8.</span> What does the aunt’s suggestion to test one line on scrap paper most strongly suggest about her teaching? <span class="lvl lvl-2">L2</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e8-text"><label class="mc-opt"><input type="radio" name="e8" value="A" aria-label="E8 option A"><span class="bubble" aria-hidden="true"></span><span>A) She believes the narrator should avoid making any independent choices.</span></label><label class="mc-opt"><input type="radio" name="e8" value="B" aria-label="E8 option B"><span class="bubble" aria-hidden="true"></span><span>B) She expects the first arrangement to succeed without revision.</span></label><label class="mc-opt"><input type="radio" name="e8" value="C" aria-label="E8 option C"><span class="bubble" aria-hidden="true"></span><span>C) She wants to finish the poster herself without wasting good paper.</span></label><label class="mc-opt"><input type="radio" name="e8" value="D" aria-label="E8 option D"><span class="bubble" aria-hidden="true"></span><span>D) She supports experimentation while limiting the cost of an unsuccessful attempt.</span></label></div></article><div class="page-foot">The Window Has a Vote · set continues · 6 / 8</div></div>
+<div class="sheet page-break"><div class="section-hd"><h2>Part D2 Continued — E9–E12</h2><span class="badge badge-blue">Same passage set</span></div><p class="instr">Refer to the passage on the preceding page. You may revise any of this set’s six choices before committing the whole set below.</p><article class="mc-q" id="e9" aria-labelledby="e9-text"><div class="mc-q-text" id="e9-text"><span class="qnum">E9.</span> How do the narrator’s trips outside contribute to the development of the passage? <span class="lvl lvl-3">L3</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e9-text"><label class="mc-opt"><input type="radio" name="e9" value="A" aria-label="E9 option A"><span class="bubble" aria-hidden="true"></span><span>A) They shift the narrator’s attention from fitting decorations onto a sheet to making the information usable.</span></label><label class="mc-opt"><input type="radio" name="e9" value="B" aria-label="E9 option B"><span class="bubble" aria-hidden="true"></span><span>B) They interrupt the printing work to establish a separate conflict with the passerby.</span></label><label class="mc-opt"><input type="radio" name="e9" value="C" aria-label="E9 option C"><span class="bubble" aria-hidden="true"></span><span>C) They show that the aunt values the window’s appearance more than the poster’s wording.</span></label><label class="mc-opt"><input type="radio" name="e9" value="D" aria-label="E9 option D"><span class="bubble" aria-hidden="true"></span><span>D) They reveal that technical accuracy matters only when someone else is watching.</span></label></div></article><article class="mc-q" id="e10" aria-labelledby="e10-text"><div class="mc-q-text" id="e10-text"><span class="qnum">E10.</span> In paragraph 5, what does “The blank spaces had a job now” mean? <span class="lvl lvl-3">L3</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e10-text"><label class="mc-opt"><input type="radio" name="e10" value="A" aria-label="E10 option A"><span class="bubble" aria-hidden="true"></span><span>A) The narrator plans to fill the remaining spaces with more stars.</span></label><label class="mc-opt"><input type="radio" name="e10" value="B" aria-label="E10 option B"><span class="bubble" aria-hidden="true"></span><span>B) The spaces reveal that the narrator has not yet finished setting the type.</span></label><label class="mc-opt"><input type="radio" name="e10" value="C" aria-label="E10 option C"><span class="bubble" aria-hidden="true"></span><span>C) The spaces separate important information so readers can find it more easily.</span></label><label class="mc-opt"><input type="radio" name="e10" value="D" aria-label="E10 option D"><span class="bubble" aria-hidden="true"></span><span>D) The narrator will use the unused paper to practice the border.</span></label></div></article><article class="mc-q" id="e11" aria-labelledby="e11-text"><div class="mc-q-text" id="e11-text"><span class="qnum">E11.</span> Which pair of details best supports the interpretation that the aunt combines independence with continued guidance? <span class="lvl lvl-4">L4</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e11-text"><label class="mc-opt"><input type="radio" name="e11" value="A" aria-label="E11 option A"><span class="bubble" aria-hidden="true"></span><span>A) The narrator crowds the fair’s name; the narrator later removes stars.</span></label><label class="mc-opt"><input type="radio" name="e11" value="B" aria-label="E11 option B"><span class="bubble" aria-hidden="true"></span><span>B) The aunt leaves the arrangement to the narrator; she later uses the ruler to identify the leaning border.</span></label><label class="mc-opt"><input type="radio" name="e11" value="C" aria-label="E11 option C"><span class="bubble" aria-hidden="true"></span><span>C) The poster uses good paper; a passerby points out the date to a friend.</span></label><label class="mc-opt"><input type="radio" name="e11" value="D" aria-label="E11 option D"><span class="bubble" aria-hidden="true"></span><span>D) The aunt returns to the press; the date initially disappears into the border.</span></label></div></article><article class="mc-q" id="e12" aria-labelledby="e12-text"><div class="mc-q-text" id="e12-text"><span class="qnum">E12.</span> Which statement best expresses the passage’s central idea? <span class="lvl lvl-4">L4</span></div><div class="mc-opts" role="radiogroup" aria-labelledby="e12-text"><label class="mc-opt"><input type="radio" name="e12" value="A" aria-label="E12 option A"><span class="bubble" aria-hidden="true"></span><span>A) Practice matters chiefly because it enables a learner to avoid needing guidance again.</span></label><label class="mc-opt"><input type="radio" name="e12" value="B" aria-label="E12 option B"><span class="bubble" aria-hidden="true"></span><span>B) A finished design is successful whenever its maker has used every available space.</span></label><label class="mc-opt"><input type="radio" name="e12" value="C" aria-label="E12 option C"><span class="bubble" aria-hidden="true"></span><span>C) Learning a craft requires setting aside personal judgment and copying an expert’s choices.</span></label><label class="mc-opt"><input type="radio" name="e12" value="D" aria-label="E12 option D"><span class="bubble" aria-hidden="true"></span><span>D) A learner develops judgment by testing choices against a purpose while receiving measured support.</span></label></div></article><label class="work-caption" for="evidence-2">Evidence check: one choice, its paragraph, and why a tempting alternative fails (unscored)</label><textarea class="work-area evidence-note printable-field" id="evidence-2" aria-label="Set 2 evidence check" placeholder="Question → paragraph/detail → why this evidence answers the exact question."></textarea><div class="set-commit"><div class="grid2"><div><h3>ELA set submission rehearsal</h3><ul class="checklist"><li>Does each response answer its question type?</li><li>Can I locate the evidence, and have I limited the claim to that evidence?</li><li>Have I reviewed all six responses in this set?</li></ul></div><div><h3>One last check, then commit</h3><p class="micro-note">You may revise E7–E12 until you commit this whole set. Commitment locks responses and notes, without checking correctness.</p><div class="commit-row"><button type="button" class="soft-btn commit-set">Commit E7–E12 set</button><span class="commit-status" role="status">Set not committed</span></div><div class="print-commit-box">All six responses reviewed and committed: □</div></div></div></div><div class="page-foot">The Window Has a Vote · six responses, one commitment · 7 / 8</div></div></section>
+<section class="sheet page-break" aria-label="Error log and two priorities"><div class="section-hd"><h2>Part E — Error Log & Two Priorities</h2><span class="badge badge-coral">Unscored · <button type="button" class="section-timer" data-seconds="600" aria-label="Part E — Error Log &amp; Two Priorities timer; click to start or pause" aria-pressed="false">10:00</button></span></div><p class="instr">After tutor-verified checking, log misses, unsupported rushes, or costly stalls. Choose one primary cause: C = execution, M = missing model or content, T = timed decision process. A long solution is not automatically a timing-only problem.</p><div class="error-log">
+<h3>My Errors This Week</h3>
+<div class="error-type-pills">
+<span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+<span class="pill pill-cg">M · Content Gap — I could not justify the method</span>
+<span class="pill pill-ce">C · Careless Error — I knew it but executed incorrectly</span>
+<span class="pill pill-ru">T · Timing — I stalled or rushed without support</span>
+</div>
+<table class="error-table" style="margin-top:0.7rem;">
+<thead>
+<tr>
+<th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:20%">Error Type</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1</td><td aria-label="Error 1: problem and skill" contenteditable="true" role="textbox" style="outline:none;min-width:60px;"> </td><td aria-label="Error 1: first broken step and replacement action" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 1: primary cause M, C, or T" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>2</td><td aria-label="Error 2: problem and skill" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 2: first broken step and replacement action" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 2: primary cause M, C, or T" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>3</td><td aria-label="Error 3: problem and skill" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 3: first broken step and replacement action" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 3: primary cause M, C, or T" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>4</td><td aria-label="Error 4: problem and skill" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 4: first broken step and replacement action" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 4: primary cause M, C, or T" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+<tr><td>5</td><td aria-label="Error 5: problem and skill" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 5: first broken step and replacement action" contenteditable="true" role="textbox" style="outline:none;"> </td><td aria-label="Error 5: primary cause M, C, or T" contenteditable="true" role="textbox" style="outline:none;"> </td></tr>
+</tbody>
+</table>
+</div>
+<p class="micro-note" style="margin-top:.5rem">In “Problem,” include the item and specific skill. In “What I Did Wrong,” write <strong>first broken step → observable replacement action</strong>. A correct redo after a hint is not independent mastery.</p>
+<div class="reflect-box"><h3>Two priorities supported by this homework</h3><div class="grid2"><div><label class="field">Priority 1: specific skill + supporting item IDs<input class="printable-field " type="text" aria-label="Priority 1: specific skill + supporting item IDs" ></label><label class="field">Next-time action I can actually observe<input class="printable-field " type="text" aria-label="Next-time action I can actually observe" ></label></div><div><label class="field">Priority 2: specific skill + supporting item IDs<input class="printable-field " type="text" aria-label="Priority 2: specific skill + supporting item IDs" ></label><label class="field">Next-time action I can actually observe<input class="printable-field " type="text" aria-label="Next-time action I can actually observe" ></label></div></div></div>
+<div class="grid2" style="margin-top:1rem"><article class="info-card"><h3>Math teach-back</h3><label class="field">I recognize this structure when…<textarea class="printable-field " aria-label="I recognize this structure when…" ></textarea></label><label class="field">My independent check is…<input class="printable-field " type="text" aria-label="My independent check is…" ></label></article><article class="info-card"><h3>ELA teach-back</h3><label class="field">This detail supports this exact claim because…<textarea class="printable-field " aria-label="This detail supports this exact claim because…" ></textarea></label><label class="field">This evidence does not establish…<input class="printable-field " type="text" aria-label="This evidence does not establish…" ></label></article></div>
+<label class="work-caption" for="final-commit">My commitment routine: the check I will not omit</label><textarea class="work-area printable-field" id="final-commit" aria-label="My final commitment routine" placeholder="Before I submit, I will…"></textarea>
+<p class="completion-note">Complete the blue self-score banner only after your tutor has verified the 24 scored responses. Leave it blank if checking is not yet available. Bring the saved worksheet and your two priorities to the next session.</p><div class="page-foot">Evidence before commitment · no answer key included · 8 / 8</div></section></main><script>
+"use strict";
+const timerControllers=[];
+let hasWork=false;
+const formatTime=ms=>{const s=Math.ceil(Math.max(0,ms)/1000);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");};
+document.querySelectorAll(".section-timer").forEach(timer=>{
+ const initial=Number(timer.dataset.seconds)*1000;
+ timer.dataset.budget=formatTime(initial);
+ let remaining=initial,deadline=0,interval=null;
+ const name=timer.closest(".section-hd").querySelector("h2").textContent;
+ const render=()=>{timer.textContent=formatTime(remaining);timer.setAttribute("aria-label",name+" timer, "+timer.textContent+" remaining; "+(interval===null?"click to start":"click to pause"));};
+ const stop=()=>{if(interval!==null)clearInterval(interval);interval=null;timer.classList.remove("running");timer.setAttribute("aria-pressed","false");};
+ const tick=()=>{remaining=Math.max(0,deadline-performance.now());if(remaining===0){stop();timer.classList.add("expired");timer.disabled=true;render();timer.setAttribute("aria-label",name+" timer expired; responses are not submitted");}else render();};
+ timer.addEventListener("click",()=>{if(remaining<=0)return;if(interval!==null){tick();stop();render();}else{deadline=performance.now()+remaining;timer.classList.add("running");timer.setAttribute("aria-pressed","true");interval=setInterval(tick,100);tick();}});
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden&&interval!==null)tick();});
+ timerControllers.push({reset:()=>{stop();remaining=initial;timer.disabled=false;timer.classList.remove("expired");render();},pause:()=>{if(interval!==null){tick();stop();render();}}});render();
+});
+function resizeArea(area){area.style.height="auto";area.style.height=Math.max(56,area.scrollHeight)+"px";}
+document.querySelectorAll("textarea").forEach(area=>area.addEventListener("input",()=>resizeArea(area)));
+document.addEventListener("input",()=>{hasWork=true;});
+document.querySelectorAll(".mc-opt input").forEach(radio=>{
+ radio.addEventListener("change",()=>{
+  const group=radio.closest(".mc-opts");
+  group.querySelectorAll(".mc-opt").forEach(label=>{const selected=label.querySelector("input").checked;label.classList.toggle("selected",selected);label.querySelector(".bubble").textContent=selected?"✓":"";});
+  const status=radio.closest(".passage-set").querySelector(".commit-status");status.classList.remove("invalid");status.textContent="Set not committed";hasWork=true;
+ });
+});
+document.querySelectorAll(".commit-item").forEach(button=>button.addEventListener("click",()=>{
+ const card=button.closest(".math-item"),answer=card.querySelector(".response"),status=card.querySelector(".commit-status");
+ if(!answer.value.trim()){status.textContent="Enter a response first.";status.classList.add("invalid");answer.focus();return;}
+ card.classList.add("committed");card.querySelectorAll("input,textarea").forEach(el=>{el.readOnly=true;});button.disabled=true;button.textContent="Committed";status.classList.remove("invalid");status.textContent="Response locked";card.querySelector(".print-commit-box").textContent="Final check complete: ☑ · response committed";hasWork=true;
+}));
+document.querySelectorAll(".commit-set").forEach(button=>button.addEventListener("click",()=>{
+ const set=button.closest(".passage-set"),questions=[...set.querySelectorAll(".mc-q")],missing=questions.filter(q=>!q.querySelector("input:checked")),status=set.querySelector(".commit-status");
+ if(missing.length){status.textContent="Choose a response for "+missing.map(q=>q.id.toUpperCase()).join(", ")+" before committing.";status.classList.add("invalid");missing[0].querySelector("input").focus();return;}
+ set.classList.add("committed");set.querySelectorAll("input[type=radio]").forEach(el=>{el.disabled=true;});set.querySelectorAll("textarea").forEach(el=>{el.readOnly=true;});button.disabled=true;button.textContent="Set committed";status.classList.remove("invalid");status.textContent="All six responses locked";set.querySelector(".print-commit-box").textContent="All six responses reviewed and committed: ☑";hasWork=true;
+}));
+function clearAll(){
+ if(!window.confirm("Clear all answers, notes, self-scores, commitments, and timers? This cannot be undone."))return;
+ document.querySelectorAll("input,textarea").forEach(el=>{el.readOnly=false;el.disabled=false;if(el.type==="radio")el.checked=false;else el.value="";if(el.tagName==="TEXTAREA")el.style.height="";});
+ document.querySelectorAll("[contenteditable]").forEach(el=>{el.textContent="\u00a0";});
+ document.querySelectorAll(".mc-opt").forEach(el=>{el.classList.remove("selected");el.querySelector(".bubble").textContent="";});
+ document.querySelectorAll(".committed").forEach(el=>el.classList.remove("committed"));
+ document.querySelectorAll(".commit-item,.commit-set").forEach(el=>{el.disabled=false;el.textContent=el.classList.contains("commit-item")?"Commit response":"Commit "+el.closest(".passage-set").querySelector(".mc-q").id.toUpperCase()+"–"+[...el.closest(".passage-set").querySelectorAll(".mc-q")].at(-1).id.toUpperCase()+" set";});
+ document.querySelectorAll(".commit-status").forEach(el=>{el.classList.remove("invalid");el.textContent=el.closest(".passage-set")?"Set not committed":"Not committed";});
+ document.querySelectorAll(".math-item .print-commit-box").forEach(el=>{el.textContent="Final check complete: □";});document.querySelectorAll(".passage-set .print-commit-box").forEach(el=>{el.textContent="All six responses reviewed and committed: □";});
+ timerControllers.forEach(t=>t.reset());document.querySelectorAll(".print-copy").forEach(el=>el.remove());hasWork=false;
+}
+document.getElementById("clear-all").addEventListener("click",clearAll);
+function preparePrint(){
+ document.querySelectorAll(".print-copy").forEach(el=>el.remove());
+ document.querySelectorAll(".printable-field").forEach(el=>{const copy=document.createElement(el.tagName==="TEXTAREA"?"div":"span");copy.className="print-copy"+(el.tagName==="TEXTAREA"?" block":"");copy.textContent=el.value||"\u00a0";copy.setAttribute("aria-hidden","true");el.insertAdjacentElement("afterend",copy);});
+}
+window.addEventListener("beforeprint",preparePrint);
+document.getElementById("print-save").addEventListener("click",()=>{preparePrint();window.print();});
+window.addEventListener("beforeunload",event=>{if(hasWork){event.preventDefault();event.returnValue="";}});
+</script></body></html>
