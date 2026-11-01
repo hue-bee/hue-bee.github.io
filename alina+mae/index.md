@@ -13,3 +13,4 @@
 |:-----:|:----------|:---------------:|:----------|
 | **00** | [Diagnostic](https://hue-bee.github.io/alina+mae/diagnostic) | |[Set 1](https://hue-bee.github.io/alina+mae/lessons/00/sets/01) [Set 2](https://hue-bee.github.io/alina+mae/lessons/00/sets/02) |
 | **01** | [Think Like the Digital SHSAT](https://hue-bee.github.io/alina+mae/lessons/01) | [1 Homework](https://hue-bee.github.io/alina+mae/lessons/01/homework) ||
+| **02** | [Signs That Stay Put](https://hue-bee.github.io/alina+mae/lessons/02) | [1 Homework](https://hue-bee.github.io/alina+mae/lessons/02/homework) ||
