@@ -1,1 +1,715 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 9 Homework — Setup, Interpretation &amp; TEI Mechanics</title><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;family=Nunito:wght@300..800&amp;display=swap" rel="stylesheet"/><style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:   #2563EB;
+    --blue-lt:#EFF6FF;
+    --blue-md:#BFDBFE;
+    --coral:  #F97066;
+    --coral-lt:#FFF1F0;
+    --sand:   #D4A574;
+    --sand-lt:#FDF3E7;
+    --green:  #16a34a;
+    --green-lt:#DCFCE7;
+    --purple: #7c3aed;
+    --purple-lt:#EDE9FE;
+    --ink:    #0f172a;
+    --slate:  #334155;
+    --muted:  #64748b;
+    --border: #CBD5E1;
+    --bg:     #F8FAFF;
+    --white:  #FFFFFF;
+    --ff-head: 'Baloo 2', 'Nunito', sans-serif;
+    --ff-body: 'Nunito', sans-serif;
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── Print ───────────────────────────────────── */
+  @media print {
+    input, textarea { border-color: #cbd5e1 !important; background: white !important; }
+    input[type="radio"] { accent-color: #000 !important; }
+    textarea { resize: none !important; }
+    [contenteditable] { border-bottom: 1px solid #cbd5e1; }
+    html { background: white; }
+    body { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .sheet { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; padding: 1.2cm 1.5cm !important; }
+  }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 2rem auto;
+    padding: 2.2rem 2.4rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .hw-header-left .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 220px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  /* ── Section Header ──────────────────────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .section-hd .icon { font-size: 1.25rem; }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-hd .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);    border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;        border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);   border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple);  border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;        border: 1px solid #fcd34d; }
+
+  /* ── Instruction strip ───────────────────────── */
+  .instr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── Level pill ──────────────────────────────── */
+  .lvl {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  /* GRAYSCALE level pills (matching lesson deck) */
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem card ────────────────────────────── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .prob-q {
+    font-size: 0.84rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+  .prob-q strong { color: #374151; }
+  .answer-box {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-line {
+    border-bottom: 1.5px solid var(--border);
+    flex: 1;
+    min-height: 1.2rem;
+  }
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 56px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 0.35rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    color: var(--ink);
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+  .work-area::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── SVG diagrams ────────────────────────────── */
+  .fig { display: flex; justify-content: center; margin: 0.35rem 0 0.45rem; }
+  .fig svg { overflow: visible; }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.6rem 0;
+  }
+
+  /* ── Passage ─────────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .passage-text {
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.4rem;
+  }
+  .passage-text p { margin-bottom: 0.65rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: 0.74rem;
+  }
+  .sw { background: #f0f0f0; border-radius: 3px; padding: 0 2px; font-style: italic; font-weight: 700; color: #374151; }
+
+  /* ── MC question ─────────────────────────────── */
+  .mc-q {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q-text {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1rem;
+  }
+  .mc-opt {
+    font-size: 0.79rem;
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    line-height: 1.45;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s;
+  }
+  .mc-opt:hover { background: #f0f0f0; }
+  .mc-opt input[type=radio] { display: none; }
+  .mc-opt.selected { background: #e5e7eb; border-color: #374151; font-weight: 700; }
+  .mc-opt .bubble {
+    width: 14px; height: 14px; min-width: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 800;
+  }
+  .mc-opt.selected .bubble { background: #374151; border-color: #374151; color: white; content: "✓"; }
+
+  /* ── Error log ───────────────────────────────── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: var(--coral-lt);
+    margin-top: 0.5rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.55rem;
+  }
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .error-table th {
+    background: var(--coral);
+    color: white;
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  .error-table th:first-child { border-radius: 6px 0 0 0; }
+  .error-table th:last-child  { border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: white;
+    font-weight: 500;
+  }
+  .error-table td:first-child { font-weight: 700; color: var(--ink); width: 5%; text-align: center; }
+  .error-table tr:last-child td { border-bottom: none; }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.73rem;
+    margin-top: 0.55rem;
+  }
+  .pill { padding: 2px 10px; border-radius: 20px; font-weight: 700; border: 1.5px solid; }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  /* ── Reflection box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.45rem;
+  }
+  .reflect-lines { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.3rem; }
+  .reflect-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type=text] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 1px 6px;
+  }
+
+  /* ── Score banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── Formula strip ───────────────────────────── */
+  .formula-strip {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+  .fml {
+    background: white;
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Print button ────────────────────────────── */
+  .print-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+
+/* Section timers from timerh.html */
+.section-timer{appearance:none;border:0;border-radius:12px;padding:2px 5px;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;min-width:4.5em;text-align:center}
+.section-timer.running{background:#92400e;color:#fff}
+.section-timer.expired{background:#b91c1c;color:#fff;cursor:default}
+
+
+:root{--ff-head:'Baloo 2','Nunito',sans-serif;--ff-body:'Nunito',sans-serif}
+.sheet{position:relative}.section-hd:first-child{margin-top:0}.score-banner .title{font-size:1.05rem}.score-cell{padding:.3rem .5rem}.score-cell .sc-lbl{font-size:.58rem;max-width:104px}.hw-meta{min-width:190px}.hw-meta input{min-width:0;width:130px}.hw-header-left{flex:1}.hw-header-left h1{font-size:1.8rem}.hw-header-left .subtitle{font-size:.76rem;max-width:440px}.score-banner{padding:.65rem 1rem}.score-banner .sub{font-size:.72rem}
+.intro-note{font-size:.76rem;line-height:1.5;color:var(--slate);margin:0 0 .7rem}.intro-note a{color:var(--blue)}.section-hd h2{line-height:1.2}.section-hd .badge{white-space:nowrap;font-size:.65rem}.section-hd{gap:.4rem}.prob{display:flex;flex-direction:column;break-inside:avoid;min-width:0}.prob-q{font-size:.85rem;line-height:1.5}.entry-direction{font-size:.73rem;line-height:1.4;color:var(--blue);font-weight:700;margin-bottom:.35rem}.work-area{line-height:1.6;height:108px;min-height:82px;flex:none}.setup-work{height:112px}.challenge-work{height:170px}.entry-work{height:136px}.round-work{height:144px}.multi-work,.match-work{height:64px;min-height:64px}.mc-work{height:108px}.commit-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px;margin-top:auto;padding-top:.65rem}.entry-label{font-size:.7rem;font-weight:800;color:var(--slate)}.grid-input{width:100%;height:34px;min-width:0;border:1.5px solid var(--blue-md);border-radius:7px;text-align:center;font:800 .95rem var(--ff-body);background:white;color:var(--ink)}.commit-btn{background:var(--blue);color:white;border:0;border-radius:7px;font:600 .82rem var(--ff-head);padding:7px 10px;cursor:pointer}.commit-btn:hover{background:#1d4ed8}.commit-status{font-size:.64rem;line-height:1.35;color:var(--muted);min-height:1.4em;margin-top:.3rem}.prob.committed{border-color:#86efac}.committed .commit-btn{background:var(--green);cursor:default}.committed .commit-status{color:#15803d}.committed .response{color:var(--ink);opacity:1;-webkit-text-fill-color:var(--ink)}.committed .work-area{background:#f8fafc}.choice-commit{display:flex;justify-content:flex-end}.choices{display:grid;gap:.35rem;margin:.3rem 0}.choice{display:flex;align-items:flex-start;gap:.4rem;font-size:.78rem;line-height:1.45;padding:.35rem .4rem;background:white;border:1px solid var(--border);border-radius:6px;cursor:pointer}.choice input{margin-top:3px;accent-color:var(--blue);flex:none}.choice:has(input:checked){border-color:var(--blue);background:var(--blue-lt)}.mc-pair{grid-template-columns:1fr 1fr}.match-rows{display:grid;gap:.45rem}.match-row{font-size:.75rem;line-height:1.4;display:grid;gap:.25rem}.match-row select{width:100%;font:700 .76rem var(--ff-body);padding:5px;border:1px solid var(--border);border-radius:5px;background:white;color:var(--ink)}
+.checklist{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:.7rem 0 1rem}.check{border:1px solid var(--blue-md);border-radius:12px;padding:.6rem;text-align:center;background:var(--blue-lt)}.check .n{font:700 1.3rem var(--ff-head);color:var(--blue)}.check .t{font-size:.74rem;line-height:1.35;color:var(--slate)}.page-foot{display:flex;justify-content:space-between;gap:1rem;font-size:.67rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.6rem;margin-top:1.1rem}.practice-note{background:var(--sand-lt);border:1px solid #fcd34d;border-radius:8px;padding:.65rem .8rem;font-size:.75rem;line-height:1.5;color:#92400e;margin-top:.8rem}.error-table td{height:54px;overflow-wrap:anywhere}.error-table{table-layout:fixed}.error-table th:nth-child(1){width:5%}.error-table th:nth-child(2){width:16%}.error-table th:nth-child(3){width:61%}.reflect-line{flex-wrap:wrap}.reflect-line input{min-width:100px}.print-value{display:none}input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible,[contenteditable]:focus-visible{outline:2px solid var(--blue);outline-offset:2px}input[type=number]{appearance:textfield}input::-webkit-inner-spin-button{appearance:none}.storage-note{font-size:.67rem;color:var(--muted);margin-top:.4rem}
+@media(max-width:620px){.sheet{padding:1.2rem;margin:1rem .5rem}.prob-grid{grid-template-columns:1fr}.section-hd{flex-wrap:wrap}.section-hd .badge{margin-left:0}.score-banner{align-items:flex-start}.score-cells{width:100%;justify-content:space-between}.score-cell{flex:1}.checklist{gap:.25rem}.check{padding:.45rem .2rem}.check .t{font-size:.65rem}.error-log{padding:.7rem .5rem}.error-table td,.error-table th{padding:.35rem .25rem}.page-foot{font-size:.6rem}.hw-header{gap:.6rem}.hw-meta{width:100%}}
+@page{size:Letter;margin:.42in}
+@media print{
+ body{width:100%;background:white;font-size:10pt}.sheet{padding:.1in .12in!important;break-after:page;break-before:auto;page-break-before:auto;box-shadow:none!important}.sheet:last-child{break-after:auto}.prob-grid{grid-template-columns:1fr 1fr!important;gap:.13in}.prob{padding:.1in .12in}.hw-header{margin-bottom:.12in;padding-bottom:.1in}.hw-header-left h1{font-size:20pt}.hw-header-left .subtitle{font-size:8pt}.score-banner{margin-bottom:.1in}.section-hd{margin:.12in 0 .08in}.section-hd h2{font-size:12pt}.instr{font-size:8pt;margin-bottom:.1in}.intro-note{font-size:8pt;margin-bottom:.08in}.formula-strip{padding:.06in .1in;margin-bottom:.1in}.prob-q{font-size:9pt;line-height:1.4}.entry-direction{font-size:8pt}.prob-num{font-size:8pt}.commit-btn{display:none!important}.commit-row{grid-template-columns:auto 1fr;padding-top:.07in}.commit-status{font-size:7pt}.section-timer{pointer-events:none;border:none;background:transparent!important;color:inherit!important}.print-value{display:block!important;white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.5em;font:inherit}.print-value.work-print{border:1.5px dashed var(--border);border-radius:6px;line-height:1.6;font-size:8pt;padding:.05in .07in;margin-top:.04in}.has-print-mirror{display:none!important}.entry-direction+.work-print{margin-top:.04in}.grid-input+.print-value{border-bottom:1px solid var(--border);font-weight:700;text-align:center}.score-banner input,.score-banner .print-value{color:white!important;background:transparent!important}.score-banner .print-value{display:inline-block!important;min-width:1.2rem}.hw-meta-row .print-value{flex:1;min-width:1in;border-bottom:1px solid var(--border)}.reflect-line .print-value{flex:1;border-bottom:1px solid var(--border)}.page-foot{font-size:7pt;margin-top:.13in;padding-top:.08in}.choices{gap:.2rem}.choice{font-size:8pt;padding:.22rem}.match-row{font-size:8pt}.checklist{margin:.1in 0}.check{padding:.08in}.practice-note{font-size:8pt;margin-top:.12in}.storage-note{display:none}.error-log{break-inside:avoid}.reflect-box{break-inside:avoid}.error-table td{height:.52in}.entry-label{font-size:7pt}.score-cell .sc-lbl{font-size:6.5pt}.section-timer.expired{background:transparent!important}
+}
+</style>
+<!-- Self-score styling matched to homework.html; all other content is unchanged. -->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style id="self-score-reference-style">
+.score-banner { --ff-head: 'Fredoka', sans-serif; }
+@media screen {
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .score-banner .title { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-banner .sub   { font-size: 0.78rem; opacity: 0.85; }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-cell .sc-val { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; }
+  .score-cell .sc-lbl { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; }
+  .score-cells { width: auto; justify-content: normal; }
+  .score-cell { flex: 0 1 auto; }
+  .score-cell .sc-lbl { max-width: none; }
+  .score-banner input[type="number"] {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+  }
+  .score-banner input[type="number"]::-webkit-inner-spin-button,
+  .score-banner input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: auto;
+    appearance: auto;
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+</style>
+</head><body><div class="no-print toolbar" style="display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;"><button class="print-btn" type="button" onclick="window.print()" style="margin:0">🖨️ Print / Save as PDF</button><button class="print-btn" type="button" onclick="clearAll()" style="margin:0;background:#64748b">🗑️ Clear All</button></div><section class="sheet"><div class="hw-header">
+<div class="hw-header-left">
+<h1>Week 9 Homework</h1>
+<div class="subtitle">Setup, Interpretation &amp; TEI Mechanics · November 2026 SHSAT</div>
+</div>
+<div class="hw-meta">
+<div class="hw-meta-row"><span class="label">Name</span><input aria-label="Name" placeholder="" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" type="text"/></div>
+<div class="hw-meta-row"><span class="label">Date</span><input aria-label="Date" placeholder="" style="flex:1;border:none;border-bottom:1.5px solid var(--border);font-family:var(--ff-body);font-size:0.82rem;color:var(--ink);background:transparent;outline:none;padding:1px 4px;" type="text"/></div>
+</div>
+</div><div class="score-banner">
+<div>
+<div class="title">Self-Score Before Session</div>
+<div class="sub">Fill in after checking your work — bring to Zoom!</div>
+</div>
+<div class="score-cells">
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Setup and interpretation score out of 12" max="12" min="0" placeholder="__" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" type="number"/> / 12</div>
+<div class="sc-lbl">Setup &amp; Interpretation</div>
+</div>
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Entry and commitment score out of 12" max="12" min="0" placeholder="__" style="width:2rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" type="number"/> / 12</div>
+<div class="sc-lbl">Entry &amp; Commitment</div>
+</div>
+<div class="score-cell">
+<div class="sc-val"><input aria-label="Total score out of 24" max="24" min="0" placeholder="__" style="width:2.4rem;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,0.6);color:white;font-family:var(--ff-head);font-size:1.1rem;font-weight:700;text-align:center;outline:none;" type="number"/> / 24</div>
+<div class="sc-lbl">Total</div>
+</div>
+</div>
+</div><p class="intro-note">24 new math problems · 56 minutes of suggested practice + 4 minutes of review. The three score cells group Problems 1–12, Problems 13–24, and all 24; fill them in after tutor review. One point per fully correct problem.</p><div class="section-hd"><span class="icon">✍️</span><h2>Part A — Four-Line Setup</h2><span class="badge badge-blue">4 Problems · <button class="section-timer" type="button" data-seconds="600" aria-label="Part A — Four-Line Setup timer, start or pause" aria-pressed="false">10:00</button></span></div><p class="instr">Define a variable with a unit. Relate the quantities, solve, then deliver the requested noun. Show all four lines.</p><div class="formula-strip"><span class="fs-label">Four lines</span><span class="fml">1 Define</span><span class="fml">2 Relate</span><span class="fml">3 Solve</span><span class="fml">4 Deliver</span></div><div class="prob-grid"><article class="prob" data-question="1" data-kind="setup"><div class="prob-num">Problem 1 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A makerspace charges a $24 booking fee plus $6 per hour of equipment use. A student pays $90 in all. How many hours of equipment use did the student purchase?</p><p class="entry-direction">Enter the number of hours.</p><textarea class="work-area setup-work" aria-label="Work for problem 1" placeholder="Define: variable + unit
+Relate: equation(s)
+Solve: labeled values
+Deliver: requested quantity" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-1">Final entry</label><input id="answer-1" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 1"><button class="commit-btn" type="button" aria-label="Commit problem 1">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="2" data-kind="setup"><div class="prob-num">Problem 2 <span class="lvl lvl-3">L3</span></div><p class="prob-q">An art cabinet contains red, blue, and green markers. There are three times as many blue markers as red markers, and 18 more green markers than red markers. There are 138 markers altogether. How many blue markers are there?</p><p class="entry-direction">Enter the number of blue markers.</p><textarea class="work-area setup-work" aria-label="Work for problem 2" placeholder="Define: variable + unit
+Relate: equation(s)
+Solve: labeled values
+Deliver: requested quantity" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-2">Final entry</label><input id="answer-2" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 2"><button class="commit-btn" type="button" aria-label="Commit problem 2">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="3" data-kind="setup"><div class="prob-num">Problem 3 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A rectangular display has a perimeter of 94 cm. Its length is 11 cm greater than its width. What is the area of the display?</p><p class="entry-direction">Enter the area in square centimeters, without units.</p><textarea class="work-area setup-work" aria-label="Work for problem 3" placeholder="Define: variable + unit
+Relate: equation(s)
+Solve: labeled values
+Deliver: requested quantity" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-3">Final entry</label><input id="answer-3" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 3"><button class="commit-btn" type="button" aria-label="Commit problem 3">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="4" data-kind="setup"><div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A volunteer project has morning and afternoon groups with 83 volunteers in all. The afternoon group has 7 fewer than twice the number in the morning group. How many more volunteers are in the afternoon group than in the morning group?</p><p class="entry-direction">Enter the difference in volunteers.</p><textarea class="work-area setup-work" aria-label="Work for problem 4" placeholder="Define: variable + unit
+Relate: equation(s)
+Solve: labeled values
+Deliver: requested quantity" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-4">Final entry</label><input id="answer-4" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 4"><button class="commit-btn" type="button" aria-label="Commit problem 4">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article></div><p class="storage-note" id="storage-note">Work saves in this browser when local storage is available. Print / Save as PDF preserves a copy.</p><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>1 / 7</span></div></section><section class="sheet"><div class="section-hd"><span class="icon">🔎</span><h2>Part B — Context Controls Rounding</h2><span class="badge badge-coral">4 Problems · <button class="section-timer" type="button" data-seconds="480" aria-label="Part B — Context Controls Rounding timer, start or pause" aria-pressed="false">08:00</button></span></div><p class="instr">Write the unrounded calculation. Name the context rule and justify it before entering a response.</p><div class="prob-grid"><article class="prob" data-question="5" data-kind="round"><div class="prob-num">Problem 5 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A food bank must pack 764 jars. Each shipping crate holds at most 29 jars. What is the minimum number of crates needed to ship every jar?</p><p class="entry-direction">Enter a whole number.</p><textarea class="work-area round-work" aria-label="Work for problem 5" placeholder="Quotient / calculation:
+Context rule and why:
+Final quantity:" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-5">Final entry</label><input id="answer-5" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 5"><button class="commit-btn" type="button" aria-label="Commit problem 5">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="6" data-kind="round"><div class="prob-num">Problem 6 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A roll contains 31.8 m of fabric. Each banner requires one piece 2.4 m long. No fabric is lost when cutting. What is the greatest number of complete banners that can be made?</p><p class="entry-direction">Enter a whole number.</p><textarea class="work-area round-work" aria-label="Work for problem 6" placeholder="Quotient / calculation:
+Context rule and why:
+Final quantity:" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-6">Final entry</label><input id="answer-6" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 6"><button class="commit-btn" type="button" aria-label="Commit problem 6">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="7" data-kind="round"><div class="prob-num">Problem 7 <span class="lvl lvl-3">L3</span></div><p class="prob-q">Three friends split an $83.60 restaurant bill and an 18% tip equally. There is no additional tax. What is each friend’s calculated share, rounded to the nearest cent?</p><p class="entry-direction">Do not round intermediate calculations. Enter dollars only.</p><textarea class="work-area round-work" aria-label="Work for problem 7" placeholder="Quotient / calculation:
+Context rule and why:
+Final quantity:" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-7">Final entry</label><input id="answer-7" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 7"><button class="commit-btn" type="button" aria-label="Commit problem 7">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="8" data-kind="round"><div class="prob-num">Problem 8 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A field trip includes 173 visitors and 11 guides. Five guides travel separately and do not ride the shuttles. Each shuttle has room for 16 passengers, not counting its driver. What is the minimum number of shuttles needed for everyone else?</p><p class="entry-direction">Enter a whole number.</p><textarea class="work-area round-work" aria-label="Work for problem 8" placeholder="Quotient / calculation:
+Context rule and why:
+Final quantity:" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-8">Final entry</label><input id="answer-8" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 8"><button class="commit-btn" type="button" aria-label="Commit problem 8">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article></div><div class="practice-note">Final-line sentence: “The question asks for ______ measured in ______, so I must ______.” Explain the meaning of any leftover amount in your work.</div><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>2 / 7</span></div></section><section class="sheet"><div class="section-hd"><span class="icon">🎯</span><h2>Part C — Protect the Target</h2><span class="badge badge-sand">4 Problems · <button class="section-timer" type="button" data-seconds="840" aria-label="Part C — Protect the Target timer, start or pause" aria-pressed="false">14:00</button></span></div><p class="instr">Use Define → Relate → Solve → Deliver. The solved variable may not be the quantity the question asks for.</p><div class="prob-grid"><article class="prob" data-question="9" data-kind="challenge"><div class="prob-num">Problem 9 <span class="lvl lvl-4">L4</span></div><p class="prob-q">At an art fair, 246 admissions were sold. There were 30 more premium admissions than standard admissions. Premium admission cost $22 and standard admission cost $15. How much greater was the premium-admission revenue than the standard-admission revenue?</p><p class="entry-direction">Enter the revenue difference in dollars, without a dollar sign.</p><textarea class="work-area challenge-work" aria-label="Work for problem 9" placeholder="Define → Relate → Solve → Deliver
+Label each intermediate value." spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-9">Final entry</label><input id="answer-9" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 9"><button class="commit-btn" type="button" aria-label="Commit problem 9">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="10" data-kind="challenge"><div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A reservoir contains 960 liters. An outlet removes 38 liters per minute while an inlet adds 14 liters per minute. Both operate continuously at these constant rates until 552 liters remain. How many liters have passed through the outlet?</p><p class="entry-direction">Enter liters removed, not elapsed time or net change.</p><textarea class="work-area challenge-work" aria-label="Work for problem 10" placeholder="Define → Relate → Solve → Deliver
+Label each intermediate value." spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-10">Final entry</label><input id="answer-10" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 10"><button class="commit-btn" type="button" aria-label="Commit problem 10">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="11" data-kind="challenge"><div class="prob-num">Problem 11 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A shop marks up an item’s original price by 25%, then discounts the marked price by 12%. A 6% sales tax is applied to the discounted price. The final payment is $174.90. What is the dollar amount of the discount?</p><p class="entry-direction">Enter the discount amount, not the original price or tax.</p><textarea class="work-area challenge-work" aria-label="Work for problem 11" placeholder="Define → Relate → Solve → Deliver
+Label each intermediate value." spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-11">Final entry</label><input id="answer-11" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 11"><button class="commit-btn" type="button" aria-label="Commit problem 11">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="12" data-kind="challenge"><div class="prob-num">Problem 12 <span class="lvl lvl-4">L4</span></div><p class="prob-q">Printer A produces 96 flyers in 4 minutes. Printer B runs at five-sixths of A’s rate. Both printers run together at constant rates to complete an order of 990 flyers. Rental time is sold only in whole-minute blocks. What is the minimum number of one-minute blocks that must be purchased?</p><p class="entry-direction">Enter the number of blocks.</p><textarea class="work-area challenge-work" aria-label="Work for problem 12" placeholder="Define → Relate → Solve → Deliver
+Label each intermediate value." spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-12">Final entry</label><input id="answer-12" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 12"><button class="commit-btn" type="button" aria-label="Commit problem 12">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article></div><div class="practice-note">Before committing: label each intermediate value. Ask whether your final entry measures a count, revenue, volume, time, or a change.</div><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>3 / 7</span></div></section><section class="sheet"><div class="section-hd"><span class="icon">⌨️</span><h2>Part D — Numeric-Entry Precision</h2><span class="badge badge-purple">4 Problems · <button class="section-timer" type="button" data-seconds="480" aria-label="Part D — Numeric-Entry Precision timer, start or pause" aria-pressed="false">08:00</button></span></div><p class="instr">Compute on scratch space. Inspect the final expression, sign, decimal point, and required format. Enter numbers only.</p><div class="prob-grid"><article class="prob" data-question="13" data-kind="entry"><div class="prob-num">Problem 13 <span class="lvl lvl-2">L2</span></div><p class="prob-q">Evaluate (5/8) × 56 − (1.5)².</p><p class="entry-direction">Enter the exact decimal value.</p><textarea class="work-area entry-work" aria-label="Work for problem 13" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-13">Final entry</label><input id="answer-13" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 13"><button class="commit-btn" type="button" aria-label="Commit problem 13">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="14" data-kind="entry"><div class="prob-num">Problem 14 <span class="lvl lvl-3">L3</span></div><p class="prob-q">If 4(3x − 2) = 5x + 20, what is the value of 2x − 3?</p><p class="entry-direction">Enter the requested expression’s value, not x.</p><textarea class="work-area entry-work" aria-label="Work for problem 14" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-14">Final entry</label><input id="answer-14" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 14"><button class="commit-btn" type="button" aria-label="Commit problem 14">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="15" data-kind="entry"><div class="prob-num">Problem 15 <span class="lvl lvl-2">L2</span></div><p class="prob-q">The mean of five numbers is 18. Four of the numbers are 12, 17, 21, and 24. What is the fifth number?</p><p class="entry-direction">Enter the missing number.</p><textarea class="work-area entry-work" aria-label="Work for problem 15" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-15">Final entry</label><input id="answer-15" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 15"><button class="commit-btn" type="button" aria-label="Commit problem 15">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="16" data-kind="entry"><div class="prob-num">Problem 16 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A rectangular prism is 6.4 cm long, 3.5 cm wide, and 2.5 cm high. What is its volume?</p><p class="entry-direction">Enter the exact value in cubic centimeters, without units.</p><textarea class="work-area entry-work" aria-label="Work for problem 16" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-16">Final entry</label><input id="answer-16" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 16"><button class="commit-btn" type="button" aria-label="Commit problem 16">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article></div><div class="practice-note">Mechanical checks: do not type units, a dollar sign, or a percent symbol unless requested. Do not round an exact response merely because it contains a decimal.</div><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>4 / 7</span></div></section><section class="sheet"><div class="section-hd"><span class="icon">🧩</span><h2>Part E — Digital Response Practice</h2><span class="badge badge-blue">4 Problems · <button class="section-timer" type="button" data-seconds="600" aria-label="Part E — Digital Response Practice timer, start or pause" aria-pressed="false">10:00</button></span></div><p class="instr">Follow each response direction exactly. Numeric entry, multiple selection, dropdown matching, and multiple choice each count as one problem.</p><div class="prob-grid"><article class="prob" data-question="17" data-kind="entry"><div class="prob-num">Problem 17 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A club’s membership decreases from 240 members to 186 members. What is the percent decrease?</p><p class="entry-direction">Enter the percent as a number, without the percent symbol.</p><textarea class="work-area entry-work" aria-label="Work for problem 17" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-17">Final entry</label><input id="answer-17" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 17"><button class="commit-btn" type="button" aria-label="Commit problem 17">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="18" data-kind="multi"><div class="prob-num">Problem 18 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A camp must transport 326 campers. Each bus can carry at most 28 campers. Select exactly TWO statements that correctly describe this situation.</p><p class="entry-direction">Select two statements; all selections form one response.</p><div class="choices"><label class="choice"><input type="checkbox" class="response" name="q18" value="A"><span>A. The minimum number of buses is 11.</span></label><label class="choice"><input type="checkbox" class="response" name="q18" value="B"><span>B. The minimum number of buses is 12.</span></label><label class="choice"><input type="checkbox" class="response" name="q18" value="C"><span>C. Round the quotient to the nearest whole number to find the minimum.</span></label><label class="choice"><input type="checkbox" class="response" name="q18" value="D"><span>D. If only 11 buses are used, 18 campers will not have seats.</span></label><label class="choice"><input type="checkbox" class="response" name="q18" value="E"><span>E. Twelve buses have exactly 326 camper seats.</span></label></div><textarea class="work-area multi-work" aria-label="Work for problem 18" placeholder="Show your quotient and explain your choices." spellcheck="false"></textarea><div class="commit-row choice-commit"><button class="commit-btn" type="button" aria-label="Commit problem 18">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="19" data-kind="match"><div class="prob-num">Problem 19 <span class="lvl lvl-2">L2</span></div><p class="prob-q">For each situation, select the rule that turns the unrounded quotient into the requested answer. Each row needs one selection.</p><p class="entry-direction">Choose a rule for every row. Score this item only if all three rows are correct.</p><div class="match-rows"><label class="match-row"><span>$45 available; $7.25 per notebook: maximum complete notebooks.</span><select class="response" aria-label="Problem 19 rule 1"><option value="">Choose…</option><option>Round up</option><option>Round down</option><option>Round to nearest tenth</option></select></label><label class="match-row"><span>358 learners; 32 seats per room: minimum rooms needed.</span><select class="response" aria-label="Problem 19 rule 2"><option value="">Choose…</option><option>Round up</option><option>Round down</option><option>Round to nearest tenth</option></select></label><label class="match-row"><span>247.6 km on 6.8 L: kilometers per liter, to the nearest tenth.</span><select class="response" aria-label="Problem 19 rule 3"><option value="">Choose…</option><option>Round up</option><option>Round down</option><option>Round to nearest tenth</option></select></label></div><textarea class="work-area match-work" aria-label="Work for problem 19" placeholder="Identify the controlling word in each row." spellcheck="false"></textarea><div class="commit-row choice-commit"><button class="commit-btn" type="button" aria-label="Commit problem 19">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="20" data-kind="mc"><div class="prob-num">Problem 20 <span class="lvl lvl-3">L3</span></div><p class="prob-q">A reading challenge requires an average of 26 pages per day over 6 days. A student reads 119 pages during the first 5 days. How many pages must the student read on day 6 to reach exactly that average?</p><p class="entry-direction">Choose one answer.</p><div class="choices mc-pair"><label class="choice"><input type="radio" class="response" name="q20" value="A"><span>A. 7</span></label><label class="choice"><input type="radio" class="response" name="q20" value="B"><span>B. 26</span></label><label class="choice"><input type="radio" class="response" name="q20" value="C"><span>C. 31</span></label><label class="choice"><input type="radio" class="response" name="q20" value="D"><span>D. 37</span></label></div><textarea class="work-area mc-work" aria-label="Work for problem 20" placeholder="Show your setup and solve." spellcheck="false"></textarea><div class="commit-row choice-commit"><button class="commit-btn" type="button" aria-label="Commit problem 20">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article></div><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>5 / 7</span></div></section><section class="sheet"><div class="section-hd"><span class="icon">✓</span><h2>Part F — One-Look Commitment</h2><span class="badge badge-green">4 Problems · <button class="section-timer" type="button" data-seconds="360" aria-label="Part F — One-Look Commitment timer, start or pause" aria-pressed="false">06:00</button></span></div><p class="instr">Work one card at a time. Use the four checks, commit your response, then move to the next card without revising earlier work.</p><div class="checklist"><div class="check"><div class="n">N</div><div class="t">Requested noun?</div></div><div class="check"><div class="n">U</div><div class="t">Correct unit?</div></div><div class="check"><div class="n">R</div><div class="t">Context rounding?</div></div><div class="check"><div class="n">F</div><div class="t">Exact entry format?</div></div></div><div class="prob-grid"><article class="prob" data-question="21" data-kind="entry"><div class="prob-num">Problem 21 <span class="lvl lvl-2">L2</span></div><p class="prob-q">A purchase costs $86.40 before a 7.5% sales tax. What is the total cost after tax?</p><p class="entry-direction">Enter the total in dollars to the nearest cent, without a dollar sign.</p><textarea class="work-area entry-work" aria-label="Work for problem 21" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-21">Final entry</label><input id="answer-21" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 21"><button class="commit-btn" type="button" aria-label="Commit problem 21">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="22" data-kind="entry"><div class="prob-num">Problem 22 <span class="lvl lvl-3">L3</span></div><p class="prob-q">Two numbers have a sum of 154 and a difference of 38. What is twice the smaller number?</p><p class="entry-direction">Enter only the requested value.</p><textarea class="work-area entry-work" aria-label="Work for problem 22" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-22">Final entry</label><input id="answer-22" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 22"><button class="commit-btn" type="button" aria-label="Commit problem 22">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="23" data-kind="entry"><div class="prob-num">Problem 23 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A 24% sugar solution is mixed with an 8% sugar solution to make 20 liters of a 14% sugar solution. How many liters of the 24% solution are used?</p><p class="entry-direction">Enter the exact number of liters, without units.</p><textarea class="work-area entry-work" aria-label="Work for problem 23" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-23">Final entry</label><input id="answer-23" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 23"><button class="commit-btn" type="button" aria-label="Commit problem 23">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article><article class="prob" data-question="24" data-kind="entry"><div class="prob-num">Problem 24 <span class="lvl lvl-4">L4</span></div><p class="prob-q">A walker travels 7.2 km to a park at 4.8 km/h and returns along the same route at 6 km/h. Excluding any time spent at the park, what is the total travel time?</p><p class="entry-direction">Enter the exact time in hours, without units.</p><textarea class="work-area entry-work" aria-label="Work for problem 24" placeholder="Work here…" spellcheck="false"></textarea><div class="commit-row "><label class="entry-label" for="answer-24">Final entry</label><input id="answer-24" class="response grid-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Final entry for problem 24"><button class="commit-btn" type="button" aria-label="Commit problem 24">Commit</button></div><div class="commit-status" role="status">Check noun · unit · rounding · format.</div></article></div><div class="practice-note">This is fixed practice, not an adaptive test or a replica of the official platform. The real fall 2026 SHSAT does not allow returning to a math question after advancing. Here, Commit locks a card after you confirm the four checks; it does not judge correctness. Clear All resets the entire sheet.</div><p class="intro-note" style="margin-top:.6rem">Format reference: <a href="https://www.schools.nyc.gov/learning/testing/specialized-high-school-admissions-test" target="_blank" rel="noopener">NYC Public Schools — SHSAT functionality and adaptive item selection</a>.</p><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>6 / 7</span></div></section><section class="sheet"><div class="section-hd"><span class="icon">🔎</span><h2>Part G — Error Log</h2><span class="badge badge-coral">Required · Every Missed Problem</span></div><p class="instr">After tutor review, record each missed problem. Describe the exact misstep and the corrected habit. Use additional paper if you need more than five rows.</p><div class="error-log">
+<h3>📋 My Errors This Week</h3>
+<div class="error-type-pills">
+<span style="font-size:0.73rem;font-weight:700;color:#92400e;margin-right:0.3rem;">Label each error:</span>
+<span class="pill pill-cg">🔴 Content Gap — I didn't know how to do this</span>
+<span class="pill pill-ce">🟡 Careless Error — I knew it but made a mistake</span>
+<span class="pill pill-ru">🟣 Rushing — I didn't read carefully enough</span>
+</div>
+<table class="error-table" style="margin-top:0.7rem;">
+<thead>
+<tr>
+<th>#</th><th>Problem</th><th>What I Did Wrong</th><th style="width:18%;">Error Type</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1</td><td aria-label="Error 1: Problem" contenteditable="true" style="outline:none;min-width:60px;"> </td><td aria-label="Error 1: What I did wrong" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 1: Error type" contenteditable="true" style="outline:none;"> </td></tr>
+<tr><td>2</td><td aria-label="Error 2: Problem" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 2: What I did wrong" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 2: Error type" contenteditable="true" style="outline:none;"> </td></tr>
+<tr><td>3</td><td aria-label="Error 3: Problem" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 3: What I did wrong" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 3: Error type" contenteditable="true" style="outline:none;"> </td></tr>
+<tr><td>4</td><td aria-label="Error 4: Problem" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 4: What I did wrong" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 4: Error type" contenteditable="true" style="outline:none;"> </td></tr>
+<tr><td>5</td><td aria-label="Error 5: Problem" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 5: What I did wrong" contenteditable="true" style="outline:none;"> </td><td aria-label="Error 5: Error type" contenteditable="true" style="outline:none;"> </td></tr>
+</tbody>
+</table>
+</div><div class="reflect-box">
+<h3>✍️ Weekly Reflection (2–3 sentences)</h3>
+<p style="font-size:0.8rem;color:var(--slate);font-weight:600;margin-bottom:0.5rem;">After reviewing your errors, complete these sentences:</p>
+<div class="reflect-lines">
+<div class="reflect-line">My biggest Math mistake this week was <input aria-label="Reflection 1" placeholder="…" type="text"/></div>
+<div class="reflect-line">I made this error because it was a <input aria-label="Reflection 2" placeholder="…" type="text"/> (Content Gap / Careless / Rushing)</div>
+<div class="reflect-line">The setup or entry habit I need to review is <input aria-label="Reflection 3" placeholder="…" type="text"/></div>
+<div class="reflect-line">One thing I want to ask my tutor about in session: <input aria-label="Reflection 4" placeholder="…" type="text"/></div>
+</div>
+</div><div class="practice-note">Review for 4 minutes: classify each error as Content Gap, Careless Error, or Rushing. In “What I Did Wrong,” also name the failed check: noun, unit, rounding, or format. Keep your committed response unchanged so the tutor can see your first attempt.</div><div class="page-foot"><span>Mathematics only · Practice, not a scaled-score estimate</span><span>7 / 7</span></div></section><script>
+(() => {
+'use strict';
+const KEY='shsat-week9-homework-v1';
+const cards=[...document.querySelectorAll('[data-question]')];
+const fields=[...document.querySelectorAll('input,textarea,select,[contenteditable]')];
+fields.forEach((el,i)=>el.dataset.field=String(i));
+const timers=[];
+let storageOK=true;
+function save(){
+ const data={fields:fields.map(el=>el.matches('[contenteditable]')?el.textContent:el.type==='checkbox'||el.type==='radio'?el.checked:el.value),locked:cards.filter(c=>c.classList.contains('committed')).map(c=>c.dataset.question),timers:timers.map(t=>t.snapshot())};
+ try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){storageOK=false;document.getElementById('storage-note').textContent='Browser storage is unavailable. Keep this tab open and use Print / Save as PDF to preserve your work.';}
+}
+function grow(el){el.style.height='';el.style.height=Math.max(el.scrollHeight,parseInt(getComputedStyle(el).height))+'px';}
+function lock(card){
+ card.classList.add('committed');
+ card.querySelectorAll('input,select').forEach(el=>{if(el.type==='text')el.readOnly=true;else el.disabled=true;});
+ card.querySelectorAll('textarea').forEach(el=>el.readOnly=true);
+ const b=card.querySelector('.commit-btn');b.textContent='Committed';b.disabled=true;
+ card.querySelector('.commit-status').textContent='Committed · response locked, not graded.';
+}
+function responseOf(card){
+ const kind=card.dataset.kind, inputs=[...card.querySelectorAll('.response')];
+ if(kind==='multi'){const selected=inputs.filter(e=>e.checked);return selected.length===2?selected.map(e=>e.value).join(', '):null;}
+ if(kind==='mc'){return inputs.find(e=>e.checked)?.value||null;}
+ if(kind==='match'){return inputs.every(e=>e.value)?inputs.map((e,i)=>(i+1)+': '+e.value).join('; '):null;}
+ const value=inputs[0].value.trim();
+ return /^-?(?:\d+(?:\.\d*)?|\.\d+)$/.test(value)?value:null;
+}
+cards.forEach(card=>card.querySelector('.commit-btn').addEventListener('click',()=>{
+ const response=responseOf(card);
+ if(response===null){card.querySelector('.commit-status').textContent=card.dataset.kind==='multi'?'Choose exactly two statements before committing.':card.dataset.kind==='match'?'Choose a rule for all three rows.':card.dataset.kind==='mc'?'Choose one answer before committing.':'Enter a number only: no units, commas, or symbols.';return;}
+ if(!confirm('Commit Problem '+card.dataset.question+'?\n\nYour response: '+response+'\n\nCheck: requested NOUN, correct UNIT, context ROUNDING, exact FORMAT.\n\nThis locks your response and work. It does not check correctness. Clear All is the only reset.'))return;
+ lock(card);save();
+}));
+document.querySelectorAll('.section-timer').forEach(timer=>{
+ const initial=Number(timer.dataset.seconds)*1000;
+ let remaining=initial,deadline=0,interval=null;
+ const render=()=>{const sec=Math.max(0,Math.ceil(remaining/1000));timer.textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');timer.classList.toggle('running',interval!==null);timer.classList.toggle('expired',remaining<=0);timer.disabled=remaining<=0;timer.setAttribute('aria-pressed',String(interval!==null));timer.setAttribute('aria-label','Section timer, '+timer.textContent+' remaining. '+(remaining<=0?'Time expired':interval!==null?'Pause timer':'Start timer'));};
+ const tick=()=>{remaining=Math.max(0,deadline-Date.now());if(remaining===0){clearInterval(interval);interval=null;save();}render();};
+ const start=()=>{deadline=Date.now()+remaining;interval=setInterval(tick,100);tick();};
+ timer.addEventListener('click',()=>{if(remaining<=0)return;if(interval!==null){tick();clearInterval(interval);interval=null;}else start();render();save();});
+ document.addEventListener('visibilitychange',()=>{if(interval!==null)tick();});
+ timers.push({snapshot:()=>({remaining:interval!==null?Math.max(0,deadline-Date.now()):remaining,deadline,running:interval!==null}),restore:s=>{remaining=Math.min(initial,Math.max(0,Number(s.remaining)||0));if(s.running){remaining=Math.max(0,Math.min(initial,Number(s.deadline)-Date.now()));if(remaining>0)start();}render();},reset:()=>{clearInterval(interval);interval=null;remaining=initial;deadline=0;render();}});
+ render();
+});
+try{
+ const data=JSON.parse(localStorage.getItem(KEY)||'null');
+ if(data&&Array.isArray(data.fields)){
+  fields.forEach((el,i)=>{const v=data.fields[i];if(v===undefined)return;if(el.matches('[contenteditable]'))el.textContent=v;else if(el.type==='checkbox'||el.type==='radio')el.checked=!!v;else el.value=String(v);});
+  (data.locked||[]).forEach(n=>{const card=cards.find(c=>c.dataset.question===n);if(card)lock(card);});
+  (data.timers||[]).forEach((s,i)=>{if(timers[i])timers[i].restore(s);});
+ }
+}catch(e){storageOK=false;}
+fields.forEach(el=>{el.addEventListener('input',()=>{if(el.tagName==='TEXTAREA')grow(el);save();});el.addEventListener('change',save);});
+document.querySelectorAll('textarea').forEach(el=>{if(el.value)grow(el);});
+window.clearAll=()=>{
+ if(!confirm('Clear all answers, work, scores, error-log entries, committed responses, and timers? This cannot be undone.'))return;
+ fields.forEach(el=>{if(el.matches('[contenteditable]'))el.textContent='\u00a0';else if(el.type==='checkbox'||el.type==='radio')el.checked=false;else el.value='';el.disabled=false;el.readOnly=false;if(el.tagName==='TEXTAREA')el.style.height='';});
+ cards.forEach(card=>{card.classList.remove('committed');const b=card.querySelector('.commit-btn');b.textContent='Commit';b.disabled=false;card.querySelector('.commit-status').textContent='Check noun · unit · rounding · format.';});
+ timers.forEach(t=>t.reset());save();
+};
+window.addEventListener('pagehide',save);
+function removeMirrors(){document.querySelectorAll('.print-value').forEach(e=>e.remove());document.querySelectorAll('.has-print-mirror').forEach(e=>e.classList.remove('has-print-mirror'));}
+window.addEventListener('beforeprint',()=>{
+ removeMirrors();
+ document.querySelectorAll('textarea,input[type=text],input[type=number],select').forEach(el=>{
+  const mirror=document.createElement('span');mirror.className='print-value';
+  if(el.tagName==='TEXTAREA'){mirror.classList.add('work-print');mirror.style.minHeight=getComputedStyle(el).height;mirror.textContent=el.value||'';}
+  else if(el.tagName==='SELECT')mirror.textContent=el.value||'________________';
+  else mirror.textContent=el.value||'\u00a0';
+  el.after(mirror);el.classList.add('has-print-mirror');
+ });
+});
+window.addEventListener('afterprint',removeMirrors);
+if(!storageOK)document.getElementById('storage-note').textContent='Browser storage is unavailable. Keep this tab open and use Print / Save as PDF to preserve your work.';
+})();
+</script></body></html>
