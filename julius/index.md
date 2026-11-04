@@ -37,4 +37,4 @@
 | **06B** | [Targeted Repair ELA: Precision Before Selection](https://hue-bee.github.io/julius/lesson06B) | [6B Homework](https://hue-bee.github.io/julius/lesson06B/homework) | |
 | **07A** | [Light Mixed Review Math Sweep](https://hue-bee.github.io/julius/lesson07A) | [7A Homework](https://hue-bee.github.io/julius/lesson07A/homework) | [Set 1](https://hue-bee.github.io/julius/lesson07A/sets/01) |
 | **07B** | [Test-Day Walkthrough & Light Mixed Review](https://hue-bee.github.io/julius/lesson07B) | [7B Homework](https://hue-bee.github.io/julius/lesson07B/homework) | |
-| **08A** | [Precision Under Pressure](https://hue-bee.github.io/julius/lesson08A) | [7B Homework](https://hue-bee.github.io/julius/lesson08A/homework) | |
+| **08A** | [Precision Under Pressure](https://hue-bee.github.io/julius/lesson08A) | [7B Homework](https://hue-bee.github.io/julius/lesson08A/homework) | [Set 1](https://hue-bee.github.io/julius/lesson08A/sets/01) |
