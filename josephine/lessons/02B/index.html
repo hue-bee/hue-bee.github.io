@@ -1,1 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Session 18 — Review and Strategy Lock</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+@media print{.particle-canvas{display:none!important}}
+/*
+Art direction: supplied presentation template.
+Cool blue background, white cards, gray section colors,
+blue/amber difficulty badges, Baloo 2 headings, Nunito body.
+All practice content is original. No automatic scoring is included.
+*/
+
+:root{
+  --bg:#F0F7FF;
+  --surface:#FFFFFF;
+  --ink:#1F1F1F;
+  --ink-2:#4A4A4A;
+  --ink-3:#767676;
+  --line:rgba(201,212,228,.45);
+  --pink:#2563EB;
+  --pink-soft:#DCEBFB;
+  --amber:#B45309;
+  --amber-soft:#FBEBCF;
+  --z1:#262626;
+  --z2:#4D4D4D;
+  --z3:#6A6A6A;
+  --soft:#EFEFEF;
+  --font-display:"Baloo 2","Nunito",sans-serif;
+  --font-body:"Nunito",sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{
+  font-family:var(--font-body);
+  font-weight:400;
+  width:100vw;
+  height:100dvh;
+  overflow:hidden;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,
+summary:focus-visible,a:focus-visible{
+  outline:3px solid var(--pink);
+  outline-offset:3px;
+}
+button:disabled{cursor:default;opacity:.48}
+
+.deck{
+  width:100vw;
+  height:calc(100dvh - 84px);
+  position:relative;
+}
+.slide{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transform:scale(.97);
+  transition:opacity .5s ease,transform .5s ease;
+  pointer-events:none;
+}
+.slide.active{
+  opacity:1;
+  transform:scale(1);
+  pointer-events:auto;
+}
+.content{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:1100px;
+  padding:clamp(16px,2.5vw,36px);
+  flex-shrink:0;
+  transform-origin:center;
+}
+.gradient-mesh{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+.blob{
+  position:absolute;
+  width:340px;
+  height:340px;
+  border-radius:50%;
+  background:#C9D4E4;
+  filter:blur(75px);
+  opacity:.13;
+  animation:drift 14s ease-in-out infinite;
+}
+.blob:first-child{right:-90px;top:-100px}
+.blob:nth-child(2){
+  left:-90px;bottom:-100px;
+  background:#B7BFCD;
+  animation-delay:-5s;
+  animation-duration:18s;
+}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(30px,-22px) scale(1.08)}
+}
+@keyframes heroFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+.reveal{animation:enter .4s ease both}
+@keyframes enter{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.slide.active .reveal:nth-child(2){animation-delay:.04s}
+.slide.active .reveal:nth-child(3){animation-delay:.08s}
+
+.kicker{
+  margin-bottom:5px;
+  font-size:12px;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:.13em;
+  color:var(--ink-3);
+}
+h1,h2,h3,p{margin-top:0}
+h1,h2{
+  font-family:var(--font-display);
+  font-weight:600;
+  letter-spacing:-.015em;
+  line-height:1.12;
+}
+h1{font-size:clamp(34px,4.8vw,58px);margin-bottom:12px}
+h2{font-size:clamp(26px,3.1vw,38px);margin-bottom:18px}
+h3{font-size:18px;margin-bottom:8px;font-weight:800}
+p,li{font-size:17px;line-height:1.48}
+p:last-child{margin-bottom:0}
+ul,ol{margin:8px 0 0;padding-left:22px}
+li+li{margin-top:9px}
+.tint{color:var(--pink)}
+.muted{color:var(--ink-2)}
+.small{font-size:14px;line-height:1.45;color:var(--ink-3)}
+.tiny{font-size:12px;line-height:1.4;color:var(--ink-3)}
+.center{text-align:center}
+.subhead{font-size:20px;color:var(--ink-2);line-height:1.4}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stack{display:grid;gap:14px}
+.card,.passage-card,.diagram-wrap{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 10px 24px rgba(201,212,228,.20),
+             0 2px 6px rgba(201,212,228,.13);
+}
+.soft-card{
+  background:#EDF2F9;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px;
+}
+.rule{
+  margin-top:16px;
+  padding:12px 16px;
+  background:#F1F6FD;
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-size:16px;
+  line-height:1.45;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border-radius:24px;
+  padding:5px 11px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.04em;
+  background:#FFFFFF;
+  border:1px solid var(--line);
+}
+.zone-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.zone-chip{
+  padding:4px 10px;
+  border-radius:24px;
+  background:#FFFFFF;
+  border:1px solid var(--line);
+  color:var(--ink-3);
+  font-size:11px;
+  font-weight:700;
+}
+.zone-chip.on{background:#3E3E3E;border-color:#3E3E3E;color:#FFFFFF}
+
+.prob-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.prob-num{
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:700;
+  background:#EDF2F9;
+  padding:2px 10px;
+  border-radius:8px;
+}
+.lvl-badge{
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  padding:4px 8px;
+  border-radius:24px;
+}
+.lvl-1{background:#E8EDF5;color:#3D4C63}
+.lvl-2{background:#DCEBFB;color:#1D4ED8}
+.lvl-3{background:#FBEBCF;color:#854009}
+.lvl-4{background:#E2E2E2;color:#3D3D3D}
+.question-stem{
+  font-size:16px;
+  line-height:1.43;
+  margin-bottom:12px;
+}
+.options{display:grid;gap:6px}
+.option{
+  display:grid;
+  grid-template-columns:21px 1fr;
+  gap:7px;
+  width:100%;
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#FBFCFE;
+  color:var(--ink-2);
+  padding:8px 10px;
+  font-size:14px;
+  line-height:1.35;
+  transition:background .15s,border-color .15s;
+}
+.option:hover{background:#F1F6FD}
+.option.selected{
+  background:#DCEBFB;
+  border-color:#2563EB;
+  color:#17233B;
+}
+.opt-letter{font-weight:800;color:#505B6B}
+.selection-note{font-size:12px;color:var(--ink-3);margin-top:9px}
+.response-field,.plan-input{
+  width:100%;
+  border:1px dashed #B9C6D9;
+  background:#F9FBFE;
+  border-radius:10px;
+  padding:11px 12px;
+  color:var(--ink);
+  font-weight:700;
+}
+.scratch{
+  width:100%;
+  resize:none;
+  height:60px;
+  border:1px dashed #B9C6D9;
+  border-radius:10px;
+  background:#F9FBFE;
+  padding:10px 12px;
+  margin-top:10px;
+  color:var(--ink-2);
+  font-size:15px;
+}
+.btn{
+  min-height:40px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#FFFFFF;
+  color:var(--ink);
+  padding:8px 13px;
+  font-size:14px;
+  font-weight:800;
+}
+.btn:hover{background:#F1F6FD}
+.btn.primary{background:#3D3D3D;color:#FFFFFF;border-color:#3D3D3D}
+.btn.primary:hover{background:#242424}
+.button-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}
+details{
+  margin-top:12px;
+  border:1px solid var(--line);
+  background:#F1F6FD;
+  border-radius:10px;
+  padding:10px 12px;
+}
+summary{cursor:pointer;font-size:14px;font-weight:800}
+details p{font-size:14px;margin:10px 0 0;line-height:1.45}
+
+.passage-card{padding:19px 22px}
+.passage-card p{
+  font-size:16px;
+  line-height:1.48;
+  color:var(--ink-2);
+  margin-bottom:12px;
+}
+.passage-card .para{
+  display:inline-block;
+  min-width:25px;
+  color:var(--ink-3);
+  font-weight:800;
+  font-size:12px;
+}
+.passage-title{
+  font-family:var(--font-display);
+  font-size:23px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+.passage-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+  align-items:center;
+}
+.mark-target::selection{background:#F6D18B}
+mark.user-mark{background:#F6D18B;border-radius:3px;padding:0 1px}
+.reading-note{font-size:13px;color:var(--ink-3)}
+.diagram-wrap{display:flex;align-items:center;justify-content:center}
+.diagram-wrap svg{
+  display:block;width:100%;height:auto;max-height:310px;
+}
+svg text{font-family:var(--font-body);fill:var(--ink-2)}
+.hero-graphic{
+  max-width:450px;
+  margin:0 auto 18px;
+  animation:heroFloat 5s ease-in-out infinite;
+}
+.hero-graphic svg{width:100%;height:auto}
+.route-row{
+  display:grid;
+  grid-template-columns:85px 15px 1fr;
+  gap:12px;
+  align-items:stretch;
+}
+.route-time{font-weight:800;font-size:18px;padding-top:15px;text-align:right}
+.route-rail{position:relative}
+.route-rail:before{
+  content:"";position:absolute;left:6px;top:0;bottom:0;
+  width:2px;background:var(--line);
+}
+.route-dot{
+  position:relative;display:block;margin-top:19px;
+  width:14px;height:14px;border-radius:50%;
+  background:#555;border:3px solid var(--bg);
+}
+.route-row .card{margin-bottom:12px}
+.route-row h3{margin-bottom:5px}
+.route-row p{font-size:15px}
+.source-note{font-size:11px;color:var(--ink-3);margin-top:13px}
+.source-note a{color:inherit;text-underline-offset:3px}
+.math{font-weight:800;font-size:20px;line-height:1.45}
+.math-small{font-weight:800;font-size:17px}
+.slot-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.slot{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  border:2px solid #B9C6D9;border-radius:12px;
+  background:#F9FBFE;min-height:102px;
+}
+.slot strong{font-size:28px}
+.slot span{font-size:12px;color:var(--ink-3)}
+.sample-table{width:100%;border-collapse:separate;border-spacing:5px}
+.sample-table th{font-size:15px;font-weight:800;padding:9px}
+.sample-table td{
+  background:#F9FBFE;border:1px solid var(--line);
+  border-radius:8px;text-align:center;padding:6px;
+}
+.sample-table input{
+  width:100%;min-width:0;height:40px;text-align:center;
+  background:transparent;border:0;font-size:18px;color:var(--ink);
+}
+.review-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.review-item{
+  display:grid;grid-template-columns:1fr auto;gap:10px;
+  align-items:center;background:#FFFFFF;
+  border:1px solid var(--line);border-radius:10px;padding:13px;
+}
+.review-item strong{font-size:17px}
+.review-response{display:block;font-size:13px;color:var(--ink-3);margin-top:4px}
+.status-message{min-height:22px;font-size:14px;color:var(--ink-2);margin-top:12px}
+.closed-panel{
+  text-align:center;background:#FFFFFF;border:1px solid var(--line);
+  border-radius:14px;padding:50px 24px;
+}
+.closed-panel h3{font-family:var(--font-display);font-size:30px}
+.plan-field{display:block;font-size:14px;font-weight:800;margin-bottom:11px}
+.plan-field input{margin-top:6px}
+.number-line{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;margin-top:16px;
+}
+.number-line div{
+  background:#FFFFFF;border:1px solid var(--line);
+  border-radius:10px;padding:13px;text-align:center;
+}
+.number-line strong{font-size:22px;display:block}
+.number-line span{font-size:12px;color:var(--ink-3)}
+
+.nav-controls{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:10px;z-index:100;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(12px);
+  padding:7px 15px;border-radius:40px;border:1px solid var(--line);
+  box-shadow:0 10px 28px rgba(201,212,228,.32),
+             0 2px 8px rgba(201,212,228,.18);
+}
+.nav-btn{
+  flex-shrink:0;width:40px;height:40px;border:0;
+  background:#F1F6FD;color:var(--ink);
+  border-radius:50%;font-size:26px;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-btn:hover{background:#DCE7F7}
+.slide-dots{display:flex;gap:0;align-items:center}
+.dot{
+  width:18px;height:30px;padding:0;border:0;
+  background:transparent;display:flex;align-items:center;justify-content:center;
+}
+.dot:after{
+  content:"";width:7px;height:7px;border-radius:50%;
+  background:rgba(0,0,0,.18);
+}
+.dot.active:after{background:var(--ink);transform:scale(1.35)}
+.slide-counter{
+  font-size:12px;color:var(--ink-3);
+  min-width:43px;text-align:center;font-weight:700;
+}
+.clock{
+  position:fixed;top:11px;right:14px;z-index:70;
+  display:flex;align-items:center;gap:8px;
+  color:var(--ink-3);font-size:12px;
+}
+.clock button{
+  background:#FFFFFF;border:1px solid var(--line);
+  border-radius:20px;padding:5px 10px;font-size:12px;font-weight:800;
+}
+.clock-time{font-variant-numeric:tabular-nums}
+dialog{
+  width:min(920px,calc(100vw - 28px));
+  max-height:calc(100dvh - 32px);
+  border:1px solid var(--line);border-radius:16px;
+  background:var(--bg);padding:22px;color:var(--ink);
+}
+dialog::backdrop{background:rgba(28,33,45,.38);backdrop-filter:blur(4px)}
+.dialog-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:14px;margin-bottom:12px;
+}
+.dialog-head h2{font-size:27px;margin:0}
+.dialog-body{transform-origin:top center}
+#confirmDialog{max-width:560px}
+#confirmDialog p{font-size:16px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+@media(max-width:700px){
+  .grid2,.grid3{grid-template-columns:1fr}
+  .content{padding:18px}
+  h2{font-size:27px;margin-bottom:12px}
+  p,li{font-size:16px}
+  .card{padding:14px}
+  .question-stem{font-size:15px}
+  .option{font-size:13px;padding:7px 9px}
+  .grid2.question-grid{gap:10px}
+  .question-grid .card{padding:12px}
+  .passage-card p{font-size:15px}
+  .nav-controls{gap:5px;padding:6px 9px;bottom:10px}
+  .dot{width:17px}
+  .nav-btn{width:38px;height:38px}
+  .slide-counter{min-width:39px}
+  .clock{top:7px;right:9px}
+  .review-list{grid-template-columns:1fr 1fr}
+  .hero-graphic{max-width:310px}
+  .number-line{grid-template-columns:repeat(2,1fr)}
+  .diagram-wrap svg{max-height:190px}
+  .source-note{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+@media print{
+  body{height:auto;overflow:visible;background:white}
+  .deck{height:auto;width:100%}
+  .slide{
+    position:relative;opacity:1;transform:none;
+    pointer-events:auto;min-height:190mm;
+    page-break-after:always;
+  }
+  .content{transform:none!important;width:100%!important}
+  .nav-controls,.clock,.gradient-mesh,dialog{display:none!important}
+  .reveal{opacity:1;animation:none}
+}
+
+/* Math only: retain the surrounding presentation styling. */
+.latex-math, mjx-container { background:transparent!important; box-shadow:none!important; }
+.latex-math { font-weight:400; }
+.math-small, .math { background:transparent; }
+.soft-card.center:has(.latex-math) { background:transparent; }
+mjx-container svg { max-height:none!important; }
+</style>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']] },
+  svg: { fontCache: 'local' },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // Typeset the numeric diagram labels in the same TeX font.
+        document.querySelectorAll('.diagram-wrap svg text').forEach(label => {
+          const text=label.textContent;
+          if(!/\d/.test(text))return;
+          const tex=text.split(/(\d+)/).map(part=>/^\d+$/.test(part)?part:'\\text{'+part+'}').join('');
+          const rendered=MathJax.tex2svg(tex).querySelector('svg');
+          const vb=rendered.getAttribute('viewBox').split(/\s+/).map(Number);
+          const size=Number(label.getAttribute('font-size')||17);
+          const scale=size/1000;
+          const x=Number(label.getAttribute('x')||0),y=Number(label.getAttribute('y')||0);
+          const width=vb[2]*scale;
+          const anchor=label.getAttribute('text-anchor');
+          const left=x-(anchor==='middle'?width/2:anchor==='end'?width:0);
+          rendered.setAttribute('x',left);
+          rendered.setAttribute('y',y+vb[1]*scale);
+          rendered.setAttribute('width',width);
+          rendered.setAttribute('height',vb[3]*scale);
+          rendered.style.overflow='visible';
+          rendered.setAttribute('aria-label',text);
+          label.replaceWith(rendered);
+        });
+        window.dispatchEvent(new Event('resize'));
+      });
+    }
+  }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<div class="clock" aria-label="Lesson timer">
+  <span>Lesson</span>
+  <span class="clock-time" id="clockTime">00:00</span>
+  <button type="button" id="clockToggle">Start</button>
+</div>
+
+<main class="deck" id="deck" aria-label="Session 18, 60-minute SHSAT presentation"></main>
+
+<nav class="nav-controls" aria-label="Slide navigation">
+  <button type="button" class="nav-btn" id="prev" aria-label="Previous slide">‹</button>
+  <div class="slide-dots" id="dots" aria-label="Slide indicators"></div>
+  <button type="button" class="nav-btn" id="next" aria-label="Next slide">›</button>
+  <span class="slide-counter" id="counter" aria-live="polite"></span>
+</nav>
+
+<dialog id="passageDialog" aria-labelledby="passageDialogTitle">
+  <div class="dialog-head">
+    <h2 id="passageDialogTitle">Passage</h2>
+    <button type="button" class="btn" data-action="close-passage">Close</button>
+  </div>
+  <div class="dialog-body" id="passageDialogBody"></div>
+</dialog>
+
+<dialog id="confirmDialog" aria-labelledby="confirmTitle">
+  <h2 id="confirmTitle">Submit this passage set?</h2>
+  <p>You can still review or change responses before submitting.</p>
+  <p>After submission, this practice passage and its questions close. No correctness feedback will appear.</p>
+  <div class="button-row">
+    <button class="btn" type="button" data-action="cancel-submit">Keep reviewing</button>
+    <button class="btn primary" type="button" data-action="confirm-submit">Submit set</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+
+/* Original passages. Paragraph numbering remains stable in every view. */
+const passages={
+  N:{
+    title:"The Repair Shelf",
+    paragraphs:[
+      "Mara proposed a repair shelf at the neighborhood library: visitors could leave damaged books with a note, and volunteers would try to mend them. Staff hoped the shelf would keep usable books out of the discard bin.",
+      "During the first week, volunteers repaired eighteen books and discarded six. Fourteen books had been discarded the week before. Mara was ready to declare the shelf a success. The librarian pointed out that the new week included unusually sturdy hardcovers, while the earlier week included many water-damaged paperbacks. The totals described different mixtures of books.",
+      "The team began recording damage types before comparing weeks. Volunteers also timed each repair, since saving a single book might require an hour of work. Their notes connected the number of books saved to the effort needed to save them.",
+      "The librarian's support for the shelf remained qualified. She favored keeping it, but wanted several comparable weeks before claiming that it reduced waste efficiently. Her caution did not make the project useless; it made the claim narrower and more defensible."
+    ]
+  },
+  F:{
+    title:"The Blank Label",
+    paragraphs:[
+      "Before the community exhibit opened, Lena aligned a printed label beside each of her grandfather's repaired clocks. One brass clock had no date. She left a blank card beneath it and moved on. A display, she thought, should explain itself without anyone having to ask.",
+      "Her grandfather arrived carrying a small tin of screws. When Lena asked for the missing year, he studied the clock but shook his head. “I remember who brought it,” he said. A neighbor had carried it through rain after finding it in a flooded cellar. He described drying each gear on the kitchen table. Lena glanced toward the doors; the first visitors were already gathering.",
+      "“We need something for the card,” she said. Instead of naming a year, he wound the clock. Its first tick was uneven, then settled. Lena remembered that sound behind her childhood conversations at his workbench. She set down her pen.",
+      "When a visitor stopped at the brass clock, Lena did not apologize for the empty label. She asked her grandfather to tell the cellar story again. The card remained blank, but she moved it aside so that the visitor could see the small patch of repaired metal."
+    ]
+  }
+};
+
+/* Teaching levels are instructional labels, not official adaptive difficulty parameters. */
+const questions={
+  N1:{
+    level:1,
+    stem:'As used in paragraph 4, “qualified” most nearly means',
+    options:[
+      "officially certified.",
+      "uncertain about the existence of the shelf.",
+      "supportive, but with reservations.",
+      "unwilling to consider further evidence."
+    ]
+  },
+  N2:{
+    level:2,
+    stem:"Which statement best expresses the passage's central idea?",
+    options:[
+      "Repairing library books is always more efficient than replacing them.",
+      "A promising project needs comparable evidence before broad claims about its success are justified.",
+      "The repair shelf failed because the two weeks contained different kinds of books.",
+      "Volunteer enthusiasm is a better measure of success than staff records."
+    ]
+  },
+  N3:{
+    level:3,
+    stem:"Why does the author mention that repairing one book might require an hour?",
+    options:[
+      "To suggest that only professional bookbinders should volunteer",
+      "To explain why hardcovers are usually damaged by water",
+      "To show that evaluating efficiency requires attention to effort as well as books saved",
+      "To prove that the shelf increased the library's costs"
+    ]
+  },
+  N4:{
+    level:4,
+    mode:"multi",
+    required:2,
+    stem:"Select TWO features of a follow-up study that most directly address the comparison problem in paragraph 2.",
+    options:[
+      "Compare weeks with similar numbers of books in each damage category.",
+      "Record the damage category of each repaired or discarded book.",
+      "Count only the books displayed near the front desk.",
+      "Use more colorful notes on the repair shelf.",
+      "Interview one visitor who is especially enthusiastic about the project."
+    ]
+  },
+  F1:{
+    level:1,
+    stem:"Why does Lena initially leave a blank card beneath the brass clock?",
+    options:[
+      "She has not been given the clock's date.",
+      "She plans to remove the clock from the exhibit.",
+      "She wants visitors to guess who repaired it.",
+      "She has run out of printed cards."
+    ]
+  },
+  F2:{
+    level:2,
+    stem:"Lena's glance toward the doors in paragraph 2 most strongly suggests that she",
+    options:[
+      "suspects that the visitors will damage the clocks.",
+      "feels pressure to finish preparing the display.",
+      "wants her grandfather to leave before the exhibit opens.",
+      "recognizes the neighbor from the cellar story."
+    ]
+  },
+  F3:{
+    level:3,
+    stem:"What is the main function of the clock's ticking in paragraph 3?",
+    options:[
+      "It establishes that the clock is more valuable than the others.",
+      "It introduces a new mechanical problem that delays the exhibit.",
+      "It proves that the grandfather has accurately remembered the date.",
+      "It connects the clock to Lena's own memory and helps prepare her change in approach."
+    ]
+  },
+  F4:{
+    level:4,
+    mode:"multi",
+    required:2,
+    stem:"Select TWO details from paragraph 4 that best support an inference that Lena's view of an informative exhibit has changed.",
+    options:[
+      "She asks her grandfather to tell the cellar story again.",
+      "She moves the blank card aside so the repaired metal can be seen.",
+      "A visitor stops at the brass clock.",
+      "The clock is made of brass.",
+      "The card still has no date written on it."
+    ]
+  },
+  M1:{
+    level:1,
+    stem:"A pouch contains 4 burgundy tokens and 6 silver tokens. The tokens are identical except for color, and one is selected at random. What is the probability that it is silver?",
+    options:["2/5","3/5","2/3","3/2"]
+  },
+  M2:{
+    level:2,
+    stem:"A badge is made by choosing one of 3 shapes, one of 4 clip colors, and one of 2 ribbon lengths. Every combination is available. How many different badges can be made?",
+    options:["9","12","18","24"]
+  },
+  M3:{
+    level:2,
+    stem:"A bag contains 7 blue tiles and 5 white tiles. Two tiles are selected at random, one after another, WITHOUT replacement. What is the probability that both tiles are white?",
+    options:["5/36","5/33","25/144","25/132"]
+  },
+  M4:{
+    level:3,
+    stem:"A number is selected at random from the EVEN integers from 1 through 36, inclusive. What is the probability that the number is a multiple of 6?",
+    options:["1/6","1/3","1/2","2/3"]
+  },
+  M5:{
+    level:3,
+    stem:"Six students are available for three different jobs: captain, recorder, and photographer. No student may hold more than one job. How many assignments are possible?",
+    options:["20","36","120","216"]
+  },
+  M6:{
+    level:4,
+    stem:"A four-digit code uses digits from {1, 2, 4, 6, 9}, with no repeated digit. The first digit must be even and the last digit must be 9. How many codes satisfy both conditions?",
+    options:["12","18","24","36"]
+  },
+  M7:{
+    level:4,
+    stem:"A fair spinner has six equal sectors labeled A through F. It is spun three times independently. What is the probability of landing on A at least once?",
+    options:["1/216","1/2","91/216","125/216"]
+  },
+  M8:{
+    level:4,
+    mode:"entry",
+    stem:"Spinner A has three equal sectors labeled 1, 2, and 4. Spinner B has three equal sectors labeled 1, 3, and 5. The spins are independent. What is the probability that their sum is at least 6? Enter a reduced fraction."
+  }
+};
+
+const state={
+  responses:{},
+  fictionSubmitted:false,
+  planLocked:false,
+  plan:{mathMinutes:"",elaMinutes:"",elaCheckpoint:"",resetPhrase:""}
+};
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function passageHTML(key){
+  const p=passages[key];
+  return `<article class="passage-card mark-target">
+    <div class="passage-title">${p.title}</div>
+    ${p.paragraphs.map((text,i)=>`<p><span class="para">[${i+1}]</span>${text}</p>`).join("")}
+    <div class="reading-note">Original practice passage · paragraph numbers remain fixed.</div>
+  </article>`;
+}
+
+function passageTools(key){
+  return `<div class="passage-tools">
+    <button class="btn" type="button" data-passage="${key}">Open full passage</button>
+    <span class="small">Use the passage freely before submitting its set.</span>
+  </div>`;
+}
+
+
+function latexInline(tex){
+  return '<span class="latex-math">\\(' + escapeHTML(tex) + '\\)</span>';
+}
+function mathText(text, labels=false){
+  const pattern=labels ? /\{\d+(?:,\s*\d+)*\}|\b\d+(?:\.\d+)?(?:\/\d+)?\b|\b[A-F]\b/g
+                       : /\{\d+(?:,\s*\d+)*\}|\b\d+(?:\.\d+)?(?:\/\d+)?\b/g;
+  return text.replace(pattern, token=>{
+    if(token.startsWith('{'))return latexInline('\\{' + token.slice(1,-1) + '\\}');
+    if(token.includes('/')){const [a,b]=token.split('/');return latexInline('\\frac{'+a+'}{'+b+'}');}
+    return latexInline(token);
+  });
+}
+
+function questionHTML(id){
+  const q=questions[id];
+  return `<article class="card question-card" data-question-card="${id}">
+    <div class="prob-head">
+      <span class="prob-num">${id}</span>
+      <span class="lvl-badge lvl-${q.level}">Level ${q.level}</span>
+    </div>
+    <div class="question-stem">${mathText(q.stem,id.startsWith("M"))}</div>
+    ${q.mode==="entry"
+      ? `<label class="small" for="entry-${id}">Your response</label>
+         <input class="response-field" id="entry-${id}" data-entry="${id}"
+          type="text" inputmode="text" autocomplete="off" placeholder="Reduced fraction">`
+      : `<div class="options" role="group" aria-label="${id} response choices">
+         ${q.options.map((opt,i)=>`<button class="option" type="button"
+           data-question="${id}" data-option="${i}" aria-pressed="false">
+           <span class="opt-letter">${String.fromCharCode(65+i)}</span>
+           <span>${id.startsWith("M")?mathText(opt,true):opt}</span>
+         </button>`).join("")}</div>`
+    }
+    <div class="selection-note" data-selection-note="${id}">
+      ${q.mode==="multi"?"Select exactly two.":q.mode==="entry"?"Check the requested representation.":"Select one response."}
+      No correctness feedback is shown.
+    </div>
+  </article>`;
+}
+
+function lens(title,text){
+  return `<details><summary>${title}</summary><p>${text}</p></details>`;
+}
+
+function scratch(label="Record a plan or a check, not a long solution."){
+  return `<textarea class="scratch" aria-label="${escapeHTML(label)}" placeholder="${escapeHTML(label)}"></textarea>`;
+}
+
+function officialNote(){
+  return `<div class="source-note">
+    Format guidance:
+    <a href="https://www.schools.nyc.gov/learning/testing/specialized-high-school-admissions-test"
+      target="_blank" rel="noopener noreferrer">NYC Public Schools SHSAT information</a>.
+    Classroom timing targets are personal strategy choices, not official section limits.
+  </div>`;
+}
+
+function closedHTML(){
+  return `<div class="closed-panel">
+    <h3>Passage set submitted</h3>
+    <p>The passage and its questions are now closed in this rehearsal.</p>
+    <p class="small">Continue with the presentation. No score or correctness feedback is displayed.</p>
+  </div>`;
+}
+
+const bridgeSVG=`
+<svg viewBox="0 0 900 190" role="img" aria-label="A detail connects to its paragraph's job, which connects to the whole passage's purpose.">
+  <defs><marker id="bridgeArrow" viewBox="0 0 10 10" refX="9" refY="5"
+    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 Z" fill="#6A6A6A"/></marker></defs>
+  <rect x="15" y="35" width="245" height="110" rx="14" fill="#F9FBFE" stroke="#BAC9D6"/>
+  <rect x="327" y="35" width="245" height="110" rx="14" fill="#EDF2F9" stroke="#BAC9D6"/>
+  <rect x="639" y="35" width="245" height="110" rx="14" fill="#DCEBFB" stroke="#BAC9D6"/>
+  <path d="M270 90 H313" stroke="#6A6A6A" stroke-width="2.5" marker-end="url(#bridgeArrow)"/>
+  <path d="M582 90 H625" stroke="#6A6A6A" stroke-width="2.5" marker-end="url(#bridgeArrow)"/>
+  <text x="137" y="75" text-anchor="middle" font-size="22" font-weight="800">Detail</text>
+  <text x="137" y="108" text-anchor="middle" font-size="17">What does it say?</text>
+  <text x="449" y="75" text-anchor="middle" font-size="22" font-weight="800">Paragraph job</text>
+  <text x="449" y="108" text-anchor="middle" font-size="17">What work does it do?</text>
+  <text x="761" y="75" text-anchor="middle" font-size="22" font-weight="800">Passage purpose</text>
+  <text x="761" y="108" text-anchor="middle" font-size="17">Why does that job matter?</text>
+  <text x="450" y="176" text-anchor="middle" font-size="16">A choice must preserve the link—not merely repeat a topic word.</text>
+</svg>`;
+
+const treeSVG=`
+<svg viewBox="0 0 620 330" role="img" aria-label="Two-draw outcome tree. First draw blue or white; second draw blue or white. The four ordered color paths are BB, BW, WB, and WW.">
+  <text x="310" y="24" text-anchor="middle" font-size="19" font-weight="800">Two draws, without replacement</text>
+  <rect x="224" y="44" width="172" height="48" rx="10" fill="#EDF2F9" stroke="#BAC9D6"/>
+  <text x="310" y="74" text-anchor="middle" font-size="17">7 blue · 5 white</text>
+  <path d="M280 92 L154 146 M340 92 L466 146" stroke="#707B8B" stroke-width="2" fill="none"/>
+  <rect x="75" y="146" width="158" height="44" rx="10" fill="#EDF2F9" stroke="#BAC9D6"/>
+  <rect x="387" y="146" width="158" height="44" rx="10" fill="#F9FBFE" stroke="#BAC9D6"/>
+  <text x="154" y="174" text-anchor="middle" font-size="17">Blue first</text>
+  <text x="466" y="174" text-anchor="middle" font-size="17">White first</text>
+  <path d="M128 190 L73 241 M180 190 L235 241 M440 190 L385 241 M492 190 L547 241"
+    stroke="#707B8B" stroke-width="2" fill="none"/>
+  <g fill="#FFFFFF" stroke="#BAC9D6">
+    <rect x="18" y="242" width="110" height="43" rx="9"/>
+    <rect x="180" y="242" width="110" height="43" rx="9"/>
+    <rect x="330" y="242" width="110" height="43" rx="9"/>
+    <rect x="492" y="242" width="110" height="43" rx="9"/>
+  </g>
+  <g text-anchor="middle" font-size="17" font-weight="800">
+    <text x="73" y="269">BB</text><text x="235" y="269">BW</text>
+    <text x="385" y="269">WB</text><text x="547" y="269">WW</text>
+  </g>
+  <text x="310" y="318" text-anchor="middle" font-size="15">Color paths are not automatically equally likely. Update the bag.</text>
+</svg>`;
+
+const conditionSVG=`
+<svg viewBox="0 0 600 300" role="img" aria-label="Nested sample spaces. The integers from 1 through 36 contain the even integers; the even integers contain the multiples of 6.">
+  <rect x="15" y="18" width="570" height="264" rx="16" fill="#FFFFFF" stroke="#B6C1CB" stroke-width="2"/>
+  <text x="40" y="51" font-size="18" font-weight="800">Integers from 1 through 36</text>
+  <rect x="91" y="80" width="453" height="170" rx="14" fill="#EDF2F9" stroke="#B6C1CB" stroke-width="2"/>
+  <text x="115" y="112" font-size="18" font-weight="800">Condition: even integers</text>
+  <rect x="242" y="143" width="269" height="77" rx="12" fill="#DCEBFB" stroke="#94ADC6" stroke-width="2"/>
+  <text x="376" y="189" text-anchor="middle" font-size="19" font-weight="800">Target: multiples of 6</text>
+  <text x="115" y="237" font-size="14">The condition defines who is eligible to be selected.</text>
+</svg>`;
+
+const resetSVG=`
+<svg viewBox="0 0 920 155" role="img" aria-label="Reset sequence: one breath, read the task, choose a plan, check and commit.">
+  <g fill="#FFFFFF" stroke="#BAC9D6" stroke-width="1.5">
+    <rect x="10" y="30" width="200" height="88" rx="13"/>
+    <rect x="243" y="30" width="200" height="88" rx="13"/>
+    <rect x="476" y="30" width="200" height="88" rx="13"/>
+    <rect x="709" y="30" width="200" height="88" rx="13"/>
+  </g>
+  <g stroke="#7D889A" stroke-width="2" fill="none">
+    <path d="M218 74 H234 M228 68 L235 74 L228 80"/>
+    <path d="M451 74 H467 M461 68 L468 74 L461 80"/>
+    <path d="M684 74 H700 M694 68 L701 74 L694 80"/>
+  </g>
+  <g text-anchor="middle" font-size="20" font-weight="800">
+    <text x="110" y="70">One breath</text>
+    <text x="343" y="70">Read the task</text>
+    <text x="576" y="70">Choose a plan</text>
+    <text x="809" y="70">Check + commit</text>
+  </g>
+  <g text-anchor="middle" font-size="14">
+    <text x="110" y="95">Drop the previous item.</text>
+    <text x="343" y="95">Name what is asked.</text>
+    <text x="576" y="95">Make one useful move.</text>
+    <text x="809" y="95">Inspect the vulnerable step.</text>
+  </g>
+</svg>`;
+
+const slidesData=[
+{
+  title:"Review and Strategy Lock",minutes:"0–1",zone:1,cover:true,
+  body:`
+    <div class="center">
+      <div class="hero-graphic reveal">
+        <svg viewBox="0 0 460 130" role="img" aria-label="A route from evidence through a plan to a committed decision.">
+          <path d="M68 64 H392" stroke="#BAC9D6" stroke-width="3" fill="none"/>
+          <circle cx="70" cy="64" r="35" fill="#FFFFFF" stroke="#BAC9D6" stroke-width="2"/>
+          <circle cx="230" cy="64" r="35" fill="#EDF2F9" stroke="#BAC9D6" stroke-width="2"/>
+          <circle cx="390" cy="64" r="35" fill="#DCEBFB" stroke="#BAC9D6" stroke-width="2"/>
+          <g text-anchor="middle" font-size="18" font-weight="800">
+            <text x="70" y="70">Read</text>
+            <text x="230" y="70">Plan</text>
+            <text x="390" y="70">Commit</text>
+          </g>
+        </svg>
+      </div>
+      <span class="badge reveal">Final preparation · Session 18 · 60 minutes</span>
+      <h1 class="reveal" style="margin-top:16px">Review and<br><span class="tint">Strategy Lock</span></h1>
+      <p class="subhead reveal">A steady process for the November 2026 CAT SHSAT</p>
+      <p class="small reveal">Josephine · Test-day plan: November 18, 2026 · Confirm the ticket</p>
+      <div class="button-row reveal" style="justify-content:center">
+        <span class="badge">ELA: evidence before hesitation</span>
+        <span class="badge">Math: probability + counting</span>
+        <span class="badge">Strategy: rehearse, then keep it</span>
+      </div>
+    </div>`
+},
+{
+  title:"Today's 60-Minute Route",minutes:"1–2",zone:1,
+  body:`
+    <div class="route-row reveal">
+      <div class="route-time">0–25</div><div class="route-rail"><span class="route-dot"></span></div>
+      <div class="card"><h3>ELA: recover the process on screen</h3><p>Original nonfiction and fiction; Levels 1–4; evidence checks; one passage-set submission rehearsal.</p></div>
+    </div>
+    <div class="route-row reveal">
+      <div class="route-time">25–45</div><div class="route-rail"><span class="route-dot"></span></div>
+      <div class="card"><h3>Math: tighten probability and counting</h3><p>Eight short problems. Identify the sample space, repetition rule, order rule, and useful check.</p></div>
+    </div>
+    <div class="route-row reveal">
+      <div class="route-time">45–60</div><div class="route-rail"><span class="route-dot"></span></div>
+      <div class="card"><h3>Strategy: say it, rehearse it, lock it</h3><p>Math first; personal checkpoints; passage review; response-entry discipline; attention reset.</p></div>
+    </div>
+    <div class="rule reveal"><strong>Today's constraint:</strong> consolidate familiar tools. Do not rebuild the plan around one uncomfortable practice result.</div>`
+},
+{
+  title:"Separate the Signal from the Conditions",minutes:"2–4",zone:1,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>What the recent review showed</h3>
+        <p>Previously missed ELA question types became manageable in review.</p>
+        <p class="muted">Reported distraction, an unfamiliar delivery sequence, and an older 57-question form complicate interpretation of that mock.</p>
+      </div>
+      <div class="card reveal">
+        <h3>What we will actually rehearse</h3>
+        <p>Independent ELA decisions on screen, followed by review inside the active passage set.</p>
+        <p class="muted">Probability and counting receive the targeted content attention. Preserve the stronger math habits.</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Opening questions:</strong> What did you know but not use? What did the screen make harder? Which action can you control next time?</div>
+    <p class="source-note">Instructional emphasis follows the attached lesson notes. A review success does not, by itself, prove why a timed response was missed.</p>`
+},
+{
+  title:"A Detail Must Do a Job",minutes:"4–6",zone:1,
+  body:`
+    <div class="diagram-wrap reveal">${bridgeSVG}</div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card reveal">
+        <h3>The deletion test</h3>
+        <p>If this detail disappeared, what explanation, contrast, qualification, or turning point would become weaker?</p>
+      </div>
+      <div class="card reveal">
+        <h3>The replacement test</h3>
+        <p>For vocabulary, substitute a plain phrase. Does it preserve the sentence's logic—not just its mood?</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Before choices:</strong> say a short prediction. Then make the choices compete against the text, not against your confidence.</div>`
+},
+{
+  title:"Read: The Repair Shelf",minutes:"6–8",zone:1,
+  body:`
+    <div class="passage-tools reveal">
+      <button class="btn" type="button" data-action="mark-selection">Highlight selected text</button>
+      <span class="reading-note">Mark one claim and one limitation. Highlighting is optional.</span>
+    </div>
+    <div class="reveal">${passageHTML("N")}</div>`
+},
+{
+  title:"Meaning and Main Idea",minutes:"8–11",zone:1,
+  body:`
+    ${passageTools("N")}
+    <div class="grid2 question-grid reveal">${questionHTML("N1")}${questionHTML("N2")}</div>
+    ${lens("Reasoning lens: scope","For a word, use the surrounding contrast. For a main idea, ask whether the choice covers the whole passage without converting a possibility into a certainty.")}`
+},
+{
+  title:"Function and Fair Comparison",minutes:"11–13",zone:1,
+  body:`
+    ${passageTools("N")}
+    <div class="grid2 question-grid reveal">${questionHTML("N3")}${questionHTML("N4")}</div>
+    ${lens("Reasoning lens: evidence architecture","A function choice explains why a detail belongs. A study-design choice must address the named comparison problem, not merely make the project more attractive.")}`
+},
+{
+  title:"Truth Is Not Enough",minutes:"13–15",zone:1,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>Two gates for a choice</h3>
+        <p><strong>Truth:</strong> Is it supported by the passage?</p>
+        <p><strong>Job:</strong> Does it answer this particular stem at the right scale?</p>
+        <p class="small">A true detail may still be a weak main idea or the wrong explanation of purpose.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Change only for a reason</h3>
+        <p>What exact word, missing link, or overstatement makes your earlier response less defensible?</p>
+        <p class="small">“It feels wrong” is a signal to check—not evidence that a response should change.</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Explain one decision:</strong> “This detail does ___, which helps the passage ___.” Keep the sentence specific enough to test.</div>
+    ${scratch("Write one evidence-based reason for keeping or changing a response.")}`
+},
+{
+  title:"Read: The Blank Label",minutes:"15–17",zone:1,
+  fiction:true,
+  body:`
+    <div class="fiction-content">
+      <div class="passage-tools reveal">
+        <span class="badge">Active fiction set</span>
+        <span class="reading-note">You may revisit F1–F4 until this set is submitted.</span>
+      </div>
+      <div class="reveal">${passageHTML("F")}</div>
+    </div>`
+},
+{
+  title:"Fiction: Detail and Inference",minutes:"17–19",zone:1,
+  fiction:true,
+  body:`
+    <div class="fiction-content">
+      ${passageTools("F")}
+      <div class="grid2 question-grid reveal">${questionHTML("F1")}${questionHTML("F2")}</div>
+      <div class="rule reveal"><strong>Independence first:</strong> select a response, locate the support, and then explain. The tutor waits for the first committed decision.</div>
+    </div>`
+},
+{
+  title:"Fiction: Function and Change",minutes:"19–21",zone:1,
+  fiction:true,
+  body:`
+    <div class="fiction-content">
+      ${passageTools("F")}
+      <div class="grid2 question-grid reveal">${questionHTML("F3")}${questionHTML("F4")}</div>
+      ${lens("Reasoning lens: a character's change","Separate the starting belief, the trigger, and the later action. A detail earns its place by helping connect those stages; merely appearing near the ending is not enough.")}
+    </div>`
+},
+{
+  title:"Review the Set Before Submitting",minutes:"21–23",zone:1,
+  fiction:true,
+  body:`
+    <div class="fiction-content">
+      <div class="grid2">
+        <div class="card reveal">
+          <h3>A purposeful final review</h3>
+          <ol>
+            <li>Check that every response is complete.</li>
+            <li>Revisit the least-supported decision.</li>
+            <li>Inspect the exact claim and evidence.</li>
+            <li>Check “select TWO” before submitting.</li>
+          </ol>
+        </div>
+        <div class="card reveal">
+          <h3>Your current selections</h3>
+          <div class="review-list" id="fictionReview"></div>
+          <div class="button-row">
+            <button class="btn" type="button" data-passage="F">Read passage</button>
+            <button class="btn primary" type="button" data-action="request-submit">Review complete: submit set</button>
+          </div>
+          <div class="status-message" id="setStatus" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="rule reveal">This is a classroom rehearsal of the review boundary, not a replica of TestNav. Presentation navigation remains separate from the practice set.</div>
+      ${officialNote()}
+    </div>`
+},
+{
+  title:"Name the Move You Will Repeat",minutes:"23–25",zone:1,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>Keep the method transferable</h3>
+        <p>Which decision became clearer when you named the paragraph's job?</p>
+        <p>Which choice required a scope check rather than another full reread?</p>
+      </div>
+      <div class="card reveal">
+        <h3>Separate independence from certainty</h3>
+        <p>Could you commit before hearing the tutor's reaction?</p>
+        <p>What evidence justified any change during review?</p>
+      </div>
+    </div>
+    ${scratch("My repeatable ELA move is…")}
+    <div class="rule reveal"><strong>Carry forward:</strong> a short prediction, a precise evidence link, and a deliberate submission boundary.</div>`
+},
+{
+  title:"Write the Probability Contract",minutes:"25–27",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>Before calculating</h3>
+        <ol>
+          <li>What is one complete outcome?</li>
+          <li>Which outcomes are equally likely?</li>
+          <li>Does a selection change the next stage?</li>
+          <li>Does exchanging positions change the result?</li>
+        </ol>
+      </div>
+      <div class="card reveal">
+        <h3>Match the tool to the structure</h3>
+        <p><strong>List or table:</strong> a small sample space.</p>
+        <p><strong>Slots or tree:</strong> staged choices.</p>
+        <p><strong>Complement:</strong> “at least one” when “none” is simpler.</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Precision check:</strong> favorable and total counts must use the same kind of outcome. Do not mix color labels with individual objects.</div>`
+},
+{
+  title:"Two Quick Structure Checks",minutes:"27–29",zone:2,
+  body:`
+    <div class="grid2 question-grid reveal">${questionHTML("M1")}${questionHTML("M2")}</div>
+    ${lens("Reasoning lens: what is being counted?","For a random token, count equally likely objects. For a constructed badge, ask whether every choice at one stage can pair with every choice at the next. Why would adding the stage counts describe a different task?")}`
+},
+{
+  title:"Without Replacement: Update the World",minutes:"29–32",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="reveal">
+        ${questionHTML("M3")}
+        ${lens("Reasoning lens: make the second draw real","Imagine physically removing the first tile. What changed in the total? What changed in the relevant color count? Follow the event through the tree before multiplying stage probabilities.")}
+      </div>
+      <div class="diagram-wrap reveal">${treeSVG}</div>
+    </div>
+    ${scratch("Write the event path and the quantities that change after the first draw.")}`
+},
+{
+  title:"The Condition Chooses the Denominator",minutes:"32–34",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="reveal">${questionHTML("M4")}</div>
+      <div class="reveal">
+        <div class="diagram-wrap">${conditionSVG}</div>
+        ${lens("Reasoning lens: close the outer door","Once the stem limits selection to a subgroup, outcomes outside that subgroup are no longer eligible. Count the target inside the eligible group. Is the endpoint included?")}
+      </div>
+    </div>`
+},
+{
+  title:"A Job Is Not Just a Name",minutes:"34–37",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="reveal">${questionHTML("M5")}</div>
+      <div class="card reveal">
+        <h3>Run the swap test</h3>
+        <p>If two students exchange jobs, is the assignment different?</p>
+        <div class="slot-row" style="grid-template-columns:repeat(3,1fr);margin-top:16px">
+          <div class="slot"><strong>___</strong><span>Captain</span></div>
+          <div class="slot"><strong>___</strong><span>Recorder</span></div>
+          <div class="slot"><strong>___</strong><span>Photographer</span></div>
+        </div>
+        ${lens("Reasoning lens: count a construction","Build one assignment in stages. After filling a job, who remains available? Do not divide out rearrangements when those rearrangements are genuinely different assignments.")}
+      </div>
+    </div>
+    ${scratch("Describe what makes two assignments different before calculating.")}`
+},
+{
+  title:"Fill the Tightest Slot First",minutes:"37–40",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="reveal">${questionHTML("M6")}</div>
+      <div class="card reveal">
+        <h3>Constraints are local</h3>
+        <div class="slot-row">
+          <div class="slot"><strong>___</strong><span>Even</span></div>
+          <div class="slot"><strong>___</strong><span>Unused digit</span></div>
+          <div class="slot"><strong>___</strong><span>Unused digit</span></div>
+          <div class="slot"><strong>${latexInline("9")}</strong><span>Fixed</span></div>
+        </div>
+        <p class="small" style="margin-top:14px">These boxes show the stated restrictions—not completed counts.</p>
+        ${lens("Reasoning lens: dependency, not reading order","Counting does not have to begin at the left. Reserve a forced digit, then handle the restrictive slot. At each stage, ask whether the number of legal choices depends on which earlier digit was used.")}
+      </div>
+    </div>
+    ${scratch("Annotate the legal-choice count for each slot. Check that no digit is used twice.")}`
+},
+{
+  title:"Count None Before At Least One",minutes:"40–43",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="reveal">${questionHTML("M7")}</div>
+      <div class="card reveal">
+        <h3>Use a complete partition</h3>
+        <p>Every three-spin sequence belongs to exactly one of two groups:</p>
+        <div class="grid2" style="margin:14px 0">
+          <div class="soft-card center"><strong>No ${latexInline("A")} occurs</strong></div>
+          <div class="soft-card center"><strong>At least one ${latexInline("A")} occurs</strong></div>
+        </div>
+        <div class="math-small">${latexInline("P(\\text{at least one}) = 1 - P(\\text{none})")}</div>
+        ${lens("Reasoning lens: why this saves work","Direct counting splits into one, two, and three occurrences. The complement combines those cases without overlap. What feature of independent spins permits multiplication across the three stages?")}
+      </div>
+    </div>
+    ${scratch("State the complement in words before writing any arithmetic.")}`
+},
+{
+  title:"Equal Pairs, Unequal Totals",minutes:"43–45",zone:2,
+  body:`
+    <div class="grid2">
+      <div class="reveal">${questionHTML("M8")}</div>
+      <div class="card reveal">
+        <h3>Each cell is one ordered pair</h3>
+        <table class="sample-table" aria-label="Blank spinner-sum table">
+          <thead><tr><th>${latexInline("A")} / ${latexInline("B")}</th><th>${latexInline("1")}</th><th>${latexInline("3")}</th><th>${latexInline("5")}</th></tr></thead>
+          <tbody>
+            ${[1,2,4].map(a=>`<tr><th>${latexInline(String(a))}</th>${[1,3,5].map(b=>`<td><input type="text" inputmode="numeric" aria-label="Sum for A ${a} and B ${b}"></td>`).join("")}</tr>`).join("")}
+          </tbody>
+        </table>
+        ${lens("Reasoning lens: preserve the sampling unit","The equally likely units are cells, not distinct sum labels. If a sum appears in more than one cell, what happens to its probability? Inspect the boundary phrase “at least” before counting.")}
+      </div>
+    </div>`
+},
+{
+  title:"Math First. Then Stay with the Plan.",minutes:"45–47",zone:3,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>The section-order decision</h3>
+        <p><strong>Rehearse starting with math.</strong> This follows the existing plan rather than the sequence imposed by the recent mock.</p>
+        <p class="small">State the choice aloud. Once a subject is submitted, it cannot be reopened.</p>
+      </div>
+      <div class="card reveal">
+        <h3>The actual review boundaries</h3>
+        <p><strong>Math and standalone ELA:</strong> no return after advancing.</p>
+        <p><strong>Passage-based ELA:</strong> review within the active set before submitting it.</p>
+      </div>
+    </div>
+    <div class="number-line reveal">
+      <div><strong>50</strong><span>Math questions</span></div>
+      <div><strong>50</strong><span>ELA questions</span></div>
+      <div><strong>180</strong><span>Standard testing minutes</span></div>
+      <div><strong>1</strong><span>Subject completed before switching</span></div>
+    </div>
+    ${officialNote()}`
+},
+{
+  title:"Use Checkpoints, Not Constant Clock-Watching",minutes:"47–49",zone:3,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>Math checkpoint</h3>
+        <p><strong>At question 25:</strong> compare the clock with the established target of no more than 45 minutes used.</p>
+        <p class="small">This is a personal planning checkpoint. It is not an official midsection time limit.</p>
+        <p>Then reset attention for the back half.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Confirm the rehearsed targets</h3>
+        <label class="plan-field">Math budget, in minutes
+          <input class="plan-input" type="number" min="1" max="179" data-plan="mathMinutes" placeholder="Use the established budget">
+        </label>
+        <label class="plan-field">ELA budget, in minutes
+          <input class="plan-input" type="number" min="1" max="179" data-plan="elaMinutes" placeholder="Together, budgets total 180">
+        </label>
+        <label class="plan-field">After ELA passage set 4
+          <input class="plan-input" type="text" data-plan="elaCheckpoint" placeholder="Record the already-rehearsed clock target">
+        </label>
+      </div>
+    </div>
+    <div class="rule reveal">Passage lengths and question counts can vary. The set-4 checkpoint is a personal rehearsal marker, not a promise about every test form.</div>`
+},
+{
+  title:"A Time Ceiling Is a Decision Cue",minutes:"49–50",zone:3,
+  body:`
+    <div class="card reveal">
+      <h3>The established 2.5-minute cue</h3>
+      <p>When a single item approaches the rehearsed ceiling, ask: “Do I have a productive next step, or am I repeating the same attempt?”</p>
+      <p>Use the work you have to make the best-supported response, inspect the vulnerable step, and advance deliberately.</p>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="soft-card reveal"><strong>Not a test rule</strong><p class="small" style="margin-top:7px">The ceiling is a tutoring strategy, not a platform-enforced limit.</p></div>
+      <div class="soft-card reveal"><strong>Not a guessing sprint</strong><p class="small" style="margin-top:7px">Protect useful attempts. Do not assume rapid guesses near the end improve the result.</p></div>
+    </div>
+    ${officialNote()}`
+},
+{
+  title:"Warm Up Inside the First Passage",minutes:"50–52",zone:3,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>Begin with a small, clear task</h3>
+        <ol>
+          <li>Read to understand the situation or claim.</li>
+          <li>Name each paragraph's job in a few words.</li>
+          <li>State the passage's overall movement.</li>
+          <li>Answer, then review inside the active set.</li>
+        </ol>
+      </div>
+      <div class="card reveal">
+        <h3>When two choices survive</h3>
+        <p>Which exact phrase distinguishes them?</p>
+        <p>Does one choice change the scope, cause, degree, or purpose?</p>
+        <p class="small">Reread the smallest useful region first. Broaden the reread only if the task requires it.</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Transition into ELA:</strong> begin the first passage carefully. Do not carry the emotional residue of the final math item into a new subject.</div>`
+},
+{
+  title:"The Response Must Match the Direction",minutes:"52–54",zone:3,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>Selection-based items</h3>
+        <p>Read whether the task asks for one, two, or all applicable choices.</p>
+        <p>Check the final set of selections—not just the last option clicked.</p>
+        <p class="small">For matching or ordering, inspect every destination or position before advancing.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Entered responses</h3>
+        <p>Read the requested form: integer, fraction, decimal, expression, or another specified representation.</p>
+        <p>Inspect the displayed sign, fraction structure, and any requested precision.</p>
+        <p class="small">Follow the item's actual entry directions; do not assume every item accepts the same format.</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Final inspection:</strong> “Does the screen show what I meant to submit?” A correct plan can still be lost through an incomplete or mistyped response.</div>`
+},
+{
+  title:"Reset Attention Without Restarting the Test",minutes:"54–56",zone:3,
+  body:`
+    <div class="diagram-wrap reveal">${resetSVG}</div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card reveal">
+        <h3>After a distraction</h3>
+        <p>Locate the current sentence or stem. Name what the task asks. Resume from a known point instead of mentally replaying the interruption.</p>
+      </div>
+      <div class="card reveal">
+        <h3>After a difficult item</h3>
+        <p>Do not use perceived difficulty to diagnose your score. The next useful action remains the same: understand, plan, check, commit.</p>
+      </div>
+    </div>
+    <label class="plan-field reveal" style="margin-top:15px">My brief reset phrase
+      <input class="plan-input" type="text" data-plan="resetPhrase" placeholder="A short phrase you already find useful">
+    </label>
+    <p class="source-note">This is a brief attention reset within testing, not permission for an unscheduled break.</p>`
+},
+{
+  title:"Rehearse the Decisions, Not the Fear",minutes:"56–58",zone:3,
+  body:`
+    <div class="stack">
+      <div class="card reveal">
+        <h3>A question suddenly feels much harder</h3>
+        <p>Which next action stays under your control? What would guessing your current score distract you from doing?</p>
+      </div>
+      <div class="card reveal">
+        <h3>You doubt one response during passage review</h3>
+        <p>What specific evidence would justify changing it? What would justify keeping it?</p>
+      </div>
+      <div class="card reveal">
+        <h3>The platform pauses or the display behaves unexpectedly</h3>
+        <p>What will you tell the proctor? Which actions should wait for the proctor's instructions?</p>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Delivery:</strong> answer each scenario aloud in one or two sentences. Keep the procedure concrete.</div>`
+},
+{
+  title:"Read Back the Locked Plan",minutes:"58–60",zone:3,
+  body:`
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>My test-day sequence</h3>
+        <ol>
+          <li>Start with math and preserve the rehearsed section budgets.</li>
+          <li>Use question 25 and the ELA set-4 marker as personal checkpoints.</li>
+          <li>Check replacement, order, and the sample space before probability work.</li>
+          <li>Review passage questions before submitting the set.</li>
+          <li>Inspect the response, commit, and release the previous item.</li>
+        </ol>
+      </div>
+      <div class="card reveal">
+        <h3>Confirm—not redesign</h3>
+        <label class="plan-field">Math budget
+          <input class="plan-input" type="number" data-plan="mathMinutes" placeholder="Minutes">
+        </label>
+        <label class="plan-field">ELA budget
+          <input class="plan-input" type="number" data-plan="elaMinutes" placeholder="Minutes">
+        </label>
+        <label class="plan-field">ELA set-4 clock target
+          <input class="plan-input" type="text" data-plan="elaCheckpoint" placeholder="Established target">
+        </label>
+        <label class="plan-field">Reset phrase
+          <input class="plan-input" type="text" data-plan="resetPhrase" placeholder="Your short phrase">
+        </label>
+        <button type="button" class="btn primary" data-action="lock-plan">Read back and lock the plan</button>
+        <div class="status-message" id="planStatus" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="rule reveal"><strong>Final statement:</strong> “I do not need every item to feel easy. I need to carry out the next useful step independently.”</div>`
+}
+];
+
+/* Build the deck. */
+const deck=document.getElementById("deck");
+deck.innerHTML=slidesData.map((s,i)=>`
+  <section class="slide ${i===0?"active":""}" data-slide="${i+1}"
+    data-minutes="${s.minutes}" aria-label="Slide ${i+1}: ${escapeHTML(s.title)}"
+    aria-hidden="${i===0?"false":"true"}">
+    ${i===0||i===slidesData.length-1?'<canvas class="particle-canvas" aria-hidden="true"></canvas>':""}
+    <div class="gradient-mesh" aria-hidden="true"><div class="blob"></div><div class="blob"></div></div>
+    <div class="content">
+      ${s.cover?"":`
+        <div class="zone-strip reveal">
+          <span class="zone-chip ${s.zone===1?"on":""}">ELA · 0–25</span>
+          <span class="zone-chip ${s.zone===2?"on":""}">Math · 25–45</span>
+          <span class="zone-chip ${s.zone===3?"on":""}">Strategy · 45–60</span>
+        </div>
+        <div class="kicker reveal">Session 18 · minutes ${s.minutes}</div>
+        <h2 class="reveal">${s.title}</h2>
+      `}
+      ${s.body}
+    </div>
+  </section>
+`).join("");
+
+const slideElements=[...document.querySelectorAll(".slide")];
+const total=slideElements.length;
+let current=1;
+const dots=document.getElementById("dots");
+const counter=document.getElementById("counter");
+
+for(let i=1;i<=total;i++){
+  const d=document.createElement("button");
+  d.type="button";
+  d.className="dot"+(i===1?" active":"");
+  d.setAttribute("aria-label",`Go to slide ${i}: ${slidesData[i-1].title}`);
+  d.addEventListener("click",()=>goToSlide(i));
+  dots.appendChild(d);
+}
+slideElements.forEach((s,i)=>{s.inert=i!==0;});
+
+function updateNav(){
+  const maxDots=innerWidth<580?7:innerWidth<950?15:total;
+  let lo=Math.max(1,current-Math.floor(maxDots/2));
+  let hi=Math.min(total,lo+maxDots-1);
+  lo=Math.max(1,hi-maxDots+1);
+  [...dots.children].forEach((d,i)=>{
+    const n=i+1;
+    d.hidden=n<lo||n>hi;
+    d.style.display=d.hidden?"none":"flex";
+    d.classList.toggle("active",n===current);
+    if(n===current)d.setAttribute("aria-current","step");
+    else d.removeAttribute("aria-current");
+  });
+  counter.textContent=`${current} / ${total}`;
+}
+
+function fitSlide(slide){
+  if(!slide)return;
+  const c=slide.querySelector(".content");
+  c.style.transform="";
+  const available=deck.clientHeight-12;
+  const h=c.offsetHeight;
+  const scale=Math.min(1,available/h);
+  if(scale<1)c.style.transform=`scale(${scale})`;
+}
+
+function goToSlide(n){
+  n=Math.max(1,Math.min(total,Number(n)));
+  if(!Number.isFinite(n))return;
+  const previous=slideElements[current-1];
+  const next=slideElements[n-1];
+  previous.classList.remove("active");
+  previous.setAttribute("aria-hidden","true");
+  previous.inert=true;
+  next.classList.add("active");
+  next.setAttribute("aria-hidden","false");
+  next.inert=false;
+  current=n;
+  updateNav();
+  renderReview();
+  requestAnimationFrame(()=>fitSlide(next));
+}
+function changeSlide(direction){
+  let n=current+direction;
+  if(n<1)n=total;
+  if(n>total)n=1;
+  goToSlide(n);
+}
+document.getElementById("prev").addEventListener("click",()=>changeSlide(-1));
+document.getElementById("next").addEventListener("click",()=>changeSlide(1));
+
+const editable=el=>el.closest("input,textarea,select,[contenteditable=true]");
+document.addEventListener("keydown",e=>{
+  if(document.querySelector("dialog[open]")||editable(e.target))return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){
+    e.preventDefault();changeSlide(1);
+  }
+  if(e.key==="ArrowLeft"||e.key==="PageUp"){
+    e.preventDefault();changeSlide(-1);
+  }
+  if(e.key==="Home"){e.preventDefault();goToSlide(1);}
+  if(e.key==="End"){e.preventDefault();goToSlide(total);}
+});
+
+let touchStart=null;
+document.addEventListener("touchstart",e=>{
+  if(editable(e.target)||e.target.closest("button,dialog"))return;
+  touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+},{passive:true});
+document.addEventListener("touchend",e=>{
+  if(!touchStart)return;
+  const dx=touchStart.x-e.changedTouches[0].clientX;
+  const dy=touchStart.y-e.changedTouches[0].clientY;
+  if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.5)changeSlide(dx>0?1:-1);
+  touchStart=null;
+},{passive:true});
+
+/* Response selections: selection state only, never correctness. */
+function updateQuestion(id){
+  const q=questions[id];
+  const selected=state.responses[id];
+  document.querySelectorAll(`[data-question="${id}"]`).forEach(btn=>{
+    const i=Number(btn.dataset.option);
+    const on=Array.isArray(selected)&&selected.includes(i);
+    btn.classList.toggle("selected",on);
+    btn.setAttribute("aria-pressed",String(on));
+  });
+  document.querySelectorAll(`[data-selection-note="${id}"]`).forEach(el=>{
+    if(q.mode==="entry"){
+      el.textContent="Check the requested representation. No correctness feedback is shown.";
+    }else if(q.mode==="multi"){
+      el.textContent=`${Array.isArray(selected)?selected.length:0} of ${q.required} selected. No correctness feedback is shown.`;
+    }else{
+      el.textContent=Array.isArray(selected)&&selected.length
+        ?"Response recorded. No correctness feedback is shown."
+        :"Select one response. No correctness feedback is shown.";
+    }
+  });
+}
+
+function responseComplete(id){
+  const q=questions[id],r=state.responses[id];
+  if(q.mode==="entry")return typeof r==="string"&&r.trim().length>0;
+  if(!Array.isArray(r))return false;
+  return q.mode==="multi"?r.length===q.required:r.length===1;
+}
+
+function responseText(id){
+  const r=state.responses[id];
+  if(!Array.isArray(r)||!r.length)return "No selection yet";
+  return "Selected: "+r.slice().sort((a,b)=>a-b).map(i=>String.fromCharCode(65+i)).join(", ");
+}
+
+function renderReview(){
+  const box=document.getElementById("fictionReview");
+  if(!box||state.fictionSubmitted)return;
+  const targets={F1:10,F2:10,F3:11,F4:11};
+  box.innerHTML=["F1","F2","F3","F4"].map(id=>`
+    <div class="review-item">
+      <div><strong>${id}</strong><span class="review-response">${responseText(id)}</span></div>
+      <button class="btn" type="button" data-go="${targets[id]}">Review</button>
+    </div>
+  `).join("");
+}
+
+document.addEventListener("click",e=>{
+  const option=e.target.closest("[data-question]");
+  if(option){
+    const id=option.dataset.question;
+    if(id.startsWith("F")&&state.fictionSubmitted)return;
+    const q=questions[id],i=Number(option.dataset.option);
+    let selections=Array.isArray(state.responses[id])?[...state.responses[id]]:[];
+    if(q.mode==="multi"){
+      selections=selections.includes(i)
+        ?selections.filter(x=>x!==i)
+        :[...selections,i];
+    }else selections=[i];
+    state.responses[id]=selections;
+    updateQuestion(id);
+    renderReview();
+    return;
+  }
+
+  const jump=e.target.closest("[data-go]");
+  if(jump){goToSlide(Number(jump.dataset.go));return;}
+
+  const passageButton=e.target.closest("[data-passage]");
+  if(passageButton){openPassage(passageButton.dataset.passage);return;}
+
+  const action=e.target.closest("[data-action]")?.dataset.action;
+  if(!action)return;
+
+  if(action==="close-passage")document.getElementById("passageDialog").close();
+  if(action==="cancel-submit")document.getElementById("confirmDialog").close();
+
+  if(action==="request-submit"){
+    const incomplete=["F1","F2","F3","F4"].filter(id=>!responseComplete(id));
+    const status=document.getElementById("setStatus");
+    if(incomplete.length){
+      status.textContent="Complete the response directions for: "+incomplete.join(", ")+".";
+      return;
+    }
+    document.getElementById("confirmDialog").showModal();
+  }
+
+  if(action==="confirm-submit"){
+    state.fictionSubmitted=true;
+    document.getElementById("confirmDialog").close();
+    document.querySelectorAll(".fiction-content").forEach(el=>{el.innerHTML=closedHTML();});
+    goToSlide(13);
+  }
+
+  if(action==="lock-plan")lockPlan();
+  if(action==="mark-selection")highlightSelection();
+});
+
+document.addEventListener("input",e=>{
+  const entry=e.target.closest("[data-entry]");
+  if(entry){
+    state.responses[entry.dataset.entry]=entry.value;
+    updateQuestion(entry.dataset.entry);
+  }
+  const plan=e.target.closest("[data-plan]");
+  if(plan&&!state.planLocked){
+    const key=plan.dataset.plan;
+    state.plan[key]=plan.value;
+    document.querySelectorAll(`[data-plan="${key}"]`).forEach(input=>{
+      if(input!==plan)input.value=plan.value;
+    });
+  }
+});
+
+function openPassage(key){
+  if(key==="F"&&state.fictionSubmitted)return;
+  const dialog=document.getElementById("passageDialog");
+  document.getElementById("passageDialogTitle").textContent=passages[key].title;
+  const body=document.getElementById("passageDialogBody");
+  body.innerHTML=passageHTML(key);
+  body.style.transform="";
+  dialog.showModal();
+  requestAnimationFrame(()=>{
+    const header=dialog.querySelector(".dialog-head").offsetHeight;
+    const available=innerHeight-header-100;
+    const natural=body.offsetHeight;
+    if(natural>available){
+      const scale=available/natural;
+      body.style.transform=`scale(${scale})`;
+      body.style.marginBottom=`-${natural*(1-scale)}px`;
+    }else body.style.marginBottom="0";
+  });
+}
+
+function highlightSelection(){
+  const selection=window.getSelection();
+  if(!selection||selection.isCollapsed||!selection.rangeCount)return;
+  const range=selection.getRangeAt(0);
+  const parent=range.commonAncestorContainer.nodeType===1
+    ?range.commonAncestorContainer:range.commonAncestorContainer.parentElement;
+  if(!parent.closest(".mark-target"))return;
+  const mark=document.createElement("mark");
+  mark.className="user-mark";
+  try{range.surroundContents(mark);selection.removeAllRanges();}
+  catch(_){
+    /* Cross-paragraph selections are deliberately left unchanged. */
+  }
+}
+
+function lockPlan(){
+  const status=document.getElementById("planStatus");
+  const p=state.plan;
+  const math=Number(p.mathMinutes),ela=Number(p.elaMinutes);
+  if(!p.mathMinutes||!p.elaMinutes||math<=0||ela<=0||math+ela!==180){
+    status.textContent="Confirm positive section budgets totaling 180 minutes before locking.";
+    return;
+  }
+  if(!p.elaCheckpoint.trim()||!p.resetPhrase.trim()){
+    status.textContent="Record the rehearsed ELA checkpoint and reset phrase before locking.";
+    return;
+  }
+  state.planLocked=true;
+  document.querySelectorAll("[data-plan]").forEach(input=>{input.readOnly=true;});
+  document.querySelectorAll('[data-action="lock-plan"]').forEach(btn=>{
+    btn.disabled=true;btn.textContent="Plan locked";
+  });
+  status.textContent="Plan recorded for this browser session. Keep the established sequence; no late redesign.";
+}
+
+/* Timer is a lesson pacing aid; it does not force slide changes. */
+let timerRunning=false,elapsed=0,lastTick=0;
+const clockTime=document.getElementById("clockTime");
+const clockToggle=document.getElementById("clockToggle");
+
+clockToggle.addEventListener("click",()=>{
+  timerRunning=!timerRunning;
+  lastTick=Date.now();
+  clockToggle.textContent=timerRunning?"Pause":"Resume";
+});
+
+setInterval(()=>{
+  const now=Date.now();
+  if(timerRunning)elapsed+=now-lastTick;
+  lastTick=now;
+  const seconds=Math.floor(elapsed/1000);
+  clockTime.textContent=
+    String(Math.floor(seconds/60)).padStart(2,"0")+":"+
+    String(seconds%60).padStart(2,"0");
+},250);
+
+document.querySelectorAll("details").forEach(d=>{
+  d.addEventListener("toggle",()=>fitSlide(slideElements[current-1]));
+});
+window.addEventListener("resize",()=>{
+  updateNav();fitSlide(slideElements[current-1]);
+});
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(()=>fitSlide(slideElements[current-1]));
+}
+renderReview();
+updateNav();
+requestAnimationFrame(()=>fitSlide(slideElements[0]));
+</script>
+<script>
+window.initParticles = function(canvas, opts) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  const count = opts.count || 40;
+  let mx = -1000, my = -1000;
+  const [r, g, b] = [37, 99, 235];
+  let particles = [];
+  function seed() {
+    const w = canvas.offsetWidth || window.innerWidth;
+    const h = canvas.offsetHeight || window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      size: Math.random() * 2.2 + .7, alpha: Math.random() * .28 + .08
+    }));
+  }
+  seed(); requestAnimationFrame(seed); window.addEventListener('resize', seed);
+  const ownSlide = canvas.closest('.slide');
+  const pointerTarget = ownSlide || canvas;
+  pointerTarget.addEventListener('mousemove', e => { const rc = canvas.getBoundingClientRect(); mx = (e.clientX - rc.left) * canvas.width / rc.width; my = (e.clientY - rc.top) * canvas.height / rc.height; });
+  pointerTarget.addEventListener('mouseleave', () => { mx = -1000; my = -1000; });
+  (function animate() {
+    if (!ownSlide || ownSlide.classList.contains('active')) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > 0 && dist < 120) { const f = (120-dist)/120*1.5; p.vx += (dx/dist)*f*.1; p.vy += (dy/dist)*f*.1; }
+        p.vx *= .98; p.vy *= .98; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')'; ctx.fill();
+      });
+    }
+    requestAnimationFrame(animate);
+  })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { count: 55 }));
+</script>
+</body>
+</html>
