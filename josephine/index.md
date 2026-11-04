@@ -27,4 +27,4 @@
 | **01A** | [Strategy, Section Order andd the Back-Half Stamina Set](https://hue-bee.github.io/josephine/lessons/01A) | [01A Homework](https://hue-bee.github.io/josephine/lessons/01A/homework) |[Set 1](https://hue-bee.github.io/josephine/lessons/01A/sets/01)|
 | **01B** | [Targeted Repair II](https://hue-bee.github.io/josephine/lessons/01B) | [01B Homework](https://hue-bee.github.io/josephine/lessons/01B/homework) ||
 | **02A** | [Mock #3 Review and Strategy Lock](https://hue-bee.github.io/josephine/lessons/02A) | [02A Homework](https://hue-bee.github.io/josephine/lessons/02A/homework) ||
-| **02B** | [Review and Strategy Lock](https://hue-bee.github.io/josephine/lessons/02B) | [02B Homework](https://hue-bee.github.io/josephine/lessons/02B/homework) |[Set 1](https://hue-bee.github.io/josephine/lessons/02B/sets/01)|
+| **02B** | [Review and Strategy Lock](https://hue-bee.github.io/josephine/lessons/02B) | [02B Homework](https://hue-bee.github.io/josephine/lessons/02B/homework) |[Set 1](https://hue-bee.github.io/josephine/lessons/02B/sets/01) [Set 2](https://hue-bee.github.io/josephine/lessons/02B/sets/02)|
