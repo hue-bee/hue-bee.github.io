@@ -728,7 +728,108 @@ input:disabled,textarea:disabled {color:var(--ink);-webkit-text-fill-color:var(-
  .sheet[data-page="8"] .page-footer {margin-top:.02in;padding-top:.01in;}
 
 }
-</style></head><body><nav class="toolbar no-print" aria-label="Worksheet actions"><button id="print-save" type="button" class="print-btn">🖨️ Print / Save as PDF</button><button id="clear-all" type="button" class="print-btn" style="background:#64748b">🗑️ Clear All</button></nav><main><section class="sheet " data-page="1" aria-label="Worksheet page 1"><div class="hw-header">
+</style>
+<style id="passage-annotation-styles">
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+
+.passage-note:focus .note-tooltip { display: block; }
+@media print { .annotation-toolbar, .note-input-wrapper { display: none !important; } .passage-highlight { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+</style>
+</head><body><nav class="toolbar no-print" aria-label="Worksheet actions"><button id="print-save" type="button" class="print-btn">🖨️ Print / Save as PDF</button><button id="clear-all" type="button" class="print-btn" style="background:#64748b">🗑️ Clear All</button></nav><main><section class="sheet " data-page="1" aria-label="Worksheet page 1"><div class="hw-header">
 <div class="hw-header-left">
 <h1>Session 18 Homework</h1>
 <div class="subtitle">Review &amp; Strategy Lock · November 2026 CAT</div>
@@ -870,4 +971,218 @@ function preparePrint(){
 byId('print-save').addEventListener('click',()=>{preparePrint();window.print();});
 window.addEventListener('beforeprint',preparePrint);
 syncChoices();
-</script></body></html>
+</script>
+<script id="passage-annotation-script">
+
+(function () {
+'use strict';
+document.querySelectorAll('.passage-text').forEach(function(passage, index) {
+  var holder = document.createElement('div');
+  holder.innerHTML = "<div class=\"annotation-toolbar\" id=\"toolbar-passage\">\n<span class=\"annot-label\">Tool:</span>\n<button class=\"annot-btn active\" data-tool=\"highlight\" onclick=\"setPassageTool('highlight',this)\">\ud83d\udd8a Highlight</button>\n<button class=\"annot-btn\" data-tool=\"underline\" onclick=\"setPassageTool('underline',this)\">U\u0332 Underline</button>\n<button class=\"annot-btn\" data-tool=\"outline\" onclick=\"setPassageTool('outline',this)\">\u25a2 Outline</button>\n<button class=\"annot-btn\" data-tool=\"note\" onclick=\"setPassageTool('note',this)\">\ud83d\udccc Note</button>\n<div class=\"annot-sep\"></div>\n<span class=\"annot-label\">Color:</span>\n<div class=\"annot-color-row\" id=\"colors-passage\">\n<div class=\"annot-color-swatch active\" data-color=\"#fef08a\" onclick=\"setPassageColor('#fef08a',this)\" style=\"background:#fef08a;\" title=\"Yellow\"></div>\n<div class=\"annot-color-swatch\" data-color=\"#86efac\" onclick=\"setPassageColor('#86efac',this)\" style=\"background:#86efac;\" title=\"Green\"></div>\n<div class=\"annot-color-swatch\" data-color=\"#93c5fd\" onclick=\"setPassageColor('#93c5fd',this)\" style=\"background:#93c5fd;\" title=\"Blue\"></div>\n<div class=\"annot-color-swatch\" data-color=\"#fca5a5\" onclick=\"setPassageColor('#fca5a5',this)\" style=\"background:#fca5a5;\" title=\"Pink\"></div>\n<div class=\"annot-color-swatch\" data-color=\"#c4b5fd\" onclick=\"setPassageColor('#c4b5fd',this)\" style=\"background:#c4b5fd;\" title=\"Purple\"></div>\n</div>\n<button class=\"clear-annotations-btn\" onclick=\"clearPassageAnnotations()\">\u2715 Clear</button>\n</div>";
+  var toolbar = holder.firstElementChild;
+  toolbar.removeAttribute('id');
+  toolbar.querySelector('[id]').removeAttribute('id');
+  toolbar.setAttribute('aria-label', 'Passage annotation tools');
+  toolbar.querySelectorAll('[onclick]').forEach(function(el) { el.removeAttribute('onclick'); });
+  toolbar.querySelectorAll('button').forEach(function(el) { el.type = 'button'; });
+  passage.before(toolbar);
+  passage.classList.add('annotatable-passage');
+var passageAnnotState = { tool: 'highlight', color: '#fef08a', noteCount: 0 };
+
+function setPassageTool(tool, btn) {
+  passageAnnotState.tool = tool;
+  toolbar.querySelectorAll('.annot-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setPassageColor(color, swatch) {
+  passageAnnotState.color = color;
+  toolbar.querySelector('.annot-color-row').querySelectorAll('.annot-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  swatch.classList.add('active');
+}
+
+function clearPassageAnnotations() {
+  
+  if (!passage) return;
+  passage.querySelectorAll('.note-input-wrapper').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-note').forEach(function(el){ el.remove(); });
+  passage.querySelectorAll('.passage-highlight, .passage-underline, .passage-outline').forEach(function(el){
+    var parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  passageAnnotState.noteCount = 0;
+}
+
+function applyPassageAnnotation(range) {
+  var tool = passageAnnotState.tool;
+  var color = passageAnnotState.color;
+  if (!range || range.collapsed) return;
+
+  if (tool === 'note') {
+    var pendingSpan;
+    try {
+      pendingSpan = document.createElement('span');
+      pendingSpan.className = 'passage-highlight passage-note-pending';
+      pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+      pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+      range.surroundContents(pendingSpan);
+    } catch(e) {
+      try {
+        pendingSpan = document.createElement('span');
+        pendingSpan.className = 'passage-highlight passage-note-pending';
+        pendingSpan.style.backgroundColor = 'rgba(251,191,36,0.35)';
+        pendingSpan.style.borderBottom = '2px dashed #f59e0b';
+        pendingSpan.appendChild(range.extractContents());
+        range.insertNode(pendingSpan);
+      } catch(e2) { return; }
+    }
+    window.getSelection().removeAllRanges();
+
+    var inputWrapper = document.createElement('span');
+    inputWrapper.className = 'note-input-wrapper';
+    inputWrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);vertical-align:middle;font-style:normal;';
+    var inp = document.createElement('input');
+    inp.type = 'text'; inp.setAttribute('aria-label', 'Annotation note');
+    inp.placeholder = 'Type note...';
+    inp.style.cssText = 'border:none;outline:none;font-size:0.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.textContent = '\u2713';
+    confirmBtn.style.cssText = 'border:none;background:#374151;color:white;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '\u2715';
+    cancelBtn.style.cssText = 'border:none;background:#e5e7eb;color:#374151;border-radius:4px;width:18px;height:18px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;';
+    inputWrapper.appendChild(inp);
+    inputWrapper.appendChild(confirmBtn);
+    inputWrapper.appendChild(cancelBtn);
+    pendingSpan.after(inputWrapper);
+    inp.focus();
+
+    function confirmNote() {
+      var noteText = inp.value.trim();
+      inputWrapper.remove();
+      if (!noteText) {
+        var p = pendingSpan.parentNode;
+        while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+        p.removeChild(pendingSpan);
+        return;
+      }
+      passageAnnotState.noteCount++;
+      var noteNum = passageAnnotState.noteCount;
+      pendingSpan.className = 'passage-highlight';
+      pendingSpan.style.backgroundColor = '#fef3c7';
+      pendingSpan.style.borderBottom = '';
+      var noteEl = document.createElement('span');
+      noteEl.className = 'passage-note'; noteEl.tabIndex = 0; noteEl.setAttribute('aria-label', 'Note ' + noteNum + ': ' + noteText);
+      noteEl.textContent = noteNum;
+      var tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip';
+      tooltip.textContent = 'Note: ' + noteText;
+      noteEl.appendChild(tooltip);
+      pendingSpan.after(noteEl);
+    }
+
+    confirmBtn.addEventListener('click', confirmNote);
+    cancelBtn.addEventListener('click', function() {
+      inputWrapper.remove();
+      var p = pendingSpan.parentNode;
+      while(pendingSpan.firstChild) p.insertBefore(pendingSpan.firstChild, pendingSpan);
+      p.removeChild(pendingSpan);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); confirmNote(); }
+      if (e.key === 'Escape') { cancelBtn.click(); }
+    });
+    return;
+  }
+
+  try {
+    var span = document.createElement('span');
+    if (tool === 'highlight') {
+      span.className = 'passage-highlight';
+      span.style.backgroundColor = color;
+      span.style.color = '#1f2937';
+    } else if (tool === 'underline') {
+      span.className = 'passage-underline';
+      span.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+    } else if (tool === 'outline') {
+      span.className = 'passage-outline';
+      span.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+    }
+    wrapSelection(range, span);
+  } catch(e) {
+    try {
+      var span2 = document.createElement('span');
+      if (tool === 'highlight') {
+        span2.className = 'passage-highlight';
+        span2.style.backgroundColor = color;
+        span2.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        span2.className = 'passage-underline';
+        span2.style.textDecorationColor = color !== '#fef08a' ? color : '#374151';
+      } else if (tool === 'outline') {
+        span2.className = 'passage-outline';
+        span2.style.outlineColor = color !== '#fef08a' ? color : '#374151';
+      }
+      span2.appendChild(range.extractContents());
+      range.insertNode(span2);
+    } catch(e2) {}
+  }
+  window.getSelection().removeAllRanges();
+}
+
+
+
+function wrapSelection(range, template) {
+  var walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+  var nodes = [], node;
+  while ((node = walker.nextNode())) {
+    if (!node.parentElement.closest('.passage-note, .note-input-wrapper') && range.intersectsNode(node)) {
+      var start = node === range.startContainer ? range.startOffset : 0;
+      var end = node === range.endContainer ? range.endOffset : node.length;
+      if (end > start) nodes.push({node:node, start:start, end:end});
+    }
+  }
+  var last = null;
+  nodes.forEach(function(part) {
+    var text = part.node;
+    if (part.end < text.length) text.splitText(part.end);
+    if (part.start) text = text.splitText(part.start);
+    var span = template.cloneNode(false);
+    text.parentNode.insertBefore(span, text);
+    span.appendChild(text);
+    last = span;
+  });
+  return last;
+}
+
+  toolbar.querySelectorAll('[data-tool]').forEach(function(button) {
+    button.addEventListener('click', function() { setPassageTool(button.dataset.tool, button); });
+  });
+  toolbar.querySelectorAll('[data-color]').forEach(function(swatch) {
+    swatch.tabIndex = 0;
+    swatch.setAttribute('role', 'button');
+    swatch.setAttribute('aria-label', swatch.title);
+    function choose() { setPassageColor(swatch.dataset.color, swatch); }
+    swatch.addEventListener('click', choose);
+    swatch.addEventListener('keydown', function(event) {
+      if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choose(); }
+    });
+  });
+  toolbar.querySelector('.clear-annotations-btn').addEventListener('click', clearPassageAnnotations);
+  function applySelection(event) {
+    if(event.target.closest('.note-input-wrapper, .passage-note')) return;
+    var selection = window.getSelection();
+    if(!selection || !selection.rangeCount || selection.isCollapsed) return;
+    var range = selection.getRangeAt(0);
+    if(!passage.contains(range.commonAncestorContainer)) return;
+    applyPassageAnnotation(range.cloneRange());
+  }
+  passage.addEventListener('mouseup', applySelection);
+  passage.addEventListener('keyup', function(event) { if(event.key === 'Shift') applySelection(event); });
+  passage.addEventListener('touchend', function(event) { setTimeout(function() { applySelection(event); }, 100); });
+});
+})();
+</script>
+</body></html>
