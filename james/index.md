@@ -24,3 +24,4 @@
 | **11** | [Level 5 SHSAT Math: Decode, Model, Verify](https://hue-bee.github.io/james/lessons/11) | [11 Homework](https://hue-bee.github.io/james/lessons/11/homework) | |
 | **12** | [Setup, Interpretation & TEI Mechanics](https://hue-bee.github.io/james/lessons/12) | [12 Homework](https://hue-bee.github.io/james/lessons/12/homework) | |
 | **01A** | [Adaptive Rehearsal](https://hue-bee.github.io/james/lessons/01A) | [01A Homework](https://hue-bee.github.io/james/lessons/01A/homework) |[Set 1](https://hue-bee.github.io/james/lessons/01A/sets/01) [Set 2](https://hue-bee.github.io/james/lessons/01A/sets/02)|
+| **01B** | [Light Mixed Review Math Sweep](https://hue-bee.github.io/james/lessons/01B) | [01B Homework](https://hue-bee.github.io/james/lessons/01B/homework) ||
