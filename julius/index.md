@@ -39,3 +39,4 @@
 | **07B** | [Test-Day Walkthrough & Light Mixed Review](https://hue-bee.github.io/julius/lesson07B) | [7B Homework](https://hue-bee.github.io/julius/lesson07B/homework) | |
 | **08A** | [Precision Under Pressure](https://hue-bee.github.io/julius/lesson08A) | [8A Homework](https://hue-bee.github.io/julius/lesson08A/homework) | [Set 1](https://hue-bee.github.io/julius/lesson08A/sets/01) |
 | **08B** | [Test Day, Without Surprises](https://hue-bee.github.io/julius/lesson08B) | [8B Homework](https://hue-bee.github.io/julius/lesson08B/homework) | |
+| **09A** | [Ready, Not Rushed](https://hue-bee.github.io/julius/lesson09A) | [9A Homework](https://hue-bee.github.io/julius/lesson09A/homework) | |
