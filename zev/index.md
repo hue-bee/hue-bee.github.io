@@ -14,3 +14,4 @@
 | **03** | [Geometry, Angles & Percents](https://hue-bee.github.io/zev/lessons/03) | [3 Homework](https://hue-bee.github.io/zev/lessons/03/homework) ||
 | **04** | [Full Timed Mock Debrief](https://hue-bee.github.io/zev/lessons/04) | [4 Homework](https://hue-bee.github.io/zev/lessons/04/homework) |[Set 1](https://hue-bee.github.io/zev/lessons/04/sets/01) [Set 2](https://hue-bee.github.io/zev/lessons/04/sets/02)|
 | **05** | [Test Day, Without Surprises](https://hue-bee.github.io/zev/lessons/05) | [5 Homework](https://hue-bee.github.io/zev/lessons/05/homework) |[Set 1](https://hue-bee.github.io/zev/lessons/05/sets/01)|
+| **06** | [Final Tune-Up](https://hue-bee.github.io/zev/lessons/06) | | |
