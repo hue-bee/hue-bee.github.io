@@ -1,1 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="slides-format" content="viewport">
+<title>Session 19 | Taper and Test-Day Script</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0F7FF;--surface:#fff;--ink:#1f1f1f;--ink2:#4a4a4a;--muted:#606b7b;--line:rgba(201,212,228,.7);--blue:#2563EB;--amber:#B45309;--soft:#EDF2F9;--font-display:'Baloo 2','Nunito',sans-serif;--font-body:'Nunito',sans-serif;--xs:clamp(.75rem,.72rem + .1vw,.8rem);--sm:clamp(.875rem,.82rem + .2vw,1rem);--base:clamp(1rem,.92rem + .3vw,1.125rem);--lg:clamp(1.15rem,1rem + .6vw,1.5rem);--title:clamp(1.65rem,1rem + 1.7vw,2.4rem);--hero:clamp(2.6rem,1.5rem + 3vw,4rem)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg)}body{font-family:var(--font-body);color:var(--ink);overflow:hidden;font-size:var(--base)}button,input,textarea,select{font:inherit}button{cursor:pointer}a{color:#1D4ED8;text-underline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.deck{height:100dvh;width:100%;position:relative}.slide{position:absolute;inset:0;display:flex;opacity:0;transform:scale(0.97);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;overflow:hidden;padding:36px 32px 104px;align-items:center;justify-content:center;background:var(--bg)}.slide.active{display:flex;opacity:1;transform:scale(1);pointer-events:all}.slide::before{content:"";position:fixed;right:-100px;top:-100px;width:420px;height:420px;background:radial-gradient(circle,rgba(37,99,235,.07),transparent 70%);pointer-events:none}.slide::after{content:"";position:fixed;left:-100px;bottom:-60px;width:380px;height:380px;background:radial-gradient(circle,rgba(180,83,9,.04),transparent 70%);pointer-events:none}.content{width:100%;max-width:1100px;position:relative;z-index:1}.kicker{font-size:var(--xs);letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--muted);margin:0 0 4px}.slide-title,h1{font-family:var(--font-display);font-weight:600;letter-spacing:-.015em;line-height:1.16;margin:0 0 20px;font-size:var(--title)}.tint{color:var(--blue)}h1{font-size:var(--hero);line-height:1.12;margin:24px 0}h3{font-size:var(--base);margin:0 0 8px}p{line-height:1.5;margin:0 0 12px}p:last-child{margin-bottom:0}.small{font-size:var(--sm);color:var(--muted);line-height:1.45}.center{text-align:center}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.wide-left{grid-template-columns:1.15fr .85fr}.stack{display:grid;gap:12px}.card,.passage,.diagram{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 10px 24px rgba(201,212,228,.20),0 2px 6px rgba(201,212,228,.14)}.card-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}.num{background:var(--soft);border-radius:8px;padding:3px 10px;font-weight:800;font-size:var(--sm)}.level{font-size:var(--xs);text-transform:uppercase;letter-spacing:.07em;font-weight:800;border-radius:20px;padding:4px 9px;white-space:nowrap}.l1{background:#E8EDF5;color:#3D4C63}.l2{background:#DCEBFB;color:#1D4ED8}.l3{background:#FBEBCF;color:#944400}.l4{background:#E2E2E2;color:#3D3D3D}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.chip{border:1px solid var(--line);background:#fff;padding:5px 11px;border-radius:20px;font-size:var(--xs);color:var(--muted);font-weight:700}.chip.on{background:#3e3e3e;border-color:#3e3e3e;color:#fff}.title-pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:30px;padding:8px 18px;font-size:var(--xs);letter-spacing:.13em;text-transform:uppercase;font-weight:800}.title-pill::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);margin-right:9px}.callout{border:1px solid var(--line);border-left:4px solid #6a6a6a;border-radius:12px;padding:16px 20px;background:#fff;margin-top:16px}.callout.blue{border-left-color:var(--blue);background:#f8fbff}.callout.amber{border-left-color:var(--amber);background:#fffcf7}.callout h3{font-size:var(--sm);text-transform:uppercase;letter-spacing:.06em}.callout p{font-size:var(--sm)}.math{font-weight:800;font-size:var(--lg);font-variant-numeric:tabular-nums;margin:12px 0}.work{width:100%;border:1px dashed #b9c6d9;background:#F9FBFE;border-radius:10px;min-height:70px;padding:12px;margin-top:12px;resize:vertical;color:var(--ink2);font-size:var(--sm)}.work::placeholder{color:#65748a}.options{display:grid;gap:8px;margin-top:12px}.option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:10px 12px;border-radius:9px;font-size:var(--sm);line-height:1.4;cursor:pointer;background:#fff}.option:has(input:checked){border-color:#2563eb;background:#eff6ff}.option input{margin-top:4px;accent-color:#2563eb;flex-shrink:0}.option .letter{font-weight:800;color:#44516a}.option.cut{text-decoration:line-through;opacity:.65}.option button{margin-left:auto;border:0;background:var(--soft);color:var(--ink2);border-radius:5px;padding:2px 7px;font-size:var(--xs)}.passage{font-size:var(--base);line-height:1.65}.passage p{margin:0 0 14px}.ln{display:inline-block;color:var(--muted);font-size:var(--xs);width:25px;user-select:none}.poem{display:grid;grid-template-columns:28px 1fr;line-height:1.8}.poem .ln{line-height:2.4}.poem-title{font-family:var(--font-display);font-size:var(--lg);font-weight:600;margin-bottom:12px}.steps{counter-reset:step;display:grid;gap:12px}.step{display:flex;gap:14px;align-items:flex-start}.step::before{counter-increment:step;content:counter(step);min-width:30px;height:30px;background:var(--soft);border-radius:50%;font-size:var(--sm);display:grid;place-items:center;font-weight:800}.step p{font-size:var(--sm)}details{border:1px solid var(--line);border-radius:10px;background:#f9fbfe;margin-top:12px;padding:12px 14px}summary{font-size:var(--sm);font-weight:800;cursor:pointer}details .steps{margin-top:16px}.source{font-size:var(--xs);color:var(--muted);margin-top:14px;line-height:1.45}.source a{font-weight:700}.timeline{display:grid;gap:10px}.row{display:grid;grid-template-columns:125px 16px 1fr;gap:12px;align-items:center}.time{font-weight:800;color:var(--muted);font-size:var(--sm);font-variant-numeric:tabular-nums}.rail{width:2px;background:#c9d4e4;height:100%;position:relative;min-height:54px}.rail::before{content:"";position:absolute;top:20px;left:-4px;width:10px;height:10px;border-radius:50%;background:#4d4d4d}.row .card{padding:12px 18px;box-shadow:none}.row h3{margin:0 0 2px}.row p{font-size:var(--sm);color:var(--muted)}svg{display:block;width:100%;height:auto;overflow:visible;font-family:var(--font-body)}svg text{fill:#3d4c63;font-size:15px;font-weight:700}.diagram figcaption{font-size:var(--xs);color:var(--muted);line-height:1.4;margin-top:8px}.diagram{margin:0}.script{font-family:var(--font-display);font-size:var(--lg);font-weight:500;line-height:1.5}.blank{width:100%;border:0;border-bottom:1px solid #9aa9bf;background:transparent;padding:7px 2px;color:var(--ink);font-size:var(--base)}.checklist{display:grid;gap:12px}.check{display:flex;gap:10px;line-height:1.4;font-size:var(--sm)}.check input{accent-color:var(--blue);width:18px;height:18px;flex-shrink:0}.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:100;background:rgba(255,255,255,.96);padding:8px 16px;border-radius:40px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(201,212,228,.32),0 2px 8px rgba(201,212,228,.18);max-width:calc(100vw - 24px)}.nav-btn{width:38px;height:38px;border:0;background:#EDF2F9;border-radius:50%;font-size:1.5rem;color:var(--ink);flex-shrink:0}.nav-btn:hover{background:#DCE7F7}.dots{display:flex;gap:3px}.dot{width:12px;height:24px;padding:0;border:0;background:transparent;position:relative}.dot::after{content:"";position:absolute;left:3px;top:9px;width:6px;height:6px;border-radius:50%;background:#c3c8ce}.dot[aria-current="true"]::after{background:#262626;transform:scale(1.45)}.counter{font-size:var(--xs);font-weight:700;color:var(--muted);white-space:nowrap;min-width:52px;text-align:center}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.last-line{font-size:var(--sm);color:var(--muted);margin-top:24px}.schedule{padding:16px;background:#f9fbfe;border-radius:12px;border:1px solid var(--line)}.schedule strong{color:var(--blue)}.rule{padding-bottom:12px;border-bottom:1px solid var(--line)}.rule:last-child{padding:0;border:0}.big-word{font-family:var(--font-display);font-size:var(--hero);color:var(--blue);line-height:1.2;margin:12px 0}.numbertable{width:100%;border-collapse:collapse;font-size:var(--sm);margin-top:12px}.numbertable th,.numbertable td{padding:12px;border:1px solid var(--line);text-align:center}.numbertable th{background:var(--soft)}.hide-on-mobile{display:block}
+@media(max-width:760px){.slide{bottom:88px;padding:28px 20px 24px;align-items:flex-start}.content{margin:auto 0}.grid2,.grid3,.wide-left{grid-template-columns:1fr}.card,.passage,.diagram{padding:16px}.diagram{overflow-x:auto}.diagram svg{min-width:360px}.diagram svg.wide-svg{min-width:780px}.diagram:has(svg)::after{content:"Swipe diagram to inspect →";display:block;font-size:var(--xs);color:var(--muted);margin-top:8px}.dots{display:none}.nav-controls{bottom:12px;gap:14px}.nav-btn{width:44px;height:44px}.slide-title{margin-bottom:16px}.row{grid-template-columns:87px 10px 1fr;gap:8px}.title-pill{letter-spacing:.06em}.poem{font-size:var(--sm)}.hide-on-mobile{display:none}}
+@media(max-height:720px) and (min-width:761px){.slide{bottom:96px;align-items:flex-start;padding-top:24px;padding-bottom:24px}.content{margin:auto 0}.card,.passage,.diagram{padding:16px}.slide-title{margin-bottom:14px}.passage{font-size:var(--sm)}}
+@media print{body,.deck{height:auto;overflow:visible}.slide{display:flex!important;opacity:1!important;transform:none!important;transition:none!important;position:relative;min-height:100vh;break-after:page;padding:32px}.nav-controls{display:none}details:not([open]){display:none}.slide::before,.slide::after{display:none}}
+.particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+@media print{.particle-canvas{display:none}}
+/* Reference-led rhythm: section strip, compact cards, one clear takeaway. */
+:root{--base:clamp(1rem,.94rem + .15vw,1.0625rem);--title:clamp(1.65rem,1.1rem + 1.2vw,2.15rem)}
+.content{padding-inline:24px}.slide-title{margin-bottom:16px;line-height:1.2}.slide-title .tint{color:#4d4d4d}
+.grid2,.grid3{gap:14px;align-items:start}.grid3{align-items:stretch}.grid2:has(>.card + .card){align-items:stretch}.stack{gap:12px;align-content:start}.card,.passage,.diagram{padding:16px 18px}.card-head{margin-bottom:8px}
+.card p{color:var(--ink2)}.card h3{font-size:var(--sm);font-weight:800}.card>.work{margin-top:8px}
+.callout{padding:12px 16px;margin-top:14px}.callout.blue{border-left-color:#6a6a6a;background:#fff}.callout h3{font-size:var(--xs);margin-bottom:5px}
+.work{min-height:76px}.passage{font-size:var(--sm);line-height:1.6}.passage p{margin-bottom:12px}
+.poem{line-height:1.9;font-size:var(--base)}.poem .ln{line-height:2.65}.script{font-family:var(--font-body);font-weight:700;font-size:var(--lg);line-height:1.45}
+.zone-strip{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}.zone-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;background:white;border:1px solid var(--line);border-radius:20px;color:#606772;font-size:var(--xs);white-space:nowrap}
+.zone-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:#858585}.zone-chip.on{color:white;background:#3e3e3e;border-color:#3e3e3e;font-weight:800}.zone-chip.on::before{background:#fff}
+.cue{display:flex;align-items:baseline;gap:12px}.cue h3{flex-shrink:0;margin:0}.cue p{margin:0}.card-label{display:block;color:var(--muted);font-size:var(--xs);letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:8px}
+.signal{font-family:var(--font-display);font-size:2rem;line-height:1.2;margin:8px 0 12px;color:#3e3e3e}.compact-list{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--ink2);font-size:var(--sm);line-height:1.5}
+.fact{font-size:var(--sm);color:var(--ink2)}.fact a,.source a{font-size:var(--xs)}.checkpoint{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.checkpoint:last-child{border:0}.checkpoint strong{font-size:var(--lg);font-variant-numeric:tabular-nums;white-space:nowrap}.checkpoint p{font-size:var(--sm);margin:0}
+.scenario{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}.scenario:last-child{border-bottom:0}.scenario p{font-size:var(--sm);margin:0}.scenario-head{padding-top:0;padding-bottom:10px;font-size:var(--xs);font-weight:800;text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
+@media(max-width:760px){.content{padding-inline:0}.zone-strip{gap:5px;margin-bottom:12px}.zone-chip{font-size:.75rem;padding:3px 7px}.zone-chip:not(.on) .zone-time{display:none}.cue{display:block}.cue h3{margin-bottom:6px}.scenario{grid-template-columns:1fr;gap:8px}.scenario-head{display:none}.scenario p::before{content:attr(data-label) " ";font-size:var(--xs);font-weight:800;color:var(--muted)}.poem{font-size:var(--sm)}}
+/* Match the supplied index.html hierarchy rather than the enlarged stage scale. */
+:root{--xs:.75rem;--sm:.79rem;--base:.9rem;--lg:1.05rem;--title:clamp(1.5rem,3vw,2.15rem);--hero:clamp(2.2rem,5.7vw,3.9rem)}
+.slide{padding:24px 0 88px;align-items:safe center}
+.content{max-width:1100px;padding-inline:clamp(1rem,3vw,2.6rem)}
+.slide-title{font-size:var(--title);margin-bottom:.8rem;line-height:1.2}
+.card,.passage,.diagram{padding:.78rem .92rem;border-radius:14px}
+.grid2{gap:.85rem}.grid3{gap:.75rem}.stack{gap:.65rem}
+.card h3{font-size:.85rem}.card p{font-size:.88rem;line-height:1.43}
+.card p.small,.card p.source{font-size:var(--sm);line-height:1.45}
+.card p.script,.script{font-family:var(--font-display);font-size:1.05rem;font-weight:600;line-height:1.45}
+.card-head{gap:.45rem;margin-bottom:.4rem}.num{font-size:.82rem}.level{font-size:.75rem}
+.work{min-height:3.4rem;font-size:.95rem;line-height:1.5;padding:.55rem .8rem}
+.blank{font-size:.95rem}.math{font-size:1.36rem}
+.option{font-size:.78rem;padding:.3rem .52rem;line-height:1.35}.options{gap:.3rem}
+.passage{font-size:.77rem;line-height:1.42}.passage p{margin:.3rem 0;line-height:1.42}
+.poem{font-size:.82rem;line-height:1.65}.poem .ln{line-height:normal;align-self:center}
+.poem-title{font-size:1.05rem}
+.signal{font-size:1.4rem;margin:.35rem 0 .6rem}
+.callout{padding:.62rem .85rem;margin-top:.75rem}.callout p{font-size:.82rem;line-height:1.45}
+.callout h3{font-size:.75rem}.cue{gap:.65rem}
+.step h3{font-size:.85rem}.step p{font-size:.82rem;line-height:1.45}
+.steps{gap:.65rem}.step::before{min-width:28px;height:28px}
+.zone-strip{margin-bottom:.75rem}.zone-chip,.kicker,.card-label{font-size:.75rem}
+.source,.diagram figcaption{font-size:.79rem}
+.row{grid-template-columns:105px 14px 1fr}.row .card{padding:.47rem .8rem}.row h3{font-size:.87rem}.row p,.time{font-size:.81rem}
+.checkpoint{grid-template-columns:88px 1fr;gap:12px}.checkpoint strong{font-size:1.25rem}
+.checkpoint p,.scenario p{font-size:.85rem}.check{font-size:.85rem}
+.diagram svg text{font-size:15px}
+@media(min-width:761px){
+  .options:has(input[name="m7"]){grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .option:has(input[name="m7"]){justify-content:center;font-size:.9rem}
+}
+@media(max-width:760px){
+  .slide{bottom:88px;padding:20px 20px 24px;align-items:flex-start}.content{padding:0}
+  .row{grid-template-columns:82px 10px 1fr}.cue{display:block}.cue h3{margin-bottom:6px}
+}
+@media(max-height:720px) and (min-width:761px){
+  .slide{bottom:88px;padding-block:16px}.content{padding-inline:24px}
+}
 
+/* Compact diagram system: native-size artwork, consistent labels and marks. */
+.diagram{overflow-x:auto;}
+.diagram svg{width:400px;max-width:100%;min-width:0;height:auto;margin-inline:auto;}
+.diagram svg.wide-svg{width:600px;max-width:100%;min-width:0;}
+.diagram svg text{font-size:13px;font-weight:700;}
+.diagram figcaption{max-width:400px;margin:8px auto 0;}
+@media(max-width:760px){
+  .diagram svg{min-width:340px;}
+  .diagram svg.wide-svg{min-width:600px;}
+}
+/* ── Annotation Toolbar ── */
+.annotation-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.annot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #f8f8f8;
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  user-select: none;
+}
+.annot-btn:hover { background: #e5e7eb; border-color: #9ca3af; }
+.annot-btn.active { background: #374151; color: white; border-color: #374151; }
+.annot-btn.active:hover { background: #1f2937; }
+.annot-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.10); margin: 0 2px; }
+.annot-color-row { display: flex; align-items: center; gap: 4px; }
+.annot-color-swatch {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.10);
+  cursor: pointer; transition: transform 0.12s, border-color 0.12s;
+}
+.annot-color-swatch:hover { transform: scale(1.18); }
+.annot-color-swatch.active { border-color: #374151; transform: scale(1.18); box-shadow: 0 0 0 2px white, 0 0 0 4px #374151; }
+.annot-label { font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; }
+.annotatable-passage { position: relative; cursor: text; user-select: text; }
+.passage-highlight { border-radius: 3px; padding: 0 1px; }
+.passage-underline { text-decoration: underline; text-decoration-thickness: 2px; }
+.passage-outline { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.passage-note {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: #374151; color: white;
+  border-radius: 50%;
+  font-size: 0.6rem; font-weight: 800;
+  text-align: center; line-height: 14px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+.passage-note .note-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 9px;
+  border-radius: 8px;
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+}
+.passage-note:hover .note-tooltip { display: block; }
+.clear-annotations-btn {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.15s;
+}
+.clear-annotations-btn:hover { background: #fecaca; }
+
+
+.passage-note:focus .note-tooltip, .passage-note.note-open .note-tooltip { display:block; }
+.passage-note { user-select:none; }
+.annot-color-swatch { padding:0; flex-shrink:0; }
+.passage-highlight,.passage-underline,.passage-outline { box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+@media print { .annotation-toolbar,.note-input-wrapper { display:none!important; } .passage-highlight { print-color-adjust:exact; -webkit-print-color-adjust:exact; } }
+
+
+/* Question countdowns */
+.question-timer{margin-left:auto;min-width:4.4em;padding:4px 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink2);font-size:var(--sm);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.4}
+.question-timer[data-running="true"]{border-color:var(--blue);color:var(--blue);background:#eff6ff}
+.question-timer[data-expired="true"]{border-color:var(--amber);color:var(--amber);background:#fffcf7}
+
+@media screen {
+  html,body,.deck{width:100%;height:100dvh;overflow:hidden;}
+  .slide{bottom:0;overflow:hidden;align-items:center;padding-bottom:104px;}
+  .slide > .content{flex-shrink:0;margin:0;transform-origin:center center;}
+  .diagram{overflow:hidden;}
+  .diagram svg,.diagram svg.wide-svg{min-width:0;width:100%;height:auto;}
+  .diagram:has(svg)::after{display:none;}
+  *{scrollbar-width:none;}
+  *::-webkit-scrollbar{display:none;}
+}
+@media print{.slide > .content{transform:none!important;}}
+</style>
+
+<style>
+/* Transparent TeX typography only; existing cards and controls are unchanged. */
+mjx-container, .tex-diagram { background: transparent !important; }
+mjx-container[jax="SVG"] { font-weight: normal; }
+mjx-container[jax="SVG"] > svg { display:inline-block; width:auto; height:auto; }
+.math mjx-container { margin:0 !important; }
+
+.passage { font-family: Helvetica, sans-serif; font-size: 0.9em; }
+.passage .poem { font-size: inherit; }
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'local' },
+  startup: {
+    ready: function () {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(async function () {
+        for (const label of document.querySelectorAll('svg text[data-tex]')) {
+          const wrapper = await MathJax.tex2svgPromise(label.getAttribute('data-tex'), {display:false});
+          const rendered = wrapper.querySelector('svg');
+          const box = rendered.getAttribute('viewBox').split(/\s+/).map(Number);
+          const size = parseFloat(getComputedStyle(label).fontSize) || 13;
+          const scale = size / 1000;
+          const width = box[2] * scale, height = box[3] * scale;
+          const anchor = label.getAttribute('text-anchor') || getComputedStyle(label).textAnchor;
+          let x = parseFloat(label.getAttribute('x')) || 0;
+          const y = parseFloat(label.getAttribute('y')) || 0;
+          if (anchor === 'middle') x -= width / 2;
+          else if (anchor === 'end') x -= width;
+          rendered.setAttribute('x', x);
+          rendered.setAttribute('y', y + box[1] * scale);
+          rendered.setAttribute('width', width);
+          rendered.setAttribute('height', height);
+          rendered.setAttribute('class', 'tex-diagram');
+          rendered.setAttribute('aria-label', label.textContent);
+          rendered.setAttribute('role', 'img');
+          rendered.style.cssText = 'width:'+width+'px;height:'+height+'px;min-width:0;max-width:none;overflow:visible;color:'+getComputedStyle(label).fill;
+          label.replaceWith(rendered);
+        }
+      });
+    }
+  }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+
+<style id="reference-input-types">
+textarea.work,textarea.blank{width:100%;min-height:3.4rem;border:1px dashed rgba(185,198,217,0.7);border-radius:10px;background:#F9FBFE;resize:vertical;padding:0.55rem 0.8rem;font-size:0.95rem;color:var(--ink2);font-family:var(--font-body);line-height:1.5;outline:none;}
+textarea.work::placeholder,textarea.blank::placeholder{color:#9AA9BF;}
+textarea.work:focus,textarea.blank:focus{background:#F1F6FD;}
+</style>
+</head>
+<body>
+<main class="deck" aria-label="Session 19 presentation">
+<section class="slide active" data-title="Taper and Test-Day Script">
+<canvas class="particle-canvas" aria-hidden="true"></canvas>
+<div class="content center">
+<div class="title-pill">Final Seven · Session 19 · November 16, 2026</div>
+<h1>Taper and<br><span class="tint">Test-Day Script</span></h1>
+<p style="font-size:var(--lg)">Familiar moves. A steady pace. A clear next step.</p>
+<p class="kicker" style="margin:20px 0">Digital SHSAT · One-hour guided session</p>
+<div class="chips" style="justify-content:center;margin-top:24px"><span class="chip">Poetry + Purpose</span><span class="chip">Ratio + Algebra</span><span class="chip">Repaired Skills</span><span class="chip">Calm Execution</span></div>
+<p class="last-line">0:00–0:01 · Name one routine you trust.<br>Arrow keys or slide dots to navigate.</p>
+</div></section>
+
+<section class="slide" data-title="60-Minute Route"><div class="content">
+<div class="kicker">0:01–0:03 · Session Roadmap</div><h2 class="slide-title">Today’s <span class="tint">60-Minute Route</span></h2>
+<div class="timeline">
+<div class="row"><div class="time">0:00–0:05</div><div class="rail"></div><div class="card"><h3>Settle and retrieve</h3><p>Name familiar routines; do not invent a new strategy.</p></div></div>
+<div class="row"><div class="time">0:05–0:14</div><div class="rail"></div><div class="card"><h3>Confidence set · Reading + ratio</h3><p>Original poetry, proportional thinking, and evidence.</p></div></div>
+<div class="row"><div class="time">0:14–0:30</div><div class="rail"></div><div class="card"><h3>Confidence set · Algebra + repaired skills</h3><p>Percents, averages, inequality multi-select, and one nonfiction block.</p></div></div>
+<div class="row"><div class="time">0:30–0:45</div><div class="rail"></div><div class="card"><h3>Rehearse the test-day script</h3><p>Section order, checkpoints, passage review, and commit routines.</p></div></div>
+<div class="row"><div class="time">0:45–1:00</div><div class="rail"></div><div class="card"><h3>Make logistics boring</h3><p>Pack, rehearse interruptions, and close with evidence.</p></div></div>
+</div>
+<div class="callout cue"><h3>Today’s rule</h3><p>Retrieve → rehearse → rest. Keep familiar moves; add no new strategy.</p></div>
+</div></section>
+
+<section class="slide" data-title="Familiar Moves"><div class="content">
+<div class="kicker">0:03–0:05 · Arrive Ready</div><h2 class="slide-title">Turn Down the Pressure, <span class="tint">Not the Precision</span></h2>
+<div class="grid2">
+<div class="card"><span class="card-label">Retrieve one familiar move</span><h3>What comes first?</h3><p>Choose one: a percent calculation, a missing-score average, or a detail-to-purpose question.</p><textarea class="work" aria-label="A routine I trust" placeholder="Before I calculate or choose, I…" spellcheck="false"></textarea></div>
+<div class="card"><span class="card-label">Same ladder · Familiar content</span><div class="stack"><div><span class="level l1">Level 1</span> <span class="small">Recall a move.</span></div><div><span class="level l2">Level 2</span> <span class="small">Translate or connect.</span></div><div><span class="level l3">Level 3</span> <span class="small">Link familiar moves.</span></div><div><span class="level l4">Level 4</span> <span class="small">Explain or test every case.</span></div></div><p class="source">Practice labels, not official difficulty bands.</p></div>
+</div><div class="callout cue"><h3>Try → explain → check</h3><p>Use guidance only if needed. You finish every calculation and selection.</p></div>
+</div></section>
+
+<section class="slide" data-title="Poetry | The Landing"><div class="content">
+<div class="kicker">0:05–0:09 · Read Once with Care</div><h2 class="slide-title">Poetry: <span class="tint">The Landing</span></h2>
+<div class="grid2 wide-left">
+<div><div class="annotation-toolbar" data-passage="poem">
+  <span class="annot-label">Tool:</span>
+  <button type="button" class="annot-btn active" data-tool="highlight">&#x1F58A; Highlight</button>
+  <button type="button" class="annot-btn" data-tool="underline">U&#x332; Underline</button>
+  <button type="button" class="annot-btn" data-tool="outline">&#9634; Outline</button>
+  <button type="button" class="annot-btn" data-tool="note">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color:</span>
+  <div class="annot-color-row">
+    <button type="button" class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" title="Yellow"></button>
+    <button type="button" class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" title="Green"></button>
+    <button type="button" class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" title="Blue"></button>
+    <button type="button" class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" title="Pink"></button>
+    <button type="button" class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" title="Purple"></button>
+  </div>
+  <button type="button" class="clear-annotations-btn">&#10005; Clear</button>
+</div>
+<div class="passage" id="poem"><div class="poem">
+<span class="ln">1</span><span>At dawn the landing holds the rain;</span>
+<span class="ln">2</span><span>the ferries stitch the harbor gray.</span>
+<span class="ln">3</span><span>I fold my map along its crease</span>
+<span class="ln">4</span><span>and let the first boat pull away.</span>
+<span class="ln">5</span><span>Last week I counted every wave,</span>
+<span class="ln">6</span><span>as if the shore could promise me</span>
+<span class="ln">7</span><span>a path that never bent or broke,</span>
+<span class="ln">8</span><span>a crossing smooth as polished sea.</span>
+<span class="ln">9</span><span>Today I watch a gull lean in,</span>
+<span class="ln">10</span><span>then rise against the morning air.</span>
+<span class="ln">11</span><span>I cannot still the harbor’s wind;</span>
+<span class="ln">12</span><span>I lift my bag. The boat is there.</span>
+</div><p class="source">Original poem · Select text to annotate.</p></div></div>
+<div class="stack">
+<div class="card"><div class="card-head"><span class="num">P1</span><span class="level l1">Level 1</span><button type="button" class="question-timer" data-duration="480" data-label="Questions P1, P2, P3, P4" data-running="false" aria-pressed="false" aria-label="Questions P1, P2, P3, P4 timer, 8:00, paused">8:00</button></div><p>Which phrase suggests that the speaker once wanted certainty before acting?</p><textarea class="work" aria-label="Poem evidence" placeholder="Quote a short phrase; explain what it reveals." spellcheck="false"></textarea></div>
+<div class="card"><div class="card-head"><span class="num">P2</span><span class="level l2">Level 2</span></div><p>What does “stitch” in line \(2\) suggest about the ferries’ movement?</p><textarea class="work" aria-label="Stitch in context" placeholder="Predict a meaning, then test it in the line." spellcheck="false"></textarea></div>
+</div></div></div></section>
+
+<section class="slide" data-title="Poetry | The Shift"><div class="content">
+<div class="kicker">0:09–0:11 · Poetry Continued</div><h2 class="slide-title">Find the Shift, <span class="tint">Then Defend It</span></h2>
+<div class="grid2">
+<div class="card"><div class="card-head"><span class="num">P3</span><span class="level l3">Level 3</span></div><p>How does the contrast between “Last week” and “Today” develop the speaker’s attitude?</p><div class="options" data-group="p3">
+<label class="option"><input type="radio" name="p3"><span class="letter">A</span><span>From wanting a guaranteed path to acting despite uncertainty.</span></label>
+<label class="option"><input type="radio" name="p3"><span class="letter">B</span><span>From trusting the ferries to distrusting their crews.</span></label>
+<label class="option"><input type="radio" name="p3"><span class="letter">C</span><span>From enjoying the harbor to deciding never to leave it.</span></label>
+<label class="option"><input type="radio" name="p3"><span class="letter">D</span><span>From traveling alone to depending on a companion.</span></label>
+</div></div>
+<div class="card"><div class="card-head"><span class="num">P4</span><span class="level l4">Level 4</span></div><p>Why end with the speaker lifting a bag rather than saying “I am ready”?</p><textarea class="work" aria-label="Final action purpose" placeholder="Action → inference → earlier evidence." spellcheck="false"></textarea><p class="source">Which detail shows a decision, not just a setting?</p></div>
+</div>
+<div class="callout cue"><h3>The camera test</h3><p>Describe what the camera sees; infer what changed. What evidence joins those two ideas?</p></div>
+</div></section>
+
+<section class="slide" data-title="Ratio | Same Recipe"><div class="content">
+<div class="kicker">0:11–0:14 · Familiar Strength</div><h2 class="slide-title">Ratio: <span class="tint">Keep the Recipe, Change the Batch</span></h2>
+<div class="grid2">
+<div class="card"><div class="card-head"><span class="num">M1</span><span class="level l1">Level 1</span><button type="button" class="question-timer" data-duration="60" data-label="Question M1" data-running="false" aria-pressed="false" aria-label="Question M1 timer, 1:00, paused">1:00</button></div><p>A paint mixture uses blue and white paint in a ratio of \(3:5\). A batch uses \(12\) cups of blue paint. How many cups of white paint are needed?</p><textarea class="work" aria-label="Ratio M1 work" placeholder="One scale factor; apply it to both quantities." spellcheck="false"></textarea></div>
+<div class="card"><div class="card-head"><span class="num">M2</span><span class="level l2">Level 2</span><button type="button" class="question-timer" data-duration="100" data-label="Question M2" data-running="false" aria-pressed="false" aria-label="Question M2 timer, 1:40, paused">1:40</button></div><p>The same \(3:5\) mixture fills a \(48\)-cup container. How many cups are blue paint?</p><textarea class="work" aria-label="Ratio M2 work" placeholder="Does 48 describe one color or the whole batch?" spellcheck="false"></textarea></div>
+</div>
+<figure class="diagram" style="margin-top:16px"><svg class="wide-svg" viewBox="0 0 600 130" role="img" aria-label="Eight equal ratio parts: three blue parts and five white parts">
+<text x="12" y="19">One batch model: every box has the same volume.</text>
+<g stroke="#9eafc7" stroke-width="1.2"><rect x="12" y="35" width="216" height="30" fill="#DCEBFB"/><rect x="228" y="35" width="360" height="30" fill="#fff"/><path d="M84 35V65M156 35V65M300 35V65M372 35V65M444 35V65M516 35V65"/></g>
+<path d="M12 73V79H228V73M228 73V79H588V73" fill="none" stroke="#9eafc7" stroke-width="1.2"/>
+<text x="120" y="98" text-anchor="middle" data-tex="3\text{ blue parts}">3 blue parts</text><text x="408" y="98" text-anchor="middle" data-tex="5\text{ white parts}">5 white parts</text>
+<text x="300" y="122" text-anchor="middle">Ask: what does ONE equal part represent in each problem?</text>
+</svg></figure>
+</div></section>
+
+<section class="slide" data-title="Algebra | Undo in Reverse"><div class="content">
+<div class="kicker">0:14–0:17 · Familiar Strength</div><h2 class="slide-title">Algebra: <span class="tint">Undo in Reverse Order</span></h2>
+<div class="grid2">
+<div class="card"><div class="card-head"><span class="num">M3</span><span class="level l2">Level 2</span><button type="button" class="question-timer" data-duration="100" data-label="Question M3" data-running="false" aria-pressed="false" aria-label="Question M3 timer, 1:40, paused">1:40</button></div><p>Solve for <strong>\(x\)</strong>.</p><div class="math">\(4(x - 3) + 8 = 36\)</div><textarea class="work" aria-label="Equation M3 work" placeholder="Choose a first move. How can substitution check it?" spellcheck="false"></textarea></div>
+<div class="card"><div class="card-head"><span class="num">M4</span><span class="level l3">Level 3</span><button type="button" class="question-timer" data-duration="140" data-label="Question M4" data-running="false" aria-pressed="false" aria-label="Question M4 timer, 2:20, paused">2:20</button></div><p>A museum charges a fixed booking fee of \(\$12\) plus \(\$6\) per student. The total charge is \(\$84\). How many students are in the group?</p><textarea class="work" aria-label="Equation M4 work" placeholder="Define the variable; represent fixed and per-student costs." spellcheck="false"></textarea></div>
+</div>
+<div class="grid3" style="margin-top:16px"><div class="card"><h3>Translate</h3><p class="small">Which cost is charged once? Which repeats for each student?</p></div><div class="card"><h3>Balance</h3><p class="small">Whatever operation you use, apply it to both sides.</p></div><div class="card"><h3>Verify</h3><p class="small">Put your result into the original relationship, not just your last line.</p></div></div>
+<div class="callout blue"><p><strong>Think of a backpack:</strong> Remove the outside layer before reaching what is packed inside. In an equation, identify what happened last and undo it first.</p></div>
+</div></section>
+
+<section class="slide" data-title="Percent | Protect the Base"><div class="content">
+<div class="kicker">0:17–0:20 · Repaired Domain 1 of 4</div><h2 class="slide-title">Percent Change: <span class="tint">Protect the Base</span></h2>
+<div class="grid2 wide-left">
+<div class="card"><div class="card-head"><span class="num">M5</span><span class="level l3">Level 3</span><button type="button" class="question-timer" data-duration="140" data-label="Question M5" data-running="false" aria-pressed="false" aria-label="Question M5 timer, 2:20, paused">2:20</button></div><p>A school store lowers a sweatshirt’s price from \(\$64\) to \(\$56\). What is the percent decrease?</p><p class="small">Enter the numerical percent only, without the percent sign. Explain which price represents \(100\%\).</p><textarea class="blank" inputmode="decimal" aria-label="Percent decrease response" placeholder="Numerical percent" spellcheck="false"></textarea>
+<details><summary>Guided path · Three steps, then finish</summary><div class="steps">
+<div class="step"><div><h3>Name the base</h3><p>Label the original price “\(100\%\).”</p></div></div>
+<div class="step"><div><h3>Build the fraction</h3><p>\((\text{Original} - \text{new}) \div \text{original}\). Substitute before calculating.</p></div></div>
+<div class="step"><div><h3>Convert and inspect</h3><p>Multiply by \(100\). Finish the arithmetic; check the requested entry form.</p></div></div>
+</div></details></div>
+<div class="stack"><figure class="diagram"><svg viewBox="0 0 400 158" role="img" aria-label="Comparison of original price 64 dollars and new price 56 dollars, with the decrease labeled by a question mark">
+<text x="12" y="19">Same dollar scale for both bars</text>
+<text x="12" y="46" data-tex="\text{Original: }\$64">Original: $64</text><rect x="12" y="55" width="352" height="28" rx="5" fill="#E8EDF5" stroke="#9eafc7"/>
+<text x="12" y="115" data-tex="\text{New: }\$56">New: $56</text><rect x="12" y="124" width="308" height="28" rx="5" fill="#DCEBFB" stroke="#9eafc7"/>
+<path d="M320 108H364M320 103V113M364 103V113" stroke="#B45309" stroke-width="1.5"/><text x="342" y="100" text-anchor="middle" data-tex="?">?</text><path d="M364 84V152" stroke="#B45309" stroke-dasharray="3 4"/>
+</svg><figcaption>Equal dollar scale · Original price is the comparison base.</figcaption></figure><div class="callout" style="margin:0"><h3>The original is your ruler</h3><p>Which amount represents \(100\%\)? Would changing that ruler change the question?</p></div></div>
+</div></div></section>
+
+<section class="slide" data-title="Averages | Recover the Total"><div class="content">
+<div class="kicker">0:20–0:23 · Repaired Domain 2 of 4</div><h2 class="slide-title">Averages: <span class="tint">Recover the Hidden Total</span></h2>
+<div class="grid2">
+<div class="card"><div class="card-head"><span class="num">M6</span><span class="level l3">Level 3</span><button type="button" class="question-timer" data-duration="140" data-label="Question M6" data-running="false" aria-pressed="false" aria-label="Question M6 timer, 2:20, paused">2:20</button></div><p>Four practice rounds have a mean score of \(18\) points. A fifth round is added, and the mean of all five rounds is \(20\) points. How many points were scored in the fifth round?</p><textarea class="work" aria-label="Average M6 work" placeholder="Represent the old total and the new total." spellcheck="false"></textarea>
+<details><summary>Guided path · Three steps, then finish</summary><div class="steps">
+<div class="step"><div><h3>Recover the old total</h3><p>\(\text{Old mean} \times \text{old count}\). Write that product.</p></div></div>
+<div class="step"><div><h3>Recover the new total</h3><p>\(\text{New mean} \times \text{new count}\), including the added round.</p></div></div>
+<div class="step"><div><h3>Find the addition</h3><p>\(\text{New total} - \text{old total}\). Finish; check the five-round mean.</p></div></div>
+</div></details></div>
+<div class="stack"><figure class="diagram"><svg viewBox="0 0 400 158" role="img" aria-label="Four original rounds with mean 18 and a fifth unknown round combine into five rounds with mean 20">
+<text x="12" y="19" data-tex="\text{Old group: }4\text{ rounds · mean }18">Old group: 4 rounds · mean 18</text>
+<g fill="#E8EDF5" stroke="#9eafc7"><rect x="12" y="35" width="54" height="34" rx="5"/><rect x="74" y="35" width="54" height="34" rx="5"/><rect x="136" y="35" width="54" height="34" rx="5"/><rect x="198" y="35" width="54" height="34" rx="5"/></g>
+<g text-anchor="middle"><text x="39" y="57" data-tex="\text{R}1">R1</text><text x="101" y="57" data-tex="\text{R}2">R2</text><text x="163" y="57" data-tex="\text{R}3">R3</text><text x="225" y="57" data-tex="\text{R}4">R4</text><text x="276" y="57" data-tex="+">+</text></g>
+<rect x="300" y="35" width="88" height="34" rx="5" fill="#FBEBCF" stroke="#b6a384"/><text x="344" y="57" text-anchor="middle" data-tex="?">?</text>
+<path d="M200 79V105M194 99L200 105L206 99" fill="none" stroke="#65748a" stroke-width="1.5"/>
+<rect x="12" y="115" width="376" height="34" rx="6" fill="#DCEBFB" stroke="#9eafc7"/><text x="200" y="137" text-anchor="middle" data-tex="\text{New group: }5\text{ rounds · mean }20">New group: 5 rounds · mean 20</text>
+</svg><figcaption>Boxes count rounds; their individual scores need not be equal.</figcaption></figure>
+<div class="callout" style="margin:0"><h3>Recover the receipt</h3><p>A mean summarizes a total. Which multiplication recovers that total before and after the new round?</p></div></div>
+</div></div></section>
+
+<section class="slide" data-title="Inequality | Every Option"><div class="content">
+<div class="kicker">0:23–0:26 · Repaired Domain 3 of 4</div><h2 class="slide-title">Multi-Select: <span class="tint">Judge Every Option</span></h2>
+<div class="grid2">
+<div class="card"><div class="card-head"><span class="num">M7</span><span class="level l4">Level 4</span><button type="button" class="question-timer" data-duration="180" data-label="Question M7" data-running="false" aria-pressed="false" aria-label="Question M7 timer, 3:00, paused">3:00</button></div><p>Select all values of <strong>\(x\)</strong> that satisfy the inequality.</p><div class="math">\(-6 < -2x + 2 \leq 8\)</div>
+<div class="options"><label class="option"><input type="checkbox" name="m7" value="-3">\(-3\)</label><label class="option"><input type="checkbox" name="m7" value="-1">\(-1\)</label><label class="option"><input type="checkbox" name="m7" value="0">\(0\)</label><label class="option"><input type="checkbox" name="m7" value="4">\(4\)</label><label class="option"><input type="checkbox" name="m7" value="5">\(5\)</label></div><div class="callout"><p><strong>Two gates:</strong> Passing only one condition is not enough. Which endpoint symbol would allow equality?</p></div></div>
+<div class="stack"><figure class="diagram"><svg viewBox="0 0 400 100" role="img" aria-label="An unshaded number line from negative three to five in equal unit intervals">
+<text x="12" y="19">Sketch your own boundary marks.</text>
+<path d="M12 57H388M12 57L19 52M12 57L19 62M388 57L381 52M388 57L381 62" fill="none" stroke="#65748a" stroke-width="1.5"/>
+<path d="M32 51V63M74 51V63M116 51V63M158 51V63M200 51V63M242 51V63M284 51V63M326 51V63M368 51V63" stroke="#65748a"/>
+<g text-anchor="middle"><text x="32" y="85" data-tex="-3">−3</text><text x="74" y="85" data-tex="-2">−2</text><text x="116" y="85" data-tex="-1">−1</text><text x="158" y="85" data-tex="0">0</text><text x="200" y="85" data-tex="1">1</text><text x="242" y="85" data-tex="2">2</text><text x="284" y="85" data-tex="3">3</text><text x="326" y="85" data-tex="4">4</text><text x="368" y="85" data-tex="5">5</text></g>
+</svg><figcaption>One tick = one unit · Add your own endpoints.</figcaption></figure>
+<details><summary>Guided path · Three steps, then select</summary><div class="steps">
+<div class="step"><div><h3>Split the conditions</h3><p>Write \(-6 < -2x + 2\) and \(-2x + 2 \leq 8\).</p></div></div>
+<div class="step"><div><h3>Undo carefully</h3><p>Subtract \(2\). When dividing by a negative, reverse the inequality.</p></div></div>
+<div class="step"><div><h3>Check every option</h3><p>Substitute in the original. Select only values that satisfy both conditions.</p></div></div>
+</div></details></div>
+</div></div></section>
+
+<section class="slide" data-title="Nonfiction | A Detail’s Job"><div class="content">
+<div class="kicker">0:26–0:30 · Repaired Domain 4 of 4</div><h2 class="slide-title">Nonfiction: <span class="tint">A Detail Has a Job</span></h2>
+<div class="grid2 wide-left">
+<div><div class="annotation-toolbar" data-passage="nonfiction">
+  <span class="annot-label">Tool:</span>
+  <button type="button" class="annot-btn active" data-tool="highlight">&#x1F58A; Highlight</button>
+  <button type="button" class="annot-btn" data-tool="underline">U&#x332; Underline</button>
+  <button type="button" class="annot-btn" data-tool="outline">&#9634; Outline</button>
+  <button type="button" class="annot-btn" data-tool="note">&#128204; Note</button>
+  <div class="annot-sep"></div>
+  <span class="annot-label">Color:</span>
+  <div class="annot-color-row">
+    <button type="button" class="annot-color-swatch active" style="background:#fef08a;" data-color="#fef08a" title="Yellow"></button>
+    <button type="button" class="annot-color-swatch" style="background:#86efac;" data-color="#86efac" title="Green"></button>
+    <button type="button" class="annot-color-swatch" style="background:#93c5fd;" data-color="#93c5fd" title="Blue"></button>
+    <button type="button" class="annot-color-swatch" style="background:#fca5a5;" data-color="#fca5a5" title="Pink"></button>
+    <button type="button" class="annot-color-swatch" style="background:#c4b5fd;" data-color="#c4b5fd" title="Purple"></button>
+  </div>
+  <button type="button" class="clear-annotations-btn">&#10005; Clear</button>
+</div><div class="passage" id="nonfiction">
+<div class="poem-title">The Repaired Clock</div>
+<p><span class="ln">1</span>For years, the station clock displayed the wrong time. Travelers glanced up, frowned, and checked their phones. The repair team’s first inspection focused on the clock’s face: a clean dial and freshly painted hands would make it look dependable again.</p>
+<p><span class="ln">2</span>A technician instead opened the case. A worn gear slipped whenever the minute hand climbed toward the top of the dial. The team replaced the gear and checked the clock against a reliable time signal each morning for a week.</p>
+<p><span class="ln">3</span>The dial remained weathered. Yet passengers began looking up again. The repair had restored more than a mechanism: it had restored a small, shared source of confidence.</p>
+<p class="source">Original instructional passage</p></div></div>
+<div class="stack">
+<div class="card"><div class="card-head"><span class="num">N1</span><span class="level l2">Level 2 · Purpose</span><button type="button" class="question-timer" data-duration="200" data-label="Questions N1, N2" data-running="false" aria-pressed="false" aria-label="Questions N1, N2 timer, 3:20, paused">3:20</button></div><p>Why does the author include the detail that the dial remained weathered?</p><textarea class="work" aria-label="Nonfiction purpose" placeholder="Detail → contrast → larger point." spellcheck="false"></textarea></div>
+<div class="card"><div class="card-head"><span class="num">N2</span><span class="level l2">Level 2 · Context</span></div><p>In paragraph \(3\), what does “restored” most nearly mean?</p><textarea class="blank" aria-label="Restored meaning" placeholder="Predict a replacement word or phrase" spellcheck="false"></textarea><p class="small" style="margin-top:12px">Test your word in both uses of “restored.”</p></div>
+</div></div>
+<div class="callout cue"><h3>Before submitting</h3><p>Purpose → evidence → response check. What does the detail do, beyond what it says?</p></div>
+</div></section>
+
+<section class="slide" data-title="The Commit Check"><div class="content">
+<div class="kicker">0:30–0:33 · Rehearse Before Advancing</div><h2 class="slide-title">Three Screens, <span class="tint">Three Commit Checks</span></h2>
+<div class="grid3">
+<div class="card"><span class="card-label">Before the next item</span><div class="signal">Response.</div><p>Point to the requested quantity or task. Does your entered response match it?</p></div>
+<div class="card"><span class="card-label">Before leaving a passage</span><div class="signal">Evidence.</div><p>Use the review available on the screen. Which response needs one final evidence check?</p></div>
+<div class="card"><span class="card-label">Before a final confirmation</span><div class="signal">Readiness.</div><p>Read the on-screen message. What exactly are you confirming before you continue?</p></div>
+</div>
+<figure class="diagram" style="margin-top:16px"><svg class="wide-svg" viewBox="0 0 600 80" role="img" aria-label="Rehearsal routine: read, respond, inspect, then commit and reset for the next task">
+<rect x="12" y="12" width="244" height="56" rx="8" fill="#E8EDF5" stroke="#a8b7cb"/><text x="134" y="34" text-anchor="middle">Current task</text><text x="134" y="54" text-anchor="middle">Read → Respond → Inspect</text>
+<path d="M268 40H301M295 35L301 40L295 45" fill="none" stroke="#65748a" stroke-width="1.5"/>
+<rect x="314" y="23" width="96" height="34" rx="6" fill="#3e3e3e"/><text x="362" y="45" text-anchor="middle" style="fill:#fff">Commit</text>
+<path d="M422 40H455M449 35L455 40L449 45" fill="none" stroke="#65748a" stroke-width="1.5"/>
+<rect x="468" y="12" width="120" height="56" rx="8" fill="#DCEBFB" stroke="#a8b7cb"/><text x="528" y="34" text-anchor="middle">Next task</text><text x="528" y="54" text-anchor="middle">Reset</text>
+</svg></figure>
+<div class="callout cue"><h3>Say it back</h3><p>“I check the response, use the review available, and read before confirming.”</p></div>
+</div></section>
+
+<section class="slide" data-title="Lock the Personal Plan"><div class="content">
+<div class="kicker">0:33–0:36 · Retrieve the Session 17 Decision</div><h2 class="slide-title">Keep the Plan <span class="tint">You Already Tested</span></h2>
+<div class="grid2">
+<div class="card"><span class="card-label">Retrieve · Do not redesign</span><h3>The order you already tested</h3><p>Say the sequence, then write it.</p><label class="small" for="first">First subject</label><textarea class="blank" id="first" placeholder="ELA or Math, as previously locked" spellcheck="false"></textarea>
+<label class="small" for="budget" style="display:block;margin-top:16px">Previously tested subject budgets</label><textarea class="blank" id="budget" placeholder="First subject ___ min · second subject ___ min" spellcheck="false"></textarea></div>
+<div class="card"><span class="card-label">Use only the checkpoints you rehearsed</span><div class="checkpoint"><strong>45 min</strong><p>Math · Q25<br><span class="small">Time used within math.</span></p></div><div class="checkpoint"><strong>50 min</strong><p>ELA · After block 4<br><span class="small">Time used within ELA.</span></p></div><p class="source">Personal targets, not official limits; the ELA checkpoint depends on your practiced sequence.</p></div>
+</div>
+<div class="callout cue"><h3>Behind pace?</h3><p>Cut loops, not care: clear setup → best supported attempt → move forward.</p></div>
+<p class="source">Use your rehearsed subject budgets; reconcile them with your confirmed timing instructions before test day.</p>
+</div></section>
+
+<section class="slide" data-title="ELA | The Opening Script"><div class="content">
+<div class="kicker">0:36–0:39 · Rehearse Aloud</div><h2 class="slide-title">ELA: <span class="tint">Careful Speed from Passage One</span></h2>
+<div class="grid2">
+<div class="card"><div class="steps">
+<div class="step"><div><h3>Label the jobs</h3><p>Introduce? Illustrate? Contrast? Qualify?</p></div></div>
+<div class="step"><div><h3>Name the purpose</h3><p>“The author explains, argues, or reveals ___.”</p></div></div>
+<div class="step"><div><h3>Match the task</h3><p>Function: detail → purpose. Vocabulary: predict → substitute.</p></div></div>
+<div class="step"><div><h3>Review the set</h3><p>Evidence, changed responses, and response completeness.</p></div></div>
+</div></div>
+<div class="stack"><div class="card"><span class="card-label">Say it</span><p class="script">“Careful speed. Paragraph jobs. Purpose first.”</p></div><div class="card"><span class="card-label">Test the routine</span><p>A choice is true about the passage but does not explain the detail’s job. What do you ask next?</p></div><p class="source">Coaching target: about 60 seconds for the final set check, within the practiced block budget.</p></div>
+</div>
+</div></section>
+
+<section class="slide" data-title="Math | Commit with Care"><div class="content">
+<div class="kicker">0:39–0:42 · Rehearse Aloud</div><h2 class="slide-title">Math: <span class="tint">One Clean Pass</span></h2>
+<div class="grid3"><div class="card"><span class="card-label">Read</span><div class="signal">Target.</div><p>Requested quantity, unit, base, and conditions.</p></div><div class="card"><span class="card-label">Solve</span><div class="signal">Check.</div><p>Visible setup; estimate or substitute to verify.</p></div><div class="card"><span class="card-label">Commit</span><div class="signal">Inspect.</div><p>Correct field and form; every option checked for multi-select.</p></div></div>
+<div class="callout"><h3>Q25 reset · Say it</h3><p class="script">“One breath. Name the target. Solve. Check. Commit.”</p></div>
+<div class="grid2" style="margin-top:14px"><div class="card"><h3>If the method stalls</h3><p class="small">At your rehearsed roughly 2½-minute decision point: stop looping, eliminate, make the best supported response.</p><p class="source">Personal coaching cue, not an official time limit.</p></div><div class="card"><h3>Before advancing</h3><p class="script">“The requested quantity, not an intermediate one?”</p></div></div>
+</div></section>
+
+<section class="slide" data-title="Adaptive | No Score Detective"><div class="content">
+<div class="kicker">0:42–0:45 · Keep Attention on the Current Item</div><h2 class="slide-title">Solve the Item, <span class="tint">Not the Algorithm</span></h2>
+<div class="grid2">
+<div class="card"><span class="card-label">Let go</span><h3>Stop trying to read your score</h3><p>Catch the thought “This feels easy” or “This feels hard.” Set that thought aside instead of turning it into a verdict.</p><p class="small">Ask: what useful action does this question need?</p></div>
+<div class="card"><span class="card-label">Return to</span><h3>The response in front of you</h3><p class="script">“One task. One best supported response.”</p><p class="small">Name the task, use the evidence or setup, and make a deliberate choice. Do not replace the routine with a guessing streak.</p></div>
+</div>
+<div class="callout cue"><h3>Rehearse</h3><p>The next item feels easier. What thought do you drop, and what useful action replaces it?</p></div>
+</div></section>
+
+<section class="slide" data-title="Pack and Confirm"><div class="content">
+<div class="kicker">0:45–0:48 · Rehearse the Morning</div><h2 class="slide-title">Pack Light. <span class="tint">Confirm the Basics.</span></h2>
+<div class="grid3">
+<div class="card"><span class="card-label">Confirm</span><div class="signal">Date + place.</div><p>Read back your own ticket and school instructions. State the date, location, and arrival time without guessing.</p><textarea class="blank" aria-label="My confirmed arrival plan" placeholder="My date, place, and arrival time…" spellcheck="false"></textarea></div>
+<div class="card"><span class="card-label">Sort</span><div class="signal">Bring or receive?</div><p>Use your school’s materials list. Name what you will bring and what you expect to receive; resolve any uncertainty before test morning.</p><textarea class="work" aria-label="My materials plan" placeholder="I bring… / I receive…" spellcheck="false"></textarea></div>
+<div class="card"><span class="card-label">Rehearse</span><div class="signal">Store + settle.</div><p>Practice the phone-off and storage routine from your school’s directions. Finish reviewing your strategy card before active testing.</p><p class="small">Say the sequence once, then put the practice materials away.</p></div>
+</div><div class="callout cue"><h3>Say it back</h3><p>Where am I going? When do I arrive? Which packing or storage detail still needs confirmation?</p></div></div></section>
+
+<section class="slide" data-title="If the Platform Pauses"><div class="content">
+<div class="kicker">0:48–0:51 · Rehearse the Interruption</div><h2 class="slide-title">Screen Freezes? <span class="tint">Stop → Signal → Resume</span></h2>
+<div class="grid2">
+<div class="card"><div class="steps">
+<div class="step"><div><h3>Stop</h3><p>No repeat clicks, refresh, or troubleshooting.</p></div></div>
+<div class="step"><div><h3>Signal</h3><p>Raise your hand; describe the screen and ask about the timer.</p></div></div>
+<div class="step"><div><h3>Resume when instructed</h3><p>One breath. Reread the current task. Follow the proctor’s directions.</p></div></div>
+</div></div>
+<div class="stack"><div class="card"><span class="card-label">Say it</span><p class="script">“My screen stopped responding. Please help me check the test and timer.”</p></div><p class="source">Rehearse describing the problem clearly instead of trying repeated clicks.</p></div>
+</div><div class="callout cue"><h3>Check the assumption</h3><p>Do not assume the timer paused. Which fact should you ask the proctor to confirm?</p></div>
+</div></section>
+
+<section class="slide" data-title="Illness and Interruptions"><div class="content">
+<div class="kicker">0:51–0:53 · Remove the “What If?”</div><h2 class="slide-title">Know When to <span class="tint">Ask for Help</span></h2>
+<div class="card">
+<div class="scenario scenario-head"><span>When</span><span>Say / do</span><span>Remember</span></div>
+<div class="scenario"><h3>Unwell before starting</h3><p data-label="Say:">“I do not feel well. I need to speak with you before I begin.”</p><p data-label="Remember:">Pause and ask what to do next; do not try to push through silently.</p></div>
+<div class="scenario"><h3>Serious distraction</h3><p data-label="Say:">“I am having trouble continuing because ___. Can you help?”</p><p data-label="Remember:">Describe the actual problem, not just the feeling of worry.</p></div>
+<div class="scenario"><h3>Proctor says stop</h3><p data-label="Do:">Put the pencil down. Keep your hands still and listen for the next instruction.</p><p data-label="Remember:">Eyes up. Listen fully.</p></div>
+</div>
+<div class="callout cue"><h3>Practice the distinction</h3><p>Which needs a raised hand? Which needs only a breath and a return to the task?</p></div>
+</div></section>
+
+<section class="slide" data-title="Full Script Rehearsal"><div class="content">
+<div class="kicker">0:53–0:56 · Three-Minute Run-Through</div><h2 class="slide-title">Say the Whole Script <span class="tint">Without Looking</span></h2>
+<div class="grid2">
+<div class="card"><span class="card-label">First 90 seconds · Student</span><h3>Say the six anchors</h3><div class="checklist">
+<label class="check"><input type="checkbox"><span>I name my locked section order and subject budgets.</span></label>
+<label class="check"><input type="checkbox"><span>I explain my first-passage warm-up and current-set review.</span></label>
+<label class="check"><input type="checkbox"><span>I name my math checkpoint and quick reset.</span></label>
+<label class="check"><input type="checkbox"><span>I explain what I do when a method stalls.</span></label>
+<label class="check"><input type="checkbox"><span>I check the response format before advancing.</span></label>
+<label class="check"><input type="checkbox"><span>I explain how I report a technical problem.</span></label>
+</div></div>
+<div class="card"><span class="card-label">Next 90 seconds · Instructor</span><h3>Change one condition</h3><ul class="compact-list"><li>You are behind your checkpoint. What changes?</li><li>The next item feels easier. Where does your attention go?</li><li>The current ELA set is complete. What do you inspect?</li></ul><p class="source">Prompt a missing step; repeat only that line.</p></div>
+</div><div class="callout cue"><h3>Success looks like</h3><p>A concrete next action, not a new rule or a score prediction.</p></div>
+</div></section>
+
+<section class="slide" data-title="Close with Evidence"><div class="content">
+<div class="kicker">0:56–0:58 · Be Specific, Not Grand</div><h2 class="slide-title">Confidence Needs <span class="tint">Evidence, Not a Forecast</span></h2>
+<div class="grid2">
+<div class="card"><span class="card-label">Student · Name the evidence</span><h3>Which trap did you catch?</h3><textarea class="work" aria-label="Concrete evidence of progress" placeholder="I noticed ___, so I ___ before committing." spellcheck="false"></textarea><p class="source">Choose one actual moment from today.</p></div>
+<div class="card"><span class="card-label">Instructor · Name the improvement</span><p class="script">“I saw you ___. That helped because ___. Keep doing that.”</p><p class="source">Use today’s work or a documented error-log change.</p></div>
+</div><div class="callout cue"><h3>Keep one action</h3><p>“Label the base.” “Recover the total.” “Test both conditions.” Which one is yours?</p></div>
+</div></section>
+
+<section class="slide" data-title="Ready for the Next Question"><canvas class="particle-canvas" aria-hidden="true"></canvas><div class="content center">
+<div class="kicker">0:58–1:00 · Finish Quietly</div><h2 class="slide-title">You Need the <span class="tint">Next Good Decision.</span></h2>
+<p class="script" style="max-width:750px;margin:0 auto 28px">“I know my order. I know my checks.<br>I can pause, read, and take the next step.”</p>
+<div class="grid3" style="text-align:left"><div class="card"><span class="card-label">Before</span><h3>Keep it familiar.</h3><p>Normal sleep, familiar breakfast, confirmed arrival.</p></div><div class="card"><span class="card-label">During</span><h3>Keep it precise.</h3><p>Read the task. Check the evidence, quantity, and response form.</p></div><div class="card"><span class="card-label">When unsure</span><h3>Keep it useful.</h3><p>One breath. One clear next step. Ask for help when needed.</p></div></div>
+<p class="last-line">The lesson ends here. No extra problem set.</p>
+</div></section>
+
+</main>
+<nav class="nav-controls" aria-label="Slide navigation"><button class="nav-btn" id="prev" aria-label="Previous slide">‹</button><div class="dots" id="dots"></div><button class="nav-btn" id="next" aria-label="Next slide">›</button><span class="counter" id="counter" aria-live="polite"></span></nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')],dots=document.getElementById('dots');
+let current=0;
+const ZONES=[{name:'Settle',time:'0:00'},{name:'Confidence',time:'0:05'},{name:'Script',time:'0:30'},{name:'Logistics',time:'0:45'},{name:'Close',time:'0:56'}];
+slides.forEach((s,i)=>{
+  if(i===0||i===slides.length-1)return;
+  const active=i<3?0:i<11?1:i<16?2:i<20?3:4;
+  const strip=document.createElement('div');strip.className='zone-strip';strip.setAttribute('aria-label','Session route');
+  strip.innerHTML=ZONES.map((z,j)=>`<span class="zone-chip ${j===active?'on':''}">${z.name}<span class="zone-time">${z.time}</span></span>`).join('');
+  s.querySelector('.content').prepend(strip);
+});
+slides.forEach((s,i)=>{s.setAttribute('aria-label',`Slide ${i+1}: ${s.dataset.title}`);const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label',`Slide ${i+1}: ${s.dataset.title}`);b.onclick=()=>go(i);dots.appendChild(b)});
+function go(n){current=(n+slides.length)%slides.length;slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.inert=i!==current});[...dots.children].forEach((d,i)=>d.setAttribute('aria-current',String(i===current)));document.getElementById('counter').textContent=`${current+1} / ${slides.length}`;fitSlide(slides[current]);startParticles(slides[current])}
+document.getElementById('prev').onclick=()=>go(current-1);document.getElementById('next').onclick=()=>go(current+1);
+document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select,summary,a,[contenteditable]'))return;if(e.key===' '&&e.target.closest('button'))return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}if(e.key==='Home')
+function fitSlide(slide){
+  if(!slide)return;
+  const content=slide.querySelector(':scope > .content');
+  if(!content)return;
+  const style=getComputedStyle(slide);
+  const availableHeight=slide.clientHeight-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom);
+  const availableWidth=slide.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight);
+  const scale=Math.min(1,Math.max(1,availableHeight)/content.offsetHeight,Math.max(1,availableWidth)/content.scrollWidth);
+  content.style.transform=`scale(${scale})`;
+}
+let fitFrame;
+function scheduleFit(){cancelAnimationFrame(fitFrame);fitFrame=requestAnimationFrame(()=>{fitSlide(slides[current]);startParticles(slides[current]);});}
+window.addEventListener('resize',scheduleFit);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleFit);
+document.fonts.ready.then(scheduleFit);
+document.addEventListener('toggle',scheduleFit,true);
+window.addEventListener('load',scheduleFit);
+const contentResizeObserver=new ResizeObserver(()=>scheduleFit());
+slides.forEach(slide=>{const content=slide.querySelector(':scope > .content');if(content)contentResizeObserver.observe(content);});
+go(0);if(e.key==='End')go(slides.length-1)});
+let start=null;document.addEventListener('touchstart',e=>{if(e.target.closest('input,textarea,button,label,.passage,.diagram,summary')){start=null;return}start={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});document.addEventListener('touchend',e=>{if(!start)return;const dx=start.x-e.changedTouches[0].clientX,dy=start.y-e.changedTouches[0].clientY;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*2)go(current+(dx>0?1:-1));start=null},{passive:true});
+/* Passage tools adapted from copy.html; each passage has independent state. */
+document.querySelectorAll('.annotation-toolbar').forEach(bar => {
+  const passage = document.getElementById(bar.dataset.passage);
+  passage.classList.add('annotatable-passage');
+  let tool = 'highlight', color = '#fef08a', noteCount = 0, pending = null;
+  const excluded = '.ln,.source,.poem-title,.passage-note,.note-input-wrapper';
+  function unwrap(el) {
+    if (el.parentNode) el.replaceWith(...el.childNodes);
+  }
+  function cancelPending() {
+    if (!pending) return;
+    const old = pending; pending = null;
+    old.input.remove(); old.marks.forEach(unwrap);
+    passage.normalize();
+  }
+  function clear() {
+    cancelPending();
+    passage.querySelectorAll('.passage-note').forEach(el => el.remove());
+    passage.querySelectorAll('.passage-highlight,.passage-underline,.passage-outline').forEach(unwrap);
+    passage.normalize(); noteCount = 0;
+    window.getSelection()?.removeAllRanges();
+  }
+  bar.querySelectorAll('.annot-btn').forEach(btn => {
+    btn.setAttribute('aria-pressed', String(btn.dataset.tool === tool));
+    btn.addEventListener('click', () => {
+      tool = btn.dataset.tool;
+      bar.querySelectorAll('.annot-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+    });
+  });
+  bar.querySelectorAll('.annot-color-swatch').forEach(btn => {
+    btn.setAttribute('aria-label', btn.title);
+    btn.setAttribute('aria-pressed', String(btn.dataset.color === color));
+    btn.addEventListener('click', () => {
+      color = btn.dataset.color;
+      bar.querySelectorAll('.annot-color-swatch').forEach(b => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+    });
+  });
+  bar.querySelector('.clear-annotations-btn').addEventListener('click', clear);
+  function apply() {
+    const sel = window.getSelection();
+    if (pending || !sel || !sel.rangeCount || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    if (!passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return;
+    const walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT);
+    const parts = [];
+    // Wrap only selected text leaves, preserving paragraph and poem grid structure.
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.parentElement.closest(excluded) || !range.intersectsNode(node)) continue;
+      const start = node === range.startContainer ? range.startOffset : 0;
+      const end = node === range.endContainer ? range.endOffset : node.length;
+      if (end > start && node.data.slice(start, end).trim()) parts.push({node,start,end});
+    }
+    if (!parts.length) return;
+    const marks = parts.map(({node,start,end}) => {
+      const segment = document.createRange();
+      segment.setStart(node,start); segment.setEnd(node,end);
+      const mark = document.createElement('span');
+      if (tool === 'highlight' || tool === 'note') {
+        mark.className = 'passage-highlight';
+        mark.style.backgroundColor = tool === 'note' ? 'rgba(251,191,36,0.35)' : color;
+        if (tool === 'note') {
+          mark.classList.add('passage-note-pending');
+          mark.style.borderBottom = '2px dashed #f59e0b';
+        } else mark.style.color = '#1f2937';
+      } else if (tool === 'underline') {
+        mark.className = 'passage-underline';
+        mark.style.textDecorationColor = color === '#fef08a' ? '#374151' : color;
+      } else {
+        mark.className = 'passage-outline';
+        mark.style.outlineColor = color === '#fef08a' ? '#374151' : color;
+      }
+      segment.surroundContents(mark);
+      return mark;
+    });
+    sel.removeAllRanges();
+    if (tool !== 'note') return;
+    const wrapper = document.createElement('span');
+    wrapper.className = 'note-input-wrapper';
+    wrapper.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:white;border:1.5px solid #374151;border-radius:8px;padding:2px 6px;margin-left:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);vertical-align:middle;font-style:normal;';
+    const input = document.createElement('input');
+    input.type = 'text'; input.placeholder = 'Type note...';
+    input.setAttribute('aria-label','Annotation note');
+    input.style.cssText = 'border:none;outline:none;font-size:.72rem;width:130px;color:#374151;background:transparent;font-family:inherit;';
+    function button(label, title, background, foreground) {
+      const b = document.createElement('button'); b.type = 'button';
+      b.textContent = label; b.setAttribute('aria-label',title);
+      b.style.cssText = 'border:none;border-radius:4px;width:18px;height:18px;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;background:'+background+';color:'+foreground;
+      return b;
+    }
+    const save = button('✓','Save note','#374151','white');
+    const cancel = button('✕','Cancel note','#e5e7eb','#374151');
+    wrapper.append(input,save,cancel);
+    marks[marks.length-1].after(wrapper);
+    pending = {input:wrapper,marks};
+    input.focus();
+    function saveNote() {
+      if (!pending || pending.input !== wrapper) return;
+      const text = input.value.trim();
+      if (!text) { cancelPending(); return; }
+      wrapper.remove(); pending = null;
+      marks.forEach(mark => {
+        mark.classList.remove('passage-note-pending');
+        mark.style.backgroundColor = '#fef3c7'; mark.style.borderBottom = '';
+      });
+      const note = document.createElement('span');
+      note.className = 'passage-note'; note.textContent = String(++noteCount);
+      note.tabIndex = 0; note.setAttribute('role','button');
+      note.setAttribute('aria-label','Note '+noteCount+': '+text);
+      note.setAttribute('aria-expanded','false');
+      const tooltip = document.createElement('span');
+      tooltip.className = 'note-tooltip'; tooltip.textContent = 'Note: '+text;
+      note.append(tooltip); marks[marks.length-1].after(note);
+      function toggle() {
+        const open = note.classList.toggle('note-open');
+        note.setAttribute('aria-expanded',String(open));
+      }
+      note.addEventListener('click',toggle);
+      note.addEventListener('keydown',e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggle(); }
+        if (e.key === 'Escape') { note.classList.remove('note-open'); note.blur(); }
+      });
+    }
+    save.addEventListener('click',saveNote);
+    cancel.addEventListener('click',cancelPending);
+    input.addEventListener('keydown',e => {
+      if (e.key === 'Enter') { e.preventDefault(); saveNote(); }
+      if (e.key === 'Escape') { e.preventDefault(); cancelPending(); }
+    });
+  }
+  passage.addEventListener('mouseup', e => {
+    if (!e.target.closest('.passage-note,.note-input-wrapper')) apply();
+  });
+  passage.addEventListener('touchend', e => {
+    if (!e.target.closest('.passage-note,.note-input-wrapper')) setTimeout(apply,100);
+  }, {passive:true});
+  passage.addEventListener('keyup',e => { if (e.key === 'Shift') apply(); });
+});
+const particleStates=new WeakMap(),reducedParticleMotion=matchMedia('(prefers-reduced-motion: reduce)');
+let particleFrame=0;
+function startParticles(slide){
+  cancelAnimationFrame(particleFrame);
+  const canvas=slide.querySelector('.particle-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  if(!ctx)return;
+  const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,2);
+  if(!width||!height)return;
+  let state=particleStates.get(canvas);
+  if(!state||state.width!==width||state.height!==height||state.dpr!==dpr){
+    canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    state={width,height,dpr,points:Array.from({length:28},()=>({x:Math.random()*width,y:Math.random()*height,r:Math.random()*2+1,alpha:Math.random()*.28+.08,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}))};
+    particleStates.set(canvas,state);
+  }
+  let previous=0;
+  function draw(now){
+    const step=previous?Math.min((now-previous)/(1000/60),3):0;previous=now;
+    ctx.clearRect(0,0,width,height);
+    state.points.forEach(p=>{
+      if(!reducedParticleMotion.matches){p.x=(p.x+p.vx*step+width)%width;p.y=(p.y+p.vy*step+height)%height}
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(37,99,235,${p.alpha})`;ctx.fill();
+    });
+    if(!reducedParticleMotion.matches)particleFrame=requestAnimationFrame(draw);
+  }
+  draw(performance.now());
+}
+window.addEventListener('resize',()=>startParticles(slides[current]));
+reducedParticleMotion.addEventListener('change',()=>startParticles(slides[current]));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(particleFrame);else startParticles(slides[current])});
+
+function fitSlide(slide){
+  if(!slide)return;
+  const content=slide.querySelector(':scope > .content');
+  if(!content)return;
+  const style=getComputedStyle(slide);
+  const availableHeight=slide.clientHeight-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom);
+  const availableWidth=slide.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight);
+  const scale=Math.min(1,Math.max(1,availableHeight)/content.offsetHeight,Math.max(1,availableWidth)/content.scrollWidth);
+  content.style.transform=`scale(${scale})`;
+}
+let fitFrame;
+function scheduleFit(){cancelAnimationFrame(fitFrame);fitFrame=requestAnimationFrame(()=>{fitSlide(slides[current]);startParticles(slides[current]);});}
+window.addEventListener('resize',scheduleFit);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleFit);
+document.fonts.ready.then(scheduleFit);
+document.addEventListener('toggle',scheduleFit,true);
+window.addEventListener('load',scheduleFit);
+const contentResizeObserver=new ResizeObserver(()=>scheduleFit());
+slides.forEach(slide=>{const content=slide.querySelector(':scope > .content');if(content)contentResizeObserver.observe(content);});
+go(0);
+</script>
+
+<script>
+/* Linear tier gradient: 60, 100, 140, 180 seconds; passage sets sum their questions. */
+(() => {
+  const timers = [...document.querySelectorAll('.question-timer')].map(button => ({
+    button, remaining: Number(button.dataset.duration) * 1000, deadline: null
+  }));
+  function render(timer) {
+    const seconds = Math.ceil(timer.remaining / 1000);
+    const text = Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+    const running = timer.deadline !== null;
+    timer.button.textContent = text;
+    timer.button.dataset.running = String(running);
+    timer.button.dataset.expired = String(timer.remaining === 0);
+    timer.button.setAttribute('aria-pressed', String(running));
+    timer.button.setAttribute('aria-label', timer.button.dataset.label + ' timer, ' + text + ', ' +
+      (timer.remaining === 0 ? 'finished' : running ? 'running' : 'paused'));
+  }
+  function update(timer, now) {
+    if (timer.deadline !== null) {
+      timer.remaining = Math.max(0, timer.deadline - now);
+      if (timer.remaining === 0) timer.deadline = null;
+    }
+    render(timer);
+  }
+  timers.forEach(timer => {
+    timer.button.addEventListener('click', () => {
+      const now = Date.now();
+      const wasRunning = timer.deadline !== null;
+      update(timer, now);
+      if (wasRunning) {
+        timer.deadline = null;
+      } else {
+        if (timer.remaining === 0) timer.remaining = Number(timer.button.dataset.duration) * 1000;
+        timer.deadline = now + timer.remaining;
+      }
+      render(timer);
+    });
+    render(timer);
+  });
+  setInterval(() => {
+    const now = Date.now();
+    timers.forEach(timer => { if (timer.deadline !== null) update(timer, now); });
+  }, 100);
+  document.addEventListener('visibilitychange', () => {
+    const now = Date.now();
+    timers.forEach(timer => update(timer, now));
+  });
+})();
+</script>
+</body>
+</html>
