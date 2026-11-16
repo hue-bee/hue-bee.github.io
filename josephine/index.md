@@ -30,3 +30,4 @@
 | **02B** | [Review and Strategy Lock](https://hue-bee.github.io/josephine/lessons/02B) | [02B Homework](https://hue-bee.github.io/josephine/lessons/02B/homework) |[Set 1](https://hue-bee.github.io/josephine/lessons/02B/sets/01) [Set 2](https://hue-bee.github.io/josephine/lessons/02B/sets/02)|
 | **03A** | [Error Log “Greatest Hits”](https://hue-bee.github.io/josephine/lessons/03A) | [03A Homework](https://hue-bee.github.io/josephine/lessons/03A/homework) ||
 | **03B** | [Error Log “Greatest Hits” II](https://hue-bee.github.io/josephine/lessons/03B) | [03B Homework](https://hue-bee.github.io/josephine/lessons/03B/homework) | |
+| **04A** | [Taper and Test-Day Script](https://hue-bee.github.io/josephine/lessons/04A) | [04A Homework](https://hue-bee.github.io/josephine/lessons/04A/homework) | |
