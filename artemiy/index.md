@@ -10,5 +10,5 @@
 | Session | Lesson | Homework | Notes |
 |:-----:|:----------|:---------------:|:----------|
 | **01** | [Angles and Parallel Lines](https://hue-bee.github.io/artemiy/lessons/01) | [1 Homework](https://hue-bee.github.io/artemiy/lessons/01/homework) ||
-| **01.5** | [Make the mistake teach you something](https://hue-bee.github.io/artemiy/lessons/01.5) | ||
+| **01.5** | [Make the mistake that teaches you something](https://hue-bee.github.io/artemiy/lessons/01.5) | ||
 | **02** | [Triangles and polygons](https://hue-bee.github.io/artemiy/lessons/02) | [2 Homework](https://hue-bee.github.io/artemiy/lessons/02/homework) ||
