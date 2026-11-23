@@ -1,1 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Digital ISEE Orientation Homework — Upper Level</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<style>
+  /* ── Reset & Base (homework.html color scheme + index.html fonts) ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:      #2563EB;
+    --blue-lt:   #EFF6FF;
+    --blue-md:   #BFDBFE;
+    --coral:     #F97066;
+    --coral-lt:  #FFF1F0;
+    --sand:      #D4A574;
+    --sand-lt:   #FDF3E7;
+    --green:     #16a34a;
+    --green-lt:  #DCFCE7;
+    --purple:    #7c3aed;
+    --purple-lt: #EDE9FE;
+    --ink:       #0f172a;
+    --slate:     #334155;
+    --muted:     #64748b;
+    --border:    #CBD5E1;
+    --bg:        #F8FAFF;
+    --white:     #FFFFFF;
+    --ff-head:   'Baloo 2', 'Nunito', sans-serif;
+    --ff-body:   'Nunito', sans-serif;
+    --ff-math:   'Nunito', sans-serif;
+    --text-xs:   clamp(0.75rem, 0.72rem + 0.12vw, 0.8rem);
+    --text-sm:   clamp(0.8125rem, 0.79rem + 0.12vw, 0.875rem);
+    --text-base: clamp(0.875rem, 0.85rem + 0.12vw, 0.94rem);
+  }
+  html { background: #e2e8f0; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 2rem;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* ── KaTeX & Fallback Math Typography (from index.html) ── */
+  .tex {
+    font-family: 'KaTeX_Main', 'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: 1.06em;
+    font-style: normal;
+    letter-spacing: 0;
+    background: transparent;
+  }
+  .tex i {
+    font-family: 'KaTeX_Math', 'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif;
+    font-style: italic;
+  }
+  .tex sup { font-size: 0.72em; line-height: 0; }
+  .tex .katex { font-size: 1em; background: transparent; }
+
+  /* ── Sheet Container ─────────────────────────── */
+  .sheet {
+    background: var(--white);
+    margin: 1.8rem auto;
+    padding: 2.1rem 2.3rem;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    border-radius: 16px;
+  }
+
+  /* ── Header (Page 1 Only) ────────────────────── */
+  .hw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 0.95rem;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 1.25rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hw-header-left h1 {
+    font-family: var(--ff-head);
+    font-size: 1.82rem;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .hw-header-left .subtitle {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    font-weight: 700;
+    margin-top: 0.22rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hw-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.38rem;
+    min-width: 225px;
+  }
+  .hw-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .hw-meta-row .label {
+    background: var(--blue-lt);
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 66px;
+    text-align: center;
+  }
+  .hw-meta-row input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: var(--text-sm);
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 2px 5px;
+  }
+
+  /* ── Score Banner ────────────────────────────── */
+  .score-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: white;
+    border-radius: 10px;
+    padding: 0.72rem 1.2rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .score-banner .title {
+    font-family: var(--ff-head);
+    font-size: 1.14rem;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  .score-banner .sub {
+    font-size: var(--text-xs);
+    opacity: 0.92;
+  }
+  .score-cells { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .score-cell {
+    background: rgba(255,255,255,0.16);
+    border-radius: 8px;
+    padding: 0.3rem 0.75rem;
+    text-align: center;
+    min-width: 88px;
+  }
+  .score-cell .sc-val {
+    font-family: var(--ff-head);
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+  .score-cell .sc-val input {
+    width: 2.3rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.68);
+    color: white;
+    font-family: var(--ff-head);
+    font-size: 1.12rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  .score-cell .sc-val input::-webkit-outer-spin-button,
+  .score-cell .sc-val input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .score-cell .sc-val input::placeholder { color: rgba(255,255,255,0.78); }
+  .score-cell .sc-lbl {
+    font-size: var(--text-xs);
+    opacity: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Section Header & Section Timer ──────────── */
+  .section-hd {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0.2rem 0 0.7rem;
+    flex-wrap: wrap;
+  }
+  .section-hd h2 {
+    font-family: var(--ff-head);
+    font-size: 1.24rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .section-hd .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-blue   { background: var(--blue-lt);   color: var(--blue);   border: 1px solid var(--blue-md); }
+  .badge-coral  { background: var(--coral-lt);  color: #c2410c;       border: 1px solid #fca5a5; }
+  .badge-green  { background: var(--green-lt);  color: var(--green);  border: 1px solid #86efac; }
+  .badge-purple { background: var(--purple-lt); color: var(--purple); border: 1px solid #c4b5fd; }
+  .badge-sand   { background: var(--sand-lt);   color: #92400e;       border: 1px solid #fcd34d; }
+
+  .section-timer {
+    appearance: none;
+    border: 0;
+    border-radius: 12px;
+    padding: 2px 7px;
+    background: rgba(15,23,42,0.07);
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    white-space: nowrap;
+    min-width: 4.4em;
+    min-height: 24px;
+    text-align: center;
+    transition: background 0.15s, color 0.15s;
+  }
+  .section-timer:hover:not(:disabled) { background: rgba(15,23,42,0.14); }
+  .section-timer.running { background: #92400e; color: #ffffff; }
+  .section-timer.expired { background: #b91c1c; color: #ffffff; cursor: default; }
+
+  /* ── Instruction & Formula Strips ────────────── */
+  .instr {
+    font-size: var(--text-xs);
+    color: var(--slate);
+    line-height: 1.48;
+    margin-bottom: 0.8rem;
+    padding: 0.4rem 0.78rem;
+    background: var(--blue-lt);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .formula-strip {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    background: var(--blue-lt);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 10px;
+    padding: 0.52rem 0.85rem;
+    margin-bottom: 0.85rem;
+    align-items: center;
+  }
+  .formula-strip .fs-label {
+    font-size: var(--text-xs);
+    font-weight: 800;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.25rem;
+  }
+  .fml {
+    background: var(--white);
+    border: 1.5px solid var(--blue-md);
+    border-radius: 7px;
+    padding: 0.18rem 0.58rem;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: var(--ff-head);
+  }
+
+  /* ── Grayscale Level Pills (matching homework.html) ── */
+  .lvl {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 8px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .lvl-1 { background: #eceff3; color: #334155; }
+  .lvl-2 { background: #d9d9d9; color: #1f2937; }
+  .lvl-3 { background: #bdbdbd; color: #111827; }
+  .lvl-4 { background: #6b7280; color: #ffffff; }
+
+  /* ── Problem Cards & Quantitative Comparison Columns ── */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.88rem;
+  }
+  .prob-grid.single { grid-template-columns: 1fr; }
+  .prob {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .prob-num {
+    font-family: var(--ff-head);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.28rem;
+  }
+  .prob-q {
+    font-size: var(--text-base);
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 0.42rem;
+  }
+  .prob-q strong { color: #374151; font-weight: 800; }
+
+  .qc-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    margin: 0.2rem 0 0.42rem;
+  }
+  .qc-col {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.36rem 0.5rem;
+    text-align: center;
+  }
+  .qc-col-h {
+    font-size: var(--text-xs);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 0.14rem;
+  }
+  .qc-col-v {
+    font-family: var(--ff-math);
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .fig { display: flex; justify-content: center; margin: 0.28rem 0 0.42rem; }
+  .fig svg { max-width: 100%; height: auto; overflow: visible; }
+  .fig text { font-family: var(--ff-body); }
+
+  .work-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 54px;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    background: var(--white);
+    padding: 0.36rem 0.55rem;
+    font-family: var(--ff-body);
+    font-size: var(--text-sm);
+    color: var(--ink);
+    outline: none;
+    margin-top: 0.3rem;
+    line-height: 1.42;
+  }
+  .work-area::placeholder { color: var(--muted); }
+
+  .answer-box {
+    margin-top: auto;
+    padding-top: 0.46rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .answer-box input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 2px 6px;
+  }
+
+  /* ── Multiple-Choice Questions & Bubbles ─────── */
+  .mc-q {
+    margin-bottom: 0.72rem;
+    padding: 0.65rem 0.85rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+  }
+  .mc-q:last-of-type { margin-bottom: 0.4rem; }
+  .mc-q-text {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.42rem;
+    line-height: 1.46;
+  }
+  .mc-q-text .qnum {
+    font-family: var(--ff-head);
+    color: var(--blue);
+    margin-right: 0.3rem;
+  }
+  .pred-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.42rem;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .pred-row input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-bottom: 1.5px dashed var(--border);
+    background: var(--white);
+    border-radius: 4px 4px 0 0;
+    padding: 2px 6px;
+    font-family: var(--ff-body);
+    font-size: var(--text-xs);
+    color: var(--ink);
+    outline: none;
+  }
+  .mc-opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.24rem 0.9rem;
+  }
+  .mc-opts.row4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.3rem;
+    margin-top: 0.4rem;
+  }
+  .mc-opt {
+    font-size: var(--text-sm);
+    color: var(--slate);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.34rem;
+    line-height: 1.4;
+    cursor: pointer;
+    padding: 0.24rem 0.42rem;
+    border-radius: 6px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+    user-select: none;
+  }
+  .mc-opts.row4 .mc-opt {
+    justify-content: center;
+    align-items: center;
+    background: var(--white);
+    border-color: var(--border);
+    font-weight: 700;
+    padding: 0.26rem 0.3rem;
+  }
+  .mc-opt:hover { background: #f0f4f8; }
+  .mc-opt input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .mc-opt:has(input:focus-visible) {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .mc-opt.selected {
+    background: #e5e7eb;
+    border-color: #374151;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .mc-opt .bubble {
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 800;
+    background: var(--white);
+  }
+  .mc-opts.row4 .mc-opt .bubble { margin-top: 0; }
+  .mc-opt.selected .bubble {
+    background: #374151;
+    border-color: #374151;
+    color: var(--white);
+  }
+
+  /* ── Passage Box ─────────────────────────────── */
+  .passage-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  .passage-title {
+    font-family: var(--ff-head);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.45rem;
+  }
+  .passage-text {
+    font-size: var(--text-sm);
+    line-height: 1.62;
+    color: var(--slate);
+    column-count: 2;
+    column-gap: 1.35rem;
+  }
+  .passage-text p { margin-bottom: 0.52rem; break-inside: avoid; }
+  .para-lbl {
+    background: rgba(100,116,139,0.15);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-weight: 800;
+    color: #374151;
+    font-size: var(--text-xs);
+  }
+  .sw {
+    background: #f0f0f0;
+    border-radius: 3px;
+    padding: 0 3px;
+    font-weight: 700;
+    color: #374151;
+  }
+  .map-strip {
+    margin-top: 0.55rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
+  }
+  .map-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: 0;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--slate);
+  }
+  .map-cell input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    background: var(--white);
+    padding: 2px 5px;
+    font-family: var(--ff-body);
+    font-size: var(--text-xs);
+    color: var(--ink);
+    outline: none;
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* ── Commit Row & Answer Locking ─────────────── */
+  .commit-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.42rem;
+  }
+  .commit-btn {
+    min-height: 30px;
+    border: 0;
+    border-radius: 20px;
+    padding: 0.24rem 0.78rem;
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--ff-body);
+    font-size: var(--text-xs);
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .commit-btn:hover:not(:disabled) { background: #1d4ed8; }
+  .commit-btn:disabled { background: var(--muted); cursor: not-allowed; }
+  .lock-note {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .lock-note.warn { color: #b91c1c; }
+  .commit-row.committed .lock-note { color: var(--green); }
+  .prob.locked, .mc-q.locked {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+  .prob.locked .mc-opt:not(.selected),
+  .mc-q.locked .mc-opt:not(.selected) {
+    opacity: 0.55;
+  }
+  .prob.locked .mc-opt,
+  .mc-q.locked .mc-opt {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  /* ── Divider ─────────────────────────────────── */
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.35rem 0;
+  }
+
+  /* ── Error Log (exact homework.html scheme & layout) ── */
+  .error-log {
+    border: 2px solid var(--coral);
+    border-radius: 10px;
+    padding: 0.88rem 1.05rem;
+    background: var(--coral-lt);
+    margin-top: 0.45rem;
+  }
+  .error-log h3 {
+    font-family: var(--ff-head);
+    font-size: 1.04rem;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 0.45rem;
+  }
+  .error-type-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: var(--text-xs);
+    margin-bottom: 0.65rem;
+  }
+  .pill {
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: 1.5px solid;
+    font-size: var(--text-xs);
+  }
+  .pill-cg { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+  .pill-ce { background: #fef9c3; color: #92400e; border-color: #fde68a; }
+  .pill-ru { background: var(--purple-lt); color: var(--purple); border-color: #c4b5fd; }
+
+  .error-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: var(--text-xs);
+  }
+  .error-table th {
+    background: var(--coral);
+    color: var(--white);
+    font-family: var(--ff-head);
+    font-weight: 600;
+    padding: 0.36rem 0.6rem;
+    text-align: left;
+    font-size: var(--text-xs);
+  }
+  .error-table th:nth-child(1) { width: 6%; border-radius: 6px 0 0 0; text-align: center; }
+  .error-table th:nth-child(2) { width: 17%; }
+  .error-table th:nth-child(3) { width: 57%; }
+  .error-table th:nth-child(4) { width: 20%; border-radius: 0 6px 0 0; }
+  .error-table td {
+    padding: 0.44rem 0.6rem;
+    border-bottom: 1px solid #fca5a5;
+    color: var(--slate);
+    background: var(--white);
+    font-weight: 500;
+    height: 36px;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+  }
+  .error-table td:first-child {
+    font-weight: 700;
+    color: var(--ink);
+    text-align: center;
+  }
+  .error-table tr:last-child td { border-bottom: none; }
+
+  /* ── Reflection Box ──────────────────────────── */
+  .reflect-box {
+    background: var(--green-lt);
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-top: 0.95rem;
+  }
+  .reflect-box h3 {
+    font-family: var(--ff-head);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.35rem;
+  }
+  .reflect-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-top: 0.3rem;
+  }
+  .reflect-line {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    font-size: var(--text-sm);
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .reflect-line input[type="text"] {
+    flex: 1;
+    min-width: 160px;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    font-family: var(--ff-body);
+    font-size: var(--text-sm);
+    color: var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 2px 6px;
+  }
+
+  /* ── Top Buttons, Dialog, Print Mirror & Footer ── */
+  .top-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin: 1rem 0 0;
+    flex-wrap: wrap;
+  }
+  .print-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.52rem 1.6rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.28);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #1d4ed8; }
+  .print-btn.secondary {
+    background: #64748b;
+    box-shadow: 0 3px 10px rgba(100,116,139,0.25);
+  }
+  .print-btn.secondary:hover { background: #475569; }
+
+  #printNotice {
+    max-width: 820px;
+    padding: 0.65rem 1rem;
+    margin: 0.65rem auto 0;
+    background: var(--blue-lt);
+    border: 1px solid var(--blue-md);
+    color: var(--slate);
+    font-size: var(--text-sm);
+    border-radius: 8px;
+    text-align: center;
+  }
+  #printNotice a { color: var(--blue); font-weight: 800; margin: 0 0.35rem; }
+
+  dialog {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    max-width: 400px;
+    width: calc(100% - 32px);
+    margin: auto;
+    font-family: var(--ff-body);
+    color: var(--ink);
+  }
+  dialog::backdrop { background: rgba(15,23,42,0.42); }
+  dialog h2 { font-family: var(--ff-head); font-size: 1.35rem; color: var(--blue); }
+  dialog p { margin: 0.45rem 0 1rem; font-size: var(--text-base); line-height: 1.5; color: var(--slate); }
+  .dialog-actions { display: flex; justify-content: flex-end; gap: 0.6rem; }
+  .dialog-actions button {
+    border: 0;
+    border-radius: 20px;
+    padding: 0.48rem 1.05rem;
+    font: 700 var(--text-sm) var(--ff-body);
+    cursor: pointer;
+    background: #e2e8f0;
+    color: var(--ink);
+  }
+  .dialog-actions .danger { background: #b91c1c; color: var(--white); }
+
+  .page-foot {
+    margin-top: 1rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .sources-note {
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+  .sources-note a { color: var(--blue); }
+  .print-mirror { display: none; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  button:focus-visible, input:focus-visible, textarea:focus-visible, [contenteditable]:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  /* ── Responsive Mobile (375px+) ──────────────── */
+  @media (max-width: 640px) {
+    html { background: var(--bg); }
+    body { max-width: 100%; padding-bottom: 1.2rem; }
+    .sheet { margin: 0.9rem 0.55rem; padding: 1.15rem 0.95rem; border-radius: 12px; }
+    .prob-grid, .mc-opts, .passage-text { grid-template-columns: 1fr; column-count: 1; }
+    .map-strip { grid-template-columns: 1fr; }
+    .hw-meta { width: 100%; min-width: 0; }
+    .score-cells { width: 100%; gap: 0.4rem; }
+    .score-cell { flex: 1; min-width: 0; padding: 0.35rem 0.4rem; }
+    .section-hd .badge { margin-left: 0; }
+    .mc-opt { min-height: 40px; align-items: center; }
+    .section-timer { min-height: 34px; }
+    .reflect-line { display: block; }
+    .reflect-line input[type="text"] { display: block; width: 100%; min-width: 0; margin-top: 0.25rem; }
+  }
+
+  /* ── Print Styles (Clean Letter Pages) ───────── */
+  @page { size: letter; margin: 0.36in 0.46in; }
+  @media print {
+    html, body { background: white !important; max-width: none !important; padding: 0 !important; }
+    .no-print, .commit-row, dialog, #printNotice { display: none !important; }
+    .sheet {
+      box-shadow: none !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      break-after: page;
+    }
+    .sheet:last-of-type { break-after: auto; }
+    .page-break { break-before: page; page-break-before: always; }
+    .prob, .mc-q, .passage-box, .error-log, .reflect-box, .section-hd { break-inside: avoid; }
+    .hw-header { margin-bottom: 0.55rem; padding-bottom: 0.45rem; }
+    .hw-header-left h1 { font-size: 18pt; }
+    .score-banner { margin-bottom: 0.6rem; padding: 0.42rem 0.75rem; }
+    .section-hd { margin: 0.25rem 0 0.38rem; }
+    .section-hd h2 { font-size: 12.5pt; }
+    .section-timer { min-height: 0; padding: 0 3px; background: transparent !important; color: inherit !important; }
+    .instr { margin-bottom: 0.45rem; padding: 0.26rem 0.55rem; font-size: 8.4pt; line-height: 1.35; }
+    .formula-strip { margin-bottom: 0.5rem; padding: 0.32rem 0.6rem; }
+    .prob-grid { gap: 0.52rem; grid-template-columns: 1fr 1fr; }
+    .prob { padding: 0.48rem 0.62rem; }
+    .prob-q, .mc-q-text { font-size: 9pt; line-height: 1.35; }
+    .mc-q-text { margin-bottom: 0.18rem; }
+    .qc-cols { margin: 0.14rem 0 0.26rem; }
+    .qc-col { padding: 0.22rem 0.38rem; }
+    .mc-q { padding: 0.22rem 0.5rem; margin-bottom: 0.2rem; }
+    .mc-opts { grid-template-columns: 1fr 1fr; gap: 0.06rem 0.65rem; }
+    .mc-opts.row4 { grid-template-columns: repeat(4, 1fr); margin-top: 0.22rem; }
+    .mc-opt { font-size: 8.1pt; line-height: 1.26; padding: 0.04rem 0.16rem; min-height: 0; }
+    .passage-box { padding: 0.4rem 0.62rem; margin-bottom: 0.28rem; }
+    .passage-title { font-size: 9.8pt; margin-bottom: 0.22rem; }
+    .passage-text { column-count: 2; font-size: 8pt; line-height: 1.33; }
+    .passage-text p { margin-bottom: 0.2rem; }
+    .map-strip { grid-template-columns: repeat(4, 1fr); margin-top: 0.22rem; padding-top: 0.18rem; }
+    hr.divider { margin: 0.6rem 0; }
+    .error-log { padding: 0.58rem 0.78rem; margin-top: 0.28rem; }
+    .error-type-pills { margin-bottom: 0.42rem; }
+    .error-table td { height: 29px; padding: 0.3rem 0.5rem; }
+    .reflect-box { padding: 0.55rem 0.78rem; margin-top: 0.52rem; }
+    .reflect-lines { gap: 0.36rem; }
+    .sources-note { margin-top: 0.42rem; font-size: 7.4pt; line-height: 1.32; }
+    textarea { display: none !important; }
+    .print-mirror {
+      display: block;
+      border: 1px dashed var(--border);
+      border-radius: 5px;
+      background: white;
+      min-height: 30px;
+      margin-top: 0.2rem;
+      padding: 0.2rem 0.42rem;
+      font-size: 8.4pt;
+      line-height: 1.32;
+      color: var(--ink);
+    }
+    input, [contenteditable] { border-color: #cbd5e1 !important; }
+    .score-cell .sc-val input { border-bottom: 2px solid rgba(255,255,255,0.85) !important; color: white !important; background: transparent !important; }
+    .page-foot { margin-top: 0.34rem; padding-top: 0.22rem; font-size: 7.6pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print top-actions">
+  <button id="printSave" class="print-btn" type="button">Print / Save as PDF</button>
+  <button id="clearAll" class="print-btn secondary" type="button">Clear All</button>
+</div>
+<div id="printNotice" class="no-print" hidden>
+  If your preview blocks the print dialog, open the <a id="standalonePrint" target="_blank" rel="noopener">printable worksheet tab</a> or <a id="saveWorksheet" download="isee-orientation-homework.html">download your filled sheet</a>.
+</div>
+
+<main>
+<!-- ══════════════════════════════════════════════
+     PAGE 1 — HEADER, SELF-SCORE & PART A (PROBLEMS 1–4)
+══════════════════════════════════════════════ -->
+<section class="sheet" aria-label="Worksheet page 1">
+
+  <header class="hw-header">
+    <div class="hw-header-left">
+      <h1>2026 Digital ISEE Orientation Homework</h1>
+      <div class="subtitle">Upper Level (E3n Online Format) &nbsp;·&nbsp; Verbal, Quant Comparisons, Reading &amp; Math</div>
+    </div>
+    <div class="hw-meta">
+      <label class="hw-meta-row"><span class="label">Name</span><input type="text" aria-label="Name"></label>
+      <label class="hw-meta-row"><span class="label">Date</span><input type="text" aria-label="Date"></label>
+    </div>
+  </header>
+
+  <div class="score-banner">
+    <div>
+      <div class="title">Self-Score Before Session</div>
+      <div class="sub">Fill in after checking your work — bring to Zoom.</div>
+    </div>
+    <div class="score-cells">
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" aria-label="Math self-score out of 12" placeholder="__"> / 12</div>
+        <div class="sc-lbl">Math Problems</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="12" aria-label="ELA self-score out of 12" placeholder="__"> / 12</div>
+        <div class="sc-lbl">ELA Questions</div>
+      </div>
+      <div class="score-cell">
+        <div class="sc-val"><input type="number" min="0" max="24" aria-label="Total self-score out of 24" placeholder="__"> / 24</div>
+        <div class="sc-lbl">Total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A: QUANTITATIVE COMPARISONS -->
+  <div class="section-hd">
+    <h2>Part A — Section 2: Quantitative Comparisons</h2>
+    <span class="badge badge-blue">6 Problems · <button type="button" class="section-timer" data-seconds="360" aria-label="Part A timer, click to start or pause" aria-pressed="false">06:00</button></span>
+  </div>
+  <p class="instr">Digital Two-Pass Rule: bank sure wins first, skip and flag stalls for Pass 2, and leave zero blanks. Click the timer to start or pause. Select <strong>A</strong> if Column A is greater, <strong>B</strong> if Column B is greater, <strong>C</strong> if the two quantities are equal, or <strong>D</strong> if the relationship cannot be determined.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">QC Protocol</span>
+    <span class="fml">Cancel shared terms</span>
+    <span class="fml">Factor before multiplying</span>
+    <span class="fml">FROZEN: Fractions · 0 · 1 · Negatives · Extremes</span>
+    <span class="fml">Pure numbers ≠ Choice D</span>
+  </div>
+
+  <div class="prob-grid">
+
+    <!-- Problem 1: L1 Pure-Number Factoring -->
+    <article class="prob" id="m1">
+      <div class="prob-num">Problem 1 <span class="lvl lvl-1">L1</span></div>
+      <p class="prob-q">Compare the two quantities by factoring rather than multiplying two-digit numbers:</p>
+      <div class="qc-cols">
+        <div class="qc-col">
+          <div class="qc-col-h">Column A</div>
+          <div class="qc-col-v"><span class="tex" data-tex="23 \times 64 + 23 \times 36">23 × 64 + 23 × 36</span></div>
+        </div>
+        <div class="qc-col">
+          <div class="qc-col-h">Column B</div>
+          <div class="qc-col-v"><span class="tex" data-tex="2{,}350">2,350</span></div>
+        </div>
+      </div>
+      <textarea class="work-area" aria-label="Problem 1 work" placeholder="Factor 23 × ( … + … ) = …"></textarea>
+      <div class="mc-opts row4">
+        <label class="mc-opt"><input type="radio" name="qc1" value="A"><span class="bubble"></span><span>A</span></label>
+        <label class="mc-opt"><input type="radio" name="qc1" value="B"><span class="bubble"></span><span>B</span></label>
+        <label class="mc-opt"><input type="radio" name="qc1" value="C"><span class="bubble"></span><span>C</span></label>
+        <label class="mc-opt"><input type="radio" name="qc1" value="D"><span class="bubble"></span><span>D</span></label>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Compare, audit, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m1" aria-label="Commit answer Problem 1">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Problem 2: L2 Overlapping Venn Sets in QC -->
+    <article class="prob" id="m2">
+      <div class="prob-num">Problem 2 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">At a summer camp of <strong>60 students</strong>, <strong>38</strong> kayak, <strong>31</strong> rock-climb, and <strong>9</strong> do neither activity.</p>
+      <div class="qc-cols">
+        <div class="qc-col">
+          <div class="qc-col-h">Column A</div>
+          <div class="qc-col-v">Students who do both</div>
+        </div>
+        <div class="qc-col">
+          <div class="qc-col-h">Column B</div>
+          <div class="qc-col-v"><span class="tex" data-tex="16">16</span></div>
+        </div>
+      </div>
+      <textarea class="work-area" aria-label="Problem 2 work" placeholder="Active union = 60 − 9 = …  Overlap = …"></textarea>
+      <div class="mc-opts row4">
+        <label class="mc-opt"><input type="radio" name="qc2" value="A"><span class="bubble"></span><span>A</span></label>
+        <label class="mc-opt"><input type="radio" name="qc2" value="B"><span class="bubble"></span><span>B</span></label>
+        <label class="mc-opt"><input type="radio" name="qc2" value="C"><span class="bubble"></span><span>C</span></label>
+        <label class="mc-opt"><input type="radio" name="qc2" value="D"><span class="bubble"></span><span>D</span></label>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Compare, audit, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m2" aria-label="Commit answer Problem 2">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Problem 3: L2 Positive Proper Fraction Reciprocal -->
+    <article class="prob" id="m3">
+      <div class="prob-num">Problem 3 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Given that <span class="tex" data-tex="0 < t < 1">0 &lt; <i>t</i> &lt; 1</span>, compare the two quantities:</p>
+      <div class="qc-cols">
+        <div class="qc-col">
+          <div class="qc-col-h">Column A</div>
+          <div class="qc-col-v"><span class="tex" data-tex="\dfrac{1}{t^2}">1 / <i>t</i><sup>2</sup></span></div>
+        </div>
+        <div class="qc-col">
+          <div class="qc-col-h">Column B</div>
+          <div class="qc-col-v"><span class="tex" data-tex="\dfrac{1}{t}">1 / <i>t</i></span></div>
+        </div>
+      </div>
+      <textarea class="work-area" aria-label="Problem 3 work" placeholder="Test t = 1/2 and t = 1/10…"></textarea>
+      <div class="mc-opts row4">
+        <label class="mc-opt"><input type="radio" name="qc3" value="A"><span class="bubble"></span><span>A</span></label>
+        <label class="mc-opt"><input type="radio" name="qc3" value="B"><span class="bubble"></span><span>B</span></label>
+        <label class="mc-opt"><input type="radio" name="qc3" value="C"><span class="bubble"></span><span>C</span></label>
+        <label class="mc-opt"><input type="radio" name="qc3" value="D"><span class="bubble"></span><span>D</span></label>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Compare, audit, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m3" aria-label="Commit answer Problem 3">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Problem 4: L3 Parallel-Line Triangle Altitude Sharing -->
+    <article class="prob" id="m4">
+      <div class="prob-num">Problem 4 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Parallel lines <span class="tex" data-tex="m"><i>m</i></span> and <span class="tex" data-tex="n"><i>n</i></span> are <strong>7 cm</strong> apart. <span class="tex" data-tex="\triangle ABC">△<i>ABC</i></span> and <span class="tex" data-tex="\triangle DBC">△<i>DBC</i></span> share base <span class="tex" data-tex="BC = 10\text{ cm}"><i>BC</i> = 10 cm</span> on line <span class="tex" data-tex="n"><i>n</i></span>, with <span class="tex" data-tex="A"><i>A</i></span> and <span class="tex" data-tex="D"><i>D</i></span> on line <span class="tex" data-tex="m"><i>m</i></span>.</p>
+      <div class="fig">
+        <svg width="196" height="74" viewBox="0 0 196 74" aria-label="Parallel lines m and n with triangles ABC and DBC sharing base BC">
+          <line x1="12" y1="16" x2="184" y2="16" stroke="#4b5563" stroke-width="1.6"/>
+          <line x1="12" y1="58" x2="184" y2="58" stroke="#4b5563" stroke-width="1.6"/>
+          <polygon points="56,58 124,58 72,16" fill="rgba(156,163,175,0.28)" stroke="#374151" stroke-width="1.7"/>
+          <polygon points="56,58 124,58 154,16" fill="rgba(209,213,219,0.34)" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <line x1="34" y1="16" x2="34" y2="58" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="3 2"/>
+          <text x="16" y="13" font-size="10" font-weight="700" fill="#374151">m</text>
+          <text x="16" y="69" font-size="10" font-weight="700" fill="#374151">n</text>
+          <text x="27" y="40" font-size="9.5" font-weight="700" fill="#4b5563" text-anchor="end">7</text>
+          <text x="72" y="12" font-size="10" font-weight="700" fill="#374151" text-anchor="middle">A</text>
+          <text x="154" y="12" font-size="10" font-weight="700" fill="#374151" text-anchor="middle">D</text>
+          <text x="53" y="69" font-size="10" font-weight="700" fill="#374151" text-anchor="middle">B</text>
+          <text x="127" y="69" font-size="10" font-weight="700" fill="#374151" text-anchor="middle">C</text>
+          <text x="90" y="69" font-size="9.5" font-weight="700" fill="#6b7280" text-anchor="middle">10 cm</text>
+        </svg>
+      </div>
+      <div class="qc-cols">
+        <div class="qc-col">
+          <div class="qc-col-h">Column A</div>
+          <div class="qc-col-v">Area of <span class="tex" data-tex="\triangle ABC">△<i>ABC</i></span></div>
+        </div>
+        <div class="qc-col">
+          <div class="qc-col-h">Column B</div>
+          <div class="qc-col-v">Area of <span class="tex" data-tex="\triangle DBC">△<i>DBC</i></span></div>
+        </div>
+      </div>
+      <textarea class="work-area" style="min-height:44px;" aria-label="Problem 4 work" placeholder="Compare base and perpendicular height…"></textarea>
+      <div class="mc-opts row4">
+        <label class="mc-opt"><input type="radio" name="qc4" value="A"><span class="bubble"></span><span>A</span></label>
+        <label class="mc-opt"><input type="radio" name="qc4" value="B"><span class="bubble"></span><span>B</span></label>
+        <label class="mc-opt"><input type="radio" name="qc4" value="C"><span class="bubble"></span><span>C</span></label>
+        <label class="mc-opt"><input type="radio" name="qc4" value="D"><span class="bubble"></span><span>D</span></label>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Compare, audit, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m4" aria-label="Commit answer Problem 4">Commit answer</button>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="page-foot">
+    <span>2026 Digital ISEE · Upper Level Orientation</span>
+    <span>Page 1 / 6</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — PART A (PROBLEMS 5–6) & PART B (PROBLEMS 7–8)
+══════════════════════════════════════════════ -->
+<section class="sheet page-break" aria-label="Worksheet page 2">
+
+  <div class="prob-grid">
+
+    <!-- Problem 5: L3 Symmetric Percent Up/Down Trap -->
+    <article class="prob" id="m5">
+      <div class="prob-num">Problem 5 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">For a positive wholesale cost <span class="tex" data-tex="c > 0"><i>c</i> &gt; 0</span>, a gallery raises <span class="tex" data-tex="c"><i>c</i></span> by <strong>30%</strong> and later discounts that marked-up price by <strong>30%</strong>.</p>
+      <div class="qc-cols">
+        <div class="qc-col">
+          <div class="qc-col-h">Column A</div>
+          <div class="qc-col-v">Final discounted price</div>
+        </div>
+        <div class="qc-col">
+          <div class="qc-col-h">Column B</div>
+          <div class="qc-col-v"><span class="tex" data-tex="c"><i>c</i></span></div>
+        </div>
+      </div>
+      <textarea class="work-area" aria-label="Problem 5 work" placeholder="Write as decimal multipliers: c × ( … ) × ( … ) = …"></textarea>
+      <div class="mc-opts row4">
+        <label class="mc-opt"><input type="radio" name="qc5" value="A"><span class="bubble"></span><span>A</span></label>
+        <label class="mc-opt"><input type="radio" name="qc5" value="B"><span class="bubble"></span><span>B</span></label>
+        <label class="mc-opt"><input type="radio" name="qc5" value="C"><span class="bubble"></span><span>C</span></label>
+        <label class="mc-opt"><input type="radio" name="qc5" value="D"><span class="bubble"></span><span>D</span></label>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Compare, audit, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m5" aria-label="Commit answer Problem 5">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Problem 6: L4 Restricted Quadratic Inequality Sign Trap -->
+    <article class="prob" id="m6">
+      <div class="prob-num">Problem 6 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">Given that <span class="tex" data-tex="y \neq 0"><i>y</i> ≠ 0</span> and <span class="tex" data-tex="y^2 < 9"><i>y</i><sup>2</sup> &lt; 9</span>, cancel shared constants and stress-test all legal regions:</p>
+      <div class="qc-cols">
+        <div class="qc-col">
+          <div class="qc-col-h">Column A</div>
+          <div class="qc-col-v"><span class="tex" data-tex="y + 3"><i>y</i> + 3</span></div>
+        </div>
+        <div class="qc-col">
+          <div class="qc-col-h">Column B</div>
+          <div class="qc-col-v"><span class="tex" data-tex="3 - y">3 − <i>y</i></span></div>
+        </div>
+      </div>
+      <textarea class="work-area" aria-label="Problem 6 work" placeholder="Legal interval for y² < 9: …  Test positive vs. negative y…"></textarea>
+      <div class="mc-opts row4">
+        <label class="mc-opt"><input type="radio" name="qc6" value="A"><span class="bubble"></span><span>A</span></label>
+        <label class="mc-opt"><input type="radio" name="qc6" value="B"><span class="bubble"></span><span>B</span></label>
+        <label class="mc-opt"><input type="radio" name="qc6" value="C"><span class="bubble"></span><span>C</span></label>
+        <label class="mc-opt"><input type="radio" name="qc6" value="D"><span class="bubble"></span><span>D</span></label>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Compare, audit, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m6" aria-label="Commit answer Problem 6">Commit answer</button>
+      </div>
+    </article>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: MATHEMATICS ACHIEVEMENT -->
+  <div class="section-hd">
+    <h2>Part B — Section 4: Mathematics Achievement</h2>
+    <span class="badge badge-sand">4 Problems · <button type="button" class="section-timer" data-seconds="300" aria-label="Part B timer, click to start or pause" aria-pressed="false">05:00</button></span>
+  </div>
+  <p class="instr">No calculator allowed on the ISEE. Spot algebraic identities and factorable structure before multiplying large numbers, and verify the exact target expression requested.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Upper-Level Toolkit</span>
+    <span class="fml"><span class="tex" data-tex="a^2 - b^2 = (a - b)(a + b)">a² − b² = (a − b)(a + b)</span></span>
+    <span class="fml"><span class="tex" data-tex="b^{n+k} - b^n = b^n(b^k - 1)">bⁿ⁺ᵏ − bⁿ = bⁿ(bᵏ − 1)</span></span>
+    <span class="fml"><span class="tex" data-tex="\text{Total} = \text{Mean} \times \text{Count}">Total = Mean × Count</span></span>
+    <span class="fml"><span class="tex" data-tex="m_{\perp} = -\dfrac{1}{m}">m_⊥ = −1 / m</span></span>
+  </div>
+
+  <div class="prob-grid">
+
+    <!-- Problem 7: L2 Weighted Mean -->
+    <article class="prob" id="m7">
+      <div class="prob-num">Problem 7 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">In a robotics league, <strong>15 seventh graders</strong> average <strong>76 points</strong> per match, and <strong>10 eighth graders</strong> average <strong>91 points</strong> per match. What is the combined mean score of all <strong>25 students</strong>?</p>
+      <textarea class="work-area" style="min-height:66px;" aria-label="Problem 7 work" placeholder="Group 1 total = 15 × 76 = …&#10;Group 2 total = 10 × 91 = …&#10;Combined mean = Total ÷ 25 = …"></textarea>
+      <div class="answer-box">
+        <label for="ans-m7">Mean =</label>
+        <input id="ans-m7" type="text" autocomplete="off" aria-label="Problem 7 final answer">
+        <span>points</span>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Audit work, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m7" aria-label="Commit answer Problem 7">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Problem 8: L2 Perpendicular Coordinate Slope -->
+    <article class="prob" id="m8">
+      <div class="prob-num">Problem 8 <span class="lvl lvl-2">L2</span></div>
+      <p class="prob-q">Segment <span class="tex" data-tex="PQ"><i>PQ</i></span> connects <span class="tex" data-tex="P(-3,\,7)"><i>P</i>(−3, 7)</span> and <span class="tex" data-tex="Q(5,\,1)"><i>Q</i>(5, 1)</span>. What is the slope of any line <strong>perpendicular</strong> to segment <span class="tex" data-tex="PQ"><i>PQ</i></span>? Express as a fraction in simplest form.</p>
+      <div class="fig">
+        <svg width="165" height="92" viewBox="0 0 165 92" aria-label="Coordinate plane showing segment PQ from (-3,7) to (5,1) and dashed perpendicular line">
+          <line x1="16" y1="74" x2="152" y2="74" stroke="#6b7280" stroke-width="1.3"/>
+          <line x1="66" y1="10" x2="66" y2="86" stroke="#6b7280" stroke-width="1.3"/>
+          <line x1="38" y1="22" x2="122" y2="62" stroke="#374151" stroke-width="2"/>
+          <line x1="64" y1="72" x2="98" y2="14" stroke="#4b5563" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <circle cx="38" cy="22" r="3.2" fill="#374151"/>
+          <circle cx="122" cy="62" r="3.2" fill="#374151"/>
+          <text x="34" y="16" font-size="9.5" font-weight="700" fill="#374151" text-anchor="end">P(−3, 7)</text>
+          <text x="126" y="59" font-size="9.5" font-weight="700" fill="#374151">Q(5, 1)</text>
+          <text x="103" y="21" font-size="9" font-weight="700" fill="#6b7280">⊥ line</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:48px;" aria-label="Problem 8 work" placeholder="m_PQ = (y₂ − y₁)/(x₂ − x₁) = …   m_⊥ = …"></textarea>
+      <div class="answer-box">
+        <label for="ans-m8">Slope =</label>
+        <input id="ans-m8" type="text" autocomplete="off" aria-label="Problem 8 final answer">
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Audit work, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m8" aria-label="Commit answer Problem 8">Commit answer</button>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="page-foot">
+    <span>2026 Digital ISEE · Upper Level Orientation</span>
+    <span>Page 2 / 6</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — PART B (PROBLEMS 9–10) & PART B CONTINUED (PROBLEMS 11–12)
+══════════════════════════════════════════════ -->
+<section class="sheet page-break" aria-label="Worksheet page 3">
+
+  <div class="prob-grid">
+
+    <!-- Problem 9: L3 Difference of Squares Quotient -->
+    <article class="prob" id="m9">
+      <div class="prob-num">Problem 9 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">Without multiplying three-digit squares, find the exact value of <span class="tex" data-tex="\dfrac{704^2 - 696^2}{56}">(704<sup>2</sup> − 696<sup>2</sup>) ÷ 56</span>.</p>
+      <textarea class="work-area" style="min-height:74px;" aria-label="Problem 9 work" placeholder="Numerator = (704 − 696)(704 + 696) = …&#10;Divide by 56: …"></textarea>
+      <div class="answer-box">
+        <label for="ans-m9">Value =</label>
+        <input id="ans-m9" type="text" autocomplete="off" aria-label="Problem 9 final answer">
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Audit work, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m9" aria-label="Commit answer Problem 9">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Problem 10: L4 Exponent Factoring -->
+    <article class="prob" id="m10">
+      <div class="prob-num">Problem 10 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">If <span class="tex" data-tex="2^{n+3} - 2^n = 448">2<sup><i>n</i>+3</sup> − 2<sup><i>n</i></sup> = 448</span>, factor out the common power of <span class="tex" data-tex="2">2</span> to find the exact value of <span class="tex" data-tex="n"><i>n</i></span>.</p>
+      <textarea class="work-area" style="min-height:74px;" aria-label="Problem 10 work" placeholder="2ⁿ(2³ − 1) = 448&#10;2ⁿ × … = 448 → 2ⁿ = … → n = …"></textarea>
+      <div class="answer-box">
+        <label for="ans-m10"><span class="tex" data-tex="n ="><i>n</i> =</span></label>
+        <input id="ans-m10" type="text" autocomplete="off" aria-label="Problem 10 final answer">
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Audit work, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m10" aria-label="Commit answer Problem 10">Commit answer</button>
+      </div>
+    </article>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B CONTINUED: MULTI-STEP WORD PROBLEMS -->
+  <div class="section-hd">
+    <h2>Part B Continued — Multi-Step Rate &amp; 3D Geometry Word Problems</h2>
+    <span class="badge badge-green">2 Problems · <button type="button" class="section-timer" data-seconds="240" aria-label="Part B Continued timer, click to start or pause" aria-pressed="false">04:00</button></span>
+  </div>
+  <p class="instr">Underline the final comparison requested before writing your answer—ERB distractors routinely plant intermediate values in Choice A.</p>
+
+  <div class="prob-grid">
+
+    <!-- Word Problem 11: L3 Round-Trip Harmonic Speed -->
+    <article class="prob" id="m11">
+      <div class="prob-num">Word Problem 11 <span class="lvl lvl-3">L3</span></div>
+      <p class="prob-q">A courier cyclist rides <strong>18 miles</strong> uphill to a mountain relay at <strong>6 mph</strong> and returns along the same <strong>18-mile</strong> road downhill at <strong>18 mph</strong>. How many miles per hour <strong>slower</strong> is her average speed for the entire round trip than the simple mean of 6 and 18?</p>
+      <textarea class="work-area" style="min-height:92px;" aria-label="Word Problem 11 work" placeholder="Uphill clock = 18 ÷ 6 = … hr   Downhill clock = 18 ÷ 18 = … hr&#10;Round-trip avg = Total dist ÷ Total time = …&#10;Simple mean of 6 and 18 = …   Difference = …"></textarea>
+      <div class="answer-box">
+        <label for="ans-m11">Difference =</label>
+        <input id="ans-m11" type="text" autocomplete="off" aria-label="Word Problem 11 final answer">
+        <span>mph</span>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Audit work, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m11" aria-label="Commit answer Word Problem 11">Commit answer</button>
+      </div>
+    </article>
+
+    <!-- Word Problem 12: L4 Inscribed Cylinder in Square-Base Box -->
+    <article class="prob" id="m12">
+      <div class="prob-num">Word Problem 12 <span class="lvl lvl-4">L4</span></div>
+      <p class="prob-q">A closed cylinder of radius <strong>r = 4 cm</strong> fits snugly inside a rectangular box with a square base and height <strong>h = 10 cm</strong> so the circular ends touch all four side walls. Find the volume of <strong>empty space</strong> inside the box outside the cylinder. Leave <span class="tex" data-tex="\pi">π</span> in your answer.</p>
+      <div class="fig">
+        <svg width="150" height="106" viewBox="0 0 150 106" aria-label="Cylinder of radius 4 cm and height 10 cm inscribed in a square-base prism">
+          <polygon points="28,22 98,22 98,90 28,90" fill="#f5f5f5" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="98,22 118,10 118,78 98,90" fill="#e0e0e0" stroke="#374151" stroke-width="1.5"/>
+          <polygon points="28,22 98,22 118,10 48,10" fill="#eeeeee" stroke="#374151" stroke-width="1.5"/>
+          <ellipse cx="73" cy="16" rx="33" ry="5.5" fill="#d9d9d9" stroke="#374151" stroke-width="1.5"/>
+          <line x1="40" y1="16" x2="40" y2="84" stroke="#4b5563" stroke-width="1.4" stroke-dasharray="4 3"/>
+          <line x1="106" y1="16" x2="106" y2="84" stroke="#4b5563" stroke-width="1.4" stroke-dasharray="4 3"/>
+          <ellipse cx="73" cy="84" rx="33" ry="5.5" fill="none" stroke="#4b5563" stroke-width="1.4" stroke-dasharray="4 3"/>
+          <line x1="73" y1="16" x2="106" y2="16" stroke="#374151" stroke-width="1.6"/>
+          <circle cx="73" cy="16" r="2.3" fill="#374151"/>
+          <text x="89" y="13" font-size="9.5" font-weight="700" fill="#374151" text-anchor="middle">r = 4</text>
+          <text x="23" y="58" font-size="9.5" font-weight="700" fill="#374151" text-anchor="end">h = 10</text>
+          <text x="63" y="101" font-size="9" font-weight="700" fill="#6b7280" text-anchor="middle">square base = 2r × 2r</text>
+        </svg>
+      </div>
+      <textarea class="work-area" style="min-height:58px;" aria-label="Word Problem 12 work" placeholder="Box side = …   V_box = …   V_cyl = πr²h = …   Empty = …"></textarea>
+      <div class="answer-box">
+        <label for="ans-m12">Empty V =</label>
+        <input id="ans-m12" type="text" autocomplete="off" aria-label="Word Problem 12 final answer">
+        <span>cm³</span>
+      </div>
+      <div class="commit-row">
+        <span class="lock-note" role="status">Audit work, then commit.</span>
+        <button class="commit-btn" type="button" data-commit-items="m12" aria-label="Commit answer Word Problem 12">Commit answer</button>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="page-foot">
+    <span>2026 Digital ISEE · Upper Level Orientation</span>
+    <span>Page 3 / 6</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 4 — PART C: VERBAL REASONING (QUESTIONS 1–6)
+══════════════════════════════════════════════ -->
+<section class="sheet page-break" aria-label="Worksheet page 4">
+
+  <div class="section-hd">
+    <h2>Part C — Section 1: Verbal Reasoning (Synonyms &amp; Completions)</h2>
+    <span class="badge badge-purple">6 Questions · <button type="button" class="section-timer" data-seconds="180" aria-label="Part C timer, click to start or pause" aria-pressed="false">03:00</button></span>
+  </div>
+  <p class="instr">Real Section 1 pace is 40 questions in 20 minutes (30 seconds per item). Write your own synonym or + / − prediction before scanning choices, beware of look-alike Latin root echoes, and eliminate one blank first on two-blank items.</p>
+
+  <div class="formula-strip">
+    <span class="fs-label">Verbal Engine</span>
+    <span class="fml">Root Surgery + Charge (+ / −)</span>
+    <span class="fml">Flip: although · despite · far from</span>
+    <span class="fml">Match: because · therefore · so</span>
+    <span class="fml">One-Blank Guillotine</span>
+  </div>
+
+  <!-- Q1 -->
+  <article class="mc-q" id="v1">
+    <div class="mc-q-text"><span class="qnum">Q1.</span> <strong>FRUGAL</strong> most nearly means: <span class="lvl lvl-1">L1</span></div>
+    <label class="pred-row">Own prediction first: <input type="text" aria-label="Q1 prediction" placeholder="Write definition or + / − tone before looking…"></label>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="vq1" value="A"><span class="bubble"></span><span>A) fragile</span></label>
+      <label class="mc-opt"><input type="radio" name="vq1" value="B"><span class="bubble"></span><span>B) thrifty</span></label>
+      <label class="mc-opt"><input type="radio" name="vq1" value="C"><span class="bubble"></span><span>C) extravagant</span></label>
+      <label class="mc-opt"><input type="radio" name="vq1" value="D"><span class="bubble"></span><span>D) secretive</span></label>
+    </div>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Predict, select, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="v1" aria-label="Commit answer Q1">Commit answer</button>
+    </div>
+  </article>
+
+  <!-- Q2 -->
+  <article class="mc-q" id="v2">
+    <div class="mc-q-text"><span class="qnum">Q2.</span> Despite the botanist’s _____ field notes—scribbled across rain-spotted margins in hurried shorthand—her published monograph organized forty Alpine species with crystal clarity. <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="vq2" value="A"><span class="bubble"></span><span>A) methodical</span></label>
+      <label class="mc-opt"><input type="radio" name="vq2" value="B"><span class="bubble"></span><span>B) fragmentary</span></label>
+      <label class="mc-opt"><input type="radio" name="vq2" value="C"><span class="bubble"></span><span>C) exhaustive</span></label>
+      <label class="mc-opt"><input type="radio" name="vq2" value="D"><span class="bubble"></span><span>D) eloquent</span></label>
+    </div>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Predict, select, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="v2" aria-label="Commit answer Q2">Commit answer</button>
+    </div>
+  </article>
+
+  <!-- Q3 -->
+  <article class="mc-q" id="v3">
+    <div class="mc-q-text"><span class="qnum">Q3.</span> <strong>INTRACTABLE</strong> most nearly means: <span class="lvl lvl-2">L2</span></div>
+    <label class="pred-row">Root check (<span class="tex" data-tex="\text{in-} + \text{tract}">in- + tract</span>): <input type="text" aria-label="Q3 root prediction" placeholder="Slice prefix + root and assign tone…"></label>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="vq3" value="A"><span class="bubble"></span><span>A) magnetic</span></label>
+      <label class="mc-opt"><input type="radio" name="vq3" value="B"><span class="bubble"></span><span>B) stubborn</span></label>
+      <label class="mc-opt"><input type="radio" name="vq3" value="C"><span class="bubble"></span><span>C) brief</span></label>
+      <label class="mc-opt"><input type="radio" name="vq3" value="D"><span class="bubble"></span><span>D) compliant</span></label>
+    </div>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Predict, select, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="v3" aria-label="Commit answer Q3">Commit answer</button>
+    </div>
+  </article>
+
+  <!-- Q4 -->
+  <article class="mc-q" id="v4">
+    <div class="mc-q-text"><span class="qnum">Q4.</span> Because early daguerreotype plates required exposure times lasting several minutes, even a slight blink would blur a portrait; sitters therefore had to remain utterly _____ before the lens. <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="vq4" value="A"><span class="bubble"></span><span>A) expressive</span></label>
+      <label class="mc-opt"><input type="radio" name="vq4" value="B"><span class="bubble"></span><span>B) motionless</span></label>
+      <label class="mc-opt"><input type="radio" name="vq4" value="C"><span class="bubble"></span><span>C) spontaneous</span></label>
+      <label class="mc-opt"><input type="radio" name="vq4" value="D"><span class="bubble"></span><span>D) animated</span></label>
+    </div>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Predict, select, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="v4" aria-label="Commit answer Q4">Commit answer</button>
+    </div>
+  </article>
+
+  <!-- Q5 -->
+  <article class="mc-q" id="v5">
+    <div class="mc-q-text"><span class="qnum">Q5.</span> <strong>SUPERFLUOUS</strong> most nearly means: <span class="lvl lvl-3">L3</span></div>
+    <label class="pred-row">Root check (<span class="tex" data-tex="\text{super-} + \text{fluere}">super- + fluere</span>): <input type="text" aria-label="Q5 root prediction" placeholder="Beware literal root echoes…"></label>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="vq5" value="A"><span class="bubble"></span><span>A) liquid</span></label>
+      <label class="mc-opt"><input type="radio" name="vq5" value="B"><span class="bubble"></span><span>B) prestigious</span></label>
+      <label class="mc-opt"><input type="radio" name="vq5" value="C"><span class="bubble"></span><span>C) unnecessary</span></label>
+      <label class="mc-opt"><input type="radio" name="vq5" value="D"><span class="bubble"></span><span>D) rapid</span></label>
+    </div>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Predict, select, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="v5" aria-label="Commit answer Q5">Commit answer</button>
+    </div>
+  </article>
+
+  <!-- Q6 -->
+  <article class="mc-q" id="v6">
+    <div class="mc-q-text"><span class="qnum">Q6.</span> Far from issuing the _____ endorsement that industry lobbyists had anticipated, the safety commission’s report proved strikingly _____, cataloging twelve unresolved design flaws before recommending a delay. <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="vq6" value="A"><span class="bubble"></span><span>A) sweeping ... critical</span></label>
+      <label class="mc-opt"><input type="radio" name="vq6" value="B"><span class="bubble"></span><span>B) guarded ... skeptical</span></label>
+      <label class="mc-opt"><input type="radio" name="vq6" value="C"><span class="bubble"></span><span>C) enthusiastic ... deferential</span></label>
+      <label class="mc-opt"><input type="radio" name="vq6" value="D"><span class="bubble"></span><span>D) hostile ... complimentary</span></label>
+    </div>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Guillotine one blank first, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="v6" aria-label="Commit answer Q6">Commit answer</button>
+    </div>
+  </article>
+
+  <div class="page-foot">
+    <span>2026 Digital ISEE · Upper Level Orientation</span>
+    <span>Page 4 / 6</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 5 — PART C2: READING COMPREHENSION PASSAGE SET (QUESTIONS 7–12)
+══════════════════════════════════════════════ -->
+<section class="sheet page-break" aria-label="Worksheet page 5">
+
+  <div class="section-hd">
+    <h2>Part C2 — Section 3: Reading Comprehension Passage Set</h2>
+    <span class="badge badge-blue">6 Questions · <button type="button" class="section-timer" data-seconds="360" aria-label="Part C2 timer, click to start or pause" aria-pressed="false">06:00</button></span>
+  </div>
+  <p class="instr">Six informational passages appear in Section 3 (zero poetry, ~6 minutes per set). Write a 4-word job for each paragraph below, verify in the exact paragraph window, and reject megaphone words, recycled collages, and wrong-zoom traps.</p>
+
+  <div class="passage-box">
+    <div class="passage-title">Listening to Wood: Why Alpine Spruce Still Outperforms Synthetic Soundboards</div>
+    <div class="passage-text">
+      <p><span class="para-lbl">[¶1]</span> For more than three centuries, violin makers and piano builders have prized Norway spruce grown on high, cold Alpine slopes above nearly every modern composite material. At first glance, this loyalty looks like guild nostalgia. Aerospace engineers routinely manufacture carbon-fiber sheets that are stiffer and more uniform than any timber, <span class="sw">yet</span> concert instruments built with synthetic soundboards often strike listeners as harsh in the upper register or flat in sustain.</p>
+      <p><span class="para-lbl">[¶2]</span> Acoustic physicists attribute spruce’s advantage to an improbable pairing of traits: exceptional stiffness along the grain combined with remarkably low density. In high-elevation forests, short summers produce narrow, tightly spaced growth rings composed of microscopic hollow tubes called tracheids. <span class="sw">Consequently</span>, sound waves race swiftly through the wood’s rigid cellular walls without requiring a heavy, sluggish plate to set surrounding air in motion.</p>
+      <p><span class="para-lbl">[¶3]</span> <span class="sw">However</span>, speed and lightness tell only half the story. Carbon fiber transmits vibrations efficiently, too, <span class="sw">yet</span> its uniform synthetic resin damps all frequencies at nearly the same rate. Spruce, <span class="sw">by contrast</span>, acts as a natural acoustic filter: internal friction within its wood fibers absorbs shrill, high-frequency overtones far more rapidly than warm mid-range fundamentals. What musicians describe poetically as a violin’s “singing voice” is, in laboratory terms, selective energy loss.</p>
+      <p><span class="para-lbl">[¶4]</span> Material scientists have recently begun 3D-printing cellular polymers modeled on spruce tracheids to shield instrument making from climate-driven shortages of old-growth Alpine trees. Early prototypes match traditional wood across several frequency bands, <span class="sw">although</span> subtle variations from tree to tree remain difficult to replicate on an assembly line. Even if engineered soundboards eventually rival historic spruce, their blueprint will have been drafted by a mountain forest.</p>
+    </div>
+    <div class="map-strip" aria-label="Four-word paragraph blueprint">
+      <label class="map-cell">¶1: <input type="text" placeholder="4-word job…" aria-label="Paragraph 1 job"></label>
+      <label class="map-cell">¶2: <input type="text" placeholder="4-word job…" aria-label="Paragraph 2 job"></label>
+      <label class="map-cell">¶3: <input type="text" placeholder="4-word job…" aria-label="Paragraph 3 job"></label>
+      <label class="map-cell">¶4: <input type="text" placeholder="4-word job…" aria-label="Paragraph 4 job"></label>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <article class="mc-q" id="r7">
+    <div class="mc-q-text"><span class="qnum">Q7.</span> The passage is primarily concerned with: <span class="lvl lvl-1">L1</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="rq7" value="A"><span class="bubble"></span><span>A) arguing that climate change has permanently ended traditional violin making</span></label>
+      <label class="mc-opt"><input type="radio" name="rq7" value="B"><span class="bubble"></span><span>B) explaining the physical properties that make high-altitude spruce uniquely effective for soundboards</span></label>
+      <label class="mc-opt"><input type="radio" name="rq7" value="C"><span class="bubble"></span><span>C) tracing the economic history of European instrument guilds since the seventeenth century</span></label>
+      <label class="mc-opt"><input type="radio" name="rq7" value="D"><span class="bubble"></span><span>D) proving that synthetic composites can never match natural materials in any engineering field</span></label>
+    </div>
+  </article>
+
+  <!-- Q8 -->
+  <article class="mc-q" id="r8">
+    <div class="mc-q-text"><span class="qnum">Q8.</span> According to [¶2], why do trees growing at high Alpine elevations develop favorable acoustic structure? <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="rq8" value="A"><span class="bubble"></span><span>A) Deep mountain soil saturates the timber with heavy mineral resins</span></label>
+      <label class="mc-opt"><input type="radio" name="rq8" value="B"><span class="bubble"></span><span>B) Short growing seasons form narrow rings of lightweight, rigid hollow cells</span></label>
+      <label class="mc-opt"><input type="radio" name="rq8" value="C"><span class="bubble"></span><span>C) Winter winds bend the trunks into naturally arched soundboard plates</span></label>
+      <label class="mc-opt"><input type="radio" name="rq8" value="D"><span class="bubble"></span><span>D) Cold air prevents moisture from entering the outer bark</span></label>
+    </div>
+  </article>
+
+  <!-- Q9 -->
+  <article class="mc-q" id="r9">
+    <div class="mc-q-text"><span class="qnum">Q9.</span> In [¶1], the word “uniform” most nearly means: <span class="lvl lvl-2">L2</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="rq9" value="A"><span class="bubble"></span><span>A) dressed in identical attire</span></label>
+      <label class="mc-opt"><input type="radio" name="rq9" value="B"><span class="bubble"></span><span>B) consistent in structure throughout</span></label>
+      <label class="mc-opt"><input type="radio" name="rq9" value="C"><span class="bubble"></span><span>C) unoriginal in musical expression</span></label>
+      <label class="mc-opt"><input type="radio" name="rq9" value="D"><span class="bubble"></span><span>D) formally certified by guilds</span></label>
+    </div>
+  </article>
+
+  <!-- Q10 -->
+  <article class="mc-q" id="r10">
+    <div class="mc-q-text"><span class="qnum">Q10.</span> What is the primary function of [¶3] in relation to [¶2]? <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="rq10" value="A"><span class="bubble"></span><span>A) It refutes the cellular measurements described in [¶2] as inaccurate</span></label>
+      <label class="mc-opt"><input type="radio" name="rq10" value="B"><span class="bubble"></span><span>B) It introduces selective frequency damping to explain why stiffness and low density alone are insufficient</span></label>
+      <label class="mc-opt"><input type="radio" name="rq10" value="C"><span class="bubble"></span><span>C) It shifts from laboratory physics to biographies of famous concert soloists</span></label>
+      <label class="mc-opt"><input type="radio" name="rq10" value="D"><span class="bubble"></span><span>D) It compares the retail cost of carbon-fiber violins with historic Alpine instruments</span></label>
+    </div>
+  </article>
+
+  <!-- Q11 -->
+  <article class="mc-q" id="r11">
+    <div class="mc-q-text"><span class="qnum">Q11.</span> The author’s attitude toward recent 3D-printed polymer soundboard research ([¶4]) is best described as: <span class="lvl lvl-3">L3</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="rq11" value="A"><span class="bubble"></span><span>A) dismissive skepticism</span></label>
+      <label class="mc-opt"><input type="radio" name="rq11" value="B"><span class="bubble"></span><span>B) uncritical enthusiasm</span></label>
+      <label class="mc-opt"><input type="radio" name="rq11" value="C"><span class="bubble"></span><span>C) measured interest tempered by practical caution</span></label>
+      <label class="mc-opt"><input type="radio" name="rq11" value="D"><span class="bubble"></span><span>D) urgent alarm</span></label>
+    </div>
+  </article>
+
+  <!-- Q12 -->
+  <article class="mc-q" id="r12">
+    <div class="mc-q-text"><span class="qnum">Q12.</span> Which inference is best supported by [¶3] and [¶4] together? <span class="lvl lvl-4">L4</span></div>
+    <div class="mc-opts">
+      <label class="mc-opt"><input type="radio" name="rq12" value="A"><span class="bubble"></span><span>A) Eliminating all internal energy loss in a soundboard would make an instrument sound harsher rather than warmer</span></label>
+      <label class="mc-opt"><input type="radio" name="rq12" value="B"><span class="bubble"></span><span>B) Carbon-fiber sheets vibrate too slowly to project sound across a large hall</span></label>
+      <label class="mc-opt"><input type="radio" name="rq12" value="C"><span class="bubble"></span><span>C) Every harvested Alpine spruce tree yields identical acoustic readings</span></label>
+      <label class="mc-opt"><input type="radio" name="rq12" value="D"><span class="bubble"></span><span>D) Printed polymers have already replaced spruce in most concert pianos</span></label>
+    </div>
+  </article>
+
+  <div class="commit-row">
+    <span class="lock-note" role="status">Review Q7–Q12 freely within this passage set, then submit.</span>
+    <button class="commit-btn" type="button" data-commit-items="r7,r8,r9,r10,r11,r12" aria-label="Submit passage set Q7 to Q12">Submit passage set</button>
+  </div>
+
+  <div class="page-foot">
+    <span>2026 Digital ISEE · Upper Level Orientation</span>
+    <span>Page 5 / 6</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 6 — TYPED ESSAY DRILL, ERROR LOG & REFLECTION
+══════════════════════════════════════════════ -->
+<section class="sheet page-break" aria-label="Worksheet page 6">
+
+  <!-- PART D: UNSCORED ESSAY BLUEPRINT DRILL -->
+  <div class="section-hd">
+    <h2>Part D — Section 5: 4-Minute Typed Essay Blueprint Drill</h2>
+    <span class="badge badge-sand">Unscored · <button type="button" class="section-timer" data-seconds="240" aria-label="Part D timer, click to start or pause" aria-pressed="false">04:00</button></span>
+  </div>
+  <p class="instr">Schools receive an unedited copy of your 30-minute typed essay alongside your application. Practice only the <strong>Minutes 1–4 scratch-outline step</strong> from the 4–22–4 blueprint (does not count toward the 24-point self-score).</p>
+
+  <article class="prob" id="essay1">
+    <div class="prob-num">Essay Prompt Outline <span class="lvl lvl-2">4-Min Blueprint</span></div>
+    <p class="prob-q">“Describe a moment when testing an assumption that turned out to be wrong helped you solve a problem or understand a group of people better.”</p>
+    <textarea class="work-area" style="min-height:76px;" aria-label="Essay 4-minute outline" placeholder="1-Sentence Direct Thesis: …&#10;Concrete Scene 1 (named details): …&#10;Concrete Scene 2 (wider impact / lesson): …"></textarea>
+    <div class="commit-row">
+      <span class="lock-note" role="status">Draft thesis + 2 concrete scenes, then commit.</span>
+      <button class="commit-btn" type="button" data-commit-items="essay1" data-textarea-commit="true" aria-label="Commit essay outline">Commit outline</button>
+    </div>
+  </article>
+
+  <hr class="divider">
+
+  <!-- PART E: ERROR LOG (consistent with homework.html) -->
+  <div class="section-hd">
+    <h2>Part E — Error Log</h2>
+    <span class="badge badge-coral">Required · Every Missed Problem</span>
+  </div>
+  <p class="instr">For every problem you missed, fill in a row honestly so we can separate quick Digital ISEE format adjustments from genuine Upper-Level gaps in session.</p>
+
+  <div class="error-log">
+    <h3>My Errors This Week</h3>
+    <div class="error-type-pills">
+      <span style="font-weight:700;color:#92400e;margin-right:0.25rem;">Label each error:</span>
+      <span class="pill pill-cg">Content Gap — I didn't know how to do this</span>
+      <span class="pill pill-ce">Careless Error — I knew it but made a mistake</span>
+      <span class="pill pill-ru">Rushing — I didn't read carefully enough</span>
+    </div>
+    <table class="error-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Problem</th>
+          <th>What I Did Wrong</th>
+          <th>Error Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td contenteditable="true" role="textbox" aria-label="Error row 1 problem" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 1 what went wrong" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 1 error type" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>2</td><td contenteditable="true" role="textbox" aria-label="Error row 2 problem" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 2 what went wrong" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 2 error type" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>3</td><td contenteditable="true" role="textbox" aria-label="Error row 3 problem" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 3 what went wrong" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 3 error type" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>4</td><td contenteditable="true" role="textbox" aria-label="Error row 4 problem" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 4 what went wrong" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 4 error type" style="outline:none;">&nbsp;</td></tr>
+        <tr><td>5</td><td contenteditable="true" role="textbox" aria-label="Error row 5 problem" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 5 what went wrong" style="outline:none;">&nbsp;</td><td contenteditable="true" role="textbox" aria-label="Error row 5 error type" style="outline:none;">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WEEKLY REFLECTION -->
+  <div class="reflect-box">
+    <h3>Weekly Reflection (2–3 sentences)</h3>
+    <p style="font-size:var(--text-xs);color:var(--slate);font-weight:600;margin-bottom:0.42rem;">After reviewing your work, complete these sentences before your full-length home diagnostic:</p>
+    <div class="reflect-lines">
+      <label class="reflect-line">My biggest Math or Quantitative Comparison mistake this week was <input type="text" aria-label="Biggest math mistake" placeholder="…"></label>
+      <label class="reflect-line">I made this error because it was a <input type="text" aria-label="Error category" placeholder="…"> (Content Gap / Careless / Rushing)</label>
+      <label class="reflect-line">On my home diagnostic, my skipping and flagging rule vs. the SHSAT will be <input type="text" aria-label="Navigation commitment" placeholder="…"></label>
+      <label class="reflect-line">One Upper-Level format or content question to ask my tutor in session: <input type="text" aria-label="Question for tutor" placeholder="…"></label>
+    </div>
+  </div>
+
+  <p class="sources-note">
+    2026–2027 Upper Level Digital ISEE format (administered by E3n, formerly ERB): fixed-form non-adaptive sections with free skipping, flagging, and Review Screen inside each active section; 4 choices (A–D) with zero wrong-answer penalty; no calculator; Verbal Reasoning (40 Q, 20 min), Quantitative Reasoning (37 Q, 35 min), Reading Comprehension (36 Q, 35 min), Mathematics Achievement (47 Q, 40 min), plus a 30-minute unscored typed essay. Verified against the <a href="https://cdn.erblearn.org/www/20260801_E3n_ISEE_QuickFacts_DIGITAL.pdf" target="_blank" rel="noopener noreferrer">E3n ISEE Quick Facts Guide 2026–2027</a>.
+  </p>
+
+  <div class="page-foot">
+    <span>2026 Digital ISEE · Upper Level Orientation</span>
+    <span>Page 6 / 6</span>
+  </div>
+</section>
+</main>
+
+<dialog id="clearDialog" aria-labelledby="clearTitle">
+  <h2 id="clearTitle">Clear all work?</h2>
+  <p>This clears your answers, self-scores, passage notes, error log, and reflection, and resets all six timers.</p>
+  <div class="dialog-actions">
+    <button id="cancelClear" type="button">Cancel</button>
+    <button id="confirmClear" type="button" class="danger">Clear All</button>
+  </div>
+</dialog>
+
+<script>
+  // Render KaTeX expressions while keeping clean fallback markup
+  function renderTex() {
+    if (!window.katex) return;
+    document.querySelectorAll('.tex[data-tex]').forEach(el => {
+      try {
+        window.katex.render(el.dataset.tex, el, { throwOnError: false });
+        el.removeAttribute('data-tex');
+      } catch (_e) {}
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderTex);
+  } else {
+    renderTex();
+  }
+  window.addEventListener('load', renderTex);
+
+  // Radio button bubble selection
+  document.querySelectorAll('.mc-opt input[type="radio"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => {
+        const label = r.closest('.mc-opt');
+        label.classList.toggle('selected', r.checked);
+        label.querySelector('.bubble').textContent = r.checked ? '✓' : '';
+      });
+    });
+  });
+
+  // Auto-expanding textareas + live print mirrors
+  const syncMirror = ta => {
+    let mirror = ta.nextElementSibling;
+    if (!mirror || !mirror.classList.contains('print-mirror')) {
+      mirror = document.createElement('div');
+      mirror.className = 'print-mirror';
+      mirror.setAttribute('aria-hidden', 'true');
+      ta.insertAdjacentElement('afterend', mirror);
+    }
+    mirror.textContent = ta.value || ' ';
+  };
+  const resizeTextarea = ta => {
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 'px';
+    syncMirror(ta);
+  };
+  document.querySelectorAll('textarea').forEach(ta => {
+    syncMirror(ta);
+    ta.addEventListener('input', () => resizeTextarea(ta));
+  });
+
+  // Independent section countdown timers
+  const resets = [];
+  document.querySelectorAll('.section-timer').forEach(timer => {
+    let remaining = Number(timer.dataset.seconds) * 1000;
+    let deadline = 0;
+    let interval = null;
+    const sectionName = timer.closest('.section-hd').querySelector('h2').textContent;
+
+    const render = () => {
+      const secs = Math.ceil(remaining / 1000);
+      const mm = String(Math.floor(secs / 60)).padStart(2, '0');
+      const ss = String(secs % 60).padStart(2, '0');
+      timer.textContent = `${mm}:${ss}`;
+      timer.setAttribute(
+        'aria-label',
+        `${sectionName} timer, ${timer.textContent} remaining; click to ${interval ? 'pause' : 'start'}`
+      );
+    };
+
+    const stop = () => {
+      clearInterval(interval);
+      interval = null;
+      timer.classList.remove('running');
+      timer.setAttribute('aria-pressed', 'false');
+    };
+
+    const tick = () => {
+      remaining = Math.max(0, deadline - Date.now());
+      render();
+      if (remaining === 0) {
+        stop();
+        timer.classList.add('expired');
+        timer.disabled = true;
+        timer.setAttribute('aria-label', `${sectionName} timer expired`);
+      }
+    };
+
+    timer.addEventListener('click', () => {
+      if (remaining <= 0) return;
+      if (interval !== null) {
+        tick();
+        stop();
+        render();
+      } else {
+        deadline = Date.now() + remaining;
+        interval = setInterval(tick, 100);
+        timer.classList.add('running');
+        timer.setAttribute('aria-pressed', 'true');
+        tick();
+      }
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && interval !== null) tick();
+    });
+
+    resets.push(() => {
+      stop();
+      remaining = Number(timer.dataset.seconds) * 1000;
+      timer.disabled = false;
+      timer.classList.remove('expired');
+      render();
+    });
+
+    render();
+  });
+
+  // Commit individual items or multi-question passage set
+  document.querySelectorAll('[data-commit-items]').forEach(button => {
+    const cards = button.dataset.commitItems.split(',').map(id => document.getElementById(id));
+    const row = button.closest('.commit-row');
+    const note = row.querySelector('.lock-note');
+    const initialNote = note.textContent;
+    const isTextareaCommit = button.dataset.textareaCommit === 'true';
+
+    button.addEventListener('click', () => {
+      if (button.disabled) return;
+      const missing = cards.find(card => {
+        if (isTextareaCommit) {
+          const ta = card.querySelector('textarea');
+          return !ta || !ta.value.trim();
+        }
+        const radios = card.querySelectorAll('input[type="radio"]');
+        if (radios.length) return !card.querySelector('input[type="radio"]:checked');
+        const answer = card.querySelector('.answer-box input');
+        return !answer || !answer.value.trim();
+      });
+
+      if (missing) {
+        note.classList.add('warn');
+        note.textContent = cards.length > 1
+          ? 'Choose an answer for all 6 passage questions before submitting.'
+          : isTextareaCommit
+            ? 'Write your 4-minute outline before committing.'
+            : missing.querySelector('input[type="radio"]')
+              ? 'Choose an answer before committing.'
+              : 'Enter an answer before committing.';
+        const focusTarget = missing.querySelector('.answer-box input, textarea, input[type="radio"]');
+        if (focusTarget) focusTarget.focus();
+        return;
+      }
+
+      note.classList.remove('warn');
+      cards.forEach(card => {
+        card.classList.add('locked');
+        card.querySelectorAll('input, textarea').forEach(el => { el.disabled = true; });
+      });
+      button.disabled = true;
+      row.classList.add('committed');
+      note.textContent = cards.length > 1
+        ? 'Locked passage set submitted.'
+        : isTextareaCommit
+          ? 'Locked outline committed.'
+          : 'Locked response committed.';
+    });
+
+    resets.push(() => {
+      cards.forEach(card => {
+        card.classList.remove('locked');
+        card.querySelectorAll('input, textarea').forEach(el => { el.disabled = false; });
+      });
+      button.disabled = false;
+      row.classList.remove('committed');
+      note.classList.remove('warn');
+      note.textContent = initialNote;
+    });
+  });
+
+  // Clear All modal dialog (avoids sandbox-blocked window.confirm)
+  const clearDialog = document.getElementById('clearDialog');
+  document.getElementById('clearAll').addEventListener('click', () => clearDialog.showModal());
+  document.getElementById('cancelClear').addEventListener('click', () => clearDialog.close());
+  document.getElementById('confirmClear').addEventListener('click', () => {
+    document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => {
+      el.value = '';
+      if (el.tagName === 'TEXTAREA') {
+        el.style.height = '';
+        syncMirror(el);
+      }
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(el => { el.checked = false; });
+    document.querySelectorAll('.mc-opt').forEach(el => {
+      el.classList.remove('selected');
+      el.querySelector('.bubble').textContent = '';
+    });
+    document.querySelectorAll('[contenteditable]').forEach(el => { el.textContent = '\u00a0'; });
+    resets.forEach(fn => fn());
+    clearDialog.close();
+  });
+
+  // Print mirror sync + sandbox print fallback
+  function preparePrint() {
+    document.querySelectorAll('textarea').forEach(ta => syncMirror(ta));
+  }
+  window.addEventListener('beforeprint', preparePrint);
+
+  document.getElementById('printSave').addEventListener('click', () => {
+    preparePrint();
+    window.print();
+    if (window.self !== window.top) {
+      const notice = document.getElementById('printNotice');
+      notice.hidden = false;
+      const clone = document.documentElement.cloneNode(true);
+      clone.querySelectorAll('input').forEach((el, i) => {
+        const orig = document.querySelectorAll('input')[i];
+        el.setAttribute('value', orig.value);
+        if (orig.checked) el.setAttribute('checked', '');
+        else el.removeAttribute('checked');
+      });
+      clone.querySelectorAll('textarea').forEach((el, i) => {
+        el.textContent = document.querySelectorAll('textarea')[i].value;
+      });
+      const cloneNotice = clone.querySelector('#printNotice');
+      if (cloneNotice) cloneNotice.remove();
+      const blob = new Blob(['<!DOCTYPE html>' + clone.outerHTML], { type: 'text/html' });
+      if (window.printViewURL) URL.revokeObjectURL(window.printViewURL);
+      window.printViewURL = URL.createObjectURL(blob);
+      document.getElementById('standalonePrint').href = window.printViewURL;
+      document.getElementById('saveWorksheet').href = window.printViewURL;
+    }
+  });
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
