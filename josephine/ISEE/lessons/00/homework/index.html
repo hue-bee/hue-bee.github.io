@@ -606,50 +606,6 @@
     border-radius: 3px 3px 0 0;
   }
 
-  /* ── Commit Row & Answer Locking ─────────────── */
-  .commit-row {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    margin-top: 0.42rem;
-  }
-  .commit-btn {
-    min-height: 30px;
-    border: 0;
-    border-radius: 20px;
-    padding: 0.24rem 0.78rem;
-    background: var(--blue);
-    color: var(--white);
-    font-family: var(--ff-body);
-    font-size: var(--text-xs);
-    font-weight: 800;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .commit-btn:hover:not(:disabled) { background: #1d4ed8; }
-  .commit-btn:disabled { background: var(--muted); cursor: not-allowed; }
-  .lock-note {
-    font-size: var(--text-xs);
-    color: var(--muted);
-    font-weight: 700;
-  }
-  .lock-note.warn { color: #b91c1c; }
-  .commit-row.committed .lock-note { color: var(--green); }
-  .prob.locked, .mc-q.locked {
-    background: #f1f5f9;
-    border-color: #94a3b8;
-  }
-  .prob.locked .mc-opt:not(.selected),
-  .mc-q.locked .mc-opt:not(.selected) {
-    opacity: 0.55;
-  }
-  .prob.locked .mc-opt,
-  .mc-q.locked .mc-opt {
-    pointer-events: none;
-    cursor: default;
-  }
-
   /* ── Divider ─────────────────────────────────── */
   hr.divider {
     border: none;
@@ -883,7 +839,7 @@
   @page { size: letter; margin: 0.36in 0.46in; }
   @media print {
     html, body { background: white !important; max-width: none !important; padding: 0 !important; }
-    .no-print, .commit-row, dialog, #printNotice { display: none !important; }
+    .no-print, dialog, #printNotice { display: none !important; }
     .sheet {
       box-shadow: none !important;
       margin: 0 !important;
@@ -1029,10 +985,6 @@
         <label class="mc-opt"><input type="radio" name="qc1" value="C"><span class="bubble"></span><span>C</span></label>
         <label class="mc-opt"><input type="radio" name="qc1" value="D"><span class="bubble"></span><span>D</span></label>
       </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Compare, audit, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m1" aria-label="Commit answer Problem 1">Commit answer</button>
-      </div>
     </article>
 
     <!-- Problem 2: L2 Overlapping Venn Sets in QC -->
@@ -1056,10 +1008,6 @@
         <label class="mc-opt"><input type="radio" name="qc2" value="C"><span class="bubble"></span><span>C</span></label>
         <label class="mc-opt"><input type="radio" name="qc2" value="D"><span class="bubble"></span><span>D</span></label>
       </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Compare, audit, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m2" aria-label="Commit answer Problem 2">Commit answer</button>
-      </div>
     </article>
 
     <!-- Problem 3: L2 Positive Proper Fraction Reciprocal -->
@@ -1082,10 +1030,6 @@
         <label class="mc-opt"><input type="radio" name="qc3" value="B"><span class="bubble"></span><span>B</span></label>
         <label class="mc-opt"><input type="radio" name="qc3" value="C"><span class="bubble"></span><span>C</span></label>
         <label class="mc-opt"><input type="radio" name="qc3" value="D"><span class="bubble"></span><span>D</span></label>
-      </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Compare, audit, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m3" aria-label="Commit answer Problem 3">Commit answer</button>
       </div>
     </article>
 
@@ -1127,10 +1071,6 @@
         <label class="mc-opt"><input type="radio" name="qc4" value="C"><span class="bubble"></span><span>C</span></label>
         <label class="mc-opt"><input type="radio" name="qc4" value="D"><span class="bubble"></span><span>D</span></label>
       </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Compare, audit, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m4" aria-label="Commit answer Problem 4">Commit answer</button>
-      </div>
     </article>
 
   </div>
@@ -1169,10 +1109,6 @@
         <label class="mc-opt"><input type="radio" name="qc5" value="C"><span class="bubble"></span><span>C</span></label>
         <label class="mc-opt"><input type="radio" name="qc5" value="D"><span class="bubble"></span><span>D</span></label>
       </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Compare, audit, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m5" aria-label="Commit answer Problem 5">Commit answer</button>
-      </div>
     </article>
 
     <!-- Problem 6: L4 Restricted Quadratic Inequality Sign Trap -->
@@ -1195,10 +1131,6 @@
         <label class="mc-opt"><input type="radio" name="qc6" value="B"><span class="bubble"></span><span>B</span></label>
         <label class="mc-opt"><input type="radio" name="qc6" value="C"><span class="bubble"></span><span>C</span></label>
         <label class="mc-opt"><input type="radio" name="qc6" value="D"><span class="bubble"></span><span>D</span></label>
-      </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Compare, audit, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m6" aria-label="Commit answer Problem 6">Commit answer</button>
       </div>
     </article>
 
@@ -1233,10 +1165,6 @@
         <input id="ans-m7" type="text" autocomplete="off" aria-label="Problem 7 final answer">
         <span>points</span>
       </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Audit work, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m7" aria-label="Commit answer Problem 7">Commit answer</button>
-      </div>
     </article>
 
     <!-- Problem 8: L2 Perpendicular Coordinate Slope -->
@@ -1260,10 +1188,6 @@
       <div class="answer-box">
         <label for="ans-m8">Slope =</label>
         <input id="ans-m8" type="text" autocomplete="off" aria-label="Problem 8 final answer">
-      </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Audit work, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m8" aria-label="Commit answer Problem 8">Commit answer</button>
       </div>
     </article>
 
@@ -1291,10 +1215,6 @@
         <label for="ans-m9">Value =</label>
         <input id="ans-m9" type="text" autocomplete="off" aria-label="Problem 9 final answer">
       </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Audit work, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m9" aria-label="Commit answer Problem 9">Commit answer</button>
-      </div>
     </article>
 
     <!-- Problem 10: L4 Exponent Factoring -->
@@ -1305,10 +1225,6 @@
       <div class="answer-box">
         <label for="ans-m10"><span class="tex" data-tex="n ="><i>n</i> =</span></label>
         <input id="ans-m10" type="text" autocomplete="off" aria-label="Problem 10 final answer">
-      </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Audit work, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m10" aria-label="Commit answer Problem 10">Commit answer</button>
       </div>
     </article>
 
@@ -1334,10 +1250,6 @@
         <label for="ans-m11">Difference =</label>
         <input id="ans-m11" type="text" autocomplete="off" aria-label="Word Problem 11 final answer">
         <span>mph</span>
-      </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Audit work, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m11" aria-label="Commit answer Word Problem 11">Commit answer</button>
       </div>
     </article>
 
@@ -1366,10 +1278,6 @@
         <label for="ans-m12">Empty V =</label>
         <input id="ans-m12" type="text" autocomplete="off" aria-label="Word Problem 12 final answer">
         <span>cm³</span>
-      </div>
-      <div class="commit-row">
-        <span class="lock-note" role="status">Audit work, then commit.</span>
-        <button class="commit-btn" type="button" data-commit-items="m12" aria-label="Commit answer Word Problem 12">Commit answer</button>
       </div>
     </article>
 
@@ -1410,10 +1318,6 @@
       <label class="mc-opt"><input type="radio" name="vq1" value="C"><span class="bubble"></span><span>C) extravagant</span></label>
       <label class="mc-opt"><input type="radio" name="vq1" value="D"><span class="bubble"></span><span>D) secretive</span></label>
     </div>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Predict, select, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="v1" aria-label="Commit answer Q1">Commit answer</button>
-    </div>
   </article>
 
   <!-- Q2 -->
@@ -1424,10 +1328,6 @@
       <label class="mc-opt"><input type="radio" name="vq2" value="B"><span class="bubble"></span><span>B) fragmentary</span></label>
       <label class="mc-opt"><input type="radio" name="vq2" value="C"><span class="bubble"></span><span>C) exhaustive</span></label>
       <label class="mc-opt"><input type="radio" name="vq2" value="D"><span class="bubble"></span><span>D) eloquent</span></label>
-    </div>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Predict, select, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="v2" aria-label="Commit answer Q2">Commit answer</button>
     </div>
   </article>
 
@@ -1441,10 +1341,6 @@
       <label class="mc-opt"><input type="radio" name="vq3" value="C"><span class="bubble"></span><span>C) brief</span></label>
       <label class="mc-opt"><input type="radio" name="vq3" value="D"><span class="bubble"></span><span>D) compliant</span></label>
     </div>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Predict, select, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="v3" aria-label="Commit answer Q3">Commit answer</button>
-    </div>
   </article>
 
   <!-- Q4 -->
@@ -1455,10 +1351,6 @@
       <label class="mc-opt"><input type="radio" name="vq4" value="B"><span class="bubble"></span><span>B) motionless</span></label>
       <label class="mc-opt"><input type="radio" name="vq4" value="C"><span class="bubble"></span><span>C) spontaneous</span></label>
       <label class="mc-opt"><input type="radio" name="vq4" value="D"><span class="bubble"></span><span>D) animated</span></label>
-    </div>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Predict, select, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="v4" aria-label="Commit answer Q4">Commit answer</button>
     </div>
   </article>
 
@@ -1472,10 +1364,6 @@
       <label class="mc-opt"><input type="radio" name="vq5" value="C"><span class="bubble"></span><span>C) unnecessary</span></label>
       <label class="mc-opt"><input type="radio" name="vq5" value="D"><span class="bubble"></span><span>D) rapid</span></label>
     </div>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Predict, select, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="v5" aria-label="Commit answer Q5">Commit answer</button>
-    </div>
   </article>
 
   <!-- Q6 -->
@@ -1486,10 +1374,6 @@
       <label class="mc-opt"><input type="radio" name="vq6" value="B"><span class="bubble"></span><span>B) guarded ... skeptical</span></label>
       <label class="mc-opt"><input type="radio" name="vq6" value="C"><span class="bubble"></span><span>C) enthusiastic ... deferential</span></label>
       <label class="mc-opt"><input type="radio" name="vq6" value="D"><span class="bubble"></span><span>D) hostile ... complimentary</span></label>
-    </div>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Guillotine one blank first, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="v6" aria-label="Commit answer Q6">Commit answer</button>
     </div>
   </article>
 
@@ -1592,11 +1476,6 @@
     </div>
   </article>
 
-  <div class="commit-row">
-    <span class="lock-note" role="status">Review Q7–Q12 freely within this passage set, then submit.</span>
-    <button class="commit-btn" type="button" data-commit-items="r7,r8,r9,r10,r11,r12" aria-label="Submit passage set Q7 to Q12">Submit passage set</button>
-  </div>
-
   <div class="page-foot">
     <span>2026 Digital ISEE · Upper Level Orientation</span>
     <span>Page 5 / 6</span>
@@ -1619,10 +1498,6 @@
     <div class="prob-num">Essay Prompt Outline <span class="lvl lvl-2">4-Min Blueprint</span></div>
     <p class="prob-q">“Describe a moment when testing an assumption that turned out to be wrong helped you solve a problem or understand a group of people better.”</p>
     <textarea class="work-area" style="min-height:76px;" aria-label="Essay 4-minute outline" placeholder="1-Sentence Direct Thesis: …&#10;Concrete Scene 1 (named details): …&#10;Concrete Scene 2 (wider impact / lesson): …"></textarea>
-    <div class="commit-row">
-      <span class="lock-note" role="status">Draft thesis + 2 concrete scenes, then commit.</span>
-      <button class="commit-btn" type="button" data-commit-items="essay1" data-textarea-commit="true" aria-label="Commit essay outline">Commit outline</button>
-    </div>
   </article>
 
   <hr class="divider">
@@ -1808,67 +1683,6 @@
     });
 
     render();
-  });
-
-  // Commit individual items or multi-question passage set
-  document.querySelectorAll('[data-commit-items]').forEach(button => {
-    const cards = button.dataset.commitItems.split(',').map(id => document.getElementById(id));
-    const row = button.closest('.commit-row');
-    const note = row.querySelector('.lock-note');
-    const initialNote = note.textContent;
-    const isTextareaCommit = button.dataset.textareaCommit === 'true';
-
-    button.addEventListener('click', () => {
-      if (button.disabled) return;
-      const missing = cards.find(card => {
-        if (isTextareaCommit) {
-          const ta = card.querySelector('textarea');
-          return !ta || !ta.value.trim();
-        }
-        const radios = card.querySelectorAll('input[type="radio"]');
-        if (radios.length) return !card.querySelector('input[type="radio"]:checked');
-        const answer = card.querySelector('.answer-box input');
-        return !answer || !answer.value.trim();
-      });
-
-      if (missing) {
-        note.classList.add('warn');
-        note.textContent = cards.length > 1
-          ? 'Choose an answer for all 6 passage questions before submitting.'
-          : isTextareaCommit
-            ? 'Write your 4-minute outline before committing.'
-            : missing.querySelector('input[type="radio"]')
-              ? 'Choose an answer before committing.'
-              : 'Enter an answer before committing.';
-        const focusTarget = missing.querySelector('.answer-box input, textarea, input[type="radio"]');
-        if (focusTarget) focusTarget.focus();
-        return;
-      }
-
-      note.classList.remove('warn');
-      cards.forEach(card => {
-        card.classList.add('locked');
-        card.querySelectorAll('input, textarea').forEach(el => { el.disabled = true; });
-      });
-      button.disabled = true;
-      row.classList.add('committed');
-      note.textContent = cards.length > 1
-        ? 'Locked passage set submitted.'
-        : isTextareaCommit
-          ? 'Locked outline committed.'
-          : 'Locked response committed.';
-    });
-
-    resets.push(() => {
-      cards.forEach(card => {
-        card.classList.remove('locked');
-        card.querySelectorAll('input, textarea').forEach(el => { el.disabled = false; });
-      });
-      button.disabled = false;
-      row.classList.remove('committed');
-      note.classList.remove('warn');
-      note.textContent = initialNote;
-    });
   });
 
   // Clear All modal dialog (avoids sandbox-blocked window.confirm)
