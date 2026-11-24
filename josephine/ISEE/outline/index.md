@@ -1,6 +1,6 @@
 # ISEE Upper Level: Test Overview (2026–27)
 
-## What the test is
+## What is the ISEE?
 
 The Independent School Entrance Exam (ISEE) is an admission test used by independent (private) schools. The Upper Level is for students applying to grades 9 through 12. It is administered by E3n, the organization formed in 2026 when ERB and EMA merged.
 
